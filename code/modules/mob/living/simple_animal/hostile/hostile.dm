@@ -168,7 +168,7 @@
 	var/time_between_move_randomization = 3 SECONDS
 	var/last_move_randomization = 0
 
-	var/vision_mult_duration = (15 SECONDS)
+	var/vision_mult_duration = (45 SECONDS)
 	var/vision_mult_active_until = 0 //if vision_mult_active_until is greater than world.time, we use the multiplied vision range, for things like attraction that temporarily boost vision
 
 	speed = 3//The default hostile mob speed. If you ever speed the mob ss again please raise this to compensate.
@@ -294,6 +294,7 @@
 /mob/living/simple_animal/hostile/AttractionAct(atom/target_origin, intensity, max_range, duration)
 	if(health <= 0)
 		return
+	vision_mult_active_until = world.time + vision_mult_duration
 	if(get_target())
 		InterruptAttractionMovement()
 		return FALSE
@@ -397,7 +398,7 @@
 /mob/living/simple_animal/hostile/proc/get_vision_range()
 	var/vrange = vision_range
 	if(vision_mult_active_until > world.time)
-		return vrange * 3
+		return max(vrange * 5, 10)
 	return vrange
 
 //////////////HOSTILE MOB TARGETTING AND AGGRESSION////////////

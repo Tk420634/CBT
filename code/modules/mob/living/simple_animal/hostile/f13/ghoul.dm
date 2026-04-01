@@ -111,7 +111,7 @@
 
 	tastes = list("decay" = 1, "mud" = 1)
 	taunt_chance = 30
-	emote_taunt_sound = list('sound/f13npc/ghoul/aggro1.ogg', 'sound/f13npc/ghoul/aggro2.ogg', 'sound/f13npc/ghoul/aggro3.ogg',) //I will not apologize. ~TK
+	emote_taunt_sound = list('sound/f13npc/ghoul/aggro1.ogg', 'sound/f13npc/ghoul/aggro2.ogg',) //I will not apologize. ~TK,  I will now apologize. ~TK
 	idlesound = list('sound/f13npc/ghoul/idle.ogg', 'sound/effects/scrungy.ogg')
 	death_sound = 'sound/f13npc/ghoul/ghoul_death.ogg'
 	loot = list()
@@ -131,10 +131,6 @@
 		MOB_COLOR_VARIATION(150, 150, 150, 255, 255, 255),
 		MOB_SPEED_LIST(14, 13, 12, 11, 10),
 		MOB_SPEED_CHANGE_PER_TURN_CHANCE(80),
-		MOB_RETREAT_DISTANCE_LIST(0, 0, 0, 0, 0, 0, 1),
-		MOB_RETREAT_DISTANCE_CHANGE_PER_TURN_CHANCE(5),
-		MOB_MINIMUM_DISTANCE_LIST(0, 1),
-		MOB_MINIMUM_DISTANCE_CHANGE_PER_TURN_CHANCE(10)
 	)
 
 /mob/living/simple_animal/hostile/ghoul/Initialize()

@@ -203,7 +203,7 @@ ATTACHMENTS
 	maptext_y = 2
 
 	var/loudness = 100
-	var/loud_range = 15
+	var/loud_range = 18
 
 /obj/item/gun/Initialize()
 	recoil_tag = SSrecoil.give_recoil_tag(init_recoil)
