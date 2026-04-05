@@ -39,7 +39,7 @@
 		return
 	var/current_index = current_firemode_index
 	set_firemode_to_type(/obj/item/ammo_casing/energy/electrode)
-	process_afterattack(target, user, proximity_flag, params)
+	pull_the_trigger(target, user, proximity_flag, params)
 	set_firemode_index(current_index)
 	last_altfire = world.time
 

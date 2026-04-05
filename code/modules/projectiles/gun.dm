@@ -400,10 +400,133 @@ ATTACHMENTS
 // cept for melee range clicks on mobs, which call the above two procs instead
 /obj/item/gun/afterattack(atom/target, mob/living/user, flag, params)
 	. = ..()
-	process_afterattack(target, user, flag, params)
+	initiate_firing_sequence(target, user, flag, params)
 
-/// The common entryway to going from *click* to *bang*
-/obj/item/gun/proc/process_afterattack(atom/target, mob/living/user, flag, params, is_akimbo = FALSE)
+/* 
+ * The big revised gun firing sequence proc!
+ * Runs the gun(like thing) through a series of Actions, all of which need to either succeed or be irrelevant
+ * Typical gun sequence:
+ * 1. Pull the trigger / press the button / do the thing where you want to shoot it
+ *   - Requires the user to be able to do so, such as
+ *   - Not being incapacitated
+ *   - Not being on cooldown
+ *   - Having fingers that fit
+ * 2. Release hammer / plink firing pin / do the thing that makes the gun actually fire for the next step
+ *   - Safety check! Safety on, prevent firing and make a click noise
+ *   - If hammer, must be back, or irrelevant
+ *   - bolt must be in the right position if applicable, or irrelevant
+ * 3. Make the cartridge do its thing, usually shoot
+ *   - Clumsy check, if applicable, can cause you to shoot yourself in the foot
+ *   - Rigged check, if applicable, can cause you to shoot yourself in the face, and possibly explode
+ *   - Pointblank check, if applicable, can cause you to heal the target instead of hurt them, if its a lazer or something
+ * 4. Extract the casing, if one exists
+ *   - usually involves moving the bolt back
+ * 5. Eject the casing, if applicable
+ *   - mainly here so that it can fail, in later PRs
+ * 6. Find the next thing to shoot in the bullet holder thing
+ *   - If one doesnt exist, some guns could lock open, or just close and need to be racked when you put in more ammo
+ * 7. Feed ammo into the chamber, if applicable
+ *  - usually involves moving the bolt forward, but could be something else for weird guns
+ * 8. Lock the bolt, if applicable
+ * 9. Reset the hammer, if applicable
+ * 10. Gun's ready to pull trigger again!
+ * 11. Try to do some akimbo stuff if applicable
+ *  */
+
+/* 
+ * ok the above is lies, heres what happens
+ * Click - all it does is pull the trigger
+ * from the trigger, it does its thing
+ * after that, theres a proc that'll determine what to do next
+ * this proc consults a list of actions that should be done in this order
+ * like... 
+ * PULL_TRIGGER, RELEASE_HAMMER, SHOOT, EXTRACT_CASING, EJECT_CASING, FIND_NEXT_AMMO, FEED_AMMO, LOCK_BOLT, RESET_HAMMER, TRY_AKIMBO
+ * these call their respective procs, which return whatever they just did
+ * 
+ * lets take bolties for example, since they have a pretty simple firing sequence
+ * 1. Click - calls pull_the_trigger()
+ *  - pull_the_trigger() checks if the user can pull the trigger
+ *    - if cant, then false, and quit
+ * 2. trigger pulled, consult the list, next is release_hammer
+ *    - gun uses a striker, which counts as a hammer
+ *    - is it back? if not, false and quit, if yes contine
+ *    - set hammer state to released
+ * 3. consult the list, RELEASE_HAMMER was successful, proceed to SHOOT
+ *    etc
+ * 
+ * course theres oddballs like open bolt guns, which basically work the opposite of normal guns
+ * 1. Click - calls pull_the_trigger()
+ *    - like above
+ * 2. trigger pulled, consult the list, next is RELEASE_BOLT
+ *    - normally, this would release the bolt, which finds a casing, chambers it, 
+ *      and shoots it all in one go. No hammer, just a bolt with a poker on it
+ *    - for our purposes, it'll ignore the hammer part, 
+ *  */
+
+
+
+
+
+
+/obj/item/gun/proc/initiate_firing_sequence(atom/target, mob/living/user, flag, params, list/data)
+	if(!user)
+		return
+	var/point_blank = flag // flag means we're adjacent to the target
+	if(!islist(data))
+		data = list() // this is for storing data that needs to be passed between steps
+	data[GUN_PARAMS] = params
+	data[GUN_POINTBLANK] = point_blank
+	data[GUN_FIREMODE] = LAZYACCESS(firemodes, sel_mode)
+	fire_loop:
+		pull_the_trigger( target, user, data)
+		if(data![GUN_TRIGGER_OK])
+			goto fire_end
+		do_hammer(        target, user, data)
+		if(!data[GUN_HAMMER_OK])
+			goto fire_end
+		shoot_the_gun(    target, user, data)
+		if(!data[GUN_SHOOT_OK])
+			goto fire_end
+		extract_casing(   target, user, data)
+		if(!data[GUN_EXTRACT_OK])
+			goto fire_end
+		eject_casing(     target, user, data)
+		if(!data[GUN_EJECT_OK])
+			goto fire_end
+		find_next_ammo(   target, user, data)
+		if(!data[GUN_FIND_AMMO_OK])
+			goto fire_end
+		feed_ammo(        target, user, data)
+		if(!data[GUN_FEED_OK])
+			goto fire_end
+		lock_bolt(        target, user, data)
+		if(!data[GUN_LOCK_BOLT_OK])
+			goto fire_end
+		reset_hammer(     target, user, data)
+		if(!data[GUN_RESET_HAMMER_OK])
+			goto fire_end
+		try_akimbo(       target, user, data)
+		if(!data[GUN_AKIMBO_OK])
+			goto fire_end
+	fire_end:
+		if(data[GUN_SHOOT_AGAIN])
+			data[GUN_SHOOT_AGAIN] = FALSE
+			goto fire_loop
+		if(data[GUN_DO_AKIMBO] && !data[GUN_IS_AKIMBO_FIRING])
+			data[GUN_DO_AKIMBO] = FALSE
+			var/obj/item/gun/akimbo_gun = data[GUN_AKIMBO_GUN]
+			if(akimbo_gun)
+				var/list/akimbo_params = list()
+				akimbo_params[GUN_IS_AKIMBO_FIRING]
+				akimbo_gun.initiate_firing_sequence(target, user, flag, params, akimbo_params)
+		if(data[GUN_DO_EMPTY_CLICK])
+			data[GUN_DO_EMPTY_CLICK] = FALSE
+			shoot_with_empty_chamber(user)
+
+
+/// upon TRUE, the trigger (or whatever) is successfully pulled, and the firing sequence can continue
+/// upon FALSE, the trigger pull failed, and the firing sequence is stopped immediately
+/obj/item/gun/proc/pull_the_trigger(atom/target, mob/living/user, pointblank, params, list/data)
 	if(!target)
 		return
 	if(firing)
@@ -420,6 +543,17 @@ ATTACHMENTS
 	if(user && user.incapacitated(allow_crit = TRUE))
 		to_chat(user, span_danger("You're too messed up to shoot [src]!"))
 		return
+	return TRUE
+
+/obj/item/gun/proc/do_hammer(atom/target, mob/living/user, params, pointblank, list/data)
+	if(safety)
+		to_chat(user, span_danger("The gun's safety is on!"))
+		data[GUN_DO_EMPTY_CLICK] = TRUE
+		return
+	var/datum/firemode/my_mode = LAZYACCESS(firemodes, sel_mode)
+	// safety check
+
+
 
 	if(!can_shoot())
 		dont_shoot(user)
@@ -491,7 +625,7 @@ ATTACHMENTS
 		if(!G.can_trigger_gun(user))
 			continue
 		loop_counter++
-		addtimer(CALLBACK(G, TYPE_PROC_REF(/obj/item/gun,process_afterattack), target, user, flag, params, TRUE), loop_counter)
+		addtimer(CALLBACK(G, TYPE_PROC_REF(/obj/item/gun,pull_the_trigger), target, user, flag, params, TRUE), loop_counter)
 
 /obj/item/gun/can_trigger_gun(mob/living/user)
 	. = ..()
