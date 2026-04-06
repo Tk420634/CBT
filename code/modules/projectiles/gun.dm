@@ -205,6 +205,19 @@ ATTACHMENTS
 	var/loudness = 100
 	var/loud_range = 15
 
+	/* 
+	 * Flow control lists for doing stuff with the gun!
+	 * Its a flowchart!
+	 * format, and this is a doozy, is as follows:
+	 * "ACTION_TO_TAKE" = list(
+	 *   "GFCR_SUCCESSFUL" = "LIST_ENTRY_TO_EXECUTE_NEXT",
+	 *   "GFCR_FAILED" = "LIST_ENTRY_TO_EXECUTE_NEXT",
+	 *   "GFCR_CHECK_DATA" = "DATA_KEY"),
+	 */
+	var/gloch_kind = GLOCH_SEMI_AUTO
+	var/list/click_flow_control = list()
+	var/list/use_flow_control = list()
+
 /obj/item/gun/Initialize()
 	recoil_tag = SSrecoil.give_recoil_tag(init_recoil)
 	if(!recoil_tag)
@@ -400,7 +413,7 @@ ATTACHMENTS
 // cept for melee range clicks on mobs, which call the above two procs instead
 /obj/item/gun/afterattack(atom/target, mob/living/user, flag, params)
 	. = ..()
-	initiate_firing_sequence(target, user, flag, params)
+	run_click_script(target, user, flag, params)
 
 /* 
  * The big revised gun firing sequence proc!
@@ -457,89 +470,102 @@ ATTACHMENTS
  * course theres oddballs like open bolt guns, which basically work the opposite of normal guns
  * 1. Click - calls pull_the_trigger()
  *    - like above
- * 2. trigger pulled, consult the list, next is RELEASE_BOLT
- *    - normally, this would release the bolt, which finds a casing, chambers it, 
- *      and shoots it all in one go. No hammer, just a bolt with a poker on it
- *    - for our purposes, it'll ignore the hammer part, 
+ * then it checks if the bolt is back, and if so, chambers a round, closes, fires, opens again, extract and eject, and locks
  *  */
 
+/// loads the click script and passes it to the gun processing unit (GPU)
+/obj/item/gun/proc/run_click_script(atom/target, mob/living/user, flag, params, list/data)
+	LAZYINITLIST(data)
+	execute_gloch(target, user, flag, params, click_flow_control, data)
 
+/obj/item/gun/proc/run_use_script(atom/target, mob/living/user, flag, params, list/data)
+	LAZYINITLIST(data)
+	execute_gloch(target, user, flag, params, use_flow_control, data)
 
-
-
-
-/obj/item/gun/proc/initiate_firing_sequence(atom/target, mob/living/user, flag, params, list/data)
-	if(!user)
+/*
+ * This handles turning a flow control script into actions!
+ * 
+ *  gdi im just making my damn blender belt again
+ * */
+/obj/item/gun/proc/execute_gloch(atom/target, mob/living/user, flag, params, list/gloch, list/data)
+	if(!islist(gloch))
 		return
-	var/point_blank = flag // flag means we're adjacent to the target
-	if(!islist(data))
-		data = list() // this is for storing data that needs to be passed between steps
-	data[GUN_PARAMS] = params
-	data[GUN_POINTBLANK] = point_blank
-	data[GUN_FIREMODE] = LAZYACCESS(firemodes, sel_mode)
-	fire_loop:
-		pull_the_trigger( target, user, data)
-		if(data![GUN_TRIGGER_OK])
-			goto fire_end
-		do_hammer(        target, user, data)
-		if(!data[GUN_HAMMER_OK])
-			goto fire_end
-		shoot_the_gun(    target, user, data)
-		if(!data[GUN_SHOOT_OK])
-			goto fire_end
-		extract_casing(   target, user, data)
-		if(!data[GUN_EXTRACT_OK])
-			goto fire_end
-		eject_casing(     target, user, data)
-		if(!data[GUN_EJECT_OK])
-			goto fire_end
-		find_next_ammo(   target, user, data)
-		if(!data[GUN_FIND_AMMO_OK])
-			goto fire_end
-		feed_ammo(        target, user, data)
-		if(!data[GUN_FEED_OK])
-			goto fire_end
-		lock_bolt(        target, user, data)
-		if(!data[GUN_LOCK_BOLT_OK])
-			goto fire_end
-		reset_hammer(     target, user, data)
-		if(!data[GUN_RESET_HAMMER_OK])
-			goto fire_end
-		try_akimbo(       target, user, data)
-		if(!data[GUN_AKIMBO_OK])
-			goto fire_end
-	fire_end:
-		if(data[GUN_SHOOT_AGAIN])
-			data[GUN_SHOOT_AGAIN] = FALSE
-			goto fire_loop
-		if(data[GUN_DO_AKIMBO] && !data[GUN_IS_AKIMBO_FIRING])
-			data[GUN_DO_AKIMBO] = FALSE
-			var/obj/item/gun/akimbo_gun = data[GUN_AKIMBO_GUN]
-			if(akimbo_gun)
-				var/list/akimbo_params = list()
-				akimbo_params[GUN_IS_AKIMBO_FIRING]
-				akimbo_gun.initiate_firing_sequence(target, user, flag, params, akimbo_params)
-		if(data[GUN_DO_EMPTY_CLICK])
-			data[GUN_DO_EMPTY_CLICK] = FALSE
-			shoot_with_empty_chamber(user)
+	LAZYINITLIST(data)
+	var/curr_inst = data[GDAT_NEXT_INSTRUCTION] || gloch[1]
+	execute_curr:
+		if(data[GDAT_WAIT])
+			var/wait_time = data[GDAT_WAIT] || 1
+			data -= GDAT_WAIT
+			sleep(wait_time)
+			// we waited, reconfirm everything is still good to go before we do the next step
+		switch(curr_inst)
+			if(GACT_PULL_TRIGGER)
+				pull_the_trigger(target, user, flag, params, data)
+			if(GACT_RELEASE_HAMMER)
+				do_hammer(target, user, params, flag, data)
+			if(GACT_SHOOT)
+				shoot_the_gun(target, user, data)
+			if(GACT_EXTRACT_CASING)
+				extract_casing(target, user, data)
+			if(GACT_EJECT_CASING)
+				eject_casing(target, user, data)
+			if(GACT_FIND_NEXT_AMMO)
+				find_next_ammo(target, user, data)
+			if(GACT_FEED_AMMO)
+				feed_ammo(target, user, data)
+			if(GACT_LOCK_BOLT)
+				lock_bolt(target, user, data)
+			if(GACT_PULL_HAMMER)
+				pull_hammer(target, user, data)
+			if(GACT_TRY_AKIMBO)
+				try_akimbo(target, user, flag, params, data)
+			if(GACT_READ_DATA)
+				read_data(target, user, flag, params, data)
+			if(GACT_SHOOT_WITH_EMPTY_CHAMBER)
+				shoot_with_empty_chamber(target, user, params, data)
+			else
+				stack_trace("Invalid GLOCH instruction [curr_inst] in [src], with data [data]")
+					goto end
+	
+	get_next:
+		if(data[GDAT_BREAK])
+			goto end
+		var/list/poss_steps = gloch[curr_inst]
+		if(!islist(poss_steps))
+			goto end
+		var/gret = data[GDAT_RETURN]
+		data[GDAT_RETURN] = null
+		if(poss_steps[gret])
+			curr_inst = poss_steps[gret] //Dan.  You can do it. <3 ♥
+			goto execute_curr
+		else
+			goto end
 
 
-/// upon TRUE, the trigger (or whatever) is successfully pulled, and the firing sequence can continue
-/// upon FALSE, the trigger pull failed, and the firing sequence is stopped immediately
+
+
+/// wrapper for procs that involve pulling the trigger
+/// just so i dont have to copypaste data[GDAT_RETURN] whatever a million times (just hundreds)
 /obj/item/gun/proc/pull_the_trigger(atom/target, mob/living/user, pointblank, params, list/data)
+	LAZYINITLIST(data)
+	if(!can_pull_trigger(target, user, pointblank, params, data))
+		data[GDAT_RETURN] = GFCR_FAILED
+		return
+	data[GDAT_RETURN] = GFCR_SUCCESSFUL
+
+/obj/item/gun/proc/can_pull_trigger(atom/target, mob/living/user, pointblank, params, list/data)
+	LAZYINITLIST(data)
 	if(!target)
 		return
 	if(firing)
 		return
-	if(!is_akimbo)
+	if(!data[GDAT_IS_AKIMBO_SHOT])
 		if(!CheckAttackCooldown(user, target))
 			return
-
 	if(isliving(user))//Check if the user can use the gun, if the user isn't alive(turrets) assume it can.
 		var/mob/living/L = user
-		if(!can_trigger_gun(L))
+		if(!can_trigger_gun(L)) // its cus other non-guns can be guns, sort
 			return
-
 	if(user && user.incapacitated(allow_crit = TRUE))
 		to_chat(user, span_danger("You're too messed up to shoot [src]!"))
 		return
