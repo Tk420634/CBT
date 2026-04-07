@@ -582,7 +582,7 @@ ATTACHMENTS
 	return TRUE
 
 /// drops da hammer! also the safety check, cus thats where it makes sense i guess
-/obj/item/gun/proc/do_hammer(atom/target, mob/living/user,, list/data)
+/obj/item/gun/proc/do_hammer(atom/target, mob/living/user, list/data)
 	LAZYINITLIST(data)
 	if(!target)
 		return
