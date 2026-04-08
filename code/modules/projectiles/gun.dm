@@ -219,7 +219,7 @@ ATTACHMENTS
 	var/gloch_kind = GLOCH_SEMI_AUTO
 	var/list/click_flow_control = list()
 	var/list/use_flow_control = list()
-	var/datum/gloch_data/gdata
+	// var/datum/gloch_data/gdata
 
 /obj/item/gun/Initialize()
 	recoil_tag = SSrecoil.give_recoil_tag(init_recoil)
@@ -246,7 +246,7 @@ ATTACHMENTS
 	if(LAZYLEN(firemodes))
 		set_firemode(sel_mode)
 	generate_guntags()
-	gdata = new /datum/gun_data(src)
+	// gdata = new /datum/gun_data(src)
 
 	//writes in standard values for the weapon's class, if left null
 	if(islist(weapon_class))
@@ -481,83 +481,105 @@ ATTACHMENTS
 /obj/item/gun/proc/run_click_script(atom/target, mob/living/user, flag, params, list/ext_data)
 	if(gdata.is_in_use)
 		return
-	gdata.init(flag, params, ext_data)
-	execute_gloch(target, user, click_flow_control)
+	var/list/data = init_data(target, user, "click", click_flow_control, flag, params, ext_data)
+	execute_gloch(data)
 
 /obj/item/gun/proc/run_use_script(atom/target, mob/living/user, flag, params, list/ext_data)
 	if(gdata.is_in_use)
 		return
-	gdata.init(flag, params, ext_data)
-	execute_gloch(target, user, use_flow_control)
+	var/list/data = init_data(target, user, "use", use_flow_control, flag, params, ext_data)
+	execute_gloch(data)
+
+// initializes the GLOCH data, which is used for flow control and storing temporary data during the gun firing process
+/obj/item/gun/proc/init_data(atom/target, mob/living/user, input_origin, list/flow_control, flag, params, list/ext_data)
+	var/list/data = list()
+	data[GDAT_TARGET] = target
+	data[GDAT_USER] = user
+	data[GDAT_INPUT_ORIGIN] = input_origin
+	data[GDAT_FLOW_CONTROL] = flow_control.Copy()
+	data[GDAT_POINT_BLANK] = flag
+	data[GDAT_MOUSE_PARAMS] = params
+	if(islist(ext_data))
+		data |= ext_data
+	return data
+
 
 /*
  * This handles turning a flow control script into actions!
  * 
  *  gdi im just making my damn blender belt again
  * */
-/obj/item/gun/proc/execute_gloch(atom/target, mob/living/user, list/gloch)
-	if(!islist(gloch))
+/obj/item/gun/proc/execute_gloch(list/data)
+	if(!islist(data))
 		return
 	// start us off!
-	var/curr_inst = LAZYACCESS(gloch, 1)
+	var/curr_inst = LAZYACCESS(data[GDAT_FLOW_CONTROL], 1)
+	var/list/curr_table = LAZYACCESS(data[GDAT_FLOW_CONTROL], curr_inst)
 	
 	execute_curr:
-		if(data.wait)
-			var/wait_time = data.wait
-			data.wait = null
+		if(data[GDAT_WAIT])
+			var/wait_time = data[GDAT_WAIT]
+			data[GDAT_WAIT] = null
 			sleep(wait_time)
 			// we waited, reconfirm everything is still good to go before we do the next step
 		switch(curr_inst)
 			if(GACT_PULL_TRIGGER)
-				pull_the_trigger(target, user)
+				pull_the_trigger(data[GDAT_TARGET], data[GDAT_USER], data)
 			if(GACT_RELEASE_HAMMER)
-				do_hammer(target, user)
+				do_hammer(data[GDAT_TARGET], data[GDAT_USER], data)
 			if(GACT_SHOOT)
-				shoot_the_gun(target, user)
+				shoot_the_gun(data[GDAT_TARGET], data[GDAT_USER], data)
 			if(GACT_EXTRACT_CASING)
-				extract_casing(target, user)
+				extract_casing(data[GDAT_TARGET], data[GDAT_USER], data)
 			if(GACT_EJECT_CASING)
-				eject_casing(target, user)
+				eject_casing(data[GDAT_TARGET], data[GDAT_USER], data)
 			if(GACT_FIND_NEXT_AMMO)
-				find_next_ammo(target, user)
+				find_next_ammo(data[GDAT_TARGET], data[GDAT_USER], data)
 			if(GACT_FEED_AMMO)
-				feed_ammo(target, user)
+				feed_ammo(data[GDAT_TARGET], data[GDAT_USER], data)
 			if(GACT_LOCK_BOLT)
-				lock_bolt(target, user)
+				lock_bolt(data[GDAT_TARGET], data[GDAT_USER], data)
 			if(GACT_PULL_HAMMER)
-				pull_hammer(target, user)
+				pull_hammer(data[GDAT_TARGET], data[GDAT_USER], data)
 			if(GACT_TRY_AKIMBO)
-				try_akimbo(target, user)
+				try_akimbo(data[GDAT_TARGET], data[GDAT_USER], data)
 			if(GACT_READ_DATA)
-				read_data(target, user)
+				read_data(data[GDAT_TARGET], data[GDAT_USER], data)
 			if(GACT_SHOOT_WITH_EMPTY_CHAMBER)
-				shoot_with_empty_chamber(target, user)
+				shoot_with_empty_chamber(data[GDAT_TARGET], data[GDAT_USER], data)
 			else
 				stack_trace("Invalid GLOCH instruction [curr_inst] in [src]!")
 				goto end
 	
 	get_next:
-		if(gdata.break_script)
+		if(data[GDAT_BREAK_SCRIPT])
 			goto end
-		var/list/poss_steps = gloch[curr_inst]
-		if(!islist(poss_steps))
+		if(!islist(curr_table))
 			goto end
-		if(delay_next_action)
-			user.DelayNextAction(fire_delay)
-			delay_next_action = null
-		var/gret = gdata.return_value
-		gdata.return_value = null // pop goes the return value
-		if(poss_steps[gret])
-			curr_inst = poss_steps[gret] //Dan.  You can do it. <3 ♥
+		if(data[GDAT_DELAY_NEXT_ACTION])
+			var/mob/living/user = data[GDAT_USER]
+			if(user)
+				user.DelayNextAction(data[GDAT_DELAY_NEXT_ACTION])
+			data[GDAT_DELAY_NEXT_ACTION] = null
+		var/gret = data[GDAT_RETURN]
+		data[GDAT_RETURN] = null // pop goes the return value
+		if(curr_table[gret])
+			curr_inst = curr_table[gret] //Dan.  You can do it. <3 ♥
+			curr_table = LAZYACCESS(data[GDAT_FLOW_CONTROL], curr_inst)
 			goto execute_curr
 		else
 			goto end
+	
+	end:
+		data[GDAT_IN_USE] = FALSE
+		data[GDAT_USER] = null
+		data[GDAT_TARGET] = null
 
 /// wrapper for procs that involve pulling the trigger
 /// just so i dont have to copypaste data[GDAT_RETURN] whatever a million times (just hundreds)
 /obj/item/gun/proc/pull_the_trigger(atom/target, mob/living/user, list/data)
 	LAZYINITLIST(data)
-	if(!can_pull_trigger(target, user, pointblank, params, data))
+	if(!can_pull_trigger(data[GDAT_TARGET], data[GDAT_USER], data))
 		data[GDAT_RETURN] = GFCR_FAILED
 		return
 	data[GDAT_RETURN] = GFCR_SUCCESSFUL
@@ -569,15 +591,15 @@ ATTACHMENTS
 	if(firing)
 		return
 	if(!data[GDAT_IS_AKIMBO_SHOT])
-		try_akimbo(target, user, pointblank, params, data) // check if we have an akimbo partner that can shoot, but DONT actually do the akimbo shot yet
-		if(!CheckAttackCooldown(user, target))
+		try_akimbo(data[GDAT_TARGET], data[GDAT_USER], data) // check if we have an akimbo partner that can shoot, but DONT actually do the akimbo shot yet
+		if(!CheckAttackCooldown(data[GDAT_USER], data[GDAT_TARGET]))
 			return
-	if(isliving(user))//Check if the user can use the gun, if the user isn't alive(turrets) assume it can.
-		var/mob/living/L = user
+	if(isliving(data[GDAT_USER]))//Check if the user can use the gun, if the user isn't alive(turrets) assume it can.
+		var/mob/living/L = data[GDAT_USER]
 		if(!can_trigger_gun(L)) // its cus other non-guns can be guns, sort
 			return
-	if(user && user.incapacitated(allow_crit = TRUE))
-		to_chat(user, span_danger("You're too messed up to shoot [src]!"))
+	if(data[GDAT_USER] && data[GDAT_USER].incapacitated(allow_crit = TRUE))
+		to_chat(data[GDAT_USER], span_danger("You're too messed up to shoot [src]!"))
 		return
 	return TRUE
 
@@ -588,24 +610,24 @@ ATTACHMENTS
 		return
 	if(firing)
 		return
-	if(!drop_hammer(target, user, data))
+	if(!drop_hammer(data[GDAT_TARGET], data[GDAT_USER], data))
 		data[GDAT_RETURN] = GFCR_FAILED
 		return
 	data[GDAT_RETURN] = GFCR_SUCCESSFUL
 
 /obj/item/gun/proc/drop_hammer(atom/target, mob/living/user, list/data)
 	if(safety)
-		to_chat(user, span_danger("The gun's safety is on!"))
+		to_chat(data[GDAT_USER], span_danger("The gun's safety is on!"))
 		data[GDAT_NEXT_INSTRUCTION] = [GACT_EMPTY_CLICK]
 		return
 	// safety check
 	if(!can_shoot())
-		dont_shoot(target, user, data)
+		dont_shoot(data[GDAT_TARGET], data[GDAT_USER], data)
 		return
 	var/datum/firemode/my_mode = LAZYACCESS(firemodes, sel_mode)
 	if(my_mode)
 		if(!my_mode.try_hammer(TRUE))
-			dont_shoot(target, user, data)
+			dont_shoot(data[GDAT_TARGET], data[GDAT_USER], data)
 			return
 		return TRUE
 
