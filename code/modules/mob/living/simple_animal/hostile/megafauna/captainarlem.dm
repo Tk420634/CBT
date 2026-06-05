@@ -80,7 +80,7 @@
 		return
 	..()
 
-/mob/living/simple_animal/hostile/megafauna/captainarlem/Goto(target, delay, minimum_distance)
+/mob/living/simple_animal/hostile/megafauna/captainarlem/perform_move_action(target, delay, minimum_distance)
 	if(charging)
 		return
 	..()
@@ -117,7 +117,7 @@
 	sleep(5)
 	throw_at(T, get_dist(src, T), 1, src, 0)
 	charging = 0
-	Goto(my_target, move_to_delay, minimum_distance)
+	perform_move_action(my_target, move_to_delay, minimum_distance)
 
 
 /mob/living/simple_animal/hostile/megafauna/captainarlem/Bump(atom/A)

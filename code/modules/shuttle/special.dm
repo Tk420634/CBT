@@ -156,7 +156,7 @@
 	status_flags = GODMODE
 	unique_name = FALSE
 	AIStatus = AI_OFF
-	stop_automated_movement = TRUE
+	stop_wandering = TRUE
 	initial_language_holder = /datum/language_holder/universal
 
 /mob/living/simple_animal/hostile/alien/maid/barmaid/Initialize()

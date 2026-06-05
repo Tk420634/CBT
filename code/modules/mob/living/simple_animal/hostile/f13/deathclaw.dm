@@ -448,7 +448,7 @@
 	if(!charging)
 		return ..()
 
-/mob/living/simple_animal/hostile/aethergiest/Goto(target, delay, minimum_distance)
+/mob/living/simple_animal/hostile/aethergiest/perform_move_action(target, delay, minimum_distance)
 	if(!charging)
 		..()
 
@@ -468,7 +468,7 @@
 /mob/living/simple_animal/hostile/aethergiest/proc/charge_end(list/effects_to_destroy)
 	charging = FALSE
 	if(target)
-		Goto(target, move_to_delay, minimum_distance)
+		perform_move_action(target, move_to_delay, minimum_distance)
 
 /mob/living/simple_animal/hostile/aethergiest/Bump(atom/A)
 	if(charging)

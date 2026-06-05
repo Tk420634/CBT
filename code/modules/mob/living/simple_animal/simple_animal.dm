@@ -41,11 +41,11 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	var/seconds_per_wander = 1
 	var/last_wander_time = 0
 	///Use this to temporarely stop random movement or to if you write special movement code for animals.
-	var/stop_automated_movement = 0
+	var/stop_wandering = 0
 	///Does the mob wander around when idle?
 	var/wander = 1
 	///When set to 1 this stops the animal from moving when someone is pulling it.
-	var/stop_automated_movement_when_pulled = 1
+	var/stop_wandering_when_pulled = 1
 
 	///When someone interacts with the simple animal.
 	///Help-intent verb in present continuous tense.
@@ -221,6 +221,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	var/datum/weakref/lazarused_by
 	/// required pop to hop into this thing
 	var/pop_required_to_jump_into = 0
+	var/list/autoset_variations = DEFAULT_VARIATIONS
 
 	var/obj/effect/proc_holder/mob_common/make_nest/make_a_nest
 	var/obj/effect/proc_holder/mob_common/unmake_nest/unmake_a_nest
@@ -652,7 +653,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	if(stat == DEAD || stat == UNCONSCIOUS || health <= 0)
 		return FALSE
 	if(!ignore_stopped_automated_movement)
-		if(stop_automated_movement || !wander)
+		if(stop_wandering || !wander)
 			return FALSE
 	if(!isturf(loc) && !allow_movement_on_non_turfs)
 		return FALSE
@@ -663,7 +664,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	if(RTS_move_ordered())
 		// am_within_range_of_target_coords()
 		return FALSE
-	if(stop_automated_movement_when_pulled && pulledby) //Some animals don't move when pulled
+	if(stop_wandering_when_pulled && pulledby) //Some animals don't move when pulled
 		return FALSE
 	return TRUE
 
@@ -1479,19 +1480,13 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 /mob/living/simple_animal/proc/setup_variations()
 	if(!LAZYLEN(variation_list))
 		return FALSE // we're good here
-	// if(LAZYLEN(variation_list[MOB_VARIED_NAME_GLOBAL_LIST]))
-	// 	vary_mob_name_from_global_lists()
-	// else if(LAZYLEN(variation_list[MOB_VARIED_NAME_LIST]))
-	// 	vary_mob_name_from_local_list()
-	if(LAZYLEN(variation_list[MOB_VARIED_COLOR]))
-		vary_mob_color()
-	if(LAZYLEN(variation_list[MOB_VARIED_HEALTH]))
-		var/our_health = vary_from_list(variation_list[MOB_VARIED_HEALTH])
-		maxHealth = our_health
-		health = our_health
-	if(LAZYLEN(variation_list[MOB_VARIED_SPEED]))
-		var/speedpick = pick(variation_list[MOB_VARIED_SPEED])
-		set_varspeed(speedpick)
+	if(autoset_variations[MOB_VARIATE_ALL])
+		var/list/variatables = list()
+		for(var/key in variation_list)
+			variatables |= key
+		autoset_variations = variatables
+	variate_color()
+	variate_health()
 	return TRUE
 
 /mob/living/simple_animal/proc/vary_from_list(which_list, weighted_list = FALSE)
@@ -1535,7 +1530,10 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 /mob/living/simple_animal/proc/vary_mob_name_from_local_list()
 	name = pick(variation_list[MOB_VARIED_NAME_LIST])
 
-/mob/living/simple_animal/proc/vary_mob_color()
+/mob/living/simple_animal/proc/variate_color()
+	. = color
+	if(!LAZYLEN(variation_list[MOB_VARIED_COLOR]))
+		return
 	if(LAZYLEN(variation_list[MOB_VARIED_COLOR][MOB_VARIED_COLOR_MIN]) != 3)
 		return
 	if(LAZYLEN(variation_list[MOB_VARIED_COLOR][MOB_VARIED_COLOR_MAX]) != 3)
@@ -1561,7 +1559,21 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	else
 		var/list/blue_numbers = put_numbers_in_order(our_mob_random_color_list[MOB_VARIED_COLOR_MIN][3], our_mob_random_color_list[MOB_VARIED_COLOR_MAX][3])
 		colors["blue"] = rand(blue_numbers[1], blue_numbers[2])
-	color = rgb(clamp(colors["red"], 0, 255), clamp(colors["green"], 0, 255), clamp(colors["blue"], 0, 255))
+	var/new_color = rgb(clamp(colors["red"], 0, 255), clamp(colors["green"], 0, 255), clamp(colors["blue"], 0, 255))
+	if(autoset_variations[MOB_VARIED_COLOR])
+		color = new_color
+	return new_color
+
+/mob/living/simple_animal/proc/variate_health()
+	. = maxHealth
+	if(!LAZYLEN(variation_list[MOB_VARIED_HEALTH]))
+		return
+	var/new_health = vary_from_list(variation_list[MOB_VARIED_HEALTH])
+	if(autoset_variations[MOB_VARIED_HEALTH])
+		maxHealth = new_health
+		health = new_health
+	return new_health
+
 
 /mob/living/simple_animal/proc/put_numbers_in_order(num_1, num_2)
 	if(num_1 < num_2)

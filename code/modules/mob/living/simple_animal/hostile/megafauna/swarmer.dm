@@ -52,7 +52,7 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 	score_type = SWARMER_BEACON_SCORE
 	faction = list("mining", "boss", "swarmer")
 	weather_immunities = list("lava","ash")
-	stop_automated_movement = TRUE
+	stop_wandering = TRUE
 	wander = FALSE
 	layer = BELOW_MOB_LAYER
 	AIStatus = AI_OFF
@@ -124,7 +124,7 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 /mob/living/simple_animal/hostile/swarmer/ai/resource/handle_automated_action()
 	. = ..()
 	if(.)
-		if(!stop_automated_movement)
+		if(!stop_wandering)
 			if(health < maxHealth*0.25)
 				StartAction(100)
 				RepairSelf()
@@ -149,13 +149,13 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 
 
 /mob/living/simple_animal/hostile/swarmer/ai/proc/StartAction(deci = 0)
-	stop_automated_movement = TRUE
+	stop_wandering = TRUE
 	AIStatus = AI_OFF
 	addtimer(CALLBACK(src,PROC_REF(EndAction)), deci)
 
 
 /mob/living/simple_animal/hostile/swarmer/ai/proc/EndAction()
-	stop_automated_movement = FALSE
+	stop_wandering = FALSE
 	AIStatus = AI_ON
 
 
@@ -212,7 +212,7 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 /mob/living/simple_animal/hostile/swarmer/ai/resource/handle_automated_action()
 	. = ..()
 	if(.)
-		if(!stop_automated_movement)
+		if(!stop_wandering)
 			if(GLOB.AISwarmers.len < GetTotalAISwarmerCap() && resources >= 50)
 				StartAction(100) //so they'll actually sit still and use the verbs
 				CreateSwarmer()

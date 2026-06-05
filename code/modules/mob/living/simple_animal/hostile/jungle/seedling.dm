@@ -103,7 +103,7 @@
 	beam_debuff_target = null
 	. = ..()
 
-/mob/living/simple_animal/hostile/jungle/seedling/Goto()
+/mob/living/simple_animal/hostile/jungle/seedling/perform_move_action()
 	if(combatant_state != SEEDLING_STATE_NEUTRAL)
 		return
 	return ..()
@@ -209,7 +209,7 @@
 	var/atom/my_target = get_target()
 	if(my_target && !stat)
 		update_icons()
-		Goto(my_target, move_to_delay, minimum_distance)
+		perform_move_action(my_target, move_to_delay, minimum_distance)
 
 /mob/living/simple_animal/hostile/jungle/seedling/adjustHealth()
 	. = ..()

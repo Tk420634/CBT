@@ -290,7 +290,7 @@ Featuring:
 	return ..()
 
 
-/mob/living/simple_animal/hostile/renegade/syndicate/mecha_pilot/Goto(target, delay, minimum_distance)
+/mob/living/simple_animal/hostile/renegade/syndicate/mecha_pilot/perform_move_action(target, delay, minimum_distance)
 	if(mecha)
 		walk_to(mecha, target, minimum_distance, mecha.step_in)
 	else

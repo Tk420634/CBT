@@ -1027,7 +1027,7 @@
 					var/mob/living/simple_animal/hostile/illusion/escape/E = new(owner.loc)
 					E.Copy_Parent(owner, 70, 10)
 					E.GiveTarget(owner)
-					E.Goto(owner, owner.movement_delay(), E.minimum_distance)
+					E.perform_move_action(owner, owner.movement_delay(), E.minimum_distance)
 			return
 	else
 		if(prob(50))

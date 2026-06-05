@@ -36,7 +36,7 @@
 	melee_damage_lower = 1
 	melee_damage_upper = 2
 	environment_smash = ENVIRONMENT_SMASH_NONE
-	stop_automated_movement_when_pulled = 1
+	stop_wandering_when_pulled = 1
 	blood_volume = 480
 	var/obj/item/udder/udder = null
 	var/datum/reagent/milk_reagent = /datum/reagent/consumable/milk
@@ -1533,7 +1533,7 @@
 	melee_damage_lower = 25
 	melee_damage_upper = 20
 	environment_smash = ENVIRONMENT_SMASH_NONE
-	stop_automated_movement_when_pulled = 1
+	stop_wandering_when_pulled = 1
 	var/is_calf = 0
 	var/food_type = /obj/item/reagent_containers/food/snacks/grown/wheat
 	var/has_calf = 0

@@ -15,7 +15,7 @@
 	icon = 'icons/mob/eldritch_mobs.dmi'
 	speed = 0
 	a_intent = INTENT_HARM
-	stop_automated_movement = 1
+	stop_wandering = 1
 	AIStatus = AI_OFF
 	attack_sound = 'sound/weapons/punch1.ogg'
 	see_in_dark = 7

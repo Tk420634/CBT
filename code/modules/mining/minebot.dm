@@ -23,7 +23,7 @@
 	obj_damage = 10
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	check_friendly_fire = TRUE
-	stop_automated_movement_when_pulled = TRUE
+	stop_wandering_when_pulled = TRUE
 	attack_verb_continuous = "drills"
 	attack_verb_simple = "drill"
 	attack_sound = 'sound/weapons/circsawhit.ogg'

@@ -258,7 +258,7 @@
 	melee_damage_upper = 20
 	anchored = FALSE
 	AIStatus = AI_ON
-	stop_automated_movement = FALSE
+	stop_wandering = FALSE
 	wander = TRUE
 	//maxbodytemp = INFINITY
 	layer = MOB_LAYER

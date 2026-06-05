@@ -38,7 +38,7 @@
 	doing_move_loop = FALSE
 	return ..()
 
-/mob/living/simple_animal/hostile/asteroid/curseblob/Goto(move_target, delay, minimum_distance)
+/mob/living/simple_animal/hostile/asteroid/curseblob/perform_move_action(move_target, delay, minimum_distance)
 	move_loop(get_target(), delay)
 
 /mob/living/simple_animal/hostile/asteroid/curseblob/proc/move_loop(move_target, delay)
@@ -65,7 +65,7 @@
 		return
 	new_target = set_target
 	. = ..()
-	Goto(target, move_to_delay)
+	perform_move_action(target, move_to_delay)
 
 /mob/living/simple_animal/hostile/asteroid/curseblob/LoseTarget() //we can't lose our target!
 	if(check_for_target())

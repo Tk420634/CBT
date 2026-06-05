@@ -294,11 +294,11 @@ Difficulty: Medium
 		if(.)
 			recovery_time = world.time + 10
 
-/mob/living/simple_animal/hostile/megafauna/sif/Goto(target, delay, minimum_distance)
+/mob/living/simple_animal/hostile/megafauna/sif/perform_move_action(target, delay, minimum_distance)
 	if(charging == FALSE)
 		..()
 
-/mob/living/simple_animal/hostile/megafauna/sif/MoveToTarget(list/possible_targets)
+/mob/living/simple_animal/hostile/megafauna/sif/perform_automated_combat_move(list/possible_targets)
 	if(charging == FALSE)
 		..()
 

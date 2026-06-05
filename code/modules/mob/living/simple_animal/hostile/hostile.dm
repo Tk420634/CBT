@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile
 	faction = list("hostile")
-	stop_automated_movement_when_pulled = 0
+	stop_wandering_when_pulled = 0
 	obj_damage = 40
 	environment_smash = ENVIRONMENT_SMASH_STRUCTURES //Bitflags. Set to ENVIRONMENT_SMASH_STRUCTURES to break closets,tables,racks, etc; ENVIRONMENT_SMASH_WALLS for walls; ENVIRONMENT_SMASH_RWALLS for rwalls
 	mob_size = MOB_SIZE_LARGE
@@ -93,9 +93,7 @@
 	var/ranged_ignores_vision = FALSE //if it'll fire ranged attacks even if it lacks vision on its target, only works with environment smash
 	var/check_friendly_fire = 0 // Should the ranged mob check for friendlies when shooting
 	var/should_factionize_shots = TRUE
-	/// If our mob runs from players when they're too close, set in tile distance. By default, mobs do not retreat.
-	var/retreat_distance = null
-	/// Minimum approach distance, so ranged mobs chase targets down, but still keep their distance set in tiles to the target, set higher to make mobs keep distance
+
 
 	var/decompose = TRUE //Does this mob decompose over time when dead?
 	//var/decomposition_time = 5 MINUTES
@@ -171,7 +169,62 @@
 	var/vision_mult_duration = (15 SECONDS)
 	var/vision_mult_active_until = 0 //if vision_mult_active_until is greater than world.time, we use the multiplied vision range, for things like attraction that temporarily boost vision
 
-	speed = 3//The default hostile mob speed. If you ever speed the mob ss again please raise this to compensate.
+	// ------------------------ //
+	// Movement vars ---------- //
+	// ------------------------ //
+
+	var/movement_mode = MOB_MOVE_IDLE
+	// set a movement mode here to have it only use that mode when not idle
+	// for things like mobs that don't retreat, or mobs that only retreat
+	var/movement_mode_lock
+	// when going from idle to active, which mode should it go to furst?
+	var/movement_mode_first = MOB_MOVE_TOWARDS_TARGET
+
+	/// If our mob runs from players when they're too close, set in tile distance. By default, mobs do not retreat.
+	var/retreat_distance = 0
+	/// destination coords for retreating, considered "there" if the mob is "there"
+	var/retreat_dest = null
+	/// how far from the dest is considered "there" for retreating
+	var/retreat_dest_radius = 1
+
+	/// approach -> retreat triggers
+	var/retreat_after_attack = TRUE
+	var/retreat_after_attack_count = 1
+
+	var/retreat_after_duration = TRUE
+	var/retreat_after_duration_length = 7 SECONDS
+
+	var/retreat_after_damaged = TRUE
+
+	/// retreat -> approach triggers
+	var/approach_after_duration = TRUE
+	var/approach_after_duration_duration = 5 SECONDS
+
+	var/approach_after_damaged = TRUE
+
+	var/approach_after_attack = TRUE
+	var/approach_after_attack_count = 1
+
+	/// retreat behavior
+	var/retreat_moves_before_switch = 3
+	var/retreat_moves_left = 0 // autoset
+	var/retreat_move_max_duration = 2 SECONDS
+
+	var/retreat_to_approach_chance = 50
+
+
+	/// record keeping
+	var/attacks_performed_this_move = 0
+	var/damaged_this_move = FALSE
+
+	/// timer keeping
+	var/retreat_timeout = 0 // timeout for each move made, so they dont get stuck
+	var/retreat_timeout_to_approach = 0 // timeout for the whole mode, so they dont just retreat forever, if wanted
+	var/approach_timeout = 0
+	var/movement_mode_last_changed = 0
+	var/movement_last_move = 0
+
+	speed = 3 //The default hostile mob speed. If you ever speed the mob ss again please raise this to compensate.
 
 /mob/living/simple_animal/hostile/Initialize(mapload, nest_spawned)
 	. = ..()
@@ -210,7 +263,7 @@
 			visible_message(span_notice("\The dead body of the [src] decomposes!"))
 			dust(TRUE, TRUE)
 		return
-	tacticalhealing() // just had to put the procs where they would be run yeh, should work now, should be it, probably ye
+	passive_healing() // just had to put the procs where they would be run yeh, should work now, should be it, probably ye
 	queue_naptime()
 	check_health()
 
@@ -241,14 +294,7 @@
 	if(AIStatus == AI_OFF)
 		return 0
 	
-	if(time_between_move_randomization && LAZYLEN(variation_list[MOB_VARIED_SPEED]) && variation_list[MOB_VARIED_SPEED_CHANCE] > 0)
-		if(last_move_randomization + time_between_move_randomization >= world.time)
-			last_move_randomization = world.time + time_between_move_randomization
-			if(prob(variation_list[MOB_VARIED_SPEED_CHANCE]))
-				move_to_delay = vary_from_list(variation_list[MOB_VARIED_SPEED])
-				set_glide_size(move_to_delay)
-	//else
-	// danbuttfat = TRUE
+	//danbuttfat = TRUE
 
 	var/list/possible_targets = ListTargets() //we look around for potential targets and make it a list for later use.
 	if(!get_target())
@@ -264,7 +310,7 @@
 		var/atom/my_target = get_target()
 		if(my_target && !QDELETED(target) && my_origin && !my_origin.Adjacent(target))
 			DestroyPathToTarget()
-		if(!MoveToTarget(possible_targets))     //if we lose our target
+		if(!perform_automated_combat_move(possible_targets))     //if we lose our target
 			if(AIShouldSleep(possible_targets))	// we try to acquire a new one
 				toggle_ai(AI_IDLE)			// otherwise we go idle
 	consider_despawning()
@@ -378,7 +424,7 @@
 	if(stat == CONSCIOUS && !get_target() && AIStatus != AI_OFF && !client)
 		if(P.firer)
 			FindTarget(list(P.firer), 1)
-		Goto(P.starting, move_to_delay, 3)
+		perform_move_action(P.starting, move_to_delay, 3)
 	//return ..()
 
 /mob/living/simple_animal/hostile/Hear(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, message_mode, atom/movable/source)
@@ -607,55 +653,58 @@
 	if(my_target && origin && isturf(origin.loc) && my_target.Adjacent(origin) && !incapacitated())
 		AttackingTarget()
 
-/mob/living/simple_animal/hostile/proc/MoveToTarget(list/possible_targets)//Step 5, handle movement between us and our targette
-	stop_automated_movement = 1
+/mob/living/simple_animal/hostile/proc/perform_automated_combat_move(list/possible_targets)//Step 5, handle movement between us and our targette
+	stop_wandering = TRUE
 	if (peaceful == TRUE)
 		LoseTarget()
-		return 0
+		return FALSE
+	
 	var/atom/my_target = get_target()
 	if(!my_target || !CanAttack(my_target))
 		LoseTarget()
+		return FALSE
+	var/turf/T = get_turf(src)
+	if(my_target.z != T.z)
+		LoseTarget()
 		return 0
+
 	var/atom/origin = get_origin()
 	if(!(my_target in possible_targets))
-		if(FrustrateTarget())
-			return 0
-	else
-		ClearFrustration()
-	if(get_dist(src, my_target) <= max_tracking_range)
-		var/turf/T = get_turf(src)
-		if(my_target.z != T.z)
-			LoseTarget()
-			return 0
+		handle_frustration()
+		return FALSE
+	reset_frustration()
+	if(get_dist(src, my_target) > max_tracking_range)
+		LoseTarget()
+		return FALSE // someday, make them go to the last seen turf if possible
+	
+	perform_ranged_action(my_target) //If we can shoot at them, do that before moving
+	perform_smash_action()
+	perform_move_action()
+	variate_retreat_distance()
+
 		if(winding_up_melee)
 			return 0
 		var/target_distance = get_dist(origin,my_target)
 		if(ranged && target_distance <= max_tracking_range) //We ranged? Shoot at em
 			if(!my_target.Adjacent(origin) && ranged_cooldown <= world.time) //But make sure they're not in range for a melee attack and our range attack is off cooldown
 				OpenFire(my_target)
-		// if(!Process_Spacemove()) //Drifting
-		// 	walk(src,0)
-		// 	return 1
 		if(retreat_distance != null && !winding_up_melee) //If we have a retreat distance and aren't winding up an attack, check if we need to run from our targette
 			if(target_distance <= retreat_distance && CHECK_BITFIELD(mobility_flags, MOBILITY_MOVE)) //If targette's closer than our retreat distance, run
 				set_glide_size(DELAY_TO_GLIDE_SIZE(move_to_delay))
 				walk_away(src,my_target,retreat_distance,move_to_delay)
 			else
-				Goto(my_target,move_to_delay,minimum_distance) //Otherwise, get to our minimum distance so we chase them
+				perform_move_action(my_target,move_to_delay,minimum_distance) //Otherwise, get to our minimum distance so we chase them
 		else
-			Goto(my_target,move_to_delay,minimum_distance)
+			perform_move_action(my_target,move_to_delay,minimum_distance)
 		/// roll to randomize this thing... if its an option
-		if(!winding_up_melee && variation_list[MOB_RETREAT_DISTANCE_CHANCE] && LAZYLEN(variation_list[MOB_RETREAT_DISTANCE]) && prob(variation_list[MOB_RETREAT_DISTANCE_CHANCE]))
-			retreat_distance = vary_from_list(variation_list[MOB_RETREAT_DISTANCE])
+		variate_retreat_distance()
 		if(my_target)
 			if(MeleeActionIfPossible(FALSE, my_target))
 				return 1
 		return 0
-	else
-		LoseTarget()
-		. = 0
+
 	if((environment_smash & ENVIRONMENT_SMASH_WALLS) || (environment_smash & ENVIRONMENT_SMASH_RWALLS) || robuster_searching || SSmobs.debug_everyone_has_robuster_searching) //If we're capable of smashing through walls, forget about vision completely after finding our targette
-		Goto(my_target,move_to_delay,minimum_distance)
+		perform_move_action(my_target,move_to_delay,minimum_distance)
 		if(my_target.loc != null && get_dist(origin, my_target.loc) <= get_vision_range()) //We can't see our targette, but he's in our vision range still
 			if(ranged_ignores_vision && ranged_cooldown <= world.time) //we can't see our targette... but we can fire at them!
 				OpenFire(my_target)
@@ -664,22 +713,28 @@
 				return 1
 	return 0
 
-/mob/living/simple_animal/hostile/proc/FrustrateTarget()
+/mob/living/simple_animal/hostile/proc/handle_frustration()
 	if(!last_frustration)
 		last_frustration = world.time
 		return
-	frustration_total += world.time - last_frustration
-	if(frustration_total >= max_frustration)
+	if(world.time - last_frustration >= max_frustration)
 		LoseTarget()
-		ClearFrustration()
+		reset_frustration()
 		return TRUE
 
-/mob/living/simple_animal/hostile/proc/ClearFrustration()
+/mob/living/simple_animal/hostile/proc/reset_frustration()
 	frustration_total = 0
 	last_frustration = 0
 
-/mob/living/simple_animal/hostile/proc/Goto(targette, delay, minimum_distance)
-	var/atom/my_target = get_target()
+/// *********************
+/// MOVEMENT PROCS
+/// *********************
+
+/// the args are overrides
+/mob/living/simple_animal/hostile/proc/perform_move_action(targette, delay, minimum_distance = 0)
+	var/atom/my_target = get_move_target(targette)
+	var/move_delay = get_move_delay(delay)
+	var/distance_from_target = get_target_standoff_distance(minimum_distance, my_target)
 	if(my_target == targette)
 		approaching_target = TRUE
 	else
@@ -687,21 +742,247 @@
 	if(CHECK_BITFIELD(mobility_flags, MOBILITY_MOVE))
 		set_glide_size(DELAY_TO_GLIDE_SIZE(move_to_delay))
 		walk_to(src, my_target, minimum_distance, delay)
-	if(variation_list[MOB_MINIMUM_DISTANCE_CHANCE] && LAZYLEN(variation_list[MOB_MINIMUM_DISTANCE]) && prob(variation_list[MOB_MINIMUM_DISTANCE_CHANCE]))
-		if(winding_up_melee)//Stay in melee range for the whole attack
-			minimum_distance = 1
-		else
-			minimum_distance = vary_from_list(variation_list[MOB_MINIMUM_DISTANCE])
-	if(variation_list[MOB_VARIED_SPEED_CHANCE] && LAZYLEN(variation_list[MOB_VARIED_SPEED]))
-		if(prob(variation_list[MOB_VARIED_SPEED_CHANCE]))
-			move_to_delay = vary_from_list(variation_list[MOB_VARIED_SPEED])
 
+/// finds somewhere for the mob to try and move towards
+/mob/living/simple_animal/hostile/proc/get_move_target(targette)
+	if(targette)
+		return targette
+	else
+		update_movement_mode()
+		switch(movement_mode)
+			if(MOB_MOVE_TOWARDS_TARGET)
+				return get_target()
+			if(MOB_MOVE_AWAY_FROM_TARGET)
+				return get_retreat_target()
+			else
+				return get_target()
+
+/mob/living/simple_animal/hostile/proc/get_move_delay(delay)
+	if(delay)
+		return delay
+	else
+		return variate_move_to_delay()
+
+/mob/living/simple_animal/hostile/proc/get_target_standoff_distance(minimum_distance, atom/target)
+	if(minimum_distance)
+		return minimum_distance
+	if(movement_mode == MOB_MOVE_AWAY_FROM_TARGET)
+		return 0 // we want to move to the target, yeah
+	if(movement_mode == MOB_MOVE_TOWARDS_TARGET) // now we're getting somewhere
+		if(approach_distance)
+			return approach_distance
+		
+	else
+		var/dist = get_dist(src, target)
+		if(dist <= melee_queue_distance)
+		return variate_minimum_distance()
+
+/// **
+/// RETREAT STUFF
+/// **
+
+/mob/living/simple_animal/hostile/proc/get_retreat_target()
+	var/turf/T = coords2turf(retreat_dest)
+	if(isturf(T))
+		return T
+	else
+		return get_target()
+
+/mob/living/simple_animal/hostile/proc/is_at_retreat_dest(turf/T)
+	// check timeout
+	if(world.time > retreat_timeout)
+		return TRUE
+	if(!isturf(T))
+		T = coords2turf(retreat_dest)
+		if(!isturf(T))
+			return FALSE
+	return (get_dist(src, T) > retreat_dest_radius)
+
+/// uses that wacky bullet casing eject code to find somewhere to run away to
+/mob/living/simple_animal/hostile/proc/get_new_retreat_dest()
+	var/atom/my_target = get_target()
+	if(!my_target)
+		set_new_retreat_dest(pick(oview(5, src))) // shrug
+		return coords2turf(retreat_dest) // pick a direction, probably wont be used, no target means we'll probably just not move
+	/// dir to check in
+	var/cardinal = get_dir(src, my_target)
+	var/possible_dirs = list(cardinal, turn(cardinal, 90), turn(cardinal, -90))
+	var/dir_to_check = pick(possible_dirs)
+	var/spread = ceil(get_dist(src, my_target) / 2) // its spread is +- the number given to it
+	var/retreat_range = variate_retreat_distance()
+	var/turf/poss_dest = get_ranged_target_turf(src, dir_to_check, retreat_range, spread)
+	if(!isturf(poss_dest))
+		poss_dest = pick(oview(5, my_target)) // if we cant find a turf in that direction, just pick a random one in our oview
+	set_new_retreat_dest(poss_dest)
+	return poss_dest
+
+/mob/living/simple_animal/hostile/proc/set_new_retreat_dest(turf/T)
+	retreat_dest = atom2coords(T)
+	retreat_timeout = world.time + retreat_timeout_duration
+	return retreat_dest
+
+/// ***********************
+/// MOVEMENT UPDATOR
+/// ***********************
+//todo: a more reliable move timer
+//todo: what counts as a 'move' ? Especially for approaching
+//todo: maybe moves only count for retreating? approach is a timer / action based?
+/mob/living/simple_animal/hostile/proc/update_movement_mode()
+	if(!get_target())
+		set_movement_mode(MOB_MOVE_IDLE)
+		return movement_mode
+	// determine which mode we should be in based on stuff
+	if(movement_mode_lock)
+		set_movement_mode(movement_mode_lock)
+	else
+		switch(movement_mode)
+			if(MOB_MOVE_IDLE) // was idle, dive in
+				set_movement_mode(movement_mode_first)
+
+			if(MOB_MOVE_TOWARDS_TARGET)
+				if(retreat_distance <= 0)
+					set_movement_mode(MOB_MOVE_TOWARDS_TARGET) // if we dont have a retreat distance, we might as well just stay in approach mode
+					return
+				if(!should_move_towards_target())
+					set_movement_mode(MOB_MOVE_AWAY_FROM_TARGET)
+				else
+					set_movement_mode(MOB_MOVE_TOWARDS_TARGET)
+
+			if(MOB_MOVE_AWAY_FROM_TARGET)
+				if(!should_move_away_from_target())
+					set_movement_mode(MOB_MOVE_TOWARDS_TARGET)
+				else
+					set_movement_mode(MOB_MOVE_AWAY_FROM_TARGET)
+	return movement_mode
+
+/// simple checks to see if we should keep doing what we're doing, or switch it up
+/mob/living/simple_animal/hostile/proc/should_move_towards_target()
+	if(retreat_after_attack)
+		if(attacks_performed_this_move >= retreat_after_attack_count)
+			return FALSE
+	if(retreat_after_duration)
+		if(world.time > approach_timeout)
+			return FALSE
+	if(retreat_after_damaged)
+		if(damaged_this_move)
+			return FALSE
+	return TRUE
+
+/mob/living/simple_animal/hostile/proc/should_move_away_from_target()
+	// typical checks
+	if(approach_after_attack)
+		if(attacks_performed_this_move >= approach_after_attack_count)
+			return FALSE
+	if(approach_after_duration)
+		if(world.time > retreat_timeout_to_approach)
+			return FALSE
+	if(approach_after_damaged)
+		if(damaged_this_move)
+			return FALSE
+	if(retreat_moves_left <= 0)
+		return FALSE
+	return TRUE
+
+/// ***********************
+/// MOVEMENT MODE SETTOR
+/// ***********************
+
+/mob/living/simple_animal/hostile/proc/set_movement_mode(new_mode)
+	var/prev_mode = movement_mode
+	movement_mode = new_mode
+	var/mode_changed = prev_mode != movement_mode
+	if(mode_changed)
+		clear_movement_data()
+	var/time_in_mode = world.time - movement_mode_last_changed
+	switch(movement_mode)
+		if(MOB_MOVE_IDLE)
+			stop_wandering = FALSE
+		if(MOB_MOVE_TOWARDS_TARGET)
+			stop_wandering = TRUE
+			update_approach(mode_changed, time_in_mode) // mostly for overriding
+		if(MOB_MOVE_AWAY_FROM_TARGET)
+			if(retreat_distance <= 0)
+				return set_movement_mode(MOB_MOVE_TOWARDS_TARGET) // if we dont have a retreat distance, we might as well just stay in approach mode
+			stop_wandering = TRUE
+			update_retreat(mode_changed, time_in_mode)
+	return movement_mode
+
+/mob/living/simple_animal/hostile/proc/update_approach(mode_changed, time_in_mode)
+	if(mode_changed)
+		approach_timeout = world.time + get_approach_duration()
+
+/// Handles updating which tile to run to, and the moves left to run
+/mob/living/simple_animal/hostile/proc/update_retreat(mode_changed, time_in_mode)
+	var/need_new_dest = FALSE
+	if(is_at_retreat_dest(get_retreat_target()))
+		need_new_dest = TRUE
+	if(mode_changed)
+		need_new_dest = TRUE
+		retreat_moves_left = get_retreat_moves()
+		retreat_timeout_to_approach = world.time + get_retreat_move_max_duration() // set the timeout for how long we should retreat before switching back to approach
+	if(!need_new_dest)
+		return // carry on!
+	retreat_dest = null // we arrived, need a new one
+	retreat_timeout = world.time + get_retreat_duration() // reset the timeout for reaching the retreat dest
+	retreat_moves_left-- // count will be checked by update_movement_mode, as it should
+	get_new_retreat_dest()
+
+/mob/living/simple_animal/hostile/proc/clear_movement_data()
+	attacks_performed_this_move = 0
+	damaged_this_move = FALSE
+	retreat_timeout = 0
+	retreat_timeout_to_approach = 0
+	retreat_moves_left = 0
+	approach_timeout = 0
+	movement_mode_last_changed = world.time
+	movement_last_move = world.time
+
+/// *********************
+/// GETTORS FOR THESE THINGS
+/// *********************
+
+/mob/living/simple_animal/hostile/proc/get_approach_duration()
+	return variate_approach_duration()
+
+/mob/living/simple_animal/hostile/proc/get_retreat_duration()
+	return variate_retreat_duration()
+
+/mob/living/simple_animal/hostile/proc/get_retreat_moves()
+	return variate_retreat_moves()
+
+/mob/living/simple_animal/hostile/proc/get_target_standoff_distance(minimum_distance, atom/target)
+	if(minimum_distance)
+		return minimum_distance
+	else
+		var/dist = get_dist(src, target)
+		if(dist <= melee_queue_distance)
+			return variate_minimum_distance()
+		else
+			return 1 // if we're not in melee range, we might as well try and get as close as possible
+
+
+/// *********************
 
 /mob/living/simple_animal/hostile/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	. = ..()
+	on_health_changed(.)
+
+/mob/living/simple_animal/hostile/proc/on_health_changed(amount)
+	if(ckey)
+		return
+	if(stat != CONSCIOUS)
+		return
+	if(search_objects >= 2)
+		return
+	if(amount <= 0)
+		return
+
+
+
+
 	if(!ckey && !stat && search_objects < 3 && . > 0)//Not unconscious, and we don't ignore mobs
 		if(amount > 0)
-			tacticalretreat()
+			try_tactical_retreat()
 		if(peaceful == TRUE)
 			peaceful = FALSE
 		if(search_objects)//Turn off item searching and ignore whatever item we were looking at, we're more concerned with fight or flight
@@ -769,7 +1050,7 @@
 
 
 /mob/living/simple_animal/hostile/proc/LoseAggro()
-	stop_automated_movement = 0
+	stop_wandering = 0
 	vision_range = initial(vision_range)
 	taunt_chance = initial(taunt_chance)
 
@@ -802,7 +1083,7 @@
 		if(faction_check_mob(M, TRUE))
 			if(M.AIStatus == AI_OFF || M.stat == DEAD || M.ckey)
 				return
-			M.Goto(src,M.move_to_delay,M.minimum_distance)
+			M.perform_move_action(src,M.move_to_delay,M.minimum_distance)
 
 /mob/living/simple_animal/hostile/proc/CheckFriendlyFire(atom/A)
 	if(!check_friendly_fire || ckey || should_factionize_shots)
@@ -832,12 +1113,8 @@
 	ranged_cooldown = world.time + ranged_cooldown_time + rand(0,30)
 	if(sound_after_shooting)
 		addtimer(CALLBACK(usr, GLOBAL_PROC_REF(playsound), src, sound_after_shooting, 100, 0, 0), sound_after_shooting_delay, TIMER_STOPPABLE)
-	if(projectiletype)
-		if(LAZYLEN(variation_list[MOB_PROJECTILE]) >= 2) // Gotta have multiple different projectiles to cycle through
-			projectiletype = vary_from_list(variation_list[MOB_PROJECTILE], TRUE)
-	if(casingtype)
-		if(LAZYLEN(variation_list[MOB_CASING]) >= 2) // Gotta have multiple different casings to cycle through
-			casingtype = vary_from_list(variation_list[MOB_CASING], TRUE)
+	variate_projectile_type(TRUE)
+	variate_casing_type(TRUE)
 
 /mob/living/simple_animal/hostile/proc/ThrowSomething(atom/targeted_atom)
 	if(!istype(throw_thing) || !istype(targeted_atom))
@@ -991,7 +1268,7 @@
 		return FALSE
 	if(istype(my_target.loc, /obj/structure/closet) || istype(my_target.loc, /obj/machinery/disposal) || istype(my_target.loc, /obj/machinery/sleeper))
 		var/atom/A = my_target.loc
-		Goto(A,move_to_delay,minimum_distance)
+		perform_move_action(A,move_to_delay,minimum_distance)
 		if(A.Adjacent(get_origin()))
 			A.attack_animal(src)
 		return 1
@@ -1019,6 +1296,10 @@
 
 /mob/living/simple_animal/hostile/proc/unset_origin()
 	targetting_origin = null
+
+/// *****************
+/// AI STATUS PROCS
+/// *****************
 
 ////// AI Status ///////
 /mob/living/simple_animal/hostile/proc/AICanContinue(list/possible_targets)
@@ -1094,6 +1375,10 @@
 	if(AIStatus == AI_IDLE && tlist.len)
 		toggle_ai(AI_ON)
 
+/// *************************
+/// TARGETTING PROCS
+/// *************************
+
 /mob/living/simple_animal/hostile/proc/ListTargetsLazy(_Z)//Step 1, find out what we can see
 	var/static/hostile_machines = typecacheof(list(/obj/machinery/porta_turret, /obj/mecha))
 	. = list()
@@ -1128,6 +1413,10 @@
 	InterruptAttractionMovement()
 	RegisterSignal(target, COMSIG_PARENT_QDELETING,PROC_REF(handle_target_del), TRUE)
 
+/// ************************
+/// NEST UNBIRTH PROCS
+/// ************************
+
 /mob/living/simple_animal/hostile/proc/queue_unbirth()
 	SSidlenpcpool.add_to_culling(src)
 
@@ -1146,6 +1435,84 @@
 	went_to_sleep = TRUE
 	SEND_SIGNAL(my_home, COMSIG_SPAWNER_ABSORB_MOB, src)
 
+/// ***********************
+/// VARIATION PROCS
+/// ***********************
+
+/mob/living/simple_animal/hostile/proc/variate_move_to_delay()
+	. = move_to_delay
+	if(!time_between_move_randomization)
+		return
+	if(!LAZYLEN(variation_list[MOB_VARIED_SPEED]) || !variation_list[MOB_VARIED_SPEED_CHANCE])
+		return
+	if(last_move_randomization + time_between_move_randomization >= world.time)
+		return
+	last_move_randomization = world.time
+	if(!prob(variation_list[MOB_VARIED_SPEED_CHANCE]))
+		return
+	var/new_speed = vary_from_list(variation_list[MOB_VARIED_SPEED])
+	if(auto_set_variations[MOB_VARIED_SPEED])
+		move_to_delay = new_speed
+		set_glide_size(move_to_delay)
+	return new_speed
+
+/mob/living/simple_animal/hostile/proc/variate_projectile_type()
+	. = projectiletype
+	if(!projectiletype)
+		return
+	if(LAZYLEN(variation_list[MOB_PROJECTILE]) < 2)
+		return
+	var/new_projectile = vary_from_list(variation_list[MOB_PROJECTILE])
+	if(autoset_variations[MOB_PROJECTILE])
+		projectiletype = new_projectile
+	return new_projectile
+
+
+/mob/living/simple_animal/hostile/proc/variate_casing_type()
+	. = casingtype
+	if(!casingtype)
+		return
+	if(LAZYLEN(variation_list[MOB_CASING]) < 2)
+		return
+	var/new_casing = vary_from_list(variation_list[MOB_CASING])
+	if(autoset_variations[MOB_CASING])
+		casingtype = new_casing
+	return new_casing
+
+/mob/living/simple_animal/hostile/proc/variate_minimum_distance()
+	. = minimum_distance
+	if(!winding_up_melee)
+		return
+	if(!variation_list[MOB_MINIMUM_DISTANCE_CHANCE])
+		return
+	if(!LAZYLEN(variation_list[MOB_MINIMUM_DISTANCE]))
+		return
+	if(!prob(variation_list[MOB_MINIMUM_DISTANCE_CHANCE]))
+		return
+	var/new_minimum_distance = vary_from_list(variation_list[MOB_MINIMUM_DISTANCE])
+	if(autoset_variations[MOB_MINIMUM_DISTANCE])
+		minimum_distance = new_minimum_distance
+	return new_minimum_distance
+
+/mob/living/simple_animal/hostile/proc/variate_retreat_distance()
+	. = retreat_distance
+	if(winding_up_melee)
+		return
+	if(!variation_list[MOB_RETREAT_DISTANCE_CHANCE])
+		return
+	if(!LAZYLEN(variation_list[MOB_RETREAT_DISTANCE]))
+		return
+	if(!prob(variation_list[MOB_RETREAT_DISTANCE_CHANCE]))
+		return
+	var/new_retreat_distance = vary_from_list(variation_list[MOB_RETREAT_DISTANCE])
+	if(autoset_variations[MOB_RETREAT_DISTANCE])
+		retreat_distance = new_retreat_distance
+	return new_retreat_distance
+
+/// ***********************
+/// SETUP VARIATIONS PROC
+/// ***********************
+
 /mob/living/simple_animal/hostile/setup_variations()
 	if(!..())
 		return
@@ -1159,6 +1526,10 @@
 		retreat_distance = vary_from_list(variation_list[MOB_RETREAT_DISTANCE])
 	if(LAZYLEN(variation_list[MOB_MINIMUM_DISTANCE]))
 		minimum_distance = vary_from_list(variation_list[MOB_MINIMUM_DISTANCE])
+
+/// ***********************
+/// EMP PROCS
+/// ***********************
 
 /mob/living/simple_animal/hostile/emp_act(severity)
 	. = ..()
@@ -1239,31 +1610,61 @@
 	LoseTarget()
 	visible_message(span_notice("[src] jerks around wildly and starts acting strange!"))
 
-// 
+/// ***********************
+/// TACTICAL RETREAT PROCS
+/// ***********************
 
-/mob/living/simple_animal/hostile/proc/tacticalretreat()
+/mob/living/simple_animal/hostile/proc/try_tactical_retreat()
 	if(!SSmobs.buggy_mob_running_away)
 		return
-	if(!tactical_retreat) // if we're not tactically retreating,
-		return // dont!
-	if(stat == DEAD || (health / maxHealth) < retreat_health_percent) // If I ain't dead, and my max health percent is less than my retreat health percent then...
+	var/should_retreat = FALSE
+	if(tactical_retreat)
+		if(stat == CONSCIOUS)
+			if((health / maxHealth) < retreat_health_percent)
+				should_retreat = TRUE
+	if(should_retreat)
+		start_tactical_retreat()
+	else
+		stop_tactical_retreat()
+	
+	if(tactical_retreat && stat != DEAD && (health / maxHealth) < retreat_health_percent) // If I have a tactical retreat distance, and I'm not dead, and my health is below my retreat health percent then...
 		retreat_distance = initial(retreat_distance) // I look at my original mob retreat distance
-		return //With that sniffed then I look to see if.
-	var/atom/my_target = get_target() //Do I have a target?????
-	if(!retreat_message_said && my_target) //If I haven't said my retreat message and I definitely don't have a target
-		var/msg = actual_retreat_message // Then play my retreat message
-		msg = replacetext(msg, "%NAME", name) //with my name
-		msg = replacetext(msg, "%TARGET", my_target.name) // and the targets name
-		visible_message(span_danger(msg)) // in it.
+	else
+		retreat_distance = null //Otherwise, I don't retreat at all!
+
+/mob/living/simple_animal/hostile/proc/start_tactical_retreat()
+	if(!tactical_retreat)
+		stop_tactical_retreat()
+		return
+	// say the line
+	if(!retreat_message_said)
+		var/atom/my_target = get_target() //Do I have a target?????
+		if(my_target)
+			var/msg = actual_retreat_message // Then play my retreat message
+			msg = replacetext(msg, "%NAME", name) //with my name
+			msg = replacetext(msg, "%TARGET", my_target.name) // and the targets name
+			visible_message(span_danger(msg)) // in it.
+		else
+			visible_message(span_danger(replacetext(actual_retreat_message, "%NAME", name))) // If I don't have a target just say the message without the target's name in it.
 		retreat_message_said = TRUE //I've officially said my retreat message
 	retreat_distance = tactical_retreat // then make my retreat distance my tactical retreat distance
-	//Now I run like hell until my health is higher than my health/max health retreat percent.
 
-//Tactical Healing Code
-//                                                              V these can go too
-/mob/living/simple_animal/hostile/proc/tacticalhealing() // Every life tick, my hostile ass is going to...
-	if(!heal_per_life || health > max_healing_ability || get_target()) //Then I check my heal per life var to see if my health isn't greater than my max healing ability and I do NOT have a target then
-		return // I do a lil dance and
+/mob/living/simple_animal/hostile/proc/stop_tactical_retreat()
+	retreat_distance = initial(retreat_distance) //Stop retreating
+	retreat_message_said = FALSE //I can say my retreat message again if I need to
+
+
+/// *************************
+/// PASSIVE HEALING PROCS
+/// *************************
+
+/mob/living/simple_animal/hostile/proc/passive_healing() // Every life tick, my hostile ass is going to...
+	if(!heal_per_life)
+		return
+	if(health > max_healing_ability)
+		return
+	if(get_target())
+		return
 	adjustHealth(-heal_per_life*maxHealth) //heal this much per life tick, negative is giving me health back. I guess you could make a mob bleed out by having it do positive adjust health?
 	visible_message(span_danger(replacetext(healing_message, "%NAME", name))) // almost, take a look at how the retreatcode's message is handled
 	playsound(get_turf(src), healing_sound, healing_volume, 1, ignore_walls = TRUE)

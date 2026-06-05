@@ -304,10 +304,10 @@
 	if(AIStatus == AI_IDLE)
 		//1% chance to skitter madly away
 		if(!busy && prob(1))
-			stop_automated_movement = 1
-			Goto(pick(urange(20, src, 1)), move_to_delay)
+			stop_wandering = 1
+			perform_move_action(pick(urange(20, src, 1)), move_to_delay)
 			spawn(50)
-				stop_automated_movement = 0
+				stop_wandering = 0
 				walk(src,0)
 		return 1
 
@@ -318,7 +318,7 @@
 	// 		if(cocoon_target == C && get_dist(src,cocoon_target) > 1)
 	// 			cocoon_target = null
 	// 		busy = FALSE
-	// 		stop_automated_movement = 0
+	// 		stop_wandering = 0
 
 /mob/living/simple_animal/hostile/poison/giant_spider/nurse/handle_automated_action()
 	return ..()
@@ -330,7 +330,7 @@
 	// 			if(C.stat && !istype(C, /mob/living/simple_animal/hostile/poison/giant_spider) && !C.anchored)
 	// 				cocoon_target = C
 	// 				busy = MOVING_TO_TARGET
-	// 				Goto(C, move_to_delay)
+	// 				perform_move_action(C, move_to_delay)
 	// 				//give up if we can't reach them after 10 seconds
 	// 				GiveUp(C)
 	// 				return
@@ -353,8 +353,8 @@
 	// 					if(isitem(O) || isstructure(O) || ismachinery(O))
 	// 						cocoon_target = O
 	// 						busy = MOVING_TO_TARGET
-	// 						stop_automated_movement = 1
-	// 						Goto(O, move_to_delay)
+	// 						stop_wandering = 1
+	// 						perform_move_action(O, move_to_delay)
 	// 						//give up if we can't reach them after 10 seconds
 	// 						GiveUp(O)
 
@@ -364,7 +364,7 @@
 
 	// else
 	// 	busy = SPIDER_IDLE
-	// 	stop_automated_movement = FALSE
+	// 	stop_wandering = FALSE
 
 /mob/living/simple_animal/hostile/poison/giant_spider/nurse/proc/cocoon()
 	if(stat != DEAD && cocoon_target && !cocoon_target.anchored)
@@ -382,7 +382,7 @@
 			return //we're already doing this, don't cancel out or anything
 		busy = SPINNING_COCOON
 		visible_message(span_notice("[src] begins to secrete a sticky substance around [cocoon_target]."),span_notice("You begin wrapping [cocoon_target] into a cocoon."))
-		stop_automated_movement = TRUE
+		stop_wandering = TRUE
 		walk(src,0)
 		if(do_after(src, 50, target = cocoon_target))
 			if(busy == SPINNING_COCOON)
@@ -403,7 +403,7 @@
 					C.icon_state = pick("cocoon_large1","cocoon_large2","cocoon_large3")
 	cocoon_target = null
 	busy = SPIDER_IDLE
-	stop_automated_movement = FALSE
+	stop_wandering = FALSE
 
 /datum/action/innate/spider
 	icon_icon = 'icons/mob/actions/actions_animal.dmi'
@@ -432,12 +432,12 @@
 	if(S.busy != SPINNING_WEB)
 		S.busy = SPINNING_WEB
 		S.visible_message(span_notice("[S] begins to secrete a sticky substance."),span_notice("You begin to lay a web."))
-		S.stop_automated_movement = TRUE
+		S.stop_wandering = TRUE
 		if(do_after(S, 40, target = T))
 			if(S.busy == SPINNING_WEB && S.loc == T)
 				new /obj/structure/spider/stickyweb(T)
 		S.busy = SPIDER_IDLE
-		S.stop_automated_movement = FALSE
+		S.stop_wandering = FALSE
 	else
 		to_chat(S, span_warning("You're already spinning a web!"))
 
@@ -524,7 +524,7 @@
 	else if(S.busy != LAYING_EGGS)
 		S.busy = LAYING_EGGS
 		S.visible_message(span_notice("[S] begins to lay a cluster of eggs."),span_notice("You begin to lay a cluster of eggs."))
-		S.stop_automated_movement = TRUE
+		S.stop_wandering = TRUE
 		if(do_after(S, 50, target = get_turf(S)))
 			if(S.busy == LAYING_EGGS)
 				E = locate() in get_turf(S)
@@ -539,7 +539,7 @@
 					S.fed--
 					UpdateButtonIcon(TRUE)
 		S.busy = SPIDER_IDLE
-		S.stop_automated_movement = FALSE
+		S.stop_wandering = FALSE
 
 /datum/action/innate/spider/set_directive
 	name = "Set Directive"

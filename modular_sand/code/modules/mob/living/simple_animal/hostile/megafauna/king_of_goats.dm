@@ -205,20 +205,20 @@ Difficulty: Insanely Hard
 
 		else if(prob(5)) //earthquake spell
 			visible_message("<B><span class='danger'>\The [src]' eyes begin to glow ominously as dust and debris in the area is kicked up in a light breeze!!</span></B>")
-			stop_automated_movement = TRUE
+			stop_wandering = TRUE
 			if(do_after(src, 6 SECONDS, src))
 				var/health_holder = getBruteLoss()
 				visible_message("<B><span class='cult'>\The [src] raises its fore-hooves and stomps them into the ground with incredible force!!</span></B>")
 				explosion(get_step(src,pick(GLOB.cardinals)), -1, 2, 2, 3, 6)
 				explosion(get_step(src,pick(GLOB.cardinals)), -1, 1, 4, 4, 6)
 				explosion(get_step(src,pick(GLOB.cardinals)), -1, 3, 4, 3, 6)
-				stop_automated_movement = FALSE
+				stop_wandering = FALSE
 				spellscast++
 				if(!(getBruteLoss() > health_holder))
 					adjustBruteLoss(health_holder - getBruteLoss()) //our own magicks cannot harm us
 			else
 				visible_message(span_notice("\The [src] loses concentration and huffs haughtily."))
-				stop_automated_movement = FALSE
+				stop_wandering = FALSE
 
 		else return
 

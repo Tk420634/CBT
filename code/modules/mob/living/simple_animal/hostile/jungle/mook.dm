@@ -56,7 +56,7 @@
 		WarmupAttack()
 	return ..()
 
-/mob/living/simple_animal/hostile/jungle/mook/Goto()
+/mob/living/simple_animal/hostile/jungle/mook/perform_move_action()
 	if(attack_state != MOOK_ATTACK_NEUTRAL)
 		return
 	return ..()
@@ -155,7 +155,7 @@
 	var/atom/my_target = get_target()
 	if(my_target && !stat)
 		update_icons()
-		Goto(my_target, move_to_delay, minimum_distance)
+		perform_move_action(my_target, move_to_delay, minimum_distance)
 
 /mob/living/simple_animal/hostile/jungle/mook/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	. = ..()

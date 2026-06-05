@@ -187,7 +187,7 @@ Difficulty: Normal
 		if(my_target)
 			arena_trap(my_target)
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/Goto(target, delay, minimum_distance)
+/mob/living/simple_animal/hostile/megafauna/hierophant/perform_move_action(target, delay, minimum_distance)
 	wander = TRUE
 	if(!blinking)
 		..()
@@ -665,7 +665,7 @@ Difficulty: Normal
 					if(get_dist(H, caster) <= H.aggroed_vision_range)
 						H.FindTarget(list(caster), 1)
 					else
-						H.Goto(get_turf(caster), H.move_to_delay, 3)
+						H.perform_move_action(get_turf(caster), H.move_to_delay, 3)
 		if(monster_damage_boost && (ismegafauna(L) || istype(L, /mob/living/simple_animal/hostile/asteroid)))
 			L.adjustBruteLoss(damage)
 		log_combat(caster, L, "struck with a [name]")

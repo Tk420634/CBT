@@ -19,7 +19,7 @@
 	mob_size = MOB_SIZE_LARGE
 	speed = 1
 	a_intent = INTENT_HARM
-	stop_automated_movement = 1
+	stop_wandering = 1
 	status_flags = CANPUSH
 	attack_sound = 'sound/magic/demon_attack1.ogg'
 	var/feast_sound = 'sound/magic/demon_consume.ogg'

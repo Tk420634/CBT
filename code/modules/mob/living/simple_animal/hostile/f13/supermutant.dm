@@ -439,7 +439,7 @@
 	if(!charging)
 		return ..()
 
-/mob/living/simple_animal/hostile/supermutant/nightkin/rain/Goto(target, delay, minimum_distance)
+/mob/living/simple_animal/hostile/supermutant/nightkin/rain/perform_move_action(target, delay, minimum_distance)
 	if(!charging)
 		..()
 
@@ -469,7 +469,7 @@
 	var/atom/my_target = get_target()
 	if(!my_target)
 		return
-	Goto(my_target, move_to_delay, minimum_distance)
+	perform_move_action(my_target, move_to_delay, minimum_distance)
 
 /mob/living/simple_animal/hostile/supermutant/nightkin/rain/Bump(atom/A)
 	if(charging)

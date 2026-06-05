@@ -16,7 +16,7 @@
 	speed = 0
 	spacewalk = TRUE
 	a_intent = INTENT_HARM
-	stop_automated_movement = 1
+	stop_wandering = 1
 	status_flags = CANPUSH
 	attack_sound = 'sound/weapons/punch1.ogg'
 	see_in_dark = 7
@@ -277,7 +277,7 @@
 	if(Found(the_target) || ..()) //If we Found it or Can_Attack it normally, we Can_Attack it as long as it wasn't invisible
 		return 1 //as a note this shouldn't be added to base hostile mobs because it'll mess up retaliate hostile mobs
 
-/mob/living/simple_animal/hostile/construct/builder/MoveToTarget(list/possible_targets)
+/mob/living/simple_animal/hostile/construct/builder/perform_automated_combat_move(list/possible_targets)
 	..()
 	var/mob/living/L = get_target()
 	if(!isliving(L))

@@ -9,7 +9,7 @@
 	light_power = 0.9
 	light_color = "#CDDDFF"
 	light_on = FALSE
-	stop_automated_movement = 1
+	stop_wandering = 1
 	wander = 0
 	healable = 0
 	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 0, CLONE = 0, STAMINA = 0, OXY = 0)

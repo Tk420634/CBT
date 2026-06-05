@@ -109,7 +109,7 @@ Difficulty: Medium
 	if(!swooping)
 		..()
 
-/mob/living/simple_animal/hostile/megafauna/dragon/Goto(target, delay, minimum_distance)
+/mob/living/simple_animal/hostile/megafauna/dragon/perform_move_action(target, delay, minimum_distance)
 	if(!swooping)
 		..()
 
@@ -183,7 +183,7 @@ Difficulty: Medium
 	if(!my_target)
 		return
 	swoop_cooldown = world.time + 200
-	stop_automated_movement = TRUE
+	stop_wandering = TRUE
 	swooping |= SWOOP_DAMAGEABLE
 	density = FALSE
 	icon_state = "shadow"

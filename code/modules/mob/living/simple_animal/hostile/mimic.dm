@@ -41,7 +41,7 @@
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
 	speak_emote = list("clatters")
-	stop_automated_movement = 1
+	stop_wandering = 1
 	wander = 0
 	var/attempt_open = FALSE
 

@@ -595,6 +595,15 @@
 /// Varied projectiles they can shoot, weighted chance to do the thing too
 #define MOB_PROJECTILE_ENTRY(proj, chance) proj = chance
 
+/// tells the mob to autoset variations for all this gung
+#define MOB_VARIATE_ALL "mob_variate_all"
+/// a list of all the variatiable things, for autosetting stuff
+#define DEFAULT_VARIATIONS list(MOB_VARIATE_ALL = TRUE)
+
+#define MOB_MOVE_UNSET "mob_move_unset"
+#define MOB_MOVE_TOWARDS_TARGET "mob_move_towards_target"
+#define MOB_MOVE_AWAY_FROM_TARGET "mob_move_away_from_target"
+
 /// Mob EMP reaction flags
 /// For mobs that react to EMP to do something other than take a little damage
 

@@ -30,8 +30,8 @@
 	ventcrawler = VENTCRAWLER_ALWAYS
 	gold_core_spawnable = FRIENDLY_SPAWN
 	gender = NEUTER
-	stop_automated_movement = FALSE
-	stop_automated_movement_when_pulled = TRUE
+	stop_wandering = FALSE
+	stop_wandering_when_pulled = TRUE
 	stat_exclusive = TRUE
 	robust_searching = TRUE
 	search_objects = TRUE
