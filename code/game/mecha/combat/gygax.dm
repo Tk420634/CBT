@@ -10,7 +10,7 @@
 	step_in = 2.5
 	dir_in = 1 //Facing North.
 	max_integrity = 550
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	max_temperature = 25000
 	infra_luminosity = 6
 	wreckage = /obj/structure/mecha_wreckage/gygax
@@ -23,7 +23,7 @@
 	desc = "A lightweight exosuit, painted in a dark scheme. This model appears to have some modifications."
 	icon_state = "darkgygax"
 	max_integrity = 500
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	max_temperature = 35000
 	wreckage = /obj/structure/mecha_wreckage/gygax/dark
 	max_equip = 4

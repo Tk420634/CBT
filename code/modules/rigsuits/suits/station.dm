@@ -15,7 +15,7 @@
 	suit_type = "augmented suit"
 	desc = "Prepare for paperwork."
 	icon_state = "internalaffairs_rig"
-	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
+	armor_list = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 	active_slowdown = 0
 	offline_slowdown = 0
@@ -49,7 +49,7 @@
 	suit_type = "industrial hardsuit"
 	desc = "A heavy, powerful rig used by construction crews and mining corporations."
 	icon_state = "engineering_rig"
-	armor = list(melee = 10, bullet = 5, laser = 10, energy = 5, bomb = 10, bio = 100, rad = 75)
+	armor_list = list(melee = 10, bullet = 5, laser = 10, energy = 5, bomb = 10, bio = 100, rad = 75)
 	active_slowdown = 3
 	offline_slowdown = 10
 	offline_vision_restriction = 2
@@ -102,7 +102,7 @@
 	suit_type = "advanced voidsuit"
 	desc = "An advanced voidsuit that protects against hazardous, low pressure environments. Shines with a high polish."
 	icon_state = "ce_rig"
-	armor = list(melee = 40, bullet = 5, laser = 10, energy = 5, bomb = 50, bio = 100, rad = 90)
+	armor_list = list(melee = 40, bullet = 5, laser = 10, energy = 5, bomb = 50, bio = 100, rad = 90)
 	active_slowdown = 0
 	offline_slowdown = 0
 	offline_vision_restriction = 0
@@ -164,7 +164,7 @@
 	suit_type = "rescue hardsuit"
 	desc = "A durable suit designed for medical rescue in high risk areas."
 	icon_state = "medical_rig"
-	armor = list(melee = 10, bullet = 5, laser = 10, energy = 5, bomb = 10, bio = 100, rad = 50)
+	armor_list = list(melee = 10, bullet = 5, laser = 10, energy = 5, bomb = 10, bio = 100, rad = 50)
 	active_slowdown = 1
 	offline_vision_restriction = 1
 
@@ -188,7 +188,7 @@
 	suit_type = "hazard hardsuit"
 	desc = "A Security hardsuit designed for prolonged EVA in dangerous environments."
 	icon_state = "hazard_rig"
-	armor = list(melee = 30, bullet = 15, laser = 30, energy = 10, bomb = 10, bio = 100, rad = 50)
+	armor_list = list(melee = 30, bullet = 15, laser = 30, energy = 10, bomb = 10, bio = 100, rad = 50)
 	active_slowdown = 1
 	offline_slowdown = 3
 	offline_vision_restriction = 1

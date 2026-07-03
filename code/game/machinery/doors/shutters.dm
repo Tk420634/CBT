@@ -5,7 +5,7 @@
 	icon = 'icons/obj/doors/shutters.dmi'
 	layer = SHUTTER_LAYER
 	closingLayer = SHUTTER_LAYER
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	damage_deflection = 26 //fragile, but will block weak melee weapons
 	max_integrity = 200
 	proj_resist = 16 //fragile, blocks .22s
@@ -26,7 +26,7 @@
 	desc = "A plain grey security shutter, it looks to be moderately reinforced. Mag-locks keep the shutter securely in place."
 	icon = 'icons/obj/doors/shutters_old.dmi'
 	icon_state = "closed"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	max_integrity = 350
 	damage_deflection = 36 //stronger, will block most one-handed melee weapons
 	proj_resist = 30 // will block weaker pistol/scattershot projectiles, though most faction weapons will get through
@@ -66,7 +66,7 @@
 	desc = "Mechanical shutters that have a thick piece of ballistic glass in the middle, allowing you to see through the shutters at all times."
 	icon = 'icons/obj/doors/shutters_window.dmi'
 	icon_state = "closed"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	max_integrity = 300
 	damage_deflection = 26 // weaker against melee
 	proj_resist = 28

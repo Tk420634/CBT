@@ -308,7 +308,7 @@
 	canSmoothWith = list(SMOOTH_GROUP_GLASS_TABLES)
 	max_integrity = 70
 	resistance_flags = ACID_PROOF
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	var/list/debris = list()
 
 /obj/structure/table/glass/Initialize()
@@ -394,7 +394,7 @@
 	canSmoothWith = null
 	max_integrity = 270
 	resistance_flags = ACID_PROOF
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	var/list/debris = list()
 
 /obj/structure/table/plasmaglass/New()
@@ -583,7 +583,7 @@
 	buildstack = /obj/item/stack/sheet/plasteel
 	max_integrity = 200
 	integrity_failure = 0.25
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 
 /obj/structure/table/reinforced/deconstruction_hints(mob/user)
 	if(deconstruction_ready)

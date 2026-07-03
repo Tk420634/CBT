@@ -27,7 +27,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	item_flags = NOBLUDGEON
 	w_class = WEIGHT_CLASS_SMALL
 	slot_flags = INV_SLOTBIT_ID | INV_SLOTBIT_GLOVES
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	tastes = list("old metal" = 1, "rust" = 1)
 	attack_verb = list("smacked", "bapped", "bopped", "bonked", "slapped", "whipped")

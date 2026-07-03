@@ -44,7 +44,7 @@
 	rotate_on_lying = FALSE // plop~
 
 	faction = list("catslug", "neutral")
-	mob_armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	maxHealth = 200
 	health = 200
 	healable = 1
@@ -1207,7 +1207,7 @@
 	health = 70
 	see_in_dark = 3
 	maxHealth = 70
-	mob_armor = ARMOR_VALUE_ZERO
+	armor_list = ARMOR_VALUE_ZERO
 	AIStatus = AI_IDLE
 	light_color = "#2BFF2B"
 	light_range = 2.5
@@ -1403,7 +1403,7 @@
 	response_harm_simple = "punt"
 	maxHealth = 200
 	health = 200
-	mob_armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	healable = 1
 	waddle_amount = 3
 	waddle_up_time = 1

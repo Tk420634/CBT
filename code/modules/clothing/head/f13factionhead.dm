@@ -11,7 +11,7 @@
 	dynamic_hair_suffix = "+generic"
 	var/datum/beepsky_fashion/beepsky_fashion //the associated datum for applying this to a secbot
 	var/list/speechspan = null
-	armor = list("melee" = 20, "bullet" = 10, "laser" = 10, "bio" = 0, "bomb" = 10, "rad" = 0, "fire" = 25, "acid" = 25)
+	armor_list = list("melee" = 20, "bullet" = 10, "laser" = 10, "bio" = 0, "bomb" = 10, "rad" = 0, "fire" = 25, "acid" = 25)
 	slowdown = 0
 
 /obj/item/clothing/head/Initialize()
@@ -31,7 +31,7 @@
 	desc = "Standard Security gear. Protects the head from impacts."
 	icon_state = "helmet"
 	inhand_icon_state = "helmet"
-	armor = list("melee" = 40, "bullet" = 40, "laser" = 40, energy = "25", "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 10)
+	armor_list = list("melee" = 40, "bullet" = 40, "laser" = 40, energy = "25", "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 10)
 	flags_inv = HIDEEARS | HIDEHAIR
 	cold_protection = HEAD
 	min_cold_protection_temperature = HELMET_MIN_TEMP_PROTECT
@@ -233,7 +233,7 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEFACE|HIDEEYES|HIDEHAIR|HIDEFACIALHAIR
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T1, ARMOR_MODIFIER_UP_BULLET_T2, ARMOR_MODIFIER_UP_LASER_T2, ARMOR_MODIFIER_UP_FIRE_T3, ARMOR_MODIFIER_UP_ENV_T4)
 	strip_delay = 60
 	equip_delay_other = 60

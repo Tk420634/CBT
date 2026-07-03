@@ -13,7 +13,7 @@
 	throw_range = 7
 	attack_verb = list("banned")
 	max_integrity = 200
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	resistance_flags = FIRE_PROOF
 
 /*
@@ -66,7 +66,7 @@ superlagg says: cool story, oranges
 	block_chance = 50
 	sharpness = SHARP_EDGED
 	max_integrity = 200
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	resistance_flags = FIRE_PROOF
 	total_mass = TOTAL_MASS_MEDIEVAL_WEAPON
 
@@ -683,7 +683,7 @@ superlagg says: cool story, oranges
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	sharpness = SHARP_EDGED
 	max_integrity = 200
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	resistance_flags = FIRE_PROOF
 
 /obj/item/pitchfork/Initialize()

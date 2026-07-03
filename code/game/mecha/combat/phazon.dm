@@ -6,7 +6,7 @@
 	dir_in = 2 //Facing South.
 	max_integrity = 200
 	deflect_chance = 30
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	max_temperature = 25000
 	infra_luminosity = 3
 	wreckage = /obj/structure/mecha_wreckage/phazon

@@ -24,7 +24,7 @@ RLD
 	w_class = WEIGHT_CLASS_NORMAL
 	custom_materials = list(/datum/material/iron=100000)
 	req_access_txt = "11"
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	resistance_flags = FIRE_PROOF
 	var/datum/effect_system/spark_spread/spark_system
 	var/matter = 0

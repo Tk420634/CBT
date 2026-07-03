@@ -4,7 +4,7 @@
 	locked = TRUE
 	icon_state = "secure"
 	max_integrity = 250
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	secure = TRUE
 	var/melee_min_damage = 20
 

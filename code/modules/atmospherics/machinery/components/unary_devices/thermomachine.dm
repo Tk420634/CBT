@@ -7,7 +7,7 @@
 
 	density = TRUE
 	max_integrity = 300
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	layer = OBJ_LAYER
 	plane = GAME_PLANE
 	circuit = /obj/item/circuitboard/machine/thermomachine

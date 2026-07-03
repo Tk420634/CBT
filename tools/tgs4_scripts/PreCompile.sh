@@ -36,17 +36,19 @@ if ! ( [ -x "$has_git" ] && [ -x "$has_grep" ] && [ -f "/usr/lib/i386-linux-gnu/
 		dpkg --add-architecture i386
 		apt-get update
 		apt-get install -y git libssl-dev:i386
+		apt-get install curl:i386
 		rm -rf /var/lib/apt/lists/*
 	else
 		sudo dpkg --add-architecture i386
 		sudo apt-get update
 		sudo apt-get install -y git libssl-dev:i386
+		sudo apt-get install curl:i386
 		sudo rm -rf /var/lib/apt/lists/*
 	fi
 fi
 dpkg --add-architecture i386
 apt-get update
-apt-get install -y lib32z1 pkg-config libssl-dev:i386 libssl-dev libssl1.1:i386
+apt-get install -y lib32z1 pkg-config libssl-dev:i386 libssl-dev libssl1.1:i386 curl:i386
 # update rust-g
 if [ ! -d "rust-g" ]; then
 	echo "Cloning rust-g..."

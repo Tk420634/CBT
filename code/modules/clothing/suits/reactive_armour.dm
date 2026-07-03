@@ -33,7 +33,7 @@
 	icon_state = "reactiveoff"
 	inhand_icon_state = "reactiveoff"
 	blood_overlay_type = "armor"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	actions_types = list(/datum/action/item_action/toggle)
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	rad_flags = RAD_PROTECT_CONTENTS | RAD_NO_CONTAMINATE

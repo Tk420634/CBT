@@ -16,7 +16,7 @@
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 10
 	active_power_usage = 100
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	var/obj/item/stored
 
 /obj/machinery/blackbox_recorder/Initialize()

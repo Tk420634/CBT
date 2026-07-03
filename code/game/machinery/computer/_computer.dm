@@ -8,7 +8,7 @@
 	active_power_usage = 300
 	max_integrity = 200
 	integrity_failure = 0.5
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	barricade = TRUE
 	proj_pass_rate = 65
 	var/brightness_on = 1

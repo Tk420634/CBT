@@ -11,7 +11,7 @@
 	cold_protection = CHEST|GROIN|LEGS|ARMS
 	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
 	hoodtype = /obj/item/clothing/head/hooded/explorer
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	slowdown = ARMOR_SLOWDOWN_MEDIUM * ARMOR_SLOWDOWN_GLOBAL_MULT
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T3, ARMOR_MODIFIER_DOWN_BULLET_T1, ARMOR_MODIFIER_DOWN_LASER_T1, ARMOR_MODIFIER_UP_ENV_T4, ARMOR_MODIFIER_UP_FIRE_T3, ARMOR_MODIFIER_UP_DT_T2)
 	flags_inv = HIDEJUMPSUIT
@@ -29,7 +29,7 @@
 	flags_inv = HIDEHAIR|HIDEFACE
 	min_cold_protection_temperature = FIRE_HELM_MIN_TEMP_PROTECT
 	cold_protection = HEAD
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T3, ARMOR_MODIFIER_DOWN_BULLET_T1, ARMOR_MODIFIER_DOWN_LASER_T1, ARMOR_MODIFIER_UP_ENV_T4, ARMOR_MODIFIER_UP_FIRE_T3, ARMOR_MODIFIER_UP_DT_T2)
 	resistance_flags = FIRE_PROOF
 	rad_flags = RAD_PROTECT_CONTENTS | RAD_NO_CONTAMINATE
@@ -42,7 +42,7 @@
 	visor_flags_inv = HIDEFACIALHAIR
 	visor_flags_cover = MASKCOVERSMOUTH
 	actions_types = list(/datum/action/item_action/adjust)
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T4)
 	resistance_flags = FIRE_PROOF
 
@@ -67,7 +67,7 @@
 	resistance_flags = FIRE_PROOF | LAVA_PROOF | ACID_PROOF | GOLIATH_RESISTANCE
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_SNEK_TAURIC|STYLE_PAW_TAURIC
 	slowdown = 0
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T1)
 
 /obj/item/clothing/suit/space/hostile_environment/Initialize()
@@ -96,7 +96,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	clothing_flags = THICKMATERIAL // no space protection
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T1)
 	resistance_flags = FIRE_PROOF | LAVA_PROOF
 
@@ -133,7 +133,7 @@
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	heat_protection = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	hoodtype = /obj/item/clothing/head/hooded/explorer/seva
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	slowdown = ARMOR_SLOWDOWN_MEDIUM * ARMOR_SLOWDOWN_GLOBAL_MULT
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_MELEE_T1, ARMOR_MODIFIER_UP_BULLET_T3, ARMOR_MODIFIER_DOWN_LASER_T1, ARMOR_MODIFIER_UP_ENV_T4, ARMOR_MODIFIER_UP_FIRE_T3, ARMOR_MODIFIER_UP_DT_T2)
 	resistance_flags = FIRE_PROOF | GOLIATH_WEAKNESS
@@ -149,7 +149,7 @@
 	icon_state = "seva"
 	inhand_icon_state = "seva"
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T3, ARMOR_MODIFIER_DOWN_BULLET_T1, ARMOR_MODIFIER_DOWN_LASER_T1, ARMOR_MODIFIER_UP_ENV_T4, ARMOR_MODIFIER_UP_FIRE_T3, ARMOR_MODIFIER_UP_DT_T2)
 	resistance_flags = FIRE_PROOF | GOLIATH_WEAKNESS
 	rad_flags = RAD_PROTECT_CONTENTS | RAD_NO_CONTAMINATE
@@ -173,7 +173,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	heat_protection = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	hoodtype = /obj/item/clothing/head/hooded/explorer/exo
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	resistance_flags = FIRE_PROOF | GOLIATH_RESISTANCE
 
 /obj/item/clothing/head/hooded/explorer/exo
@@ -181,7 +181,7 @@
 	desc = "A robust helmet for fighting dangerous animals. Its design and material make it harder for a Goliath to keep their grip on the wearer."
 	icon_state = "exo"
 	inhand_icon_state = "exo"
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	resistance_flags = FIRE_PROOF | GOLIATH_RESISTANCE
 
 /obj/item/clothing/mask/gas/exo

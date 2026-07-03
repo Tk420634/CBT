@@ -6,7 +6,7 @@
 	icon_living = "piratemelee"
 	icon_dead = "pirate_dead"
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
-	mob_armor = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_BOSS
+	armor_list = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_BOSS
 	speak_chance = 0
 	seconds_per_wander = 5
 	response_help_continuous = "pushes"

@@ -15,7 +15,7 @@
 	icon_dead = "raider_dead"
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	seconds_per_wander = 5
-	mob_armor = ARMOR_VALUE_RAIDER_LEATHER_JACKET
+	armor_list = ARMOR_VALUE_RAIDER_LEATHER_JACKET
 	maxHealth = 80
 	health = 80
 	melee_damage_lower = 5
@@ -105,7 +105,7 @@
 	icon_state = "raider_ranged"
 	icon_living = "raider_ranged"
 	ranged = TRUE
-	mob_armor = ARMOR_VALUE_RAIDER_LEATHER_JACKET
+	armor_list = ARMOR_VALUE_RAIDER_LEATHER_JACKET
 	maxHealth = 80
 	health = 80
 	rapid_melee = 2
@@ -145,7 +145,7 @@
 	name = "Legendary Raider"
 	desc = "Another murderer churned out by the wastes - this one seems a bit faster than the average..."
 	color = "#FFFF00"
-	mob_armor = ARMOR_VALUE_RAIDER_LEATHER_JACKET
+	armor_list = ARMOR_VALUE_RAIDER_LEATHER_JACKET
 	maxHealth = 300
 	health = 300
 	speed = 2
@@ -165,7 +165,7 @@
 	name = "Legendary Raider"
 	desc = "Another murderer churned out by the wastes, wielding a decent pistol and looking very strong"
 	color = "#FFFF00"
-	mob_armor = ARMOR_VALUE_RAIDER_LEATHER_JACKET
+	armor_list = ARMOR_VALUE_RAIDER_LEATHER_JACKET
 	maxHealth = 240
 	health = 240
 	retreat_distance = 1
@@ -210,7 +210,7 @@
 	icon_state = "raiderboss"
 	icon_living = "raiderboss"
 	icon_dead = "raiderboss_dead"
-	mob_armor = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_BOSS
+	armor_list = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_BOSS
 	maxHealth = 150
 	health = 150
 	extra_projectiles = 2
@@ -273,7 +273,7 @@
 	icon_state = "mango_matt"
 	icon_living = "mango_matt"
 	icon_dead = "mango_matt_dead"
-	mob_armor = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_BOSS
+	armor_list = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_BOSS
 	maxHealth = 165
 	health = 165
 	extra_projectiles = 2
@@ -329,7 +329,7 @@
 	icon_state = "blueberry_bates"
 	icon_living = "blueberry_bates"
 	icon_dead = "blueberry_bates_dead"
-	mob_armor = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_BOSS
+	armor_list = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_BOSS
 	move_to_delay = 4 //S L O W
 	sight_shoot_delay_time = 0 SECONDS
 	ranged_cooldown_time = 1 SECONDS
@@ -387,7 +387,7 @@
 	icon_state = "metal_raider"
 	icon_living = "metal_raider"
 	icon_dead = "metal_raider_dead"
-	mob_armor = ARMOR_VALUE_RAIDER_METAL_ARMOR
+	armor_list = ARMOR_VALUE_RAIDER_METAL_ARMOR
 	maxHealth = 60
 	health = 60
 	rapid_melee = 1
@@ -418,7 +418,7 @@
 	icon_state = "firefighter_raider"
 	icon_living = "firefighter_raider"
 	icon_dead = "firefighter_raider_dead"
-	mob_armor = ARMOR_VALUE_RAIDER_ARMOR
+	armor_list = ARMOR_VALUE_RAIDER_ARMOR
 	maxHealth = 80
 	health = 80
 	loot = list()
@@ -436,7 +436,7 @@
 	icon_dead = "biker_raider_dead"
 	melee_damage_lower = 10
 	melee_damage_upper = 20
-	mob_armor = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_RUSTY
+	armor_list = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_RUSTY
 	maxHealth = 125
 	health = 125
 	rapid_melee = 1
@@ -484,7 +484,7 @@
 	minimum_distance = 0
 	melee_damage_lower = 15
 	melee_damage_upper = 33
-	mob_armor = ARMOR_VALUE_RAIDER_ARMOR
+	armor_list = ARMOR_VALUE_RAIDER_ARMOR
 	maxHealth = 125
 	health = 125
 	rapid_melee = 1
@@ -509,7 +509,7 @@
 	icon_state = "tribal_raider"
 	icon_living = "tribal_raider"
 	icon_dead = "tribal_raider_dead"
-	mob_armor = ARMOR_VALUE_RAIDER_ARMOR
+	armor_list = ARMOR_VALUE_RAIDER_ARMOR
 	maxHealth = 125
 	health = 125
 	melee_damage_lower = 12
@@ -539,7 +539,7 @@
 	icon_state = "sulphite"
 	icon_living = "sulphite"
 	icon_dead= "sulphite_dead"
-	mob_armor = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_RUSTY
+	armor_list = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_RUSTY
 	maxHealth = 135
 	health = 135
 	rapid_melee = 1
@@ -561,7 +561,7 @@
 	icon_state = "junker_hijacker"
 	icon_living = "junker_hijacker"
 	icon_dead = "junker_dead"
-	mob_armor = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_RUSTY
+	armor_list = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_RUSTY
 	maxHealth = 150
 	health = 150
 	rapid_melee = 1
@@ -576,7 +576,7 @@
 	icon_living = "junker_scrapper"
 	icon_dead = "junker_dead"
 	faction = list("raider", "wastebot")
-	mob_armor = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_BOSS
+	armor_list = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_BOSS
 	maxHealth = 165
 	health = 165
 	damage_coeff = list(BRUTE = 1, BURN = 0.75, TOX = 0, CLONE = 0, STAMINA = 0, OXY = 0)
@@ -592,7 +592,7 @@
 	icon_state = "junker"
 	icon_living = "junker"
 	icon_dead = "junker_dead"
-	mob_armor = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_RUSTY
+	armor_list = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_RUSTY
 	maxHealth = 150
 	health = 150
 	ranged = TRUE
@@ -638,7 +638,7 @@
 	icon_state = "junker_boss"
 	icon_living = "junker_boss"
 	icon_dead = "junker_dead"
-	mob_armor = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_BOSS
+	armor_list = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_BOSS
 	maxHealth = 165
 	health = 165
 	ranged = TRUE
@@ -667,7 +667,7 @@
 	icon_dead = "cult_axeghoul_dead"
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	seconds_per_wander = 5
-	mob_armor = ARMOR_VALUE_RAIDER_LEATHER_JACKET
+	armor_list = ARMOR_VALUE_RAIDER_LEATHER_JACKET
 	maxHealth = 80
 	health = 80
 	melee_damage_lower = 10
@@ -701,7 +701,7 @@
 	icon_living = "cultist_pistol"
 	icon_dead = "cultist_pistol_dead"
 	ranged = TRUE
-	mob_armor = ARMOR_VALUE_RAIDER_LEATHER_JACKET
+	armor_list = ARMOR_VALUE_RAIDER_LEATHER_JACKET
 	faction = list("raider", "hostile")
 	maxHealth = 85
 	health = 85
@@ -738,7 +738,7 @@
 	icon_living = "cultist_shotgun"
 	icon_dead = "cultist_shotgun_dead"
 	ranged = TRUE
-	mob_armor = ARMOR_VALUE_RAIDER_LEATHER_JACKET
+	armor_list = ARMOR_VALUE_RAIDER_LEATHER_JACKET
 	maxHealth = 80
 	health = 80
 	rapid_melee = 2
@@ -777,7 +777,7 @@
 	icon_living = "cultist2_smg"
 	icon_dead = "cultist2_smg_dead"
 	ranged = TRUE
-	mob_armor = ARMOR_VALUE_RAIDER_LEATHER_JACKET
+	armor_list = ARMOR_VALUE_RAIDER_LEATHER_JACKET
 	maxHealth = 80
 	health = 80
 	rapid_melee = 2
@@ -815,7 +815,7 @@
 	icon_living = "cultist3_tesla"
 	icon_dead = "cultist3_tesla_dead"
 	ranged = TRUE
-	mob_armor = ARMOR_VALUE_RAIDER_LEATHER_JACKET
+	armor_list = ARMOR_VALUE_RAIDER_LEATHER_JACKET
 	maxHealth = 150
 	health = 150
 	rapid_melee = 2
@@ -853,7 +853,7 @@
 	icon_living = "cultist3_tesla"
 	icon_dead = "cultist3_tesla_dead"
 	ranged = TRUE
-	mob_armor = ARMOR_VALUE_RAIDER_LEATHER_JACKET
+	armor_list = ARMOR_VALUE_RAIDER_LEATHER_JACKET
 	maxHealth = 150
 	health = 150
 	rapid_melee = 2

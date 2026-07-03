@@ -9,7 +9,7 @@
 	layer = OPEN_DOOR_LAYER
 	power_channel = ENVIRON
 	max_integrity = 350
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	CanAtmosPass = ATMOS_PASS_DENSITY
 	flags_1 = PREVENT_CLICK_UNDER_1|DEFAULT_RICOCHET_1
 	ricochet_chance_mod = 0.8

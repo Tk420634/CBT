@@ -10,7 +10,7 @@
 	layer = LYING_MOB_LAYER
 	obj_integrity = 400
 	max_integrity = 400
-	armor = list(melee = 50, bullet = 40, laser = 30, energy = 30, bomb = 0, bio = 0, rad = 0, fire = 30, acid = 40)
+	armor_list = list(melee = 50, bullet = 40, laser = 30, energy = 30, bomb = 0, bio = 0, rad = 0, fire = 30, acid = 40)
 	var/image/cover = null
 	var/datum_type = /datum/riding/motorcycle
 

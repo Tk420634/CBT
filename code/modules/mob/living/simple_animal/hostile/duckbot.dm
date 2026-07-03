@@ -27,7 +27,7 @@
 	ranged = TRUE
 	melee_attacks = FALSE
 	environment_smash = NONE
-	mob_armor = ARMOR_VALUE_RENEGADE_POWER_ARMOR // so we get the tombstone message for our duck
+	armor_list = ARMOR_VALUE_RENEGADE_POWER_ARMOR // so we get the tombstone message for our duck
 	maxHealth = 40
 	health = 40
 	density = FALSE

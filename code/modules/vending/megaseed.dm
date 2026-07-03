@@ -65,7 +65,7 @@
 					/obj/item/seeds/star_cactus = 2,
 					/obj/item/seeds/random = 2)
 	premium = list(/obj/item/reagent_containers/spray/waterflower = 1)
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	refill_canister = /obj/item/vending_refill/hydroseeds
 	resistance_flags = FIRE_PROOF
 	default_price = PRICE_REALLY_CHEAP

@@ -14,7 +14,7 @@
 					/obj/item/clothing/shoes/sandal/magic = 1,
 					/obj/item/staff = 2)
 	contraband = list(/obj/item/reagent_containers/glass/bottle/wizarditis = 1)	//No one can get to the machine to hack it anyways; for the lulz - Microwave
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	resistance_flags = FIRE_PROOF
 	default_price = PRICE_EXPENSIVE
 	extra_price = PRICE_ABOVE_EXPENSIVE

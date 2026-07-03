@@ -73,7 +73,7 @@ GLOBAL_LIST_INIT(marker_beacon_colors, list(
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "marker"
 	layer = BELOW_OPEN_DOOR_LAYER
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	max_integrity = 50
 	anchored = TRUE
 	light_range = 2

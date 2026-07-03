@@ -9,7 +9,7 @@
 	var/togglename = null
 	var/suittoggled = FALSE
 	var/armor_tier_desc = ARMOR_CLOTHING_DESC
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 	limb_integrity = 0 // disabled for most exo-suits
 	mutantrace_variation = NONE
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/armor

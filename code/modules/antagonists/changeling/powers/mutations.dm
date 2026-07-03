@@ -662,7 +662,7 @@
 	item_flags = DROPDEL
 	clothing_flags = STOPSPRESSUREDAMAGE //Not THICKMATERIAL because it's organic tissue, so if somebody tries to inject something into it, it still ends up in your blood. (also balance but muh fluff)
 	allowed = list(/obj/item/flashlight, /obj/item/tank/internals/emergency_oxygen, /obj/item/tank/internals/oxygen)
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 	mutantrace_variation = NONE
 
 /obj/item/clothing/suit/space/changeling/Initialize()
@@ -683,7 +683,7 @@
 	desc = "A covering of pressure and temperature-resistant organic tissue with a glass-like chitin front."
 	item_flags = DROPDEL
 	clothing_flags = STOPSPRESSUREDAMAGE
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 
 /obj/item/clothing/head/helmet/space/changeling/Initialize()
@@ -717,7 +717,7 @@
 	icon_state = "lingarmor"
 	item_flags = DROPDEL
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	flags_inv = HIDEJUMPSUIT
 	cold_protection = 0
 	heat_protection = 0
@@ -733,7 +733,7 @@
 	desc = "A tough, hard covering of black chitin with transparent chitin in front."
 	icon_state = "lingarmorhelmet"
 	item_flags = DROPDEL
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	flags_inv = HIDEEARS|HIDEHAIR|HIDEEYES|HIDEFACIALHAIR|HIDEFACE
 
 /obj/item/clothing/head/helmet/changeling/Initialize()

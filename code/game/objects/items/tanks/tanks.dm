@@ -15,7 +15,7 @@
 	throw_range = 4
 	custom_materials = list(/datum/material/iron = 500)
 	actions_types = list(/datum/action/item_action/set_internals)
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	var/datum/gas_mixture/air_contents = null
 	var/distribute_pressure = ONE_ATMOSPHERE
 	var/integrity = 3

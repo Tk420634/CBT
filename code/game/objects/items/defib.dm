@@ -14,7 +14,7 @@
 	throwforce = 6
 	w_class = WEIGHT_CLASS_BULKY
 	actions_types = list(/datum/action/item_action/toggle_paddles)
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 	var/on = FALSE //if the paddles are equipped (1) or on the defib (0)
 	var/safety = TRUE //if you can zap people with the defibs on harm mode

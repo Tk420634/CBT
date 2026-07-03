@@ -932,7 +932,7 @@
 	desc = "A red robe decorated with bird feathers for the Priestess of Mars."
 	icon_state = "pmars_robe"
 	inhand_icon_state = "pmars_robe"
-	armor = list(melee = 0, bullet = 0, laser = 20, energy = 20, bomb = 5, bio = 0, rad = 0, fire = 100, acid = 0)
+	armor_list = list(melee = 0, bullet = 0, laser = 20, energy = 20, bomb = 5, bio = 0, rad = 0, fire = 100, acid = 0)
 	resistance_flags = LAVA_PROOF | FIRE_PROOF
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS
 	flags_inv = HIDEGLOVES|HIDESHOES
@@ -1916,7 +1916,7 @@
 	name = "torn overcoat"
 	desc = "Some time ago it looked like a regular NCR uniform, but now it looks like a total mess of ripped cloth."
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS
-	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0, fire = 0, acid = 0)
+	armor_list = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0, fire = 0, acid = 0)
 	icon_state = "tornovercoat"
 	item_color = "tornovercoat"
 

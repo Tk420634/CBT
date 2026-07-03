@@ -6,7 +6,7 @@
 	icon_state = "yellow"
 	density = TRUE
 	volume = 1000
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	max_integrity = 250
 	integrity_failure = 0.4
 	pressure_resistance = 7 * ONE_ATMOSPHERE

@@ -35,7 +35,7 @@ GLOBAL_LIST_INIT(glass_recipes, list ( \
 	icon_state = "sheet-glass"
 	inhand_icon_state = "sheet-glass"
 	custom_materials = list(/datum/material/glass=MINERAL_MATERIAL_AMOUNT)
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	resistance_flags = ACID_PROOF
 	merge_type = /obj/item/stack/sheet/glass
 	grind_results = list(/datum/reagent/silicon = 20)
@@ -104,7 +104,7 @@ GLOBAL_LIST_INIT(pglass_recipes, list ( \
 	icon_state = "sheet-pglass"
 	inhand_icon_state = "sheet-pglass"
 	custom_materials = list(/datum/material/plasma=MINERAL_MATERIAL_AMOUNT * 0.5, /datum/material/glass=MINERAL_MATERIAL_AMOUNT)
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	resistance_flags = ACID_PROOF
 	merge_type = /obj/item/stack/sheet/plasmaglass
 	grind_results = list(/datum/reagent/silicon = 20, /datum/reagent/toxin/plasma = 10)
@@ -159,7 +159,7 @@ GLOBAL_LIST_INIT(reinforced_glass_recipes, list ( \
 	icon_state = "sheet-rglass"
 	inhand_icon_state = "sheet-rglass"
 	custom_materials = list(/datum/material/iron=MINERAL_MATERIAL_AMOUNT * 0.5, /datum/material/glass=MINERAL_MATERIAL_AMOUNT)
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	resistance_flags = ACID_PROOF
 	merge_type = /obj/item/stack/sheet/rglass
 	grind_results = list(/datum/reagent/silicon = 20, /datum/reagent/iron = 10)
@@ -206,7 +206,7 @@ GLOBAL_LIST_INIT(prglass_recipes, list ( \
 	icon_state = "sheet-prglass"
 	inhand_icon_state = "sheet-prglass"
 	custom_materials = list(/datum/material/plasma=MINERAL_MATERIAL_AMOUNT * 0.5, /datum/material/glass=MINERAL_MATERIAL_AMOUNT, /datum/material/iron=MINERAL_MATERIAL_AMOUNT * 0.5,)
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	resistance_flags = ACID_PROOF
 	merge_type = /obj/item/stack/sheet/plasmarglass
 	grind_results = list(/datum/reagent/silicon = 20, /datum/reagent/toxin/plasma = 10, /datum/reagent/iron = 10)
@@ -232,7 +232,7 @@ GLOBAL_LIST_INIT(titaniumglass_recipes, list(
 	icon_state = "sheet-titaniumglass"
 	inhand_icon_state = "sheet-titaniumglass"
 	custom_materials = list(/datum/material/titanium=MINERAL_MATERIAL_AMOUNT * 0.5, /datum/material/glass=MINERAL_MATERIAL_AMOUNT)
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	resistance_flags = ACID_PROOF
 	merge_type = /obj/item/stack/sheet/titaniumglass
 	shard_type = /obj/item/shard
@@ -256,7 +256,7 @@ GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
 	icon_state = "sheet-plastitaniumglass"
 	inhand_icon_state = "sheet-plastitaniumglass"
 	custom_materials = list(/datum/material/titanium=MINERAL_MATERIAL_AMOUNT * 0.5, /datum/material/plasma=MINERAL_MATERIAL_AMOUNT * 0.5, /datum/material/glass=MINERAL_MATERIAL_AMOUNT)
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	resistance_flags = ACID_PROOF
 	merge_type = /obj/item/stack/sheet/plastitaniumglass
 	shard_type = /obj/item/shard
@@ -287,7 +287,7 @@ GLOBAL_LIST_INIT(plastitaniumglass_recipes, list(
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	resistance_flags = ACID_PROOF
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	max_integrity = 40
 	sharpness = SHARP_EDGED
 	var/icon_prefix

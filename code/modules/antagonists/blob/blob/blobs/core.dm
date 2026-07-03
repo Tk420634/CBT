@@ -4,7 +4,7 @@
 	icon_state = "blank_blob"
 	desc = "A huge, pulsating yellow mass."
 	max_integrity = 400
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	explosion_block = 6
 	point_return = -1
 	health_regen = 0 //we regen in Life() instead of when pulsed

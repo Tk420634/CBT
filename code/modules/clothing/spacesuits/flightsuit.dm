@@ -20,7 +20,7 @@
 	icon_state = FLIGHTPACK_SPRITE_BASE
 	inhand_icon_state = FLIGHTPACK_SPRITE_BASE
 	actions_types = list(/datum/action/item_action/flightpack/toggle_flight, /datum/action/item_action/flightpack/engage_boosters, /datum/action/item_action/flightpack/toggle_stabilizers, /datum/action/item_action/flightpack/change_power, /datum/action/item_action/flightpack/toggle_airbrake)
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = INV_SLOTBIT_BACK
 	resistance_flags = FIRE_PROOF
@@ -764,7 +764,7 @@
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/flightsuit
 	jetpack = null
 	actions_types = list(/datum/action/item_action/flightsuit/toggle_helmet, /datum/action/item_action/flightsuit/toggle_boots, /datum/action/item_action/flightsuit/toggle_flightpack, /datum/action/item_action/flightsuit/lock_suit)
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	max_heat_protection_temperature = FIRE_SUIT_MAX_TEMP_PROTECT
 	var/locked_strip_delay = 80
 	var/obj/item/flightpack/pack = null
@@ -1084,7 +1084,7 @@
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	brightness_on = 7
 	light_color = "#30ffff"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	max_heat_protection_temperature = FIRE_HELM_MAX_TEMP_PROTECT
 	var/list/datahuds = list(DATA_HUD_SECURITY_ADVANCED, DATA_HUD_MEDICAL_ADVANCED, DATA_HUD_DIAGNOSTIC_BASIC)
 	var/zoom_range = 12

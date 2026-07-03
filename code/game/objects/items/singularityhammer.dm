@@ -10,7 +10,7 @@
 	throwforce = 15
 	throw_range = 1
 	w_class = WEIGHT_CLASS_HUGE
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	force_string = "LORD SINGULOTH HIMSELF"
 	total_mass = TOTAL_MASS_MEDIEVAL_WEAPON

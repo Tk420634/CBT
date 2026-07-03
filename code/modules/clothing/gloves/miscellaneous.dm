@@ -89,7 +89,7 @@
 	icon_state = "narsiearmwraps"
 	inhand_icon_state = "narsiearmwraps"
 	resistance_flags = FIRE_PROOF | ACID_PROOF
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	enhancement = 3
 	secondary_trait = TRAIT_KI_VAMPIRE
 
@@ -99,7 +99,7 @@
 	icon_state = "ratvararmwraps"
 	inhand_icon_state = "ratvararmwraps"
 	resistance_flags = FIRE_PROOF | ACID_PROOF
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	enhancement = 4 //The artifice of Ratvar is unmatched except when it is.
 	secondary_trait = TRAIT_STRONG_GRABBER
 
@@ -170,7 +170,7 @@
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_TEMP_PROTECT
 	resistance_flags = NONE
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_BULLET_T1, ARMOR_MODIFIER_UP_ENV_T1, ARMOR_MODIFIER_UP_DT_T1)
 	strip_mod = 1.5
 
@@ -188,7 +188,7 @@
 	min_cold_protection_temperature = GLOVES_MIN_TEMP_PROTECT
 	max_heat_protection_temperature = GLOVES_MAX_TEMP_PROTECT
 	resistance_flags = NONE
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T1, ARMOR_MODIFIER_UP_ENV_T1, ARMOR_MODIFIER_UP_DT_T1)
 
 /obj/item/clothing/gloves/thief

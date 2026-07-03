@@ -3,7 +3,7 @@
 	desc = "A heavy duty gate that opens mechanically."
 	icon = 'icons/fallout/structures/city_gate.dmi'
 	icon_state = "closed"
-	armor = ARMOR_VALUE_PA
+	armor_list = ARMOR_VALUE_PA
 	id = 333
 	bound_width = 96
 	ertblast = TRUE

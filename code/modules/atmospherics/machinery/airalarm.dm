@@ -75,7 +75,7 @@
 	req_access = list(ACCESS_ATMOSPHERICS)
 	max_integrity = 250
 	integrity_failure = 0.33
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	resistance_flags = FIRE_PROOF
 
 	var/danger_level = 0

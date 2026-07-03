@@ -18,6 +18,7 @@
 	var/bare_wound_bonus = 0
 
 	var/datum/armor/armor
+	var/list/armor_list = ARMOR_VALUE_CLOTHES
 	var/obj_integrity	//defaults to max_integrity
 	var/max_integrity = 500
 	var/super_advanced_technology = FALSE
@@ -52,8 +53,7 @@
 
 /obj/Initialize()
 	setup_armor_values()
-	if (islist(armor))
-		armor = getArmor(arglist(armor))
+	armor = getArmor(arglist(armor_list))
 	/*
 	else if (!armor)
 		armor = getArmor()
@@ -350,5 +350,5 @@
 /obj/proc/setup_armor_values()
 	if(!armor)
 		return
-	if(!islist(armor))
+	if(!islist(armor_list))
 		return

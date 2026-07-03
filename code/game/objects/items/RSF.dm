@@ -14,7 +14,7 @@ RSF
 	density = FALSE
 	anchored = FALSE
 	item_flags = NOBLUDGEON
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	var/matter = 0
 	var/mode = 1
 	w_class = WEIGHT_CLASS_NORMAL

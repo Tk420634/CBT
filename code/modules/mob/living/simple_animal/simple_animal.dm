@@ -64,7 +64,8 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	/// Mob damage threshold, subtracted from incoming damage
 	var/force_threshold = 0
 	/// mob's inherent armor
-	var/datum/armor/mob_armor = ARMOR_VALUE_ZERO
+	var/datum/armor/mob_armor = null
+	var/list/armor_list = ARMOR_VALUE_ZERO
 	/// Additional armor modifiers that are applied to the actual armor value
 	var/mob_armor_tokens = list()
 	/// Description line for their armor, cached nice and sweet
@@ -277,11 +278,8 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	pixel_y = rand(-randpixel, randpixel)
 	/// WARNING: DUPLICATED CODE, MAKE BETTER
 	setup_mob_armor_values()
-	if (islist(mob_armor))
-		var/list/armor_list = mob_armor
+	if (isnull(mob_armor))
 		mob_armor = getArmor(arglist(armor_list))
-	else if (!mob_armor)
-		mob_armor = getArmor()
 	else if (!istype(mob_armor, /datum/armor))
 		stack_trace("Invalid type [mob_armor.type] found in .armor during /mob/living/simple_animal Initialize()")
 	/// End duplicated code
@@ -1643,7 +1641,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 		return
 	if(length(mob_armor_tokens) < 1)
 		return // all done!
-	var/list/armorlist = alist(mob_armor)
+	var/list/armorlist = list(armor_list)
 	
 	for(var/list/token in mob_armor_tokens)
 		for(var/modifier in token)
@@ -1654,19 +1652,18 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 					armorlist[modifier] = max(armorlist[modifier] + token[modifier], 0)
 				else
 					continue
-	mob_armor = armorlist
+	armor_list = armorlist
 
 /// compiles the mob's armor description
 /mob/living/simple_animal/proc/setup_mob_armor_description()
-	if(!mob_armor)
-		mob_armor_description = null
 
 	var/list/descriptors = list("\n" + span_notice("You consider [src]'s resistances...") + "\n")
 	///Melee
-	var/melee_armor = mob_armor.getRating("melee")
+	var/melee_armor = mob_armor?.getRating("melee")
+
 	descriptors += span_notice("[p_they(TRUE)] look[p_s()] like [p_they()]")
 	switch(melee_armor)
-		if(-INFINITY to 20)
+		if(-INFINITY to 20, null)
 			descriptors += span_notice("'d bruise like a mutfruit.")
 		if(20 to 40)
 			descriptors += span_notice(" could take a punch, maybe two if [p_they()] had to.")
@@ -1678,10 +1675,10 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 			descriptors += span_warning(" could play pattycake with [istype(src, /mob/living/simple_animal/hostile/aethergiest) ? "another" : "a"] aethergiest and win.")
 	descriptors += "\n"
 	///Bullet
-	var/bullet_armor = mob_armor.getRating("bullet")
+	var/bullet_armor = mob_armor?.getRating("bullet")
 	descriptors += span_notice("You feel like")
 	switch(bullet_armor)
-		if(-INFINITY to 20)
+		if(-INFINITY to 20, null)
 			descriptors += span_notice(" a bullet would smash right through [p_them()].")
 		if(20 to 40)
 			descriptors += span_notice(" a bullet would hurt them good, with heavy enough ammo.")
@@ -1693,10 +1690,10 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 			descriptors += span_warning(" you'd have better luck blowing up a tank with a BB gun.")
 	descriptors += "\n"
 	///Laser
-	var/laser_armor = mob_armor.getRating("laser")
+	var/laser_armor = mob_armor?.getRating("laser")
 	descriptors += span_notice("You figure")
 	switch(laser_armor)
-		if(-INFINITY to 20)
+		if(-INFINITY to 20, null)
 			descriptors += span_notice(" a laser would slice through [p_them()] like brahminbutter.")
 		if(20 to 40)
 			descriptors += span_notice(" a laser would singe the everliving daylights out of [p_them()].")
@@ -1708,10 +1705,10 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 			descriptors += span_warning(" you may as well be waving a torch at [p_them()].")
 	descriptors += "\n"
 	///plasma
-	var/plasma_armor = mob_armor.getRating("energy")
+	var/plasma_armor = mob_armor?.getRating("energy")
 	descriptors += span_notice("You imagine that")
 	switch(plasma_armor)
-		if(-INFINITY to 20)
+		if(-INFINITY to 20, null)
 			descriptors += span_notice(" a burst of intense heat would simply burn [p_them()] to a crisp.")
 		if(20 to 40)
 			descriptors += span_notice(" a burst of intense heat would sear [p_them()] medium-well.")

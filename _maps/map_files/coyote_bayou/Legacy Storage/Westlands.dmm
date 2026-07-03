@@ -1403,7 +1403,7 @@
 	health = 500;
 	melee_damage_upper = 80;
 	melee_damage_lower = 60;
-	mob_armor = list("melee"=50,"bullet"=45,"laser"=40,"energy"=30,"bomb"=25,"bio"=100,"rad"=100,"fire"=0,"acid"=0,"wound"=0,"damage_threshold"=11);
+	armor_list = list("melee"=50,"bullet"=45,"laser"=40,"energy"=30,"bomb"=25,"bio"=100,"rad"=100,"fire"=0,"acid"=0,"wound"=0,"damage_threshold"=11);
 	faction = list("hostile","institute");
 	projectiletype = /obj/item/projectile/hook
 	},
@@ -2404,7 +2404,7 @@
 	health = 2000;
 	melee_damage_lower = 35;
 	melee_damage_upper = 35;
-	mob_armor = list("linemelee"=50,"linebullet"=50,"linelaser"=50,"energy"=50,"bomb"=50,"bio"=50,"rad"=50,"fire"=50,"acid"=50,"wound"=50,"damage_threshold"=15);
+	armor_list = list("linemelee"=50,"linebullet"=50,"linelaser"=50,"energy"=50,"bomb"=50,"bio"=50,"rad"=50,"fire"=50,"acid"=50,"wound"=50,"damage_threshold"=15);
 	name = "Giant Sandworm";
 	real_name = "Giant Sandworm"
 	},
@@ -4228,7 +4228,7 @@
 	health = 500;
 	melee_damage_upper = 80;
 	melee_damage_lower = 60;
-	mob_armor = list("melee"=50,"bullet"=45,"laser"=40,"energy"=30,"bomb"=25,"bio"=100,"rad"=100,"fire"=0,"acid"=0,"wound"=0,"damage_threshold"=11);
+	armor_list = list("melee"=50,"bullet"=45,"laser"=40,"energy"=30,"bomb"=25,"bio"=100,"rad"=100,"fire"=0,"acid"=0,"wound"=0,"damage_threshold"=11);
 	faction = list("hostile","institute");
 	projectiletype = /obj/item/projectile/hook
 	},
@@ -5629,7 +5629,7 @@
 	health = 500;
 	melee_damage_upper = 80;
 	melee_damage_lower = 60;
-	mob_armor = list("melee"=50,"bullet"=45,"laser"=40,"energy"=30,"bomb"=25,"bio"=100,"rad"=100,"fire"=0,"acid"=0,"wound"=0,"damage_threshold"=11);
+	armor_list = list("melee"=50,"bullet"=45,"laser"=40,"energy"=30,"bomb"=25,"bio"=100,"rad"=100,"fire"=0,"acid"=0,"wound"=0,"damage_threshold"=11);
 	faction = list("hostile","institute");
 	projectiletype = /obj/item/projectile/hook
 	},
@@ -12441,7 +12441,7 @@
 	health = 500;
 	melee_damage_upper = 80;
 	melee_damage_lower = 60;
-	mob_armor = list("melee"=50,"bullet"=45,"laser"=40,"energy"=30,"bomb"=25,"bio"=100,"rad"=100,"fire"=0,"acid"=0,"wound"=0,"damage_threshold"=11);
+	armor_list = list("melee"=50,"bullet"=45,"laser"=40,"energy"=30,"bomb"=25,"bio"=100,"rad"=100,"fire"=0,"acid"=0,"wound"=0,"damage_threshold"=11);
 	faction = list("hostile","institute");
 	projectiletype = /obj/item/projectile/hook
 	},

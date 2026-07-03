@@ -1005,7 +1005,7 @@
 	var/projectile_sound_properties
 	var/melee_damage_lower
 	var/melee_damage_upper
-	var/list/mob_armor
+	var/list/armor_list
 	var/mobtag
 
 /// A proc that takes a mob datum and records all the vars that are different from the initial vars, for later use.
@@ -1033,7 +1033,7 @@
 	/// mob_armor is even specialer
 	if(istype(cool_mob.mob_armor, /datum/armor))
 		var/datum/armor/rmr = cool_mob.mob_armor
-		mob_armor = rmr.getList() // its a datum! aaaand I dont want to save that one
+		armor_list = rmr.getList() // its a datum! aaaand I dont want to save that one
 	return src
 
 /// A proc that spawns a mob from a special mob datum
@@ -1062,7 +1062,7 @@
 		cool_mob.projectile_sound_properties = projectile_sound_properties
 		cool_mob.melee_damage_lower = melee_damage_lower
 		cool_mob.melee_damage_upper = melee_damage_upper
-		cool_mob.mob_armor = getArmor(arglist(mob_armor))
+		cool_mob.armor_list = getArmor(arglist(armor_list))
 	myspawner.special_mobs -= src
 	cool_mob.do_alert_animation(cool_mob)
 	return cool_mob

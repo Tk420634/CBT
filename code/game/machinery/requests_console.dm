@@ -55,7 +55,7 @@ GLOBAL_LIST_EMPTY(allConsoles)
 	var/emergency //If an emergency has been called by this device. Acts as both a cooldown and lets the responder know where it the emergency was triggered from
 	var/receive_ore_updates = FALSE //If ore redemption machines will send an update when it receives new ores.
 	max_integrity = 300
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 
 /obj/machinery/requests_console/power_change()
 	..()

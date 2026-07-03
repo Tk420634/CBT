@@ -6,7 +6,7 @@
 	name = "salvaged power helmet"
 	desc = "It's a salvaged power armor helmet of what..? YOU CAN'T SEE ME! STOP! REPORT TO CODERS!!"
 	slowdown = ARMOR_SLOWDOWN_NONE * ARMOR_SLOWDOWN_GLOBAL_MULT
-	armor = ARMOR_VALUE_SALVAGE
+	armor_list = ARMOR_VALUE_SALVAGE
 
 // T-45B
 /obj/item/clothing/head/helmet/f13/heavy/salvaged_pa/t45b
@@ -20,14 +20,14 @@
 	desc = "a raider's attempt to duplicate a power armor helmet. The result is a fuzed mass of metal and ceramic that nonetheless provides protection"
 	icon_state = "raiderpa_helm"
 	inhand_icon_state = "raiderpa_helm"
-	armor = ARMOR_VALUE_SALVAGE
+	armor_list = ARMOR_VALUE_SALVAGE
 
 /obj/item/clothing/head/helmet/f13/power_armor/t45b/hotrod
 	name = "Refurbished T-45b Hotrod helmet"
 	desc = "This power armor helmet was restored and modified to protect against flames and high intensity lasers at the cost of some protection against blunt trauma."
 	icon_state = "t45hotrod_helm"
 	inhand_icon_state = "t45hotrod_helm"
-	armor = ARMOR_VALUE_SALVAGE
+	armor_list = ARMOR_VALUE_SALVAGE
 	armor_tokens = list( ARMOR_MODIFIER_UP_FIRE_T3, ARMOR_MODIFIER_DOWN_MELEE_T2, ARMOR_MODIFIER_UP_LASER_T3,)
 	slowdown =  ARMOR_SLOWDOWN_REPA * ARMOR_SLOWDOWN_GLOBAL_MULT
 

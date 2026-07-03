@@ -22,7 +22,7 @@
 
 	density = TRUE
 	max_integrity = 400
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	layer = OBJ_LAYER
 	showpipe = TRUE
 

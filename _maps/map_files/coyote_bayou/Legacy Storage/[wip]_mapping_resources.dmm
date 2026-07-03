@@ -15042,7 +15042,7 @@
 	desc = "A stone grave marker, the name of the person buried here has nearly eroded. James Mueller, Son of Jacobs, father, hero."
 	},
 /obj/item/clothing/head/helmet/f13/power_armor/t51b{
-	armor = list("melee"=75,"bullet"=70,"laser"=5,"energy"=6,"bomb"=2,"bio"=1,"rad"=19,"fire"=20,"acid"=0);
+	armor_list = list("melee"=75,"bullet"=70,"laser"=5,"energy"=6,"bomb"=2,"bio"=1,"rad"=19,"fire"=20,"acid"=0);
 	desc = "It's a T-51b power helmet, from before the war. This one is rusted and ruined, giving no protection from weathering."
 	},
 /turf/open/indestructible/ground/outside/snow,

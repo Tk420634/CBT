@@ -6,7 +6,7 @@
 	density = TRUE
 	anchored = TRUE
 	resistance_flags = ACID_PROOF
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	max_integrity = 200
 	integrity_failure = 0.25
 	attack_hand_speed = CLICK_CD_MELEE

@@ -294,7 +294,7 @@
 
 //Some armor so it's harder to kill someone by mistake.
 /obj/structure/puzzle_element/prison
-	armor = ARMOR_VALUE_PA
+	armor_list = ARMOR_VALUE_PA
 
 /obj/structure/puzzle_element/prison/relaymove(mob/user)
 	return

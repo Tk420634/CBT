@@ -6,7 +6,7 @@
 	plane = ABOVE_WALL_PLANE
 	anchored = TRUE
 	density = FALSE
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	max_integrity = 150
 	integrity_failure = 0.33
 	var/locked = TRUE

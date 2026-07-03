@@ -15,13 +15,13 @@ export NODE_VERSION=18
 export NODE_VERSION_PRECISE=18.13.0
 
 # SpacemanDMM git tag
-export SPACEMAN_DMM_VERSION=suite-1.8
+export SPACEMAN_DMM_VERSION=suite-1.11
 
 # Python version for mapmerge and other tools
-export PYTHON_VERSION=3.7.9
+export PYTHON_VERSION=3.12.3
 
 # Auxmos git tag
-export AUXMOS_VERSION=v0.2.11
+export AUXMOS_VERSION=v2.5.6
 
 # Extools git tag
 export EXTOOLS_VERSION=v0.0.7

@@ -3,7 +3,7 @@
 /obj/item/melee //Melee weapon template
 	attack_speed = CLICK_CD_MELEE
 	max_integrity = 200
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	block_parry_data = /datum/block_parry_data/bokken
 	item_flags = ITEM_CAN_PARRY
 	weapon_special_component = /datum/component/weapon_special/single_turf
@@ -49,7 +49,7 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	sharpness = SHARP_EDGED
 	max_integrity = 200
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	resistance_flags = FIRE_PROOF
 	total_mass = TOTAL_MASS_MEDIEVAL_WEAPON
 //	item_flags = ITEM_CAN_PARRY does nothing from what i can tell arghhhggh todo: fix
@@ -165,7 +165,7 @@
 	throw_range = 6
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	sharpness = SHARP_POINTY
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	var/bayonet = FALSE	//Can this be attached to a gun?
 	bare_wound_bonus = 5
 	custom_materials = list(/datum/material/iron=6000)
@@ -1020,7 +1020,7 @@ y
 	sharpness = SHARP_EDGED
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = INV_SLOTBIT_BELT | INV_SLOTBIT_GLOVES | INV_SLOTBIT_BACK
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 
 ///////////
 // TOOLS //

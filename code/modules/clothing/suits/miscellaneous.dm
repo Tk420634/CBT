@@ -220,7 +220,7 @@
 	hoodtype = /obj/item/clothing/head/hooded/robes
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/duster/armored
 	armor_tier_desc = ARMOR_CLOTHING_MEDIUM
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	slowdown = ARMOR_SLOWDOWN_MEDIUM * ARMOR_SLOWDOWN_LESS_T1 * ARMOR_SLOWDOWN_GLOBAL_MULT
 	armor_tokens = list(ARMOR_MODIFIER_UP_BULLET_T2, ARMOR_MODIFIER_UP_LASER_T2, ARMOR_MODIFIER_UP_ENV_T1, ARMOR_MODIFIER_UP_DT_T2)
 
@@ -231,7 +231,7 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	flags_cover = HEADCOVERSEYES
 	flash_protect = 2
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	armor_tokens = list(ARMOR_MODIFIER_UP_BULLET_T2, ARMOR_MODIFIER_UP_LASER_T2, ARMOR_MODIFIER_UP_ENV_T1, ARMOR_MODIFIER_UP_DT_T2)
 
 /obj/item/clothing/suit/hooded/robes/grey
@@ -345,7 +345,7 @@
 /obj/item/clothing/suit/armor/heavy/salvaged_pa/t45b/costume
 	name = "T-45d power armor"
 	desc = "Originally developed and manufactured for the United States Army by American defense contractor West Tek, the T-45d power armor was the first version of power armor to be successfully deployed in battle. This one is made of syrofoam."
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /*
  * Misc
@@ -414,7 +414,7 @@
 	inhand_icon_state = "hostrench"
 	resistance_flags = NONE
 	max_heat_protection_temperature = ARMOR_MAX_TEMP_PROTECT
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T1, ARMOR_MODIFIER_UP_MELEE_T1)
 
 /obj/item/clothing/suit/jacket/leather/overcoat
@@ -423,7 +423,7 @@
 	icon_state = "leathercoat"
 	cold_protection = CHEST|GROIN|ARMS|LEGS
 	mutantrace_variation = STYLE_DIGITIGRADE
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T1, ARMOR_MODIFIER_UP_MELEE_T1)
 
 
@@ -445,7 +445,7 @@
 	desc = "A canvas jacket styled after classical American military garb. Feels sturdy, yet comfortable."
 	icon_state = "militaryjacket"
 	inhand_icon_state = "militaryjacket"
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T1, ARMOR_MODIFIER_UP_BULLET_T1)
 
 /obj/item/clothing/suit/jacket/letterman
@@ -453,7 +453,7 @@
 	desc = "A classic brown letterman jacket. Looks pretty hot and heavy."
 	icon_state = "letterman"
 	inhand_icon_state = "letterman"
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T1)
 
 /obj/item/clothing/suit/jacket/letterman_red
@@ -514,7 +514,7 @@
 	cold_protection = CHEST|GROIN|ARMS
 	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T1)
 
 /obj/item/clothing/head/hooded/winterhood
@@ -526,7 +526,7 @@
 	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
 	flags_inv = HIDEHAIR|HIDEEARS
 	rad_flags = RAD_NO_CONTAMINATE
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T1)
 
 /obj/item/clothing/suit/hooded/wintercoat/centcom
@@ -955,7 +955,7 @@
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS
 	flags_inv = HIDEJUMPSUIT
 	resistance_flags = NONE
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/hooded/wintercoat/christmascoatr
 	name = "red christmas coat"
@@ -1012,7 +1012,7 @@
 	desc = "An outfit used by traditional japanese warriors."
 	icon_state = "samurai"
 	inhand_icon_state = "samurai"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 //NCR Ranger Stuff
 
@@ -1021,329 +1021,329 @@
 	desc = "Used in jungle envrioments its a soft canvas cloak with a black mesh over it, with green foliage sticking out the front half."
 	icon_state = "rain_coat_sniper"
 	inhand_icon_state = "rain_coat_sniper"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/pip_cloak
 	name = "heart cloak"
 	desc = "A pretty blue cloak with a heart on the back."
 	icon_state = "pip_cloak"
 	inhand_icon_state = "pip_cloak"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/flintlock
 	name = "flintlock coat"
 	desc = "A green jacket with a brown fur lined inner."
 	icon_state = "flintlock"
 	inhand_icon_state = "flintlock"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/dension
 	name = "Denison jacket"
 	desc = "A coverall jacket created by the British during the second world war, its still in use by commonwealth units by specifically Paratroopers and units working in colder climates."
 	icon_state = "dension"
 	inhand_icon_state = "dension"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/canadian_coat
 	name = "flintlock coat"
 	desc = "A pre war standard issue service coat for the Canadian army but is a man stake for all British commonwealth Nations Winterwear."
 	icon_state = "Canadian_coat"
 	inhand_icon_state = "Canadian_coat"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/gob/adamantite
 	name = "adamantite coat"
 	desc = "A purple kinda fancy looking coat."
 	icon_state = "adamantite"
 	inhand_icon_state = "adamantite"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/gob/arcanium
 	name = "arcanium coat"
 	desc = "A blue and white kinda fancy looking coat."
 	icon_state = "arcanium"
 	inhand_icon_state = "arcanium"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/gob/gladiator
 	name = "gladiator armor"
 	desc = "A red and sliver piece of armor!"
 	icon_state = "gladiator"
 	inhand_icon_state = "gladiator"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/gob/black
 	name = "Black Coat"
 	desc = "A fancy looking black coat"
 	icon_state = "black"
 	inhand_icon_state = "black"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/gob/black_gold
 	name = "black and gold coat"
 	desc = "A fancy looking black and gold coat."
 	icon_state = "black_gold"
 	inhand_icon_state = "black_gold"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/gob/copper
 	name = "copper coat"
 	desc = "A copper colored coat."
 	icon_state = "copper"
 	inhand_icon_state = "copper"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/gob/dark_knight
 	name = "dark knight coat"
 	desc = "A grey and sliver coat with a cross on the chest. Avast Ye! Wait, that's pirates."
 	icon_state = "dark_knight"
 	inhand_icon_state = "dark_knight"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/gob/holy_knight
 	name = "holy knight coat"
 	desc = "A fancy coat!"
 	icon_state = "holy_knight"
 	inhand_icon_state = "holy_knight"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/gob/iron
 	name = "iron coat"
 	desc = "A fancy coat!"
 	icon_state = "iron"
 	inhand_icon_state = "iron"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/gob/kraus
 	name = "kraus armor"
 	desc = "A shiny suit of armor!"
 	icon_state = "kraus"
 	inhand_icon_state = "kraus"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/gob/leather
 	name = "leahter coat"
 	desc = "A leather coat! Don't call peta."
 	icon_state = "leather"
 	inhand_icon_state = "leather"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/gob/steel
 	name = "Steel coat"
 	desc = "A Steel coat! Jet fuel might melt this.."
 	icon_state = "steel"
 	inhand_icon_state = "steel"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/ranger/ned
 	name = "Ned Armor"
 	desc = "Maybe it will protect you, maybe it won't. Who's to know."
 	icon_state = "ned"
 	inhand_icon_state = "ned"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/ranger/us_coat
 	name = "US coat"
 	desc = "A nice enough looking coat"
 	icon_state = "us_coat"
 	inhand_icon_state = "us_coat"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/toggle/labcoat/ranger/trench_colorable
 	name = "Trench, colorable"
 	desc = "Trench coat! Colorable verision."
 	icon_state = "trench_colorable"
 	inhand_icon_state = "trench_colorable"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/toggle/labcoat/ranger/sack_coat
 	name = "Sack coat, colorable"
 	desc = "It's a coat. Might keep you warm. Or not.."
 	icon_state = "sack_coat"
 	inhand_icon_state = "sack_coat"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/eris/poncho
 	name = "Rainbow Poncho"
 	desc = "A rainbow poncho"
 	icon_state = "poncho"
 	inhand_icon_state = "poncho"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/eris/cyberpunksleek
 	name = "Cyperpunk Brown"
 	desc = "A brown jacket!"
 	icon_state = "cyberpunksleek"
 	inhand_icon_state = "cyberpunksleek"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/eris/cyberpunksleek_black
 	name = "Cyperpunk Black"
 	desc = "A black jacket!"
 	icon_state = "cyberpunksleek_black"
 	inhand_icon_state = "cyberpunksleek_black"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/eris/cyberpunksleek_green
 	name = "Cyperpunk Green"
 	desc = "A green jacket!"
 	icon_state = "cyberpunksleek_green"
 	inhand_icon_state = "cyberpunksleek_green"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/eris/cyberpunksleek_white
 	name = "Cyperpunk White"
 	desc = "A white jacket!"
 	icon_state = "cyberpunksleek_white"
 	inhand_icon_state = "cyberpunksleek_white"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/eris/cyberpunksleek_long_green
 	name = "Cyperpunk Long Green"
 	desc = "A green jacket!"
 	icon_state = "cyberpunksleek_long_green"
 	inhand_icon_state = "cyberpunksleek_long_green"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/eris/cyberpunksleek_long_black
 	name = "Cyperpunk Long Black"
 	desc = "A black jacket!"
 	icon_state = "cyberpunksleek_long_black"
 	inhand_icon_state = "cyberpunksleek_long_black"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/eris/cyberpunksleek_long_white
 	name = "Cyperpunk Long white"
 	desc = "A white jacket!"
 	icon_state = "cyberpunksleek_long_white"
 	inhand_icon_state = "cyberpunksleek_long_white"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/eris/cyberpunksleek_long
 	name = "Cyperpunk Long brown"
 	desc = "A brown jacket!"
 	icon_state = "cyberpunksleek_long"
 	inhand_icon_state = "cyberpunksleek_long"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/eris/overcoat_brown
 	name = "Brown Overcoat"
 	desc = "A brown jacket!"
 	icon_state = "overcoat_brown"
 	inhand_icon_state = "overcoat_brown"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/eris/overcoat_black
 	name = "Black Overcoat"
 	desc = "A black jacket!"
 	icon_state = "overcoat_black"
 	inhand_icon_state = "overcoat_black"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/eris/bladerunner_coat
 	name = "Blade Runner Coat"
 	desc = "A black jacket!"
 	icon_state = "bladerunner_coat"
 	inhand_icon_state = "bladerunner_coat"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/eris/boxer_jacket
 	name = "boxing jacket"
 	desc = "A nice looking jacket"
 	icon_state = "boxer_jacket"
 	inhand_icon_state = "boxer_jacket"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/eris/drive_jacket
 	name = "drive jacket"
 	desc = "A nice looking jacket"
 	icon_state = "drive_jacket"
 	inhand_icon_state = "drive_jacket"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/eris/violet_jacket
 	name = "Violet Jacket"
 	desc = "A nice looking jacket"
 	icon_state = "violet_jacket"
 	inhand_icon_state = "violet_jacket"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/eris/tunnelsnake
 	name = "Tunnel Snake"
 	desc = "A nice looking jacket"
 	icon_state = "tunnelsnake"
 	inhand_icon_state = "tunnelsnake"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/eris/dante
 	name = "Dante jacket"
 	desc = "A nice looking jacket"
 	icon_state = "dante"
 	inhand_icon_state = "dante"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/chomp/warden
 	name = "Warden jacket"
 	desc = "A nice looking jacket"
 	icon_state = "warden"
 	inhand_icon_state = "warden"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/chomp/hos_trench
 	name = "Black Trench Coat"
 	desc = "A nice looking jacket"
 	icon_state = "hos_trench"
 	inhand_icon_state = "hos_trench"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/toggle/labcoat/chomp/talon
 	name = "Dark blue coat"
 	desc = "A nice looking jacket"
 	icon_state = "taloncoat"
 	inhand_icon_state = "taloncoat"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/toggle/labcoat/chomp/talon
 	name = "Dark blue coat"
 	desc = "A nice looking jacket"
 	icon_state = "taloncoat"
 	inhand_icon_state = "taloncoat"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/toggle/labcoat/chomp/redjacket
 	name = "Red Hoodie"
 	desc = "A nice looking jacket"
 	icon_state = "hoodie_redtrim"
 	inhand_icon_state = "hoodie_redtrim"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/toggle/labcoat/chomp/bluejacket
 	name = "Blue Hoodie"
 	desc = "A nice looking jacket"
 	icon_state = "hoodie_bluetrim"
 	inhand_icon_state = "hoodie_bluetrim"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/toggle/labcoat/chomp/greenjacket
 	name = "Green Hoodie"
 	desc = "A nice looking jacket"
 	icon_state = "hoodie_greentrim"
 	inhand_icon_state = "hoodie_greentrim"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/toggle/labcoat/chomp/purplejacket
 	name = "Purple Hoodie"
 	desc = "A nice looking jacket"
 	icon_state = "hoodie_purpletrim"
 	inhand_icon_state = "hoodie_purpletrim"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/toggle/labcoat/chomp/yellowjacket
 	name = "Yellow Hoodie"
 	desc = "A nice looking jacket"
 	icon_state = "hoodie_yellowtrim"
 	inhand_icon_state = "hoodie_yellowtrim"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/toggle/labcoat/dinosaur
 	name = "Dinosaur costume"
@@ -1433,7 +1433,7 @@
 	desc = "A colorable detective vest."
 	icon_state = "det_vest"
 	inhand_icon_state = "det_vest"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/suit/civ13/coat/black
 	name = "Thick Black Coat"

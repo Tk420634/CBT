@@ -75,7 +75,7 @@
 	icon_state = "detective"
 	inhand_icon_state = "det_suit"
 	blood_overlay_type = "coat"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	cold_protection = CHEST|GROIN|LEGS|ARMS
 	heat_protection = CHEST|GROIN|LEGS|ARMS
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
@@ -120,7 +120,7 @@
 	inhand_icon_state = "hazard"
 	blood_overlay_type = "armor"
 	resistance_flags = NONE
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/jacket
 	body_parts_hidden = CHEST
@@ -205,7 +205,7 @@
 	inhand_icon_state = "paramedic-vest"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 	slowdown = ARMOR_SLOWDOWN_LIGHT * ARMOR_SLOWDOWN_GLOBAL_MULT
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tier_desc = ARMOR_CLOTHING_LIGHT
 	stiffness = LIGHT_STIFFNESS
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/small/four
@@ -217,7 +217,7 @@
 	inhand_icon_state = "labcoat_emt"
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 	slowdown = ARMOR_SLOWDOWN_LIGHT * ARMOR_SLOWDOWN_GLOBAL_MULT
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tier_desc = ARMOR_CLOTHING_LIGHT
 	stiffness = LIGHT_STIFFNESS
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/small/four
@@ -228,7 +228,7 @@
 	icon_state = "labcoat_emtred"
 	inhand_icon_state = "labcoat_emtred"
 	slowdown = ARMOR_SLOWDOWN_LIGHT * ARMOR_SLOWDOWN_GLOBAL_MULT
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tier_desc = ARMOR_CLOTHING_LIGHT
 	stiffness = LIGHT_STIFFNESS
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/small/four
@@ -239,7 +239,7 @@
 	icon_state = "labcoat_highvis"
 	inhand_icon_state = "labcoat_highvis"
 	slowdown = ARMOR_SLOWDOWN_LIGHT * ARMOR_SLOWDOWN_GLOBAL_MULT
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tier_desc = ARMOR_CLOTHING_LIGHT
 	stiffness = LIGHT_STIFFNESS
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/small/four

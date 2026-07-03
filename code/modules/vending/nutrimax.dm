@@ -16,7 +16,7 @@
 					/obj/item/plant_analyzer = 4)
 	contraband = list(/obj/item/reagent_containers/glass/bottle/ammonia = 10,
 					/obj/item/reagent_containers/glass/bottle/diethylamine = 5)
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	resistance_flags = FIRE_PROOF
 	default_price = PRICE_REALLY_CHEAP
 	extra_price = PRICE_CHEAP

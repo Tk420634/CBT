@@ -15,7 +15,7 @@ GLOBAL_LIST_EMPTY(vault_doors)
 	var/is_open = FALSE
 	max_integrity = 1000
 	resistance_flags = FIRE_PROOF | ACID_PROOF | UNACIDABLE | FREEZE_PROOF | INDESTRUCTIBLE  //it's a fucking steel blast door
-	armor = list("melee" = 95, "bullet" = 75, "laser" = 75, "energy" = 75, "bomb" = 95, "bio" = 100, "rad" = 100, "fire" = 99, "acid" = 100) //it's a fucking steel door 2.0
+	armor_list = list("melee" = 95, "bullet" = 75, "laser" = 75, "energy" = 75, "bomb" = 95, "bio" = 100, "rad" = 100, "fire" = 99, "acid" = 100) //it's a fucking steel door 2.0
 
 /obj/structure/vaultdoor/Initialize()
 	. = ..()

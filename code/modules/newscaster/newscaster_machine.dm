@@ -16,7 +16,7 @@ GLOBAL_LIST_EMPTY(allCasters)
 	verb_say = "beeps"
 	verb_ask = "beeps"
 	verb_exclaim = "beeps"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	max_integrity = 200
 	integrity_failure = 0.25
 	var/screen = 0

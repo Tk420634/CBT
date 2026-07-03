@@ -10,7 +10,7 @@
 	icon_living = "hulk_113_s"
 	icon_dead = "hulk_113_s"
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
-	mob_armor = ARMOR_VALUE_SUPERMUTANT_BASE
+	armor_list = ARMOR_VALUE_SUPERMUTANT_BASE
 	maxHealth = 130 
 	health = 130
 	speak_chance = 10
@@ -84,7 +84,7 @@
 
 
 /mob/living/simple_animal/hostile/supermutant/playable
-	mob_armor = ARMOR_VALUE_SUPERMUTANT_BASE
+	armor_list = ARMOR_VALUE_SUPERMUTANT_BASE
 	maxHealth = 130
 	health = 130
 	emote_taunt_sound = null
@@ -145,7 +145,7 @@
 	icon_state = "hulk_melee_s"
 	icon_living = "hulk_melee_s"
 	icon_dead = "hulk_melee_s"
-	mob_armor = ARMOR_VALUE_SUPERMUTANT_MELEE
+	armor_list = ARMOR_VALUE_SUPERMUTANT_MELEE
 	maxHealth = 130 
 	health = 130
 	mob_armor_tokens = list(
@@ -175,7 +175,7 @@
 	icon_dead = "hulk_ranged_s"
 	color = "#3344BE"
 	ranged = 1
-	mob_armor = ARMOR_VALUE_SUPERMUTANT_RANGER
+	armor_list = ARMOR_VALUE_SUPERMUTANT_RANGER
 	maxHealth = 130 
 	health = 130
 	retreat_distance = 3
@@ -235,7 +235,7 @@
 	name = "legendary super mutant"
 	desc = "A huge and ugly mutant humanoid.He has a faint yellow glow to him, scars adorn his body. This super mutant is a grizzled vetern of combat. Look out!"
 	color = "#FFFF00"
-	mob_armor = ARMOR_VALUE_SUPERMUTANT_LEGEND
+	armor_list = ARMOR_VALUE_SUPERMUTANT_LEGEND
 	maxHealth = 150 
 	health = 150
 	icon_state = "hulk_113_s"
@@ -260,7 +260,7 @@
 	icon_state = "night_s"
 	icon_living = "night_s"
 	icon_dead = "night_s"
-	mob_armor = ARMOR_VALUE_SUPERMUTANT_MELEE
+	armor_list = ARMOR_VALUE_SUPERMUTANT_MELEE
 	maxHealth = 140 
 	health = 140
 	alpha = 80
@@ -293,7 +293,7 @@
 	icon_state = "night_ranged_s"
 	icon_living = "night_ranged_s"
 	icon_dead = "night_ranged_s"
-	mob_armor = ARMOR_VALUE_SUPERMUTANT_RANGER
+	armor_list = ARMOR_VALUE_SUPERMUTANT_RANGER
 	maxHealth = 140 
 	health = 140
 	ranged = 1
@@ -341,7 +341,7 @@
 	icon_living = "night_boss_s"
 	icon_dead = "night_boss_s"
 	ranged = 1
-	mob_armor = ARMOR_VALUE_SUPERMUTANT_LEGEND
+	armor_list = ARMOR_VALUE_SUPERMUTANT_LEGEND
 	maxHealth = 130 
 	health = 130
 	alpha = 80

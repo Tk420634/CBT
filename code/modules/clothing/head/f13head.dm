@@ -30,7 +30,7 @@
 	desc = "Standard Security gear. Protects the head from impacts."
 	icon_state = "helmet"
 	inhand_icon_state = "helmet"
-	armor = list("melee" = 40, "bullet" = 40, "laser" = 40, "energy" = 20, "bomb" = 50, "bio" = 60, "rad" = 10, "fire" = 60, "acid" = 20)
+	armor_list = list("melee" = 40, "bullet" = 40, "laser" = 40, "energy" = 20, "bomb" = 50, "bio" = 60, "rad" = 10, "fire" = 60, "acid" = 20)
 	flags_inv = HIDEEARS | HIDEHAIR
 	cold_protection = HEAD
 	min_cold_protection_temperature = HELMET_MIN_TEMP_PROTECT
@@ -53,7 +53,7 @@
 	desc = "An old military grade Pre-Fall combat helmet."
 	icon_state = "combat_helmet"
 	inhand_icon_state = "combat_helmet"
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	strip_delay = 50
 	flags_inv = HIDEEARS|HIDEHAIR
 	resistance_flags = LAVA_PROOF | FIRE_PROOF
@@ -280,7 +280,7 @@
 	var/obj/item/salvaged_type = null
 	/// Used to track next tool required to salvage the suit
 	var/salvage_step = 0
-	armor = ARMOR_VALUE_PA
+	armor_list = ARMOR_VALUE_PA
 
 /obj/item/clothing/head/helmet/f13/power_armor/ComponentInitialize()
 	. = ..()
@@ -393,7 +393,7 @@
 	icon = 'icons/fallout/clothing/helmets.dmi'
 	icon_state = "t45bhelmet"
 	inhand_icon_state = "t45bhelmet"
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_BULLET_T1, ARMOR_MODIFIER_UP_LASER_T1, ARMOR_MODIFIER_UP_ENV_T1)
 	deflect_damage = 5
 	resistance_flags = LAVA_PROOF | FIRE_PROOF
@@ -417,7 +417,7 @@
 	desc = "The helmet of a power armors exo-skeleton."
 	icon_state = "t45bhelmet"
 	inhand_icon_state = "t45bhelmet"
-	armor = ARMOR_VALUE_SALVAGE
+	armor_list = ARMOR_VALUE_SALVAGE
 	salvaged_type = /obj/item/clothing/head/helmet/f13/heavy/salvaged_pa/t45b
 
 /obj/item/clothing/head/helmet/f13/power_armor/t45b/raider
@@ -747,7 +747,7 @@
 	inhand_icon_state = "unberet"
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/head.dmi'
 	icon = 'icons/fallout/clothing/hats.dmi'
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 
 /obj/item/clothing/head/f13/rusvdvberet
 	name = "Russian VDV beret"
@@ -960,7 +960,7 @@
 	icon_state = "knight_red"
 	inhand_icon_state = "knight_red"
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEHAIR|HIDEFACIALHAIR|HIDEFACE
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T3, ARMOR_MODIFIER_DOWN_BULLET_T1, ARMOR_MODIFIER_DOWN_LASER_T1, ARMOR_MODIFIER_UP_ENV_T2, ARMOR_MODIFIER_UP_DT_T1)
 
 /obj/item/clothing/head/helmet/f13/ninja
@@ -970,7 +970,7 @@
 	icon_state = "s-ninja"
 	inhand_icon_state = "s-ninja_mask"
 	flags_inv = HIDEEARS|HIDEHAIR|HIDEFACIALHAIR
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/head/hat/polis
 	name = "police officer's hat"
@@ -978,7 +978,7 @@
 	icon = 'icons/obj/clothing/hats.dmi'
 	icon_state = "police_officer"
 	inhand_icon_state = "police_officer"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_MELEE_T1, ARMOR_MODIFIER_UP_BULLET_T2, ARMOR_MODIFIER_DOWN_LASER_T1, ARMOR_MODIFIER_UP_ENV_T2, ARMOR_MODIFIER_UP_DT_T1)
 
 /obj/item/clothing/head/hat/polislt
@@ -987,7 +987,7 @@
 	icon = 'icons/obj/clothing/hats.dmi'
 	icon_state = "police_lieutenant"
 	inhand_icon_state = "police_lieutenant"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_MELEE_T1, ARMOR_MODIFIER_UP_BULLET_T2, ARMOR_MODIFIER_DOWN_LASER_T1, ARMOR_MODIFIER_UP_ENV_T2, ARMOR_MODIFIER_UP_DT_T1)
 
 
@@ -997,7 +997,7 @@
 	icon = 'icons/obj/clothing/hats.dmi'
 	icon_state = "police_chief"
 	inhand_icon_state = "police_chief"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_MELEE_T1, ARMOR_MODIFIER_UP_BULLET_T2, ARMOR_MODIFIER_DOWN_LASER_T1, ARMOR_MODIFIER_UP_ENV_T2, ARMOR_MODIFIER_UP_DT_T1)
 
 /obj/item/clothing/head/hat/polissnr
@@ -1006,5 +1006,5 @@
 	icon = 'icons/obj/clothing/hats.dmi'
 	icon_state = "police_snr"
 	inhand_icon_state = "police_snr"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_MELEE_T1, ARMOR_MODIFIER_UP_BULLET_T2, ARMOR_MODIFIER_DOWN_LASER_T1, ARMOR_MODIFIER_UP_ENV_T2, ARMOR_MODIFIER_UP_DT_T1)

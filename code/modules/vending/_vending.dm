@@ -52,7 +52,7 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	verb_exclaim = "beeps"
 	max_integrity = 300
 	integrity_failure = 0.33
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	circuit = /obj/item/circuitboard/machine/vendor
 	payment_department = ACCOUNT_SRV
 	light_power = 0.5

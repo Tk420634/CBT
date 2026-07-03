@@ -22,7 +22,7 @@
 	desc = "A original suit of Pre-Fall combat armor used by elite military units, passed down through generations to where it is today. Though it's not lined with kevlar, this suit's still lightweight and easy to move around in."
 	icon_state = "desert_ranger"
 	inhand_icon_state = "desert_ranger"
-	armor = lis t("melee" = 20, "bullet" = 30, "laser" = 10, "energy" = 20, "bomb" = 30, "bio" = 30, "rad" = 20, "fire" = 60, "acid" = 0)
+	armor_list = lis t("melee" = 20, "bullet" = 30, "laser" = 10, "energy" = 20, "bomb" = 30, "bio" = 30, "rad" = 20, "fire" = 60, "acid" = 0)
 */
 
 // YEEHAWGYVNAH/"Trinity Kemble" //
@@ -31,7 +31,7 @@
 	desc = "An armored chestplate ripped out of old riot gear."
 	icon_state = "kemble"
 	inhand_icon_state = "kemble"
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	slowdown = ARMOR_SLOWDOWN_MEDIUM * ARMOR_SLOWDOWN_LESS_T1 * ARMOR_SLOWDOWN_GLOBAL_MULT
 	armor_tokens = list(ARMOR_MODIFIER_UP_BULLET_T1, ARMOR_MODIFIER_UP_LASER_T1, ARMOR_MODIFIER_UP_ENV_T1, ARMOR_MODIFIER_UP_DT_T2)
 
@@ -41,7 +41,7 @@
 	icon_state = "kemble"
 	inhand_icon_state = "kemble"
 	actions_types = list(/datum/action/item_action/toggle)
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	armor_tokens = list(ARMOR_MODIFIER_UP_BULLET_T1, ARMOR_MODIFIER_UP_LASER_T1, ARMOR_MODIFIER_UP_ENV_T1, ARMOR_MODIFIER_UP_DT_T2)
 
 /obj/item/clothing/head/f13/trailranger/kemble/attack_self(mob/user)

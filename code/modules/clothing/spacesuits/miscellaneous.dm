@@ -22,7 +22,7 @@ Contains:
 	desc = "An advanced tactical space helmet."
 	icon_state = "deathsquad"
 	inhand_icon_state = "deathsquad"
-	armor = ARMOR_VALUE_PA
+	armor_list = ARMOR_VALUE_PA
 	strip_delay = 130
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	resistance_flags = FIRE_PROOF | ACID_PROOF
@@ -36,7 +36,7 @@ Contains:
 	desc = "A prototype designed to replace the ageing MK.II SWAT suit. Based on the streamlined MK.II model, the traditional ceramic and graphene plate construction was replaced with plasteel, allowing superior armor against most threats. There's room for some kind of energy projection device on the back."
 	icon_state = "deathsquad"
 	inhand_icon_state = "swat_suit"
-	armor = ARMOR_VALUE_PA
+	armor_list = ARMOR_VALUE_PA
 	strip_delay = 130
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	resistance_flags = FIRE_PROOF | ACID_PROOF
@@ -49,7 +49,7 @@ Contains:
 	desc = "A tactical space suit first developed in a joint effort by the defunct IS-ERI and US Government in 20XX for military space operations. A tried and true workhorse, it is very difficult to move in but offers robust protection against all threats!"
 	icon_state = "heavy"
 	inhand_icon_state = "swat_suit"
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	strip_delay = 120
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	mutantrace_variation = STYLE_DIGITIGRADE
@@ -75,7 +75,7 @@ Contains:
 	slowdown = 0
 	flags_inv = 0
 	w_class = WEIGHT_CLASS_NORMAL
-	armor = ARMOR_VALUE_PA
+	armor_list = ARMOR_VALUE_PA
 	strip_delay = 130
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	resistance_flags = FIRE_PROOF | ACID_PROOF
@@ -166,7 +166,7 @@ Contains:
 	icon_state = "hardsuit0-ert_commander"
 	inhand_icon_state = "hardsuit0-ert_commander"
 	hardsuit_type = "ert_commander"
-	armor = ARMOR_VALUE_PA
+	armor_list = ARMOR_VALUE_PA
 	strip_delay = 130
 	light_range = 7
 	resistance_flags = ACID_PROOF
@@ -181,7 +181,7 @@ Contains:
 	icon_state = "ert_command"
 	inhand_icon_state = "ert_command"
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/ert
-	armor = ARMOR_VALUE_PA
+	armor_list = ARMOR_VALUE_PA
 	slowdown = 0
 	strip_delay = 130
 	resistance_flags = ACID_PROOF
@@ -423,13 +423,13 @@ Contains:
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/ert/paranormal/inquisitor/old
 	charges = 12
 	slowdown = ARMOR_SLOWDOWN_MEDIUM * ARMOR_SLOWDOWN_LESS_T2 * ARMOR_SLOWDOWN_GLOBAL_MULT
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_BULLET_T4, ARMOR_MODIFIER_UP_LASER_T3, ARMOR_MODIFIER_UP_DT_T3)
 
 /obj/item/clothing/head/helmet/space/hardsuit/ert/paranormal/inquisitor/old
 	desc = "The helmet plating of the inquisitor suit. Vault-tec has no time for 'ghosts'!"
 	charges = 12
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_BULLET_T4, ARMOR_MODIFIER_UP_LASER_T3, ARMOR_MODIFIER_UP_DT_T3)
 
 /obj/item/clothing/suit/space/hardsuit/ert/paranormal/beserker

@@ -13995,10 +13995,6 @@
 	pixel_y = 31
 	},
 /obj/item/pen/charcoal,
-/obj/item/cool_book{
-	layer = 2.9;
-	pixel_x = 5
-	},
 /obj/item/kirbyplants{
 	icon_state = "plant-05";
 	layer = 2.9;

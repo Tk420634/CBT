@@ -2,7 +2,7 @@
 	hitsound_on = 'sound/weapons/blade1.ogg'
 	heat = 3500
 	max_integrity = 200
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	resistance_flags = FIRE_PROOF
 	light_system = MOVABLE_LIGHT
 	light_range = 3

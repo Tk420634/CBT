@@ -9,7 +9,7 @@
 	explosion_block = 3
 	point_return = 4
 	atmosblock = TRUE
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	var/weakened
 
 /obj/structure/blob/shield/scannerreport()
@@ -28,7 +28,7 @@
 		desc = "[damaged_desc]"
 		atmosblock = FALSE
 		if(!weakened)
-			armor = armor.setRating("melee" = 15, "bullet" = 15, "laser" = 5, "energy" = 0, "bomb" = 10, "bio" = 0, "rad" = 0, "fire" = 90, "acid" = 90)
+			armor_list = armor.setRating("melee" = 15, "bullet" = 15, "laser" = 5, "energy" = 0, "bomb" = 10, "bio" = 0, "rad" = 0, "fire" = 90, "acid" = 90)
 			weakened = TRUE
 	else
 		icon_state = initial(icon_state)
@@ -36,7 +36,7 @@
 		desc = initial(desc)
 		atmosblock = TRUE
 		if(weakened)
-			armor = armor.setRating("melee" = 25, "bullet" = 25, "laser" = 15, "energy" = 10, "bomb" = 20, "bio" = 0, "rad" = 0, "fire" = 90, "acid" = 90)
+			armor_list = armor.setRating("melee" = 25, "bullet" = 25, "laser" = 15, "energy" = 10, "bomb" = 20, "bio" = 0, "rad" = 0, "fire" = 90, "acid" = 90)
 			weakened = FALSE
 	air_update_turf(1)
 

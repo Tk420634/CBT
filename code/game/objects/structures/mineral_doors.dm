@@ -16,7 +16,7 @@
 	var/isSwitchingStates = 0
 	var/close_delay = -1 //-1 if does not auto close.
 	max_integrity = 200
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	var/sheetType = /obj/item/stack/sheet/metal
 	var/sheetAmount = 7
 	var/openSound = 'sound/effects/stonedoor_openclose.ogg'

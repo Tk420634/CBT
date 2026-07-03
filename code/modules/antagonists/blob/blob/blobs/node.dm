@@ -4,7 +4,7 @@
 	icon_state = "blank_blob"
 	desc = "A large, pulsating yellow mass."
 	max_integrity = 200
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	health_regen = 3
 	point_return = 25
 

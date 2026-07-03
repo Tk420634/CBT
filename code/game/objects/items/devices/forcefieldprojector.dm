@@ -88,7 +88,7 @@
 	mouse_opacity = MOUSE_OPACITY_OPAQUE
 	resistance_flags = INDESTRUCTIBLE
 	CanAtmosPass = ATMOS_PASS_DENSITY
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	var/obj/item/forcefield_projector/generator
 
 /obj/structure/projected_forcefield/Initialize(mapload, obj/item/forcefield_projector/origin)

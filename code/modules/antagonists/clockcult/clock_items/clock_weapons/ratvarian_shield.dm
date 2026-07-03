@@ -7,7 +7,7 @@
 	inhand_icon_state = "ratvarian_shield"
 	desc = "A resilient shield made out of brass.. It feels warm to the touch."
 	var/clockwork_desc = "A powerful shield of ratvarian making. It absorbs blocked attacks to charge devastating bashes."
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	shield_flags = SHIELD_FLAGS_DEFAULT
 	max_integrity = 300 //High integrity, extremely strong against melee / bullets, but still quite easy to destroy with lasers and energy
 	repair_material = /obj/item/stack/tile/brass

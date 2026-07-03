@@ -219,7 +219,7 @@
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_TEMP_PROTECT
 	strip_delay = 60
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 
 /obj/item/clothing/gloves/color/latex
 	name = "latex gloves"

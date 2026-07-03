@@ -27,7 +27,7 @@ Setup map
 	anchored = FALSE
 	density = TRUE
 	max_integrity = 500
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 
 	var/obj/machinery/particle_accelerator/control_box/master = null
 	var/construction_state = PA_CONSTRUCTION_UNSECURED

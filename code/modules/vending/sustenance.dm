@@ -11,7 +11,7 @@
 					/obj/item/reagent_containers/food/drinks/coffee = 12,
 					/obj/item/tank/internals/emergency_oxygen = 6,
 					/obj/item/clothing/mask/breath = 6)
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	refill_canister = /obj/item/vending_refill/sustenance
 	resistance_flags = FIRE_PROOF
 	default_price = PRICE_FREE

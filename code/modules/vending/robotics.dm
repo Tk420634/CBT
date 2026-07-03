@@ -18,7 +18,7 @@
 					/obj/item/clothing/mask/breath/medical = 5,
 					/obj/item/screwdriver = 5,
 					/obj/item/crowbar = 5)
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	resistance_flags = FIRE_PROOF
 	default_price = PRICE_EXPENSIVE
 	payment_department = ACCOUNT_SCI

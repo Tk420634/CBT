@@ -573,7 +573,7 @@
 	speed = 0
 	maxHealth = 150
 	health = 150
-	mob_armor = ARMOR_VALUE_DEATHCLAW_COMMON
+	armor_list = ARMOR_VALUE_DEATHCLAW_COMMON
 	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 4
@@ -731,7 +731,7 @@
 	speed = 0
 	maxHealth = 150
 	health = 150
-	mob_armor = ARMOR_VALUE_DEATHCLAW_COMMON
+	armor_list = ARMOR_VALUE_DEATHCLAW_COMMON
 	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 30
@@ -895,7 +895,7 @@
 	speed = 0
 	maxHealth = 100
 	health = 100
-	mob_armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 4

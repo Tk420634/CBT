@@ -3,7 +3,7 @@
 	icon = 'icons/obj/atmos.dmi'
 	use_power = NO_POWER_USE
 	max_integrity = 250
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	anchored = FALSE
 
 	var/datum/gas_mixture/air_contents

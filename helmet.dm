@@ -4,7 +4,7 @@
 	icon_state = "helmet"
 	inhand_icon_state = "helmet"
 	slowdown = ARMOR_SLOWDOWN_NONE * ARMOR_SLOWDOWN_GLOBAL_MULT
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	armor_tokens = list()
 	flags_inv = HIDEEARS | HIDEHAIR
 	cold_protection = HEAD
@@ -113,7 +113,7 @@
 	name = "Base for kevlar helmets of various degrees"
 	desc = "Base for Kevlar helmets 2.0 electric boogaloo"
 	armor_tokens = list( ARMOR_MODIFIER_UP_DT_T1 , ARMOR_MODIFIER_UP_ENV_T1)
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	dog_fashion = null
 	slowdown = ARMOR_SLOWDOWN_NONE * ARMOR_SLOWDOWN_GLOBAL_MULT
 
@@ -212,7 +212,7 @@
 	icon_state = "cossack"
 	inhand_icon_state = "cossack"
 	armor_tokens = list( ARMOR_MODIFIER_UP_DT_T1 , ARMOR_MODIFIER_UP_ENV_T1)
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	dog_fashion = null
 	slowdown = ARMOR_SLOWDOWN_NONE * ARMOR_SLOWDOWN_GLOBAL_MULT
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
@@ -371,7 +371,7 @@
 	icon_state = "newushanka"
 	inhand_icon_state = "newushanka"
 	armor_tokens = list( ARMOR_MODIFIER_UP_DT_T1 , ARMOR_MODIFIER_UP_ENV_T1)
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	dog_fashion = null
 	slowdown = ARMOR_SLOWDOWN_NONE * ARMOR_SLOWDOWN_GLOBAL_MULT
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
@@ -384,7 +384,7 @@
 	icon_state = "eva"
 	inhand_icon_state = "eva"
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_MELEE_T2 ,ARMOR_MODIFIER_UP_DT_T1 , ARMOR_MODIFIER_DOWN_LASER_T1 , ARMOR_MODIFIER_UP_ENV_T1)
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	dog_fashion = null
 	slowdown = ARMOR_SLOWDOWN_NONE * ARMOR_SLOWDOWN_GLOBAL_MULT
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
@@ -397,7 +397,7 @@
 	icon_state = "eva2"
 	inhand_icon_state = "eva2"
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_MELEE_T2 ,ARMOR_MODIFIER_UP_DT_T1 , ARMOR_MODIFIER_DOWN_LASER_T1 , ARMOR_MODIFIER_UP_ENV_T1)
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	dog_fashion = null
 	slowdown = ARMOR_SLOWDOWN_NONE * ARMOR_SLOWDOWN_GLOBAL_MULT
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
@@ -410,7 +410,7 @@
 	icon_state = "eva3"
 	inhand_icon_state = "eva3"
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_MELEE_T2 ,ARMOR_MODIFIER_UP_DT_T1 , ARMOR_MODIFIER_DOWN_LASER_T1 , ARMOR_MODIFIER_UP_ENV_T1)
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	dog_fashion = null
 	slowdown = ARMOR_SLOWDOWN_NONE * ARMOR_SLOWDOWN_GLOBAL_MULT
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
@@ -424,7 +424,7 @@
 	icon_state = "gungnir"
 	inhand_icon_state = "gungnir"
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_MELEE_T2 ,ARMOR_MODIFIER_UP_DT_T1 , ARMOR_MODIFIER_DOWN_LASER_T1 , ARMOR_MODIFIER_UP_ENV_T1)
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	dog_fashion = null
 	slowdown = ARMOR_SLOWDOWN_NONE * ARMOR_SLOWDOWN_GLOBAL_MULT
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
@@ -437,7 +437,7 @@
 	icon_state = "gungnir2"
 	inhand_icon_state = "gungnir2"
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_MELEE_T2 ,ARMOR_MODIFIER_UP_DT_T1 , ARMOR_MODIFIER_DOWN_LASER_T1 , ARMOR_MODIFIER_UP_ENV_T1)
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	dog_fashion = null
 	slowdown = ARMOR_SLOWDOWN_NONE * ARMOR_SLOWDOWN_GLOBAL_MULT
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
@@ -451,7 +451,7 @@
 	icon_state = "odst"
 	inhand_icon_state = "odst"
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_MELEE_T2 ,ARMOR_MODIFIER_UP_DT_T1 , ARMOR_MODIFIER_DOWN_LASER_T1 , ARMOR_MODIFIER_UP_ENV_T1)
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	dog_fashion = null
 	slowdown = ARMOR_SLOWDOWN_NONE * ARMOR_SLOWDOWN_GLOBAL_MULT
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
@@ -464,7 +464,7 @@
 	icon_state = "odst3"
 	inhand_icon_state = "odst3"
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_MELEE_T2 ,ARMOR_MODIFIER_UP_DT_T1 , ARMOR_MODIFIER_DOWN_LASER_T1 , ARMOR_MODIFIER_UP_ENV_T1)
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	dog_fashion = null
 	slowdown = ARMOR_SLOWDOWN_NONE * ARMOR_SLOWDOWN_GLOBAL_MULT
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
@@ -477,7 +477,7 @@
 	icon_state = "odst3"
 	inhand_icon_state = "odst3"
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_MELEE_T2 ,ARMOR_MODIFIER_UP_DT_T1 , ARMOR_MODIFIER_DOWN_LASER_T1 , ARMOR_MODIFIER_UP_ENV_T1)
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	dog_fashion = null
 	slowdown = ARMOR_SLOWDOWN_NONE * ARMOR_SLOWDOWN_GLOBAL_MULT
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
@@ -490,7 +490,7 @@
 	icon_state = "argmkvi"
 	inhand_icon_state = "argmkvi"
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_MELEE_T2 ,ARMOR_MODIFIER_UP_DT_T1 , ARMOR_MODIFIER_DOWN_LASER_T1 , ARMOR_MODIFIER_UP_ENV_T1)
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	dog_fashion = null
 	slowdown = ARMOR_SLOWDOWN_NONE * ARMOR_SLOWDOWN_GLOBAL_MULT
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
@@ -503,7 +503,7 @@
 	icon_state = "midwestpa"
 	inhand_icon_state = "midwestpa"
 	armor_tokens = list(ARMOR_MODIFIER_UP_DT_T1 , ARMOR_MODIFIER_UP_ENV_T1)
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	dog_fashion = null
 	slowdown = ARMOR_SLOWDOWN_NONE * ARMOR_SLOWDOWN_GLOBAL_MULT
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
@@ -517,7 +517,7 @@
 	icon_state = "arggungnir"
 	inhand_icon_state = "arggungnir"
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_MELEE_T2 ,ARMOR_MODIFIER_UP_DT_T1 , ARMOR_MODIFIER_DOWN_LASER_T1 , ARMOR_MODIFIER_UP_ENV_T1)
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	dog_fashion = null
 	slowdown = ARMOR_SLOWDOWN_NONE * ARMOR_SLOWDOWN_GLOBAL_MULT
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
@@ -549,7 +549,7 @@
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
 	icon = 'icons/fallout/clothing/helmets.dmi'
 	armor_tokens = list( ARMOR_MODIFIER_UP_DT_T1 , ARMOR_MODIFIER_UP_ENV_T1)
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	dog_fashion = null
 	slowdown = ARMOR_SLOWDOWN_NONE * ARMOR_SLOWDOWN_GLOBAL_MULT
 	speechspan = SPAN_ROBOT
@@ -560,7 +560,7 @@
 	name = "Base for old helmets"
 	desc = "Base for old helmets 2.0 electric boogaloo"
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T1 ,ARMOR_MODIFIER_UP_DT_T1 , ARMOR_MODIFIER_UP_ENV_T1, ARMOR_MODIFIER_DOWN_BULLET_T2)
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	dog_fashion = null
 	slowdown = ARMOR_SLOWDOWN_NONE * ARMOR_SLOWDOWN_GLOBAL_MULT
 
@@ -585,7 +585,7 @@
 	desc = "A salvaged bullet resistant helmet. It's made of a much weaker material."
 	icon_state = "helmetalt"
 	inhand_icon_state = "helmetalt"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	can_flashlight = FALSE
 
 
@@ -739,7 +739,7 @@
 	icon_state = "nvodst_helm"
 	inhand_icon_state = "nvodst_helm"
 	flags_inv = HIDEHAIR|HIDEMASK|HIDEEYES
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	armor_tokens = list (ARMOR_MODIFIER_UP_ENV_T1)
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
 	icon = 'icons/fallout/clothing/helmets.dmi'
@@ -750,7 +750,7 @@
 	icon_state = "unmch"
 	inhand_icon_state = "unmch"
 	flags_inv = HIDEHAIR
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_BOMB_T1)
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
 	icon = 'icons/fallout/clothing/helmets.dmi'
@@ -760,7 +760,7 @@
 	desc = "A third generation Leo Armaments MIRAGE Helmet. This helmet has no visor due to the fact the visor was not 'anthromorphic' friendly. The area around the eyes allows the installiation of gun-spec, or G.S, eyewear."
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
 	icon = 'icons/fallout/clothing/helmets.dmi'
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T1)
 	icon_state = "custominfil"
 	inhand_icon_state = "custominfil"
@@ -779,7 +779,7 @@
 	icon_state = "rhazhelm"
 	inhand_icon_state = "rhazhelm"
 	flags_inv = HIDEHAIR
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T4)
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
 	icon = 'icons/fallout/clothing/helmets.dmi'
@@ -790,7 +790,7 @@
 	icon_state = "usainfilhelm"
 	inhand_icon_state = "usainfilhelm"
 	flags_inv = HIDEHAIR|HIDESNOUT
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T1)
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
 	icon = 'icons/fallout/clothing/helmets.dmi'
@@ -801,7 +801,7 @@
 	icon_state = "chinastealthhelm"
 	inhand_icon_state = "chinastealthhelm"
 	flags_inv = HIDEHAIR|HIDESNOUT
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T1)
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
 	icon = 'icons/fallout/clothing/helmets.dmi'
@@ -812,7 +812,7 @@
 	icon_state = "unmcwh"
 	inhand_icon_state = "unmcwh"
 	flags_inv = HIDEHAIR
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_BOMB_T1)
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
 	icon = 'icons/fallout/clothing/helmets.dmi'
@@ -825,7 +825,7 @@
 	icon_state = "banditmask"
 	inhand_icon_state = "banditmask"
 	flags_inv = HIDESNOUT
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/head/helmet/blpsycho
 	name = "psycho mask"
@@ -835,7 +835,7 @@
 	icon_state = "psychomask"
 	inhand_icon_state = "psychomask"
 	flags_inv = HIDESNOUT
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/head/helmet/borderlandshelm
 	name = "borderlands helmet template"
@@ -843,7 +843,7 @@
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/helmet.dmi'
 	icon = 'icons/fallout/clothing/helmets.dmi'
 	flags_inv = HIDEMASK | HIDEEYES | HIDEHAIR | HIDEFACIALHAIR | HIDEFACE | HIDESNOUT
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 
 /obj/item/clothing/head/helmet/borderlandshelm/bandit
 	name = "bandit helmet"

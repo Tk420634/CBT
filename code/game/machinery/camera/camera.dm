@@ -15,7 +15,7 @@
 
 	resistance_flags = FIRE_PROOF
 
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	max_integrity = 100
 	integrity_failure = 0.5
 	var/list/network = list("ss13")

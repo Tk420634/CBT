@@ -13,7 +13,7 @@
 	inhand_icon_state = "labcoat"
 	blood_overlay_type = "coat"
 	body_parts_covered = CHEST|ARMS
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T1)
 	togglename = "buttons"
 	species_exception = list(/datum/species/golem)
@@ -103,7 +103,7 @@
 	cold_protection = CHEST|GROIN|ARMS
 	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T1)
 	body_parts_hidden = ARMS
 

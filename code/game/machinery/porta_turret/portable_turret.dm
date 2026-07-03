@@ -72,7 +72,7 @@
 	power_channel = EQUIP //drains power from the EQUIPMENT channel
 	max_integrity = 160 //the turret's health
 	integrity_failure = 0.25
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	/// Base turret icon state
 	base_icon_state = "standard"
 	/// Scan range of the turret for locating targets
@@ -1546,7 +1546,7 @@
 	use_power = FALSE
 	max_integrity = 160
 	integrity_failure = 0.5
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	always_up = TRUE
 	has_cover = FALSE
 	scan_range = 9
@@ -1984,7 +1984,7 @@
 	use_power = FALSE
 	max_integrity = 160
 	integrity_failure = 0.1
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	always_up = TRUE
 	has_cover = FALSE
 	scan_range = 9

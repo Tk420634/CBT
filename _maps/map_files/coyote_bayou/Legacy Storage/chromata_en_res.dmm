@@ -6088,7 +6088,7 @@
 	health = 2000;
 	melee_damage_lower = 35;
 	melee_damage_upper = 35;
-	mob_armor = list("linemelee"=50,"linebullet"=50,"linelaser"=50,"energy"=50,"bomb"=50,"bio"=50,"rad"=50,"fire"=50,"acid"=50,"wound"=50,"damage_threshold"=15);
+	armor_list = list("linemelee"=50,"linebullet"=50,"linelaser"=50,"energy"=50,"bomb"=50,"bio"=50,"rad"=50,"fire"=50,"acid"=50,"wound"=50,"damage_threshold"=15);
 	name = "Giant Sandworm";
 	real_name = "Giant Sandworm"
 	},

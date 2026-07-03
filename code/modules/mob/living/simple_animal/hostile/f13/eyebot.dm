@@ -18,7 +18,7 @@
 	response_harm_simple = "hits"
 	move_to_delay = 4
 	robust_searching = 1
-	mob_armor = ARMOR_VALUE_ROBOT_CIVILIAN
+	armor_list = ARMOR_VALUE_ROBOT_CIVILIAN
 	maxHealth = 40
 	health = 40
 	stamcrit_threshold = SIMPLEMOB_NO_STAMCRIT
@@ -196,7 +196,7 @@
 	name = "reinforced eyebot"
 	desc = "An eyebot with beefier protection, and extra electronic aggression."
 	color = "#B85C00"
-	mob_armor = ARMOR_VALUE_ROBOT_CIVILIAN
+	armor_list = ARMOR_VALUE_ROBOT_CIVILIAN
 	maxHealth = 100
 	health = 100
 	faction = list("raider", "wastebot")
@@ -232,7 +232,7 @@
 	despawns_when_lonely = FALSE
 	health = 30
 	maxHealth = 30
-	mob_armor = ARMOR_VALUE_ZERO
+	armor_list = ARMOR_VALUE_ZERO
 	speed = 2
 	icon = 'icons/mob/playerswarmer.dmi'
 	icon_state = "ranged_hivebot"
@@ -349,7 +349,7 @@
 	projectiletype = /obj/item/projectile/beam/laser/cranklasergun/tg
 	projectilesound = 'sound/weapons/magpistol.ogg'
 	auto_fire_delay = GUN_AUTOFIRE_DELAY_SLOW
-	mob_armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	ranged_cooldown_time = 30
 	extra_projectiles = 5
 	ranged_extra_spread_per_shot = 2
@@ -371,7 +371,7 @@
 	projectiletype = /obj/item/projectile/beam/cranklasergun/tg/rifle/heavy
 	projectilesound = 'sound/weapons/magrifle.ogg'
 	auto_fire_delay = GUN_AUTOFIRE_DELAY_SLOWER
-	mob_armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	ranged_cooldown_time = 30
 	extra_projectiles = 2
 	ranged_extra_spread_per_shot = 1
@@ -401,7 +401,7 @@
 	rapid_melee = 2
 	health = 50
 	maxHealth = 50
-	mob_armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	speed = 1
 	melee_damage_lower = 1
 	melee_damage_upper = 10
@@ -469,7 +469,7 @@
 	despawns_when_lonely = FALSE
 	health = 400
 	maxHealth = 400
-	mob_armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	speed = 8
 	move_to_delay = 8
 	icon = 'icons/mob/netguardian.dmi'

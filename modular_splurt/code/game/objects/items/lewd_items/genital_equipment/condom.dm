@@ -91,4 +91,4 @@
 	desc = "Looks like someone had abit of some fun!"
 	mob_overlay_icon = 'modular_splurt/icons/obj/clothing/head.dmi'
 	icon_state = "b_condom_out"
-	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 5, "rad" = 0, "fire" = 0, "acid" = 0)
+	armor_list = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 5, "rad" = 0, "fire" = 0, "acid" = 0)

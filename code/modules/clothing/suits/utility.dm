@@ -21,7 +21,7 @@
 	permeability_coefficient = 0.6
 	body_parts_covered = CHEST|GROIN|LEGS|FEET
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/jacket
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T3)
 
 /obj/item/clothing/head/hooded/surgical
@@ -52,7 +52,7 @@
 	max_integrity = 300
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/armor
 	slowdown = ARMOR_SLOWDOWN_HEAVY * ARMOR_SLOWDOWN_GLOBAL_MULT
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	armor_tier_desc = ARMOR_CLOTHING_HEAVY
 	stiffness = HEAVY_STIFFNESS
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_BULLET_T2, ARMOR_MODIFIER_UP_MELEE_T3, ARMOR_MODIFIER_UP_LASER_T2, ARMOR_MODIFIER_UP_ENERGY_T2, ARMOR_MODIFIER_UP_ENV_T2, ARMOR_MODIFIER_UP_BOMB_T1)
@@ -75,7 +75,7 @@
 	desc = "Use in case of bomb."
 	icon_state = "bombsuit"
 	clothing_flags = THICKMATERIAL
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	armor_tokens = list(ARMOR_MODIFIER_UP_BOMB_T3)
 	flags_inv = HIDEFACE|HIDEMASK|HIDEEARS|HIDEEYES|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT
 	dynamic_hair_suffix = ""
@@ -103,7 +103,7 @@
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/armor
 	slowdown = ARMOR_SLOWDOWN_HEAVY * ARMOR_SLOWDOWN_GLOBAL_MULT
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	armor_tier_desc = ARMOR_CLOTHING_HEAVY
 	stiffness = HEAVY_STIFFNESS
 	armor_tokens = list(ARMOR_MODIFIER_UP_BOMB_T3)
@@ -145,7 +145,7 @@
 	desc = "A hood with radiation protective properties. The label reads, 'Made with lead. Please do not consume insulation.'"
 	clothing_flags = THICKMATERIAL
 	flags_inv = HIDEMASK|HIDEEARS|HIDEFACE|HIDEEYES|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T4)
 	strip_delay = 60
 	equip_delay_other = 60
@@ -165,7 +165,7 @@
 	clothing_flags = THICKMATERIAL
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	slowdown = ARMOR_SLOWDOWN_LIGHT
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T4)
 	strip_delay = 60
 	equip_delay_other = 60

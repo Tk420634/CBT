@@ -612,7 +612,7 @@ This is here to make the tiles around the station mininuke change when it's arme
 	icon_state = "nucleardisk"
 	persistence_replacement = /obj/item/disk/nuclear/fake
 	max_integrity = 250
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	var/fake = FALSE
 	var/turf/lastlocation

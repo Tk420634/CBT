@@ -15,7 +15,7 @@
 	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
 
 	max_integrity = 250000
-	armor = ARMOR_VALUE_PA
+	armor_list = ARMOR_VALUE_PA
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	var/datum/weakref/he_who_is_valid
 	var/list/valid_ckeys = list()

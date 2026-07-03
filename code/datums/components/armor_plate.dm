@@ -2,7 +2,8 @@
 	var/amount = 0
 	var/maxamount = 5
 	var/upgrade_item = /obj/item/stack/crafting/armor_plate
-	var/datum/armor/added_armor = list("melee" = 2, "bullet" = 2, "laser" = 2)
+	var/datum/armor/added_armor = null
+	var/list/default_armor = list("melee" = 2, "bullet" = 2, "laser" = 2)
 	var/upgrade_name
 
 /datum/component/armor_plate/Initialize(_maxamount,obj/item/_upgrade_item,datum/armor/_added_armor)
@@ -20,14 +21,11 @@
 	if(_upgrade_item)
 		upgrade_item = _upgrade_item
 	if(_added_armor)
-		if(islist(_added_armor))
-			added_armor = getArmor(arglist(_added_armor))
-		else if (istype(_added_armor, /datum/armor))
-			added_armor = _added_armor
-		else
+		if (!istype(_added_armor, /datum/armor))
 			stack_trace("Invalid type [_added_armor.type] passed as _armor_item argument to armorplate component")
+		added_armor = _added_armor
 	else
-		added_armor = getArmor(arglist(added_armor))
+		added_armor = getArmor(arglist(default_armor))
 	var/obj/item/typecast = upgrade_item
 	upgrade_name = initial(typecast.name)
 

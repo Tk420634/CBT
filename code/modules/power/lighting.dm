@@ -44,7 +44,7 @@
 	plane = MOB_PLANE
 	layer = WALL_OBJ_LAYER
 	max_integrity = 200
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 
 	var/stage = 1
 	var/fixture_type = "tube"

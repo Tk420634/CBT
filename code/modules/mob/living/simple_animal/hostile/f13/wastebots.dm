@@ -19,7 +19,7 @@
 	gender = NEUTER
 	mob_biotypes = MOB_ROBOTIC|MOB_INORGANIC
 	move_resist = MOVE_FORCE_OVERPOWERING // Can't be pulled
-	mob_armor = ARMOR_VALUE_ROBOT_CIVILIAN
+	armor_list = ARMOR_VALUE_ROBOT_CIVILIAN
 	maxHealth = 100
 	health = 100
 	stamcrit_threshold = SIMPLEMOB_NO_STAMCRIT
@@ -80,7 +80,7 @@
 	desc_short = "A snooty robot with a circular saw."
 
 /mob/living/simple_animal/hostile/handy/playable
-	mob_armor = ARMOR_VALUE_ROBOT_CIVILIAN
+	armor_list = ARMOR_VALUE_ROBOT_CIVILIAN
 	maxHealth = 300
 	health = 300
 	attack_verb_simple = "shoots a burst of flame at"
@@ -116,7 +116,7 @@
 	icon_dead = "securitron_dead"
 	color_dead = "#467049"
 	can_ghost_into = FALSE
-	mob_armor = ARMOR_VALUE_ROBOT_MILITARY
+	armor_list = ARMOR_VALUE_ROBOT_MILITARY
 	maxHealth = 100
 	health = 100
 	melee_damage_lower = 18
@@ -175,7 +175,7 @@
 	loot_amount_random = TRUE
 
 /mob/living/simple_animal/hostile/handy/gutsy/playable
-	mob_armor = ARMOR_VALUE_ROBOT_MILITARY
+	armor_list = ARMOR_VALUE_ROBOT_MILITARY
 	maxHealth = 100
 	health = 100
 	speed = 1
@@ -208,7 +208,7 @@
 	icon_living = "leberator"
 	icon_dead = "liberator_d"
 	icon_gib = "liberator_g"
-	mob_armor = ARMOR_VALUE_ROBOT_SECURITY
+	armor_list = ARMOR_VALUE_ROBOT_SECURITY
 	maxHealth = 50
 	health = 50
 	melee_damage_lower = 5
@@ -261,7 +261,7 @@
 	icon_state = "robobrain"
 	icon_living = "robobrain"
 	icon_dead = "robobrain_d"
-	mob_armor = ARMOR_VALUE_ROBOT_SECURITY
+	armor_list = ARMOR_VALUE_ROBOT_SECURITY
 	maxHealth = 110
 	health = 110
 	can_ghost_into = FALSE
@@ -316,7 +316,7 @@
 	icon_state = "protectron"
 	icon_living = "protectron"
 	icon_dead = "protectron_dead"
-	mob_armor = ARMOR_VALUE_ROBOT_CIVILIAN
+	armor_list = ARMOR_VALUE_ROBOT_CIVILIAN
 	maxHealth = 100
 	health = 100
 	speed = 4
@@ -492,7 +492,7 @@
 	gender = FEMALE //Pffffffffffffffffffffff
 	icon_dead = "assaultron_sase_dead"
 	color_dead = "#467049"
-	mob_armor = ARMOR_VALUE_ROBOT_MILITARY
+	armor_list = ARMOR_VALUE_ROBOT_MILITARY
 	maxHealth = 100
 	health = 100
 	can_ghost_into = FALSE

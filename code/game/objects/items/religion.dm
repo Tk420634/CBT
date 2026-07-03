@@ -188,7 +188,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slowdown = 2.0 //gotta pretend we're balanced.
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	slowdown = ARMOR_SLOWDOWN_HEAVY * ARMOR_SLOWDOWN_GLOBAL_MULT
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T3, ARMOR_MODIFIER_UP_BULLET_T1, ARMOR_MODIFIER_DOWN_LASER_T2, ARMOR_MODIFIER_DOWN_FIRE_T3, ARMOR_MODIFIER_UP_DT_T2)
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
@@ -205,7 +205,7 @@
 	icon_state = "crusader"
 	w_class = WEIGHT_CLASS_NORMAL
 	flags_inv = HIDEHAIR|HIDEEARS|HIDEFACE
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T3, ARMOR_MODIFIER_UP_BULLET_T1, ARMOR_MODIFIER_DOWN_LASER_T2, ARMOR_MODIFIER_DOWN_FIRE_T3, ARMOR_MODIFIER_UP_DT_T2)
 
 /obj/item/clothing/head/helmet/plate/crusader/blue
@@ -221,7 +221,7 @@
 	icon_state = "prophet"
 	mob_overlay_icon = 'icons/mob/large-worn-icons/64x64/head.dmi'
 	flags_1 = NONE
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T3, ARMOR_MODIFIER_UP_BULLET_T1, ARMOR_MODIFIER_DOWN_LASER_T2, ARMOR_MODIFIER_DOWN_FIRE_T3, ARMOR_MODIFIER_UP_DT_T2)
 	worn_x_dimension = 64
 	worn_y_dimension = 64
@@ -281,7 +281,7 @@
 	desc = "Metal boots, they look heavy."
 	icon_state = "crusader"
 	w_class = WEIGHT_CLASS_NORMAL
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	slowdown = ARMOR_SLOWDOWN_HEAVY * ARMOR_SLOWDOWN_GLOBAL_MULT
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T3, ARMOR_MODIFIER_UP_BULLET_T1, ARMOR_MODIFIER_DOWN_LASER_T2, ARMOR_MODIFIER_DOWN_FIRE_T3, ARMOR_MODIFIER_UP_DT_T2)
 	clothing_flags = NOSLIP

@@ -6,7 +6,7 @@
 	req_access = list(ACCESS_BAR)
 	max_integrity = 500
 	integrity_failure = 0.5
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	buildable_sign = 0
 	var/list/barsigns=list()
 	var/panel_open = FALSE

@@ -36,7 +36,7 @@ GLOBAL_VAR_INIT(vendor_cash, 0)
 	obj_integrity = 300
 	max_integrity = 300
 	integrity_failure = 100
-	armor = list(melee = 20, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0, fire = 50, acid = 70)
+	armor_list = list(melee = 20, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0, fire = 50, acid = 70)
 	use_power = 0
 
 	var/stored_item_type = list(/obj/item)

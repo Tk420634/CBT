@@ -6,7 +6,7 @@
 	plane = ABOVE_WALL_PLANE
 	layer = SIGN_LAYER
 	max_integrity = 100
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	var/buildable_sign = 1 //unwrenchable and modifiable
 	rad_flags = RAD_PROTECT_CONTENTS | RAD_NO_CONTAMINATE
 

@@ -8,7 +8,7 @@
 	item_flags = ITEM_CAN_BLOCK | SLOWS_WHILE_IN_HAND
 	slowdown = 0
 	block_parry_data = /datum/block_parry_data/shield
-	armor = list("melee" = 60, "bullet" = 60, "laser" = 60, "energy" = 0, "bomb" = 30, "bio" = 0, "rad" = 0, "fire" = 80, "acid" = 70) //this is how much armor the SHIELD has. how much it PROTECTS is defined by block_parry_data. look at riot/bulletproof shield for implementation and living_blocking_parrying.dm for more info re:block
+	armor_list = list("melee" = 60, "bullet" = 60, "laser" = 60, "energy" = 0, "bomb" = 30, "bio" = 0, "rad" = 0, "fire" = 80, "acid" = 70) //this is how much armor the SHIELD has. how much it PROTECTS is defined by block_parry_data. look at riot/bulletproof shield for implementation and living_blocking_parrying.dm for more info re:block
 	/// Shield flags
 	var/shield_flags = SHIELD_FLAGS_DEFAULT
 	/// Last shieldbash world.time
@@ -198,7 +198,7 @@
 	icon_state = "shield_riot"
 	inhand_icon_state = "shield_riot"
 	slot_flags = INV_SLOTBIT_BACK | INV_SLOTBIT_OCLOTHING
-	armor = list("melee" = 20, "bullet" = 65, "laser" = 0, "energy" = 0, "bomb" = 30, "bio" = 0, "rad" = 0, "fire" = 80, "acid" = 70)
+	armor_list = list("melee" = 20, "bullet" = 65, "laser" = 0, "energy" = 0, "bomb" = 30, "bio" = 0, "rad" = 0, "fire" = 80, "acid" = 70)
 	force = 10
 	block_parry_data = /datum/block_parry_data/shield/riot
 	throwforce = 5
@@ -268,7 +268,7 @@
 	icon_state = "shield_bulletproof"
 	inhand_icon_state = "shield_bulletproof"
 	block_parry_data = /datum/block_parry_data/shield/bulletproof
-	armor = list("melee" = 50, "bullet" = 90, "laser" = 50, "energy" = 0, "bomb" = 30, "bio" = 0, "rad" = 0, "fire" = 80, "acid" = 70)
+	armor_list = list("melee" = 50, "bullet" = 90, "laser" = 50, "energy" = 0, "bomb" = 30, "bio" = 0, "rad" = 0, "fire" = 80, "acid" = 70)
 	max_integrity = -1
 	slowdown = 0.2
 	custom_materials = list(/datum/material/plastic=8000, /datum/material/titanium=1000)
@@ -289,7 +289,7 @@
 	inhand_icon_state = "shield_buckler"
 	slot_flags = INV_SLOTBIT_BELT | INV_SLOTBIT_BACK
 	block_parry_data = /datum/block_parry_data/shield/scrap
-	armor = list("melee" = 50, "bullet" = 15, "laser" = 30, "energy" = 0, "bomb" = 10, "bio" = 0, "rad" = 0, "fire" = 10, "acid" = 40)
+	armor_list = list("melee" = 50, "bullet" = 15, "laser" = 30, "energy" = 0, "bomb" = 10, "bio" = 0, "rad" = 0, "fire" = 10, "acid" = 40)
 	max_integrity = -1
 	custom_materials = list(/datum/material/wood = 18000)
 	resistance_flags = FLAMMABLE
@@ -309,7 +309,7 @@
 	desc = "Made from a ancient roadsign, with handles made of rope."
 	icon_state = "shield_stop"
 	inhand_icon_state = "shield_stop"
-	armor = list("melee" = 30, "bullet" = 25, "laser" = 65, "energy" = 0, "bomb" = 20, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 40)
+	armor_list = list("melee" = 30, "bullet" = 25, "laser" = 65, "energy" = 0, "bomb" = 20, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 40)
 	max_integrity = -1
 	slowdown = 0
 	resistance_flags = null
@@ -323,7 +323,7 @@
 	icon_state = "shield_legion"
 	inhand_icon_state = "shield_legion"
 	block_parry_data = /datum/block_parry_data/shield/legion
-	armor = list("melee" = 70, "bullet" = 60, "laser" = 60, "energy" = 0, "bomb" = 30, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 40)
+	armor_list = list("melee" = 70, "bullet" = 60, "laser" = 60, "energy" = 0, "bomb" = 30, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 40)
 	force = 13
 	slowdown = 0
 	max_integrity = -1
@@ -347,7 +347,7 @@
 	icon_state = "shield_scrap"
 	inhand_icon_state = "shield_scrap"
 	block_parry_data = /datum/block_parry_data/shield/scrap
-	armor = list("melee" = 45, "bullet" = 45, "laser" = 45, "energy" = 0, "bomb" = 15, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 40)
+	armor_list = list("melee" = 45, "bullet" = 45, "laser" = 45, "energy" = 0, "bomb" = 15, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 40)
 	max_integrity = -1
 	slowdown = 0.1
 	force = 13
@@ -424,7 +424,7 @@
 	shieldbash_cooldown = 8 SECONDS
 	shieldbash_brutedamage = 50//if you close in with this, and land a shieldbash you should deal a good bit of damage
 	shieldbash_stamdmg = 80//and stamina
-	armor = list("melee" = 60, "bullet" = 60, "laser" = 60, "energy" = 0, "bomb" = 30, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 40)
+	armor_list = list("melee" = 60, "bullet" = 60, "laser" = 60, "energy" = 0, "bomb" = 30, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 40)
 	force = 25
 	block_parry_data = /datum/block_parry_data/shield/tower
 	throwforce = 5
@@ -566,7 +566,7 @@ The telescopic shields are legacy and don't fit, but the code might be of intere
 	desc = "Yep, that's a shield. Good for not getting whacked."
 	icon_state = "shield_stop"
 	inhand_icon_state = "shield_stop"
-	armor = list("melee" = 20, "bullet" = 15, "laser" = 15, "energy" = 0, "bomb" = 20, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 40)
+	armor_list = list("melee" = 20, "bullet" = 15, "laser" = 15, "energy" = 0, "bomb" = 20, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 40)
 	force = 12
 	force_wielded = 20
 	force_unwielded = 12

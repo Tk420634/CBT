@@ -9,7 +9,7 @@
 	name = "Cowboy Boots, alt"
 	desc = "A set of cowboy boots. Yeehaw!"
 	icon_state = "cowboy_alt"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T1)
 	strip_delay = 70
 	resistance_flags = NONE
@@ -24,7 +24,7 @@
 	inhand_icon_state = "jackboots"
 	lefthand_file = 'icons/mob/inhands/equipment/security_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/security_righthand.dmi'
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T1)
 	strip_delay = 70
 	resistance_flags = NONE
@@ -53,7 +53,7 @@
 	desc = "High speed, no drag combat boots."
 	permeability_coefficient = 0.01
 	clothing_flags = NOSLIP
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T2, ARMOR_MODIFIER_UP_BULLET_T2)
 
 /obj/item/clothing/shoes/sandal
@@ -416,7 +416,7 @@
 	desc = "A set of standard UMC boots. The shin guards, knee pads, and thigh armor are mainly used to prevent scraping than actual combat. The material seems to be of a lightweight material."
 	icon_state = "unmcb"
 	inhand_icon_state = "unmcb"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_BULLET_T1 , ARMOR_MODIFIER_UP_MELEE_T1)
 	can_be_tied = FALSE
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/shoes
@@ -432,7 +432,7 @@
 	desc = "A set of luxuriously made exo-jack thigh high boots. Extending to the thighs, these boots have both style and comfort in mind. They seem to be made of a light mateial on the exterior while the interior is padded and made with comfort in mind. For the choom who desires style and functionality."
 	icon_state = "toxboots"
 	inhand_icon_state = "toxboots"
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 	can_be_tied = FALSE
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/shoes
 	equip_delay_self = 0.5

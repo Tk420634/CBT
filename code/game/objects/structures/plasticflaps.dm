@@ -3,7 +3,7 @@
 	desc = "Heavy duty, airtight, plastic flaps. Definitely can't get past those. No way."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "plasticflaps"
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	density = FALSE
 	anchored = TRUE
 	CanAtmosPass = ATMOS_PASS_NO

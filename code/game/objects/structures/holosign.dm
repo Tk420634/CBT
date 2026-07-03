@@ -6,7 +6,7 @@
 	icon = 'icons/effects/effects.dmi'
 	anchored = TRUE
 	max_integrity = 1
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	var/obj/item/holosign_creator/projector
 	var/init_vis_overlay = TRUE
 	rad_flags = RAD_NO_CONTAMINATE

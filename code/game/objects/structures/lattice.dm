@@ -6,7 +6,7 @@
 	base_icon_state = "lattice"
 	density = FALSE
 	anchored = TRUE
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	max_integrity = 50
 	layer = LATTICE_LAYER //under pipes
 	plane = FLOOR_PLANE

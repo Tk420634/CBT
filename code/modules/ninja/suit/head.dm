@@ -5,7 +5,7 @@
 	name = "ninja hood"
 	icon_state = "s-ninja"
 	inhand_icon_state = "s-ninja_mask"
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	strip_delay = 12
 	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	blockTracking = 1//Roughly the only unique thing about this helmet.

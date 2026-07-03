@@ -22,7 +22,7 @@
 	usesound = list('sound/items/screwdriver.ogg', 'sound/items/screwdriver2.ogg')
 	tool_behaviour = TOOL_SCREWDRIVER
 	toolspeed = 1
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	reskinnable_component = null
 	wound_bonus = -10
 	bare_wound_bonus = 5

@@ -11,7 +11,7 @@
 	/// The default resting icon will always be "[icon_living]_rest" unless you set this variable, which will override it.
 	icon_resting
 	unsuitable_atmos_damage = 0
-	mob_armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	health = 200
 	maxHealth = 200
 	speed = 0

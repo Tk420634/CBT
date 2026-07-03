@@ -6,7 +6,7 @@
 	layer = PROJECTILE_HIT_THRESHHOLD_LAYER
 	plane = FLOOR_PLANE
 	max_integrity = 200
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 
 	var/uses = 20
 	var/cooldown = 0

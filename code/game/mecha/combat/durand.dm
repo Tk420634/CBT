@@ -10,7 +10,7 @@
 	step_in = 2.5
 	dir_in = 1 //Facing North.
 	max_integrity = 500
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	max_temperature = 30000
 	infra_luminosity = 8
 	force = 45

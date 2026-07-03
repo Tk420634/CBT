@@ -22,7 +22,7 @@
 	reskinnable_component = /datum/component/reskinnable/wirecutters
 	tool_behaviour = TOOL_WIRECUTTER
 	toolspeed = 1
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	weapon_special_component = /datum/component/weapon_special/single_turf
 	block_parry_data = /datum/block_parry_data/bokken
 

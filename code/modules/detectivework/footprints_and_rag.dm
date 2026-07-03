@@ -126,4 +126,4 @@
 	extinguish_efficiency = 5
 	action_speed = 15
 	damp_threshold = 0.8
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES

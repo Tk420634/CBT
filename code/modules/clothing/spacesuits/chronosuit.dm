@@ -4,7 +4,7 @@
 	icon_state = "chronohelmet"
 	inhand_icon_state = "chronohelmet"
 	slowdown = 1
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	var/obj/item/clothing/suit/space/chronos/suit = null
 
@@ -19,7 +19,7 @@
 	icon_state = "chronosuit"
 	inhand_icon_state = "chronosuit"
 	actions_types = list(/datum/action/item_action/toggle)
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	mutantrace_variation = STYLE_DIGITIGRADE
 	var/list/chronosafe_items = list(/obj/item/chrono_eraser, /obj/item/gun/energy/chrono_gun)

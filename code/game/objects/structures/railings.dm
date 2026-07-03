@@ -10,7 +10,7 @@
 	layer = ABOVE_MOB_LAYER
 	plane = MOB_PLANE
 	/// armor more or less consistent with grille. max_integrity about one time and a half that of a grille.
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 
 	max_integrity = 75
 

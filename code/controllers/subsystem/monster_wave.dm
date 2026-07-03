@@ -173,7 +173,7 @@ SUBSYSTEM_DEF(monster_wave)
 	desc = "Huh, the ground here is glowing! That can't be good! Better smash it to be sure!"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "dragnetfield"
-	mob_armor = ARMOR_VALUE_RIFT
+	armor_list = ARMOR_VALUE_RIFT
 	maxHealth = 50
 	health = 50
 	move_resist = MOVE_FORCE_OVERPOWERING

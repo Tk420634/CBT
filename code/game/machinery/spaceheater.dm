@@ -11,7 +11,7 @@
 	name = "space heater"
 	desc = "Made by Space Amish using traditional space techniques, this heater/cooler is guaranteed not to set the station on fire. Warranty void if used in engines."
 	max_integrity = 250
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	circuit = /obj/item/circuitboard/machine/space_heater
 	var/obj/item/stock_parts/cell/cell
 	var/on = FALSE

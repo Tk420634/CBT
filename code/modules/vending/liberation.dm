@@ -15,7 +15,7 @@
 	contraband = list(/obj/item/clothing/under/misc/patriotsuit = 3,
 					/obj/item/bedsheet/patriot = 5,
 					/obj/item/reagent_containers/food/snacks/burger/superbite = 3) //U S A
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	resistance_flags = FIRE_PROOF
 	default_price = PRICE_ABOVE_NORMAL
 	extra_price = PRICE_ABOVE_EXPENSIVE

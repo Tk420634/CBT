@@ -17,7 +17,7 @@
 	throw_speed = 1
 	throw_range = 7
 	w_class = WEIGHT_CLASS_BULKY
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 
 	// Built automatically from the corresponding vending machine.
 	// If null, considered to be full. Otherwise, is list(/typepath = amount).

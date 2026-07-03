@@ -5,7 +5,7 @@
 	gender = PLURAL //Carn: for grammarically correct text-parsing
 	w_class = WEIGHT_CLASS_SMALL
 	var/chained = 0
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 
 	body_parts_covered = FEET
 	slot_flags = INV_SLOTBIT_FEET

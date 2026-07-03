@@ -23,7 +23,7 @@
 	light_on = FALSE
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	max_integrity = 200
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	resistance_flags = FIRE_PROOF
 	wound_bonus = -110
 	bare_wound_bonus = 20

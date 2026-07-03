@@ -20,7 +20,7 @@
 	plane = ABOVE_WALL_PLANE
 	max_integrity = 250
 	integrity_failure = 0.4
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 2
 	active_power_usage = 6

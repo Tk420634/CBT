@@ -102,7 +102,7 @@
 	actions_types = list(/datum/action/item_action/toggle_research_scanner)
 	glass_colour_type = /datum/client_colour/glass_colour/purple
 	resistance_flags = ACID_PROOF
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 
 /obj/item/clothing/glasses/science/item_action_slot_check(slot, mob/user, datum/action/A)
 	if(slot == SLOT_GLASSES)

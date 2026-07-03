@@ -40,7 +40,7 @@ GLOBAL_LIST_EMPTY(network_holopads)
 	idle_power_usage = 5
 	active_power_usage = 100
 	max_integrity = 300
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	circuit = /obj/item/circuitboard/machine/holopad
 	/// List of living mobs that use the holopad
 	var/list/masters

@@ -33,7 +33,7 @@ field_generator power level display
 	use_power = NO_POWER_USE
 	max_integrity = 500
 	//100% immune to lasers and energy projectiles since it absorbs their energy.
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	var/const/num_power_levels = 6	// Total number of power level icon has
 	var/power_level = 0
 	var/active = FG_OFFLINE

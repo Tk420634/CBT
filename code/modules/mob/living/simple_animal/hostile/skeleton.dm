@@ -7,7 +7,7 @@
 	icon_dead = "skeleton"
 	gender = NEUTER
 	rotate_on_lying = TRUE
-	mob_armor = ARMOR_VALUE_SKELETON
+	armor_list = ARMOR_VALUE_SKELETON
 	mob_biotypes = MOB_UNDEAD|MOB_HUMANOID
 	seconds_per_wander = 5
 	speak_emote = list("rattles")

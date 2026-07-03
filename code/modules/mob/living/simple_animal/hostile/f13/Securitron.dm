@@ -12,7 +12,7 @@
 	icon_state = "securitron"
 	icon_living = "securitron"
 	icon_dead = "securitron_dead"
-	mob_armor = ARMOR_VALUE_ROBOT_SECURITY
+	armor_list = ARMOR_VALUE_ROBOT_SECURITY
 	maxHealth = 100
 	health = 100
 	stamcrit_threshold = SIMPLEMOB_NO_STAMCRIT
@@ -151,7 +151,7 @@
 	icon_state = "sentrybot"
 	icon_living = "sentrybot"
 	icon_dead = "sentrybot_dead"
-	mob_armor = ARMOR_VALUE_ROBOT_SECURITY
+	armor_list = ARMOR_VALUE_ROBOT_SECURITY
 	maxHealth = 150
 	health = 150
 	del_on_death = FALSE

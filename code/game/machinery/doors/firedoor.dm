@@ -21,7 +21,7 @@
 	layer = BELOW_OPEN_DOOR_LAYER
 	closingLayer = CLOSED_FIREDOOR_LAYER
 	assemblytype = /obj/structure/firelock_frame
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	interaction_flags_machine = INTERACT_MACHINE_WIRES_IF_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN_SILICON | INTERACT_MACHINE_REQUIRES_SILICON | INTERACT_MACHINE_OPEN
 	air_tight = TRUE
 	attack_hand_is_action = TRUE

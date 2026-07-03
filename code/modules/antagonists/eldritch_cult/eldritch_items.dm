@@ -134,7 +134,7 @@
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS
 	hoodtype = /obj/item/clothing/head/hooded/cult_hoodie/eldritch
 	// slightly better than normal cult robes
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 
 /obj/item/reagent_containers/glass/beaker/eldritch
 	name = "flask of eldritch essence"

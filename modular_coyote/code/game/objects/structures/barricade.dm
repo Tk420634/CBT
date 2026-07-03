@@ -240,7 +240,7 @@
 	desc = "A small barricade made from metal posting, designed to stop you from going places you aren't supposed to."
 	icon_state = "railing_0"
 	max_integrity = 150
-	armor = list("melee" = 0, "bullet" = 50, "laser" = 50, "energy" = 50, "bomb" = 15, "bio" = 100, "rad" = 100, "fire" = 100, "acid" = 10)
+	armor_list = list("melee" = 0, "bullet" = 50, "laser" = 50, "energy" = 50, "bomb" = 15, "bio" = 100, "rad" = 100, "fire" = 100, "acid" = 10)
 	stack_type = /obj/item/stack/rods
 	destroyed_stack_amount = 2
 	barricade_type = "railing"
@@ -306,7 +306,7 @@
 	icon = 'modular_coyote/icons/objects/barricade.dmi'
 	icon_state = "sandbag"
 	max_integrity = 375
-	armor = list("melee" = 25, "bullet" = 25, "laser" = 25, "energy" = 10, "bomb" = 0, "bio" = 100, "rad" = 100, "fire" = 100, "acid" = 25, "damage_threshold" = 5) // second pass on armor values because of tanky-ness
+	armor_list = list("melee" = 25, "bullet" = 25, "laser" = 25, "energy" = 10, "bomb" = 0, "bio" = 100, "rad" = 100, "fire" = 100, "acid" = 25, "damage_threshold" = 5) // second pass on armor values because of tanky-ness
 	layer = OBJ_LAYER
 	stack_type = /obj/item/stack/sheet/mineral/sandbags
 	stack_amount = 1
@@ -361,7 +361,7 @@
 	desc = "A durable and easily mounted barricade made from metal plates, often used for rapid fortification. Repairing it requires a welder."
 	icon_state = "metal_0"
 	max_integrity = 200
-	armor = alist(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 100, FIRE = 80, ACID = 40)
+	armor_list = alist(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 100, FIRE = 80, ACID = 40)
 	stack_type = /obj/item/stack/sheet/metal
 	stack_amount = 2
 	destroyed_stack_amount = 1

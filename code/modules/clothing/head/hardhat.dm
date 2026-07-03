@@ -9,12 +9,12 @@
 	light_color = "#FFCC66"
 	light_on = FALSE
 	var/hat_type = "yellow" //Determines used sprites: hardhat[light_on]_[hat_type] and hardhat[light_on]_[hat_type]2 (lying down sprite)
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	flags_inv = 0
 	actions_types = list(/datum/action/item_action/toggle_helmet_light)
 	resistance_flags = FIRE_PROOF
 	dynamic_hair_suffix = "+generic"
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_BULLET_T2, ARMOR_MODIFIER_UP_MELEE_T3, ARMOR_MODIFIER_DOWN_LASER_T2)
 
 	dog_fashion = /datum/dog_fashion/head

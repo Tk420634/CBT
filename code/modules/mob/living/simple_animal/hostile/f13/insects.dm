@@ -15,7 +15,7 @@
 	icon_dead = "GiantAnt_dead"
 	icon_gib = "GiantAnt_gib"
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
-	mob_armor = ARMOR_VALUE_ANTS
+	armor_list = ARMOR_VALUE_ANTS
 	speak_chance = 0
 	move_to_delay = 4
 	// m2d 3 = standard, less is fast, more is slower.

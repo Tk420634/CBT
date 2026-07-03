@@ -30,7 +30,7 @@ GLOBAL_LIST_EMPTY(electrochromatic_window_lookup)
 	var/glass_amount = 1
 	can_be_unanchored = TRUE
 	resistance_flags = ACID_PROOF
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	CanAtmosPass = ATMOS_PASS_PROC
 	var/mutable_appearance/crack_overlay
 	var/real_explosion_block	//ignore this, just use explosion_block
@@ -551,7 +551,7 @@ GLOBAL_LIST_EMPTY(electrochromatic_window_lookup)
 	icon_state = "rwindow"
 	reinf = TRUE
 	heat_resistance = 1600
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	max_integrity = 50
 	explosion_block = 1
 	glass_type = /obj/item/stack/sheet/rglass
@@ -576,7 +576,7 @@ GLOBAL_LIST_EMPTY(electrochromatic_window_lookup)
 	icon_state = "plasmawindow"
 	reinf = FALSE
 	heat_resistance = 25000
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	max_integrity = 150
 	explosion_block = 1
 	glass_type = /obj/item/stack/sheet/plasmaglass
@@ -601,7 +601,7 @@ GLOBAL_LIST_EMPTY(electrochromatic_window_lookup)
 	icon_state = "plasmarwindow"
 	reinf = TRUE
 	heat_resistance = 50000
-	armor = ARMOR_VALUE_PA
+	armor_list = ARMOR_VALUE_PA
 	max_integrity = 500
 	explosion_block = 2
 	glass_type = /obj/item/stack/sheet/plasmarglass
@@ -734,7 +734,7 @@ GLOBAL_LIST_EMPTY(electrochromatic_window_lookup)
 	flags_1 = PREVENT_CLICK_UNDER_1
 	reinf = TRUE
 	heat_resistance = 1600
-	armor = ARMOR_VALUE_PA
+	armor_list = ARMOR_VALUE_PA
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = list(SMOOTH_GROUP_SHUTTLE_PARTS, SMOOTH_GROUP_WINDOW_FULLTILE_SHUTTLE)
 	canSmoothWith = list(SMOOTH_GROUP_WINDOW_FULLTILE_SHUTTLE)
@@ -766,7 +766,7 @@ GLOBAL_LIST_EMPTY(electrochromatic_window_lookup)
 	flags_1 = PREVENT_CLICK_UNDER_1
 	reinf = TRUE
 	heat_resistance = 1600
-	armor = ARMOR_VALUE_PA
+	armor_list = ARMOR_VALUE_PA
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = list(SMOOTH_GROUP_SHUTTLE_PARTS, SMOOTH_GROUP_WINDOW_FULLTILE_PLASTITANIUM)
 	canSmoothWith = list(SMOOTH_GROUP_WINDOW_FULLTILE_PLASTITANIUM)
@@ -793,7 +793,7 @@ GLOBAL_LIST_EMPTY(electrochromatic_window_lookup)
 	icon_state = "clockwork_window_single"
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	max_integrity = 80
-	armor = ARMOR_VALUE_PA
+	armor_list = ARMOR_VALUE_PA
 	explosion_block = 2 //fancy AND hard to destroy. the most useful combination.
 	decon_speed = 40
 	glass_type = /obj/item/stack/tile/brass
@@ -878,7 +878,7 @@ GLOBAL_LIST_EMPTY(electrochromatic_window_lookup)
 	decon_speed = 10
 	CanAtmosPass = ATMOS_PASS_YES
 	resistance_flags = FLAMMABLE
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	breaksound = 'sound/items/poster_ripped.ogg'
 	hitsound = 'sound/weapons/slashmiss.ogg'
 	var/static/mutable_appearance/torn = mutable_appearance('icons/obj/smooth_structures/paperframes.dmi',icon_state = "torn", layer = ABOVE_OBJ_LAYER - 0.1)

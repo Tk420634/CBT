@@ -8,7 +8,7 @@
 	idle_power_usage = 2
 	active_power_usage = 4
 	max_integrity = 300
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	resistance_flags = FIRE_PROOF
 	var/id = null
 	var/on = FALSE

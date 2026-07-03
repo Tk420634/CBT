@@ -10,7 +10,7 @@
 	level = 1		// underfloor
 	layer = LOW_OBJ_LAYER
 	max_integrity = 500
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 
 	var/open = FALSE		// true if cover is open
 	var/locked = TRUE		// true if controls are locked

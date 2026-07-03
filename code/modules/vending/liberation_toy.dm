@@ -22,7 +22,7 @@
 					/obj/item/toy/katana = 10,
 					/obj/item/dualsaber/toy = 5,
 					/obj/item/toy/cards/deck/syndicate = 10) //Gambling and it hurts, making it a +18 item
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	resistance_flags = FIRE_PROOF
 	refill_canister = /obj/item/vending_refill/donksoft
 	default_price = PRICE_ABOVE_NORMAL

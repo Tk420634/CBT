@@ -6,7 +6,7 @@
 	force = 40
 	max_temperature = 20000
 	max_integrity = 400
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	max_equip = 6
 	wreckage = /obj/structure/mecha_wreckage/ripley
 	var/list/cargo = new
@@ -43,7 +43,7 @@
 	max_integrity = 500
 	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	lights_power = 7
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	max_equip = 5 // More armor, less tools
 	wreckage = /obj/structure/mecha_wreckage/ripley/firefighter
 
@@ -56,7 +56,7 @@
 	force = 60
 	max_temperature = 100000
 	max_integrity = 550
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	lights_power = 7
 	wreckage = /obj/structure/mecha_wreckage/ripley/deathripley
 	step_energy_drain = 0
@@ -88,7 +88,7 @@
 	step_in = 1.5
 	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	lights_power = 7
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	max_equip = 5
 	wreckage = /obj/structure/mecha_wreckage/clarke
 	cargo_capacity = 10

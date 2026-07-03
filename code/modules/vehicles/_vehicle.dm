@@ -4,7 +4,7 @@
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "fuckyou"
 	max_integrity = 300
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	density = TRUE
 	anchored = FALSE
 	var/list/mob/occupants				//mob = bitflags of their control level.

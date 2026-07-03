@@ -15,7 +15,7 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	block_chance = 15
 	max_integrity = 200
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	total_mass = TOTAL_MASS_MEDIEVAL_WEAPON
 
 // CHAPLAIN CUSTOM ARMORS //
@@ -25,7 +25,7 @@
 	desc = "Deus Vult."
 	icon_state = "knight_templar"
 	inhand_icon_state = "knight_templar"
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	armor_tokens = (ARMOR_MODIFIER_DOWN_BULLET_T3)
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH

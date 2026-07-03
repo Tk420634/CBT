@@ -5,7 +5,7 @@
 	permeability_coefficient = 0.9
 	block_priority = BLOCK_PRIORITY_UNIFORM
 	slot_flags = INV_SLOTBIT_ICLOTHING
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 	mutantrace_variation = STYLE_DIGITIGRADE|USE_TAUR_CLIP_MASK
 	limb_integrity = 30
 	var/fitted = FEMALE_UNIFORM_FULL // For use in alternate clothing styles for women

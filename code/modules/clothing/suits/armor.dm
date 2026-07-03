@@ -8,7 +8,7 @@
 	equip_delay_other = 40
 	max_integrity = 250
 	resistance_flags = NONE
-	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0 , "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0, "wound" = 25)
+	armor_list = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0 , "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0, "wound" = 25)
 	slowdown = 0.01
 	var/list/protected_zones = list(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 
@@ -33,7 +33,7 @@
 	blood_overlay_type = "armor"
 	dog_fashion = /datum/dog_fashion/back
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
-	armor = list("melee" = 35, "bullet" = 35, "laser" = 35, "energy" = 25, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 30)
+	armor_list = list("melee" = 35, "bullet" = 35, "laser" = 35, "energy" = 25, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 30)
 	slowdown = 0.05
 
 /obj/item/clothing/suit/armor/medium/vest/bulletproof/big
@@ -43,7 +43,7 @@
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/armor_medium.dmi'
 	icon_state = "vest_armor"
 	inhand_icon_state = "vest_armor"
-	armor = list("melee" = 50, "bullet" = 50, "laser" = 25, "energy" = 20, "bomb" = 50, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 40)
+	armor_list = list("melee" = 50, "bullet" = 50, "laser" = 25, "energy" = 20, "bomb" = 50, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 40)
 	slowdown = 0.18
 
 /obj/item/clothing/suit/armor/medium/vest/trench
@@ -51,7 +51,7 @@
 	desc = "A grey and white trench coat with dark blue highlights, on the sides and back it has the unique symbol of the followers. Under said coat is an armor vest, perfect for light weight protection."
 	icon_state = "followerstrench"
 	inhand_icon_state = "followerstrench"
-	armor = list("melee" = 15, "bullet" = 45, "laser" = 15, "energy" = 25, "bomb" = 35, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 30)
+	armor_list = list("melee" = 15, "bullet" = 45, "laser" = 15, "energy" = 25, "bomb" = 35, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 30)
 	slowdown = 0.05
 
 
@@ -59,7 +59,7 @@
 	desc = "A thick armored vest that provides decent protection against most types of damage."
 	icon_state = "armor"
 	inhand_icon_state = "armor"
-	armor = list("melee" = 40, "bullet" = 40, "laser" = 40, "energy" = 25, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 30)
+	armor_list = list("melee" = 40, "bullet" = 40, "laser" = 40, "energy" = 25, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 30)
 	slowdown = 0.1
 
 /obj/item/clothing/suit/armor/medium/vest/old
@@ -147,7 +147,7 @@
 	icon_state = "capcarapace"
 	inhand_icon_state = "armor"
 	body_parts_covered = CHEST|GROIN
-	armor = list("melee" = 50, "bullet" = 50, "laser" = 50, "energy" = 10, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 90, "wound" = 10)
+	armor_list = list("melee" = 50, "bullet" = 50, "laser" = 50, "energy" = 10, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 90, "wound" = 10)
 	dog_fashion = null
 	resistance_flags = FIRE_PROOF
 
@@ -171,7 +171,7 @@
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	cold_protection = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	heat_protection = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
-	armor = list("melee" = 70, "bullet" = 20, "laser" = 10,"energy" = 10, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 10)
+	armor_list = list("melee" = 70, "bullet" = 20, "laser" = 10,"energy" = 10, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 10)
 	blocks_shove_knockdown = TRUE
 	strip_delay = 80
 	equip_delay_other = 60
@@ -182,7 +182,7 @@
 	icon_state = "armor_reflec"
 	inhand_icon_state = "armor_reflec"
 	blood_overlay_type = "armor"
-	armor = list("melee" = 25, "bullet" = 25,"laser" = 99, "energy" = 60, "bomb" = 40, "bio" = 30, "rad" = 20, "fire" = 60, "acid" = 0)
+	armor_list = list("melee" = 25, "bullet" = 25,"laser" = 99, "energy" = 60, "bomb" = 40, "bio" = 30, "rad" = 20, "fire" = 60, "acid" = 0)
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 	var/hit_reflect_chance = 40
@@ -228,7 +228,7 @@
 	min_cold_protection_temperature = SPACE_SUIT_MIN_TEMP_PROTECT
 	heat_protection = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_TEMP_PROTECT
-	armor = list("melee" = 90, "laser" = 90, "bullet" = 90, "energy" = 50, "bomb" = 100, "bio" = 100, "rad" = 100, "fire" = 90, "acid" = 90)
+	armor_list = list("melee" = 90, "laser" = 90, "bullet" = 90, "energy" = 50, "bomb" = 100, "bio" = 100, "rad" = 100, "fire" = 90, "acid" = 90)
 
 /obj/item/clothing/suit/armor/heavy
 	name = "heavy armor"
@@ -241,7 +241,7 @@
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	slowdown = 3
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
-	armor = list("melee" = 90, "laser" = 90, "bullet" = 90, "energy" = 50, "bomb" = 100, "bio" = 100, "rad" = 100, "fire" = 90, "acid" = 90)
+	armor_list = list("melee" = 90, "laser" = 90, "bullet" = 90, "energy" = 50, "bomb" = 100, "bio" = 100, "rad" = 100, "fire" = 90, "acid" = 90)
 
 /obj/item/clothing/suit/armor/tdome
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
@@ -308,7 +308,7 @@
 	strip_delay = 60
 	equip_delay_other = 40
 	max_integrity = 200
-	armor = list("melee" = 25, "bullet" = 15, "laser" = 45, "energy" = 45, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 50, "wound" = 40)
+	armor_list = list("melee" = 25, "bullet" = 15, "laser" = 45, "energy" = 45, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 50, "wound" = 40)
 
 /obj/item/clothing/suit/armor/light/vest/russian
 	name = "russian vest"
@@ -340,7 +340,7 @@
 	max_integrity = 250
 	resistance_flags = NONE
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS
-	armor = null
+	armor_list = null
 	blood_overlay_type = "armor"
 
 	var/list/protected_zones = list(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)

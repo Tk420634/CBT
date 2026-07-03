@@ -107,7 +107,7 @@
 	icon_state = "blindone"
 	icon_living = "blindone"
 	icon_dead = "trog_dead"
-	mob_armor = ARMOR_VALUE_DEATHCLAW_MOTHER
+	armor_list = ARMOR_VALUE_DEATHCLAW_MOTHER
 	gender = FEMALE
 	resize = 1.3
 	alpha = 150

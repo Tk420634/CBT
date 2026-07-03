@@ -4,7 +4,7 @@
 	max_integrity = 200
 	integrity_failure = 0.4
 	block_priority = BLOCK_PRIORITY_CLOTHING
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 	var/damaged_clothes = CLOTHING_PRISTINE //similar to machine's BROKEN stat and structure's broken var
 	var/flash_protect = 0		//What level of bright light protection item has. 1 = Flashers, Flashes, & Flashbangs | 2 = Welding | -1 = OH GOD WELDING BURNT OUT MY RETINAS
 	var/tint = 0				//Sets the item's level of visual impairment tint, normally set to the same as flash_protect
@@ -84,7 +84,7 @@
 	
 	if (!islist(armor))
 		return // if it doesn't even have an armor datum, don't try to apply tokens to it
-	var/list/armorlist = alist(armor)
+	var/list/armorlist = list(armor)
 	for(var/list/token in armor_tokens)
 		for(var/modifier in token)
 			switch(GLOB.armor_token_operation_legend[modifier])

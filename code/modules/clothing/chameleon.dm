@@ -279,7 +279,7 @@ CHAMELEON_CLOTHING_DEFINE(/obj/item/clothing/under/chameleon)
 	random_sensor = FALSE
 	resistance_flags = NONE
 	can_adjust = FALSE
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 
 	var/datum/action/item_action/chameleon/change/chameleon_action
 
@@ -314,7 +314,7 @@ CHAMELEON_CLOTHING_DEFINE(/obj/item/clothing/suit/chameleon)
 	inhand_icon_state = "armor"
 	blood_overlay_type = "armor"
 	resistance_flags = NONE
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 	var/datum/action/item_action/chameleon/change/chameleon_action
 
@@ -353,7 +353,7 @@ CHAMELEON_CLOTHING_DEFINE(/obj/item/clothing/suit/chameleon)
 	max_integrity = 100
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/armor
 	slowdown = 0
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 	stiffness = 0
 	w_class = WEIGHT_CLASS_SMALL
 
@@ -363,7 +363,7 @@ CHAMELEON_CLOTHING_DEFINE(/obj/item/clothing/suit/chameleon)
 	icon_state = "gear_harness"
 	inhand_icon_state = "gear_harness"
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/small/four
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 	armor_tier_desc = ARMOR_CLOTHING_DESC
 	slowdown = ARMOR_SLOWDOWN_NONE
 
@@ -383,7 +383,7 @@ CHAMELEON_CLOTHING_DEFINE(/obj/item/clothing/suit/chameleon)
 	max_integrity = 100
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 	slowdown = ARMOR_SLOWDOWN_LIGHT * ARMOR_SLOWDOWN_GLOBAL_MULT
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_BULLET_T1, ARMOR_MODIFIER_UP_MELEE_T1, ARMOR_MODIFIER_UP_LASER_T1, ARMOR_MODIFIER_UP_ENERGY_T1, ARMOR_MODIFIER_UP_ENV_T1, ARMOR_MODIFIER_UP_BOMB_T1)
 	armor_tier_desc = ARMOR_CLOTHING_LIGHT
 	stiffness = LIGHT_STIFFNESS
@@ -402,7 +402,7 @@ CHAMELEON_CLOTHING_DEFINE(/obj/item/clothing/suit/chameleon)
 	max_integrity = 200
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 	slowdown = ARMOR_SLOWDOWN_MEDIUM * ARMOR_SLOWDOWN_GLOBAL_MULT
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	armor_tokens = list(ARMOR_MODIFIER_UP_BULLET_T2, ARMOR_MODIFIER_UP_MELEE_T2, ARMOR_MODIFIER_UP_LASER_T2, ARMOR_MODIFIER_UP_ENERGY_T2, ARMOR_MODIFIER_UP_ENV_T2, ARMOR_MODIFIER_UP_BOMB_T2, ARMOR_MODIFIER_UP_DT_T1)
 	armor_tier_desc = ARMOR_CLOTHING_MEDIUM
 	stiffness = MEDIUM_STIFFNESS
@@ -416,7 +416,7 @@ CHAMELEON_CLOTHING_DEFINE(/obj/item/clothing/suit/chameleon)
 	max_integrity = 300
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 	slowdown = ARMOR_SLOWDOWN_HEAVY * ARMOR_SLOWDOWN_GLOBAL_MULT
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	armor_tokens = list(ARMOR_MODIFIER_UP_BULLET_T2, ARMOR_MODIFIER_UP_MELEE_T2, ARMOR_MODIFIER_UP_LASER_T2, ARMOR_MODIFIER_UP_ENERGY_T2, ARMOR_MODIFIER_UP_ENV_T2, ARMOR_MODIFIER_UP_BOMB_T2, ARMOR_MODIFIER_UP_DT_T2)
 	armor_tier_desc = ARMOR_CLOTHING_HEAVY
 	stiffness = HEAVY_STIFFNESS
@@ -428,7 +428,7 @@ CHAMELEON_CLOTHING_DEFINE(/obj/item/clothing/glasses/chameleon)
 	icon_state = "meson"
 	inhand_icon_state = "meson"
 	resistance_flags = NONE
-	armor = ARMOR_VALUE_ZERO
+	armor_list = ARMOR_VALUE_ZERO
 
 	var/datum/action/item_action/chameleon/change/chameleon_action
 
@@ -457,7 +457,7 @@ CHAMELEON_CLOTHING_DEFINE(/obj/item/clothing/gloves/chameleon)
 	inhand_icon_state = "ygloves"
 
 	resistance_flags = NONE
-	armor = ARMOR_VALUE_ZERO
+	armor_list = ARMOR_VALUE_ZERO
 
 	var/datum/action/item_action/chameleon/change/chameleon_action
 
@@ -488,7 +488,7 @@ CHAMELEON_CLOTHING_DEFINE(/obj/item/clothing/head/chameleon)
 	icon_state = "greysoft"
 
 	resistance_flags = NONE
-	armor = ARMOR_VALUE_ZERO
+	armor_list = ARMOR_VALUE_ZERO
 
 	var/datum/action/item_action/chameleon/change/chameleon_action
 
@@ -513,7 +513,7 @@ CHAMELEON_CLOTHING_DEFINE(/obj/item/clothing/head/chameleon)
 /obj/item/clothing/head/chameleon/drone
 	// The camohat, I mean, holographic hat projection, is part of the
 	// drone itself.
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	// which means it offers no protection, it's just air and light
 
 /obj/item/clothing/head/chameleon/drone/Initialize()
@@ -531,7 +531,7 @@ CHAMELEON_CLOTHING_DEFINE(/obj/item/clothing/mask/chameleon)
 	icon_state = "gas_alt"
 	inhand_icon_state = "gas_alt"
 	resistance_flags = NONE
-	armor = ARMOR_VALUE_ZERO
+	armor_list = ARMOR_VALUE_ZERO
 	clothing_flags = BLOCK_GAS_SMOKE_EFFECT | ALLOWINTERNALS
 	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE|HIDEFACIALHAIR
 	gas_transfer_coefficient = 0.01
@@ -566,7 +566,7 @@ CHAMELEON_CLOTHING_DEFINE(/obj/item/clothing/mask/chameleon)
 
 /obj/item/clothing/mask/chameleon/drone
 	//Same as the drone chameleon hat, undroppable and no protection
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	// Can drones use the voice changer part? Let's not find out.
 	voice_change = 0
 
@@ -588,7 +588,7 @@ CHAMELEON_CLOTHING_DEFINE(/obj/item/clothing/shoes/chameleon)
 	desc = "A pair of black shoes."
 	permeability_coefficient = 0.05
 	resistance_flags = NONE
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/shoes
 
 	var/datum/action/item_action/chameleon/change/chameleon_action
@@ -729,7 +729,7 @@ CHAMELEON_CLOTHING_DEFINE(/obj/item/clothing/neck/cloak/chameleon)
 	icon = 'icons/obj/clothing/neck.dmi'
 	icon_state = "blacktie"
 	resistance_flags = NONE
-	armor = ARMOR_VALUE_ZERO
+	armor_list = ARMOR_VALUE_ZERO
 
 /obj/item/clothing/neck/cloak/chameleon
 	var/datum/action/item_action/chameleon/change/chameleon_action

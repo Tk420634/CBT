@@ -18,7 +18,7 @@
 	throw_speed = 3
 	throw_range = 5
 	w_class = WEIGHT_CLASS_SMALL
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	resistance_flags = FIRE_PROOF
 	light_system = MOVABLE_LIGHT
 	light_range = 2

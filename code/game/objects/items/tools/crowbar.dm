@@ -22,7 +22,7 @@
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 	tool_behaviour = TOOL_CROWBAR
 	toolspeed = 1
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 
 	wound_bonus = -10
 	bare_wound_bonus = 5

@@ -10,7 +10,7 @@
 	slowdown = 0
 	actions_types = list(/datum/action/item_action/toggle_mister)
 	max_integrity = 200
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	resistance_flags = FIRE_PROOF
 
 	var/obj/item/noz

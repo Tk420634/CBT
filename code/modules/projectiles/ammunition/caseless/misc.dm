@@ -52,7 +52,7 @@
 	attack_verb = list("attacked", "bashed", "brained", "thunked", "clobbered")
 	attack_speed = CLICK_CD_MELEE
 	max_integrity = 200
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	caliber = CALIBER_ROCK
 	projectile_type = /obj/item/projectile/rock
 	is_pickable = TRUE
@@ -76,7 +76,7 @@
 	attack_verb = list("attacked", "bashed", "brained", "thunked", "clobbered")
 	attack_speed = CLICK_CD_MELEE
 	max_integrity = 200
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	caliber = CALIBER_BRICK
 	projectile_type = /obj/item/projectile/brick
 	is_pickable = TRUE

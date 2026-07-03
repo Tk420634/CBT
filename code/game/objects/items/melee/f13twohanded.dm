@@ -9,7 +9,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = INV_SLOTBIT_BELT | INV_SLOTBIT_BACK
 	max_integrity = 200
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	var/icon_prefix = null
 	block_parry_data = /datum/block_parry_data/bokken
 	item_flags = ITEM_CAN_PARRY
@@ -194,7 +194,7 @@
 	attack_verb = list("attacked", "impaled", "jabbed", "torn", "gored")
 	sharpness = SHARP_POINTY
 	max_integrity = 200
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	wound_bonus = 20
 	bare_wound_bonus = 10
 	wielded_icon = "spear-metal2"

@@ -562,7 +562,7 @@
 	flags_1 = CONDUCT_1
 	turf_type = /turf/open/floor/plasteel
 	mineralType = "metal"
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	resistance_flags = FIRE_PROOF
 	merge_type = /obj/item/stack/tile/plasteel
 

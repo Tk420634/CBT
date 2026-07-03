@@ -26,7 +26,7 @@ fi
 if ! ( [ -x "$has_git" ] && [ -x "$has_grep" ] && [ -f "/usr/lib/i386-linux-gnu/libssl.so" ] ); then
 	dpkg --add-architecture i386
 	apt-get update
-	apt-get install -y lib32z1 git pkg-config libssl-dev:i386 libssl-dev libssl1.1:i386
+	apt-get install -y lib32z1 git pkg-config libssl-dev:i386 libssl-dev libssl1.1:i386 curl:i386
 fi
 
 # install yt-dlp when not present

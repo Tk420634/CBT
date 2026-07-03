@@ -11,7 +11,7 @@
 	CanAtmosPass = ATMOS_PASS_PROC
 	var/point_return = 0 //How many points the blob gets back when it removes a blob of that type. If less than 0, blob cannot be removed.
 	max_integrity = 30
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	var/health_regen = 2 //how much health this blob regens when pulsed
 	var/pulse_timestamp = 0 //we got pulsed when?
 	var/heal_timestamp = 0 //we got healed when?

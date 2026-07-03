@@ -6,7 +6,7 @@
 	blood_overlay_type = "coat"
 	body_parts_covered = CHEST|ARMS
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/medical
-	armor = list("melee" = 10, "bullet" = 10, "laser" = 25,"energy" = 15, "bomb" = 10, "bio" = 70, "rad" = 20, "fire" = 50, "acid" = 50)
+	armor_list = list("melee" = 10, "bullet" = 10, "laser" = 25,"energy" = 15, "bomb" = 10, "bio" = 70, "rad" = 20, "fire" = 50, "acid" = 50)
 	togglename = "buttons"
 	species_exception = list(/datum/species/golem)
 
@@ -84,11 +84,11 @@
 	name = "fieldscribe suit"
 	desc = "A heavy-duty coat and chestrig fitted with tons of pockets. Ballistic weave and ceramic inserts are included to substantially increase Field Scribe survival rates."
 	icon_state = "fieldscribe"
-	armor = list("melee" = 25, "bullet" = 35, "laser" = 35, "energy" = 20, "bomb" = 50, "bio" = 60, "rad" = 10, "fire" = 60, "acid" = 20)
+	armor_list = list("melee" = 25, "bullet" = 35, "laser" = 35, "energy" = 20, "bomb" = 50, "bio" = 60, "rad" = 10, "fire" = 60, "acid" = 20)
 
 /obj/item/clothing/suit/toggle/labcoat/scribecoat
 	name = "fieldscribe coat"
 	desc = "A heavy-duty coat and chestrig fitted with tons of pockets. Ballistic weave and ceramic inserts are included to substantially increase Field Scribe survival rates."
 	icon_state = "scribecoat"
-	armor = list("melee" = 25, "bullet" = 35, "laser" = 35, "energy" = 20, "bomb" = 50, "bio" = 60, "rad" = 10, "fire" = 60, "acid" = 20)
+	armor_list = list("melee" = 25, "bullet" = 35, "laser" = 35, "energy" = 20, "bomb" = 50, "bio" = 60, "rad" = 10, "fire" = 60, "acid" = 20)
  */

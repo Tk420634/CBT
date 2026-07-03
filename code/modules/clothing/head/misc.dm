@@ -6,7 +6,7 @@
 	desc = "It's good to be emperor."
 	inhand_icon_state = "that"
 	flags_inv = 0
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	strip_delay = 80
 
 /obj/item/clothing/head/powdered_wig
@@ -50,7 +50,7 @@
 	name = "plague doctor's hat"
 	desc = "These were once used by plague doctors. They're pretty much useless."
 	icon_state = "plaguedoctor"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T3)
 	permeability_coefficient = 0.01
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/small/rushelmet
@@ -69,7 +69,7 @@
 	desc = "It allows quick identification of trained medical personnel."
 	icon_state = "nursehat"
 	dynamic_hair_suffix = ""
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T1)
 	dog_fashion = /datum/dog_fashion/head/nurse
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/small/rushelmet
@@ -316,7 +316,7 @@
 	name = "crown"
 	desc = "A crown fit for a king, a petty king maybe."
 	icon_state = "crown"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	resistance_flags = FIRE_PROOF
 	dynamic_hair_suffix = ""
 	beepsky_fashion = /datum/beepsky_fashion/king
@@ -484,14 +484,14 @@
 	desc = "Ain't nobody gonna cheat the hangman in my town."
 	icon_state = "hunter"
 	inhand_icon_state = "hunter"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/small/rushelmet
 
 /obj/item/clothing/head/kepi
 	name = "kepi"
 	desc = "A white cap with visor. Oui oui, mon capitane!"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	icon_state = "kepi"
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/small/rushelmet
 

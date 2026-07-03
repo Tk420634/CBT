@@ -4,7 +4,7 @@
 	icon = 'icons/mecha/neovgre.dmi'
 	icon_state = "neovgre"
 	max_integrity = 500 //This is THE ratvarian superweaon, its deployment is an investment
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	force = 50 //SMASHY SMASHY!!
 	internal_damage_threshold = 0
 	step_in = 3

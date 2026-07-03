@@ -351,14 +351,14 @@
 	name = "bone talisman"
 	desc = "A hunter's talisman, some say the old gods smile on those who wear it."
 	icon_state = "talisman"
-	armor = list("linemelee" = 1, "linebullet" = 1, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 5, "fire" = 0, "acid" = 0)
+	armor_list = list("linemelee" = 1, "linebullet" = 1, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 5, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/accessory/skullcodpiece
 	name = "skull codpiece"
 	desc = "A skull shaped ornament, intended to protect the important things in life."
 	icon_state = "skull"
 	above_suit = TRUE
-	armor = list("linemelee" = 1, "linebullet" = 1, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 5, "fire" = 0, "acid" = 0)
+	armor_list = list("linemelee" = 1, "linebullet" = 1, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 5, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/accessory/skullcodpiece/fake
 	name = "false codpiece"
@@ -374,14 +374,14 @@
 	name = "protective padding"
 	desc = "A soft padding meant to cushion the wearer from melee harm."
 	icon_state = "padding"
-	armor = list("linemelee" = 40, "linebullet" = 20, "laser" = 0, "energy" = 0, "bomb" = 5, "bio" = 0, "rad" = 0, "fire" = -20, "acid" = 45)
+	armor_list = list("linemelee" = 40, "linebullet" = 20, "laser" = 0, "energy" = 0, "bomb" = 5, "bio" = 0, "rad" = 0, "fire" = -20, "acid" = 45)
 	flags_inv = HIDEACCESSORY //hidden from indiscrete mob examines.
 
 /obj/item/clothing/accessory/kevlar
 	name = "kevlar padding"
 	desc = "A layered kevlar padding meant to cushion the wearer from ballistic harm."
 	icon_state = "padding"
-	armor = list("linemelee" = 20, "linebullet" = 40, "laser" = 0, "energy" = 0, "bomb" = 10, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 25)
+	armor_list = list("linemelee" = 20, "linebullet" = 40, "laser" = 0, "energy" = 0, "bomb" = 10, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 25)
 	flags_inv = HIDEACCESSORY
 
 /obj/item/clothing/accessory/plastics
@@ -916,7 +916,7 @@
 	icon_state = "heart"
 	minimize_when_attached = FALSE
 	item_flags = DROPDEL | ABSTRACT | HAND_ITEM
-	armor = list("bio" = 0, "rad" = 0, "acid" = 0)
+	armor_list = list("bio" = 0, "rad" = 0, "acid" = 0)
 
 /obj/item/clothing/accessory/looking
 	name = "looking for a group"
@@ -925,7 +925,7 @@
 	icon_state = "looking"
 	minimize_when_attached = FALSE
 	item_flags = DROPDEL | ABSTRACT | HAND_ITEM
-	armor = list("bio" = 0, "rad" = 0, "acid" = 0)
+	armor_list = list("bio" = 0, "rad" = 0, "acid" = 0)
 
 /obj/item/clothing/accessory/melee
 	name = "melee specialist"
@@ -934,7 +934,7 @@
 	icon_state = "melee"
 	minimize_when_attached = FALSE
 	item_flags = DROPDEL | ABSTRACT | HAND_ITEM
-	armor = list("bio" = 0, "rad" = 0, "acid" = 0)
+	armor_list = list("bio" = 0, "rad" = 0, "acid" = 0)
 
 /obj/item/clothing/accessory/ranged
 	name = "ranged specialist"
@@ -943,7 +943,7 @@
 	icon_state = "ranged"
 	minimize_when_attached = FALSE
 	item_flags = DROPDEL | ABSTRACT | HAND_ITEM
-	armor = list("bio" = 0, "rad" = 0, "acid" = 0)
+	armor_list = list("bio" = 0, "rad" = 0, "acid" = 0)
 
 /obj/item/clothing/accessory/newbsprout
 	name = "new sprout"
@@ -952,7 +952,7 @@
 	icon_state = "sprout"
 	minimize_when_attached = FALSE
 	item_flags = DROPDEL | ABSTRACT | HAND_ITEM
-	armor = list("bio" = 0, "rad" = 0, "acid" = 0)
+	armor_list = list("bio" = 0, "rad" = 0, "acid" = 0)
 
 /obj/item/clothing/accessory/mentorcrown
 	name = "mentor crown"
@@ -961,7 +961,7 @@
 	icon_state = "crown"
 	minimize_when_attached = FALSE
 	item_flags = DROPDEL | ABSTRACT | HAND_ITEM
-	armor = list("bio" = 0, "rad" = 0, "acid" = 0)
+	armor_list = list("bio" = 0, "rad" = 0, "acid" = 0)
 
 /obj/item/clothing/accessory/healer
 	name = "support specialist"
@@ -970,7 +970,7 @@
 	icon_state = "healer"
 	minimize_when_attached = FALSE
 	item_flags = DROPDEL | ABSTRACT | HAND_ITEM
-	armor = list("bio" = 0, "rad" = 0, "acid" = 0)
+	armor_list = list("bio" = 0, "rad" = 0, "acid" = 0)
 
 /obj/item/clothing/accessory/pvpindicator
 	name = "PVP Intent"
@@ -979,7 +979,7 @@
 	icon_state = "antag"
 	minimize_when_attached = FALSE
 	item_flags = DROPDEL | ABSTRACT | HAND_ITEM
-	armor = list("bio" = 0, "rad" = 0, "acid" = 0)
+	armor_list = list("bio" = 0, "rad" = 0, "acid" = 0)
 
 /obj/item/clothing/accessory/tank
 	name = "tank specialist"
@@ -988,7 +988,7 @@
 	icon_state = "shield"
 	minimize_when_attached = FALSE
 	item_flags = DROPDEL | ABSTRACT | HAND_ITEM
-	armor = list("bio" = 0, "rad" = 0, "acid" = 0)
+	armor_list = list("bio" = 0, "rad" = 0, "acid" = 0)
 
 
 //Bracelets, Anklets and other random shit//

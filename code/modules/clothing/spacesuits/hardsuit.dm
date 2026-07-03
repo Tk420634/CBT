@@ -5,7 +5,7 @@ armor	//Baseline hardsuits
 	icon_state = "hardsuit0-engineering"
 	inhand_icon_state = "eng_helm"
 	max_integrity = 300
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	light_system = MOVABLE_LIGHT
 	light_range = 4
 	light_on = FALSE
@@ -107,7 +107,7 @@ armor	//Baseline hardsuits
 	clothing_flags = THICKMATERIAL
 	w_class = WEIGHT_CLASS_NORMAL
 	slowdown = ARMOR_SLOWDOWN_MEDIUM * ARMOR_SLOWDOWN_GLOBAL_MULT
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	armor_tier_desc = ARMOR_CLOTHING_MEDIUM
 	stiffness = MEDIUM_STIFFNESS
 	var/obj/item/clothing/head/helmet/space/hardsuit/helmet
@@ -668,7 +668,7 @@ armor	//Baseline hardsuits
 	inhand_icon_state = "rig0-soviet"
 	hardsuit_type = "soviet"
 	icon_state = "rig0-soviet"
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	mutantrace_variation = NONE
 	armor_tokens = list(ARMOR_MODIFIER_UP_BULLET_T2, ARMOR_MODIFIER_UP_MELEE_T2, ARMOR_MODIFIER_UP_LASER_T2, ARMOR_MODIFIER_UP_DT_T3)
 
@@ -679,7 +679,7 @@ armor	//Baseline hardsuits
 	desc = "Crafted with the pride of the proletariat. The last thing the enemy sees is the bottom of this armor's boot."
 	inhand_icon_state = "rig-soviet"
 	icon_state = "rig-soviet"
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	armor_tier_desc = ARMOR_CLOTHING_MEDIUM
 	slowdown = ARMOR_SLOWDOWN_MEDIUM * ARMOR_SLOWDOWN_MORE_T1 * ARMOR_SLOWDOWN_GLOBAL_MULT
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/soviet
@@ -796,7 +796,7 @@ armor	//Baseline hardsuits
 	hardsuit_type = "syndi"
 	max_charges = 4
 	recharge_delay = 15
-	armor = ARMOR_VALUE_PA
+	armor_list = ARMOR_VALUE_PA
 	strip_delay = 130
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/shielded/swat
@@ -808,7 +808,7 @@ armor	//Baseline hardsuits
 	icon_state = "deathsquad"
 	inhand_icon_state = "deathsquad"
 	hardsuit_type = "syndi"
-	armor = ARMOR_VALUE_PA
+	armor_list = ARMOR_VALUE_PA
 	strip_delay = 130
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	actions_types = list()
@@ -826,7 +826,7 @@ armor	//Baseline hardsuits
 	max_heat_protection_temperature = FIRE_SUIT_MAX_TEMP_PROTECT
 	resistance_flags = FIRE_PROOF | LAVA_PROOF
 	heat_protection = HEAD
-	armor = list(melee = 50, bullet = 10, laser = 10, energy = 10, bomb = 50, bio = 100, rad = 50, fire = 100, acid = 100, "wound" = 30)
+	armor_list = list(melee = 50, bullet = 10, laser = 10, energy = 10, bomb = 50, bio = 100, rad = 50, fire = 100, acid = 100, "wound" = 30)
 	light_range = 7
 	var/energy_color = "#35FFF0"
 	var/obj/item/clothing/suit/space/hardsuit/lavaknight/linkedsuit = null

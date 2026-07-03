@@ -71,7 +71,7 @@
 	name = "worn boots"
 	desc = "A pair of slightly worn, steel-toed work boots.<br>Good at keeping toes safe from falling junk you find amid the ruins."
 	icon_state = "explorer"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	mutantrace_variation = STYLE_DIGITIGRADE
 
 /obj/item/clothing/shoes/f13/raidertreads
@@ -86,7 +86,7 @@
 	desc = "Fancy mens' steel-toed boots."
 	icon_state = "diesel_m"
 	inhand_icon_state = "diesel_m"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T1)
 	cold_protection = FEET
 	min_cold_protection_temperature = SHOES_MIN_TEMP_PROTECT
@@ -104,7 +104,7 @@
 	icon_state = "military"
 	inhand_icon_state = "military"
 	permeability_coefficient = 0.05
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_MELEE_T3, ARMOR_MODIFIER_DOWN_LASER_T1)
 	strip_delay = 40
 	resistance_flags = NONE
@@ -119,7 +119,7 @@
 	desc = "A pair of laced, heavy-duty leather boots designed for hard combat."
 	icon_state = "laced"
 	inhand_icon_state = "laced"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T2)
 
 /obj/item/clothing/shoes/f13/military/desert
@@ -163,7 +163,7 @@
 	desc = "These boots are made from tanned hide and lined with soft long horner wool. A fashion from wealthy tribes that has spread. "
 	icon = 'icons/fallout/clothing/shoes.dmi'
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/shoe.dmi'
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_MELEE_T2, ARMOR_MODIFIER_DOWN_LASER_T3, ARMOR_MODIFIER_DOWN_BULLET_T3)
 	icon_state = "legion_pelt"
 	inhand_icon_state = "legion_pelt"
@@ -175,7 +175,7 @@
 	name = "rough leather boots"
 	desc = "A pair of crudely made leather boots, followng the standardized pattern laid down according to the wisdom of Caesar."
 	icon = 'icons/fallout/clothing/shoes.dmi'
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_MELEE_T2, ARMOR_MODIFIER_DOWN_LASER_T3, ARMOR_MODIFIER_DOWN_BULLET_T3)
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/shoe.dmi'
 	icon_state = "legion_leather"
@@ -188,7 +188,7 @@
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/shoe.dmi'
 	icon_state = "legion_war"
 	inhand_icon_state = "legion_war"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T1)
 
 /obj/item/clothing/shoes/f13/military/legate
@@ -198,7 +198,7 @@
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/shoe.dmi'
 	icon_state = "legion_legate"
 	inhand_icon_state = "legion_legate"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T1, ARMOR_MODIFIER_UP_BULLET_T1, ARMOR_MODIFIER_DOWN_LASER_T3 )
 
 // ---------------------------------------------------------
@@ -310,7 +310,7 @@
 	desc = "Heavy-duty work boots with steel-reinforced toes and some fluffy wool for extra warmth."
 	icon_state = "miner"
 	inhand_icon_state = "miner"
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T1)
 	cold_protection = FEET
 	min_cold_protection_temperature = SHOES_MIN_TEMP_PROTECT
@@ -332,7 +332,7 @@
 	name = "super mutant boots"
 	desc = "A pair of oversized boots."
 	icon_state = "mutie_boots"
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	armor_tokens = list(ARMOR_MODIFIER_UP_MELEE_T1)
 	cold_protection = FEET
 

@@ -18,5 +18,5 @@
 					/obj/item/reagent_containers/glass/bowl = 20)
 	contraband = list(/obj/item/kitchen/rollingpin = 2,
 					  /obj/item/kitchen/knife/butcher = 2)
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	resistance_flags = FIRE_PROOF

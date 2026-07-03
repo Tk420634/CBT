@@ -17,7 +17,7 @@
 	contraband = list(/obj/item/reagent_containers/pill/tox = 2,
 					/obj/item/reagent_containers/pill/morphine = 2)
 	premium = list(/obj/item/reagent_containers/medspray/synthflesh = 2)
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	resistance_flags = FIRE_PROOF
 	refill_canister = /obj/item/vending_refill/wallmed
 	default_price = PRICE_FREE

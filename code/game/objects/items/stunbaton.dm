@@ -13,7 +13,7 @@
 	throwforce = 21
 	w_class = WEIGHT_CLASS_NORMAL
 	attack_verb = list("beaten")
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	attack_speed = CLICK_CD_MELEE
 
 	var/stamforce = 35

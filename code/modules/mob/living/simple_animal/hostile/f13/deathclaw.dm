@@ -11,7 +11,7 @@
 	icon_living = "deathclaw"
 	icon_dead = "deathclaw_dead"
 	icon_gib = "deathclaw_gib"
-	mob_armor = ARMOR_VALUE_DEATHCLAW_COMMON
+	armor_list = ARMOR_VALUE_DEATHCLAW_COMMON
 	alpha = 200
 	maxHealth = 250
 	health = 250
@@ -156,7 +156,7 @@
 	name = "mother aethergiest"
 	desc = "A massive, reptilian creature with powerful muscles, razor-sharp claws, and aggression to match. This one is an angry mother."
 	gender = FEMALE
-	mob_armor = ARMOR_VALUE_DEATHCLAW_MOTHER
+	armor_list = ARMOR_VALUE_DEATHCLAW_MOTHER
 	maxHealth = 400 // 500 is double 250, so 100 points less than double
 	health = 400
 	melee_damage_lower = 25
@@ -179,7 +179,7 @@
 	icon_living = "deathclaw"
 	icon_dead = "deathclaw_dead"
 	icon_gib = "deathclaw_gib"
-	mob_armor = ARMOR_VALUE_DEATHCLAW_COMMON
+	armor_list = ARMOR_VALUE_DEATHCLAW_COMMON
 	maxHealth = 250
 	health = 250
 	reach = 2
@@ -313,7 +313,7 @@
 	name = "mother aethergiest"
 	desc = "A massive, reptilian creature with powerful muscles, razor-sharp claws. This one is an BIG mother."
 	gender = FEMALE
-	mob_armor = ARMOR_VALUE_DEATHCLAW_MOTHER
+	armor_list = ARMOR_VALUE_DEATHCLAW_MOTHER
 	maxHealth = 400
 	health = 400
 	melee_damage_lower = 25
@@ -393,7 +393,7 @@
 /mob/living/simple_animal/hostile/aethergiest/legendary
 	name = "legendary aethergiest"
 	desc = "A massive, reptilian creature with powerful muscles, razor-sharp claws, and aggression to match. This one is a legendary enemy."
-	mob_armor = ARMOR_VALUE_DEATHCLAW_MOTHER
+	armor_list = ARMOR_VALUE_DEATHCLAW_MOTHER
 	maxHealth = 600 // Double regular one with some change.
 	health = 600
 	color = "#FFFF00"
@@ -419,7 +419,7 @@
 	icon_state = "combatclaw"
 	icon_living = "combatclaw"
 	icon_dead = "combatclaw_dead"
-	mob_armor = ARMOR_VALUE_DEATHCLAW_PA // ha get fucked
+	armor_list = ARMOR_VALUE_DEATHCLAW_PA // ha get fucked
 	maxHealth = 1000 // ha get turbofucked
 	health = 1000
 	melee_damage_lower = 40

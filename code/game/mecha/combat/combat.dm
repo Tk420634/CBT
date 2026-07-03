@@ -1,7 +1,7 @@
 /obj/mecha/combat
 	force = 30
 	internal_damage_threshold = 50
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	mouse_pointer = 'icons/mecha/mecha_mouse.dmi'
 	deflect_chance = 0
 	max_equip = 4

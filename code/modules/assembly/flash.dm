@@ -265,7 +265,7 @@
 	custom_materials = list(/datum/material/glass=7500, /datum/material/iron=1000)
 	attack_verb = list("shoved", "bashed")
 	block_chance = 50
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 
 /obj/item/assembly/flash/shield/flash_recharge(interval=10)
 	if(times_used >= 4)

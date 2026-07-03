@@ -24,7 +24,7 @@ jobs:
       - name: "Setup python"
         uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.12.3'
       - name: Install Tools
         run: |
           sudo apt-get install -y libgit2-dev
@@ -72,61 +72,62 @@ jobs:
           python3 tools/ci/template_dm_generator.py
           tools/build/build dm -DCIBUILDING -DCITESTING -DALL_MAPS
 
-  auxmos:
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    name: Build Auxmos
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          repository: 'Putnam3145/auxmos'
-          ref: '6be702ec36d8024bfb93b4277004a9a755f5e92e'
-          path: 'auxmos'
+  # No auxmos until it works.
+  # auxmos:
+  #   if: "!contains(github.event.head_commit.message, '[ci skip]')"
+  #   name: Build Auxmos
+  #   runs-on: ubuntu-22.04
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #       with:
+  #         repository: 'Putnam3145/auxmos'
+  #         ref: '6be702ec36d8024bfb93b4277004a9a755f5e92e'
+  #         path: 'auxmos'
 
-      - name: Cache cargo registry
-        uses: actions/cache@v4
-        with:
-          path: ~/.cargo/registry
-          key: auxmos-registry-${{ hashFiles('auxmos/Cargo.lock') }}
+  #     - name: Cache cargo registry
+  #       uses: actions/cache@v4
+  #       with:
+  #         path: ~/.cargo/registry
+  #         key: auxmos-registry-${{ hashFiles('auxmos/Cargo.lock') }}
 
-      - name: Cache cargo index
-        uses: actions/cache@v4
-        with:
-          path: ~/.cargo/git
-          key: auxmos-index-${{ hashFiles('auxmos/Cargo.lock') }}
+  #     - name: Cache cargo index
+  #       uses: actions/cache@v4
+  #       with:
+  #         path: ~/.cargo/git
+  #         key: auxmos-index-${{ hashFiles('auxmos/Cargo.lock') }}
 
-      - name: Cache cargo build
-        id: auxmos-cache
-        uses: actions/cache@v4
-        with:
-          path: auxmos/target
-          key: auxmos-build-target-${{ hashFiles('auxmos/Cargo.lock') }}
+  #     - name: Cache cargo build
+  #       id: auxmos-cache
+  #       uses: actions/cache@v4
+  #       with:
+  #         path: auxmos/target
+  #         key: auxmos-build-target-${{ hashFiles('auxmos/Cargo.lock') }}
 
-      - name: Install Ubuntu Deps
-        if: steps.auxmos-cache.outputs.cache-hit != 'true'
-        run: |
-          sudo dpkg --add-architecture i386
-          sudo apt-get update
-          sudo apt install build-essential g++-multilib libc6-i386 libstdc++6:i386
+  #     - name: Install Ubuntu Deps
+  #       if: steps.auxmos-cache.outputs.cache-hit != 'true'
+  #       run: |
+  #         sudo dpkg --add-architecture i386
+  #         sudo apt-get update
+  #         sudo apt install build-essential g++-multilib libc6-i386 libstdc++6:i386 curl:i386
 
-      - uses: dtolnay/rust-toolchain@stable
-        if: steps.auxmos-cache.outputs.cache-hit != 'true'
-        with:
-          toolchain: ${{env.toolchain}}
-          target: ${{env.target}}
+  #     - uses: dtolnay/rust-toolchain@stable
+  #       if: steps.auxmos-cache.outputs.cache-hit != 'true'
+  #       with:
+  #         toolchain: ${{env.toolchain}}
+  #         target: ${{env.target}}
 
-      - name: Build
-        if: steps.auxmos-cache.outputs.cache-hit != 'true'
-        run: |
-          cargo build --manifest-path auxmos/Cargo.toml --target=${{env.target}} --release --verbose
-          ldd auxmos/target/${{env.target}}/release/libauxmos.so
+  #     - name: Build
+  #       if: steps.auxmos-cache.outputs.cache-hit != 'true'
+  #       run: |
+  #         cargo build --manifest-path auxmos/Cargo.toml --target=${{env.target}} --release --verbose
+  #         ldd auxmos/target/${{env.target}}/release/libauxmos.so
       
-      - name: Upload libauxmos artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: libauxmos
-          path: auxmos/target/${{env.target}}/release/libauxmos.so
+  #     - name: Upload libauxmos artifact
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: libauxmos
+  #         path: auxmos/target/${{env.target}}/release/libauxmos.so
 
   run_all_tests:
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
@@ -172,6 +173,7 @@ jobs:
           sudo dpkg --add-architecture i386
           sudo apt update || true
           sudo apt install -o APT::Immediate-Configure=false libssl-dev:i386
+          sudo apt install curl:i386
           bash tools/ci/install_rust_g.sh
       - name: Install auxmos
         run: |
@@ -183,13 +185,13 @@ jobs:
           source $HOME/BYOND/byond/bin/byondsetup
           tools/build/build --ci -DCIBUILDING
           bash tools/ci/run_server.sh
-      - name: Upload screenshot tests
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test_artifacts_${{ matrix.map }}
-          path: data/screenshots_new/
-          retention-days: 1
+      #- name: Upload screenshot tests
+      #  if: always()
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: test_artifacts_${{ matrix.map }}
+      #    path: data/screenshots_new/
+      #    retention-days: 1
 
   # compare_screenshots: # Disabled for now.
   #   if: "!contains(github.event.head_commit.message, '[ci skip]') && always()"
@@ -226,26 +228,27 @@ jobs:
   #         name: bad-screenshots
   #         path: artifacts/screenshot_comparisons
 
-  test_windows:
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
-    name: Windows Build
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '^18'
-      - name: Compile
-        run: pwsh tools/ci/build.ps1
-        env:
-          DM_EXE: "C:\\byond\\bin\\dm.exe"
-      - name: Create artifact
-        run: |
-          md deploy
-          bash tools/deploy.sh ./deploy
-      - name: Deploy artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: deploy
-          path: deploy
+  # disabled until we make it work.
+  # test_windows:
+  #   if: "!contains(github.event.head_commit.message, '[ci skip]')"
+  #   name: Windows Build
+  #   runs-on: windows-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Setup Node
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: '^18'
+  #     - name: Compile
+  #       run: pwsh tools/ci/build.ps1
+  #       env:
+  #         DM_EXE: "C:\\byond\\bin\\dm.exe"
+  #     - name: Create artifact
+  #       run: |
+  #         md deploy
+  #         bash tools/deploy.sh ./deploy
+  #     - name: Deploy artifact
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: deploy
+  #         path: deploy

@@ -173,7 +173,7 @@
 	desc = "A refined suit of power armour, purpose-built by the residents of Vault-115 in order to better keep the peace in their new settlement."
 	icon_state = "vaultpa"
 	inhand_icon_state = "vaultpa"
-	armor = list("melee" = 70, "bullet" = 70, "laser" = 55, "energy" = 50, "bomb" = 50, "bio" = 60, "rad" = 30, "fire" = 65, "acid" = 15, "wound" = 35)
+	armor_list = list("melee" = 70, "bullet" = 70, "laser" = 55, "energy" = 50, "bomb" = 50, "bio" = 60, "rad" = 30, "fire" = 65, "acid" = 15, "wound" = 35)
 	slowdown = 0
 	armor_block_chance = 40
 	deflection_chance = 10 //10% chance to block damage from blockable bullets and redirect the bullet at a random angle. Not a heavy combat model
@@ -184,7 +184,7 @@
 	icon_state = "excavator"
 	inhand_icon_state = "excavator"
 	slowdown = 0.5 //+0.1 from helmet
-	armor = list("melee" = 70, "bullet" = 60, "laser" = 40, "energy" = 35, "bomb" = 45, "bio" = 50, "rad" = 50, "fire" = 60, "acid" = 15, "wound" = 20)
+	armor_list = list("melee" = 70, "bullet" = 60, "laser" = 40, "energy" = 35, "bomb" = 45, "bio" = 50, "rad" = 50, "fire" = 60, "acid" = 15, "wound" = 20)
 	armor_block_chance = 40
 	deflection_chance = 10 //10% chance to block damage from blockable bullets and redirect the bullet at a random angle. Not a heavy combat model
 
@@ -194,7 +194,7 @@
 	icon_state = "t45dpowerarmor"
 	inhand_icon_state = "t45dpowerarmor"
 	slowdown = 0.24
-	armor = list("melee" = 75, "bullet" = 70, "laser" = 45, "energy" = 45, "bomb" = 65, "bio" = 75, "rad" = 80, "fire" = 85, "acid" = 30, "wound" = 40)
+	armor_list = list("melee" = 75, "bullet" = 70, "laser" = 45, "energy" = 45, "bomb" = 65, "bio" = 75, "rad" = 80, "fire" = 85, "acid" = 30, "wound" = 40)
 	armor_block_chance = 50
 	deflection_chance = 10 //20% chance to block damage from blockable bullets and redirect the bullet at a random angle
 
@@ -210,14 +210,14 @@
 	icon_state = "t45dkc"
 	inhand_icon_state = "t45dkc"
 	slowdown = 0.16
-	armor = list("melee" = 75, "bullet" = 70, "laser" = 45, "energy" = 45, "bomb" = 65, "bio" = 75, "rad" = 80, "fire" = 85, "acid" = 30, "wound" = 40)
+	armor_list = list("melee" = 75, "bullet" = 70, "laser" = 45, "energy" = 45, "bomb" = 65, "bio" = 75, "rad" = 80, "fire" = 85, "acid" = 30, "wound" = 40)
 
 /obj/item/clothing/suit/armor/power_armor/midwest
 	name = "midwestern power armor"
 	desc = "This set of power armor once belonged to the Midwestern branch of the Brotherhood of Steel, and now resides here."
 	icon_state = "midwestgrey_pa"
 	inhand_icon_state = "midwestgrey_pa"
-	armor = list("melee" = 75, "bullet" = 70, "laser" = 45, "energy" = 45, "bomb" = 65, "bio" = 75, "rad" = 80, "fire" = 85, "acid" = 30, "wound" = 40)
+	armor_list = list("melee" = 75, "bullet" = 70, "laser" = 45, "energy" = 45, "bomb" = 65, "bio" = 75, "rad" = 80, "fire" = 85, "acid" = 30, "wound" = 40)
 	armor_block_chance = 50
 	deflection_chance = 10 //20% chance to block damage from blockable bullets and redirect the bullet at a random angle
 
@@ -229,7 +229,7 @@
 	slowdown = 0.15 //+0.1 from helmet = total 0.25
 	armor_block_chance = 50
 	deflection_chance = 10 //35% chance to block damage from blockable bullets and redirect the bullet at a random angle. Less overall armor compared to T-60, but higher deflection.
-	armor = list("melee" = 75, "bullet" = 70, "laser" = 50, "energy" = 45, "bomb" = 70, "bio" = 75, "rad" = 80, "fire" = 85, "acid" = 30, "wound" = 45)
+	armor_list = list("melee" = 75, "bullet" = 70, "laser" = 50, "energy" = 45, "bomb" = 70, "bio" = 75, "rad" = 80, "fire" = 85, "acid" = 30, "wound" = 45)
 	armor_block_threshold = 0.35
 	melee_block_threshold = 35
 
@@ -239,7 +239,7 @@
 	icon_state = "t51tesla"
 	inhand_icon_state = "t51tesla"
 	slowdown = 0.15 //+0.1 from helmet = total 0.25
-	armor = list("melee" = 75, "bullet" = 70, "laser" = 50, "energy" = 45, "bomb" = 70, "bio" = 75, "rad" = 80, "fire" = 85, "acid" = 30, "wound" = 45)
+	armor_list = list("melee" = 75, "bullet" = 70, "laser" = 50, "energy" = 45, "bomb" = 70, "bio" = 75, "rad" = 80, "fire" = 85, "acid" = 30, "wound" = 45)
 
 
 /obj/item/clothing/suit/armor/power_armor/t60
@@ -248,7 +248,7 @@
 	icon_state = "t60powerarmor"
 	inhand_icon_state = "t60powerarmor"
 	slowdown = 0.16
-	armor = list("melee" = 75, "bullet" = 75, "laser" = 55, "energy" = 50, "bomb" = 70, "bio" = 80, "rad" = 80, "fire" = 90, "acid" = 30, "wound" = 50)
+	armor_list = list("melee" = 75, "bullet" = 75, "laser" = 55, "energy" = 50, "bomb" = 70, "bio" = 80, "rad" = 80, "fire" = 90, "acid" = 30, "wound" = 50)
 	melee_block_threshold = 40
 	armor_block_threshold = 0.4
 	armor_block_chance = 50
@@ -260,7 +260,7 @@
 	icon_state = "t60tesla"
 	inhand_icon_state = "t60tesla"
 	slowdown = 0.15
-	armor = list("melee" = 75, "bullet" = 75, "laser" = 70, "energy" = 50, "bomb" = 70, "bio" = 80, "rad" = 80, "fire" = 90, "acid" = 30, "wound" = 50)
+	armor_list = list("melee" = 75, "bullet" = 75, "laser" = 70, "energy" = 50, "bomb" = 70, "bio" = 80, "rad" = 80, "fire" = 90, "acid" = 30, "wound" = 50)
 	var/hit_reflect_chance = 20
 
 /obj/item/clothing/suit/armor/power_armor/t60/tesla/run_block(mob/living/owner, atom/object, damage, attack_text, attack_type, armour_penetration, mob/attacker, def_zone, final_block_chance, list/block_return)
@@ -275,7 +275,7 @@
 	desc = "An advanced suit of armor typically used by the Enclave.<br>It is composed of lightweight metal alloys, reinforced with ceramic castings at key stress points.<br>Additionally, like the T-51b power armor, it includes a recycling system that can convert human waste into drinkable water, and an air conditioning system for its user's comfort."
 	icon_state = "advpowerarmor1"
 	inhand_icon_state = "advpowerarmor1"
-	armor = list("melee" = 80, "bullet" = 80, "laser" = 60, "energy" = 55, "bomb" = 70, "bio" = 80, "rad" = 90, "fire" = 90, "acid" = 40, "wound" = 70)
+	armor_list = list("melee" = 80, "bullet" = 80, "laser" = 60, "energy" = 55, "bomb" = 70, "bio" = 80, "rad" = 90, "fire" = 90, "acid" = 40, "wound" = 70)
 	melee_block_threshold = 45
 	armor_block_threshold = 0.45
 	armor_block_chance = 60
@@ -290,14 +290,14 @@
 	armor_block_threshold = 0.5
 	armor_block_chance = 70
 	deflection_chance = 20
-	armor = list("melee" = 90, "bullet" = 90, "laser" = 70, "energy" = 65, "bomb" = 80, "bio" = 90, "rad" = 100, "fire" = 90, "acid" = 50, "wound" = 90)
+	armor_list = list("melee" = 90, "bullet" = 90, "laser" = 70, "energy" = 65, "bomb" = 80, "bio" = 90, "rad" = 100, "fire" = 90, "acid" = 50, "wound" = 90)
 
 /obj/item/clothing/suit/armor/power_armor/tesla
 	name = "tesla power armor"
 	desc = "A variant of the Enclave's advanced power armor Mk I, jury-rigged with a Tesla device that is capable of dispersing a large percentage of the damage done by directed-energy attacks.<br>As it's made of complex composite materials designed to block most of energy damage - it's notably weaker against kinetic impacts."
 	icon_state = "tesla"
 	inhand_icon_state = "tesla"
-	armor = list("melee" = 75, "bullet" = 75, "laser" = 70, "energy" = 55, "bomb" = 70, "bio" = 80, "rad" = 90, "fire" = 95, "acid" = 30, "wound" = 70)
+	armor_list = list("melee" = 75, "bullet" = 75, "laser" = 70, "energy" = 55, "bomb" = 70, "bio" = 80, "rad" = 90, "fire" = 95, "acid" = 30, "wound" = 70)
 	var/hit_reflect_chance = 35
 
 /obj/item/clothing/suit/armor/power_armor/tesla/run_block(mob/living/owner, atom/object, damage, attack_text, attack_type, armour_penetration, mob/attacker, def_zone, final_block_chance, list/block_return)

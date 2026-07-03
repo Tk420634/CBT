@@ -447,7 +447,7 @@ Burning extracts:
 	icon_state = "adamshield"
 	inhand_icon_state = "adamshield"
 	w_class = WEIGHT_CLASS_HUGE
-	armor = ARMOR_VALUE_PA
+	armor_list = ARMOR_VALUE_PA
 	slot_flags = INV_SLOTBIT_BACK
 	block_chance = 75
 	force = 0

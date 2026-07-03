@@ -15,7 +15,7 @@
 	icon_dead = "mook_dead"
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	pixel_x = -16
-	mob_armor = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_BOSS
+	armor_list = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_BOSS
 	maxHealth = 80
 	health = 60
 	melee_damage_lower = 15

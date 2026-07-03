@@ -29,7 +29,7 @@
 	robust_searching = 1
 	maxHealth = 100
 	health = 100
-	mob_armor = ARMOR_VALUE_SYNDIE_VEST_MELEE
+	armor_list = ARMOR_VALUE_SYNDIE_VEST_MELEE
 	harm_intent_damage = 15
 	melee_damage_lower = 15
 	melee_damage_upper = 30
@@ -61,7 +61,7 @@
 	attack_verb_simple = "slash"
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	move_to_delay = 2
-	mob_armor = ARMOR_VALUE_SYNDIE_VEST_MELEE
+	armor_list = ARMOR_VALUE_SYNDIE_VEST_MELEE
 	harm_intent_damage = 15
 	melee_damage_lower = 15
 	melee_damage_upper = 30
@@ -77,7 +77,7 @@
 	attack_verb_simple = "slash"
 	attack_sound = 'sound/weapons/blade1.ogg'
 	move_to_delay = 3
-	mob_armor = ARMOR_VALUE_SYNDIE_VEST
+	armor_list = ARMOR_VALUE_SYNDIE_VEST
 	harm_intent_damage = 15
 	melee_damage_lower = 25
 	melee_damage_upper = 30
@@ -105,7 +105,7 @@
 	icon_state = "syndicate_pistol"
 	icon_living = "syndicate_pistol"
 	move_to_delay = 3
-	mob_armor = ARMOR_VALUE_SYNDIE_VEST_MELEE
+	armor_list = ARMOR_VALUE_SYNDIE_VEST_MELEE
 	harm_intent_damage = 15
 	melee_damage_lower = 15
 	melee_damage_upper = 25
@@ -127,7 +127,7 @@
 	icon_state = "syndicate_smg"
 	icon_living = "syndicate_smg"
 	move_to_delay = 2.5
-	mob_armor = ARMOR_VALUE_SYNDIE_VEST
+	armor_list = ARMOR_VALUE_SYNDIE_VEST
 	harm_intent_damage = 15
 	melee_damage_lower = 15
 	melee_damage_upper = 25
@@ -145,7 +145,7 @@
 
 /mob/living/simple_animal/hostile/renegade/syndicate/ranged/shotgun
 	move_to_delay = 3
-	mob_armor = ARMOR_VALUE_SYNDIE_VEST
+	armor_list = ARMOR_VALUE_SYNDIE_VEST
 	harm_intent_damage = 15
 	melee_damage_lower = 15
 	melee_damage_upper = 25
@@ -178,7 +178,7 @@
 	icon_state = "syndicate_space"
 	icon_living = "syndicate_space"
 	move_to_delay = 2.5
-	mob_armor = ARMOR_VALUE_SYNDIE_REDSUIT_MELEE
+	armor_list = ARMOR_VALUE_SYNDIE_REDSUIT_MELEE
 	harm_intent_damage = 15
 	melee_damage_lower = 35
 	melee_damage_upper = 40
@@ -195,7 +195,7 @@
 	icon_state = "syndicate_space_knife"
 	icon_living = "syndicate_space_knife"
 	move_to_delay = 2
-	mob_armor = ARMOR_VALUE_SYNDIE_REDSUIT_MELEE
+	armor_list = ARMOR_VALUE_SYNDIE_REDSUIT_MELEE
 	harm_intent_damage = 15
 	melee_damage_lower = 25
 	melee_damage_upper = 45
@@ -203,7 +203,7 @@
 	rapid_melee = 2
 	maxHealth = 170
 	health = 170
-	mob_armor = ARMOR_VALUE_SYNDIE_REDSUIT
+	armor_list = ARMOR_VALUE_SYNDIE_REDSUIT
 	speed = 1
 	light_system = MOVABLE_LIGHT
 	light_range = 4
@@ -214,7 +214,7 @@
 	icon_state = "syndicate_space_sword"
 	icon_living = "syndicate_space_sword"
 	move_to_delay = 2
-	mob_armor = ARMOR_VALUE_SYNDIE_REDSUIT_MELEE
+	armor_list = ARMOR_VALUE_SYNDIE_REDSUIT_MELEE
 	harm_intent_damage = 15
 	melee_damage_lower = 45
 	melee_damage_upper = 50
@@ -243,7 +243,7 @@
 	icon_state = "syndicate_space_pistol"
 	icon_living = "syndicate_space_pistol"
 	move_to_delay = 3
-	mob_armor = ARMOR_VALUE_SYNDIE_REDSUIT
+	armor_list = ARMOR_VALUE_SYNDIE_REDSUIT
 	harm_intent_damage = 15
 	melee_damage_lower = 15
 	melee_damage_upper = 30
@@ -262,7 +262,7 @@
 	icon_state = "syndicate_space_smg"
 	icon_living = "syndicate_space_smg"
 	move_to_delay = 3
-	mob_armor = ARMOR_VALUE_SYNDIE_REDSUIT
+	armor_list = ARMOR_VALUE_SYNDIE_REDSUIT
 	harm_intent_damage = 15
 	melee_damage_lower = 15
 	melee_damage_upper = 30
@@ -278,7 +278,7 @@
 	icon_state = "syndicate_space_shotgun"
 	icon_living = "syndicate_space_shotgun"
 	move_to_delay = 3
-	mob_armor = ARMOR_VALUE_SYNDIE_REDSUIT
+	armor_list = ARMOR_VALUE_SYNDIE_REDSUIT
 	harm_intent_damage = 15
 	melee_damage_lower = 15
 	melee_damage_upper = 30
@@ -295,7 +295,7 @@
 	icon_living = "syndicate_stormtrooper"
 	name = "Renegade Elite Brawler"
 	desc = "Part of the Void Stalker arm of the Renegades, here from parts unknown to give backup to their Terra Firma company (the guys you've been shooting). This one's decked out in a black voidsuit, designed to fight horrible monsters on the frontiers of reality. And you, apparently."
-	mob_armor = ARMOR_VALUE_SYNDIE_ELITE_MELEE
+	armor_list = ARMOR_VALUE_SYNDIE_ELITE_MELEE
 	move_to_delay = 2
 	harm_intent_damage = 15
 	melee_damage_lower = 50
@@ -308,7 +308,7 @@
 	icon_living = "syndicate_stormtrooper_knife"
 	name = "Renegade Elite Lightweight Marathon Commando"
 	desc = "Part of the Void Stalker arm of the Renegades, here from parts unknown to give backup to their Terra Firma company (the guys you've been shooting). This one's decked out in a black voidsuit, designed to fight horrible monsters on the frontiers of reality. And you, apparently."
-	mob_armor = ARMOR_VALUE_SYNDIE_ELITE_MELEE
+	armor_list = ARMOR_VALUE_SYNDIE_ELITE_MELEE
 	move_to_delay = 1.5
 	harm_intent_damage = 15
 	melee_damage_lower = 50
@@ -322,7 +322,7 @@
 	desc = "Part of the Void Stalker arm of the Renegades, here from parts unknown to give backup to their Terra Firma company (the guys you've been shooting). This one's decked out in a black voidsuit, designed to fight horrible monsters on the frontiers of reality. And you, apparently."
 	icon_state = "syndicate_stormtrooper_sword"
 	icon_living = "syndicate_stormtrooper_sword"
-	mob_armor = ARMOR_VALUE_SYNDIE_ELITE_MELEE
+	armor_list = ARMOR_VALUE_SYNDIE_ELITE_MELEE
 	move_to_delay = 2
 	harm_intent_damage = 15
 	melee_damage_lower = 50
@@ -336,7 +336,7 @@
 	name = "Renegade Elite Trooper"
 	icon_state = "syndicate_stormtrooper_pistol"
 	icon_living = "syndicate_stormtrooper_pistol"
-	mob_armor = ARMOR_VALUE_SYNDIE_ELITE_MELEE
+	armor_list = ARMOR_VALUE_SYNDIE_ELITE_MELEE
 	move_to_delay = 2
 	harm_intent_damage = 15
 	melee_damage_lower = 40
@@ -351,7 +351,7 @@
 	icon_living = "syndicate_stormtrooper_smg"
 	name = "Renegade Elite"
 	name = "Renegade Elite"
-	mob_armor = ARMOR_VALUE_SYNDIE_ELITE_MELEE
+	armor_list = ARMOR_VALUE_SYNDIE_ELITE_MELEE
 	move_to_delay = 2
 	harm_intent_damage = 15
 	melee_damage_lower = 40

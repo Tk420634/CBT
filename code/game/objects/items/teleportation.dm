@@ -107,7 +107,7 @@
 	throw_speed = 3
 	throw_range = 5
 	custom_materials = list(/datum/material/iron=10000)
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	var/list/active_portal_pairs
 	var/max_portal_pairs = 1 // was three

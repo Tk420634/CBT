@@ -834,14 +834,14 @@ Just leaving this here for quick copy-pasting, for future contributors.
 	desc = "Praise be to Atom."
 	icon_state = "atomzealot"
 	inhand_icon_state = "atomzealot"
-	armor = list("melee" = 15, "bullet" = 10, "laser" = 30, "energy" = 45, "bomb" = 55, "bio" = 65, "rad" = 100, "fire" = 60, "acid" = 20)
+	armor_list = list("melee" = 15, "bullet" = 10, "laser" = 30, "energy" = 45, "bomb" = 55, "bio" = 65, "rad" = 100, "fire" = 60, "acid" = 20)
 
 /obj/item/clothing/suit/armor/atomwitch
 	name = "atomic seer robes"
 	desc = "Atom be praised."
 	icon_state = "atomwitch"
 	inhand_icon_state = "atomwitch"
-	armor = list("melee" = 5, "bullet" = 10, "laser" = 30, "energy" = 45, "bomb" = 55, "bio" = 65, "rad" = 100, "fire" = 60, "acid" = 20)
+	armor_list = list("melee" = 5, "bullet" = 10, "laser" = 30, "energy" = 45, "bomb" = 55, "bio" = 65, "rad" = 100, "fire" = 60, "acid" = 20)
 */
 
 // In this document: Medium armor
@@ -860,7 +860,7 @@ Just leaving this here for quick copy-pasting, for future contributors.
 /obj/item/clothing/suit/armor/medium/lawcoat/mayor
 	name = "mayor trenchcoat"
 	desc = "A symbol of the mayor's authority (or lack thereof)."
-	armor = list("melee" = 40, "bullet" = 35, "laser" = 30, "energy" = 40, "bomb" = 30, "bio" = 40, "rad" = 40, "fire" = 40, "acid" = 0)
+	armor_list = list("melee" = 40, "bullet" = 35, "laser" = 30, "energy" = 40, "bomb" = 30, "bio" = 40, "rad" = 40, "fire" = 40, "acid" = 0)
 
 //Enclave/Remnants
 
@@ -869,21 +869,21 @@ Just leaving this here for quick copy-pasting, for future contributors.
 	desc = "A set of matte black advanced Pre-Fall combat armor."
 	icon_state = "enclave_new"
 	inhand_icon_state = "enclave_new"
-	armor = list("melee" = 35, "bullet" = 40, "laser" = 35, "energy" = 20, "bomb" = 30, "bio" = 10, "rad" = 10, "fire" = 20, "acid" = 10)
+	armor_list = list("melee" = 35, "bullet" = 40, "laser" = 35, "energy" = 20, "bomb" = 30, "bio" = 10, "rad" = 10, "fire" = 20, "acid" = 10)
 
 /obj/item/clothing/suit/armor/medium/vest/enclave
 	name = "armored vest"
 	desc = "Efficient prefall design issued to Enclave personell."
 	icon_state = "armor_enclave_peacekeeper"
 	inhand_icon_state = "armor_enclave_peacekeeper"
-	armor = list("melee" = 35, "bullet" = 50, "laser" = 30, "energy" = 30, "bomb" = 10, "bio" = 0, "rad" = 0, "fire" = 10, "acid" = 0)
+	armor_list = list("melee" = 35, "bullet" = 50, "laser" = 30, "energy" = 30, "bomb" = 10, "bio" = 0, "rad" = 0, "fire" = 10, "acid" = 0)
 
 /obj/item/clothing/suit/armor/enclave/officercoat
 	name = "armored coat"
 	desc = "Premium prefall armor fitted into a coat for Enclave officers."
 	icon_state = "armor_enclave_officer"
 	inhand_icon_state = "armor_enclave_officer"
-	armor = list("melee" = 60, "bullet" = 45, "energy" = 40, "bomb" = 10, "bio" = 0, "rad" = 0, "fire" = 10, "acid" = 0)
+	armor_list = list("melee" = 60, "bullet" = 45, "energy" = 40, "bomb" = 10, "bio" = 0, "rad" = 0, "fire" = 10, "acid" = 0)
 */
 
 // In this document: Heavy armor (not powerarmor)
@@ -1009,7 +1009,7 @@ Just leaving this here for quick copy-pasting, for future contributors.
 	mob_overlay_icon = 'icons/fallout/onmob/clothes/armor_light.dmi'
 	icon_state = "insect"
 	inhand_icon_state = "insect"
-	armor = list("melee" = 40, "bullet" = 35,"laser" = 20, "energy" = 25, "bomb" = 25, "bio" = 70, "rad" = 65, "fire" = 80, "acid" = 100)
+	armor_list = list("melee" = 40, "bullet" = 35,"laser" = 20, "energy" = 25, "bomb" = 25, "bio" = 70, "rad" = 65, "fire" = 80, "acid" = 100)
 	flags_inv = HIDEJUMPSUIT
 	strip_delay = 40
  */

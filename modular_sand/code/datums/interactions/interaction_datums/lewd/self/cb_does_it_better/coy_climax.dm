@@ -457,4 +457,3 @@
 		'modular_coyote/sound/lewd/sexslide10.wav',
 	) // frumf, frumf
 	user_lust_mult = 4 
-	

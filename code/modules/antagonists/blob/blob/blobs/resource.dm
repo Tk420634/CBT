@@ -5,7 +5,7 @@
 	desc = "A thin spire of slightly swaying tendrils."
 	max_integrity = 60
 	point_return = 15
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	var/resource_delay = 0
 
 /obj/structure/blob/resource/scannerreport()

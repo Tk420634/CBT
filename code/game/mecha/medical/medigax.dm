@@ -6,7 +6,7 @@
 	max_temperature = 25000
 	max_integrity = 350
 	wreckage = /obj/structure/mecha_wreckage/medigax
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	internal_damage_threshold = 30
 
 /obj/mecha/medical/medigax/moved_inside(mob/living/carbon/human/H)

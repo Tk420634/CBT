@@ -14,7 +14,7 @@ using ant armor b/c it just kinda works here and i don't want it to be super bee
 	icon_living = "texasrattler"
 	icon_dead = "texasrattler_dead"
 	icon_gib = "texasrattler_gib" //TODO: this is terrible
-	mob_armor = ARMOR_VALUE_ANTS
+	armor_list = ARMOR_VALUE_ANTS
 	maxHealth = 150
 	health = 150
 	reach = 2

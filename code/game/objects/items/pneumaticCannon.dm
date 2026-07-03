@@ -13,7 +13,7 @@
 	inhand_icon_state = "bulldog"
 	lefthand_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/guns_righthand.dmi'
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	var/maxWeightClass = 20 //The max weight of items that can fit into the cannon
 	var/loadedWeightClass = 0 //The weight of items currently in the cannon
 	var/obj/item/tank/internals/tank = null //The gas tank that is drawn from to fire things

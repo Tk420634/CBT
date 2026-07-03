@@ -29,7 +29,7 @@
 					/obj/item/reagent_containers/syringe = 3)
 	premium = list(
 					/obj/item/reagent_containers/food/condiment/enzyme = 1)
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	refill_canister = /obj/item/vending_refill/dinnerware
 	resistance_flags = FIRE_PROOF
 	default_price = PRICE_REALLY_CHEAP

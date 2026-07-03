@@ -1,5 +1,5 @@
 /obj/item/clothing/gloves/f13
-	armor = ARMOR_VALUE_CLOTHES
+	armor_list = ARMOR_VALUE_CLOTHES
 
 /obj/item/clothing/gloves/f13/baseball
 	name = "baseball glove"
@@ -19,7 +19,7 @@
 	icon_state = "leather"
 	inhand_icon_state = "leather"
 	item_color = null
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_BULLET_T3, ARMOR_MODIFIER_DOWN_LASER_T3, ARMOR_MODIFIER_DOWN_ENV_T3)
 	transfer_prints = FALSE
 	strip_delay = 20
@@ -43,7 +43,7 @@
 	icon_state = "military"
 	inhand_icon_state = "military"
 	item_color = null
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_MELEE_T3, ARMOR_MODIFIER_DOWN_LASER_T2, ARMOR_MODIFIER_DOWN_ENV_T2)
 	transfer_prints = TRUE
 	strip_delay = 20
@@ -104,7 +104,7 @@
 	icon_state = "opifex_gloves"
 	inhand_icon_state = "opifex_gloves"
 	item_color = null
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_DOWN_BULLET_T3, ARMOR_MODIFIER_DOWN_LASER_T3, ARMOR_MODIFIER_DOWN_ENV_T3)
 	transfer_prints = FALSE
 	strip_delay = 10
@@ -126,7 +126,7 @@
 	desc = "A pair of metal tubes with rope on the inside."
 	icon_state = "mutie_bracer"
 	inhand_icon_state = "mutie_bracer"
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	armor_tokens = list(ARMOR_MODIFIER_UP_BULLET_T1, ARMOR_MODIFIER_UP_LASER_T1, ARMOR_MODIFIER_UP_ENV_T1, ARMOR_MODIFIER_UP_DT_T2)
 
 /obj/item/clothing/gloves/f13/mutant/mk2
@@ -174,7 +174,7 @@
 	equip_delay_other = 20
 	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_TEMP_PROTECT
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/item/clothing/gloves/legion/forgemaster
 	name = "forgemaster gloves"

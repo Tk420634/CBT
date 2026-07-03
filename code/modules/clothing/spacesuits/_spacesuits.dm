@@ -7,7 +7,7 @@
 	clothing_flags = STOPSPRESSUREDAMAGE | THICKMATERIAL | BLOCK_GAS_SMOKE_EFFECT | ALLOWINTERNALS
 	inhand_icon_state = "spaceold"
 	permeability_coefficient = 0.01
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT
 	dynamic_hair_suffix = ""
 	dynamic_fhair_suffix = ""
@@ -36,7 +36,7 @@
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	allowed = list(/obj/item/flashlight, /obj/item/tank/internals)
 	slowdown = 1
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	armor_tokens = list(ARMOR_MODIFIER_UP_ENV_T3)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAUR
 	cold_protection = CHEST | GROIN | LEGS | FEET | ARMS | HANDS

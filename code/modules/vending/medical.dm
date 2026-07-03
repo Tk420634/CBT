@@ -46,7 +46,7 @@
 
 //						/obj/item/storage/pill_bottle/psicodine = 2, was in this
 
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	resistance_flags = FIRE_PROOF
 	refill_canister = /obj/item/vending_refill/medical
 	default_price = PRICE_ABOVE_NORMAL

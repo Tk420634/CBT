@@ -54,7 +54,7 @@
 	resistance_flags = NONE
 	max_integrity = 100
 	integrity_failure = 0.5
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/structure/closet/crate/coffin/meatcoffin
 	name = "meat coffin"
@@ -69,7 +69,7 @@
 	material_drop = /obj/item/reagent_containers/food/snacks/meat/slab
 	material_drop_amount = 3
 	integrity_failure = 0.57
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/structure/closet/crate/coffin/metalcoffin
 	name = "metal coffin"
@@ -85,7 +85,7 @@
 	material_drop_amount = 5
 	max_integrity = 200
 	integrity_failure = 0.25
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 //////////////////////////////////////////////
 

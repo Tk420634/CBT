@@ -5,7 +5,7 @@
 	icon_state = "wheelchair"
 	layer = OBJ_LAYER
 	max_integrity = 100
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	legs_required = 0	//You'll probably be using this if you don't have legs
 	canmove = TRUE
 	density = FALSE		//Thought I couldn't fix this one easily, phew

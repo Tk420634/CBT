@@ -6,7 +6,7 @@
 	products = list(/obj/item/pinpointer/validball_finder = 10,
 					/obj/item/artifact_finder = 10,
 					/obj/item/storage/box/artifactcontainer/metal = 10,)
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	refill_canister = /obj/item/vending_refill/tool
 	resistance_flags = FIRE_PROOF
 	default_price = PRICE_REALLY_CHEAP

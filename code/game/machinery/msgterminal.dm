@@ -49,7 +49,7 @@ GLOBAL_LIST_EMPTY(allTerminals)
 	var/dpt = "" //the terminal which will be receiving the message
 	var/priority = NORMAL_MESSAGE_PRIORITY //Priority of the message being sent. why is the default -1??
 	max_integrity = 300
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 
 /obj/machinery/msgterminal/power_change()
 	..()

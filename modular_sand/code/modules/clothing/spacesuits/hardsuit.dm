@@ -9,7 +9,7 @@
 	inhand_icon_state = "hardsuit0-powerarmor-1"
 	hardsuit_type = "powerarmor"
 	clothing_flags = THICKMATERIAL //Ouchie oofie my bones
-	armor = list("melee" = 40, "bullet" = 35, "laser" = 30, "energy" = 20, "bomb" = 40, "bio" = 100, "rad" = 5, "fire" = 75, "acid" = 100)
+	armor_list = list("melee" = 40, "bullet" = 35, "laser" = 30, "energy" = 20, "bomb" = 40, "bio" = 100, "rad" = 5, "fire" = 75, "acid" = 100)
 	resistance_flags = ACID_PROOF
 	mutantrace_variation = STYLE_MUZZLE
 
@@ -63,7 +63,7 @@
 	inhand_icon_state = "hardsuit-powerarmor-1"
 	slowdown = -0.1
 	clothing_flags = THICKMATERIAL //Not spaceproof. No, it isn't Spaceproof in Rimworld either.
-	armor = list("melee" = 40, "bullet" = 35, "laser" = 30, "energy" = 20, "bomb" = 40, "bio" = 100, "rad" = 5, "fire" = 75, "acid" = 100) //I was asked to buff this again. Here, fine.
+	armor_list = list("melee" = 40, "bullet" = 35, "laser" = 30, "energy" = 20, "bomb" = 40, "bio" = 100, "rad" = 5, "fire" = 75, "acid" = 100) //I was asked to buff this again. Here, fine.
 	resistance_flags = ACID_PROOF
 	var/explodioprobemp = 1
 	var/stamdamageemp = 200

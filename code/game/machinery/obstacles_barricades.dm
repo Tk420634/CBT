@@ -152,7 +152,7 @@
 	anchored = FALSE
 	max_integrity = 180
 	proj_pass_rate = 20
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	pass_flags = PASSGRILLE | PASSTABLE
 
 	var/deploy_time = 40

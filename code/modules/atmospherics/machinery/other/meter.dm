@@ -9,7 +9,7 @@
 	idle_power_usage = 2
 	active_power_usage = 4
 	max_integrity = 150
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	var/frequency = 0
 	var/atom/target
 	var/id_tag

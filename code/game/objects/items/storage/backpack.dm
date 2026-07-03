@@ -64,7 +64,7 @@
 	inhand_icon_state = "holdingpack"
 	resistance_flags = FIRE_PROOF
 	item_flags = NO_MAT_REDEMPTION
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	component_type = /datum/component/storage/concrete/bluespace/bag_of_holding
 	rad_flags = RAD_PROTECT_CONTENTS | RAD_NO_CONTAMINATE
 

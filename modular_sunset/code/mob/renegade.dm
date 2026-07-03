@@ -13,7 +13,7 @@
 	icon_dead = "renegade_prospect-dead"
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	seconds_per_wander = 5
-	mob_armor = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR
+	armor_list = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR
 	maxHealth = 100
 	health = 100
 	healable = 1
@@ -53,7 +53,7 @@
 	icon_living = "renegade_grunt"
 	icon_dead = "renegade_grunt-dead"
 	ranged = TRUE
-	mob_armor = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR
+	armor_list = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR
 	maxHealth = 100
 	health = 100
 	healable = 1
@@ -97,7 +97,7 @@
 	icon_living = "renegade_emper"
 	icon_dead = "renegade_prospect-dead"
 	ranged = TRUE
-	mob_armor = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR
+	armor_list = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR
 	maxHealth = 100
 	health = 100
 	healable = 1
@@ -139,7 +139,7 @@
 	icon_state = "renegade_engie"
 	icon_living = "renegade_engie"
 	icon_dead = "renegade_engie-dead"
-	mob_armor = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR
+	armor_list = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR
 	maxHealth = 100
 	health = 100
 	healable = 1
@@ -182,7 +182,7 @@
 	icon_living = "renegade_soldier"
 	icon_dead = "renegade_soldier-dead"
 	ranged = TRUE
-	mob_armor = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR_REINFORCED
+	armor_list = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR_REINFORCED
 	maxHealth = 100
 	health = 100
 	healable = 1
@@ -229,7 +229,7 @@
 	icon_living = "renegade_defender"
 	icon_dead = "renegade_defender-dead"
 	ranged = TRUE
-	mob_armor = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR_SUPER
+	armor_list = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR_SUPER
 	maxHealth = 130
 	health = 130
 	healable = 1
@@ -263,7 +263,7 @@
 	icon_living = "renegade_drifter"
 	icon_dead = "renegade_drifter-dead"
 	ranged = TRUE
-	mob_armor = ARMOR_VALUE_RENEGADE_SNIPER_ARMOR
+	armor_list = ARMOR_VALUE_RENEGADE_SNIPER_ARMOR
 	maxHealth = 100
 	health = 100
 	healable = 1
@@ -316,7 +316,7 @@
 	icon_living = "renegade_guardian"
 	icon_dead = "renegade_guardian-dead"
 	ranged = TRUE
-	mob_armor = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR_SUPER
+	armor_list = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR_SUPER
 	maxHealth = 150
 	health = 150
 	healable = 1
@@ -359,7 +359,7 @@
 	icon_state = "renegade_meister"
 	icon_living = "renegade_meister"
 	icon_dead = "renegade_meister-dead"
-	mob_armor = ARMOR_VALUE_RENEGADE_POWER_ARMOR
+	armor_list = ARMOR_VALUE_RENEGADE_POWER_ARMOR
 	vision_range = 12
 	aggroed_vision_range = 12
 	maxHealth = 150
@@ -415,7 +415,7 @@
 	icon_state = "rebound_chosen"
 	icon_living = "rebound_chosen"
 	icon_dead = "mercenary_ghoul_dead"
-	mob_armor = ARMOR_VALUE_RENEGADE_POWER_ARMOR
+	armor_list = ARMOR_VALUE_RENEGADE_POWER_ARMOR
 	maxHealth = 250
 	health = 250
 	healable = 1
@@ -469,7 +469,7 @@
 	icon_living = "renegade_doc"
 	icon_dead = "renegade_doc-dead"
 	ranged = TRUE
-	mob_armor = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR
+	armor_list = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR
 	maxHealth = 150
 	health = 150
 	healable = 1

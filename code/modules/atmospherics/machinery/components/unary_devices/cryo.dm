@@ -4,7 +4,7 @@
 	icon_state = "pod-off"
 	density = TRUE
 	max_integrity = 350
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	layer = ABOVE_WINDOW_LAYER
 	plane = GAME_PLANE
 	state_open = FALSE

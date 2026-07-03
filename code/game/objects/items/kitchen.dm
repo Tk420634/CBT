@@ -28,7 +28,7 @@
 	flags_1 = CONDUCT_1
 	attack_verb = list("attacked", "stabbed", "poked")
 	hitsound = 'sound/weapons/bladeslice.ogg'
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	sharpness = SHARP_POINTY
 	var/datum/reagent/forkload //used to eat omelette
 
@@ -68,7 +68,7 @@
 	custom_materials = list(/datum/material/iron=4000)
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	sharpness = SHARP_POINTY
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	var/bayonet = FALSE	//Can this be attached to a gun?
 	wound_bonus = -5
 	bare_wound_bonus = 10
@@ -126,7 +126,7 @@
 	flags_1 = CONDUCT_1
 	attack_verb = list("bonked", "thwaked", "smacked")
 	hitsound = 'sound/weapons/bladeslice.ogg'
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 
 /obj/item/weapon/copperpot
 	name = "Copper Pot"

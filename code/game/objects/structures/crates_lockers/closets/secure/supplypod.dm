@@ -16,7 +16,7 @@
 	allow_dense = TRUE
 	delivery_icon = null
 	can_weld_shut = FALSE
-	armor = ARMOR_VALUE_GENERIC_ITEM
+	armor_list = ARMOR_VALUE_GENERIC_ITEM
 	anchored = TRUE
 	anchorable = FALSE
 	var/datum/supply_order/SupplyOrder

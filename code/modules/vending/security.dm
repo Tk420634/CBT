@@ -24,7 +24,7 @@
 					/obj/item/grenade/stingbang = 1,
 					/obj/item/ssword_kit = 1,
 					/obj/item/storage/bag/ammo = 3)
-	armor = ARMOR_VALUE_HEAVY
+	armor_list = ARMOR_VALUE_HEAVY
 	refill_canister = /obj/item/vending_refill/security
 	default_price = PRICE_ALMOST_EXPENSIVE
 	extra_price = PRICE_REALLY_EXPENSIVE

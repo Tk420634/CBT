@@ -18,7 +18,7 @@ Contents:
 	inhand_icon_state = "s-ninja_suit"
 	slowdown = 1
 	resistance_flags = LAVA_PROOF | ACID_PROOF
-	armor = ARMOR_VALUE_MEDIUM
+	armor_list = ARMOR_VALUE_MEDIUM
 	strip_delay = 12
 
 	actions_types = list(/datum/action/item_action/initialize_ninja_suit, /datum/action/item_action/ninjasmoke, /datum/action/item_action/ninjaboost, /datum/action/item_action/ninjapulse, /datum/action/item_action/ninjastar, /datum/action/item_action/ninja_sword_recall, /datum/action/item_action/ninja_stealth, /datum/action/item_action/toggle_glove)

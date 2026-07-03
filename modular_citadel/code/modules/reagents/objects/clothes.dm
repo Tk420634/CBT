@@ -6,7 +6,7 @@
 	icon = 'icons/obj/clothing/hats.dmi'
 	icon_state = "cowboy"
 	desc = "A synthesized hat. You feel compelled to keep it on all times."
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 	//item_flags = NODROP //Tips their hat!
 
 /obj/item/clothing/head/hattip/on_attack_hand(mob/user, act_intent = user.a_intent, unarmed_attack_flags)

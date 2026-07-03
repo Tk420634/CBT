@@ -71,7 +71,7 @@
 	icon_state = "frozen"
 	density = TRUE
 	max_integrity = 100
-	armor = ARMOR_VALUE_LIGHT
+	armor_list = ARMOR_VALUE_LIGHT
 
 /obj/structure/ice_stasis/Initialize()
 	. = ..()
