@@ -37,7 +37,7 @@
 			continue
 		if(isliving(A))
 			var/mob/living/M = A
-			if(faction_check_mob(M) && attack_same || !faction_check_mob(M))
+			if(mob_faction_is_friendly_to_target(M) && attack_same || !mob_faction_is_friendly_to_target(M))
 				enemies |= WEAKREF(M)
 		else if(ismecha(A))
 			var/obj/mecha/M = A
@@ -46,7 +46,7 @@
 				enemies |= WEAKREF(M.occupant)
 
 	for(var/mob/living/simple_animal/hostile/retaliate/H in around)
-		if(faction_check_mob(H) && !attack_same && !H.attack_same)
+		if(mob_faction_is_friendly_to_target(H) && !attack_same && !H.attack_same)
 			H.enemies |= enemies
 	return 0
 

@@ -272,7 +272,7 @@ They deal 35 brute (armor is considered).
 			var/obj/effect/temp_visual/small_smoke/smonk = new /obj/effect/temp_visual/small_smoke(U)
 			QDEL_IN(smonk, 1.25)
 			for(var/mob/living/M in U)
-				if(!faction_check(faction, M.faction) && !(M in hit_things))
+				if(!factions_are_friendly(faction, M.faction) && !(M in hit_things))
 					playsound(src, 'sound/weapons/slash.ogg', 75, 0)
 					if(M.apply_damage(40, BRUTE, BODY_ZONE_CHEST, M.run_armor_check(BODY_ZONE_CHEST), null, null, CANT_WOUND))
 						visible_message("<span class = 'userdanger'>[src] slashes [M] with his spinning zweihander!</span>")

@@ -30,7 +30,7 @@
 	pull_force = MOVE_FORCE_WEAK
 	guaranteed_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab = 2, /obj/item/stack/sheet/sinew = 2, /obj/item/stack/sheet/bone = 2)
 	crusher_loot = /obj/item/crusher_trophy/watcher_wing
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	retreat_health_percent = 0.5
 	max_heal_amount = 0.9
 	heal_per_life = 0.115

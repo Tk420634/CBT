@@ -634,7 +634,7 @@
 			qdel(src)
 		return hit_something
 	permutated |= target		//Make sure we're never hitting it again. If we ever run into weirdness with piercing projectiles needing to hit something multiple times.. well.. that's a to-do.
-	if(LAZYLEN(faction) && faction_check(target))
+	if(LAZYLEN(faction) && factions_are_friendly(target))
 		return process_hit(T, select_target(T), qdel_self, TRUE)		//Hit whatever else we can since we're piercing through but we're still on the same tile.
 	if(is_supereffective(target))
 		damage += (supereffective_damage * damage_mod)
@@ -656,7 +656,7 @@
 		qdel(src)
 	return hit_something
 
-/obj/item/projectile/proc/faction_check(atom/target)
+/obj/item/projectile/proc/factions_are_friendly(atom/target)
 	if(not_harmful)
 		return FALSE // its something that shouldnt be harmful
 	if(!(isliving(target) || istype(target, /obj/machinery/porta_turret)) || !LAZYLEN(faction))

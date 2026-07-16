@@ -18,7 +18,7 @@
 	waddle_up_time = 1
 	waddle_side_time = 1
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	seconds_per_wander = 5
 	speak_emote = list("growls")
 	// emote_see = list("screeches")
@@ -57,7 +57,7 @@
 	icon_state = "tunneler"
 	icon_living = "tunneler"
 	icon_dead = "tunneler_dead"
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	health = 144
 	maxHealth = 144
 	speed = 1

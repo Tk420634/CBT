@@ -37,7 +37,7 @@
 	deathmessage = "fades as the energies that tied it to this world dissipate."
 	deathsound = 'sound/magic/demon_dies.ogg'
 	movement_type = FLYING
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	/// Distance the demon will teleport from the target
 	var/teleport_distance = 3
 

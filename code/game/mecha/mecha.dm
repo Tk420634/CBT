@@ -88,7 +88,7 @@
 	var/turnsound = 'sound/mecha/mechturn.ogg'
 	var/attacksound = 'sound/weapons/punch4.ogg'
 
-	var/melee_cooldown = 10
+	var/melee_attack_cooldown = 10
 	var/melee_can_hit = 1
 	var/attack_knockdown = 0 // For how much time it will knockdown a target in melee
 
@@ -424,7 +424,7 @@
 			return
 		target.mech_melee_attack(src)
 		melee_can_hit = 0
-		spawn(melee_cooldown)
+		spawn(melee_attack_cooldown)
 			melee_can_hit = 1
 
 

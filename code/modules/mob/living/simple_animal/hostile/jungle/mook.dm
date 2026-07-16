@@ -24,7 +24,7 @@
 	ranged = TRUE
 	ranged_cooldown_time = 10
 	pass_flags = LETPASSTHROW
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	attack_sound = 'sound/weapons/rapierhit.ogg'
 	death_sound = 'sound/voice/mook_death.ogg'
 	aggroed_vision_range = 8 //A little more aggressive once in combat to balance out their really low HP
@@ -161,7 +161,7 @@
 	. = ..()
 	if(isliving(hit_atom) && attack_state == MOOK_ATTACK_ACTIVE)
 		var/mob/living/L = hit_atom
-		if(CanAttack(L))
+		if(EvalTarget(L))
 			L.attack_animal(src)
 			struck_target_leap = TRUE
 			density = TRUE
@@ -174,7 +174,7 @@
 			continue
 		if(isliving(A))
 			var/mob/living/ML = A
-			if(!struck_target_leap && CanAttack(ML))//Check if some joker is attempting to use rest to evade us
+			if(!struck_target_leap && EvalTarget(ML))//Check if some joker is attempting to use rest to evade us
 				struck_target_leap = TRUE
 				ML.attack_animal(src)
 				density = TRUE

@@ -221,7 +221,7 @@
 		new /obj/effect/temp_visual/small_smoke/halfsecond(T)
 		for(var/mob/living/L in T.contents)
 			if(L != src && !(L in hit_things))
-				if(!faction_check(faction, L.faction))
+				if(!factions_are_friendly(faction, L.faction))
 					var/throwtarget = get_edge_target_turf(src, get_dir(src, L))
 					L.safe_throw_at(throwtarget, 10, 1, src)
 					L.Stun(20)
@@ -281,7 +281,7 @@
 				return
 			new /obj/effect/temp_visual/small_smoke/halfsecond(T)
 			for(var/mob/living/L in T.contents)
-				if(L != src && !(L in hit_things) && !faction_check(L.faction, faction))
+				if(L != src && !(L in hit_things) && !factions_are_friendly(L.faction, faction))
 					var/throwtarget = get_edge_target_turf(T, get_dir(T, L))
 					L.safe_throw_at(throwtarget, 5, 1, src)
 					L.Stun(10)

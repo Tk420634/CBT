@@ -132,7 +132,7 @@ Difficulty: Normal
 	L.dust()
 */
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/CanAttack(atom/the_target)
+/mob/living/simple_animal/hostile/megafauna/hierophant/EvalTarget(atom/the_target)
 	. = ..()
 	if(istype(the_target, /mob/living/simple_animal/hostile/asteroid/hivelordbrood)) //ignore temporary targets in favor of more permanent targets
 		return FALSE
@@ -649,7 +649,7 @@ Difficulty: Normal
 		return
 	for(var/mob/living/L in T.contents - hit_things) //find and damage mobs...
 		hit_things += L
-		if((friendly_fire_check && caster && caster.faction_check_mob(L)) || L.stat == DEAD)
+		if((friendly_fire_check && caster && caster.mob_faction_is_friendly_to_target(L)) || L.stat == DEAD)
 			continue
 		if(L.client)
 			flash_color(L.client, "#660099", 1)
@@ -663,7 +663,7 @@ Difficulty: Normal
 			if(H.stat == CONSCIOUS && !H.target && H.AIStatus != AI_OFF && !H.client)
 				if(!QDELETED(caster))
 					if(get_dist(H, caster) <= H.aggroed_vision_range)
-						H.FindTarget(list(caster), 1)
+						H.GetPossibleTargets(list(caster), 1)
 					else
 						H.perform_move_action(get_turf(caster), H.move_to_delay, 3)
 		if(monster_damage_boost && (ismegafauna(L) || istype(L, /mob/living/simple_animal/hostile/asteroid)))
@@ -672,7 +672,7 @@ Difficulty: Normal
 	for(var/obj/mecha/M in T.contents - hit_things) //also damage mechs.
 		hit_things += M
 		if(M.occupant)
-			if(friendly_fire_check && caster && caster.faction_check_mob(M.occupant))
+			if(friendly_fire_check && caster && caster.mob_faction_is_friendly_to_target(M.occupant))
 				continue
 			to_chat(M.occupant, span_userdanger("Your [M.name] is struck by a [name]!"))
 		playsound(M,'sound/weapons/sear.ogg', 50, 1, -4)

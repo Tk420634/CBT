@@ -218,7 +218,7 @@ Difficulty: Medium
 	sleep(7)
 	var/list/flame_hit = list()
 	while(swoop_duration > 0)
-		if(!my_target && !FindTarget())
+		if(!my_target && !GetPossibleTargets())
 			break //we lost our my_target while chasing it down and couldn't get a new one
 		if(swoop_duration < 7)
 			fire_rain = FALSE //stop raining fire near the end of the swoop

@@ -405,7 +405,7 @@
 	speed = 1
 	melee_damage_lower = 1
 	melee_damage_upper = 10
-	melee_attack_cooldown = 0.5 SECONDS
+	melee_attack_cooldown_duration = 0.5 SECONDS
 
 /mob/living/simple_animal/hostile/eyebot/playable/hivebot/melee/New()
 	..()
@@ -426,7 +426,7 @@
 	maxHealth = 100
 	melee_damage_lower = 5
 	melee_damage_upper = 15
-	melee_attack_cooldown = 1 SECONDS
+	melee_attack_cooldown_duration = 1 SECONDS
 
 /mob/living/simple_animal/hostile/eyebot/playable/hivebot/melee/tier2/New()
 	..()
@@ -447,7 +447,7 @@
 	maxHealth = 150
 	melee_damage_lower = 10
 	melee_damage_upper = 20
-	melee_attack_cooldown = 2 SECONDS
+	melee_attack_cooldown_duration = 2 SECONDS
 
 /mob/living/simple_animal/hostile/eyebot/playable/hivebot/melee/tier3/New()
 	..()

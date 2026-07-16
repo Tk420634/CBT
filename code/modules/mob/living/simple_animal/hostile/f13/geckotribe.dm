@@ -586,7 +586,7 @@
 	waddle_amount = 3
 	waddle_up_time = 1
 	waddle_side_time = 2
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	bossmob = TRUE
 	speak_emote = list(
 		"squeaks",
@@ -746,7 +746,7 @@
 	waddle_amount = 3
 	waddle_up_time = 1
 	waddle_side_time = 2
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	bossmob = TRUE
 	speak_emote = list(
 		"squeaks",
@@ -908,7 +908,7 @@
 	waddle_amount = 3
 	waddle_up_time = 1
 	waddle_side_time = 2
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	bossmob = TRUE
 	speak_emote = list(
 		"squeaks",

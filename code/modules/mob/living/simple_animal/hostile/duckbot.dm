@@ -23,7 +23,7 @@
 	icon_state = "duckbot"
 	icon_living = "duckbot"
 	icon_dead = "duckbot_dead"
-	ignore_faction = TRUE // so mobs dont kill it on accident
+	can_be_targeted_by_mob_ai = TRUE // so mobs dont kill it on accident
 	ranged = TRUE
 	melee_attacks = FALSE
 	environment_smash = NONE
@@ -36,7 +36,7 @@
 	melee_damage_upper = 0
 	ranged_cooldown_time = 20 SECONDS
 	pass_flags = LETPASSTHROW
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	death_sound = 'sound/machines/machinery_break_1.ogg'
 	aggroed_vision_range = 8 //A little more aggressive once in combat to balance out their really low HP
 	decompose = FALSE

@@ -339,7 +339,7 @@
 			return FALSE
 		if(isliving(AM))
 			var/mob/living/L = AM
-			if(!L.faction_check_mob(src))
+			if(!L.mob_faction_is_friendly_to_target(src))
 				return FALSE // no dragging around enemies if you're in crit
 		else
 			return FALSE

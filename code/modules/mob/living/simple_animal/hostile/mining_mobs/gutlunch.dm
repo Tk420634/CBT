@@ -33,7 +33,7 @@
 	stop_wandering = FALSE
 	stop_wandering_when_pulled = TRUE
 	stat_exclusive = TRUE
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	search_objects = TRUE
 	del_on_death = TRUE
 	loot = list(/obj/effect/decal/cleanable/blood/gibs)
@@ -50,7 +50,7 @@
 	udder = new()
 	. = ..()
 
-/mob/living/simple_animal/hostile/asteroid/gutlunch/CanAttack(atom/the_target) // Gutlunch-specific version of CanAttack to handle stupid stat_exclusive = true crap so we don't have to do it for literally every single simple_animal/hostile except the two that spawn in lavaland
+/mob/living/simple_animal/hostile/asteroid/gutlunch/EvalTarget(atom/the_target) // Gutlunch-specific version of EvalTarget to handle stupid stat_exclusive = true crap so we don't have to do it for literally every single simple_animal/hostile except the two that spawn in lavaland
 	if(isturf(the_target) || !the_target || the_target.type == /atom/movable/lighting_object) // bail out on invalids
 		return FALSE
 
@@ -60,7 +60,7 @@
 	if(isliving(the_target))
 		var/mob/living/L = the_target
 
-		if(faction_check_mob(L) && !attack_same)
+		if(mob_faction_is_friendly_to_target(L) && !attack_same)
 			return FALSE
 		if(L.stat > stat_attack || L.stat != stat_attack && stat_exclusive)
 			return FALSE

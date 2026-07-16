@@ -184,6 +184,7 @@
 	var/summoned_mob_path = /mob/living/simple_animal/hostile/stickman //Must be an hostile animal path.
 	var/max_stickmen = 8
 	var/cooldown = 3 SECONDS
+	/// format: list(WEAKREF(someone) = TRUE, WEAKREF(someone_else) = TRUE)
 	var/list/book_of_grudges = list()
 
 /datum/action/item_action/stickmen/New(Target)
@@ -212,8 +213,8 @@
 	. = ..()
 	if(owner)
 		RegisterSignal(M, COMSIG_MOB_POINTED,PROC_REF(rally))
-	if(book_of_grudges[M]) //Stop attacking your new master.
-		book_of_grudges -= M
+	if(book_of_grudges[WEAKREF(M)]) //Stop attacking your new master.
+		book_of_grudges -= WEAKREF(M)
 		for(var/A in summoned_stickmen)
 			var/mob/living/simple_animal/hostile/S = A
 			if(!S.mind)
@@ -247,7 +248,7 @@
 	if(summon)
 		var/mob/living/simple_animal/hostile/S = new summoned_mob_path (get_turf(usr))
 		S.faction = owner.faction
-		S.foes = book_of_grudges
+		S.foes = book_of_grudges.Copy()
 		RegisterSignal(S, COMSIG_PARENT_QDELETING,PROC_REF(remove_from_list))
 	ready = FALSE
 	addtimer(CALLBACK(src,PROC_REF(ready_again)), cooldown)
@@ -280,9 +281,9 @@
 			L = M.occupant
 		if(L && L.stat != DEAD && !HAS_TRAIT(L, TRAIT_DEATHCOMA)) //Taking revenge on the deads would be proposterous.
 			addtimer(CALLBACK(src,PROC_REF(clear_grudge), L), 2 MINUTES, TIMER_OVERRIDE|TIMER_UNIQUE)
-			if(!book_of_grudges[L])
+			if(!book_of_grudges[WEAKREF(L)])
 				RegisterSignal(L, list(COMSIG_PARENT_QDELETING, COMSIG_MOB_DEATH),PROC_REF(grudge_settled))
-				book_of_grudges[L] = TRUE
+				book_of_grudges[WEAKREF(L)] = TRUE
 	for(var/k in summoned_stickmen) //Shamelessly copied from the blob rally power
 		var/mob/living/simple_animal/hostile/S = k
 		if(!S.mind && isturf(S.loc) && get_dist(S, T) <= 10)
@@ -291,11 +292,11 @@
 
 /datum/action/item_action/stickmen/proc/clear_grudge(mob/living/L)
 	if(!QDELETED(L))
-		book_of_grudges -= L
+		book_of_grudges -= WEAKREF(L)
 
 /datum/action/item_action/stickmen/proc/grudge_settled(mob/living/L)
 	UnregisterSignal(L, list(COMSIG_PARENT_QDELETING, COMSIG_MOB_DEATH))
-	book_of_grudges -= L
+		book_of_grudges -= WEAKREF(L)
 
 //Shielded Armour
 

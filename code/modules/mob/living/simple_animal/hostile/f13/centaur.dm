@@ -28,7 +28,7 @@
 	bounty = 25
 
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	move_to_delay = 6 //slower than average, but not a lot.  //Needs to be slower than a protectron
 	// m2d 4 = standard, less is fast, more is slower.
 
@@ -107,7 +107,7 @@
 
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	environment_smash = ENVIRONMENT_SMASH_RWALLS
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	attack_verb_simple = "eviscerates"
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	speak_emote = list("screams", "clicks", "chitters", "barks", "moans", "growls", "meows", "reverberates", "roars", "squeaks", "rattles", "exclaims", "yells", "remarks", "mumbles", "jabbers", "stutters", "seethes")
@@ -178,7 +178,7 @@
 	melee_damage_upper = 40
 
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	attack_verb_simple = "eviscerates"
 	attack_sound = 'sound/weapons/punch1.ogg'
 	var/static/list/abom_sounds

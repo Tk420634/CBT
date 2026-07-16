@@ -55,14 +55,14 @@
 		coffer.Trigger()
 	return ..()
 
-/mob/living/simple_animal/hostile/regalrat/CanAttack(atom/the_target)
+/mob/living/simple_animal/hostile/regalrat/EvalTarget(atom/the_target)
 	if(istype(the_target,/mob/living/simple_animal))
 		var/mob/living/A = the_target
 		if(istype(the_target, /mob/living/simple_animal/hostile/regalrat) && A.stat == CONSCIOUS)
 			return TRUE
 		if(istype(the_target, /mob/living/simple_animal/hostile/rat) && A.stat == CONSCIOUS)
 			var/mob/living/simple_animal/hostile/rat/R = the_target
-			if(R.faction_check_mob(src, TRUE))
+			if(R.mob_faction_is_friendly_to_target(src, TRUE))
 				return FALSE
 			else
 				return TRUE
@@ -72,7 +72,7 @@
 	. = ..()
 	if(istype(user,/mob/living/simple_animal/hostile/rat))
 		var/mob/living/simple_animal/hostile/rat/ratself = user
-		if(ratself.faction_check_mob(src, TRUE))
+		if(ratself.mob_faction_is_friendly_to_target(src, TRUE))
 			. += span_notice("This is your king. Long live his majesty!")
 		else
 			. += span_warning("This is a false king! Strike him down!")
@@ -342,29 +342,29 @@
 	. = ..()
 	if(istype(user,/mob/living/simple_animal/hostile/rat))
 		var/mob/living/simple_animal/hostile/rat/ratself = user
-		if(ratself.faction_check_mob(src, TRUE))
+		if(ratself.mob_faction_is_friendly_to_target(src, TRUE))
 			. += span_notice("You both serve the same king.")
 		else
 			. += span_warning("This fool serves a different king!")
 	else if(istype(user,/mob/living/simple_animal/hostile/regalrat))
 		var/mob/living/simple_animal/hostile/regalrat/ratking = user
-		if(ratking.faction_check_mob(src, TRUE))
+		if(ratking.mob_faction_is_friendly_to_target(src, TRUE))
 			. += span_notice("This rat serves under you.")
 		else
 			. += span_warning("This peasant serves a different king! Strike him down!")
 
-/mob/living/simple_animal/hostile/rat/CanAttack(atom/the_target)
+/mob/living/simple_animal/hostile/rat/EvalTarget(atom/the_target)
 	if(istype(the_target,/mob/living/simple_animal))
 		var/mob/living/A = the_target
 		if(istype(the_target, /mob/living/simple_animal/hostile/regalrat) && A.stat == CONSCIOUS)
 			var/mob/living/simple_animal/hostile/regalrat/ratking = the_target
-			if(ratking.faction_check_mob(src, TRUE))
+			if(ratking.mob_faction_is_friendly_to_target(src, TRUE))
 				return FALSE
 			else
 				return TRUE
 		if(istype(the_target, /mob/living/simple_animal/hostile/rat) && A.stat == CONSCIOUS)
 			var/mob/living/simple_animal/hostile/rat/R = the_target
-			if(R.faction_check_mob(src, TRUE))
+			if(R.mob_faction_is_friendly_to_target(src, TRUE))
 				return FALSE
 			else
 				return TRUE

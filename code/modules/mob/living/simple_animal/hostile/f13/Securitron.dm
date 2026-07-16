@@ -28,7 +28,7 @@
 	response_help_simple = "pokes"
 	response_disarm_simple = "shoves"
 	response_harm_simple = "hits"
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	blood_volume = 0
 	bombs_can_gib_me = FALSE
 	// del_on_death = TRUE

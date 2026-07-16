@@ -86,7 +86,7 @@
 		new /obj/effect/temp_visual/small_smoke/halfsecond(T)
 		for(var/mob/living/L in T.contents)
 			if(L != user && !(L in hit_things) && !ishuman(L))
-				if(!faction_check(user.faction, L.faction))
+				if(!factions_are_friendly(user.faction, L.faction))
 					if(prob(25))
 						L.Stun(10)
 					L.apply_damage_type(20, BRUTE)

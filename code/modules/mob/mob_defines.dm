@@ -101,8 +101,8 @@
 	var/job = null//Living
 
 	var/list/faction = list("neutral") //A list of factions that this mob is currently in, for hostile mob targetting, amongst other things
-	/// ignore_faction
-	var/ignore_faction = FALSE
+	/// can_be_targeted_by_mob_ai
+	var/can_be_targeted_by_mob_ai = TRUE
 
 	var/move_on_shuttle = 1 // Can move on the shuttle.
 

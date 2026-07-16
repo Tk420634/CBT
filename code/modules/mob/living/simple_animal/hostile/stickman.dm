@@ -11,7 +11,7 @@
 	seconds_per_wander = 5
 	speed = 0
 	blood_volume = 0
-	robust_searching = TRUE //This is also required for the paper robe rallying to work.
+	// robust_searching = TRUE //This is also required for the paper robe rallying to work.
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	maxHealth = 100
 	health = 100

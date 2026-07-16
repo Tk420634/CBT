@@ -220,7 +220,7 @@
 	var/list/hit_things = list()
 	var/throwtarget = get_edge_target_turf(src, move_dir)
 	for(var/mob/living/L in T.contents - hit_things - src)
-		if(faction_check_mob(L))
+		if(mob_faction_is_friendly_to_target(L))
 			return
 		hit_things += L
 		visible_message(span_boldwarning("[src] attacks [L] with much force!"))

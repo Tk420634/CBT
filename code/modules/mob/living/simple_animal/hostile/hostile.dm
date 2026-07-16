@@ -62,23 +62,15 @@
 	var/rapid_melee = 1			 //Number of melee attacks between each npc pool tick. Spread evenly.
 	var/melee_queue_distance = 4 //If target is close enough start preparing to hit them if we have rapid_melee enabled
 
-	var/melee_attacks = TRUE
-	/// Mobs will wind up their attacks for this long before checking if they're in range to hit you again.
-	var/melee_windup_time = 0.3 SECONDS
-	/// This plays when the mob's attack windup starts. It requires melee_windup_time to be set.
-	var/melee_windup_sound = 'sound/effects/flip.ogg'
-	/// How much to shrink and grow this mob when it's doing a windup attack.
-	var/melee_windup_magnitude = 0.3
-	/// TRUE while a mob is winding up a melee attack, otherwise FALSE.
-	var/winding_up_melee = FALSE
+	var/can_melee_attack = TRUE
 
-	var/smash_attack_cooldown = 1 SECONDS
-	COOLDOWN_DECLARE(smash_cooldown)
+	var/melee_smash_cooldown_duration = 1 SECONDS
+	COOLDOWN_DECLARE(melee_smash_cooldown)
 
-	var/melee_attack_cooldown = 2 SECONDS
-	COOLDOWN_DECLARE(melee_cooldown)
+	var/melee_attack_cooldown_duration = 2 SECONDS
+	COOLDOWN_DECLARE(melee_attack_cooldown)
 
-	var/sight_shoot_delay_time = 0.7 SECONDS
+	var/sight_shoot_delay_duration = 0.7 SECONDS
 	COOLDOWN_DECLARE(sight_shoot_delay)
 
 	/// The base random spread of the mob's ranged attacks.
@@ -100,8 +92,13 @@
 	//COOLDOWN_DECLARE(decomposition_schedule)
 
 //These vars are related to how mobs locate and target
-	var/robust_searching = 1 //By default, mobs have a simple searching method, set this to 1 for the more scrutinous searching (stat_attack, stat_exclusive, etc), should be disabled on most mobs
-	var/robuster_searching = FALSE //Makes mobs see through walls if theyve seen you before
+	/// doesnt do anything important, all mobs have this as true
+	/// previously made the target evaluation check more conditions, which would make it use more CPU
+	/// but we arent playing on our grandpa's 386 anymore, we can have our mobs do cool things!
+	var/robust_searching = TRUE //By default, mobs have a simple searching method, set this to 1 for the more scrutinous searching (stat_attack, stat_exclusive, etc), should be disabled on most mobs
+	/// Allows the mob to track targets even they are out of LOS, but still within the mob's vision range
+	// todo: implement a sort of last-known-location system, like turrets
+	var/robuster_searching = FALSE
 	var/vision_range = 9 //How big of an area to search for targets in, a vision of 9 attempts to find targets as soon as they walk into screen view
 	var/aggroed_vision_range = 9 //If a mob is aggro, we search in this radius. Defaults to 9 to keep in line with original simple mob aggro radius
 	var/max_tracking_range = 14 //If a mob is aggro, we search in this radius. Defaults to 9 to keep in line with original simple mob aggro radius
@@ -114,6 +111,7 @@
 	var/attack_downed_until = HOSTILES_ATTACK_UNTIL_THIS_FAR_INTO_CRIT // Attack until they're this proportion between soft crit and hard crit
 	var/stat_attack = SOFT_CRIT //Mobs with stat_attack to UNCONSCIOUS will attempt to attack things that are unconscious, Mobs with stat_attack set to DEAD will attempt to attack the dead.
 	var/stat_exclusive = FALSE //Mobs with this set to TRUE will exclusively attack things defined by stat_attack, stat_attack DEAD means they will only attack corpses
+	/// Basically means to ignore factions and just attack everything, unless they are a friend
 	var/attack_same = 0 //Set us to 1 to allow us to attack our own faction
 	var/datum/weakref/targetting_origin = null //all range/attack/etc. calculations should be done from this atom, defaults to the mob itself, useful for Vehicles and such
 	var/attack_all_objects = FALSE //if true, equivalent to having a wanted_objects list containing ALL objects.
@@ -224,7 +222,59 @@
 	var/movement_mode_last_changed = 0
 	var/movement_last_move = 0
 
-	speed = 3 //The default hostile mob speed. If you ever speed the mob ss again please raise this to compensate.
+	// windup stuff
+	/// Can be: MOB_WINDUP_NONE, MOB_WINDUP_WINDING_UP, MOB_WINDUP_READY
+	var/windup_state = MOB_WINDUP_NONE
+	// vars relating to the winding up phase of windups
+	/// Mob uses the windup system
+	var/windup_enabled = TRUE
+	/// Time when the mob is fully wound up and ready to check if it can hit the target
+	var/windup_delay_complete = 0
+	/// Time it takes for a mob to complete its windup, after which it will be allowed to attack
+	var/windup_delay_duration = 0.3 SECONDS
+	/// The time when the mob will stop being wound up and reset its windup state, if it hasn't attacked yet
+	var/windup_ready_timeout = 0
+	/// How long the mob will stay wound up before the windup is cancelled and reset
+	var/windup_ready_duration = 1 SECONDS
+	
+	/// This plays when the mob's attack windup starts. It requires windup_delay_duration to be set.
+	var/windup_sound_start = 'sound/effects/flip.ogg'
+	/// Sound to play when the mob is fully wound up and ready to attack
+	var/windup_sound_ready = 'sound/effects/lick.ogg'
+	/// Sound to play when the mob's windup is cancelled and reset
+	var/windup_sound_cancel = 'sound/effects/meow1.ogg'
+	/// How much to shrink and grow this mob when it's doing a windup attack.
+	var/windup_magnitude = 0.3 // in decigrundles
+	/// how long to do the windup animation for, in seconds
+	var/windup_animation_duration = 0.5 SECONDS
+	/// TRUE while a mob is winding up a melee attack, otherwise FALSE.
+	var/winding_up_melee = FALSE // unused now
+
+	/// melee attack stuff
+	/// Is set by the update thingy to determine if the mob should do a melee attack this tick
+	var/melee_attack_allowed = FALSE
+	/// Number of rapid melee attacks left for this tick
+	var/melee_rapid_attacks_left = 0
+	/// currently rapid attacking
+	var/melee_rapid_attacking = FALSE
+
+	var/list/blackboard_tick = list() // a list of things to store for this tick, so i dont pass around a milluion argz
+
+	/// if the mob should use the advanced target priority selection system
+	/// Only set TRUE if you have at least one of the other two set
+	var/use_advanced_target_priority_selection = FALSE
+	var/use_distance_priority = FALSE
+	var/use_health_priority = FALSE
+
+	/// targetting flag handling stuff
+	var/turrets_are_priority = TRUE // if turrets are priority targets, set to FALSE to make them not be pruiority them
+	var/players_are_priority = TRUE // if players are priority targets, set to FALSE to make them not be pruiority them
+	var/objects_are_priority = TRUE // if objects are priority targets, set to FALSE to make them not be pruiority them
+	var/foes_are_priority = TRUE // if foes are priority targets, set to FALSE to make them not be pruiority them
+	var/assemlies_are_priority = TRUE // if assemlies are priority targets, set to FALSE to make them not be pruiority them
+
+	/// The... slowdown? of a mob while a player is inside it? does nothing while ai controlled
+	speed = 3
 
 /mob/living/simple_animal/hostile/Initialize(mapload, nest_spawned)
 	. = ..()
@@ -243,6 +293,8 @@
 	unset_target()
 	friends = null
 	foes = null
+	blackboard_tick.Cut()
+	blackboard_tick = null
 	GiveTarget(null)
 	if(!went_to_sleep)
 		SSmobs.mob_despawned(src)
@@ -253,8 +305,9 @@
 /mob/living/simple_animal/hostile/BiologicalLife(seconds, times_fired)
 	if(!CHECK_BITFIELD(mobility_flags, MOBILITY_MOVE))
 		walk(src, 0)
-
-	if(!(. = ..()))
+	. = ..()
+	var/am_alive = .
+	if(!am_alive)
 		walk(src, 0) //stops walking
 		/*if(decompose && COOLDOWN_FINISHED(src, decomposition_schedule))
 			visible_message(span_notice("\The dead body of the [src] decomposes!"))
@@ -290,31 +343,284 @@
 /mob/living/simple_animal/hostile/proc/make_low_health()
 	return
 
+/// oh no it failed a tick, by runtiming or something, shut down the mob and highlight it or something
+/mob/living/simple_animal/hostile/proc/Failed()
+	ShutDownEverything()
+	color = "#FF00FF"
+
+/* *********************************
+ * Main AI loop for hostile mobs. This is where the mob decides what to do each tick.
+ * Kinda important
+ * Notes:
+ * order of ops:
+ * if off, shut down if needed, clear everything and such, and cease
+ * check if the last tick was in the middle of something, and if so, continue it if possible
+ * plan this tick's actions
+ * - find target if none
+ * setup movement vars
+ * perform movement
+ * setup combat vars if in combat
+ * perform combat if in combat
+ */
 /mob/living/simple_animal/hostile/handle_automated_action()
+	. = "bad"
 	if(AIStatus == AI_OFF)
-		return 0
+		ShutDownEverything() // PresidentMadagascar, a man in brazil is coughing
+		return FALSE
 	
-	//danbuttfat = TRUE
+	//danbuttfat = TRUE // vital and always true
 
-	var/list/possible_targets = ListTargets() //we look around for potential targets and make it a list for later use.
-	if(!get_target())
-		FindTarget(possible_targets) //if we don't have a target, we try to find one
+	// update everything needing updating, record stuff
+	// sets flags for what we can and probably should do this tick
+	ClearTickBB()
+	UpdateRTS()
+	UpdateAIStatusPreTick()
+	UpdateTarget()
+	UpdateWindup() // set
+	UpdateMeleeAttack()
+	UpdateRangedAttack()
+	UpdateSmash()
+	UpdateAttraction(has_target)
+	UpdateMovementTarget()
+	UpdateDodging()
 
+	// perform actions
+	PerformMovement()
+	PerformCombat()
+	PerformOtherActions() // smash stuff, etc
+
+	// clean up
+	CleanupTick()
+	UpdateAIStatusPostTick() // in case our actions have made us want to change states
+	consider_despawning()
+	ClearTickBB() // clear the blackboard for the next tick, so we dont have stale data
+
+	return TRUE
+
+	////////////////////////////////////
 	if(environment_smash)
 		EscapeConfinement()
-	if(RTS_move_ordered() || AIShouldWakeUp())
-		toggle_ai(AI_ON)
 
-	if(AICanContinue(possible_targets))
-		var/atom/my_origin = get_origin()
-		var/atom/my_target = get_target()
-		if(my_target && !QDELETED(target) && my_origin && !my_origin.Adjacent(target))
-			DestroyPathToTarget()
-		if(!perform_automated_combat_move(possible_targets))     //if we lose our target
-			if(AIShouldSleep(possible_targets))	// we try to acquire a new one
-				toggle_ai(AI_IDLE)			// otherwise we go idle
-	consider_despawning()
-	return 1
+	// if(AICanContinue(possible_targets))
+	// 	var/atom/my_origin = get_origin()
+	// 	var/atom/my_target = get_target()
+	// 	if(my_target && !QDELETED(target) && my_origin && !my_origin.Adjacent(target))
+	// 		DestroyPathToTarget()
+	// 	if(!perform_automated_combat_move(possible_targets))     //if we lose our target
+	// 		if(AIShouldSleep(possible_targets))	// we try to acquire a new one
+	// 			toggle_ai(AI_IDLE)			// otherwise we go idle
+	// return 1
+
+
+
+/mob/living/simple_animal/hostile/proc/UpdateRTS()
+	// todo: this
+
+/mob/living/simple_animal/hostile/proc/UpdateAIStatusPreTick()
+	if(RTS_move_ordered())
+		toggle_ai(AI_ON)
+		return TRUE
+	if(AIShouldBeAwake())
+		toggle_ai(AI_ON)
+		return TRUE
+
+/mob/living/simple_animal/hostile/proc/UpdateAIStatusPostTick()
+	if(UpdateAIStatusPreTick())
+		return // being on is important, going idle less so
+	//todo: has-target checks, time-since-target-lost checks, frustration, etc
+
+/// gives target if we didnt
+/mob/living/simple_animal/hostile/proc/UpdateTarget(list/bb)
+	if(!islist(bb))
+		bb = blackboard_tick
+	var/atom/my_target = get_or_remove_target() // has a target before this proc is called
+	if(my_target) // if we have a target and its still valid, keep it
+		var/eval_return = EvalTarget(my_target)
+		if(CHECK_BITFIELD(eval_return, MTF_CAN_TARGET))
+			bb[MBB_HAS_TARGET_FROM_LAST_TICK] = TRUE
+			bb[MBB_HAS_TARGET] = TRUE
+			bb[MBB_TARGET_EVAL] = eval_return
+			return // target retained, job's done
+	// possible_targets is a reference and modifies the caller's list
+	// the closest this code gets to an out parameter
+	//if we don't have a target, we try to find one
+	bb[MBB_HAS_TARGET] = !!FindATarget()
+
+/mob/living/simple_animal/hostile/proc/UpdateAttraction()
+	return
+	// todo: full rewrite of attraction, and also merging hostile into simple_animal
+	// todo: continue driving these tack nails into my nuts
+
+/// Check if we are able to do a melee to our target
+/// Updates flags if so
+/// todo: init check to auto-set to not use windup if someone bungled the vars
+/mob/living/simple_animal/hostile/proc/UpdateWindup()
+	if(!windup_enabled)
+		return
+	var/atom/my_target = get_or_remove_target()
+	if(!my_target)
+		WindupKill()
+		return
+	// state mingus
+	// var/atom/my_origin = get_origin()
+	// var/distance = get_dist(my_origin, my_target)
+	// if(distance <= melee_range)
+	// 	WindupStart()
+	switch(windup_state)
+		if(MOB_WINDUP_NONE)
+			WindupStart(my_target)
+			return
+		if(MOB_WINDUP_WINDING_UP)
+			WindupCharging(my_target)
+			return
+		if(MOB_WINDUP_READY)
+			WindupReady(my_target)
+			return
+		else
+			WindupKillForever()
+			return
+
+/// Checks if we can windup and attack our target, and if so, gets everything ready for th ewwindup
+/mob/living/simple_animal/hostile/proc/WindupStart()
+	var/atom/my_target = get_or_remove_target()
+	if(!my_target)
+		WindupKill()
+		return
+	if(windup_state != MOB_WINDUP_NONE)
+		return
+	if(!IsInMeleeRange(my_target))
+		return
+	// ok we're in range, lets start this bad bingus up
+	windup_state = MOB_WINDUP_WINDING_UP
+	windup_ready_timeout = world.time + windup_ready_duration
+	if(windup_sound_start)
+		playsound(
+			src,
+			windup_sound_start,
+			150,
+			FALSE,
+			distant_range = 4)
+	if(windup_magnitude)
+		INVOKE_ASYNC(src, TYPE_PROC_REF(/atom/,do_windup), windup_magnitude, windup_delay_duration)
+	// timer set, state set, sound played, animation started
+	// next ticks will go through waiting through the charging state and such
+
+/// handles calculating when the mob is done charging and ready to attack, and if so, sets the state to ready
+/mob/living/simple_animal/hostile/proc/WindupCharging()
+	var/atom/my_target = get_or_remove_target()
+	if(!my_target)
+		WindupKill()
+		return
+	if(windup_state != MOB_WINDUP_WINDING_UP)
+		return
+	if(world.time < windup_delay_complete)
+		return // not yet! =3
+	// ok we're done charging, lets get ready to attack
+	windup_state = MOB_WINDUP_READY
+	if(windup_sound_ready)
+		playsound(
+			src,
+			windup_sound_ready,
+			150,
+			FALSE,
+			distant_range = 4)
+	// if we are ready, we will check if we can attack in the next tick
+
+/// handles calculating when the mob has been wound up too long, and resets it if that so is to be of the case
+/mob/living/simple_animal/hostile/proc/WindupReady()
+	var/atom/my_target = get_or_remove_target()
+	if(!my_target)
+		WindupKill()
+		return
+	if(windup_state != MOB_WINDUP_READY)
+		return
+	if(world.time < windup_ready_timeout)
+		return // not yet! =3
+	// ok we're done being ready, lets reset the windup
+	WindupKill()
+	return
+	if(windup_sound_cancel)
+		playsound(
+			src,
+			windup_sound_cancel,
+			150,
+			FALSE,
+			distant_range = 4)
+	// ok took too long, no more windup, reset it
+
+/// handles killing the windup state and resetting it to none, for when we lose our target or something
+/mob/living/simple_animal/hostile/proc/WindupKill()
+	if(windup_state == MOB_WINDUP_NONE)
+		return
+	windup_state = MOB_WINDUP_NONE
+	windup_delay_complete = 0
+	windup_ready_timeout = 0
+
+/// turns off the windup state forever, in case the vars are borken or something
+/mob/living/simple_animal/hostile/proc/WindupKillForever()
+	windup_state = MOB_WINDUP_NONE
+	windup_delay_complete = 0
+	windup_ready_timeout = 0
+	windup_enabled = FALSE
+
+// melee update
+/// checks if we can *initiate* a melee this tick, and sets some vars accordingly
+/mob/living/simple_animal/hostile/proc/UpdateMeleeAttack(list/bb)
+	if(!islist(bb)) // choose your own boardventure
+		bb = blackboard_tick // default to main tick's blackboard, or use the passed one for like, rapid attacks and such
+	bb[MBB_MELEE_ATTACK_ALLOWED] = FALSE
+	bb[MBB_MELEE_ATTACK_CD_READY] = FALSE
+	bb[MBB_MELEE_ATTACK_WINDUP_READY] = FALSE
+	var/atom/my_target = get_or_remove_target()
+	if(!my_target)
+		return
+	if(!can_melee_attack)
+		return
+	if(melee_attack_cooldown > world.time)
+		return
+	bb[MBB_MELEE_ATTACK_CD_READY] = TRUE
+	if(windup_enabled && windup_state != MOB_WINDUP_READY)
+		return
+	bb[MBB_MELEE_ATTACK_WINDUP_READY] = TRUE
+	if(!IsInMeleeRange(my_target))
+		return
+	bb[MBB_MELEE_ATTACK_ALLOWED] = TRUE
+
+/// checks if my_target is in melee range, cus stuff uses it a lot i fugess
+/mob/living/simple_animal/hostile/proc/IsInMeleeRange()
+	var/atom/my_target = get_or_remove_target()
+	if(!my_target)
+		return FALSE
+	var/atom/my_origin = get_origin()
+	var/atom/target_origin = my_target.get_origin()
+	return src.can_reach(my_origin, reach = melee_range)
+
+/// Checks if we can *initiate* a ranged attack this tick, and sets some vars accordingly
+/mob/living/simple_animal/hostile/proc/UpdateRangedAttack(list/bb)
+	if(!islist(bb)) // choose your own boardventure
+		bb = blackboard_tick // default to main tick's blackboard, or use the passed one for like, rapid attacks and such
+
+	bb[MBB_RANGED_ATTACK_ALLOWED] = FALSE
+	bb[MBB_RANGED_ATTACK_CD_READY] = FALSE
+	var/atom/my_target = get_or_remove_target()
+	if(!my_target)
+		return
+	if(ranged_cooldown > world.time)
+		return
+	bb[MBB_RANGED_ATTACK_CD_READY] = TRUE
+	if(!CanSeeTarget(my_target))
+		return
+	bb[MBB_RANGED_ATTACK_ALLOWED] = TRUE
+
+
+
+
+
+
+
+
+
+
 
 /mob/living/simple_animal/hostile/handle_automated_movement()
 	. = ..()
@@ -411,21 +717,31 @@
 		face_atom(my_target) //Looks better if they keep looking at you when dodging
 
 /mob/living/simple_animal/hostile/attacked_by(obj/item/I, mob/living/user, attackchain_flags = NONE, damage_multiplier = 1, damage_addition, damage_override)
-	if (peaceful == TRUE)
-		peaceful = FALSE
-	if(stat == CONSCIOUS && !get_target() && AIStatus != AI_OFF && !client && user)
-		FindTarget(list(user), 1)
-	return ..()
+	. = ..()
+	WasAttackedBy(I, user)
 
 /mob/living/simple_animal/hostile/bullet_act(obj/item/projectile/P)
 	. = ..()
-	if (peaceful == TRUE)
+	WasAttackedBy(P, P.firer, TRUE)
+
+/mob/living/simple_animal/hostile/proc/WasAttackedBy(atom/movable/implement, atom/movable/attacker, approach)
+	if(QDELETED(implement) || QDELETED(attacker) || QDELETED(src))
+		return
+	if(!attacker)
+		return
+	if(AIStatus == AI_OFF)
+		return
+	if(client)
+		return
+	if(peaceful == TRUE)
 		peaceful = FALSE
-	if(stat == CONSCIOUS && !get_target() && AIStatus != AI_OFF && !client)
-		if(P.firer)
-			FindTarget(list(P.firer), 1)
-		perform_move_action(P.starting, move_to_delay, 3)
-	//return ..()
+	if(stat != CONSCIOUS)
+		return
+	if(get_target() && prob(50))
+		return
+	GiveTarget(attacker, TRUE)
+	if(approach)
+		perform_move_action(attacker, move_to_delay, 3)
 
 /mob/living/simple_animal/hostile/Hear(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, message_mode, atom/movable/source)
 	. = ..()
@@ -448,6 +764,7 @@
 
 //////////////HOSTILE MOB TARGETTING AND AGGRESSION////////////
 
+/// gets a list of all possible targets in range, regardless of if we can attack them or not
 /mob/living/simple_animal/hostile/proc/ListTargets()//Step 1, find out what we can see
 	var/atom/origin = get_origin()
 	var/v_range = get_vision_range()
@@ -469,31 +786,52 @@
 			CHECK_TICK
 			. += A
 
-/mob/living/simple_animal/hostile/proc/FindTarget(list/possible_targets, HasTargetsList = 0)//Step 2, filter down possible targets to things we actually care about
+/mob/living/simple_animal/hostile/proc/GetPossibleTargets(auto_set_target = TRUE)//Step 2, filter down possible targets to things we actually care about
 	. = list()
-	if (peaceful == FALSE)
-		var/targ_lockout = world.time < RTS_aggro_lockout
-		if(!HasTargetsList)
-			possible_targets = ListTargets()
-		var/list/priority_targets = list()
-		for(var/pos_targ in possible_targets)
-			var/atom/A = pos_targ
-			if(targ_lockout && !isplayer(A))
-				continue
-			if(Found(A))//Just in case people want to override targetting
-				. = list(A)
-				break
-			var/attackreturn = CanAttack(A)
-			if(attackreturn)//Can we attack it?
-				if(attackreturn == 2)
-					priority_targets += A
-				. += A
-				continue
-		var/Target = PickTarget(., priority_targets)
-		GiveTarget(Target)
-		COOLDOWN_START(src, sight_shoot_delay, sight_shoot_delay_time)
-		return Target //We now have a targettte
+	if (peaceful)
+		return
 
+	var/targ_lockout = world.time < RTS_aggro_lockout
+	var/list/targ_out = list()
+	targout[MT_ALL] = ListTargets()
+	targout[MT_VALID] = list()
+	targout[MT_PRIORITY] = list()
+	targout[MT_TOP_PRIORITY] = list()
+	for(var/pos_targ in targout[MT_ALL])
+		var/atom/A = pos_targ
+		if(targ_lockout && !isplayer(A))
+			continue
+		if(Found(A))//Just in case people want to override targetting
+			targout[MT_TOP_PRIORITY] = list(A)
+			continue
+		var/eval_return = EvalTarget(A)
+		if(!CHECK_BITFIELD(eval_return, MTF_CAN_TARGET))
+			continue
+		if(CHECK_BITFIELD(eval_return, MTF_IS_FOE))
+			targout[MT_PRIORITY] |= A
+			continue
+		if(players_are_priority && CHECK_BITFIELD(eval_return, MTF_IS_PLAYER))
+			targout[MT_PRIORITY] |= A
+			continue
+		if(objects_are_priority && CHECK_BITFIELD(eval_return, MTF_IS_OBJECT))
+			targout[MT_PRIORITY] |= A
+			continue
+		if(assemblies_are_priority && CHECK_BITFIELD(eval_return, MTF_IS_ASSEMBLY))
+			targout[MT_PRIORITY] |= A
+			continue
+		if(turrets_are_priority && CHECK_BITFIELD(eval_return, MTF_IS_TURRET))
+			targout[MT_PRIORITY] |= A
+			continue
+		targout[MT_VALID] |= A
+	if(auto_set_target)
+		var/Target = ChooseTargetFromList(targout)
+		GiveTarget(Target)
+		var/list/retlist = list()
+
+		return Target //We now have a targettte
+	return targout
+
+/// not very used
 /mob/living/simple_animal/hostile/proc/PossibleThreats()
 	. = list()
 	for(var/pos_targ in ListTargets())
@@ -501,7 +839,7 @@
 		if(Found(A))
 			. = list(A)
 			break
-		if(CanAttack(A))
+		if(EvalTarget(A))
 			. += A
 			continue
 
@@ -510,119 +848,157 @@
 /mob/living/simple_animal/hostile/proc/Found(atom/A)//This is here as a potential override to pick a specific targette if available
 	return
 
-/mob/living/simple_animal/hostile/proc/PickTarget(list/Targets, list/priority)//Step 3, pick amongst the possible, attackable targets
-	var/atom/my_target = get_target()
-	if(my_target != null)//If we already have a targette, but are told to pick again, calculate the lowest distance between all possible, and pick from the lowest distance targets
-		for(var/pos_targ in Targets)
-			var/atom/A = pos_targ
-			var/atom/origin = get_origin()
-			var/target_dist = get_dist(origin, my_target)
-			var/possible_target_distance = get_dist(origin, A)
-			if(target_dist < possible_target_distance)
-				Targets -= A
-	if(!Targets.len)//We didnt find nothin!
-		return
-	var/chosen_target
-	if(LAZYLEN(priority))//If we have a list of priority targets, pick from them first
-		chosen_target = pick(priority)
-	if(!chosen_target)//If we didnt find a priority target, pick from the rest
-		chosen_target = pick(Targets)
+/// goes through a few lists of possible targets, and picks the most best one to target
+/mob/living/simple_animal/hostile/proc/ChooseTargetFromList(list/targlist_in)//Step 3, pick amongst the possible, attackable targets
+	if(LAZYLEN(targlist_in[MT_TOP_PRIORITY]))
+		return pick(targlist_in[MT_TOP_PRIORITY])
+	var/atom/my_target = get_or_remove_target()
+	var/list/targets = list()
+	targets["priority"] = targlist_in[MT_PRIORITY]
+	targets["valid"] = targlist_in[MT_VALID]
+
+	if(!use_advanced_target_priority_selection)
+		var/chosen_target
+		if(my_target)//If we have a current target, pick it first
+			return my_target
+		if(LAZYLEN(targets["priority"]))//If we have a list of priority targets, pick from them first
+			chosen_target = pick(targets["priority"])
+		if(!chosen_target)//If we didnt find a priority target, pick from the rest
+			chosen_target = pick(targets["valid"])
+		return chosen_target
+
+	if(my_target)
+		targets["current"] = list(my_target)
+	var/atom/origin = get_origin()
+
+	//todo: EQ style aggro list
+	var/list/highest_targets = list()
+	var/highest_score = 0
+	for(var/cat in targets)
+		if(!LAZYLEN(targets[cat]))
+			continue
+		var/priority_bonus = 0
+		if(cat == "current")
+			priority_bonus = 150
+		if(cat == "priority")
+			priority_bonus = 100
+		for(var/atom/A in targets[cat])
+			var/priority_score = 100 + priority_bonus
+			priority_score += GetDistancePriority(A, origin)
+			priority_score += GetHealthPriority(A)
+			if(priority_score < highest_score)
+				continue
+			if(priority_score == highest_score)
+				highest_targets |= A
+				continue
+			highest_targets = list(A)
+			highest_score = priority_score
+	var/atom/chosen_target
+	if(LAZYLEN(highest_targets))
+		chosen_target = pick(highest_targets)
 	return chosen_target
 
+/mob/living/simple_animal/hostile/proc/GetDistancePriority(atom/A, atom/origin)
+	. = 0
+	if(!use_distance_priority)
+		return
+	. += priority_bonus
+	var/dist_pen = get_dist(origin, A) * 10
+	. -= dist_pen
+
+/mob/living/simple_animal/hostile/proc/GetHealthPriority(atom/A)
+	. = 0
+	if(!use_health_priority)
+		return
+	if(!isliving(A))
+		return
+	var/mob/living/L = A
+	var/health_bonus = 100 - ((L.health / L.maxHealth) * 100)
+	. += health_bonus
+
 // Please do not add one-off mob AIs here, but override this function for your mob
-/mob/living/simple_animal/hostile/CanAttack(atom/the_target)//Can we actually attack a possible targette?
+/// Returns a bitfield of flags
+/mob/living/simple_animal/hostile/EvalTarget(atom/the_target)//Can we actually attack a possible targette?
+	. = NONE
 	if(!the_target || the_target.type == /atom/movable/lighting_object || isturf(the_target)) // bail out on invalids
-		return FALSE
-
-	if(ismob(the_target)) //Target is in godmode, ignore it.
-		var/mob/M = the_target
-		if(M.ignore_faction)
-			return FALSE
-		if(M.status_flags & GODMODE)
-			return FALSE
-		if(!M.client)
-			if(!SSmobs.debug_disable_mob_ceasefire)
-				var/client_in_range = FALSE
-				for(var/mob/living/L in SSmobs.clients_by_zlevel[z])
-					if(get_dist(src, L) < SSmobs.distance_where_a_player_needs_to_be_in_for_npcs_to_fight_other_npcs)
-						client_in_range = TRUE
-						break
-				if(!client_in_range)
-					return FALSE
-
+		return
 	if(see_invisible < the_target.invisibility)//Target's invisible to us, forget it
-		return FALSE
-	if(search_objects < 2)
-		if(isliving(the_target))
-			var/mob/living/L = the_target
-			if(SEND_SIGNAL(L, COMSIG_HOSTILE_CHECK_FACTION, src) == SIMPLEMOB_IGNORE)
-				return FALSE
-			var/faction_check = !(L in foes) && faction_check_mob(L)
-			if(robust_searching)
-				if(faction_check && !attack_same)
-					return FALSE
-				if(L.stat > stat_attack)
-					return FALSE
-				if(stat_attack == CONSCIOUS && IS_STAMCRIT(L))
-					return FALSE
-				if(attack_downed_players && L.stat == SOFT_CRIT && iscarbon(L))
-					/// so fun fact, not all players go into crit at 0 HP
-					/// some go into crit at, like, 50 HP, or at -40 HP
-					/// so we have to offset the crit threshold by the amount of health they have
-					if(!L.attackable_in_crit())
-						return FALSE
-				if(friends[L] > 0 && foes[L] < 1)
-					return FALSE
-			else
-				if((faction_check && !attack_same) || L.stat)
-					return FALSE
-			if(isplayer(L))
-				return 2
-			else
-				return TRUE
+		return
+	var/objects_only = search_objects >= 3
+	if(CanSee(the_target))
+		. |= MTF_CAN_SEE
 
-		if(ismecha(the_target))
-			var/obj/mecha/M = the_target
-			if(M.occupant)//Just so we don't attack empty mechs
-				if(CanAttack(M.occupant))
-					return TRUE
+	var/am_player = isplayer(the_target)
+	var/datum/weakref/target_ref = WEAKREF(the_target)
+	if(target_ref in foes)
+		. = MTF_CAN_TARGET | MTF_IS_LIVING | MTF_IS_FOE
+		if(am_player)
+			. |= MTF_IS_PLAYER
+		return
+	if(target_ref in friends)
+		. = MTF_CAN_TARGET | MTF_IS_LIVING | MTF_IS_FRIEND
+		if(am_player)
+			. |= MTF_IS_PLAYER
+		return
 
-		if(istype(the_target, /obj/machinery/porta_turret))
-			var/obj/machinery/porta_turret/P = the_target
-			if(P.in_faction(src)) //Don't attack if the turret is in the same faction
-				return FALSE
-			// if(P.has_cover &&!P.raised) //Don't attack invincible turrets
-			// 	return FALSE
-			if(P.stat & BROKEN) //Or turrets that are already broken
-				return FALSE
-			return 2
+	if(isobj(the_target))
+		if(attack_all_objects || is_type_in_typecache(the_target, wanted_objects))
+			return MTF_CAN_TARGET | MTF_IS_OBJECT
 
 		if(istype(the_target, /obj/item/electronic_assembly))
 			var/obj/item/electronic_assembly/O = the_target
 			if(O.combat_circuits)
-				return TRUE
+				return MTF_CAN_TARGET | MTF_IS_OBJECT | MTF_IS_ASSEMBLY
 
-	if(isobj(the_target))
-		if(attack_all_objects || is_type_in_typecache(the_target, wanted_objects))
-			return TRUE
+		if(ismecha(the_target))
+			var/obj/mecha/M = the_target
+			return EvalTarget(M.occupant)
 
-	return FALSE
+		if(istype(the_target, /obj/machinery/porta_turret))
+			var/obj/machinery/porta_turret/P = the_target
+			if(P.in_faction(src)) //Don't attack if the turret is in the same faction
+				return
+			if(P.stat & BROKEN) //Or turrets that are already broken
+				return
+			return MTF_CAN_TARGET | MTF_IS_OBJECT | MTF_IS_TURRET
 
-/mob/living/simple_animal/hostile/proc/GiveTarget(new_target)//Step 4, give us our selected targette
-	add_target(new_target)
-	LosePatience()
-	if(get_target() != null)
-		if(RTS_move_ordered())
-			clear_target_coords()
-			walk(src, 0)
-		GainPatience()
-		Aggro()
-		return 1
+	if(objects_only)
+		return
+
+	if(isliving(the_target))
+		var/mob/L = the_target
+		if(!L.can_be_targeted_by_mob_ai)
+			return
+		if(L.status_flags & GODMODE)
+			return
+		if(!SSmobs.can_attack_npc(src, L))
+			return
+		if(SEND_SIGNAL(L, COMSIG_HOSTILE_CHECK_FACTION, src) == SIMPLEMOB_IGNORE)
+			return
+		var/is_friendly_faction = FALSE
+		if(!attack_same && mob_faction_is_friendly_to_target(L))
+			is_friendly_faction = TRUE
+		if(is_friendly_faction)
+			return
+		if(L.stat > stat_attack)
+			return
+		if(stat_attack == CONSCIOUS && IS_STAMCRIT(L))
+			return
+		if(attack_downed_players && L.stat == SOFT_CRIT && iscarbon(L))
+			/// so fun fact, not all players go into crit at 0 HP
+			/// some go into crit at, like, 50 HP, or at -40 HP
+			/// so we have to offset the crit threshold by the amount of health they have
+			if(!L.attackable_in_crit())
+				return
+		. = MTF_CAN_TARGET | MTF_IS_LIVING
+		if(am_player)
+			. |= MTF_IS_PLAYER
+		return
 
 /mob/living/simple_animal/hostile/proc/MeleeActionIfPossible(patience = TRUE, atom/target_override = null)
-	if(COOLDOWN_TIMELEFT(src, melee_cooldown))
+	if(COOLDOWN_TIMELEFT(src, melee_attack_cooldown))
 		return TRUE
-	COOLDOWN_START(src, melee_cooldown, melee_attack_cooldown)
+	COOLDOWN_START(src, melee_attack_cooldown, melee_attack_cooldown_duration)
 	var/atom/my_target = target_override || get_target()
 	var/atom/origin = get_origin()
 	if(!winding_up_melee && origin && isturf(origin.loc) && my_target.Adjacent(origin)) //If they're next to us, attack
@@ -635,7 +1011,7 @@
 
 //What we do after closing in
 /mob/living/simple_animal/hostile/proc/MeleeAction(patience = TRUE, atom/target_override = null)
-	if(ismob(target_override) && faction_check_mob(target_override))
+	if(ismob(target_override) && mob_faction_is_friendly_to_target(target_override))
 		return
 	if(rapid_melee > 1)
 		var/datum/callback/cb = CALLBACK(src,PROC_REF(CheckAndAttack))
@@ -660,7 +1036,7 @@
 		return FALSE
 	
 	var/atom/my_target = get_target()
-	if(!my_target || !CanAttack(my_target))
+	if(!my_target || !EvalTarget(my_target))
 		LoseTarget()
 		return FALSE
 	var/turf/T = get_turf(src)
@@ -812,7 +1188,7 @@
 	var/retreat_range = variate_retreat_distance()
 	var/turf/poss_dest = get_ranged_target_turf(src, dir_to_check, retreat_range, spread)
 	if(!isturf(poss_dest))
-		poss_dest = pick(oview(5, my_target)) // if we cant find a turf in that direction, just pick a random one in our oview
+		poss_dest = safepick(oview(5, my_target)) || get_turf(src) // just get something idk
 	set_new_retreat_dest(poss_dest)
 	return poss_dest
 
@@ -990,29 +1366,29 @@
 			LoseSearchObjects()
 		if(AIStatus != AI_ON && AIStatus != AI_OFF)
 			toggle_ai(AI_ON)
-			FindTarget()
+			FindATarget()
 		else if(get_target() != null && prob(40))//No more pulling a mob forever and having a second player attack it, it can switch targets now if it finds a more suitable one
-			FindTarget()
+			FindATarget()
 
 
 /mob/living/simple_animal/hostile/proc/AttackingTarget(atom/target_override)
-	if(!melee_attacks)
+	if(!can_melee_attack)
 		return
 	var/atom/my_target = target_override || get_target()
 	SEND_SIGNAL(src, COMSIG_HOSTILE_ATTACKINGTARGET, my_target)
 	in_melee = TRUE
 	if(prob(alternate_attack_prob) && AlternateAttackingTarget(my_target))
 		return FALSE
-	if(melee_windup_time)
+	if(windup_delay_duration)
 		var/m_rd = retreat_distance
 		var/m_md = minimum_distance
 		winding_up_melee = TRUE //Don't increase our retreating distance while winding up
 		retreat_distance = null //Stop retreating
 		minimum_distance = 1 //Stop moving away
-		if(melee_windup_sound)
-			playsound(src.loc, melee_windup_sound, 150, TRUE, distant_range = 4)	//Play the windup sound effect to warn that an attack is coming.
-		INVOKE_ASYNC(src, TYPE_PROC_REF(/atom/,do_windup), melee_windup_magnitude, melee_windup_time)	//Bouncing bitches.
-		if(do_after(user=src,delay=melee_windup_time,needhand=FALSE,progress=FALSE,required_mobility_flags=null,allow_movement=TRUE,stay_close=FALSE,public_progbar=FALSE))
+		if(windup_sound_start)
+			playsound(src.loc, windup_sound_start, 150, TRUE, distant_range = 4)	//Play the windup sound effect to warn that an attack is coming.
+		INVOKE_ASYNC(src, TYPE_PROC_REF(/atom/,do_windup), windup_magnitude, windup_delay_duration)	//Bouncing bitches.
+		if(do_after(user=src,delay=windup_delay_duration,needhand=FALSE,progress=FALSE,required_mobility_flags=null,allow_movement=TRUE,stay_close=FALSE,public_progbar=FALSE))
 			my_target = get_target() //Switch targets if we did during our windup.
 			if(my_target && Adjacent(my_target)) //If we waited, check if we died or something before finishing the attack windup. If so, don't attack.
 				retreat_distance = m_rd
@@ -1054,14 +1430,6 @@
 	vision_range = initial(vision_range)
 	taunt_chance = initial(taunt_chance)
 
-/mob/living/simple_animal/hostile/proc/LoseTarget()
-	GiveTarget(null)
-	approaching_target = FALSE
-	in_melee = FALSE
-	if(!RTS_move_ordered())
-		walk(src, 0)
-	LoseAggro()
-
 //////////////END HOSTILE MOB TARGETTING AND AGGRESSION////////////
 
 /// Makes mobs smash stuff!
@@ -1080,10 +1448,11 @@
 	do_alert_animation(src)
 	playsound(loc, 'sound/machines/chime.ogg', 50, 1, -1)
 	for(var/mob/living/simple_animal/hostile/M in oview(distance, get_origin()))
-		if(faction_check_mob(M, TRUE))
-			if(M.AIStatus == AI_OFF || M.stat == DEAD || M.ckey)
-				return
-			M.perform_move_action(src,M.move_to_delay,M.minimum_distance)
+		if(!mob_faction_is_friendly_to_target(M))
+			continue
+		if(M.AIStatus == AI_OFF || M.stat == DEAD || M.ckey)
+			continue
+		M.perform_move_action(src,M.move_to_delay,M.minimum_distance)
 
 /mob/living/simple_animal/hostile/proc/CheckFriendlyFire(atom/A)
 	if(!check_friendly_fire || ckey || should_factionize_shots)
@@ -1092,7 +1461,7 @@
 		for(var/mob/living/L in T)
 			if(L == src || L == A)
 				continue
-			if(faction_check_mob(L) && !attack_same)
+			if(mob_faction_is_friendly_to_target(L) && !attack_same)
 				return TRUE
 
 /mob/living/simple_animal/hostile/proc/OpenFire(atom/A, rts)
@@ -1212,9 +1581,9 @@
 		return
 	var/turf/T = get_step(origin, direction)
 	if(rtsd)
-		if(COOLDOWN_TIMELEFT(src, smash_cooldown))
+		if(COOLDOWN_TIMELEFT(src, melee_smash_cooldown))
 			return TRUE
-		COOLDOWN_START(src, smash_cooldown, smash_attack_cooldown)
+		COOLDOWN_START(src, melee_smash_cooldown, melee_smash_cooldown_duration)
 	if(T && T.Adjacent(origin))
 		if(environment_smash)
 			if(CanSmashTurfs(T))
@@ -1225,7 +1594,7 @@
 				return
 		if(rtsd) // forced RTS attack
 			for(var/mob/living/L in T)
-				if(!faction_check_mob(L))
+				if(!mob_faction_is_friendly_to_target(L))
 					MeleeActionIfPossible(FALSE, L)
 					break
 
@@ -1302,29 +1671,30 @@
 /// *****************
 
 ////// AI Status ///////
-/mob/living/simple_animal/hostile/proc/AICanContinue(list/possible_targets)
+/mob/living/simple_animal/hostile/proc/AICanContinue()
 	switch(AIStatus)
 		if(AI_ON)
 			. = 1
 		if(AI_IDLE)
-			if(FindTarget(possible_targets, 1))
+			if(FindATarget())
 				. = 1
 				toggle_ai(AI_ON) //Wake up for more than one Life() cycle.
 			else
 				. = 0
 
-/mob/living/simple_animal/hostile/proc/AIShouldWakeUp()
+/// Determines if the mob should be awake or asleep based on if there are any clients in range
+/mob/living/simple_animal/hostile/proc/AIShouldBeAwake()
 	for(var/client/C in SSmobs.clients_by_zlevel[z])
 		if(get_dist(src, C) <= max_tracking_range)
 			return TRUE
 
-/mob/living/simple_animal/hostile/proc/AIShouldSleep(list/possible_targets)
+/mob/living/simple_animal/hostile/proc/AIShouldSleep()
 	var/atom/targ = get_target()
 	if(get_dist(src, targ) >= max_tracking_range)
 		return FALSE
 	if(RTS_move_ordered())
 		return FALSE
-	if(FindTarget(possible_targets, 1))
+	if(FindATarget())
 		return FALSE
 	return TRUE
 
@@ -1402,6 +1772,13 @@
 		UnregisterSignal(my_target, COMSIG_PARENT_QDELETING)
 	target = null
 
+/mob/living/simple_animal/hostile/proc/get_or_remove_target()
+	var/atom/target = get_target()
+	if(!is_valid_atom_to_target(target))
+		LoseTarget()
+		return null
+	return target
+
 /mob/living/simple_animal/hostile/proc/get_target()
 	return GET_WEAKREF(target)
 
@@ -1410,8 +1787,48 @@
 	if(!new_target)
 		return
 	target = WEAKREF(new_target)
-	InterruptAttractionMovement()
 	RegisterSignal(target, COMSIG_PARENT_QDELETING,PROC_REF(handle_target_del), TRUE)
+
+/mob/living/simple_animal/hostile/proc/LoseTarget()
+	GiveTarget(null)
+	approaching_target = FALSE
+	in_melee = FALSE
+	if(!RTS_move_ordered())
+		walk(src, 0)
+	LoseAggro()
+
+/mob/living/simple_animal/hostile/proc/GiveTarget(new_target, evaluate)//Step 4, give us our selected targette
+	var/atom/old_target = get_target()
+	if(old_target == new_target)
+		return FALSE
+	if(evaluate)	
+		var/eval_ret = EvalTarget(new_target)
+		if(!CHECK_BITFIELD(eval_ret, MTF_CAN_TARGET))
+			return FALSE
+	add_target(new_target)
+	LosePatience()
+	if(get_target() != null)
+		if(RTS_move_ordered())
+			clear_target_coords()
+			walk(src, 0)
+		GainPatience()
+		Aggro()
+		COOLDOWN_START(src, sight_shoot_delay, sight_shoot_delay_duration)
+		return 1
+
+/mob/living/simple_animal/hostile/proc/current_target_is_valid()
+	var/atom/my_target = get_target()
+	return is_valid_atom_to_target(my_target)
+
+/mob/living/simple_animal/hostile/proc/is_valid_atom_to_target(atom/target_check)
+	if(!target_check)
+		return FALSE
+	if(QDELETED(target_check))
+		return FALSE
+	if(!get_turf(target_check))
+		return FALSE
+	return TRUE
+
 
 /// ************************
 /// NEST UNBIRTH PROCS

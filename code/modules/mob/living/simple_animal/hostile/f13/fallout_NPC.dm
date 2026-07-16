@@ -150,7 +150,7 @@
 	extra_projectiles = 2
 	stat_attack = 1
 	ranged = TRUE
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	healable = TRUE
 	maxHealth = 200
 	health = 200

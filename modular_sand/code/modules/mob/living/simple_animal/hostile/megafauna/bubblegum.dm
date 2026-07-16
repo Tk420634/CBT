@@ -80,7 +80,7 @@ Removes slaughterlings (because they are bullshit), instead replacing them with 
 		new /obj/effect/temp_visual/bubblegum_hands/leftsmack(T)
 	sleep(5)
 	for(var/mob/living/L in T)
-		if(!faction_check_mob(L))
+		if(!mob_faction_is_friendly_to_target(L))
 			to_chat(L, "<span class='userdanger'>[src] rends you!</span>")
 			playsound(T, attack_sound, 100, TRUE, -1)
 			var/limb_to_hit = L.get_bodypart(pick(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG))

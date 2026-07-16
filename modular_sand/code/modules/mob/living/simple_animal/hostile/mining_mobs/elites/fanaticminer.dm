@@ -121,7 +121,7 @@
 	visible_message(span_boldwarning("[src] slams his axe!"))
 	for(var/i in 1 to 3)
 		for(var/mob/living/L in T.contents)
-			if(faction_check_mob(L))
+			if(mob_faction_is_friendly_to_target(L))
 				return
 			hit_things += L
 			visible_message(span_boldwarning("[src] slams his axe on [L]!"))

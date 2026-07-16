@@ -30,7 +30,7 @@
 	for(var/atom/movable/A in around)
 		if(isliving(A))
 			var/mob/living/M = A
-			if((faction_check_mob(M) && attack_same) || (!faction_check_mob(M)) || (!ismegafauna(M)))
+			if((mob_faction_is_friendly_to_target(M) && attack_same) || (!mob_faction_is_friendly_to_target(M)) || (!ismegafauna(M)))
 				enemies |= M
 				if(!retaliated)
 					src.visible_message(span_userdanger("[src] seems pretty pissed off at [M]!"))
@@ -51,7 +51,7 @@
 						retaliatedcooldown = world.time + retaliatedcooldowntime
 
 	for(var/mob/living/simple_animal/hostile/megafauna/H in around)
-		if(faction_check_mob(H) && !attack_same && !H.attack_same)
+		if(mob_faction_is_friendly_to_target(H) && !attack_same && !H.attack_same)
 			H.enemies |= enemies
 	return 0
 

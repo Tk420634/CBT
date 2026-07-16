@@ -1,7 +1,7 @@
 /mob/living/simple_animal/hostile/boss
 	name = "A Perfectly Generic Boss Placeholder"
 	desc = ""
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	status_flags = NONE
 	a_intent = INTENT_HARM
 	gender = NEUTER

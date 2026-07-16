@@ -33,7 +33,7 @@
 	held_items = list(null, null)
 	possible_a_intents = list(INTENT_HELP, INTENT_GRAB, INTENT_DISARM, INTENT_HARM)
 	faction = list("jungle")
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	//minbodytemp = 270
 	//maxbodytemp = 350
 	unique_name = TRUE
@@ -77,7 +77,7 @@
 			L.DefaultCombatKnockdown(20)
 			visible_message(span_danger("[src] knocks [L] down!"))
 
-/mob/living/simple_animal/hostile/gorilla/CanAttack(atom/the_target)
+/mob/living/simple_animal/hostile/gorilla/EvalTarget(atom/the_target)
 	var/list/parts = target_bodyparts(get_target())
 	return ..() && !istype(the_target, /mob/living/carbon/monkey) && (!parts  || parts.len > 3)
 

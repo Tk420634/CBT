@@ -62,12 +62,12 @@
 	minimum_distance = 2
 	extra_projectiles = 2
 	ranged_cooldown_time = 2 SECONDS
-	sight_shoot_delay_time = 0.2 SECONDS
+	sight_shoot_delay_duration = 0.2 SECONDS
 	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
 	projectiletype = /obj/item/projectile/bullet/c10mm/simple
 	projectilesound = 'sound/f13weapons/10mm_fire_01.ogg'
 	loot = list(/obj/item/gun/ballistic/automatic/pistol/m1911, /obj/effect/gibspawner/human)
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	//speak = list(
 		// "Come get some!",
 		// "Fuck off!",
@@ -106,11 +106,11 @@
 	minimum_distance = 3
 	extra_projectiles = 0
 	ranged_cooldown_time = 2 SECONDS
-	sight_shoot_delay_time = 0.2 SECONDS
+	sight_shoot_delay_duration = 0.2 SECONDS
 	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
 	projectiletype = /obj/item/projectile/ion/renegade
 	projectilesound = 'sound/f13weapons/pulsepistolfire.ogg'
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	//speak = list(
 		// "Come get some!",
 		// "Fuck off!",
@@ -153,7 +153,7 @@
 	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
 	projectilesound = 'sound/f13weapons/shotgun.ogg'
 	casingtype = /obj/item/ammo_casing/shotgun
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	//speak = list(
 		// "Come get some!",
 		// "Going to blow some shit to kingdom come!",
@@ -191,12 +191,12 @@
 	retreat_distance = 7
 	minimum_distance = 3
 	extra_projectiles = 2
-	sight_shoot_delay_time = 0.2 SECONDS
+	sight_shoot_delay_duration = 0.2 SECONDS
 	ranged_cooldown_time = 2 SECONDS
 	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
 	projectiletype = /obj/item/projectile/bullet/c10mm/simple
 	projectilesound = 'sound/f13weapons/combatrifle.ogg'
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	//speak = list(
 		// "Come get some!",
 		// "I like my odds, c'mere!",
@@ -241,7 +241,7 @@
 	attack_sound = 'sound/weapons/slam.ogg'
 	a_intent = INTENT_HARM
 	emote_taunt = list("bashes their shield with the mace")
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	//speak = list(
 		// "COME AND TRY ME, BITCH!",
 		// "I AM THE WALL!",
@@ -283,7 +283,7 @@
 		/obj/effect/spawner/lootdrop/f13/uncommon_armor,
 		/obj/effect/gibspawner/human
 		)
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	//speak = list(
 		// "Come get some!",
 		// "I am the shadow!",
@@ -330,7 +330,7 @@
 	loot = list(/obj/effect/spawner/lootdrop/f13/uncommon, /obj/effect/gibspawner/human)
 	loot_drop_amount = 5
 	loot_amount_random = TRUE
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	//speak = list(
 		// "Come get some!",
 		// "ON THE GROUND!",
@@ -377,7 +377,7 @@
 	extra_projectiles = 5
 	ranged_cooldown_time = 2 SECONDS
 	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
-	sight_shoot_delay_time = 0 SECONDS // he's a boss after all
+	sight_shoot_delay_duration = 0 SECONDS // he's a boss after all
 	projectiletype = /obj/item/projectile/bullet/m5mm/simple
 	projectilesound = 'sound/f13weapons/automaticrifle_BAR.ogg'
 	loot = list(/obj/effect/spawner/lootdrop/f13/rare, /obj/effect/gibspawner/human)
@@ -431,7 +431,7 @@
 	extra_projectiles = 3
 	ranged_cooldown_time = 3 SECONDS
 	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
-	sight_shoot_delay_time = 0 SECONDS // he's a boss after all
+	sight_shoot_delay_duration = 0 SECONDS // he's a boss after all
 	projectiletype = /obj/item/projectile/beam/laser/laer/hitscan
 	projectilesound = 'sound/f13weapons/laerfire.ogg'
 	loot = list(/obj/effect/spawner/lootdrop/f13/rare, /obj/effect/gibspawner/human)
@@ -476,12 +476,12 @@
 	check_friendly_fire = 1
 	retreat_distance = 6
 	minimum_distance = 8
-	sight_shoot_delay_time = 0.2 SECONDS
+	sight_shoot_delay_duration = 0.2 SECONDS
 	ranged_cooldown_time = 1 SECONDS
 	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
 	projectiletype = /obj/item/projectile/bullet/m44/simple
 	projectilesound = 'sound/f13weapons/44mag.ogg'
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	//speak = list(
 		// "Running low on meds.",
 		// "Could do with extra combat chems.",

@@ -33,7 +33,7 @@
 	auto_fire_delay = GUN_AUTOFIRE_DELAY_SLOWER
 	melee_damage_lower = 12
 	melee_damage_upper = 24
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	attack_verb_simple = "saws"
 	faction = list("wastebot")
 	speak_emote = list("states")

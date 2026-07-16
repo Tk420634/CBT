@@ -38,11 +38,6 @@
 /mob/living/simple_animal/hostile/shark/Process_Spacemove(movement_dir = 0, continuous_move)
 	return 1   //No drifting in space for space sharks....either!
 
-/mob/living/simple_animal/hostile/shark/FindTarget()
-	. = ..()
-	if(.)
-		emote("me", 1, "growls at [.]!")
-
 /mob/living/simple_animal/hostile/shark/AttackingTarget()
 	. =..()
 	var/mob/living/carbon/L = .

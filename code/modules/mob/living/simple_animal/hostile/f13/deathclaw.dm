@@ -26,7 +26,7 @@
 	a_intent = INTENT_HARM //So we can not move past them.
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	sentience_type = SENTIENCE_BOSS
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	//speak = list("ROAR!","Rawr!","GRRAAGH!","Growl!")
 	speak_emote = list("growls", "roars")
 	emote_hear = list("grumbles.","grawls.")
@@ -193,7 +193,7 @@
 	a_intent = INTENT_HARM //So we can not move past them.
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	sentience_type = SENTIENCE_BOSS 
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	//speak = list("ROAR!","Rawr!","GRRAAGH!","Growl!")
 	speak_emote = list("growls", "roars")
 	emote_hear = list("grumbles.","grawls.")

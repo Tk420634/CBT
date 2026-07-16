@@ -8,7 +8,7 @@
 	desc = "An elite monster, found in one of the strange tumors on lavaland."
 	icon = 'icons/mob/lavaland/lavaland_elites.dmi'
 	faction = list("boss")
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	ranged_ignores_vision = TRUE
 	ranged = TRUE
 	obj_damage = 5
@@ -39,7 +39,7 @@
 	var/atom/my_target = get_target()
 	if(istype(my_target, /mob/living/simple_animal/hostile))
 		var/mob/living/simple_animal/hostile/M = my_target
-		if(faction_check_mob(M))
+		if(mob_faction_is_friendly_to_target(M))
 			return FALSE
 	if(istype(my_target, /obj/structure/elite_tumor))
 		var/obj/structure/elite_tumor/T = my_target

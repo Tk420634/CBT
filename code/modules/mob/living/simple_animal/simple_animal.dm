@@ -258,6 +258,13 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	var/attraction_cooldown = 10 SECONDS
 	var/last_attraction_time
 
+	/// used for movement, to store the coords of the next tile to move to, for tile target movement
+	/// format: list(x, y, z)
+	var/list/move_target_coords
+	/// Used for movement, to store an entity to move towards
+	/// Takes priority over move_target_coords
+	var/datum/weakref/move_target_entity
+
 /mob/living/simple_animal/Initialize()
 	. = ..()
 	GLOB.simple_animals[AIStatus] += src
@@ -427,7 +434,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	// faction |= myteam
 
 /mob/living/simple_animal/proc/infight_check(mob/living/simple_animal/H)
-	if(SSmobs.debug_disable_mob_ceasefire)
+	if(SSmobs.can_attack_npc(src, H))
 		return
 	if(H.client || client || player_character || H.player_character)
 		return
@@ -438,6 +445,8 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	return (H.ignore_other_mobs || ignore_other_mobs)
 
 /mob/living/simple_animal/Destroy()
+	move_target_coords = null
+	move_target_entity = null
 	GLOB.simple_animals[AIStatus] -= src
 	SSnpcpool.currentrun -= src
 	QDEL_NULL(current_attraction)
@@ -585,7 +594,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 
 /mob/living/simple_animal/proc/handle_automated_action()
 	set waitfor = FALSE
-	return
+	return TRUE
 
 /mob/living/simple_animal/proc/handle_automated_movement()
 	set waitfor = FALSE
@@ -1011,7 +1020,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 		else
 			maptext = null
 
-/mob/living/simple_animal/proc/CanAttack(atom/the_target)
+/mob/living/simple_animal/proc/EvalTarget(atom/the_target)
 	if(see_invisible < the_target.invisibility)
 		return FALSE
 	if(ismob(the_target))
@@ -1067,7 +1076,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 			else if(!istype(M, childtype) && M.gender == MALE) //Better safe than sorry ;_;
 				partner = M
 
-		else if(isliving(M) && !faction_check_mob(M)) //shyness check. we're not shy in front of things that share a faction with us.
+		else if(isliving(M) && !mob_faction_is_friendly_to_target(M)) //shyness check. we're not shy in front of things that share a faction with us.
 			return //we never mate when not alone, so just abort early
 
 	if(alone && partner && children < 3)
@@ -1378,6 +1387,11 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	. = ..()
 	unstamcrit()
 
+/* *******************************
+ * RTS SIMPLEMOB STUFF END
+ * *******************************/
+
+// todo: rework this nightmare
 /mob/living/simple_animal/proc/RTS_move_to_tile(targettte, delay, minimum_distance)
 	end_RTS_move()
 	if(!targettte)
@@ -1460,6 +1474,10 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 		for(var/turf/T in orange(1,src))
 			if(prob(50))
 				do_huh_animation(T)
+
+/* *******************************
+ * RTS SIMPLEMOB STUFF END
+ * *******************************/
 
 /mob/living/simple_animal/proc/link_to_nest(atom/birthplace)
 	if(nest || !isatom(birthplace))

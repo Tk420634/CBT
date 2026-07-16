@@ -40,7 +40,7 @@
 
 		A.flags_1 |= (flags_1 & ADMIN_SPAWNED_1)
 		A.GiveTarget(get_target())
-		A.friends = friends
+		A.friends = friends.Copy()
 		A.faction = faction.Copy()
 		ranged_cooldown = world.time + ranged_cooldown_time
 

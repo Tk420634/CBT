@@ -80,8 +80,8 @@ Difficulty: Medium
 		if(prob(75))
 			var/mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion/A = new(loc)
 			A.GiveTarget(target)
-			A.friends = friends
-			A.faction = faction
+			A.friends = friends.Copy()
+			A.faction = faction.Copy()
 			ranged_cooldown = world.time + ranged_cooldown_time
 		else
 			visible_message(span_warning("<b>[src] charges!</b>"))

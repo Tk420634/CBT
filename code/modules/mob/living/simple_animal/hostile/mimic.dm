@@ -64,7 +64,7 @@
 		return ..()
 	return ..(1)
 
-/mob/living/simple_animal/hostile/mimic/crate/FindTarget()
+/mob/living/simple_animal/hostile/mimic/crate/GetPossibleTargets()
 	. = ..()
 	if(.)
 		trigger()
@@ -198,7 +198,7 @@ GLOBAL_LIST_INIT(protected_objects, list(/obj/structure/table, /obj/structure/ca
 				//"My logic is undeniable.", "One of us.", "FLESH IS WEAK", "THIS ISN'T WAR, THIS IS EXTERMINATION!")
 	speak_chance = 7
 
-/mob/living/simple_animal/hostile/mimic/copy/machine/CanAttack(atom/the_target)
+/mob/living/simple_animal/hostile/mimic/copy/machine/EvalTarget(atom/the_target)
 	if(the_target == creator) // Don't attack our creator AI.
 		return 0
 	if(iscyborg(the_target))
