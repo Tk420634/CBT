@@ -1060,7 +1060,7 @@ SUBSYSTEM_DEF(economy)
 					if(D)
 						D.adjust_money(medical_cash)
 		if(ishostile(m))
-			var/mob/living/simple_animal/hostile/H = m
+			var/mob/living/danimal/hostile/H = m
 			if(H.stat == DEAD && (H.z in SSmapping.levels_by_trait(ZTRAIT_STATION)))
 				dead_monsters++
 		CHECK_TICK
@@ -1072,7 +1072,7 @@ SUBSYSTEM_DEF(economy)
 
 /datum/controller/subsystem/economy/proc/sci_payout()
 	var/science_bounty = 0
-	for(var/mob/living/simple_animal/slime/S in GLOB.mob_list)
+	for(var/mob/living/danimal/slime/S in GLOB.mob_list)
 		if(S.stat == DEAD)
 			continue
 		science_bounty += slime_bounty[S.colour]

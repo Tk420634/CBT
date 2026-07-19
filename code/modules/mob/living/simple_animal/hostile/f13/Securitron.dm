@@ -4,7 +4,7 @@
 */
 
 //Securitron  TV Head jackass
-/mob/living/simple_animal/hostile/securitron
+/mob/living/danimal/hostile/securitron
 	bounty = 25
 	name = "securitron"
 	desc = "A Pre-Fall type of securitron.<br>Extremely dangerous machine."
@@ -52,7 +52,6 @@
 
 	emote_hear = list("Beeps.")
 	//speak = list("Stop Right There Criminal.")
-	harm_intent_damage = 8
 	melee_damage_lower = 5
 	melee_damage_upper = 10
 	extra_projectiles = 1
@@ -87,14 +86,14 @@
 	var/ex_flash = 4
 	var/ex_flames = 6
 
-/mob/living/simple_animal/hostile/securitron/nsb //NSB + Raider Bunker specific
+/mob/living/danimal/hostile/securitron/nsb //NSB + Raider Bunker specific
 	bounty = 30
 	name = "Securitron"
 	faction = list("raider")
 	obj_damage = 300
 	retreat_distance = 0 //perish, mortal
 
-/mob/living/simple_animal/hostile/securitron/bullet_act(obj/item/projectile/Proj)
+/mob/living/danimal/hostile/securitron/bullet_act(obj/item/projectile/Proj)
 	if(!Proj)
 		CRASH("[src] securitron invoked bullet_act() without a projectile")
 	if(prob(5) && health > 1)
@@ -113,11 +112,11 @@
 		S.preprime(user = null)
 	..()
 
-/mob/living/simple_animal/hostile/securitron/proc/do_death_beep()
+/mob/living/danimal/hostile/securitron/proc/do_death_beep()
 	playsound(src, 'sound/machines/triple_beep.ogg', 75, FALSE)
 	visible_message(span_warning("You hear an ominous beep coming from [src]!"), span_warning("You hear an ominous beep!"))
 
-/mob/living/simple_animal/hostile/securitron/proc/self_destruct()
+/mob/living/danimal/hostile/securitron/proc/self_destruct()
 	explosion(
 		get_turf(src),
 		ex_devastate,
@@ -127,11 +126,11 @@
 		flame_range = ex_flames
 		)
 
-/mob/living/simple_animal/hostile/securitron/ex_act(severity, target, origin)
+/mob/living/danimal/hostile/securitron/ex_act(severity, target, origin)
 	. = ..()
 	
 
-/mob/living/simple_animal/hostile/securitron/death()
+/mob/living/danimal/hostile/securitron/death()
 	do_sparks(3, TRUE, src)
 	if(explodes_on_death)
 		for(var/i in 1 to 3)
@@ -139,12 +138,12 @@
 		addtimer(CALLBACK(src,PROC_REF(self_destruct)), 4 SECONDS)
 	return ..()
 
-/mob/living/simple_animal/hostile/securitron/Aggro()
+/mob/living/danimal/hostile/securitron/Aggro()
 	. = ..()
 	summon_backup(15)
 
 //Sentry Bot
-/mob/living/simple_animal/hostile/securitron/sentrybot
+/mob/living/danimal/hostile/securitron/sentrybot
 	bounty = 80
 	name = "sentry bot"
 	desc = "A Pre-Fall military robot armed with a deadly gatling laser and covered in thick armor plating."
@@ -207,7 +206,7 @@
 	loot_drop_amount = 3
 	loot_amount_random = TRUE
 
-/mob/living/simple_animal/hostile/securitron/sentrybot/Life()
+/mob/living/danimal/hostile/securitron/sentrybot/Life()
 	..()
 	if (!warned)
 		if (health <= 50)
@@ -215,7 +214,7 @@
 			playsound(src, 'sound/f13npc/sentry/systemfailure.ogg', 75, FALSE)
 
 // Lil chew-chew
-/mob/living/simple_animal/hostile/securitron/sentrybot/chew
+/mob/living/danimal/hostile/securitron/sentrybot/chew
 	bounty = 500
 	name = "lil' chew-chew"
 	desc = "An oddly scorched Pre-Fall military robot armed with a deadly gatling laser and covered in thick, oddly blue armor plating, the name Lil' Chew-Chew scratched onto it's front armour crudely, highlighted by small bits of white paint. There seems to be an odd pack on the monstrosity of a sentrie's back, a chute at the bottom of it - there's the most scorch-marks on the robot here, so it's safe to assume this robot is capable of explosions. Better watch out!"
@@ -232,7 +231,7 @@
 	loot_drop_amount = 10
 	loot_amount_random = TRUE
 
-/mob/living/simple_animal/hostile/securitron/sentrybot/chew/bullet_act(obj/item/projectile/Proj)
+/mob/living/danimal/hostile/securitron/sentrybot/chew/bullet_act(obj/item/projectile/Proj)
 	if(!Proj)
 		CRASH("[src] sentrybot invoked bullet_act() without a projectile")
 	if(prob(10) && health > 1)
@@ -241,12 +240,12 @@
 	..()
 
 //Raider friendly Sentry bot
-/mob/living/simple_animal/hostile/securitron/sentrybot/nsb
+/mob/living/danimal/hostile/securitron/sentrybot/nsb
 	name = "sentry bot"
 	obj_damage = 300
 
 //Raider friendly Sentry bot with non-lethals
-/mob/living/simple_animal/hostile/securitron/sentrybot/nsb/riot //NSB + Raider Bunker specific.
+/mob/living/danimal/hostile/securitron/sentrybot/nsb/riot //NSB + Raider Bunker specific.
 	bounty = 300
 	name = "riot-control sentry bot"
 	desc = "A Pre-Fall military robot armed with a modified breacher shotgun and covered in thick armor plating."
@@ -266,7 +265,7 @@
 	)
 
 //Playable Sentrybot
-/mob/living/simple_animal/hostile/securitron/sentrybot/playable
+/mob/living/danimal/hostile/securitron/sentrybot/playable
 	health = 50   //El Beef
 	maxHealth = 50
 	speed = 1
@@ -279,13 +278,12 @@
 	see_in_dark = 8
 	environment_smash = 2 //can smash walls
 	wander = 0
-	force_threshold = 15
 
-/mob/living/simple_animal/hostile/securitron/sentrybot/playable/death()
+/mob/living/danimal/hostile/securitron/sentrybot/playable/death()
 	return ..()
 
 //Junkers
-/mob/living/simple_animal/hostile/securitron/sentrybot/self_destruct
+/mob/living/danimal/hostile/securitron/sentrybot/self_destruct
 	name = "explosive sentry bot"
 	desc = "A Pre-Fall military robot armed with a deadly gatling laser and covered in thick armor plating. Don't get too close to this one, it looks like it's rigged to blow!"
 	maxHealth = 160
@@ -294,6 +292,6 @@
 	retreat_distance = null
 	minimum_distance = 1
 
-/mob/living/simple_animal/hostile/securitron/sentrybot/self_destruct/AttackingTarget()
+/mob/living/danimal/hostile/securitron/sentrybot/self_destruct/AttackingTarget()
 	addtimer(CALLBACK(src,PROC_REF(do_death_beep)), 1 SECONDS)
 	addtimer(CALLBACK(src,PROC_REF(self_destruct)), 2 SECONDS)

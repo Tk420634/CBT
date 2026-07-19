@@ -1,6 +1,6 @@
 //Large and powerful, but timid. It won't engage anything above 50 health, or anything without legcuffs.
 //It can fire fleshy snares that legcuff anyone that it hits, making them look especially tasty to the arachnid.
-/mob/living/simple_animal/hostile/jungle/mega_arachnid
+/mob/living/danimal/hostile/jungle/mega_arachnid
 	name = "mega arachnid"
 	desc = "Though physically imposing, it prefers to ambush its prey, and it will only engage with an already crippled opponent."
 	icon = 'icons/mob/jungle/arachnid.dmi'
@@ -26,7 +26,7 @@
 
 	footstep_type = FOOTSTEP_MOB_CLAW
 
-/mob/living/simple_animal/hostile/jungle/mega_arachnid/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/jungle/mega_arachnid/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	var/atom/my_target = get_target()
@@ -41,11 +41,11 @@
 	minimum_distance = 0
 	alpha = 255
 
-/mob/living/simple_animal/hostile/jungle/mega_arachnid/Aggro()
+/mob/living/danimal/hostile/jungle/mega_arachnid/Aggro()
 	..()
 	alpha = 255
 
-/mob/living/simple_animal/hostile/jungle/mega_arachnid/LoseAggro()
+/mob/living/danimal/hostile/jungle/mega_arachnid/LoseAggro()
 	..()
 	alpha = 50
 

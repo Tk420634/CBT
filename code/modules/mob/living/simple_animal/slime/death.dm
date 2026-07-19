@@ -1,9 +1,9 @@
-/mob/living/simple_animal/slime/death(gibbed)
+/mob/living/danimal/slime/death(gibbed)
 	if(stat == DEAD)
 		return
 	if(!gibbed)
 		if(is_adult)
-			var/mob/living/simple_animal/slime/M = new(loc, colour)
+			var/mob/living/danimal/slime/M = new(loc, colour)
 			M.rabid = TRUE
 			M.regenerate_icons()
 
@@ -29,6 +29,6 @@
 
 	return ..(gibbed)
 
-/mob/living/simple_animal/slime/gib()
+/mob/living/danimal/slime/gib()
 	death(TRUE)
 	qdel(src)

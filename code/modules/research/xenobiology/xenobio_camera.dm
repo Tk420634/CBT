@@ -57,7 +57,7 @@
 	stored_slimes = null
 	QDEL_NULL(current_potion)
 	for(var/i in contents)
-		var/mob/living/simple_animal/slime/S = i
+		var/mob/living/danimal/slime/S = i
 		if(istype(S))
 			S.forceMove(drop_location())
 	return ..()
@@ -187,7 +187,7 @@
 	var/obj/machinery/computer/camera_advanced/xenobio/X = target
 
 	if(GLOB.cameranet.checkTurfVis(remote_eye.loc))
-		for(var/mob/living/simple_animal/slime/S in X.stored_slimes)
+		for(var/mob/living/danimal/slime/S in X.stored_slimes)
 			S.forceMove(remote_eye.loc)
 			S.visible_message("[S] warps in!")
 			X.stored_slimes -= S
@@ -207,7 +207,7 @@
 	var/obj/machinery/computer/camera_advanced/xenobio/X = target
 
 	if(GLOB.cameranet.checkTurfVis(remote_eye.loc))
-		for(var/mob/living/simple_animal/slime/S in remote_eye.loc)
+		for(var/mob/living/danimal/slime/S in remote_eye.loc)
 			if(X.stored_slimes.len >= X.max_slimes)
 				break
 			if(!S.ckey)
@@ -278,7 +278,7 @@
 	var/mob/camera/aiEye/remote/xenobio/remote_eye = C.remote_control
 
 	if(GLOB.cameranet.checkTurfVis(remote_eye.loc))
-		for(var/mob/living/simple_animal/slime/S in remote_eye.loc)
+		for(var/mob/living/danimal/slime/S in remote_eye.loc)
 			slime_scan(S, C)
 	else
 		to_chat(owner, span_warning("Target is not near a camera. Cannot proceed."))
@@ -301,7 +301,7 @@
 		return
 
 	if(GLOB.cameranet.checkTurfVis(remote_eye.loc))
-		for(var/mob/living/simple_animal/slime/S in remote_eye.loc)
+		for(var/mob/living/danimal/slime/S in remote_eye.loc)
 			X.current_potion.attack(S, C)
 			break
 	else
@@ -357,17 +357,17 @@
 // Alternate clicks for slime, monkey and open turf if using a xenobio console
 
 // Scans slime
-/mob/living/simple_animal/slime/CtrlClick(mob/user)
+/mob/living/danimal/slime/CtrlClick(mob/user)
 	SEND_SIGNAL(user, COMSIG_XENO_SLIME_CLICK_CTRL, src)
 	..()
 
 //Feeds a potion to slime
-/mob/living/simple_animal/slime/AltClick(mob/user)
+/mob/living/danimal/slime/AltClick(mob/user)
 	SEND_SIGNAL(user, COMSIG_XENO_SLIME_CLICK_ALT, src)
 	..()
 
 //Picks up slime
-/mob/living/simple_animal/slime/ShiftClick(mob/user)
+/mob/living/danimal/slime/ShiftClick(mob/user)
 	SEND_SIGNAL(user, COMSIG_XENO_SLIME_CLICK_SHIFT, src)
 	..()
 
@@ -453,7 +453,7 @@
 	var/obj/machinery/computer/camera_advanced/xenobio/X = E.origin
 	var/area/turfarea = get_area(T)
 	if(turfarea.name == E.allowed_area || turfarea.xenobiology_compatible)
-		for(var/mob/living/simple_animal/slime/S in X.stored_slimes)
+		for(var/mob/living/danimal/slime/S in X.stored_slimes)
 			S.forceMove(T)
 			S.visible_message("[S] warps in!")
 			X.stored_slimes -= S

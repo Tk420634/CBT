@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/raider/pirate
+/mob/living/danimal/hostile/raider/pirate
 	name = "Pirate"
 	desc = "Does what he wants cause a pirate is free."
 	icon = 'icons/mob/simple_human.dmi'
@@ -15,7 +15,6 @@
 	maxHealth = 115
 	health = 115
 	spacewalk = TRUE
-	harm_intent_damage = 5
 	melee_damage_lower = 10
 	melee_damage_upper = 10
 	attack_verb_continuous = "punches"
@@ -38,7 +37,7 @@
 	loot_drop_amount = 2
 	loot_amount_random = TRUE
 
-/mob/living/simple_animal/hostile/raider/pirate/melee
+/mob/living/danimal/hostile/raider/pirate/melee
 	name = "Pirate Swashbuckler"
 	icon_state = "piratemelee"
 	icon_living = "piratemelee"
@@ -52,7 +51,7 @@
 
 	footstep_type = FOOTSTEP_MOB_SHOE
 
-/mob/living/simple_animal/hostile/raider/pirate/melee/space
+/mob/living/danimal/hostile/raider/pirate/melee/space
 	name = "Space Pirate Swashbuckler"
 	icon_state = "piratespace"
 	icon_living = "piratespace"
@@ -62,15 +61,15 @@
 	speed = 1
 	spacewalk = TRUE
 
-/mob/living/simple_animal/hostile/raider/pirate/melee/Initialize()
+/mob/living/danimal/hostile/raider/pirate/melee/Initialize()
 	. = ..()
 	sord = new(src)
 
-/mob/living/simple_animal/hostile/raider/pirate/melee/Destroy()
+/mob/living/danimal/hostile/raider/pirate/melee/Destroy()
 	QDEL_NULL(sord)
 	return ..()
 
-/mob/living/simple_animal/hostile/raider/pirate/ranged
+/mob/living/danimal/hostile/raider/pirate/ranged
 	name = "Pirate Gunner"
 	icon_state = "pirateranged"
 	icon_living = "pirateranged"
@@ -97,7 +96,7 @@
 	)
 
 
-/mob/living/simple_animal/hostile/raider/pirate/ranged/space
+/mob/living/danimal/hostile/raider/pirate/ranged/space
 	name = "Space Pirate Gunner"
 	icon_state = "piratespaceranged"
 	icon_living = "piratespaceranged"

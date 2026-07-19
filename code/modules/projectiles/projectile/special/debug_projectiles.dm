@@ -58,7 +58,7 @@
 
 /obj/item/projectile/bullet/unbirth/on_hit(atom/target, blocked = FALSE)
 	..()
-	if(istype(target, /mob/living/simple_animal/hostile))
-		var/mob/living/simple_animal/hostile/B = target
+	if(istype(target, /mob/living/danimal/hostile))
+		var/mob/living/danimal/hostile/B = target
 		B.unbirth_self(TRUE) // this gun noncon vores people into holes
 	return BULLET_ACT_HIT

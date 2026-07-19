@@ -6,7 +6,7 @@
 #define INVISIBILITY_REVENANT 50
 #define REVENANT_NAME_FILE "revenant_names.json"
 
-/mob/living/simple_animal/revenant
+/mob/living/danimal/revenant
 	name = "revenant"
 	desc = "A malevolent spirit."
 	icon = 'icons/mob/mob.dmi'
@@ -43,7 +43,6 @@
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 0
 	//maxbodytemp = INFINITY
-	harm_intent_damage = 0
 	friendly_verb_continuous = "touches"
 	friendly_verb_simple = "touch"
 	status_flags = 0
@@ -73,7 +72,7 @@
 	var/perfectsouls = 0 //How many perfect, regen-cap increasing souls the revenant has. //TODO, add objective for getting a perfect soul(s?)
 	var/generated_objectives_and_spells = FALSE
 
-/mob/living/simple_animal/revenant/Initialize(mapload)
+/mob/living/danimal/revenant/Initialize(mapload)
 	. = ..()
 	AddSpell(new /obj/effect/proc_holder/spell/targeted/night_vision/revenant(null))
 	AddSpell(new /obj/effect/proc_holder/spell/targeted/telepathy/revenant(null))
@@ -83,7 +82,7 @@
 	AddSpell(new /obj/effect/proc_holder/spell/aoe_turf/revenant/malfunction(null))
 	random_revenant_name()
 
-/mob/living/simple_animal/revenant/proc/random_revenant_name()
+/mob/living/danimal/revenant/proc/random_revenant_name()
 	var/built_name = ""
 	built_name += pick(strings(REVENANT_NAME_FILE, "spirit_type"))
 	built_name += " of "
@@ -91,7 +90,7 @@
 	built_name += pick(strings(REVENANT_NAME_FILE, "theme"))
 	name = built_name
 
-/mob/living/simple_animal/revenant/Login()
+/mob/living/danimal/revenant/Login()
 	..()
 	to_chat(src, "<span class='deadsay'><span class='big bold'>You are a revenant.</span></span>")
 	to_chat(src, "<b>Your formerly mundane spirit has been infused with alien energies and empowered into a revenant.</b>")
@@ -108,7 +107,7 @@
 		mind.add_antag_datum(/datum/antagonist/revenant)
 
 //Life, Stat, Hud Updates, and Say
-/mob/living/simple_animal/revenant/Life(seconds, times_fired)
+/mob/living/danimal/revenant/Life(seconds, times_fired)
 	. = ..()
 	if(stasis)
 		return
@@ -130,13 +129,13 @@
 	update_spooky_icon()
 	update_health_hud()
 
-/mob/living/simple_animal/revenant/get_status_tab_items()
+/mob/living/danimal/revenant/get_status_tab_items()
 	. = ..()
 	. += "Current essence: [essence]/[essence_regen_cap]E"
 	. += "Stolen essence: [essence_accumulated]E"
 	. += "Stolen perfect souls: [perfectsouls]"
 
-/mob/living/simple_animal/revenant/update_health_hud()
+/mob/living/danimal/revenant/update_health_hud()
 	if(hud_used)
 		var/essencecolor = "#8F48C6"
 		if(essence > essence_regen_cap)
@@ -145,13 +144,13 @@
 			essencecolor = "#1D2953" //oh jeez you're dying
 		hud_used.healths.maptext = "<div align='center' valign='middle' style='position:relative; top:0px; left:6px'><font color='[essencecolor]'>[essence]E</font></div>"
 
-/mob/living/simple_animal/revenant/med_hud_set_health()
+/mob/living/danimal/revenant/med_hud_set_health()
 	return //we use no hud
 
-/mob/living/simple_animal/revenant/med_hud_set_status()
+/mob/living/danimal/revenant/med_hud_set_status()
 	return //we use no hud
 
-/mob/living/simple_animal/revenant/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null, only_overhead)
+/mob/living/danimal/revenant/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null, only_overhead)
 	if(!message)
 		return
 	src.log_talk(message, LOG_SAY)
@@ -167,23 +166,23 @@
 
 //Immunities
 
-/mob/living/simple_animal/revenant/ex_act(severity, target)
+/mob/living/danimal/revenant/ex_act(severity, target)
 	return 1 //Immune to the effects of explosions.
 
-/mob/living/simple_animal/revenant/blob_act(obj/structure/blob/B)
+/mob/living/danimal/revenant/blob_act(obj/structure/blob/B)
 	return //blah blah blobs aren't in tune with the spirit world, or something.
 
-/mob/living/simple_animal/revenant/singularity_act()
+/mob/living/danimal/revenant/singularity_act()
 	return //don't walk into the singularity expecting to find corpses, okay?
 
-/mob/living/simple_animal/revenant/narsie_act()
+/mob/living/danimal/revenant/narsie_act()
 	return //most humans will now be either bones or harvesters, but we're still un-alive.
 
-/mob/living/simple_animal/revenant/ratvar_act()
+/mob/living/danimal/revenant/ratvar_act()
 	return //clocks get out reee
 
 //damage, gibbing, and dying
-/mob/living/simple_animal/revenant/attackby(obj/item/W, mob/living/user, params)
+/mob/living/danimal/revenant/attackby(obj/item/W, mob/living/user, params)
 	. = ..()
 	if(istype(W, /obj/item/nullrod))
 		visible_message(span_warning("[src] violently flinches!"), \
@@ -193,11 +192,11 @@
 		update_action_buttons_icon()
 		addtimer(CALLBACK(src,PROC_REF(reset_inhibit)), 30)
 
-/mob/living/simple_animal/revenant/proc/reset_inhibit()
+/mob/living/danimal/revenant/proc/reset_inhibit()
 	inhibited = FALSE
 	update_action_buttons_icon()
 
-/mob/living/simple_animal/revenant/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/danimal/revenant/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	if(!forced && !revealed)
 		return FALSE
 	. = amount
@@ -207,13 +206,13 @@
 	if(!essence)
 		death()
 
-/mob/living/simple_animal/revenant/dust(just_ash, drop_items, force)
+/mob/living/danimal/revenant/dust(just_ash, drop_items, force)
 	death()
 
-/mob/living/simple_animal/revenant/gib()
+/mob/living/danimal/revenant/gib()
 	death()
 
-/mob/living/simple_animal/revenant/death()
+/mob/living/danimal/revenant/death()
 	if(!revealed || stasis) //Revenants cannot die if they aren't revealed //or are already dead
 		return 0
 	stasis = TRUE
@@ -239,7 +238,7 @@
 
 
 //reveal, stun, icon updates, cast checks, and essence changing
-/mob/living/simple_animal/revenant/proc/reveal(time)
+/mob/living/danimal/revenant/proc/reveal(time)
 	if(!src)
 		return
 	if(time <= 0)
@@ -255,7 +254,7 @@
 		unreveal_time = unreveal_time + time
 	update_spooky_icon()
 
-/mob/living/simple_animal/revenant/proc/stun(time)
+/mob/living/danimal/revenant/proc/stun(time)
 	if(!src)
 		return
 	if(time <= 0)
@@ -269,7 +268,7 @@
 		unstun_time = unstun_time + time
 	update_spooky_icon()
 
-/mob/living/simple_animal/revenant/proc/update_spooky_icon()
+/mob/living/danimal/revenant/proc/update_spooky_icon()
 	if(revealed)
 		if(mob_transforming)
 			if(draining)
@@ -281,7 +280,7 @@
 	else
 		icon_state = icon_idle
 
-/mob/living/simple_animal/revenant/proc/castcheck(essence_cost)
+/mob/living/danimal/revenant/proc/castcheck(essence_cost)
 	if(!src)
 		return
 	var/turf/T = get_turf(src)
@@ -300,7 +299,7 @@
 		return FALSE
 	return TRUE
 
-/mob/living/simple_animal/revenant/proc/change_essence_amount(essence_amt, silent = FALSE, source = null)
+/mob/living/danimal/revenant/proc/change_essence_amount(essence_amt, silent = FALSE, source = null)
 	if(!src)
 		return
 	if(essence + essence_amt <= 0)
@@ -317,7 +316,7 @@
 			to_chat(src, span_revenminor("Lost [essence_amt]E[source ? " from [source]":""]."))
 	return 1
 
-/mob/living/simple_animal/revenant/proc/death_reset()
+/mob/living/danimal/revenant/proc/death_reset()
 	revealed = FALSE
 	unreveal_time = 0
 	mob_transforming = 0
@@ -341,7 +340,7 @@
 	var/reforming = TRUE
 	var/inert = FALSE
 	var/old_key //key of the previous revenant, will have first pick on reform.
-	var/mob/living/simple_animal/revenant/revenant
+	var/mob/living/danimal/revenant/revenant
 
 /obj/item/ectoplasm/revenant/New()
 	..()
@@ -438,7 +437,7 @@
 /datum/objective/revenant/check_completion()
 	if(!isrevenant(owner.current))
 		return FALSE
-	var/mob/living/simple_animal/revenant/R = owner.current
+	var/mob/living/danimal/revenant/R = owner.current
 	if(!R || R.stat == DEAD)
 		return FALSE
 	var/essence_stolen = R.essence_accumulated

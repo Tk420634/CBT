@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/illusion
+/mob/living/danimal/hostile/illusion
 	name = "illusion"
 	desc = "It's a fake!"
 	icon = 'icons/effects/effects.dmi'
@@ -23,21 +23,21 @@
 	deathmessage = "vanishes into thin air! It was a fake!"
 	has_field_of_vision = FALSE //not meant to be played anyway.
 
-/mob/living/simple_animal/hostile/illusion/death(gibbed)
+/mob/living/danimal/hostile/illusion/death(gibbed)
 	parent_mob = null
 	. = ..()
 
-/mob/living/simple_animal/hostile/illusion/Destroy()
+/mob/living/danimal/hostile/illusion/Destroy()
 	parent_mob = null
 	. = ..()
 
-/mob/living/simple_animal/hostile/illusion/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/illusion/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if(world.time > life_span)
 		death()
 
-/mob/living/simple_animal/hostile/illusion/proc/Copy_Parent(mob/living/original, life = 50, hp = 100, damage = 0, replicate = 0 )
+/mob/living/danimal/hostile/illusion/proc/Copy_Parent(mob/living/original, life = 50, hp = 100, damage = 0, replicate = 0 )
 	appearance = original.appearance
 	parent_mob = original
 	setDir(original.dir)
@@ -51,13 +51,13 @@
 	pixel_y = initial(pixel_y)
 	pixel_x = initial(pixel_x)
 
-/mob/living/simple_animal/hostile/illusion/examine(mob/user)
+/mob/living/danimal/hostile/illusion/examine(mob/user)
 	if(parent_mob)
 		return parent_mob.examine(user)
 	return ..()
 
 
-/mob/living/simple_animal/hostile/illusion/AttackingTarget()
+/mob/living/danimal/hostile/illusion/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!. || !isliving(my_target) || !prob(multiply_chance))
@@ -65,14 +65,14 @@
 	var/mob/living/L = my_target
 	if(L.stat == DEAD)
 		return
-	var/mob/living/simple_animal/hostile/illusion/M = new(loc)
+	var/mob/living/danimal/hostile/illusion/M = new(loc)
 	M.faction = faction.Copy()
 	M.Copy_Parent(parent_mob, 80, health/2, melee_damage_upper, multiply_chance/2)
 	M.GiveTarget(L)
 
 ///////Actual Types/////////
 
-/mob/living/simple_animal/hostile/illusion/escape
+/mob/living/danimal/hostile/illusion/escape
 	retreat_distance = 10
 	minimum_distance = 10
 	melee_damage_lower = 0
@@ -82,5 +82,5 @@
 	environment_smash = ENVIRONMENT_SMASH_NONE
 
 
-/mob/living/simple_animal/hostile/illusion/escape/AttackingTarget()
+/mob/living/danimal/hostile/illusion/escape/AttackingTarget()
 	return FALSE

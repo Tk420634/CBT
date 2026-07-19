@@ -104,7 +104,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define islarva(A) (istype(A, /mob/living/carbon/alien/larva))
 
-#define isalienadult(A) (istype(A, /mob/living/carbon/alien/humanoid) || istype(A, /mob/living/simple_animal/hostile/alien))
+#define isalienadult(A) (istype(A, /mob/living/carbon/alien/humanoid) || istype(A, /mob/living/danimal/hostile/alien))
 
 #define isalienhunter(A) (istype(A, /mob/living/carbon/alien/humanoid/hunter))
 
@@ -128,39 +128,39 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define ispAI(A) (istype(A, /mob/living/silicon/pai))
 
 //Simple animals
-#define isanimal(A) (istype(A, /mob/living/simple_animal))
+#define isanimal(A) (istype(A, /mob/living/danimal))
 
-#define isrevenant(A) (istype(A, /mob/living/simple_animal/revenant))
+#define isrevenant(A) (istype(A, /mob/living/danimal/revenant))
 
-#define isbot(A) (istype(A, /mob/living/simple_animal/bot))
+#define isbot(A) (istype(A, /mob/living/danimal/bot))
 
-#define isshade(A) (istype(A, /mob/living/simple_animal/shade))
+#define isshade(A) (istype(A, /mob/living/danimal/shade))
 
-#define ismouse(A) (istype(A, /mob/living/simple_animal/mouse))
+#define ismouse(A) (istype(A, /mob/living/danimal/mouse))
 
-#define iscow(A) (istype(A, /mob/living/simple_animal/cow))
+#define iscow(A) (istype(A, /mob/living/danimal/cow))
 
-#define isslime(A) (istype(A, /mob/living/simple_animal/slime))
+#define isslime(A) (istype(A, /mob/living/danimal/slime))
 
-#define isdrone(A) (istype(A, /mob/living/simple_animal/drone))
+#define isdrone(A) (istype(A, /mob/living/danimal/drone))
 
-#define iscat(A) (istype(A, /mob/living/simple_animal/pet/cat))
+#define iscat(A) (istype(A, /mob/living/danimal/pet/cat))
 
-#define isdog(A) (istype(A, /mob/living/simple_animal/pet/dog))
+#define isdog(A) (istype(A, /mob/living/danimal/pet/dog))
 
-#define iscorgi(A) (istype(A, /mob/living/simple_animal/pet/dog/corgi))
+#define iscorgi(A) (istype(A, /mob/living/danimal/pet/dog/corgi))
 
-#define ishostile(A) (istype(A, /mob/living/simple_animal/hostile))
+#define ishostile(A) (istype(A, /mob/living/danimal/hostile))
 
-#define isswarmer(A) (istype(A, /mob/living/simple_animal/hostile/swarmer))
+#define isswarmer(A) (istype(A, /mob/living/danimal/hostile/swarmer))
 
-#define isguardian(A) (istype(A, /mob/living/simple_animal/hostile/guardian))
+#define isguardian(A) (istype(A, /mob/living/danimal/hostile/guardian))
 
-#define isclockmob(A) (istype(A, /mob/living/simple_animal/hostile/clockwork))
+#define isclockmob(A) (istype(A, /mob/living/danimal/hostile/clockwork))
 
-#define isconstruct(A) (istype(A, /mob/living/simple_animal/hostile/construct))
+#define isconstruct(A) (istype(A, /mob/living/danimal/hostile/construct))
 
-#define ismegafauna(A) (istype(A, /mob/living/simple_animal/hostile/megafauna))
+#define ismegafauna(A) (istype(A, /mob/living/danimal/hostile/megafauna))
 #define isdummy(A) (istype(A, /mob/living/carbon/human/dummy))
 
 //Misc mobs
@@ -247,7 +247,7 @@ GLOBAL_LIST_INIT(glass_sheet_types, typecacheof(list(
 
 #define iseffect(O) (istype(O, /obj/effect))
 
-#define isblobmonster(O) (istype(O, /mob/living/simple_animal/hostile/blob))
+#define isblobmonster(O) (istype(O, /mob/living/danimal/hostile/blob))
 
 #define isshuttleturf(T) (length(T.baseturfs) && (/turf/baseturf_skipover/shuttle in T.baseturfs))
 
@@ -268,78 +268,78 @@ GLOBAL_LIST_INIT(glass_sheet_types, typecacheof(list(
 #define isnottriggermine(A) istype(A, /obj/effect/abstract)	// Affects obj/effect/mine, add anything needed
 
 GLOBAL_LIST_INIT(simplemobs_wildlife, typecacheof(list(
-	/mob/living/simple_animal/hostile/gecko,
-	/mob/living/simple_animal/hostile/stalker,
-	/mob/living/simple_animal/hostile/stalkeryoung,
-	/mob/living/simple_animal/hostile/molerat,
-	/mob/living/simple_animal/hostile/centaur,
-	/mob/living/simple_animal/hostile/abomination,
-	/mob/living/simple_animal/hostile/aethergiest,
-	/mob/living/simple_animal/hostile/ghoul,
-	/mob/living/simple_animal/hostile/giantant,
-	/mob/living/simple_animal/hostile/fireant,
-	/mob/living/simple_animal/hostile/giantantqueen,
-	/mob/living/simple_animal/hostile/radscorpion,
-	/mob/living/simple_animal/hostile/rat,
-	/mob/living/simple_animal/hostile/regalrat,
-	/mob/living/simple_animal/hostile/carp,
-	/mob/living/simple_animal/hostile/cazador,
-	/mob/living/simple_animal/hostile/bloatfly,
-	/mob/living/simple_animal/hostile/pillbug,
-	/mob/living/simple_animal/hostile/mirelurk,
-	/mob/living/simple_animal/hostile/bear/yaoguai,
-	/mob/living/simple_animal/hostile/trog,
-	/mob/living/simple_animal/hostile/wolf
+	/mob/living/danimal/hostile/gecko,
+	/mob/living/danimal/hostile/stalker,
+	/mob/living/danimal/hostile/stalkeryoung,
+	/mob/living/danimal/hostile/molerat,
+	/mob/living/danimal/hostile/centaur,
+	/mob/living/danimal/hostile/abomination,
+	/mob/living/danimal/hostile/aethergiest,
+	/mob/living/danimal/hostile/ghoul,
+	/mob/living/danimal/hostile/giantant,
+	/mob/living/danimal/hostile/fireant,
+	/mob/living/danimal/hostile/giantantqueen,
+	/mob/living/danimal/hostile/radscorpion,
+	/mob/living/danimal/hostile/rat,
+	/mob/living/danimal/hostile/regalrat,
+	/mob/living/danimal/hostile/carp,
+	/mob/living/danimal/hostile/cazador,
+	/mob/living/danimal/hostile/bloatfly,
+	/mob/living/danimal/hostile/pillbug,
+	/mob/living/danimal/hostile/mirelurk,
+	/mob/living/danimal/hostile/bear/yaoguai,
+	/mob/living/danimal/hostile/trog,
+	/mob/living/danimal/hostile/wolf
 	)))
 
 GLOBAL_LIST_INIT(simplemobs_animals, typecacheof(list(
-	/mob/living/simple_animal/hostile/gecko,
-	/mob/living/simple_animal/hostile/stalker,
-	/mob/living/simple_animal/hostile/stalkeryoung,
-	/mob/living/simple_animal/hostile/molerat,
-	/mob/living/simple_animal/hostile/centaur,
-	/mob/living/simple_animal/hostile/abomination,
-	/mob/living/simple_animal/hostile/aethergiest,
-	/mob/living/simple_animal/hostile/rat,
-	/mob/living/simple_animal/hostile/regalrat,
-	/mob/living/simple_animal/hostile/carp,
-	/mob/living/simple_animal/hostile/mirelurk,
-	/mob/living/simple_animal/hostile/bear/yaoguai,
-	/mob/living/simple_animal/hostile/trog,
-	/mob/living/simple_animal/hostile/wolf
+	/mob/living/danimal/hostile/gecko,
+	/mob/living/danimal/hostile/stalker,
+	/mob/living/danimal/hostile/stalkeryoung,
+	/mob/living/danimal/hostile/molerat,
+	/mob/living/danimal/hostile/centaur,
+	/mob/living/danimal/hostile/abomination,
+	/mob/living/danimal/hostile/aethergiest,
+	/mob/living/danimal/hostile/rat,
+	/mob/living/danimal/hostile/regalrat,
+	/mob/living/danimal/hostile/carp,
+	/mob/living/danimal/hostile/mirelurk,
+	/mob/living/danimal/hostile/bear/yaoguai,
+	/mob/living/danimal/hostile/trog,
+	/mob/living/danimal/hostile/wolf
 	)))
 
 
 GLOBAL_LIST_INIT(simplemobs_insects, typecacheof(list(
-	/mob/living/simple_animal/hostile/giantant,
-	/mob/living/simple_animal/hostile/fireant,
-	/mob/living/simple_animal/hostile/giantantqueen,
-	/mob/living/simple_animal/hostile/radscorpion,
-	/mob/living/simple_animal/hostile/cazador,
-	/mob/living/simple_animal/hostile/bloatfly,
-	/mob/living/simple_animal/hostile/pillbug,
+	/mob/living/danimal/hostile/giantant,
+	/mob/living/danimal/hostile/fireant,
+	/mob/living/danimal/hostile/giantantqueen,
+	/mob/living/danimal/hostile/radscorpion,
+	/mob/living/danimal/hostile/cazador,
+	/mob/living/danimal/hostile/bloatfly,
+	/mob/living/danimal/hostile/pillbug,
 	)))
 
 
 GLOBAL_LIST_INIT(simplemobs_humanlike, typecacheof(list(
-	/mob/living/simple_animal/hostile/chinese,
-	/mob/living/simple_animal/hostile/vault,
-	/mob/living/simple_animal/hostile/enclave,
-	/mob/living/simple_animal/hostile/bs,
-	/mob/living/simple_animal/hostile/ncr,
-	/mob/living/simple_animal/hostile/legion,
-	/mob/living/simple_animal/hostile/tribe,
-	/mob/living/simple_animal/hostile/raider,
-	/mob/living/simple_animal/hostile/supermutant,
-	/mob/living/simple_animal/hostile/renegade,
-	/mob/living/simple_animal/hostile/ghoul,
+	/mob/living/danimal/hostile/chinese,
+	/mob/living/danimal/hostile/vault,
+	/mob/living/danimal/hostile/enclave,
+	/mob/living/danimal/hostile/bs,
+	/mob/living/danimal/hostile/ncr,
+	/mob/living/danimal/hostile/legion,
+	/mob/living/danimal/hostile/tribe,
+	/mob/living/danimal/hostile/raider,
+	/mob/living/danimal/hostile/supermutant,
+	/mob/living/danimal/hostile/renegade,
+	/mob/living/danimal/hostile/ghoul,
 	)))
 
 GLOBAL_LIST_INIT(simplemobs_robots, typecacheof(list(
-	/mob/living/simple_animal/hostile/eyebot,
-	/mob/living/simple_animal/hostile/securitron,
-	/mob/living/simple_animal/hostile/handy,
-	/mob/living/simple_animal/bot
+	/mob/living/danimal/hostile/eyebot,
+	/mob/living/danimal/hostile/securitron,
+	/mob/living/danimal/hostile/handy,
+	/mob/living/danimal/bot
 	)))
 
 #define issimplewildlife(A) (A.type in GLOB.simplemobs_wildlife)
@@ -352,6 +352,6 @@ GLOBAL_LIST_INIT(simplemobs_robots, typecacheof(list(
 
 #define issimplerobot(A) (A.type in GLOB.simplemobs_robots)
 
-#define isadvancedmob(A) istype(A, /mob/living/simple_animal/advanced)
+#define isadvancedmob(A) istype(A, /mob/living/danimal/advanced)
 
 #define isnest(A) SEND_SIGNAL(A, COMSIG_IS_IT_A_NEST)

@@ -856,7 +856,7 @@
 			if(H.stat != DEAD)
 				H.reagents.add_reagent(/datum/reagent/fuel/unholywater, 4)
 		if(isshade(target) || isconstruct(target))
-			var/mob/living/simple_animal/M = target
+			var/mob/living/danimal/M = target
 			if(M.health+5 < M.maxHealth)
 				M.adjustHealth(-5)
 		new /obj/effect/temp_visual/cult/sparks(T)
@@ -957,7 +957,7 @@
 						if(H.stat != DEAD)
 							H.reagents.add_reagent(/datum/reagent/fuel/unholywater, 7)
 					if(isshade(target) || isconstruct(target))
-						var/mob/living/simple_animal/M = target
+						var/mob/living/danimal/M = target
 						if(M.health+15 < M.maxHealth)
 							M.adjustHealth(-15)
 						else
@@ -1019,19 +1019,19 @@
 				illusions--
 				addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/item/shield/mirror,readd)), 450)
 				if(prob(60))
-					var/mob/living/simple_animal/hostile/illusion/M = new(owner.loc)
+					var/mob/living/danimal/hostile/illusion/M = new(owner.loc)
 					M.faction = list("cult")
 					M.Copy_Parent(owner, 70, 10, 5)
 					M.move_to_delay = owner.movement_delay()
 				else
-					var/mob/living/simple_animal/hostile/illusion/escape/E = new(owner.loc)
+					var/mob/living/danimal/hostile/illusion/escape/E = new(owner.loc)
 					E.Copy_Parent(owner, 70, 10)
 					E.GiveTarget(owner)
 					E.perform_move_action(owner, owner.movement_delay(), E.minimum_distance)
 			return
 	else
 		if(prob(50))
-			var/mob/living/simple_animal/hostile/illusion/H = new(owner.loc)
+			var/mob/living/danimal/hostile/illusion/H = new(owner.loc)
 			H.Copy_Parent(owner, 100, 20, 5)
 			H.faction = list("cult")
 			H.GiveTarget(owner)

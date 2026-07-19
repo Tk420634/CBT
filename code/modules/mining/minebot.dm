@@ -2,7 +2,7 @@
 #define MINEDRONE_COLLECT 1
 #define MINEDRONE_ATTACK 2
 
-/mob/living/simple_animal/hostile/mining_drone
+/mob/living/danimal/hostile/mining_drone
 	name = "nanotrasen minebot"
 	desc = "The instructions printed on the side read: This is a small robot used to support miners, can be set to search and collect loose ore, or to help fend off wildlife."
 	gender = NEUTER
@@ -41,7 +41,7 @@
 	var/mode = MINEDRONE_COLLECT
 	var/obj/item/gun/energy/kinetic_accelerator/minebot/stored_gun
 
-/mob/living/simple_animal/hostile/mining_drone/Initialize()
+/mob/living/danimal/hostile/mining_drone/Initialize()
 	. = ..()
 	stored_gun = new(src)
 	var/datum/action/innate/minedrone/toggle_light/toggle_light_action = new()
@@ -61,16 +61,16 @@
 
 	SetCollectBehavior()
 
-/mob/living/simple_animal/hostile/mining_drone/Destroy()
+/mob/living/danimal/hostile/mining_drone/Destroy()
 	for (var/datum/action/innate/minedrone/action in actions)
 		qdel(action)
 	return ..()
 
-/mob/living/simple_animal/hostile/mining_drone/sentience_act()
+/mob/living/danimal/hostile/mining_drone/sentience_act()
 	..()
 	check_friendly_fire = 0
 
-/mob/living/simple_animal/hostile/mining_drone/examine(mob/user)
+/mob/living/danimal/hostile/mining_drone/examine(mob/user)
 	. = ..()
 	var/t_He = p_they(TRUE)
 	var/t_him = p_them()
@@ -88,7 +88,7 @@
 			var/obj/item/borg/upgrade/modkit/M = A
 			. += span_notice("There is \a [M] installed, using <b>[M.cost]%</b> capacity.")
 
-/mob/living/simple_animal/hostile/mining_drone/welder_act(mob/living/user, obj/item/I)
+/mob/living/danimal/hostile/mining_drone/welder_act(mob/living/user, obj/item/I)
 	. = TRUE
 	if(mode == MINEDRONE_ATTACK)
 		to_chat(user, span_info("[src] can't be repaired while in attack mode!"))
@@ -102,7 +102,7 @@
 		adjustBruteLoss(-15)
 		to_chat(user, span_info("You repair some of the armor on [src]."))
 
-/mob/living/simple_animal/hostile/mining_drone/attackby(obj/item/I, mob/user, params)
+/mob/living/danimal/hostile/mining_drone/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/mining_scanner) || istype(I, /obj/item/t_scanner/adv_mining_scanner))
 		to_chat(user, span_info("You instruct [src] to drop any collected ore."))
 		DropOre()
@@ -112,7 +112,7 @@
 		return
 	..()
 
-/mob/living/simple_animal/hostile/mining_drone/death()
+/mob/living/danimal/hostile/mining_drone/death()
 	DropOre(0)
 	if(stored_gun)
 		for(var/obj/item/borg/upgrade/modkit/M in stored_gun.modkits)
@@ -120,7 +120,7 @@
 	deathmessage = "blows apart!"
 	..()
 
-/mob/living/simple_animal/hostile/mining_drone/on_attack_hand(mob/living/carbon/human/M)
+/mob/living/danimal/hostile/mining_drone/on_attack_hand(mob/living/carbon/human/M)
 	. = ..()
 	if(.)
 		return
@@ -133,7 +133,7 @@
 				to_chat(M, span_info("[src] has been set to attack hostile wildlife."))
 		return
 
-/mob/living/simple_animal/hostile/mining_drone/CanAllowThrough(atom/movable/O)
+/mob/living/danimal/hostile/mining_drone/CanAllowThrough(atom/movable/O)
 	if(istype(O, /obj/item/projectile/kinetic))
 		var/obj/item/projectile/kinetic/K = O
 		if(K.kinetic_gun)
@@ -145,7 +145,7 @@
 		return TRUE
 	return ..()
 
-/mob/living/simple_animal/hostile/mining_drone/proc/SetCollectBehavior()
+/mob/living/danimal/hostile/mining_drone/proc/SetCollectBehavior()
 	mode = MINEDRONE_COLLECT
 	vision_range = 9
 	search_objects = 2
@@ -156,7 +156,7 @@
 	icon_state = "mining_drone"
 	to_chat(src, span_info("You are set to collect mode. You can now collect loose ore."))
 
-/mob/living/simple_animal/hostile/mining_drone/proc/SetOffenseBehavior()
+/mob/living/danimal/hostile/mining_drone/proc/SetOffenseBehavior()
 	mode = MINEDRONE_ATTACK
 	vision_range = 7
 	search_objects = 0
@@ -167,7 +167,7 @@
 	icon_state = "mining_drone_offense"
 	to_chat(src, span_info("You are set to attack mode. You can now attack from range."))
 
-/mob/living/simple_animal/hostile/mining_drone/AttackingTarget()
+/mob/living/danimal/hostile/mining_drone/AttackingTarget()
 	var/atom/my_target = get_target()
 	if(istype(my_target, /obj/item/stack/ore) && mode == MINEDRONE_COLLECT)
 		CollectOre()
@@ -176,16 +176,16 @@
 		SetOffenseBehavior()
 	return ..()
 
-/mob/living/simple_animal/hostile/mining_drone/OpenFire(atom/A)
+/mob/living/danimal/hostile/mining_drone/OpenFire(atom/A)
 	if(CheckFriendlyFire(A))
 		return
 	stored_gun.afterattack(A, src) //of the possible options to allow minebots to have KA mods, would you believe this is the best?
 
-/mob/living/simple_animal/hostile/mining_drone/proc/CollectOre()
+/mob/living/danimal/hostile/mining_drone/proc/CollectOre()
 	for(var/obj/item/stack/ore/O in range(1, src))
 		O.forceMove(src)
 
-/mob/living/simple_animal/hostile/mining_drone/proc/DropOre(message = 1)
+/mob/living/danimal/hostile/mining_drone/proc/DropOre(message = 1)
 	if(!contents.len)
 		if(message)
 			to_chat(src, span_notice("You attempt to dump your stored ore, but you have none."))
@@ -195,7 +195,7 @@
 	for(var/obj/item/stack/ore/O in contents)
 		O.forceMove(drop_location())
 
-/mob/living/simple_animal/hostile/mining_drone/adjustHealth(amount)
+/mob/living/danimal/hostile/mining_drone/adjustHealth(amount)
 	if(mode != MINEDRONE_ATTACK && amount > 0)
 		SetOffenseBehavior()
 	. = ..()
@@ -205,7 +205,7 @@
 	button_icon_state = "meson"
 
 /datum/action/innate/minedrone/toggle_meson_vision/Activate()
-	var/mob/living/simple_animal/hostile/mining_drone/user = owner
+	var/mob/living/danimal/hostile/mining_drone/user = owner
 	if(user.sight & SEE_TURFS)
 		user.sight &= ~SEE_TURFS
 		user.lighting_alpha = initial(user.lighting_alpha)
@@ -218,7 +218,7 @@
 	to_chat(user, span_notice("You toggle your meson vision [(user.sight & SEE_TURFS) ? "on" : "off"]."))
 
 
-/mob/living/simple_animal/hostile/mining_drone/proc/toggle_mode()
+/mob/living/danimal/hostile/mining_drone/proc/toggle_mode()
 	switch(mode)
 		if(MINEDRONE_ATTACK)
 			SetCollectBehavior()
@@ -237,7 +237,7 @@
 	button_icon_state = "mech_lights_off"
 
 /datum/action/innate/minedrone/toggle_light/Activate()
-	var/mob/living/simple_animal/hostile/mining_drone/user = owner
+	var/mob/living/danimal/hostile/mining_drone/user = owner
 
 	user.set_light_on(!user.light_on)
 	to_chat(user, span_notice("You toggle your light [user.light_on ? "on" : "off"]."))
@@ -247,7 +247,7 @@
 	button_icon_state = "mech_cycle_equip_off"
 
 /datum/action/innate/minedrone/toggle_mode/Activate()
-	var/mob/living/simple_animal/hostile/mining_drone/user = owner
+	var/mob/living/danimal/hostile/mining_drone/user = owner
 	user.toggle_mode()
 
 /datum/action/innate/minedrone/dump_ore
@@ -255,7 +255,7 @@
 	button_icon_state = "mech_eject"
 
 /datum/action/innate/minedrone/dump_ore/Activate()
-	var/mob/living/simple_animal/hostile/mining_drone/user = owner
+	var/mob/living/danimal/hostile/mining_drone/user = owner
 	user.DropOre()
 
 
@@ -310,8 +310,8 @@
 	var/base_cooldown_add = 10 //base cooldown isn't reset to normal, it's just added on, since it's not practical to disable the cooldown module
 
 /obj/item/slimepotion/slime/sentience/mining/after_success(mob/living/user, mob/living/simple_animal/SM)
-	if(istype(SM, /mob/living/simple_animal/hostile/mining_drone))
-		var/mob/living/simple_animal/hostile/mining_drone/M = SM
+	if(istype(SM, /mob/living/danimal/hostile/mining_drone))
+		var/mob/living/danimal/hostile/mining_drone/M = SM
 		M.maxHealth = initial(M.maxHealth) + base_health_add
 		M.melee_damage_lower = initial(M.melee_damage_lower) + base_damage_add
 		M.melee_damage_upper = initial(M.melee_damage_upper) + base_damage_add

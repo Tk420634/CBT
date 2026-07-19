@@ -5,7 +5,7 @@
 	damage = 5
 	damage_type = BRUTE
 
-/mob/living/simple_animal/hostile/guardian/ranged
+/mob/living/danimal/hostile/guardian/ranged
 	a_intent = INTENT_HELP
 	friendly_verb_continuous = "quietly assesses"
 	friendly_verb_simple = "quietly assess"
@@ -26,7 +26,7 @@
 	var/list/snares = list()
 	var/toggle = FALSE
 
-/mob/living/simple_animal/hostile/guardian/ranged/ToggleMode()
+/mob/living/danimal/hostile/guardian/ranged/ToggleMode()
 	if(src.loc == summoner)
 		if(toggle)
 			ranged = initial(ranged)
@@ -51,14 +51,14 @@
 	else
 		to_chat(src, "<span class='danger'><B>You have to be recalled to toggle modes!</span></B>")
 
-/mob/living/simple_animal/hostile/guardian/ranged/Shoot(atom/targeted_atom)
+/mob/living/danimal/hostile/guardian/ranged/Shoot(atom/targeted_atom)
 	. = ..()
 	if(istype(., /obj/item/projectile))
 		var/obj/item/projectile/P = .
 		if(guardiancolor)
 			P.color = guardiancolor
 
-/mob/living/simple_animal/hostile/guardian/ranged/ToggleLight()
+/mob/living/danimal/hostile/guardian/ranged/ToggleLight()
 	var/msg
 	switch(lighting_alpha)
 		if (LIGHTING_PLANE_ALPHA_VISIBLE)
@@ -77,7 +77,7 @@
 	to_chat(src, span_notice("[msg]"))
 
 
-/mob/living/simple_animal/hostile/guardian/ranged/verb/Snare()
+/mob/living/danimal/hostile/guardian/ranged/verb/Snare()
 	set name = "Set Surveillance Snare"
 	set category = "Guardian"
 	set desc = "Set an invisible snare that will alert you when living creatures walk over it. Max of 5"
@@ -91,7 +91,7 @@
 	else
 		to_chat(src, "<span class='danger'><B>You have too many snares deployed. Remove some first.</span></B>")
 
-/mob/living/simple_animal/hostile/guardian/ranged/verb/DisarmSnare()
+/mob/living/danimal/hostile/guardian/ranged/verb/DisarmSnare()
 	set name = "Remove Surveillance Snare"
 	set category = "Guardian"
 	set desc = "Disarm unwanted surveillance snares."
@@ -104,7 +104,7 @@
 /obj/effect/snare
 	name = "snare"
 	desc = "You shouldn't be seeing this!"
-	var/mob/living/simple_animal/hostile/guardian/spawner
+	var/mob/living/danimal/hostile/guardian/spawner
 	invisibility = INVISIBILITY_ABSTRACT
 
 /obj/effect/snare/Initialize()
@@ -129,12 +129,12 @@
 /obj/effect/snare/singularity_pull()
 	return
 
-/mob/living/simple_animal/hostile/guardian/ranged/Manifest(forced)
+/mob/living/danimal/hostile/guardian/ranged/Manifest(forced)
 	if (toggle)
 		incorporeal_move = INCORPOREAL_MOVE_BASIC
 	. = ..()
 
-/mob/living/simple_animal/hostile/guardian/ranged/Recall(forced)
+/mob/living/danimal/hostile/guardian/ranged/Recall(forced)
 	// To stop scout mode from moving when recalled
 	incorporeal_move = FALSE
 	. = ..()

@@ -39,7 +39,7 @@
 		if(ismob(target) && !iscarbon(target))  //if the target is a simplemob or anything beyond but not an actual playable carbon
 			if(iscarbon(firer))  //we need to make sure that our firer is a carbon
 				var/mob/living/carbon/C = firer
-				var/mob/living/simple_animal/hostile/T = target
+				var/mob/living/danimal/hostile/T = target
 
 				// Headshot hit:
 				// 1. prob of 50% landing a headshot --> +50% raw damage on the projectile

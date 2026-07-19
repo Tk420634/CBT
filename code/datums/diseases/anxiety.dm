@@ -36,6 +36,6 @@
 			if(prob(2))
 				affected_mob.visible_message(span_danger("[affected_mob] coughs up butterflies!"), \
 													span_userdanger("You cough up butterflies!"))
-				new /mob/living/simple_animal/butterfly(affected_mob.loc)
-				new /mob/living/simple_animal/butterfly(affected_mob.loc)
+				new /mob/living/danimal/butterfly(affected_mob.loc)
+				new /mob/living/danimal/butterfly(affected_mob.loc)
 	return

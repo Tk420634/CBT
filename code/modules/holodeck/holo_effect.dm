@@ -67,7 +67,7 @@
 
 
 /obj/effect/holodeck_effect/mobspawner
-	var/mobtype = /mob/living/simple_animal/hostile/carp/holocarp
+	var/mobtype = /mob/living/danimal/hostile/carp/holocarp
 	var/mob/mob = null
 
 /obj/effect/holodeck_effect/mobspawner/activate(obj/machinery/computer/holodeck/HC)
@@ -88,27 +88,27 @@
 
 /obj/effect/holodeck_effect/mobspawner/pet
 	mobtype = list(
-		/mob/living/simple_animal/butterfly, /mob/living/simple_animal/chick/holo,
-		/mob/living/simple_animal/pet/cat, /mob/living/simple_animal/pet/cat/kitten,
-		/mob/living/simple_animal/pet/dog/corgi, /mob/living/simple_animal/pet/dog/corgi/puppy,
-		/mob/living/simple_animal/pet/dog/pug, /mob/living/simple_animal/pet/fox)
+		/mob/living/danimal/butterfly, /mob/living/danimal/chick/holo,
+		/mob/living/danimal/pet/cat, /mob/living/danimal/pet/cat/kitten,
+		/mob/living/danimal/pet/dog/corgi, /mob/living/danimal/pet/dog/corgi/puppy,
+		/mob/living/danimal/pet/dog/pug, /mob/living/danimal/pet/fox)
 
 /obj/effect/holodeck_effect/mobspawner/bee
-	mobtype = /mob/living/simple_animal/hostile/poison/bees/toxin
+	mobtype = /mob/living/danimal/hostile/poison/bees/toxin
 
 /obj/effect/holodeck_effect/mobspawner/monkey
-	mobtype = /mob/living/simple_animal/holodeck_monkey
+	mobtype = /mob/living/danimal/holodeck_monkey
 
 /obj/effect/holodeck_effect/mobspawner/penguin
-	mobtype = /mob/living/simple_animal/pet/penguin/emperor
+	mobtype = /mob/living/danimal/pet/penguin/emperor
 
 /obj/effect/holodeck_effect/mobspawner/penguin/Initialize()
 	if(prob(1))
-		mobtype = /mob/living/simple_animal/pet/penguin/emperor/shamebrero
+		mobtype = /mob/living/danimal/pet/penguin/emperor/shamebrero
 	return ..()
 
 /obj/effect/holodeck_effect/mobspawner/penguin_baby
-	mobtype = /mob/living/simple_animal/pet/penguin/baby
+	mobtype = /mob/living/danimal/pet/penguin/baby
 
 /obj/effect/holodeck_effect/machinespawner
 	var/machinetype = /obj/machinery

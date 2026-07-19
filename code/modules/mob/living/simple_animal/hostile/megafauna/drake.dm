@@ -35,7 +35,7 @@ Difficulty: Medium
 
 */
 
-/mob/living/simple_animal/hostile/megafauna/dragon
+/mob/living/danimal/hostile/megafauna/dragon
 	name = "ash drake"
 	desc = "Guardians of the necropolis."
 	health = 2500
@@ -77,43 +77,43 @@ Difficulty: Medium
 	faction = list("Nagafen", "Vox")
 	footstep_type = FOOTSTEP_MOB_HEAVY
 
-/mob/living/simple_animal/hostile/megafauna/dragon/Initialize()
+/mob/living/danimal/hostile/megafauna/dragon/Initialize()
 	smallsprite.Grant(src)
 	. = ..()
 	internal = new/obj/item/gps/internal/dragon(src)
 
-/mob/living/simple_animal/hostile/megafauna/dragon/ex_act(severity, target)
+/mob/living/danimal/hostile/megafauna/dragon/ex_act(severity, target)
 	if(severity == 3)
 		return
 	..()
 
-/mob/living/simple_animal/hostile/megafauna/dragon/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/danimal/hostile/megafauna/dragon/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	if(!forced && (swooping & SWOOP_INVULNERABLE))
 		return FALSE
 	return ..()
 
-/mob/living/simple_animal/hostile/megafauna/dragon/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs, mob/target, target_message, visible_message_flags = NONE, data = null)
+/mob/living/danimal/hostile/megafauna/dragon/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs, mob/target, target_message, visible_message_flags = NONE, data = null)
 	if(swooping & SWOOP_INVULNERABLE) //to suppress attack messages without overriding every single proc that could send a message saying we got hit
 		return
 	return ..()
 
-/mob/living/simple_animal/hostile/megafauna/dragon/AttackingTarget()
+/mob/living/danimal/hostile/megafauna/dragon/AttackingTarget()
 	if(!swooping)
 		return ..()
 
-/mob/living/simple_animal/hostile/megafauna/dragon/DestroySurroundings()
+/mob/living/danimal/hostile/megafauna/dragon/DestroySurroundings()
 	if(!swooping)
 		..()
 
-/mob/living/simple_animal/hostile/megafauna/dragon/Move()
+/mob/living/danimal/hostile/megafauna/dragon/Move()
 	if(!swooping)
 		..()
 
-/mob/living/simple_animal/hostile/megafauna/dragon/perform_move_action(target, delay, minimum_distance)
+/mob/living/danimal/hostile/megafauna/dragon/perform_move_action(target, delay, minimum_distance)
 	if(!swooping)
 		..()
 
-/mob/living/simple_animal/hostile/megafauna/dragon/OpenFire()
+/mob/living/danimal/hostile/megafauna/dragon/OpenFire()
 	if(swooping)
 		return
 	anger_modifier = clamp(((maxHealth - health)/50),0,20)
@@ -132,7 +132,7 @@ Difficulty: Medium
 		else
 			INVOKE_ASYNC(src,PROC_REF(triple_swoop))
 
-/mob/living/simple_animal/hostile/megafauna/dragon/proc/fire_rain()
+/mob/living/danimal/hostile/megafauna/dragon/proc/fire_rain()
 	var/atom/my_target = get_target()
 	if(!my_target)
 		return
@@ -142,13 +142,13 @@ Difficulty: Medium
 			new /obj/effect/temp_visual/target(turf)
 
 /*
-/mob/living/simple_animal/hostile/megafauna/dragon/proc/fire_walls()
+/mob/living/danimal/hostile/megafauna/dragon/proc/fire_walls()
 	playsound(get_turf(src),'sound/magic/fireball.ogg', 200, 1)
 
 	for(var/d in GLOB.cardinals)
 		INVOKE_ASYNC(src,PROC_REF(fire_wall), d)
 
-/mob/living/simple_animal/hostile/megafauna/dragon/proc/fire_wall(dir)
+/mob/living/danimal/hostile/megafauna/dragon/proc/fire_wall(dir)
 	var/list/hit_things = list(src)
 	var/turf/E = get_edge_target_turf(src, dir)
 	var/range = 10
@@ -160,7 +160,7 @@ Difficulty: Medium
 		new /obj/effect/hotspot(J)
 		J.hotspot_expose(DRAKE_FIRE_TEMP, DRAKE_FIRE_EXPOSURE, 1)
 		for(var/mob/living/L in J.contents - hit_things)
-			if(istype(L, /mob/living/simple_animal/hostile/megafauna/dragon))
+			if(istype(L, /mob/living/danimal/hostile/megafauna/dragon))
 				continue
 			L.adjustFireLoss(20)
 			to_chat(L, span_userdanger("You're hit by the drake's fire breath!"))
@@ -169,12 +169,12 @@ Difficulty: Medium
 		sleep(1)
 */
 
-/mob/living/simple_animal/hostile/megafauna/dragon/proc/triple_swoop()
+/mob/living/danimal/hostile/megafauna/dragon/proc/triple_swoop()
 	swoop_attack(swoop_duration = 30)
 	swoop_attack(swoop_duration = 30)
 	swoop_attack(swoop_duration = 30)
 
-/mob/living/simple_animal/hostile/megafauna/dragon/proc/swoop_attack(fire_rain, atom/movable/manual_target, swoop_duration = 40)
+/mob/living/danimal/hostile/megafauna/dragon/proc/swoop_attack(fire_rain, atom/movable/manual_target, swoop_duration = 40)
 	if(stat || swooping)
 		return
 	if(manual_target)
@@ -218,7 +218,7 @@ Difficulty: Medium
 	sleep(7)
 	var/list/flame_hit = list()
 	while(swoop_duration > 0)
-		if(!my_target && !GetPossibleTargets())
+		if(!my_target && !FindATarget())
 			break //we lost our my_target while chasing it down and couldn't get a new one
 		if(swoop_duration < 7)
 			fire_rain = FALSE //stop raining fire near the end of the swoop
@@ -280,7 +280,7 @@ Difficulty: Medium
 	swooping &= ~SWOOP_DAMAGEABLE
 	SetRecoveryTime(MEGAFAUNA_DEFAULT_RECOVERY_TIME)
 
-/mob/living/simple_animal/hostile/megafauna/dragon/AltClickOn(atom/movable/A)
+/mob/living/danimal/hostile/megafauna/dragon/AltClickOn(atom/movable/A)
 	if(!istype(A))
 		AltClickNoInteract(src, A)
 		return
@@ -336,7 +336,7 @@ Difficulty: Medium
 	new /obj/effect/hotspot(T)
 	T.hotspot_expose(700, 50, 1)
 	for(var/mob/living/L in T.contents)
-		if(istype(L, /mob/living/simple_animal/hostile/megafauna/dragon))
+		if(istype(L, /mob/living/danimal/hostile/megafauna/dragon))
 			continue
 		if(islist(flame_hit) && !flame_hit[L])
 			L.adjustFireLoss(40)
@@ -394,7 +394,7 @@ Difficulty: Medium
 	else
 		animate(src, pixel_x = -16, pixel_z = 0, time = 5)
 
-/mob/living/simple_animal/hostile/megafauna/dragon/lesser
+/mob/living/danimal/hostile/megafauna/dragon/lesser
 	name = "lesser ash drake"
 	maxHealth = 200
 	health = 200
@@ -408,7 +408,7 @@ Difficulty: Medium
 	crusher_loot = list()
 	guaranteed_butcher_results = list(/obj/item/stack/ore/diamond = 5, /obj/item/stack/sheet/sinew = 5, /obj/item/stack/sheet/bone = 30)
 
-/mob/living/simple_animal/hostile/megafauna/dragon/lesser/grant_achievement(medaltype,scoretype)
+/mob/living/danimal/hostile/megafauna/dragon/lesser/grant_achievement(medaltype,scoretype)
 	return
 
 //fire line keeps going even if dragon is deleted

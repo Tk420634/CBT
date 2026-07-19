@@ -1,5 +1,5 @@
 //The base for clockwork mobs
-/mob/living/simple_animal/hostile/clockwork
+/mob/living/danimal/hostile/clockwork
 	faction = list("neutral", "ratvar")
 	gender = NEUTER
 	icon = 'icons/mob/clockwork_mobs.dmi'
@@ -22,24 +22,24 @@
 	var/playstyle_string = span_heavy_brass("You are a bug, yell at whoever spawned you!")
 	var/empower_string = span_heavy_brass("You have nothing to empower, yell at the coders!") //Shown to the mob when the herald beacon activates
 
-/mob/living/simple_animal/hostile/clockwork/Initialize()
+/mob/living/danimal/hostile/clockwork/Initialize()
 	. = ..()
 	update_values()
 
-/mob/living/simple_animal/hostile/clockwork/Login()
+/mob/living/danimal/hostile/clockwork/Login()
 	..()
 	add_servant_of_ratvar(src, TRUE)
 	to_chat(src, playstyle_string)
 	if(GLOB.ratvar_approaches)
 		to_chat(src, empower_string)
 
-/mob/living/simple_animal/hostile/clockwork/ratvar_act()
+/mob/living/danimal/hostile/clockwork/ratvar_act()
 	fully_heal(TRUE)
 
-/mob/living/simple_animal/hostile/clockwork/electrocute_act(shock_damage, source, siemens_coeff = 1, flags = NONE)
+/mob/living/danimal/hostile/clockwork/electrocute_act(shock_damage, source, siemens_coeff = 1, flags = NONE)
 	return 0 //ouch, my metal-unlikely-to-be-damaged-by-electricity-body
 
-/mob/living/simple_animal/hostile/clockwork/examine(mob/user)
+/mob/living/danimal/hostile/clockwork/examine(mob/user)
 	var/t_He = p_they(TRUE)
 	var/t_s = p_s()
 	var/msg = "<span class='brass'>*---------*\nThis is [icon2html(src, user)] \a <b>[src]</b>!\n"
@@ -58,7 +58,7 @@
 
 	return list(msg)
 
-/mob/living/simple_animal/hostile/clockwork/proc/examine_info() //Override this on a by-mob basis to have unique examine info
+/mob/living/danimal/hostile/clockwork/proc/examine_info() //Override this on a by-mob basis to have unique examine info
 	return
 
-/mob/living/simple_animal/hostile/clockwork/proc/update_values() //This is called by certain things to check GLOB.ratvar_awakens and GLOB.ratvar_approaches
+/mob/living/danimal/hostile/clockwork/proc/update_values() //This is called by certain things to check GLOB.ratvar_awakens and GLOB.ratvar_approaches

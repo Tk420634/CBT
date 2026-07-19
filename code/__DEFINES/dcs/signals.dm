@@ -384,7 +384,7 @@
 // /mob/living/silicon signals
 #define COMSIG_ROBOT_UPDATE_ICONS "robot_update_icons"			//from base of robot/update_icons(): ()
 
-// /mob/living/simple_animal/hostile signals
+// /mob/living/danimal/hostile signals
 #define COMSIG_HOSTILE_CHECK_FACTION "hostile_check_faction"	//from base of mob/living/simple_animal/hostile/check_faction(): (mob/living/simple_animal/hostile/target, mob/living/simple_animal/hostile/attacker)
 	#define COMPONENT_HOSTILE_NO_ATTACK 1
 #define COMSIG_HOSTILE_ATTACKINGTARGET "hostile_attackingtarget"
@@ -489,7 +489,7 @@
 #define COMSIG_ATOM_GET_VALUE "get_value"						/// returns the value of the atom
 
 /// datum/source, mob/spawner
-#define COMSIG_ITEM_MOB_DROPPED "mobdropped"	/// from [/mob/living/simple_animal/proc/drop_loot()]
+#define COMSIG_ITEM_MOB_DROPPED "mobdropped"	/// from [/mob/living/danimal/proc/drop_loot()]
 
 // /obj/item/grenade signals
 #define COMSIG_GRENADE_PRIME "grenade_prime"					//called in /obj/item/gun/process_fire (user, target, params, zone_override)

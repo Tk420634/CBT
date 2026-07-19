@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/synth
+/mob/living/danimal/hostile/synth
 	name = "synth mk1"
 	desc = "Synth strider. Looks like a weird human but it's a machine."
 	icon = 'icons/fallout/mobs/robots/weirdrobots.dmi'
@@ -21,7 +21,6 @@
 
 	faction = list("hostile", "institute")
 
-	harm_intent_damage = 5
 	melee_damage_lower = 10
 	melee_damage_upper = 15
 	minimum_distance = 4
@@ -49,7 +48,7 @@
 		SP_DISTANT_RANGE(LASER_RANGE_DISTANT)
 	)
 
-/mob/living/simple_animal/hostile/synth/playable
+/mob/living/danimal/hostile/synth/playable
 	emote_taunt_sound = null
 	emote_taunt = null
 	emote_taunt_sound = null
@@ -60,7 +59,7 @@
 	anchored = FALSE
 	dextrous = TRUE
 
-/mob/living/simple_animal/hostile/synth/mk2
+/mob/living/danimal/hostile/synth/mk2
 	name = "synth mk2"
 	icon_state = "synthmk2"
 	icon_living = "synthmk2"
@@ -79,7 +78,7 @@
 		SP_DISTANT_RANGE(LASER_RANGE_DISTANT)
 	)
 
-/mob/living/simple_animal/hostile/synth/mk2/playable
+/mob/living/danimal/hostile/synth/mk2/playable
 	emote_taunt_sound = null
 	emote_taunt = null
 	emote_taunt_sound = null

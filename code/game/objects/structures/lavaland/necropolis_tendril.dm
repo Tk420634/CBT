@@ -9,7 +9,7 @@
 	faction = list("mining")
 	max_mobs = 3
 	max_integrity = 250
-	mob_types = list(/mob/living/simple_animal/hostile/asteroid/basilisk/watcher/tendril)
+	mob_types = list(/mob/living/danimal/hostile/asteroid/basilisk/watcher/tendril)
 	var/loot_type = /obj/structure/closet/crate/necropolis/tendril/all
 
 	move_resist=INFINITY // just killing it tears a massive hole in the ground, let's not move it
@@ -21,13 +21,13 @@
 
 
 /obj/structure/spawner/lavaland/goliath
-	mob_types = list(/mob/living/simple_animal/hostile/asteroid/goliath/beast)
+	mob_types = list(/mob/living/danimal/hostile/asteroid/goliath/beast)
 
 /obj/structure/spawner/lavaland/legion
-	mob_types = list(/mob/living/simple_animal/hostile/asteroid/hivelord/legion/tendril)
+	mob_types = list(/mob/living/danimal/hostile/asteroid/hivelord/legion/tendril)
 
 /obj/structure/spawner/lavaland/icewatcher
-	mob_types = list(/mob/living/simple_animal/hostile/asteroid/basilisk/watcher/icewing)
+	mob_types = list(/mob/living/danimal/hostile/asteroid/basilisk/watcher/icewing)
 
 GLOBAL_LIST_INIT(tendrils, list())
 /obj/structure/spawner/lavaland/Initialize()

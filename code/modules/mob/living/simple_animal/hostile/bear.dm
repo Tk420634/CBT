@@ -1,5 +1,5 @@
 //Space bears!
-/mob/living/simple_animal/hostile/bear
+/mob/living/danimal/hostile/bear
 	name = "space bear"
 	desc = "You don't need to be faster than a space bear, you just need to outrun your crewmates."
 	icon_state = "bear"
@@ -52,12 +52,12 @@
 	footstep_type = FOOTSTEP_MOB_CLAW
 
 //SPACE BEARS! SQUEEEEEEEE~     OW! FUCK! IT BIT MY HAND OFF!!
-/mob/living/simple_animal/hostile/bear/Hudson
+/mob/living/danimal/hostile/bear/Hudson
 	name = "Hudson"
 	gender = MALE
 	desc = "Feared outlaw, this guy is one bad news bear." //I'm sorry...
 
-/mob/living/simple_animal/hostile/bear/snow
+/mob/living/danimal/hostile/bear/snow
 	name = "space polar bear"
 	icon_state = "snowbear"
 	icon_living = "snowbear"
@@ -65,7 +65,7 @@
 	desc = "It's a polar bear, in space, but not actually in space."
 	weather_immunities = list("snow")
 
-/mob/living/simple_animal/hostile/bear/russian
+/mob/living/danimal/hostile/bear/russian
 	name = "combat bear"
 	desc = "A ferocious brown bear decked out in armor plating, a red star with yellow outlining details the shoulder plating."
 	icon_state = "combatbear"
@@ -81,7 +81,7 @@
 	maxHealth = 120
 	armored = TRUE
 
-/mob/living/simple_animal/hostile/bear/update_icons()
+/mob/living/danimal/hostile/bear/update_icons()
 	..()
 	if(armored)
 		add_overlay("armor_bear")
@@ -95,8 +95,8 @@
 
 /obj/item/bear_armor/afterattack(atom/target, mob/user, proximity_flag)
 	. = ..()
-	if(istype(target, /mob/living/simple_animal/hostile/bear) && proximity_flag)
-		var/mob/living/simple_animal/hostile/bear/A = target
+	if(istype(target, /mob/living/danimal/hostile/bear) && proximity_flag)
+		var/mob/living/danimal/hostile/bear/A = target
 		if(A.armored)
 			to_chat(user, span_warning("[A] has already been armored up!"))
 			return
@@ -111,7 +111,7 @@
 		to_chat(user, span_info("You strap the armor plating to [A] and sharpen [A.p_their()] claws with the nail filer. This was a great idea."))
 		qdel(src)
 
-/mob/living/simple_animal/hostile/bear/butter //The mighty companion to Cak. Several functions used from it.
+/mob/living/danimal/hostile/bear/butter //The mighty companion to Cak. Several functions used from it.
 	name = "Terrygold"
 	icon_state = "brownbear"
 	icon_living = "brownbear"
@@ -130,19 +130,19 @@
 	attack_verb_continuous = "slaps"
 	attack_verb_simple = "slap"
 
-/mob/living/simple_animal/hostile/bear/butter/BiologicalLife(seconds, times_fired) //Heals butter bear really fast when he takes damage.
+/mob/living/danimal/hostile/bear/butter/BiologicalLife(seconds, times_fired) //Heals butter bear really fast when he takes damage.
 	if(stat)
 		return
 	if(health < maxHealth)
 		heal_overall_damage(10) //Fast life regen, makes it hard for you to get eaten to death.
 
-/mob/living/simple_animal/hostile/bear/butter/on_attack_hand(mob/living/L) //Borrowed code from Cak, feeds people if they hit you. More nutriment but less vitamin to represent BUTTER.
+/mob/living/danimal/hostile/bear/butter/on_attack_hand(mob/living/L) //Borrowed code from Cak, feeds people if they hit you. More nutriment but less vitamin to represent BUTTER.
 	..()
 	if(L.a_intent == INTENT_HARM && L.reagents && !stat)
 		L.reagents.add_reagent(/datum/reagent/consumable/nutriment, 1)
 		L.reagents.add_reagent(/datum/reagent/consumable/nutriment/vitamin, 0.1)
 
-/mob/living/simple_animal/hostile/bear/butter/CheckParts(list/parts) //Borrowed code from Cak, allows the brain used to actually control the bear.
+/mob/living/danimal/hostile/bear/butter/CheckParts(list/parts) //Borrowed code from Cak, allows the brain used to actually control the bear.
 	..()
 	var/obj/item/organ/brain/B = locate(/obj/item/organ/brain) in contents
 	if(!B || !B.brainmob || !B.brainmob.mind)
@@ -156,7 +156,7 @@
 		to_chat(src, span_notice("Your name is now <b>\"new_name\"</b>!"))
 		name = new_name
 
-/mob/living/simple_animal/hostile/bear/butter/AttackingTarget() //Makes some attacks by the butter bear slip those who dare cross its path.
+/mob/living/danimal/hostile/bear/butter/AttackingTarget() //Makes some attacks by the butter bear slip those who dare cross its path.
 	var/atom/my_target = get_target()
 	if(!isliving(my_target))
 		return
@@ -167,7 +167,7 @@
 	playsound(loc, 'sound/misc/slip.ogg', 15)
 	L.visible_message(span_danger("[L] slips on butter!"))
 
-/mob/living/simple_animal/hostile/bear/yaoguai
+/mob/living/danimal/hostile/bear/yaoguai
 	name = "yao guai"
 	desc = "A mutated American black bear, sporting razor sharp teeth, claws, and a nasty temper."
 	icon = 'icons/fallout/mobs/animals/yaoguai.dmi'
@@ -182,7 +182,7 @@
 	bare_wound_bonus = 25
 	faction = list("yaoguai")
 
-/mob/living/simple_animal/hostile/bear/yaoguai/Initialize()
+/mob/living/danimal/hostile/bear/yaoguai/Initialize()
 	. = ..()
 	recenter_wide_sprite()
 

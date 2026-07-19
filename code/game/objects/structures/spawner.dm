@@ -19,7 +19,7 @@
 
 	var/max_mobs = 5
 	var/spawn_time = 300 //30 seconds default
-	var/mob_types = list(/mob/living/simple_animal/hostile/carp)
+	var/mob_types = list(/mob/living/danimal/hostile/carp)
 	//var/spawn_text = ""
 	var/faction = list("hostile")
 
@@ -32,7 +32,7 @@
 	icon = 'icons/obj/device.dmi'
 	icon_state = "syndbeacon"
 	
-	mob_types = list(/mob/living/simple_animal/hostile/renegade/syndicate/ranged)
+	mob_types = list(/mob/living/danimal/hostile/renegade/syndicate/ranged)
 	faction = list(ROLE_SYNDICATE)
 
 /obj/structure/spawner/skeleton
@@ -43,7 +43,7 @@
 	max_integrity = 150
 	max_mobs = 15
 	spawn_time = 150
-	mob_types = list(/mob/living/simple_animal/hostile/skeleton)
+	mob_types = list(/mob/living/danimal/hostile/skeleton)
 	
 	faction = list("skeleton")
 
@@ -54,30 +54,30 @@
 	max_integrity = 200
 	max_mobs = 3
 	icon = 'icons/mob/nest.dmi'
-	mob_types = list(/mob/living/simple_animal/hostile/asteroid/goldgrub, /mob/living/simple_animal/hostile/asteroid/goliath, /mob/living/simple_animal/hostile/asteroid/hivelord, /mob/living/simple_animal/hostile/asteroid/basilisk, /mob/living/simple_animal/hostile/asteroid/fugu)
+	mob_types = list(/mob/living/danimal/hostile/asteroid/goldgrub, /mob/living/danimal/hostile/asteroid/goliath, /mob/living/danimal/hostile/asteroid/hivelord, /mob/living/danimal/hostile/asteroid/basilisk, /mob/living/danimal/hostile/asteroid/fugu)
 	faction = list("mining")
 
 /obj/structure/spawner/mining/goldgrub
 	name = "goldgrub den"
 	desc = "A den housing a nest of goldgrubs, annoying but arguably much better than anything else you'll find in a nest."
-	mob_types = list(/mob/living/simple_animal/hostile/asteroid/goldgrub)
+	mob_types = list(/mob/living/danimal/hostile/asteroid/goldgrub)
 
 /obj/structure/spawner/mining/goliath
 	name = "goliath den"
 	desc = "A den housing a nest of goliaths, oh god why?"
-	mob_types = list(/mob/living/simple_animal/hostile/asteroid/goliath)
+	mob_types = list(/mob/living/danimal/hostile/asteroid/goliath)
 
 /obj/structure/spawner/mining/hivelord
 	name = "hivelord den"
 	desc = "A den housing a nest of hivelords."
-	mob_types = list(/mob/living/simple_animal/hostile/asteroid/hivelord)
+	mob_types = list(/mob/living/danimal/hostile/asteroid/hivelord)
 
 /obj/structure/spawner/mining/basilisk
 	name = "basilisk den"
 	desc = "A den housing a nest of basilisks, bring a coat."
-	mob_types = list(/mob/living/simple_animal/hostile/asteroid/basilisk)
+	mob_types = list(/mob/living/danimal/hostile/asteroid/basilisk)
 
 /obj/structure/spawner/mining/wumborian
 	name = "wumborian fugu den"
 	desc = "A den housing a nest of wumborian fugus, how do they all even fit in there?"
-	mob_types = list(/mob/living/simple_animal/hostile/asteroid/fugu)
+	mob_types = list(/mob/living/danimal/hostile/asteroid/fugu)

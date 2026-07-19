@@ -36,7 +36,7 @@
 	var/ai_zlevel = ai_current_turf.z
 
 	data["robots"] = list()
-	for(var/mob/living/simple_animal/bot/B in GLOB.bots_list)
+	for(var/mob/living/danimal/bot/B in GLOB.bots_list)
 		if(B.z != ai_zlevel || B.remote_disabled) //Only non-emagged bots on the same Z-level are detected!
 			continue
 		var/list/robot_data = list(

@@ -1,4 +1,4 @@
-/mob/living/simple_animal/bot/secbot/grievous //This bot is powerful. If you managed to get 4 eswords somehow, you deserve this horror. Emag him for best results.
+/mob/living/danimal/bot/secbot/grievous //This bot is powerful. If you managed to get 4 eswords somehow, you deserve this horror. Emag him for best results.
 	name = "General Beepsky"
 	desc = "Is that a secbot with four eswords in its arms...?"
 	icon = 'icons/mob/aibots.dmi'
@@ -11,35 +11,35 @@
 	var/block_chance = 50
 
 
-/mob/living/simple_animal/bot/secbot/grievous/toy //A toy version of general beepsky!
+/mob/living/danimal/bot/secbot/grievous/toy //A toy version of general beepsky!
 	name = "Genewul Bweepskee"
 	desc = "An adorable looking secbot with four toy swords taped to its arms"
 	health = 50
 	maxHealth = 50
 	baton_type = /obj/item/toy/sword
 
-/mob/living/simple_animal/bot/secbot/grievous/bullet_act(obj/item/projectile/P)
+/mob/living/danimal/bot/secbot/grievous/bullet_act(obj/item/projectile/P)
 	visible_message("[src] deflects [P] with its energy swords!")
 	playsound(src, 'sound/weapons/blade1.ogg', 50, TRUE)
 	return BULLET_ACT_BLOCK
 
-/mob/living/simple_animal/bot/secbot/grievous/on_entered(atom/movable/AM)
+/mob/living/danimal/bot/secbot/grievous/on_entered(atom/movable/AM)
 	..()
 	if(ismob(AM) && AM == target)
 		visible_message("[src] flails his swords and cuts [AM]!")
 		playsound(src,'sound/effects/beepskyspinsabre.ogg',100,TRUE,-1)
 		INVOKE_ASYNC(src,PROC_REF(stun_attack), AM)
 
-/mob/living/simple_animal/bot/secbot/grievous/Initialize()
+/mob/living/danimal/bot/secbot/grievous/Initialize()
 	. = ..()
 	weapon = new baton_type(src)
 	INVOKE_ASYNC(weapon, TYPE_PROC_REF(/obj/item,attack_self), src)
 
-/mob/living/simple_animal/bot/secbot/grievous/Destroy()
+/mob/living/danimal/bot/secbot/grievous/Destroy()
 	QDEL_NULL(weapon)
 	return ..()
 
-/mob/living/simple_animal/bot/secbot/grievous/special_retaliate_after_attack(mob/user)
+/mob/living/danimal/bot/secbot/grievous/special_retaliate_after_attack(mob/user)
 	if(mode != BOT_HUNT)
 		return
 	if(prob(block_chance))
@@ -47,7 +47,7 @@
 		playsound(src, 'sound/weapons/blade1.ogg', 50, TRUE, -1)
 		return TRUE
 
-/mob/living/simple_animal/bot/secbot/grievous/stun_attack(mob/living/carbon/C) //Criminals don't deserve to live
+/mob/living/danimal/bot/secbot/grievous/stun_attack(mob/living/carbon/C) //Criminals don't deserve to live
 	weapon.attack(C, src)
 	playsound(src, 'sound/weapons/blade1.ogg', 50, TRUE, -1)
 	if(C.stat == DEAD)
@@ -55,7 +55,7 @@
 		back_to_idle()
 
 
-/mob/living/simple_animal/bot/secbot/grievous/handle_automated_action()
+/mob/living/danimal/bot/secbot/grievous/handle_automated_action()
 	if(!on)
 		return
 	switch(mode)
@@ -97,7 +97,7 @@
 			look_for_perp()
 			bot_patrol()
 
-/mob/living/simple_animal/bot/secbot/grievous/look_for_perp()
+/mob/living/danimal/bot/secbot/grievous/look_for_perp()
 	anchored = FALSE
 	var/judgement_criteria = judgement_criteria()
 	for (var/mob/living/carbon/C in view(7,src)) //Let's find us a criminal
@@ -128,7 +128,7 @@
 			continue
 
 
-/mob/living/simple_animal/bot/secbot/grievous/explode()
+/mob/living/danimal/bot/secbot/grievous/explode()
 
 	walk_to(src,0)
 	visible_message(span_boldannounce("[src] lets out a huge cough as it blows apart!"))

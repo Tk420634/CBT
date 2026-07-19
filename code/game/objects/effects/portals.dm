@@ -65,7 +65,7 @@
 	if(linked && (get_turf(oldloc) == get_turf(linked)))
 		return
 	if(ishostile(AM))
-		var/mob/living/simple_animal/hostile/HAM = AM
+		var/mob/living/danimal/hostile/HAM = AM
 		if(!HAM.ckey)
 			var/turf/toss_here = get_edge_target_turf(src, pick(GLOB.alldirs))
 			say("HOSTILE ENTITY DETECTED: REJECTING.")

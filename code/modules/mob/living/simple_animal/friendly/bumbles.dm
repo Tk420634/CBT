@@ -1,4 +1,4 @@
-/mob/living/simple_animal/pet/bumbles
+/mob/living/danimal/pet/bumbles
 	name = "Bumbles"
 	desc = "Bumbles, the very humble bumblebee."
 	icon_state = "bumbles"
@@ -14,7 +14,6 @@
 	speak_emote = list("buzzes")
 	maxHealth = 100
 	health = 100
-	harm_intent_damage = 1
 	friendly_verb_continuous = "bzzs"
 	friendly_verb_simple = "bzz"
 	density = FALSE
@@ -32,15 +31,15 @@
 	speak_chance = 1
 	unique_name = TRUE
 
-/mob/living/simple_animal/pet/bumbles/Initialize()
+/mob/living/danimal/pet/bumbles/Initialize()
 	. = ..()
 	add_verb(src, /mob/living/proc/lay_down)
 
-/mob/living/simple_animal/pet/bumbles/ComponentInitialize()
+/mob/living/danimal/pet/bumbles/ComponentInitialize()
 	. = ..()
 	AddElement(/datum/element/wuv, "bzzs!")
 
-/mob/living/simple_animal/pet/bumbles/update_mobility()
+/mob/living/danimal/pet/bumbles/update_mobility()
 	. = ..()
 	if(client && stat != DEAD)
 		if (resting)
@@ -49,10 +48,10 @@
 			icon_state = "[icon_living]"
 	regenerate_icons()
 
-/mob/living/simple_animal/pet/bumbles/bee_friendly()
+/mob/living/danimal/pet/bumbles/bee_friendly()
 	return TRUE //treaty signed at the Beeneeva convention
 
-/mob/living/simple_animal/pet/bumbles/handle_automated_movement()
+/mob/living/danimal/pet/bumbles/handle_automated_movement()
 	. = ..()
 	if(!isturf(loc) || buckled)
 		return
@@ -63,7 +62,7 @@
 		emote("me", EMOTE_VISIBLE, pick("wakes up with a smiling buzz.", "rolls upside down before waking up.", "stops resting."))
 		set_resting(FALSE)
 
-/mob/living/simple_animal/pet/bumbles/update_mobility()
+/mob/living/danimal/pet/bumbles/update_mobility()
 	. = ..()
 	if(stat != DEAD)
 		if(!CHECK_MOBILITY(src, MOBILITY_STAND))

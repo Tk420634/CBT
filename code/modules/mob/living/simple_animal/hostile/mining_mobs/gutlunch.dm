@@ -1,5 +1,5 @@
 //Gutlunches, passive mods that devour blood and gibs
-/mob/living/simple_animal/hostile/asteroid/gutlunch
+/mob/living/danimal/hostile/asteroid/gutlunch
 	name = "gutlunch"
 	desc = "A scavenger that eats raw meat, often found alongside ash walkers. Produces a thick, nutritious milk."
 	icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
@@ -39,18 +39,18 @@
 	loot = list(/obj/effect/decal/cleanable/blood/gibs)
 	deathmessage = "is pulped into bugmash."
 
-	animal_species = /mob/living/simple_animal/hostile/asteroid/gutlunch
-	childtype = list(/mob/living/simple_animal/hostile/asteroid/gutlunch/gubbuck = 45, /mob/living/simple_animal/hostile/asteroid/gutlunch/guthen = 55)
+	animal_species = /mob/living/danimal/hostile/asteroid/gutlunch
+	childtype = list(/mob/living/danimal/hostile/asteroid/gutlunch/gubbuck = 45, /mob/living/danimal/hostile/asteroid/gutlunch/guthen = 55)
 
 	wanted_objects = list(/obj/effect/decal/cleanable/blood/gibs/xeno, /obj/effect/decal/cleanable/blood/gibs/, /obj/item/bodypart, /obj/item/organ/appendix, /obj/item/organ/ears, /obj/item/organ/eyes, /obj/item/organ/heart, /obj/item/organ/liver, \
 						/obj/item/organ/lungs, /obj/item/organ/stomach, /obj/item/organ/tongue) // So we dont eat implants or brains. Still can eat robotic stuff thats subtyped of base line but thats a issue for another day.
 	var/obj/item/udder/gutlunch/udder = null
 
-/mob/living/simple_animal/hostile/asteroid/gutlunch/Initialize()
+/mob/living/danimal/hostile/asteroid/gutlunch/Initialize()
 	udder = new()
 	. = ..()
 
-/mob/living/simple_animal/hostile/asteroid/gutlunch/EvalTarget(atom/the_target) // Gutlunch-specific version of EvalTarget to handle stupid stat_exclusive = true crap so we don't have to do it for literally every single simple_animal/hostile except the two that spawn in lavaland
+/mob/living/danimal/hostile/asteroid/gutlunch/EvalTarget(atom/the_target) // Gutlunch-specific version of EvalTarget to handle stupid stat_exclusive = true crap so we don't have to do it for literally every single simple_animal/hostile except the two that spawn in lavaland
 	if(isturf(the_target) || !the_target || the_target.type == /atom/movable/lighting_object) // bail out on invalids
 		return FALSE
 
@@ -72,24 +72,24 @@
 
 	return FALSE
 
-/mob/living/simple_animal/hostile/asteroid/gutlunch/Destroy()
+/mob/living/danimal/hostile/asteroid/gutlunch/Destroy()
 	QDEL_NULL(udder)
 	return ..()
 
-/mob/living/simple_animal/hostile/asteroid/gutlunch/regenerate_icons()
+/mob/living/danimal/hostile/asteroid/gutlunch/regenerate_icons()
 	cut_overlays()
 	if(udder.reagents.total_volume == udder.reagents.maximum_volume)
 		add_overlay("gl_full")
 	..()
 
-/mob/living/simple_animal/hostile/asteroid/gutlunch/attackby(obj/item/O, mob/user, params)
+/mob/living/danimal/hostile/asteroid/gutlunch/attackby(obj/item/O, mob/user, params)
 	if(stat == CONSCIOUS && istype(O, /obj/item/reagent_containers/glass))
 		udder.milkAnimal(O, user)
 		regenerate_icons()
 	else
 		..()
 
-/mob/living/simple_animal/hostile/asteroid/gutlunch/AttackingTarget()
+/mob/living/danimal/hostile/asteroid/gutlunch/AttackingTarget()
 	var/atom/my_target = get_target()
 	if(is_type_in_typecache(my_target,wanted_objects)) //we eats
 		udder.generateMilk()
@@ -99,28 +99,28 @@
 	return ..()
 
 //Male gutlunch. They're smaller and more colorful!
-/mob/living/simple_animal/hostile/asteroid/gutlunch/gubbuck
+/mob/living/danimal/hostile/asteroid/gutlunch/gubbuck
 	name = "gubbuck"
 	gender = MALE
 
-/mob/living/simple_animal/hostile/asteroid/gutlunch/gubbuck/Initialize()
+/mob/living/danimal/hostile/asteroid/gutlunch/gubbuck/Initialize()
 	. = ..()
 	add_atom_colour(pick("#E39FBB", "#D97D64", "#CF8C4A"), FIXED_COLOUR_PRIORITY)
 	resize = 0.85
 	update_transform()
 
 //Lady gutlunch. They make the babby.
-/mob/living/simple_animal/hostile/asteroid/gutlunch/guthen
+/mob/living/danimal/hostile/asteroid/gutlunch/guthen
 	name = "guthen"
 	gender = FEMALE
 
-/mob/living/simple_animal/hostile/asteroid/gutlunch/guthen/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/asteroid/gutlunch/guthen/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if(udder.reagents.total_volume == udder.reagents.maximum_volume) //Only breed when we're full.
 		make_babies()
 
-/mob/living/simple_animal/hostile/asteroid/gutlunch/guthen/make_babies()
+/mob/living/danimal/hostile/asteroid/gutlunch/guthen/make_babies()
 	. = ..()
 	if(.)
 		udder.reagents.clear_reagents()

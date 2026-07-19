@@ -3,7 +3,7 @@
 */
 
 //Base ghoul
-/mob/living/simple_animal/hostile/ghoul
+/mob/living/danimal/hostile/ghoul
 	bounty = 8
 	name = "feral walker"
 	desc = "A ghoul that has lost its mind and become aggressive."
@@ -60,7 +60,6 @@
 	// 	)
 	a_intent = INTENT_HARM
 	speed = 3
-	harm_intent_damage = 25
 	melee_damage_lower = 10
 	melee_damage_upper = 25
 	attack_verb_simple = list(
@@ -137,7 +136,7 @@
 		MOB_MINIMUM_DISTANCE_CHANGE_PER_TURN_CHANCE(10)
 	)
 
-/mob/living/simple_animal/hostile/ghoul/Initialize()
+/mob/living/danimal/hostile/ghoul/Initialize()
 	. = ..()
 	if(prob(50))
 		icon_state = rare_icon
@@ -147,21 +146,21 @@
 		loot = GLOB.trash_mob_loot
 
 
-/mob/living/simple_animal/hostile/ghoul/Aggro()
+/mob/living/danimal/hostile/ghoul/Aggro()
 	. = ..()
 	if(.)
 		return
 	summon_backup(15)
 
 
-/mob/living/simple_animal/hostile/ghoul/become_the_mob(mob/user)
+/mob/living/danimal/hostile/ghoul/become_the_mob(mob/user)
 	call_backup = /obj/effect/proc_holder/mob_common/summon_backup/ghoul
 	send_mobs = /obj/effect/proc_holder/mob_common/direct_mobs/ghoul
 	. = ..()
 
 
 // ghoul Reaver
-/mob/living/simple_animal/hostile/ghoul/reaver
+/mob/living/danimal/hostile/ghoul/reaver
 	bounty = 12
 	name = "feral bruiser"
 	desc = "A ghoul that has lost its mind and become aggressive. This one is strapped with metal armor, and appears far stronger."
@@ -181,7 +180,6 @@
 	// ranged_cooldown_time = 3 SECONDS
 	// projectiletype = /obj/item/projectile/bullet/ghoul_rock
 	// projectilesound = 'sound/weapons/punchmiss.ogg'
-	harm_intent_damage = 25
 	melee_damage_lower = 10
 	melee_damage_upper = 20
 	loot = list()
@@ -206,26 +204,26 @@
 	)
 	desc_short = "A beefy creature that may or may not be a reanimated corpse."
 
-/mob/living/simple_animal/hostile/ghoul/reaver/Initialize()
+/mob/living/danimal/hostile/ghoul/reaver/Initialize()
 	. = ..()
 
-/mob/living/simple_animal/hostile/ghoul/reaver/Aggro()
+/mob/living/danimal/hostile/ghoul/reaver/Aggro()
 	..()
 	summon_backup(10)
 
-// /mob/living/simple_animal/hostile/ghoul/reaver/ncr
+// /mob/living/danimal/hostile/ghoul/reaver/ncr
 // 	name = "feral walker soldier"
 // 	desc = "A former US Army combatant, now ghoulified and insane. The armor that failed it in life still packs some good defense."
 // 	maxHealth = 140
 // 	can_ghost_into = FALSE
 
-// /mob/living/simple_animal/hostile/ghoul/reaver/ncr_helmet
+// /mob/living/danimal/hostile/ghoul/reaver/ncr_helmet
 // 	name = "plated feral walker soldier"
 // 	desc = "A former US Army combatant, now ghoulified and insane. The armor that failed it in life still packs some good defense."
 // 	maxHealth = 60
 // 	can_ghost_into = FALSE
 
-// /mob/living/simple_animal/hostile/ghoul/reaver/ncr_officer
+// /mob/living/danimal/hostile/ghoul/reaver/ncr_officer
 // 	name = "feral walker officer"
 // 	desc = "A former US Army officer, now ghoulified and insane. The armor that failed it in life still packs some good defense."
 // 	maxHealth = 60
@@ -233,7 +231,7 @@
 // 	can_ghost_into = FALSE
 
 // //Cold Feral ghoul
-// /mob/living/simple_animal/hostile/ghoul/coldferal
+// /mob/living/danimal/hostile/ghoul/coldferal
 // 	name = "cold walker feral"
 // 	desc = "A ghoul that has lost its mind and become aggressive. This one is strapped with metal armor, and appears far stronger."
 // 	icon_state = "cold_feral"
@@ -243,7 +241,6 @@
 // 	armor_list = ARMOR_VALUE_GHOUL_COLD
 // 	maxHealth = 80
 // 	health = 80
-// 	harm_intent_damage = 8
 // 	melee_damage_lower = 10
 // 	melee_damage_upper = 15
 // 	loot = list()
@@ -252,7 +249,7 @@
 // 	can_ghost_into = FALSE
 
 // //Frozen Feral ghoul
-// /mob/living/simple_animal/hostile/ghoul/frozenreaver
+// /mob/living/danimal/hostile/ghoul/frozenreaver
 // 	name = "frozen walker reaver"
 // 	desc = "A ghoul that has lost its mind and become aggressive. This one is strapped with metal armor, and appears far stronger."
 // 	icon_state = "frozen_reaver"
@@ -262,7 +259,6 @@
 // 	speed = 1.5
 // 	maxHealth = 80
 // 	health = 80
-// 	harm_intent_damage = 8
 // 	melee_damage_lower = 10
 // 	melee_damage_upper = 15
 // 	loot = list()
@@ -271,7 +267,7 @@
 // 	can_ghost_into = FALSE
 
 //Legendary ghoul
-/mob/living/simple_animal/hostile/ghoul/legendary
+/mob/living/danimal/hostile/ghoul/legendary
 	bounty = 50
 	name = "legendary walker"
 	desc = "A ghoul that has lost its mind and become aggressive. This one has exceptionally large, bulging muscles. It looks quite strong."
@@ -284,7 +280,6 @@
 	maxHealth = 200
 	health = 200
 	speed = 2.5
-	harm_intent_damage = 20
 	melee_damage_lower = 20
 	melee_damage_upper = 35
 	mob_size = 5
@@ -298,13 +293,13 @@
 	pop_required_to_jump_into = BIG_MOB_MIN_PLAYERS
 	desc_short = "A deadly creature that may or may not be reanimated jerky."
 
-/mob/living/simple_animal/hostile/ghoul/legendary/become_the_mob(mob/user)
+/mob/living/danimal/hostile/ghoul/legendary/become_the_mob(mob/user)
 	call_backup = null
 	send_mobs = null
 	. = ..()
 
 //Glowing ghoul
-/mob/living/simple_animal/hostile/ghoul/glowing
+/mob/living/danimal/hostile/ghoul/glowing
 	bounty = 15
 	name = "feral walker rad-shaman"
 	desc = "A feral ghoul that has absorbed massive amounts of radiation, causing them to glow in the dark and radiate constantly."
@@ -322,7 +317,6 @@
 	// ranged = TRUE
 	// projectiletype = /obj/item/projectile/radiation_thing
 	// projectilesound = 'sound/weapons/etherealhit.ogg'
-	harm_intent_damage = 8
 	melee_damage_lower = 10
 	melee_damage_upper = 22
 	light_system = MOVABLE_LIGHT
@@ -345,13 +339,13 @@
 		MOB_MINIMUM_DISTANCE_CHANGE_PER_TURN_CHANCE(50)
 	)
 
-/mob/living/simple_animal/hostile/ghoul/glowing/Initialize(mapload)
+/mob/living/danimal/hostile/ghoul/glowing/Initialize(mapload)
 	. = ..()
 	// we only heal BRUTELOSS because each type directly heals a simplemob's health
 	// therefore setting it to BRUTELOSS | FIRELOSS | TOXLOSS | OXYLOSS would mean healing 4x as much
 	// aka 40% of max life every tick, which is basically unkillable
 	// TODO: refactor this if simple_animals ever get damage types
-	AddComponent(/datum/component/glow_heal, chosen_targets = /mob/living/simple_animal/hostile/ghoul, allow_revival = FALSE, restrict_faction = null, type_healing = BRUTELOSS)
+	AddComponent(/datum/component/glow_heal, chosen_targets = /mob/living/danimal/hostile/ghoul, allow_revival = FALSE, restrict_faction = null, type_healing = BRUTELOSS)
 
 /obj/item/projectile/radiation_thing
 	name = "radiation"
@@ -366,11 +360,11 @@
 	icon_state = "neurotoxin"
 
 
-/mob/living/simple_animal/hostile/ghoul/glowing/Aggro()
+/mob/living/danimal/hostile/ghoul/glowing/Aggro()
 	..()
 	summon_backup(10)
 
-/mob/living/simple_animal/hostile/ghoul/glowing/AttackingTarget()
+/mob/living/danimal/hostile/ghoul/glowing/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!. || !ishuman(my_target))
@@ -378,7 +372,7 @@
 	var/mob/living/carbon/human/H = my_target
 	H.apply_effect(20, EFFECT_IRRADIATE, 0)
 
-// /mob/living/simple_animal/hostile/ghoul/glowing/strong // FEV mutation
+// /mob/living/danimal/hostile/ghoul/glowing/strong // FEV mutation
 // 	maxHealth = 256
 // 	health = 256
 // 	speed = 1.4 // Nyooom
@@ -387,7 +381,7 @@
 // 	melee_damage_upper = 30
 
 // //Alive ghoul
-// /mob/living/simple_animal/hostile/ghoul/soldier
+// /mob/living/danimal/hostile/ghoul/soldier
 // 	name = "walker soldier"
 // 	desc = "Have you ever seen a living ghoul before?<br>ghouls are necrotic post-humans - decrepit, rotting, zombie-like mutants."
 // 	icon_state = "soldier_ghoul"
@@ -403,7 +397,7 @@
 // 	can_ghost_into = FALSE
 
 // //Alive ghoul
-// /mob/living/simple_animal/hostile/ghoul/soldier/armored
+// /mob/living/danimal/hostile/ghoul/soldier/armored
 // 	name = "armored walker soldier"
 // 	desc = "Have you ever seen a living ghoul before?<br>ghouls are necrotic post-humans - decrepit, rotting, zombie-like mutants."
 // 	icon_state = "soldier_ghoul_a"
@@ -418,7 +412,7 @@
 // 	loot_drop_amount = 3
 
 // //Alive ghoul
-// /mob/living/simple_animal/hostile/ghoul/scorched
+// /mob/living/danimal/hostile/ghoul/scorched
 // 	name = "scorched walker soldier"
 // 	desc = "Have you ever seen a living ghoul before?<br>ghouls are necrotic post-humans - decrepit, rotting, zombie-like mutants."
 // 	icon_state = "scorched_m"
@@ -451,7 +445,7 @@
 // 	)
 
 // //Alive ghoul Ranged
-// /mob/living/simple_animal/hostile/ghoul/scorched/ranged
+// /mob/living/danimal/hostile/ghoul/scorched/ranged
 // 	name = "Ranged walker Soldier"
 // 	desc = "Have you ever seen a living ghoul before?<br>ghouls are necrotic post-humans - decrepit, rotting, zombie-like mutants."
 // 	icon_state = "scorched_r"
@@ -489,7 +483,7 @@
 // 	)
 
 // //Sunset mob of some sort?
-// /mob/living/simple_animal/hostile/ghoul/wyomingghost
+// /mob/living/danimal/hostile/ghoul/wyomingghost
 // 	name = "ghost soldier"
 // 	desc = "A figure clad in armor that stands silent except for the slight wheezing coming from them, a dark orange and black liquid pumps through a clear tube into the gas mask. The armor they wear seems to be sealed to their skin."
 // 	icon_state = "wyomingghost"
@@ -505,7 +499,6 @@
 // 	maxHealth = 150
 // 	health = 150
 // 	speed = 2
-// 	harm_intent_damage = 8
 // 	melee_damage_lower = 15
 // 	melee_damage_upper = 15
 // 	attack_verb_simple = "attacks"
@@ -520,7 +513,7 @@
 // 	loot_drop_amount = 5
 
 // //Halloween Event ghouls
-// /mob/living/simple_animal/hostile/ghoul/zombie
+// /mob/living/danimal/hostile/ghoul/zombie
 // 	name = "ravenous feral walker"
 // 	desc = "A ferocious feral ghoul, hungry for human meat."
 // 	faction = list("ghoul")
@@ -531,13 +524,13 @@
 // 	footstep_type = FOOTSTEP_MOB_BAREFOOT
 // 	can_ghost_into = FALSE
 
-// /*/mob/living/simple_animal/hostile/ghoul/zombie/AttackingTarget()
+// /*/mob/living/danimal/hostile/ghoul/zombie/AttackingTarget()
 // 	. = ..()
 // 	if(. && ishuman(target))
 // 		var/mob/living/carbon/human/H = target
 // 		try_to_ghoul_zombie_infect(H)*/
 
-// /mob/living/simple_animal/hostile/ghoul/zombie/reaver
+// /mob/living/danimal/hostile/ghoul/zombie/reaver
 // 	name = "ravenous feral walker"
 // 	desc = "A ferocious feral ghoul, hungry for human meat. This one is strapped with metal armor, and appears far stronger."
 // 	icon_state = "ghoulreaver"
@@ -547,13 +540,12 @@
 // 	maxHealth = 216
 // 	health = 216
 // 	can_ghost_into = FALSE
-// 	harm_intent_damage = 8
 // 	melee_damage_lower = 30
 // 	melee_damage_upper = 30
 // 	footstep_type = FOOTSTEP_MOB_BAREFOOT
 // 	can_ghost_into = FALSE
 
-// /mob/living/simple_animal/hostile/ghoul/zombie/glowing
+// /mob/living/danimal/hostile/ghoul/zombie/glowing
 // 	name = "ravenous glowing feral ghoul"
 // 	desc = "A ferocious feral ghoul, hungry for human meat. This one has absorbed massive amounts of radiation, causing them to glow in the dark and radiate constantly."
 // 	icon_state = "glowinghoul"
@@ -563,7 +555,6 @@
 // 	health = 192
 // 	speed = 2
 // 	can_ghost_into = FALSE
-// 	harm_intent_damage = 8
 // 	melee_damage_lower = 30
 // 	melee_damage_upper = 30
 // 	light_system = MOVABLE_LIGHT
@@ -571,19 +562,19 @@
 // 	footstep_type = FOOTSTEP_MOB_BAREFOOT
 // 	can_ghost_into = FALSE
 
-// /mob/living/simple_animal/hostile/ghoul/zombie/glowing/Initialize(mapload)
+// /mob/living/danimal/hostile/ghoul/zombie/glowing/Initialize(mapload)
 // 	. = ..()
 // 	// we only heal BRUTELOSS because each type directly heals a simplemob's health
 // 	// therefore setting it to BRUTELOSS | FIRELOSS | TOXLOSS | OXYLOSS would mean healing 4x as much
 // 	// aka 40% of max life every tick, which is basically unkillable
 // 	// TODO: refactor this if simple_animals ever get damage types
-// 	AddComponent(/datum/component/glow_heal, chosen_targets = /mob/living/simple_animal/hostile/ghoul, allow_revival = FALSE, restrict_faction = null, type_healing = BRUTELOSS)
+// 	AddComponent(/datum/component/glow_heal, chosen_targets = /mob/living/danimal/hostile/ghoul, allow_revival = FALSE, restrict_faction = null, type_healing = BRUTELOSS)
 
-// /mob/living/simple_animal/hostile/ghoul/zombie/glowing/Aggro()
+// /mob/living/danimal/hostile/ghoul/zombie/glowing/Aggro()
 // 	..()
 // 	summon_backup(10)
 
-// /mob/living/simple_animal/hostile/ghoul/zombie/glowing/AttackingTarget()
+// /mob/living/danimal/hostile/ghoul/zombie/glowing/AttackingTarget()
 // 	. = ..()
 // 	var/atom/my_target = get_target()
 // 	if(!. || !ishuman(my_target))
@@ -591,7 +582,7 @@
 // 	var/mob/living/carbon/human/H = my_target
 // 	H.apply_effect(20, EFFECT_IRRADIATE, 0)
 
-// /mob/living/simple_animal/hostile/ghoul/zombie/legendary
+// /mob/living/danimal/hostile/ghoul/zombie/legendary
 // 	name = "legendary ravenous walker"
 // 	desc = "A ferocious feral ghoul, hungry for human meat. This one has exceptionally large, bulging muscles. It looks quite strong."
 // 	icon_state = "glowinghoul"
@@ -603,7 +594,6 @@
 // 	health = 200
 // 	can_ghost_into = FALSE
 // 	speed = 2.5
-// 	harm_intent_damage = 8
 // 	melee_damage_lower = 30
 // 	melee_damage_upper = 35
 // 	mob_size = 5

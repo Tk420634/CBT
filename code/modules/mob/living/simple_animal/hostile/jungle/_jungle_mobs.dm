@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/jungle
+/mob/living/danimal/hostile/jungle
 	vision_range = 5
 	faction = list("jungle")
 	weather_immunities = list("acid")

@@ -4,7 +4,7 @@
 #define DETECTED_VOICE_INTERVAL 300  // Time between fire detected callouts
 #define FOAM_INTERVAL 50  // Time between deployment of fire fighting foam
 
-/mob/living/simple_animal/bot/firebot
+/mob/living/danimal/bot/firebot
 	name = "\improper Firebot"
 	desc = "A little fire extinguishing bot. He looks rather anxious."
 	icon = 'icons/mob/aibots.dmi'
@@ -39,7 +39,7 @@
 	var/extinguish_fires = TRUE
 	var/stationary_mode = FALSE
 
-/mob/living/simple_animal/bot/firebot/Initialize()
+/mob/living/danimal/bot/firebot/Initialize()
 	. = ..()
 	update_icon()
 	var/datum/job/engineer/J = new/datum/job/engineer
@@ -48,17 +48,17 @@
 
 	create_extinguisher()
 
-/mob/living/simple_animal/bot/firebot/bot_reset()
+/mob/living/danimal/bot/firebot/bot_reset()
 	create_extinguisher()
 
-/mob/living/simple_animal/bot/firebot/proc/create_extinguisher()
+/mob/living/danimal/bot/firebot/proc/create_extinguisher()
 	internal_ext = new /obj/item/extinguisher(src)
 	internal_ext.safety = FALSE
 	internal_ext.precision = TRUE
 	internal_ext.max_water = INFINITY
 	internal_ext.refill()
 
-/mob/living/simple_animal/bot/firebot/UnarmedAttack(atom/A, proximity, intent = a_intent, flags = NONE)
+/mob/living/danimal/bot/firebot/UnarmedAttack(atom/A, proximity, intent = a_intent, flags = NONE)
 	if(!on)
 		return
 	if(internal_ext)
@@ -66,7 +66,7 @@
 	else
 		return ..()
 
-/mob/living/simple_animal/bot/firebot/RangedAttack(atom/A)
+/mob/living/danimal/bot/firebot/RangedAttack(atom/A)
 	if(!on)
 		return
 	if(internal_ext)
@@ -74,15 +74,15 @@
 	else
 		return ..()
 
-/mob/living/simple_animal/bot/firebot/turn_on()
+/mob/living/danimal/bot/firebot/turn_on()
 	. = ..()
 	update_icon()
 
-/mob/living/simple_animal/bot/firebot/turn_off()
+/mob/living/danimal/bot/firebot/turn_off()
 	..()
 	update_icon()
 
-/mob/living/simple_animal/bot/firebot/bot_reset()
+/mob/living/danimal/bot/firebot/bot_reset()
 	..()
 	target_fire = null
 	old_target_fire = null
@@ -90,19 +90,19 @@
 	anchored = FALSE
 	update_icon()
 
-/mob/living/simple_animal/bot/firebot/proc/soft_reset()
+/mob/living/danimal/bot/firebot/proc/soft_reset()
 	path = list()
 	target_fire = null
 	mode = BOT_IDLE
 	last_found = world.time
 	update_icon()
 
-/mob/living/simple_animal/bot/firebot/set_custom_texts()
+/mob/living/danimal/bot/firebot/set_custom_texts()
 	text_hack = "You corrupt [name]'s safety protocols."
 	text_dehack = "You detect errors in [name] and reset his programming."
 	text_dehack_fail = "[name] is not responding to reset commands!"
 
-/mob/living/simple_animal/bot/firebot/get_controls(mob/user)
+/mob/living/danimal/bot/firebot/get_controls(mob/user)
 	var/dat
 	dat += hack(user)
 	dat += showpai(user)
@@ -119,7 +119,7 @@
 
 	return dat
 
-/mob/living/simple_animal/bot/firebot/emag_act(mob/user)
+/mob/living/danimal/bot/firebot/emag_act(mob/user)
 	. = ..()
 	if(emagged == 1)
 		if(user)
@@ -138,7 +138,7 @@
 		internal_ext.max_water = INFINITY
 		internal_ext.refill()
 
-/mob/living/simple_animal/bot/firebot/Topic(href, href_list)
+/mob/living/danimal/bot/firebot/Topic(href, href_list)
 	if(..())
 		return TRUE
 
@@ -153,7 +153,7 @@
 	update_controls()
 	update_icon()
 
-/mob/living/simple_animal/bot/firebot/proc/is_burning(atom/target)
+/mob/living/danimal/bot/firebot/proc/is_burning(atom/target)
 	if(ismob(target))
 		var/mob/living/M = target
 		if(M.on_fire || (emagged == 1 && !M.on_fire))
@@ -166,7 +166,7 @@
 
 	return FALSE
 
-/mob/living/simple_animal/bot/firebot/handle_automated_action()
+/mob/living/danimal/bot/firebot/handle_automated_action()
 	if(!..())
 		return
 
@@ -255,7 +255,7 @@
 
 
 //Look for burning people or turfs around the bot
-/mob/living/simple_animal/bot/firebot/process_scan(atom/scan_target)
+/mob/living/danimal/bot/firebot/process_scan(atom/scan_target)
 	var/result
 
 	if(scan_target == src)
@@ -270,20 +270,20 @@
 
 	return result
 
-/mob/living/simple_animal/bot/firebot/temperature_expose(datum/gas_mixture/air, temperature, volume)
+/mob/living/danimal/bot/firebot/temperature_expose(datum/gas_mixture/air, temperature, volume)
 	if((temperature > T0C + 200 || temperature < BODYTEMP_COLD_DAMAGE_LIMIT) && foam_cooldown + FOAM_INTERVAL < world.time)
 		new /obj/effect/particle_effect/foam/firefighting(loc)
 		foam_cooldown = world.time
 	..()
 
-/mob/living/simple_animal/bot/firebot/proc/spray_water(atom/target, mob/user)
+/mob/living/danimal/bot/firebot/proc/spray_water(atom/target, mob/user)
 	if(stationary_mode)
 		flick("firebots_use", user)
 	else
 		flick("firebot1_use", user)
 	internal_ext.afterattack(target, user, null)
 
-/mob/living/simple_animal/bot/firebot/update_icon()
+/mob/living/danimal/bot/firebot/update_icon()
 	if(!on)
 		icon_state = "firebot0"
 		return
@@ -295,7 +295,7 @@
 		icon_state = "firebot1"
 
 
-/mob/living/simple_animal/bot/firebot/explode()
+/mob/living/danimal/bot/firebot/explode()
 	on = FALSE
 	visible_message(span_boldannounce("[src] blows apart!"))
 

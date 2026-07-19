@@ -1,4 +1,4 @@
-/mob/living/simple_animal/mouse
+/mob/living/danimal/mouse
 	name = "radmouse"
 	desc = "It's a nasty, ugly, evil, disease-ridden, radioactive rodent."
 	icon_state = "mouse_gray"
@@ -32,7 +32,7 @@
 	var/chew_probability = 1
 	faction = list("rat")
 
-/mob/living/simple_animal/mouse/Initialize()
+/mob/living/danimal/mouse/Initialize()
 	. = ..()
 	if(!body_color)
 		body_color = pick(list("brown","gray","white"))
@@ -41,12 +41,12 @@
 	icon_living = "mouse_[body_color]"
 	icon_dead = "mouse_[body_color]_dead"
 
-/mob/living/simple_animal/mouse/proc/splat()
+/mob/living/danimal/mouse/proc/splat()
 	src.health = 0
 	src.icon_dead = "mouse_[body_color]_splat"
 	death()
 
-/mob/living/simple_animal/mouse/death(gibbed, toast)
+/mob/living/danimal/mouse/death(gibbed, toast)
 	if(!ckey)
 		..(1)
 		if(!gibbed)
@@ -61,7 +61,7 @@
 		..(gibbed)
 
 
-/mob/living/simple_animal/mouse/on_entered(AM as mob|obj)
+/mob/living/danimal/mouse/on_entered(AM as mob|obj)
 	..()
 	if( ishuman(AM) )
 		if(!stat)
@@ -71,7 +71,7 @@
 		INVOKE_ASYNC(src,PROC_REF(evolve))
 		qdel(AM)
 
-/mob/living/simple_animal/mouse/handle_automated_action()
+/mob/living/danimal/mouse/handle_automated_action()
 	if(!isturf(loc))
 		return
 
@@ -103,20 +103,20 @@
  *Checks the mouse cap, if it's above the cap, doesn't spawn a mouse. If below, spawns a mouse and adds it to cheeserats.
  */
 
-/mob/living/simple_animal/mouse/proc/be_fruitful()
+/mob/living/danimal/mouse/proc/be_fruitful()
 	var/cap = CONFIG_GET(number/ratcap)
 	if(LAZYLEN(SSmobs.cheeserats) >= cap)
 		visible_message(span_warning("[src] carefully eats the cheese, hiding it from the [cap] mice on the station!"))
 		return
-	var/mob/living/newmouse = new /mob/living/simple_animal/mouse(loc)
+	var/mob/living/newmouse = new /mob/living/danimal/mouse(loc)
 	SSmobs.cheeserats += newmouse
 	visible_message(span_notice("[src] nibbles through the cheese, attracting another mouse!"))
 
 /**
  *Spawns a new regal rat, says some good jazz, and if sentient, transfers the relivant mind.
  */
-/mob/living/simple_animal/mouse/proc/evolve()
-	var/mob/living/simple_animal/hostile/regalrat = new /mob/living/simple_animal/hostile/regalrat(loc)
+/mob/living/danimal/mouse/proc/evolve()
+	var/mob/living/danimal/hostile/regalrat = new /mob/living/danimal/hostile/regalrat(loc)
 	visible_message(span_warning("[src] devours the cheese! He morphs into something... greater!"))
 	regalrat.say("RISE, MY SUBJECTS! SCREEEEEEE!")
 	if(mind)
@@ -127,31 +127,31 @@
  * Mouse types
  */
 
-/mob/living/simple_animal/mouse/white
+/mob/living/danimal/mouse/white
 	body_color = "white"
 	icon_state = "mouse_white"
 
-/mob/living/simple_animal/mouse/gray
+/mob/living/danimal/mouse/gray
 	body_color = "gray"
 	icon_state = "mouse_gray"
 
-/mob/living/simple_animal/mouse/brown
+/mob/living/danimal/mouse/brown
 	body_color = "brown"
 	icon_state = "mouse_brown"
 
-/mob/living/simple_animal/mouse/Destroy()
+/mob/living/danimal/mouse/Destroy()
 	SSmobs.cheeserats -= src
 	return ..()
 
 GLOBAL_VAR(tom_existed)
 
 //TOM IS ALIVE! SQUEEEEEEEE~K :)
-/mob/living/simple_animal/mouse/brown/Tom
+/mob/living/danimal/mouse/brown/Tom
 	name = "Tom"
 	desc = "Jerry the cat is not amused."
 	gold_core_spawnable = NO_SPAWN
 
-/mob/living/simple_animal/mouse/brown/Tom/Initialize()
+/mob/living/danimal/mouse/brown/Tom/Initialize()
 	. = ..()
 	GLOB.tom_existed = TRUE
 

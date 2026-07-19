@@ -166,7 +166,7 @@
 	desc = "You can now summon a Raw Prophet using eyes, a left arm, right arm and a pool of blood using a transmutation circle. Raw prophets have increased seeing range, and can see through walls. They can jaunt long distances, though they are fragile."
 	cost = 1
 	required_atoms = list(/obj/item/organ/eyes,/obj/item/bodypart/l_arm,/obj/item/bodypart/r_arm,/obj/effect/decal/cleanable/blood)
-	mob_to_summon = /mob/living/simple_animal/hostile/eldritch/raw_prophet
+	mob_to_summon = /mob/living/danimal/hostile/eldritch/raw_prophet
 	next_knowledge = list(/datum/eldritch_knowledge/flesh_blade_upgrade,/datum/eldritch_knowledge/spell/blood_siphon,/datum/eldritch_knowledge/curse/paralysis)
 	route = PATH_FLESH
 
@@ -176,7 +176,7 @@
 	desc = "You can now summon a Stalker using a knife, a flower, a pen and a piece of paper using a transmutation circle. Stalkers possess the ability to shapeshift into various forms while assuming the vigor and powers of that form."
 	cost = 1
 	required_atoms = list(/obj/item/kitchen/knife,/obj/item/reagent_containers/food/snacks/grown/poppy,/obj/item/pen,/obj/item/paper)
-	mob_to_summon = /mob/living/simple_animal/hostile/eldritch/stalker
+	mob_to_summon = /mob/living/danimal/hostile/eldritch/stalker
 	next_knowledge = list(/datum/eldritch_knowledge/summon/ashy,/datum/eldritch_knowledge/summon/rusty,/datum/eldritch_knowledge/flesh_blade_upgrade_2)
 	route = PATH_FLESH
 
@@ -186,7 +186,7 @@
 	desc = "You can now summon an Ashen One by transmuting a pile of ash, a head and a book using a transmutation circle. They possess the ability to jaunt short distances and create a cascade of flames."
 	cost = 1
 	required_atoms = list(/obj/effect/decal/cleanable/ash,/obj/item/bodypart/head,/obj/item/book)
-	mob_to_summon = /mob/living/simple_animal/hostile/eldritch/ash_spirit
+	mob_to_summon = /mob/living/danimal/hostile/eldritch/ash_spirit
 	next_knowledge = list(/datum/eldritch_knowledge/summon/stalker,/datum/eldritch_knowledge/spell/flame_birth)
 
 /datum/eldritch_knowledge/summon/rusty
@@ -195,7 +195,7 @@
 	desc = "You can now summon a Rust Walker transmuting a vomit pool, a head, and a book using a transmutation circle. Rust Walkers possess the ability to spread rust and can fire bolts of rust to further corrode the area."
 	cost = 1
 	required_atoms = list(/obj/effect/decal/cleanable/vomit,/obj/item/bodypart/head,/obj/item/book)
-	mob_to_summon = /mob/living/simple_animal/hostile/eldritch/rust_spirit
+	mob_to_summon = /mob/living/danimal/hostile/eldritch/rust_spirit
 	next_knowledge = list(/datum/eldritch_knowledge/summon/stalker,/datum/eldritch_knowledge/spell/entropic_plume)
 
 /datum/eldritch_knowledge/spell/blood_siphon
@@ -219,7 +219,7 @@
 	user.SetImmobilized(10 HOURS) // no way someone will stand 10 hours in a spot, just so he can move while the alert is still showing.
 	switch(alert_)
 		if("No")
-			var/mob/living/summoned = new /mob/living/simple_animal/hostile/eldritch/armsy(loc)
+			var/mob/living/summoned = new /mob/living/danimal/hostile/eldritch/armsy(loc)
 			message_admins("[summoned.name] is being summoned by [user.real_name] in [loc]")
 			var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you want to play as a [summoned.real_name]", ROLE_HERETIC, null, ROLE_HERETIC, 100,summoned)
 			user.SetImmobilized(0)
@@ -238,7 +238,7 @@
 			monster.set_owner(master)
 			master.ascended = TRUE
 		if("Yes")
-			var/mob/living/summoned = new /mob/living/simple_animal/hostile/eldritch/armsy/prime(loc,TRUE,10)
+			var/mob/living/summoned = new /mob/living/danimal/hostile/eldritch/armsy/prime(loc,TRUE,10)
 			summoned.ghostize(0)
 			user.SetImmobilized(0)
 			priority_announce("$^@&#*$^@(#&$(@&#^$&#^@# Fear the dark, for king of arms has ascended! Lord of the night has come! $^@&#*$^@(#&$(@&#^$&#^@#","#$^@&#*$^@(#&$(@&#^$&#^@#", 'sound/announcer/classic/spanomalies.ogg')

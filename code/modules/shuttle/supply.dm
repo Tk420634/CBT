@@ -28,8 +28,8 @@ GLOBAL_LIST_INIT(blacklisted_cargo_types, typecacheof(list(
 	)))
 
 GLOBAL_LIST_INIT(cargo_shuttle_leave_behind_typecache, typecacheof(list(
-	/mob/living/simple_animal/revenant,
-	/mob/living/simple_animal/slaughter
+	/mob/living/danimal/revenant,
+	/mob/living/danimal/slaughter
 	)))
 
 /obj/docking_port/mobile/supply

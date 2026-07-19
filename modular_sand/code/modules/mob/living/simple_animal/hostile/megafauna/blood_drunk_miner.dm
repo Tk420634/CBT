@@ -1,8 +1,8 @@
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner
+/mob/living/danimal/hostile/megafauna/blood_drunk_miner
 	crusher_loot = list(/obj/item/melee/transforming/cleaving_saw, /obj/item/gun/energy/kinetic_accelerator/premiumka/bdminer, /obj/item/borg/upgrade/modkit/lifesteal/miner, /obj/item/crusher_trophy/miner_eye)
 	loot = list(/obj/item/melee/transforming/cleaving_saw, /obj/item/gun/energy/kinetic_accelerator/premiumka/bdminer, /obj/item/borg/upgrade/modkit/lifesteal/miner)
 
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/ComponentInitialize()
+/mob/living/danimal/hostile/megafauna/blood_drunk_miner/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("grabs the blood-drunk's arm, flips their cleaving saw with the other hand, and forcefully makes them chop off their own head with it!", "grabs blood-drunk by their PKA, aims it at their head and then shoots, splattering his brains out!", "rips out both of the blood-drunk's arms, then kicks their limp torso on the groundd and curbstomps their head in so hard it explodes!"), \

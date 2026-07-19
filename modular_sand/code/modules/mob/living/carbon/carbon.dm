@@ -30,7 +30,7 @@
 //also because of this you can proccall it, why would you if you have smite?
 /mob/living/proc/pregoodbye(C)
 	if(isanimal(C))
-		var/mob/living/simple_animal/D = C
+		var/mob/living/danimal/D = C
 		D.toggle_ai(AI_OFF)
 	AllImmobility(900, TRUE, TRUE) // Complete 15 minutes of stun, hopefully they shouldn't take that long
 	playsound(C, "modular_sand/sound/effects/admin_punish/changetheworld.ogg", 100, FALSE)

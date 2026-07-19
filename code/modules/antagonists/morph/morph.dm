@@ -1,6 +1,6 @@
 #define MORPH_COOLDOWN 50
 
-/mob/living/simple_animal/hostile/morph
+/mob/living/danimal/hostile/morph
 	name = "morph"
 	real_name = "morph"
 	desc = "A revolting, pulsating pile of flesh."
@@ -41,7 +41,7 @@
 	var/static/list/blacklist_typecache = typecacheof(list(
 	/atom/movable/screen,
 	/obj/singularity,
-	/mob/living/simple_animal/hostile/morph,
+	/mob/living/danimal/hostile/morph,
 	/obj/effect))
 
 	var/playstyle_string = "<span class='big bold'>You are a morph,</span></b> an abomination of science created primarily with changeling cells. \
@@ -51,7 +51,7 @@
 							You can attack any item or dead creature to consume it - creatures will fully restore your health. \
 							Finally, you can restore yourself to your original form while morphed by shift-clicking yourself.</b>"
 
-/mob/living/simple_animal/hostile/morph/examine(mob/user)
+/mob/living/danimal/hostile/morph/examine(mob/user)
 	if(morphed)
 		. = form.examine(user)
 		if(get_dist(user,src)<=3)
@@ -59,24 +59,24 @@
 	else
 		. = ..()
 
-/mob/living/simple_animal/hostile/morph/med_hud_set_health()
+/mob/living/danimal/hostile/morph/med_hud_set_health()
 	if(morphed && !isliving(form))
 		var/image/holder = hud_list[HEALTH_HUD]
 		holder.icon_state = null
 		return //we hide medical hud while morphed
 	..()
 
-/mob/living/simple_animal/hostile/morph/med_hud_set_status()
+/mob/living/danimal/hostile/morph/med_hud_set_status()
 	if(morphed && !isliving(form))
 		var/image/holder = hud_list[STATUS_HUD]
 		holder.icon_state = null
 		return //we hide medical hud while morphed
 	..()
 
-/mob/living/simple_animal/hostile/morph/proc/allowed(atom/movable/A) // make it into property/proc ? not sure if worth it
+/mob/living/danimal/hostile/morph/proc/allowed(atom/movable/A) // make it into property/proc ? not sure if worth it
 	return !is_type_in_typecache(A, blacklist_typecache) && (isobj(A) || ismob(A))
 
-/mob/living/simple_animal/hostile/morph/proc/eat(atom/movable/A)
+/mob/living/danimal/hostile/morph/proc/eat(atom/movable/A)
 	if(morphed && !eat_while_disguised)
 		to_chat(src, span_warning("You can not eat anything while you are disguised!"))
 		return FALSE
@@ -86,7 +86,7 @@
 		return TRUE
 	return FALSE
 
-/mob/living/simple_animal/hostile/morph/ShiftClickOn(atom/movable/A)
+/mob/living/danimal/hostile/morph/ShiftClickOn(atom/movable/A)
 	if(morph_time <= world.time && !stat)
 		if(A == src)
 			restore()
@@ -97,7 +97,7 @@
 		to_chat(src, span_warning("Your chameleon skin is still repairing itself!"))
 		..()
 
-/mob/living/simple_animal/hostile/morph/proc/assume(atom/movable/target)
+/mob/living/danimal/hostile/morph/proc/assume(atom/movable/target)
 	if(morphed)
 		to_chat(src, span_warning("You must restore to your original form first!"))
 		return
@@ -123,7 +123,7 @@
 	med_hud_set_status() //we're an object honest
 	return
 
-/mob/living/simple_animal/hostile/morph/proc/restore()
+/mob/living/danimal/hostile/morph/proc/restore()
 	if(!morphed)
 		to_chat(src, span_warning("You're already in your normal form!"))
 		return
@@ -149,7 +149,7 @@
 	med_hud_set_health()
 	med_hud_set_status() //we are not an object
 
-/mob/living/simple_animal/hostile/morph/death(gibbed)
+/mob/living/danimal/hostile/morph/death(gibbed)
 	if(morphed)
 		visible_message(span_warning("[src] twists and dissolves into a pile of green flesh!"), \
 						span_userdanger("Your skin ruptures! Your flesh breaks apart! No disguise can ward off de--"))
@@ -157,24 +157,24 @@
 	barf_contents()
 	..()
 
-/mob/living/simple_animal/hostile/morph/proc/barf_contents()
+/mob/living/danimal/hostile/morph/proc/barf_contents()
 	for(var/atom/movable/AM in src)
 		AM.forceMove(loc)
 		if(prob(90))
 			step(AM, pick(GLOB.alldirs))
 
-/mob/living/simple_animal/hostile/morph/wabbajack_act(mob/living/new_mob)
+/mob/living/danimal/hostile/morph/wabbajack_act(mob/living/new_mob)
 	barf_contents()
 	. = ..()
 
-/mob/living/simple_animal/hostile/morph/Aggro() // automated only
+/mob/living/danimal/hostile/morph/Aggro() // automated only
 	..()
 	restore()
 
-/mob/living/simple_animal/hostile/morph/LoseAggro()
+/mob/living/danimal/hostile/morph/LoseAggro()
 	vision_range = initial(vision_range)
 
-/mob/living/simple_animal/hostile/morph/AIShouldSleep(list/possible_targets)
+/mob/living/danimal/hostile/morph/AIShouldSleep(list/possible_targets)
 	. = ..()
 	if(.)
 		var/list/things = list()
@@ -184,12 +184,12 @@
 		var/atom/movable/T = pick(things)
 		assume(T)
 
-/mob/living/simple_animal/hostile/morph/can_track(mob/living/user)
+/mob/living/danimal/hostile/morph/can_track(mob/living/user)
 	if(morphed)
 		return FALSE
 	return ..()
 
-/mob/living/simple_animal/hostile/morph/AttackingTarget()
+/mob/living/danimal/hostile/morph/AttackingTarget()
 	if(morphed && !melee_damage_disguised)
 		to_chat(src, span_warning("You can not attack while disguised!"))
 		return
@@ -232,7 +232,7 @@
 	player_mind.active = 1
 	if(!GLOB.xeno_spawn)
 		return MAP_ERROR
-	var/mob/living/simple_animal/hostile/morph/S = new /mob/living/simple_animal/hostile/morph(pick(GLOB.xeno_spawn))
+	var/mob/living/danimal/hostile/morph/S = new /mob/living/danimal/hostile/morph(pick(GLOB.xeno_spawn))
 	player_mind.transfer_to(S)
 	player_mind.assigned_role = "Morph"
 	player_mind.special_role = "Morph"

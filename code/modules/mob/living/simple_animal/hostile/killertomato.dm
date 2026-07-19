@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/killertomato
+/mob/living/danimal/hostile/killertomato
 	name = "Killer Tomato"
 	desc = "It's a horrifyingly enormous beef tomato, and it's packing extra beef!"
 	icon_state = "tomato"

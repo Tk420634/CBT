@@ -11,7 +11,7 @@
 	if (!chosen)
 		return
 
-	var/mob/living/simple_animal/hostile/mimic/copy/basemob = /mob/living/simple_animal/hostile/mimic/copy
+	var/mob/living/danimal/hostile/mimic/copy/basemob = /mob/living/danimal/hostile/mimic/copy
 
 	var/obj/chosen_obj = text2path(chosen)
 
@@ -25,7 +25,7 @@
 			"disableai" = list("desc" = "Disable AI", "type" = "boolean", "value" = "Yes"),
 			"idledamage" = list("desc" = "Damaged while idle", "type" = "boolean", "value" = "No"),
 			"dropitem" = list("desc" = "Drop obj on death", "type" = "boolean", "value" = "Yes"),
-			"mobtype" = list("desc" = "Base mob type", "type" = "datum", "path" = "/mob/living/simple_animal/hostile/mimic/copy", "value" = "/mob/living/simple_animal/hostile/mimic/copy"),
+			"mobtype" = list("desc" = "Base mob type", "type" = "datum", "path" = "/mob/living/danimal/hostile/mimic/copy", "value" = "/mob/living/danimal/hostile/mimic/copy"),
 			"ckey" = list("desc" = "ckey", "type" = "ckey", "value" = "none"),
 	)
 	)
@@ -37,7 +37,7 @@
 		chosen_obj = text2path(mainsettings["objtype"]["value"])
 
 		basemob = text2path(mainsettings["mobtype"]["value"])
-		if (!ispath(basemob, /mob/living/simple_animal/hostile/mimic/copy) || !ispath(chosen_obj, /obj))
+		if (!ispath(basemob, /mob/living/danimal/hostile/mimic/copy) || !ispath(chosen_obj, /obj))
 			to_chat(usr, "Mob or object path invalid")
 
 		basemob = new basemob(get_turf(usr), new chosen_obj(get_turf(usr)), usr, mainsettings["dropitem"]["value"] == "Yes" ? FALSE : TRUE, (mainsettings["googlyeyes"]["value"] == "Yes" ? FALSE : TRUE))

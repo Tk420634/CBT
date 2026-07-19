@@ -24,12 +24,12 @@
 
 /obj/item/grenade/spawnergrenade/manhacks
 	name = "viscerator delivery grenade"
-	spawner_type = /mob/living/simple_animal/hostile/viscerator
+	spawner_type = /mob/living/danimal/hostile/viscerator
 	deliveryamt = 10
 
 /obj/item/grenade/spawnergrenade/spesscarp
 	name = "carp delivery grenade"
-	spawner_type = /mob/living/simple_animal/hostile/carp
+	spawner_type = /mob/living/danimal/hostile/carp
 	deliveryamt = 5
 
 /obj/item/grenade/spawnergrenade/syndiesoap
@@ -40,5 +40,5 @@
 	name = "Buzzkill grenade"
 	desc = "The label reads: \"WARNING: DEVICE WILL RELEASE LIVE SPECIMENS UPON ACTIVATION. SEAL SUIT BEFORE USE.\" It is warm to the touch and vibrates faintly."
 	icon_state = "holy_grenade"
-	spawner_type = /mob/living/simple_animal/hostile/poison/bees/short/frenly
+	spawner_type = /mob/living/danimal/hostile/poison/bees/short/frenly
 	deliveryamt = 10

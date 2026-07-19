@@ -12,7 +12,7 @@ They deal 35 brute (armor is considered).
 * Shielding modkit - A modkit that grants your PKA a 15% chance to block any incoming attack while held.
 * Tomahawk - Basically a one handed crusher to complement the shield.
 */
-/mob/living/simple_animal/hostile/megafauna/gladiator
+/mob/living/danimal/hostile/megafauna/gladiator
 	name = "\proper The Gladiator"
 	desc = "An immortal ash walker, whose powers have been granted by the necropolis itself."
 	icon = 'modular_sand/icons/mob/lavaland/lavaland_monsters.dmi'
@@ -51,7 +51,7 @@ They deal 35 brute (armor is considered).
 	loot = list(/obj/structure/closet/crate/necropolis/gladiator)
 	crusher_loot = list(/obj/structure/closet/crate/necropolis/gladiator/crusher)
 
-/mob/living/simple_animal/hostile/megafauna/gladiator/ComponentInitialize()
+/mob/living/danimal/hostile/megafauna/gladiator/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("grabs the gladiator's arm, flips their zweihander with the other hand, and forcefully makes them chop off their own head with it!", "grabs the gladiator by their zweihander, and mark detonate them into a shower of gibs!", "rips out both of the gladiator's arms, then kicks their limp torso on the groundd and curbstomps their head in so hard it explodes!"), \
@@ -65,18 +65,18 @@ They deal 35 brute (armor is considered).
 	gpstag = "Dreadful Signal"
 	desc = "Let me help you to see, miner."
 
-/mob/living/simple_animal/hostile/megafauna/gladiator/Initialize(mapload)
+/mob/living/danimal/hostile/megafauna/gladiator/Initialize(mapload)
 	. = ..()
 	internal = new /obj/item/gps/internal/gladiator(src)
 
-/mob/living/simple_animal/hostile/megafauna/gladiator/Life()
+/mob/living/danimal/hostile/megafauna/gladiator/Life()
 	. = ..()
 	if(!wander)
 		for(var/mob/living/M in view(4, src))
 			if(!(M in introduced) && (stat != DEAD))
 				introduction(M)
 
-/mob/living/simple_animal/hostile/megafauna/gladiator/apply_damage(damage = 0,damagetype = BRUTE, def_zone = null, blocked = FALSE, forced = FALSE, spread_damage = FALSE, wound_bonus = 0, bare_wound_bonus = 0, sharpness = SHARP_NONE) //skyrat edit
+/mob/living/danimal/hostile/megafauna/gladiator/apply_damage(damage = 0,damagetype = BRUTE, def_zone = null, blocked = FALSE, forced = FALSE, spread_damage = FALSE, wound_bonus = 0, bare_wound_bonus = 0, sharpness = SHARP_NONE) //skyrat edit
 	if(speen)
 		visible_message("<span class='danger'>[src] brushes off all incoming attacks!")
 		return FALSE
@@ -89,12 +89,12 @@ They deal 35 brute (armor is considered).
 	if(world.time + adjustment_amount > next_move)
 		changeNext_move(adjustment_amount)
 
-/mob/living/simple_animal/hostile/megafauna/gladiator/Retaliate()
+/mob/living/danimal/hostile/megafauna/gladiator/Retaliate()
 	. = ..()
 	if(!wander)
 		wander = TRUE
 
-/mob/living/simple_animal/hostile/megafauna/gladiator/proc/introduction(mob/living/target)
+/mob/living/danimal/hostile/megafauna/gladiator/proc/introduction(mob/living/target)
 	if(src == target)
 		introduced += src
 		return
@@ -139,7 +139,7 @@ They deal 35 brute (armor is considered).
 		say("You are not welcome into the necropolisss.")
 		introduced |= target
 
-/mob/living/simple_animal/hostile/megafauna/gladiator/Move(atom/newloc, dir, step_x, step_y)
+/mob/living/danimal/hostile/megafauna/gladiator/Move(atom/newloc, dir, step_x, step_y)
 	if(speen || stunned)
 		return FALSE
 	else
@@ -188,7 +188,7 @@ They deal 35 brute (armor is considered).
 					discharge()
 			..()
 
-/mob/living/simple_animal/hostile/megafauna/gladiator/Bump(atom/A)
+/mob/living/danimal/hostile/megafauna/gladiator/Bump(atom/A)
 	. = ..()
 	if(charging)
 		if(isliving(A))
@@ -201,7 +201,7 @@ They deal 35 brute (armor is considered).
 			visible_message(span_userdanger("[src] crashes headfirst into [A]!"))
 			discharge(1.33)
 
-/mob/living/simple_animal/hostile/megafauna/gladiator/proc/update_phase()
+/mob/living/danimal/hostile/megafauna/gladiator/proc/update_phase()
 	var/healthpercentage = 100 * (health/maxHealth)
 	if(src.stat == DEAD)
 		return
@@ -229,7 +229,7 @@ They deal 35 brute (armor is considered).
 	if(charging)
 		move_to_delay = move_to_charge
 
-/mob/living/simple_animal/hostile/megafauna/gladiator/proc/zweispin()
+/mob/living/danimal/hostile/megafauna/gladiator/proc/zweispin()
 	visible_message(span_boldwarning("[src] lifts his zweihander, and prepares to spin!"))
 	speen = TRUE
 	animate(src, color = "#ff6666", 10)
@@ -287,7 +287,7 @@ They deal 35 brute (armor is considered).
 	sleep(3)
 	speen = FALSE
 
-/mob/living/simple_animal/hostile/megafauna/gladiator/proc/chargeattack(atom/target, var/range)
+/mob/living/danimal/hostile/megafauna/gladiator/proc/chargeattack(atom/target, var/range)
 	face_atom(target)
 	visible_message(span_boldwarning("[src] lifts his shield, and prepares to charge!"))
 	animate(src, color = "#ff6666", 3)
@@ -297,7 +297,7 @@ They deal 35 brute (armor is considered).
 	minimum_distance = 0
 	charging = TRUE
 
-/mob/living/simple_animal/hostile/megafauna/gladiator/proc/discharge(var/modifier = 1)
+/mob/living/danimal/hostile/megafauna/gladiator/proc/discharge(var/modifier = 1)
 	stunned = TRUE
 	charging = FALSE
 	minimum_distance = 1
@@ -307,7 +307,7 @@ They deal 35 brute (armor is considered).
 	sleep(stunduration * modifier)
 	stunned = FALSE
 
-/mob/living/simple_animal/hostile/megafauna/gladiator/proc/teleport(atom/target)
+/mob/living/danimal/hostile/megafauna/gladiator/proc/teleport(atom/target)
 	var/turf/T = get_step(target, -target.dir)
 	new /obj/effect/temp_visual/small_smoke/halfsecond(get_turf(src))
 	sleep(4)
@@ -327,7 +327,7 @@ They deal 35 brute (armor is considered).
 			new /obj/effect/temp_visual/small_smoke/halfsecond(T)
 			forceMove(T)
 
-/mob/living/simple_animal/hostile/megafauna/gladiator/AttackingTarget()
+/mob/living/danimal/hostile/megafauna/gladiator/AttackingTarget()
 	. = ..()
 	if(speen || stunned)
 		return FALSE
@@ -336,14 +336,14 @@ They deal 35 brute (armor is considered).
 	if(. && prob(5 * phase))
 		teleport(target)
 
-/mob/living/simple_animal/hostile/megafauna/gladiator/proc/boneappletea(atom/target)
+/mob/living/danimal/hostile/megafauna/gladiator/proc/boneappletea(atom/target)
 	var/obj/item/kitchen/knife/combat/bone/boned = new /obj/item/kitchen/knife/combat/bone(get_turf(src))
 	boned.throwforce = 35
 	playsound(src, 'sound/weapons/fwoosh.wav', 60, 0)
 	boned.throw_at(target, 7, 3, src)
 	QDEL_IN(boned, 30)
 
-/mob/living/simple_animal/hostile/megafauna/gladiator/OpenFire()
+/mob/living/danimal/hostile/megafauna/gladiator/OpenFire()
 	if(world.time < ranged_cooldown)
 		return FALSE
 	if(speen || stunned || charging)
@@ -382,11 +382,11 @@ They deal 35 brute (armor is considered).
 
 //Aggression helpers
 /obj/effect/step_trigger/gladiator
-	var/mob/living/simple_animal/hostile/megafauna/gladiator/glady
+	var/mob/living/danimal/hostile/megafauna/gladiator/glady
 
 /obj/effect/step_trigger/gladiator/Initialize()
 	. = ..()
-	for(var/mob/living/simple_animal/hostile/megafauna/gladiator/G in view(7, src))
+	for(var/mob/living/danimal/hostile/megafauna/gladiator/G in view(7, src))
 		if(!glady)
 			glady = G
 

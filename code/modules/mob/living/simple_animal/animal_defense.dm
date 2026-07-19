@@ -1,6 +1,6 @@
 
 
-/mob/living/simple_animal/on_attack_hand(mob/living/carbon/human/M)
+/mob/living/danimal/on_attack_hand(mob/living/carbon/human/M)
 	. = ..()
 	if(.) //the attack was blocked
 		return
@@ -72,7 +72,7 @@
 			updatehealth()
 			return TRUE
 
-/mob/living/simple_animal/attack_hulk(mob/living/carbon/human/user, does_attack_animation = FALSE)
+/mob/living/danimal/attack_hulk(mob/living/carbon/human/user, does_attack_animation = FALSE)
 	if(user.a_intent == INTENT_HARM)
 		. = ..(user, TRUE)
 		if(.)
@@ -84,7 +84,7 @@
 		adjustBruteLoss(15)
 		return TRUE
 
-/mob/living/simple_animal/attack_paw(mob/living/carbon/monkey/M)
+/mob/living/danimal/attack_paw(mob/living/carbon/monkey/M)
 	. = ..()
 	if(.) //successful larva bite
 		var/damage = rand(1, 3)
@@ -97,7 +97,7 @@
 							target = M, target_message = span_notice("You [response_help_simple] [src]."))
 			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 
-/mob/living/simple_animal/attack_alien(mob/living/carbon/alien/humanoid/M)
+/mob/living/danimal/attack_alien(mob/living/carbon/alien/humanoid/M)
 	. = ..()
 	if(!.) // the attack was blocked or was help/grab intent
 		return
@@ -115,7 +115,7 @@
 		attack_threshold_check(M.meleeSlashSAPower, BRUTE, "melee")
 		log_combat(M, src, "attacked")
 
-/mob/living/simple_animal/attack_larva(mob/living/carbon/alien/larva/L)
+/mob/living/danimal/attack_larva(mob/living/carbon/alien/larva/L)
 	. = ..()
 	if(. && stat != DEAD) //successful larva bite
 		var/damage = rand(5, 10)
@@ -123,13 +123,13 @@
 		if(.)
 			L.amount_grown = min(L.amount_grown + damage, L.max_grown)
 
-/mob/living/simple_animal/attack_animal(mob/living/simple_animal/M)
+/mob/living/danimal/attack_animal(mob/living/simple_animal/M)
 	. = ..()
 	if(.)
 		var/damage = .
 		return attack_threshold_check(damage, M.melee_damage_type, "melee")
 
-/mob/living/simple_animal/attack_slime(mob/living/simple_animal/slime/M)
+/mob/living/danimal/attack_slime(mob/living/simple_animal/slime/M)
 	. = ..()
 	if(.) //successful slime shock
 		var/damage = rand(15, 25)
@@ -137,18 +137,18 @@
 			damage = rand(20, 35)
 		return attack_threshold_check(damage, BRUTE, "melee")
 
-/mob/living/simple_animal/attack_drone(mob/living/simple_animal/drone/M)
+/mob/living/danimal/attack_drone(mob/living/simple_animal/drone/M)
 	if(M.a_intent == INTENT_HARM) //No kicking dogs even as a rogue drone. Use a weapon.
 		return
 	return ..()
 
-/mob/living/simple_animal/proc/attack_threshold_check(damage, damagetype = BRUTE, armorcheck = "melee")
+/mob/living/danimal/proc/attack_threshold_check(damage, damagetype = BRUTE, armorcheck = "melee")
 	var/armor = run_armor_check(null, armorcheck, null, null, 0, null)
 	var/dt = max(run_armor_check(null, "damage_threshold", null, null, 0, null), 0)
 	apply_damage(damage, damagetype, null, armor, null, null, null, damage_threshold = dt)
 	return TRUE
 
-/mob/living/simple_animal/bullet_act(obj/item/projectile/P)
+/mob/living/danimal/bullet_act(obj/item/projectile/P)
 	var/totaldamage = P.damage
 	var/staminadamage = P.stamina
 	var/final_percent = 0
@@ -171,7 +171,7 @@
 	Proj.on_hit(src)
 	return BULLET_ACT_HIT */
 
-/mob/living/simple_animal/ex_act(severity, target, origin)
+/mob/living/danimal/ex_act(severity, target, origin)
 	if(origin && istype(origin, /datum/spacevine_mutation) && isvineimmune(src))
 		return
 	..()
@@ -194,11 +194,11 @@
 				bloss = bloss / 1.5
 			adjustBruteLoss(bloss)
 
-/mob/living/simple_animal/blob_act(obj/structure/blob/B)
+/mob/living/danimal/blob_act(obj/structure/blob/B)
 	adjustBruteLoss(20)
 	return
 
-/mob/living/simple_animal/do_attack_animation(atom/A, visual_effect_icon, used_item, no_effect)
+/mob/living/danimal/do_attack_animation(atom/A, visual_effect_icon, used_item, no_effect)
 	if(!no_effect && !visual_effect_icon && melee_damage_upper)
 		if(melee_damage_upper < 10)
 			visual_effect_icon = ATTACK_EFFECT_PUNCH
@@ -206,5 +206,5 @@
 			visual_effect_icon = ATTACK_EFFECT_SMASH
 	..()
 
-/mob/living/simple_animal/getarmor(def_zone = null, type)
+/mob/living/danimal/getarmor(def_zone = null, type)
 	return mob_armor.getRating(type)

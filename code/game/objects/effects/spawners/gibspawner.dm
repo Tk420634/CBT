@@ -96,7 +96,7 @@
 	return ..()
 
 /obj/effect/gibspawner/generic/animal
-	gib_mob_type = /mob/living/simple_animal/pet
+	gib_mob_type = /mob/living/danimal/pet
 
 /obj/effect/gibspawner/human
 	gibtypes = list(/obj/effect/decal/cleanable/blood/gibs/human/up, /obj/effect/decal/cleanable/blood/gibs/human/down, /obj/effect/decal/cleanable/blood/gibs/human, /obj/effect/decal/cleanable/blood/gibs/human, /obj/effect/decal/cleanable/blood/gibs/human/body, /obj/effect/decal/cleanable/blood/gibs/human/limb, /obj/effect/decal/cleanable/blood/gibs/human/core)

@@ -1,4 +1,4 @@
-/mob/living/simple_animal/astral
+/mob/living/danimal/astral
 	name = "Astral projection"
 	desc = "A soul of someone projecting their mind."
 	icon = 'icons/mob/mob.dmi'
@@ -34,18 +34,18 @@
 	//maxbodytemp = 100000
 	blood_volume = 0
 
-/mob/living/simple_animal/astral/death()
+/mob/living/danimal/astral/death()
 	icon_state = "shade_dead"
 	Stun(1000)
 	pseudo_death = TRUE
 	incorporeal_move = 0
 	to_chat(src, span_notice("Your astral projection is interrupted and your mind is sent back to your body with a shock!"))
 
-/mob/living/simple_animal/astral/ClickOn(atom/A, params)
+/mob/living/danimal/astral/ClickOn(atom/A, params)
 	. = ..()
 	attempt_possess(A)
 
-/mob/living/simple_animal/astral/proc/attempt_possess(atom/A)
+/mob/living/danimal/astral/proc/attempt_possess(atom/A)
 	set waitfor = FALSE
 	if(pseudo_death == FALSE)
 		if(isliving(A))
@@ -67,7 +67,7 @@
 			log_reagent("FERMICHEM: [src] has astrally transmitted [message] into [A]")
 
 //Delete the mob if there's no mind! Pay that mob no mind.
-/mob/living/simple_animal/astral/PhysicalLife(seconds, times_fired)
+/mob/living/danimal/astral/PhysicalLife(seconds, times_fired)
 	. = ..()
 	if(!mind && !QDELETED(src))
 		qdel(src)

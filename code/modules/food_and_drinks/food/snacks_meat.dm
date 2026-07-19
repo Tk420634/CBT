@@ -548,18 +548,18 @@
 /obj/item/reagent_containers/food/snacks/cube/goat
 	name = "goat cube"
 	tastes = list("grass" = 1)
-	dried_being = /mob/living/simple_animal/hostile/retaliate/goat
+	dried_being = /mob/living/danimal/hostile/retaliate/goat
 
 /obj/item/reagent_containers/food/snacks/cube/cow
 	name = "cow cube"
 	tastes = list("milk" = 1, "beef" = 1)
-	dried_being = /mob/living/simple_animal/cow
+	dried_being = /mob/living/danimal/cow
 
 /obj/item/reagent_containers/food/snacks/cube/ape
 	name = "ape cube"
 	desc = "Don't add water."
 	tastes = list("the jungle" = 1, "bananas" = 1, "jimmies" = 1)
-	dried_being = /mob/living/simple_animal/hostile/gorilla
+	dried_being = /mob/living/danimal/hostile/gorilla
 
 /obj/item/reagent_containers/food/snacks/cube/egg
 //Well eggs normally are able to hatch into small birds, this one does not.
@@ -571,4 +571,4 @@
 	cooked_type = /obj/item/reagent_containers/food/snacks/boiledegg
 	list_reagents = list(/datum/reagent/consumable/eggyolk = 5)
 	tastes = list("dried eggs" = 1, "confusion" = 1)
-	dried_being = /mob/living/simple_animal/chicken
+	dried_being = /mob/living/danimal/chicken

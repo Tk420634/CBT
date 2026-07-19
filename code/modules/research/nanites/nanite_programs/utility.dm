@@ -221,7 +221,7 @@
 		if(current_item)
 			new_access += current_item.GetAccess()
 	else if(isanimal(host_mob))
-		var/mob/living/simple_animal/A = host_mob
+		var/mob/living/danimal/A = host_mob
 		current_item = A.access_card
 		if(current_item)
 			new_access += current_item.GetAccess()

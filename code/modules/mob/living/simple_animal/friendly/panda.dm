@@ -1,4 +1,4 @@
-/mob/living/simple_animal/pet/redpanda
+/mob/living/danimal/pet/redpanda
 	name = "Red panda"
 	desc = "Wah't a dork."
 	icon = 'icons/mob/pets.dmi'
@@ -22,5 +22,5 @@
 	gold_core_spawnable = FRIENDLY_SPAWN
 	footstep_type = FOOTSTEP_MOB_CLAW
 
-/mob/living/simple_animal/pet/redpanda/stinky
+/mob/living/danimal/pet/redpanda/stinky
 	name = "Stinky"

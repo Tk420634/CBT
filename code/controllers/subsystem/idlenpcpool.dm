@@ -33,7 +33,7 @@ SUBSYSTEM_DEF(idlenpcpool)
 	var/list/currentrun = src.currentrun
 
 	while(currentrun.len)
-		var/mob/living/simple_animal/SA = currentrun[currentrun.len]
+		var/mob/living/danimal/SA = currentrun[currentrun.len]
 		--currentrun.len
 		if (QDELETED(SA))
 			GLOB.simple_animals[AI_IDLE] -= SA
@@ -51,7 +51,7 @@ SUBSYSTEM_DEF(idlenpcpool)
 	if(!LAZYLEN(mobs_to_cull))
 		return
 	for(var/datum/weakref/weakie in mobs_to_cull)
-		var/mob/living/simple_animal/hostile/simp = RESOLVEWEAKREF(weakie)
+		var/mob/living/danimal/hostile/simp = RESOLVEWEAKREF(weakie)
 		if(simp)
 			//message_admins("[simp] getting culled~")
 			simp.unbirth_self()

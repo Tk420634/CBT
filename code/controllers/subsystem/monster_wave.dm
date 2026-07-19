@@ -6,7 +6,7 @@ SUBSYSTEM_DEF(monster_wave)
 	/// big list of all the spawners that have been destroyed
 	var/list/spawner_tickets = list() // list(/datum/nest_box)
 	/// big list of all the spawner lads in existence
-	var/list/spawner_lads = list() // list(/mob/living/simple_animal/nest_spawn_hole_guy)
+	var/list/spawner_lads = list() // list(/mob/living/danimal/nest_spawn_hole_guy)
 	/// big list of what we actually spawned, for an occasional admin report
 	/// How long it takes from when the spawner dies to when it starts the respawn process
 	var/nest_respawndelay = 1 HOURS
@@ -80,7 +80,7 @@ SUBSYSTEM_DEF(monster_wave)
 			else if(!can_put)
 				continue
 			//NB.mutate() // >:3c
-			var/mob/living/simple_animal/nest_spawn_hole_guy/NSHG = new(there)
+			var/mob/living/danimal/nest_spawn_hole_guy/NSHG = new(there)
 			NSHG.set_up(NB)
 			killnest(NB)
 			return TRUE
@@ -101,7 +101,7 @@ SUBSYSTEM_DEF(monster_wave)
 	var/tries = 50
 	while(tries-- > 0)
 		var/whichnum = rand(1, LAZYLEN(spawner_lads))
-		var/mob/living/simple_animal/nest_spawn_hole_guy/NSHG = LAZYACCESS(spawner_lads, whichnum)
+		var/mob/living/danimal/nest_spawn_hole_guy/NSHG = LAZYACCESS(spawner_lads, whichnum)
 		if(!istype(NSHG) || QDELETED(NSHG))
 			continue
 		if(NSHG.deploy_if_ready())
@@ -140,7 +140,7 @@ SUBSYSTEM_DEF(monster_wave)
 		return FALSE
 	if(locate(/obj/structure/nest) in here)
 		return KILL_INVALID_SPAWN
-	if(locate(/mob/living/simple_animal/nest_spawn_hole_guy) in here)
+	if(locate(/mob/living/danimal/nest_spawn_hole_guy) in here)
 		return FALSE
 	if(here.density)
 		return FALSE
@@ -168,7 +168,7 @@ SUBSYSTEM_DEF(monster_wave)
 
 
 /// who lives in a ditch on the side of the road?
-/mob/living/simple_animal/nest_spawn_hole_guy
+/mob/living/danimal/nest_spawn_hole_guy
 	name = "rift"
 	desc = "Huh, the ground here is glowing! That can't be good! Better smash it to be sure!"
 	icon = 'icons/effects/effects.dmi'
@@ -192,7 +192,7 @@ SUBSYSTEM_DEF(monster_wave)
 	shoot_me = TRUE
 	var/shhh_im_dead
 
-/mob/living/simple_animal/nest_spawn_hole_guy/Initialize(datum/nest_box/NB)
+/mob/living/danimal/nest_spawn_hole_guy/Initialize(datum/nest_box/NB)
 	if(NB)
 		set_up(NB)
 	if(SSmonster_wave.insta_boy)
@@ -200,32 +200,32 @@ SUBSYSTEM_DEF(monster_wave)
 		light_on = FALSE
 	. = ..()
 
-/mob/living/simple_animal/nest_spawn_hole_guy/Destroy()
+/mob/living/danimal/nest_spawn_hole_guy/Destroy()
 	if(nest_seed)
 		nest_seed.assigned_to = null
 		QDEL_NULL(nest_seed)
 	SSmonster_wave.unregister_hole(src)
 	. = ..()
 
-// /mob/living/simple_animal/nest_spawn_hole_guy/examine_more(mob/user)
+// /mob/living/danimal/nest_spawn_hole_guy/examine_more(mob/user)
 // 	. = list(span_notice("In the rift, you notice <i>stuff</i>. "))
 
 
-/mob/living/simple_animal/nest_spawn_hole_guy/ComponentInitialize()
+/mob/living/danimal/nest_spawn_hole_guy/ComponentInitialize()
 	. = ..()
 	RegisterSignal(src, COMSIG_HOSTILE_CHECK_FACTION,PROC_REF(no_attack_pls), TRUE)
 	RegisterSignal(src, COMSIG_MOB_APPLY_DAMAGE,PROC_REF(im_hit), TRUE)
 
-/mob/living/simple_animal/nest_spawn_hole_guy/update_overlays()
+/mob/living/danimal/nest_spawn_hole_guy/update_overlays()
 	. = ..()
 	cut_overlays()
 	var/mutable_appearance/overlay1 = mutable_appearance('icons/effects/effects.dmi', "quantum_sparks")
 	. += overlay1
 
-/mob/living/simple_animal/nest_spawn_hole_guy/proc/no_attack_pls()
+/mob/living/danimal/nest_spawn_hole_guy/proc/no_attack_pls()
 	return TRUE
 
-/mob/living/simple_animal/nest_spawn_hole_guy/proc/set_up(datum/nest_box/NB)
+/mob/living/danimal/nest_spawn_hole_guy/proc/set_up(datum/nest_box/NB)
 	if(shhh_im_dead)
 		return
 	if(!istype(NB))
@@ -237,7 +237,7 @@ SUBSYSTEM_DEF(monster_wave)
 	spawn_after = SSmonster_wave.get_spawn_delay()
 	return TRUE
 
-/mob/living/simple_animal/nest_spawn_hole_guy/proc/deploy_if_ready(do_it_now)
+/mob/living/danimal/nest_spawn_hole_guy/proc/deploy_if_ready(do_it_now)
 	if(!nest_seed)
 		return
 	if(!COOLDOWN_FINISHED(src, spawn_after) && !do_it_now)
@@ -260,7 +260,7 @@ SUBSYSTEM_DEF(monster_wave)
 	SSmonster_wave.spawned_a_nest()
 	qdel(src)
 
-/mob/living/simple_animal/nest_spawn_hole_guy/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/nest_spawn_hole_guy/BiologicalLife(seconds, times_fired)
 	if(shhh_im_dead)
 		return
 	for(var/obj/structure/respawner_blocker/RB in SSmonster_wave.spawn_blockers)
@@ -271,7 +271,7 @@ SUBSYSTEM_DEF(monster_wave)
 				continue
 			return
 
-/mob/living/simple_animal/nest_spawn_hole_guy/proc/unbirth()
+/mob/living/danimal/nest_spawn_hole_guy/proc/unbirth()
 	shhh_im_dead = null
 	if(!nest_seed)
 		death()
@@ -282,11 +282,11 @@ SUBSYSTEM_DEF(monster_wave)
 	death()
 	return TRUE
 
-/mob/living/simple_animal/nest_spawn_hole_guy/proc/im_hit()
+/mob/living/danimal/nest_spawn_hole_guy/proc/im_hit()
 	playsound(src, 'sound/effects/portalboy_hit.ogg', 100, TRUE)
 	do_sparks(1, FALSE, src, /datum/effect_system/spark_spread/quantum)
 
-/mob/living/simple_animal/nest_spawn_hole_guy/death()
+/mob/living/danimal/nest_spawn_hole_guy/death()
 	playsound(src, 'sound/effects/portalboy_death.ogg', 100, TRUE)
 	QDEL_NULL(nest_seed)
 	SSmonster_wave.unregister_hole(src)
@@ -302,7 +302,7 @@ SUBSYSTEM_DEF(monster_wave)
 	var/protection_radius = 10
 	var/obj/item/my_component
 	var/show_range_cooldown = 0
-	var/mob/living/simple_animal/nest_spawn_hole_guy/killing_something
+	var/mob/living/danimal/nest_spawn_hole_guy/killing_something
 	var/datum/beam/my_bean
 
 /obj/structure/respawner_blocker/Initialize()

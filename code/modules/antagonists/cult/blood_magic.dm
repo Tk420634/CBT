@@ -615,11 +615,11 @@
 					user.visible_message(span_danger("The dark cloud receedes from what was formerly [candidate], revealing a\n [construct_class]!"))
 					switch(construct_class)
 						if("Juggernaut")
-							makeNewConstruct(/mob/living/simple_animal/hostile/construct/armored, candidate, user, 0, T)
+							makeNewConstruct(/mob/living/danimal/hostile/construct/armored, candidate, user, 0, T)
 						if("Wraith")
-							makeNewConstruct(/mob/living/simple_animal/hostile/construct/wraith, candidate, user, 0, T)
+							makeNewConstruct(/mob/living/danimal/hostile/construct/wraith, candidate, user, 0, T)
 						if("Artificer")
-							makeNewConstruct(/mob/living/simple_animal/hostile/construct/builder, candidate, user, 0, T)
+							makeNewConstruct(/mob/living/danimal/hostile/construct/builder, candidate, user, 0, T)
 					SEND_SOUND(user, sound('sound/effects/magic.ogg',0,1,25))
 					uses--
 					candidate.mmi = null
@@ -743,7 +743,7 @@
 					to_chat(user,span_danger("[H.p_theyre(TRUE)] missing too much blood - you cannot drain [H.p_them()] further!"))
 					return
 		if(isconstruct(target))
-			var/mob/living/simple_animal/M = target
+			var/mob/living/danimal/M = target
 			var/missing = M.maxHealth - M.health
 			if(missing)
 				if(uses > missing)

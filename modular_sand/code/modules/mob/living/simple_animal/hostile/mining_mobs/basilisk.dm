@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/asteroid/basilisk/watcher/ComponentInitialize()
+/mob/living/danimal/hostile/asteroid/basilisk/watcher/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("rips out both of the watcher's wings and shoves them aside, then kicks the downed body until it turns into mush!", "violently rips off one of the watcher's spikes, then stabs them repeatedly with it!"), \

@@ -31,7 +31,7 @@
 	// find our chosen mob to breathe life into
 	// Mobs have to be simple animals, mindless and on station
 	var/list/potential = list()
-	for(var/mob/living/simple_animal/L in GLOB.alive_mob_list)
+	for(var/mob/living/danimal/L in GLOB.alive_mob_list)
 		var/turf/T = get_turf(L)
 		if(!T || !is_station_level(T.z))
 			continue
@@ -47,7 +47,7 @@
 
 	var/spawned_animals = 0
 	while(spawned_animals < animals && candidates.len && potential.len)
-		var/mob/living/simple_animal/SA = pick_n_take(potential)
+		var/mob/living/danimal/SA = pick_n_take(potential)
 		var/mob/SG = pick_n_take(candidates)
 
 		spawned_animals++

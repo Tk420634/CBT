@@ -14,7 +14,7 @@
 
 /obj/item/projectile/bullet/bee/on_hit(atom/target, blocked = FALSE)
 	..()
-	spawn_and_random_walk(/mob/living/simple_animal/hostile/poison/bees/short/frenly, target, 1, walk_chance = 100, max_walk = 3, admin_spawn = FALSE)
+	spawn_and_random_walk(/mob/living/danimal/hostile/poison/bees/short/frenly, target, 1, walk_chance = 100, max_walk = 3, admin_spawn = FALSE)
 	return BULLET_ACT_HIT
 
 /obj/item/projectile/bullet/mouse
@@ -33,5 +33,5 @@
 
 /obj/item/projectile/bullet/mouse/on_hit(atom/target, blocked = FALSE)
 	..()
-	spawn_and_random_walk(/mob/living/simple_animal/hostile/rat/skitter/curious/frenly, target, 1, walk_chance = 100, max_walk = 3, admin_spawn = FALSE)
+	spawn_and_random_walk(/mob/living/danimal/hostile/rat/skitter/curious/frenly, target, 1, walk_chance = 100, max_walk = 3, admin_spawn = FALSE)
 	return BULLET_ACT_HIT

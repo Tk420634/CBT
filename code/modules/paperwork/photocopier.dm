@@ -294,7 +294,7 @@
 			return
 
 	var/icon/temp_img
-	if(isalienadult(ass) || istype(ass, /mob/living/simple_animal/hostile/alien)) //Xenos have their own asses, thanks to Pybro.
+	if(isalienadult(ass) || istype(ass, /mob/living/danimal/hostile/alien)) //Xenos have their own asses, thanks to Pybro.
 		temp_img = icon('icons/ass/assalien.png')
 	else if(ishuman(ass)) //Suit checks are after check_ass
 		temp_img = icon(ass.gender == FEMALE ? 'icons/ass/assfemale.png' : 'icons/ass/assmale.png')

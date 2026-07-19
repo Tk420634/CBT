@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/asteroid/goldgrub/ComponentInitialize()
+/mob/living/danimal/hostile/asteroid/goldgrub/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("rips out the goldgrub's eyes, and sticks them into his mouth hole!", "violently opens the goldgrub's mouth open, then sticks one hand inside and rips out their ore-filled stomach!"), \

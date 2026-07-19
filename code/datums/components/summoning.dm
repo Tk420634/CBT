@@ -56,9 +56,9 @@
 		return 0
 	last_spawned_time = world.time + spawn_delay
 	var/chosen_mob_type = pick(mob_types)
-	var/mob/living/simple_animal/L = new chosen_mob_type(spawn_location)
+	var/mob/living/danimal/L = new chosen_mob_type(spawn_location)
 	if(ishostile(L))
-		var/mob/living/simple_animal/hostile/H = L
+		var/mob/living/danimal/hostile/H = L
 		H.friends[WEAKREF(summoner)] = TRUE // do not attack our summon boy
 	spawned_mobs += L
 	if(faction != null)

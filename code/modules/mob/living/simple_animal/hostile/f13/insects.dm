@@ -5,7 +5,7 @@
 // GIANT ANT //
 ///////////////
 
-/mob/living/simple_animal/hostile/giantant
+/mob/living/danimal/hostile/giantant
 	bounty = 20
 	name = "giant ant"
 	desc = "A giant ant with twitching, darting antennae. Its outsides are a mixture of crusted, unrotting rock and chitin that bounce off bullets and melee weapons. Hardened insides compact once valueless sand and dirt to gemstones. Many a fool in their search for wealth have become part of the gemstones. Can be butchered down the thorax for minerals and shinies."
@@ -50,7 +50,6 @@
 	waddle_side_time = 1
 	maxHealth = 80
 	health = 80
-	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 6
 	melee_damage_upper = 20
@@ -67,15 +66,15 @@
 	loot_drop_amount = 1
 	loot_amount_random = TRUE
 
-/mob/living/simple_animal/hostile/giantant/Initialize()
+/mob/living/danimal/hostile/giantant/Initialize()
 	. = ..()
 
-/mob/living/simple_animal/hostile/giantant/Aggro()
+/mob/living/danimal/hostile/giantant/Aggro()
 	..()
 	summon_backup(10)
 
 // FIREANT
-/mob/living/simple_animal/hostile/fireant
+/mob/living/danimal/hostile/fireant
 	bounty = 25
 	name = "fireant"
 	desc = "A large reddish ant. The furnace it holds inside itself blasts intruders and the dirt it chews with flaming heat. Its insides contain more gemstones than its unremarkable kin, accessible by butchering them straight down the thorax."
@@ -101,7 +100,6 @@
 	speed = 1
 	maxHealth = 65
 	health = 65
-	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 8
 	melee_damage_upper = 16
@@ -121,14 +119,14 @@
 	projectiletype = /obj/item/projectile/magic/kelpmagic/magmaspray/weak
 	projectilesound = 'sound/weapons/fire03.ogg'
 
-/mob/living/simple_animal/hostile/fireant/Initialize()
+/mob/living/danimal/hostile/fireant/Initialize()
 	. = ..()
 
-/mob/living/simple_animal/hostile/fireant/Aggro()
+/mob/living/danimal/hostile/fireant/Aggro()
 	..()
 	summon_backup(10)
 /*
-/mob/living/simple_animal/hostile/fireant/AttackingTarget()
+/mob/living/danimal/hostile/fireant/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!. || !ishuman(my_target))
@@ -137,7 +135,7 @@
 	H.reagents.add_reagent(/datum/reagent/hellwater, 1)
 */
 // ANT QUEEN
-/mob/living/simple_animal/hostile/giantantqueen
+/mob/living/danimal/hostile/giantantqueen
 	bounty = 300
 	name = "giant ant queen"
 	desc = "The queen of a giant ant colony. Butchering it seems like a good way to a pretty penny."
@@ -162,7 +160,6 @@
 	maxHealth = 560
 	health = 560
 	ranged = 1
-	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 15
 	melee_damage_upper = 15
@@ -179,7 +176,7 @@
 	decompose = FALSE
 	a_intent = INTENT_HARM
 	var/max_mobs = 2
-	var/mob_types = list(/mob/living/simple_animal/hostile/giantant)
+	var/mob_types = list(/mob/living/danimal/hostile/giantant)
 	var/spawn_time = 30 SECONDS
 	//var/spawn_text = "hatches from"
 	blood_volume = 0
@@ -188,19 +185,19 @@
 	loot_amount_random = TRUE
 
 
-/mob/living/simple_animal/hostile/giantantqueen/Initialize()
+/mob/living/danimal/hostile/giantantqueen/Initialize()
 	. = ..()
 	AddComponent(/datum/component/spawner, mob_types, spawn_time, faction, /*spawn_text,*/ max_mobs, _range = 7)
 
-/mob/living/simple_animal/hostile/giantantqueen/death()
+/mob/living/danimal/hostile/giantantqueen/death()
 	RemoveComponentByType(/datum/component/spawner)
 	. = ..()
 
-/mob/living/simple_animal/hostile/giantantqueen/Destroy()
+/mob/living/danimal/hostile/giantantqueen/Destroy()
 	RemoveComponentByType(/datum/component/spawner)
 	. = ..()
 
-/mob/living/simple_animal/hostile/giantantqueen/Aggro()
+/mob/living/danimal/hostile/giantantqueen/Aggro()
 	..()
 	summon_backup(10)
 
@@ -213,7 +210,7 @@
 // RADSCORPION //
 /////////////////
 
-/mob/living/simple_animal/hostile/radscorpion
+/mob/living/danimal/hostile/radscorpion
 	bounty = 30
 	name = "giant radscorpion"
 	desc = "A mutated arthropod with an armored carapace and a powerful sting."
@@ -225,7 +222,6 @@
 	speed = 1.25
 	maxHealth = 120
 	health = 120
-	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 15
 	melee_damage_upper = 28
@@ -275,7 +271,7 @@
 	death_sound = 'sound/f13npc/scorpion/death.ogg'
 
 
-/mob/living/simple_animal/hostile/radscorpion/AttackingTarget()
+/mob/living/danimal/hostile/radscorpion/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!. || !ishuman(my_target))
@@ -283,19 +279,19 @@
 	var/mob/living/carbon/human/H = my_target
 	H.reagents.add_reagent(/datum/reagent/toxin, 5)
 
-/mob/living/simple_animal/hostile/radscorpion/Initialize()
+/mob/living/danimal/hostile/radscorpion/Initialize()
 	. = ..()
 	scorpion_randomify()
 	update_icons()
 
-/mob/living/simple_animal/hostile/radscorpion/proc/scorpion_randomify()
+/mob/living/danimal/hostile/radscorpion/proc/scorpion_randomify()
 	scorpion_color = pick(icon_sets)
 	icon_state = "[scorpion_color]"
 	icon_living = "[scorpion_color]"
 	icon_dead = "[scorpion_color]_dead"
 
 // BLACK RADSCORPION - a little tougher and slower
-/mob/living/simple_animal/hostile/radscorpion/black
+/mob/living/danimal/hostile/radscorpion/black
 	bounty = 35
 	name = "giant rad scorpion"
 	desc = "A giant irradiated scorpion with a black exoskeleton. Its appearance makes you shudder in fear.<br>This one has giant pincers."
@@ -312,7 +308,7 @@
 
 
 // BLUE RADSCORPION - a little weaker and faster
-/mob/living/simple_animal/hostile/radscorpion/blue
+/mob/living/danimal/hostile/radscorpion/blue
 	bounty = 25
 	name = "giant rad scorpion"
 	desc = "A giant irradiated scorpion with a bluish exoskeleton. Slighly smaller and faster than its reddish cousin."
@@ -330,7 +326,7 @@
 // CAZADOR //
 /////////////
 
-/mob/living/simple_animal/hostile/cazador
+/mob/living/danimal/hostile/cazador
 	bounty = 20
 	name = "cazador"
 	desc = "A mutated insect known for its fast speed, deadly sting, and being huge bastards."
@@ -372,7 +368,6 @@
 	speed = 1
 	maxHealth = 24
 	health = 24
-	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 5
 	melee_damage_upper = 10
@@ -390,7 +385,7 @@
 	loot_drop_amount = 1
 	loot_amount_random = TRUE
 
-/mob/living/simple_animal/hostile/cazador/AttackingTarget()
+/mob/living/danimal/hostile/cazador/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!. || !ishuman(my_target))
@@ -398,11 +393,11 @@
 	var/mob/living/carbon/human/H = my_target
 	H.reagents.add_reagent(/datum/reagent/toxin/cazador_venom, 5)
 
-/mob/living/simple_animal/hostile/cazador/death(gibbed)
+/mob/living/danimal/hostile/cazador/death(gibbed)
 	icon_dead = "cazador_dead[rand(1,5)]"
 	. = ..()
 
-/mob/living/simple_animal/hostile/cazador/bullet_act(obj/item/projectile/Proj)
+/mob/living/danimal/hostile/cazador/bullet_act(obj/item/projectile/Proj)
 	if(!Proj)
 		return
 	if(prob(50))
@@ -412,7 +407,7 @@
 		return 0
 
 
-/mob/living/simple_animal/hostile/cazador/young
+/mob/living/danimal/hostile/cazador/young
 	bounty = 15
 	name = "young cazador"
 	desc = "A mutated insect known for its fast speed, deadly sting, and being huge bastards. This one's little."
@@ -424,7 +419,7 @@
 	guaranteed_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab/cazador_meat = 1, /obj/item/stack/sheet/animalhide/chitin = 1, /obj/item/stack/sheet/sinew = 1)
 	butcher_difficulty = 1.5
 
-/mob/living/simple_animal/hostile/cazador/young/Initialize()
+/mob/living/danimal/hostile/cazador/young/Initialize()
 	. = ..()
 	resize = 0.8
 	update_transform()
@@ -467,7 +462,7 @@
 // BLOATFLY //
 //////////////
 
-/mob/living/simple_animal/hostile/bloatfly
+/mob/living/danimal/hostile/bloatfly
 	bounty = 5
 	name = "bloatfly"
 	desc = "A common mutated pest resembling an oversized blow-fly."
@@ -481,7 +476,6 @@
 	speed = 1
 	maxHealth = 20
 	health = 20
-	harm_intent_damage = 8
 	obj_damage = 15
 	melee_damage_lower = 4
 	melee_damage_upper = 7
@@ -537,7 +531,7 @@
 	loot_drop_amount = 1
 	loot_amount_random = TRUE
 
-/mob/living/simple_animal/hostile/bloatfly/bullet_act(obj/item/projectile/Proj)
+/mob/living/danimal/hostile/bloatfly/bullet_act(obj/item/projectile/Proj)
 	if(!Proj)
 		return
 	if(prob(50))
@@ -546,7 +540,7 @@
 	else
 		. = ..()
 
-/mob/living/simple_animal/hostile/bloatfly/become_the_mob(mob/user)
+/mob/living/danimal/hostile/bloatfly/become_the_mob(mob/user)
 	call_backup = /obj/effect/proc_holder/mob_common/summon_backup/small_critter
 	send_mobs = /obj/effect/proc_holder/mob_common/direct_mobs/small_critter
 	. = ..()
@@ -555,7 +549,7 @@
 // Pillbug //
 //////////////
 
-/mob/living/simple_animal/hostile/pillbug
+/mob/living/danimal/hostile/pillbug
 	bounty = 2
 	name = "mutant pillbug"
 	desc = "A large mutated insect that finds its way everywhere."
@@ -575,7 +569,6 @@
 	speed = 2
 	maxHealth = 35
 	health = 35
-	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 10
 	melee_damage_upper = 20
@@ -622,17 +615,17 @@
 	actual_retreat_message = "The %NAME skitters away from %TARGET like a lunatic!"
 	healing_message = "The %NAME bandages itself!" // ye, oh easily, thats why I love procs~
 
-/mob/living/simple_animal/hostile/pillbug/become_the_mob(mob/user)
+/mob/living/danimal/hostile/pillbug/become_the_mob(mob/user)
 	call_backup = /obj/effect/proc_holder/mob_common/summon_backup/small_critter
 	send_mobs = /obj/effect/proc_holder/mob_common/direct_mobs/small_critter
 	. = ..()
 //Variants for Radroachers
-/mob/living/simple_animal/hostile/pillbug/Initialize()
+/mob/living/danimal/hostile/pillbug/Initialize()
 		.=..()
 		resize = 0.75
 		update_transform()
 
-/mob/living/simple_animal/hostile/pillbug/micro
+/mob/living/danimal/hostile/pillbug/micro
 	bounty = 1
 	name = "Micro Pillbug"
 	maxHealth = 20
@@ -650,17 +643,17 @@
 		MOB_MINIMUM_DISTANCE_CHANGE_PER_TURN_CHANCE(50),
 	) //same as a newt for how they attack
 
-/mob/living/simple_animal/hostile/pillbug/micro/Initialize()
+/mob/living/danimal/hostile/pillbug/micro/Initialize()
 	.=..()
 	resize = 0.65
 	update_transform()
 
-/mob/living/simple_animal/hostile/pillbug/micro/become_the_mob(mob/user)
+/mob/living/danimal/hostile/pillbug/micro/become_the_mob(mob/user)
 	call_backup = /obj/effect/proc_holder/mob_common/summon_backup/small_critter
 	send_mobs = /obj/effect/proc_holder/mob_common/direct_mobs/small_critter
 	. = ..()
 
-/mob/living/simple_animal/hostile/pillbug/strongradroach
+/mob/living/danimal/hostile/pillbug/strongradroach
 	bounty = 15
 	name = "Macro Pillbug"
 	maxHealth = 40
@@ -678,17 +671,17 @@
 		MOB_MINIMUM_DISTANCE_CHANGE_PER_TURN_CHANCE(50),
 	) //same as a newt for how they attack
 
-/mob/living/simple_animal/hostile/pillbug/strongradroach/Initialize()
+/mob/living/danimal/hostile/pillbug/strongradroach/Initialize()
 	.=..()
 	resize = 0.8
 	update_transform()
 
-/mob/living/simple_animal/hostile/pillbug/strongradroach/become_the_mob(mob/user)
+/mob/living/danimal/hostile/pillbug/strongradroach/become_the_mob(mob/user)
 	call_backup = /obj/effect/proc_holder/mob_common/summon_backup/small_critter
 	send_mobs = /obj/effect/proc_holder/mob_common/direct_mobs/small_critter
 	. = ..()
 
-/mob/living/simple_animal/hostile/pillbug/leader
+/mob/living/danimal/hostile/pillbug/leader
 	bounty = 15
 	name = "Pillbug Leader"
 	maxHealth = 40
@@ -710,12 +703,12 @@
 		MOB_MINIMUM_DISTANCE_CHANGE_PER_TURN_CHANCE(50),
 	) //same as a newt for how they attack
 
-/mob/living/simple_animal/hostile/pillbug/leader/Initialize()
+/mob/living/danimal/hostile/pillbug/leader/Initialize()
 	.=..()
 	resize = 1.2
 	update_transform()
 
-/mob/living/simple_animal/hostile/pillbug/leader/become_the_mob(mob/user)
+/mob/living/danimal/hostile/pillbug/leader/become_the_mob(mob/user)
 	call_backup = /obj/effect/proc_holder/mob_common/summon_backup/small_critter
 	send_mobs = /obj/effect/proc_holder/mob_common/direct_mobs/small_critter
 	. = ..()
@@ -743,18 +736,18 @@
 
 /obj/item/projectile/pillbugsummon/on_hit(atom/target, blocked = FALSE)
 	..()
-	spawn_and_random_walk(/mob/living/simple_animal/hostile/pillbug/summon, target, 5, walk_chance = 100, max_walk = 10, admin_spawn = FALSE)
+	spawn_and_random_walk(/mob/living/danimal/hostile/pillbug/summon, target, 5, walk_chance = 100, max_walk = 10, admin_spawn = FALSE)
 	//		break
 	return BULLET_ACT_HIT
 
-/mob/living/simple_animal/hostile/pillbug/summon //untameable
+/mob/living/danimal/hostile/pillbug/summon //untameable
 	faction = list("gecko")
 	can_ghost_into = FALSE
 	guaranteed_butcher_results = list()
 	butcher_results = list()
 	del_on_death = TRUE
 
-/mob/living/simple_animal/hostile/pillbug/leader/Initialize(mapload)
+/mob/living/danimal/hostile/pillbug/leader/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/glow_heal, chosen_targets = /mob/living/simple_animal/hostile/pillbug, allow_revival = FALSE, restrict_faction = null, type_healing = BRUTELOSS)
+	AddComponent(/datum/component/glow_heal, chosen_targets = /mob/living/danimal/hostile/pillbug, allow_revival = FALSE, restrict_faction = null, type_healing = BRUTELOSS)
 

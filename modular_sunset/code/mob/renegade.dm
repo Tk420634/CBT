@@ -4,7 +4,7 @@
 
 
 // LIGHT MELEE VARIANT
-/mob/living/simple_animal/hostile/renegade
+/mob/living/danimal/hostile/renegade
 	name = "Renegade Prospect"
 	desc = "A raider recently inducted among the Renegades."
 	icon = 'modular_sunset/icons/mob/renegades/renegade.dmi'
@@ -39,14 +39,14 @@
 	loot_drop_amount = 2
 	loot_amount_random = TRUE
 
-/mob/living/simple_animal/hostile/renegade/Aggro()
+/mob/living/danimal/hostile/renegade/Aggro()
 	..()
 	summon_backup(10)
 	
 
 
 // LIGHT RANGED VARIANT
-/mob/living/simple_animal/hostile/renegade/grunt
+/mob/living/danimal/hostile/renegade/grunt
 	name = "Renegade Grunt"
 	desc = "The standard issue muscle employed among the Renegades."
 	icon_state = "renegade_grunt"
@@ -90,7 +90,7 @@
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
 // LIGHT RANGED EMP VARIANT
-/mob/living/simple_animal/hostile/renegade/grunt/emp
+/mob/living/danimal/hostile/renegade/grunt/emp
 	name = "Renegade Grunt"
 	desc = "The standard issue muscle employed among the Renegades."
 	icon_state = "renegade_emper"
@@ -133,7 +133,7 @@
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
 // LIGHT SHOTGUN VARIANT
-/mob/living/simple_animal/hostile/renegade/engie
+/mob/living/danimal/hostile/renegade/engie
 	name = "Renegade Engie"
 	desc = "Demolitions and engineering expert of the Renegades."
 	icon_state = "renegade_engie"
@@ -175,7 +175,7 @@
 	)
 
 // MEDIUM RANGED VARIANT
-/mob/living/simple_animal/hostile/renegade/soldier
+/mob/living/danimal/hostile/renegade/soldier
 	name = "Renegade Soldier"
 	desc = "The beefier side of the Renegade's muscle; with combat experience to back it."
 	icon_state = "renegade_soldier"
@@ -222,7 +222,7 @@
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
 //MEDIUM MELEE VARIANT
-/mob/living/simple_animal/hostile/renegade/defender
+/mob/living/danimal/hostile/renegade/defender
 	name = "Renegade Defender"
 	desc = "The Renegade member who's sole purpose is to withstand punishment with layers of advanced combat armor."
 	icon_state = "renegade_defender"
@@ -256,7 +256,7 @@
 	loot_amount_random = TRUE
 
 //HEAVY RANGED VARIANT
-/mob/living/simple_animal/hostile/renegade/drifter
+/mob/living/danimal/hostile/renegade/drifter
 	name = "Renegade Drifter"
 	desc = "A veteran of the Renegades, specializing in recon and long range engagements."
 	icon_state = "renegade_drifter"
@@ -309,7 +309,7 @@
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
 // HEAVY SHOTGUN VARIANT
-/mob/living/simple_animal/hostile/renegade/guardian
+/mob/living/danimal/hostile/renegade/guardian
 	name = "Renegade Guardian"
 	desc = "A veteran of the Renegades,specializing in close quarters and crowd control.. with an automatic shotgun."
 	icon_state = "renegade_guardian"
@@ -353,7 +353,7 @@
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
 // POWER ARMOR VARIANT
-/mob/living/simple_animal/hostile/renegade/meister
+/mob/living/danimal/hostile/renegade/meister
 	name = "Renegade Meister"
 	desc = "Is that a merc in power armor?!"
 	icon_state = "renegade_meister"
@@ -404,11 +404,11 @@
 	)
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
-/mob/living/simple_animal/hostile/renegade/meister/movement_delay()
+/mob/living/danimal/hostile/renegade/meister/movement_delay()
 	return 6
 
 // POWER ARMOR VARIANT 2.0
-/mob/living/simple_animal/hostile/renegade/traitor //while good intentions were there for this mob, it's op. Nerfed it. - Blue
+/mob/living/danimal/hostile/renegade/traitor //while good intentions were there for this mob, it's op. Nerfed it. - Blue
 	name = "Brotherhood of Steel Traitor"
 	desc = "A former Brotherhood of Steel Paladin, now turn coat for the Renegades. You imagine this is who is responsible for the siege."
 	icon = 'icons/fallout/mobs/humans/ghouls.dmi'
@@ -458,11 +458,11 @@
 	)
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
-/mob/living/simple_animal/hostile/renegade/meister/movement_delay()
+/mob/living/danimal/hostile/renegade/meister/movement_delay()
 	return 6
 
 // HEALER VARIANT
-/mob/living/simple_animal/hostile/renegade/doc
+/mob/living/danimal/hostile/renegade/doc
 	name = "Renegade Doc"
 	desc = "A veteran of the Renegades, this one specializing in field first aid."
 	icon_state = "renegade_doc"
@@ -506,10 +506,10 @@
 	)
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
-/mob/living/simple_animal/hostile/renegade/doc/Initialize(mapload)
+/mob/living/danimal/hostile/renegade/doc/Initialize(mapload)
 	. = ..()
 	// we only heal BRUTELOSS because each type directly heals a simplemob's health
 	// therefore setting it to BRUTELOSS | FIRELOSS | TOXLOSS | OXYLOSS would mean healing 4x as much
 	// aka 40% of max life every tick, which is basically unkillable
 	// TODO: refactor this if simple_animals ever get damage types
-	AddComponent(/datum/component/glow_heal, chosen_targets = /mob/living/simple_animal/hostile/renegade, allow_revival = FALSE, restrict_faction = list("raider"), type_healing = BRUTELOSS)
+	AddComponent(/datum/component/glow_heal, chosen_targets = /mob/living/danimal/hostile/renegade, allow_revival = FALSE, restrict_faction = list("raider"), type_healing = BRUTELOSS)

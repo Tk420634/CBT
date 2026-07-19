@@ -283,7 +283,7 @@ Value is raw html.
 
 Possible keywords :
 Job titles / Assigned roles (ghost spawners for example) : Assistant , Captain , Ash Walker
-Mob types : /mob/living/simple_animal/hostile/carp
+Mob types : /mob/living/danimal/hostile/carp
 Antagonist types : /datum/antagonist/highlander
 Species types : /datum/species/lizard
 special keywords defined in _DEFINES/admin.dm

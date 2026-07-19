@@ -62,7 +62,7 @@
 				var/mob/living/L = target
 				if(!L.anti_magic_check(chargecost = 0))
 					if(isrevenant(L))
-						var/mob/living/simple_animal/revenant/R = L
+						var/mob/living/danimal/revenant/R = L
 						if(R.revealed)
 							R.unreveal_time += 2
 						else
@@ -117,13 +117,13 @@
 			if (istype(c.handcuffed,/obj/item/restraints/handcuffs/clockwork))
 				continue
 		if(ishostile(L))
-			var/mob/living/simple_animal/hostile/H = L
+			var/mob/living/danimal/hostile/H = L
 			if(("ratvar" in H.faction) || (!H.mind && ("neutral" in H.faction)))
 				continue
 			if(ismegafauna(H) || (!H.mind && H.AIStatus == AI_OFF))
 				continue
 		else if(isrevenant(L))
-			var/mob/living/simple_animal/revenant/R = L
+			var/mob/living/danimal/revenant/R = L
 			if(R.stasis) //Don't target any revenants that are respawning
 				continue
 		else if(!L.mind)

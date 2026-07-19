@@ -5,7 +5,7 @@
 
 //A plant rooted in the ground that forfeits its melee attack in favor of ranged barrages.
 //It will fire flurries of solar energy, and occasionally charge up a powerful blast that makes it vulnerable to attack.
-/mob/living/simple_animal/hostile/jungle/seedling
+/mob/living/danimal/hostile/jungle/seedling
 	name = "seedling"
 	desc = "This oversized, predatory flower conceals what can only be described as an organic energy cannon, and it will not die until its hidden vital organs are sliced out. \
 		The concentrated streams of energy it sometimes produces require its full attention, attacking it during this time will prevent it from finishing its attack."
@@ -99,16 +99,16 @@
 	icon_state = "seedling_beam_indicator"
 	screen_loc = "CENTER:-16,CENTER:-16"
 
-/mob/living/simple_animal/hostile/jungle/seedling/Destroy()
+/mob/living/danimal/hostile/jungle/seedling/Destroy()
 	beam_debuff_target = null
 	. = ..()
 
-/mob/living/simple_animal/hostile/jungle/seedling/perform_move_action()
+/mob/living/danimal/hostile/jungle/seedling/perform_move_action()
 	if(combatant_state != SEEDLING_STATE_NEUTRAL)
 		return
 	return ..()
 
-/mob/living/simple_animal/hostile/jungle/seedling/AttackingTarget()
+/mob/living/danimal/hostile/jungle/seedling/AttackingTarget()
 	var/atom/my_target = get_target()
 	if(isliving(my_target))
 		if(ranged_cooldown <= world.time && combatant_state == SEEDLING_STATE_NEUTRAL)
@@ -116,10 +116,10 @@
 		return
 	return ..()
 
-/mob/living/simple_animal/hostile/jungle/seedling/OpenFire()
+/mob/living/danimal/hostile/jungle/seedling/OpenFire()
 	WarmupAttack()
 
-/mob/living/simple_animal/hostile/jungle/seedling/proc/WarmupAttack()
+/mob/living/danimal/hostile/jungle/seedling/proc/WarmupAttack()
 	var/atom/my_target = get_target()
 	if(combatant_state != SEEDLING_STATE_NEUTRAL)
 		return
@@ -137,7 +137,7 @@
 			return
 	addtimer(CALLBACK(src,PROC_REF(Volley)), 5)
 
-/mob/living/simple_animal/hostile/jungle/seedling/proc/SolarBeamStartup(mob/living/living_target)//It's more like requiem than final spark
+/mob/living/danimal/hostile/jungle/seedling/proc/SolarBeamStartup(mob/living/living_target)//It's more like requiem than final spark
 	if(combatant_state != SEEDLING_STATE_WARMUP || !get_target())
 		return
 	combatant_state = SEEDLING_STATE_ACTIVE
@@ -149,7 +149,7 @@
 	solar_beam_identifier = world.time
 	addtimer(CALLBACK(src,PROC_REF(Beamu), living_target, solar_beam_identifier), 35)
 
-/mob/living/simple_animal/hostile/jungle/seedling/proc/Beamu(mob/living/living_target, beam_id = 0)
+/mob/living/danimal/hostile/jungle/seedling/proc/Beamu(mob/living/living_target, beam_id = 0)
 	if(combatant_state == SEEDLING_STATE_ACTIVE && living_target && beam_id == solar_beam_identifier)
 		if(living_target.z == z)
 			update_icons()
@@ -171,8 +171,8 @@
 			return
 	AttackRecovery()
 
-/mob/living/simple_animal/hostile/jungle/seedling/proc/Volley()
-	if(combatant_state == SEEDLING_STATE_WARMUP && target)
+/mob/living/danimal/hostile/jungle/seedling/proc/Volley()
+	if(combatant_state == SEEDLING_STATE_WARMUP && get_target())
 		combatant_state = SEEDLING_STATE_ACTIVE
 		update_icons()
 		var/datum/callback/cb = CALLBACK(src,PROC_REF(InaccurateShot))
@@ -180,7 +180,7 @@
 			addtimer(cb, i)
 		addtimer(CALLBACK(src,PROC_REF(AttackRecovery)), 14)
 
-/mob/living/simple_animal/hostile/jungle/seedling/proc/InaccurateShot()
+/mob/living/danimal/hostile/jungle/seedling/proc/InaccurateShot()
 	var/atom/my_target = get_target()
 	if(!my_target || QDELETED(my_target) || combatant_state != SEEDLING_STATE_ACTIVE || stat)
 		return
@@ -193,7 +193,7 @@
 	readied_shot.fire()
 	playsound(src, projectilesound, 100, 1)
 
-/mob/living/simple_animal/hostile/jungle/seedling/proc/AttackRecovery()
+/mob/living/danimal/hostile/jungle/seedling/proc/AttackRecovery()
 	var/atom/my_target = get_target()
 	if(combatant_state != SEEDLING_STATE_ACTIVE)
 		return
@@ -204,14 +204,14 @@
 		face_atom(my_target)
 	addtimer(CALLBACK(src,PROC_REF(ResetNeutral)), 10)
 
-/mob/living/simple_animal/hostile/jungle/seedling/proc/ResetNeutral()
+/mob/living/danimal/hostile/jungle/seedling/proc/ResetNeutral()
 	combatant_state = SEEDLING_STATE_NEUTRAL
 	var/atom/my_target = get_target()
 	if(my_target && !stat)
 		update_icons()
 		perform_move_action(my_target, move_to_delay, minimum_distance)
 
-/mob/living/simple_animal/hostile/jungle/seedling/adjustHealth()
+/mob/living/danimal/hostile/jungle/seedling/adjustHealth()
 	. = ..()
 	var/mob/living/beam_blasted = GET_WEAKREF(beam_debuff_target)
 	if(combatant_state == SEEDLING_STATE_ACTIVE && beam_blasted)
@@ -220,7 +220,7 @@
 		solar_beam_identifier = 0
 		AttackRecovery()
 
-/mob/living/simple_animal/hostile/jungle/seedling/update_icons()
+/mob/living/danimal/hostile/jungle/seedling/update_icons()
 	. = ..()
 	if(!stat)
 		switch(combatant_state)
@@ -233,14 +233,14 @@
 			if(SEEDLING_STATE_RECOVERY)
 				icon_state = "seedling"
 
-/mob/living/simple_animal/hostile/jungle/seedling/GiveTarget()
+/mob/living/danimal/hostile/jungle/seedling/GiveTarget()
 	var/atom/my_target = get_target()
 	if(my_target)
 		if(combatant_state == SEEDLING_STATE_WARMUP || combatant_state == SEEDLING_STATE_ACTIVE)//So it doesn't 180 and blast you in the face while it's firing at someone else
 			return
 	return ..()
 
-/mob/living/simple_animal/hostile/jungle/seedling/LoseTarget()
+/mob/living/danimal/hostile/jungle/seedling/OnTargetLost()
 	if(combatant_state == SEEDLING_STATE_WARMUP || combatant_state == SEEDLING_STATE_ACTIVE)
 		return
 	return ..()

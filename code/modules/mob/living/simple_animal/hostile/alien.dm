@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/alien
+/mob/living/danimal/hostile/alien
 	name = "wanamingo"
 	desc = "Hiss!"
 	icon = 'icons/fallout/mobs/monsters/wanamingo.dmi'
@@ -9,7 +9,6 @@
 	speed = 0
 	maxHealth = 275
 	health = 275
-	harm_intent_damage = 8
 	obj_damage = 60
 	melee_damage_lower = 60
 	melee_damage_upper = 60
@@ -41,11 +40,11 @@
 	death_sound = 'sound/voice/hiss6.ogg'
 	deathmessage = "lets out a waning guttural screech, green blood bubbling from its maw..."
 
-/mob/living/simple_animal/hostile/alien/Initialize()
+/mob/living/danimal/hostile/alien/Initialize()
 	. = ..()
 	recenter_wide_sprite()
 
-/mob/living/simple_animal/hostile/alien/drone
+/mob/living/danimal/hostile/alien/drone
 	name = "alien drone"
 	icon_state = "aliend"
 	icon_living = "aliend"
@@ -55,7 +54,7 @@
 	var/plant_cooldown = 30
 	var/plants_off = 0
 
-/mob/living/simple_animal/hostile/alien/drone/handle_automated_action()
+/mob/living/danimal/hostile/alien/drone/handle_automated_action()
 	if(!..()) //AIStatus is off
 		return
 	plant_cooldown--
@@ -64,7 +63,7 @@
 			plant_cooldown = initial(plant_cooldown)
 			SpreadPlants()
 
-/mob/living/simple_animal/hostile/alien/sentinel
+/mob/living/danimal/hostile/alien/sentinel
 	name = "alien sentinel"
 	icon_state = "aliens"
 	icon_living = "aliens"
@@ -80,7 +79,7 @@
 	projectilesound = 'sound/weapons/pierce.ogg'
 
 
-/mob/living/simple_animal/hostile/alien/queen
+/mob/living/danimal/hostile/alien/queen
 	name = "alien queen"
 	icon_state = "alienq"
 	icon_living = "alienq"
@@ -105,7 +104,7 @@
 	var/egg_cooldown = 30
 	var/plant_cooldown = 30
 
-/mob/living/simple_animal/hostile/alien/queen/handle_automated_action()
+/mob/living/danimal/hostile/alien/queen/handle_automated_action()
 	if(!..()) //AIStatus is off
 		return
 	egg_cooldown--
@@ -118,7 +117,7 @@
 			egg_cooldown = initial(egg_cooldown)
 			LayEggs()
 
-/mob/living/simple_animal/hostile/alien/proc/SpreadPlants()
+/mob/living/danimal/hostile/alien/proc/SpreadPlants()
 	if(!isturf(loc) || isspaceturf(loc))
 		return
 	if(locate(/obj/structure/alien/weeds/node) in get_turf(src))
@@ -126,7 +125,7 @@
 	visible_message(span_alertalien("[src] has planted some alien weeds!"))
 	new /obj/structure/alien/weeds/node(loc)
 
-/mob/living/simple_animal/hostile/alien/proc/LayEggs()
+/mob/living/danimal/hostile/alien/proc/LayEggs()
 	if(!isturf(loc) || isspaceturf(loc))
 		return
 	if(locate(/obj/structure/alien/egg) in get_turf(src))
@@ -134,7 +133,7 @@
 	visible_message(span_alertalien("[src] has laid an egg!"))
 	new /obj/structure/alien/egg(loc)
 
-/mob/living/simple_animal/hostile/alien/queen/large
+/mob/living/danimal/hostile/alien/queen/large
 	name = "alien empress"
 	icon = 'icons/mob/alienqueen.dmi'
 	icon_state = "alienq"
@@ -155,14 +154,14 @@
 	icon_state = "toxin"
 
 /*
-/mob/living/simple_animal/hostile/alien/handle_temperature_damage()
+/mob/living/danimal/hostile/alien/handle_temperature_damage()
 	if(bodytemperature < //minbodytemp)
 		adjustBruteLoss(2)
 	else if(bodytemperature > maxbodytemp)
 		adjustBruteLoss(20)
 */
 
-/mob/living/simple_animal/hostile/alien/maid
+/mob/living/danimal/hostile/alien/maid
 	name = "lusty xenomorph maid"
 	melee_damage_lower = 0
 	melee_damage_upper = 0
@@ -176,11 +175,11 @@
 	icon_living = "maid"
 	icon_dead = "maid_dead"
 
-/mob/living/simple_animal/hostile/alien/maid/Initialize(mapload)
+/mob/living/danimal/hostile/alien/maid/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/cleaning)
 
-/mob/living/simple_animal/hostile/alien/maid/AttackingTarget()
+/mob/living/danimal/hostile/alien/maid/AttackingTarget()
 	var/atom/my_target = get_target()
 	if(!ismovable(my_target))
 		return
@@ -194,7 +193,7 @@
 	visible_message("[src] polishes \the [my_target].")
 	return TRUE
 
-/mob/living/simple_animal/pet/catslug/roxy //Yes I'm making her a catslug
+/mob/living/danimal/pet/catslug/roxy //Yes I'm making her a catslug
 	name = "Roxy"
 	desc = "A xenomorph! This one is wearing a maid dress. Cute! You think."
 	icon = 'icons/mob/alien.dmi'

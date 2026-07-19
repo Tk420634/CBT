@@ -188,7 +188,7 @@
 	subcategory = CAT_DESERT
 
 /datum/crafting_recipe/food/moth_cheese_cakes
-	name = "Ælorölen (Cheesecake balls)"
+	name = "ï¿½lorï¿½len (Cheesecake balls)"
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/cheesewedge = 1,
 		/datum/reagent/consumable/coco = 1,
@@ -480,7 +480,7 @@
 		/obj/item/reagent_containers/food/snacks/meat/slab = 3,
 		/datum/reagent/blood = 30 //To shock the whole thing into life
 	)
-	result = /mob/living/simple_animal/pet/cat/cak
+	result = /mob/living/danimal/pet/cat/cak
 	subcategory = CAT_DESERT //Cat! Haha, get it? CAT? GET IT? We get it - Love Catpeople
 
 //Macarons//

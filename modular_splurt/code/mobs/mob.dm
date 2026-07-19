@@ -1,7 +1,7 @@
 //Werewolfs from Splurt
 
 
-/mob/living/simple_animal/advanced/werewolf
+/mob/living/danimal/advanced/werewolf
 	name = "grey werewolf"
 	desc = "Howling at the moon."
 	icon = 'modular_splurt/icons/mob/werewolf.dmi'
@@ -9,7 +9,7 @@
 	icon_living = "werewolf"
 	icon_dead = "werewolf_dead"
 
-/mob/living/simple_animal/advanced/werewolf/ice
+/mob/living/danimal/advanced/werewolf/ice
 	name = "white werewolf"
 	desc = "Howling at the moon."
 	icon = 'modular_splurt/icons/mob/werewolf.dmi'
@@ -17,7 +17,7 @@
 	icon_living = "ice_wolf"
 	icon_dead = "werewolf_dead"
 
-/mob/living/simple_animal/advanced/werewolf/skull
+/mob/living/danimal/advanced/werewolf/skull
 	name = "skull werewolf"
 	desc = "Howling at the moon."
 	icon = 'modular_splurt/icons/mob/werewolf.dmi'
@@ -25,7 +25,7 @@
 	icon_living = "skull_wolf"
 	icon_dead = "werewolf_dead"
 
-/mob/living/simple_animal/advanced/werewolf/hellhound
+/mob/living/danimal/advanced/werewolf/hellhound
 	name = "hellhound werewolf"
 	desc = "Howling at the moon."
 	icon = 'modular_splurt/icons/mob/werewolf.dmi'

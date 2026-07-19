@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/asteroid/ice_demon
+/mob/living/danimal/hostile/asteroid/ice_demon
 	name = "demonic watcher"
 	desc = "A creature formed entirely out of ice, bluespace energy emanates from inside of it."
 	icon = 'icons/mob/icemoon/icemoon_monsters.dmi'
@@ -47,7 +47,7 @@
 	nodamage = FALSE
 	temperature = -75
 
-/mob/living/simple_animal/hostile/asteroid/ice_demon/OpenFire()
+/mob/living/danimal/hostile/asteroid/ice_demon/OpenFire()
 	if(teleport_distance <= 0)
 		return ..()
 	var/list/possible_ends = list()
@@ -64,7 +64,7 @@
 	SLEEP_CHECK_DEATH(8)
 	return ..()
 
-/mob/living/simple_animal/hostile/asteroid/ice_demon/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/asteroid/ice_demon/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	var/atom/my_target = get_target()
@@ -72,7 +72,7 @@
 		return
 	adjustHealth(-maxHealth*0.025)
 
-/mob/living/simple_animal/hostile/asteroid/ice_demon/death(gibbed)
+/mob/living/danimal/hostile/asteroid/ice_demon/death(gibbed)
 	move_force = MOVE_FORCE_DEFAULT
 	move_resist = MOVE_RESIST_DEFAULT
 	pull_force = PULL_FORCE_DEFAULT

@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/asteroid/wolf
+/mob/living/danimal/hostile/asteroid/wolf
 	name = "white wolf"
 	desc = "A beast that survives by feasting on weaker opponents, they're much stronger with numbers."
 	icon = 'icons/mob/icemoon/icemoon_monsters.dmi'
@@ -18,7 +18,7 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 35
 	rapid_melee = 2 // every second attack
-	dodging = TRUE
+	can_dodge_in_melee = TRUE
 	dodge_prob = 50
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"

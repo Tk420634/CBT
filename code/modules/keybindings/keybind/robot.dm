@@ -70,6 +70,6 @@
 	description = "Quickly puts an item in the best slot available"
 
 /datum/keybinding/robot/drone/quick_equip_drone/down(client/user)
-	var/mob/living/simple_animal/drone/D = user.mob
+	var/mob/living/danimal/drone/D = user.mob
 	D.quick_equip()
 	return TRUE

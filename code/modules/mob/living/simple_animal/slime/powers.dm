@@ -13,14 +13,14 @@
 
 /datum/action/innate/slime/IsAvailable(silent = FALSE)
 	if(..())
-		var/mob/living/simple_animal/slime/S = owner
+		var/mob/living/danimal/slime/S = owner
 		if(needs_growth == GROWTH_NEEDED)
 			if(S.amount_grown >= SLIME_EVOLUTION_THRESHOLD)
 				return 1
 			return 0
 		return 1
 
-/mob/living/simple_animal/slime/verb/Feed()
+/mob/living/danimal/slime/verb/Feed()
 	set category = "Slime"
 	set desc = "This will let you feed on any valid creature in the surrounding area. This should also be used to halt the feeding process."
 
@@ -45,10 +45,10 @@
 
 
 /datum/action/innate/slime/feed/Activate()
-	var/mob/living/simple_animal/slime/S = owner
+	var/mob/living/danimal/slime/S = owner
 	S.Feed()
 
-/mob/living/simple_animal/slime/proc/CanFeedon(mob/living/M, silent = FALSE)
+/mob/living/danimal/slime/proc/CanFeedon(mob/living/M, silent = FALSE)
 	if(!Adjacent(M))
 		return FALSE
 
@@ -60,7 +60,7 @@
 		return FALSE
 
 	if(isanimal(M))
-		var/mob/living/simple_animal/S = M
+		var/mob/living/danimal/S = M
 		if(S.damage_coeff[STAMINA] <= 0 && S.damage_coeff[BRUTE] <= 0) //The creature wouldn't take any damage, it must be too weird even for us.
 			if(silent)
 				return FALSE
@@ -94,14 +94,14 @@
 		to_chat(src, span_warning("<i>This subject does not have a strong enough life energy...</i>"))
 		return FALSE
 
-	if(locate(/mob/living/simple_animal/slime) in M.buckled_mobs)
+	if(locate(/mob/living/danimal/slime) in M.buckled_mobs)
 		if(silent)
 			return FALSE
 		to_chat(src, span_warning("<i>Another slime is already feeding on this subject...</i>"))
 		return FALSE
 	return TRUE
 
-/mob/living/simple_animal/slime/proc/Feedon(mob/living/M)
+/mob/living/danimal/slime/proc/Feedon(mob/living/M)
 	M.unbuckle_all_mobs(force=1) //Slimes rip other mobs (eg: shoulder parrots) off (Slimes Vs Slimes is already handled in CanFeedon())
 	if(M.buckle_mob(src, force=TRUE))
 		layer = M.layer+0.01 //appear above the target mob
@@ -110,7 +110,7 @@
 	else
 		to_chat(src, span_warning("<i>I have failed to latch onto the subject!</i>"))
 
-/mob/living/simple_animal/slime/proc/Feedstop(silent = FALSE, living=1)
+/mob/living/danimal/slime/proc/Feedstop(silent = FALSE, living=1)
 	if(buckled)
 		if(!living)
 			to_chat(src, "<span class='warning'>[pick("This subject is incompatible", \
@@ -123,7 +123,7 @@
 		layer = initial(layer)
 		buckled.unbuckle_mob(src,force=TRUE)
 
-/mob/living/simple_animal/slime/verb/Evolve()
+/mob/living/danimal/slime/verb/Evolve()
 	set category = "Slime"
 	set desc = "This will let you evolve from baby to adult slime."
 
@@ -150,13 +150,13 @@
 	needs_growth = GROWTH_NEEDED
 
 /datum/action/innate/slime/evolve/Activate()
-	var/mob/living/simple_animal/slime/S = owner
+	var/mob/living/danimal/slime/S = owner
 	S.Evolve()
 	if(S.is_adult)
 		var/datum/action/innate/slime/reproduce/A = new
 		A.Grant(S)
 
-/mob/living/simple_animal/slime/verb/Reproduce()
+/mob/living/danimal/slime/verb/Reproduce()
 	set category = "Slime"
 	set desc = "This will make you split into four Slimes."
 
@@ -181,7 +181,7 @@
 					child_colour = slime_mutation[rand(1,4)]
 				else
 					child_colour = colour
-				var/mob/living/simple_animal/slime/M
+				var/mob/living/danimal/slime/M
 				M = new(loc, child_colour)
 				if(ckey)
 					M.set_nutrition(new_nutrition) //Player slimes are more robust at spliting. Once an oversight of poor copypasta, now a feature!
@@ -193,7 +193,7 @@
 				M.mutation_chance = clamp(mutation_chance+(rand(5,-5)),0,100)
 				SSblackbox.record_feedback("tally", "slime_babies_born", 1, M.colour)
 
-			var/mob/living/simple_animal/slime/new_slime = pick(babies)
+			var/mob/living/danimal/slime/new_slime = pick(babies)
 			new_slime.a_intent = INTENT_HARM
 			if(src.mind)
 				src.mind.transfer_to(new_slime)
@@ -211,5 +211,5 @@
 	needs_growth = GROWTH_NEEDED
 
 /datum/action/innate/slime/reproduce/Activate()
-	var/mob/living/simple_animal/slime/S = owner
+	var/mob/living/danimal/slime/S = owner
 	S.Reproduce()

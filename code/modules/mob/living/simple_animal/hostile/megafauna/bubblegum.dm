@@ -23,7 +23,7 @@ Difficulty: Hard
 
 */
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum
+/mob/living/danimal/hostile/megafauna/bubblegum
 	name = "bubblegum"
 	desc = "In what passes for a hierarchy among slaughter demons, this one is king."
 	health = 2500
@@ -63,12 +63,12 @@ Difficulty: Hard
 	desc = "You're not quite sure how a signal can be bloody."
 	invisibility = 100
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/megafauna/bubblegum/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	move_to_delay = clamp(round((health/maxHealth) * 10), 3, 10)
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/OpenFire()
+/mob/living/danimal/hostile/megafauna/bubblegum/OpenFire()
 	anger_modifier = clamp(((maxHealth - health)/50),0,20)
 	if(charging)
 		return
@@ -88,9 +88,9 @@ Difficulty: Hard
 			INVOKE_ASYNC(src,PROC_REF(triple_charge))
 
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/Initialize()
+/mob/living/danimal/hostile/megafauna/bubblegum/Initialize()
 	. = ..()
-	for(var/mob/living/simple_animal/hostile/megafauna/bubblegum/B in GLOB.mob_list)
+	for(var/mob/living/danimal/hostile/megafauna/bubblegum/B in GLOB.mob_list)
 		if(B != src)
 			return INITIALIZE_HINT_QDEL //There can be only one
 	var/obj/effect/proc_holder/spell/bloodcrawl/bloodspell = new
@@ -99,27 +99,27 @@ Difficulty: Hard
 		bloodspell.phased = TRUE
 	internal = new/obj/item/gps/internal/bubblegum(src)
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/grant_achievement(medaltype,scoretype)
+/mob/living/danimal/hostile/megafauna/bubblegum/grant_achievement(medaltype,scoretype)
 	. = ..()
 	if(.)
 		SSshuttle.shuttle_purchase_requirements_met |= "bubblegum"
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
+/mob/living/danimal/hostile/megafauna/bubblegum/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
 	if(charging)
 		return
 	..()
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/AttackingTarget()
+/mob/living/danimal/hostile/megafauna/bubblegum/AttackingTarget()
 	if(charging)
 		return
 	..()
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/perform_move_action(target, delay, minimum_distance)
+/mob/living/danimal/hostile/megafauna/bubblegum/perform_move_action(target, delay, minimum_distance)
 	if(charging)
 		return
 	..()
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/Move()
+/mob/living/danimal/hostile/megafauna/bubblegum/Move()
 	if(!stat)
 		playsound(src.loc, 'sound/effects/meteorimpact.ogg', 200, 1, 2, 1)
 	if(charging)
@@ -129,14 +129,14 @@ Difficulty: Hard
 	if(charging)
 		DestroySurroundings()
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/proc/triple_charge()
+/mob/living/danimal/hostile/megafauna/bubblegum/proc/triple_charge()
 	charge()
 	sleep(10)
 	charge()
 	sleep(10)
 	charge()
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/proc/charge()
+/mob/living/danimal/hostile/megafauna/bubblegum/proc/charge()
 	var/atom/my_target = get_target()
 	var/turf/T = get_turf(my_target)
 	if(!T || T == loc)
@@ -154,14 +154,14 @@ Difficulty: Hard
 	perform_move_action(my_target, move_to_delay, minimum_distance)
 
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/Bump(atom/A)
+/mob/living/danimal/hostile/megafauna/bubblegum/Bump(atom/A)
 	if(charging)
 		if(isturf(A) || isobj(A) && A.density)
 			A.ex_act(EXPLODE_HEAVY)
 		DestroySurroundings()
 	..()
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
+/mob/living/danimal/hostile/megafauna/bubblegum/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	if(!charging)
 		return ..()
 
@@ -178,7 +178,7 @@ Difficulty: Hard
 	charging = 0
 
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/proc/blood_warp()
+/mob/living/danimal/hostile/megafauna/bubblegum/proc/blood_warp()
 	var/obj/effect/decal/cleanable/blood/found_bloodpool
 	var/list/pools = list()
 	var/can_jaunt = FALSE
@@ -200,7 +200,7 @@ Difficulty: Hard
 		visible_message(span_danger("And springs back out!"))
 
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/proc/blood_spray()
+/mob/living/danimal/hostile/megafauna/bubblegum/proc/blood_spray()
 	visible_message(span_danger("[src] sprays a stream of gore!"))
 	var/turf/E = get_edge_target_turf(src, src.dir)
 	var/range = 10
@@ -217,13 +217,13 @@ Difficulty: Hard
 		previousturf = J
 		sleep(1)
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/proc/slaughterlings()
+/mob/living/danimal/hostile/megafauna/bubblegum/proc/slaughterlings()
 	visible_message(span_danger("[src] summons a shoal of slaughterlings!"))
 	for(var/obj/effect/decal/cleanable/blood/H in range(src, 10))
 		if(prob(25))
-			new /mob/living/simple_animal/hostile/asteroid/hivelordbrood/slaughter(H.loc)
+			new /mob/living/danimal/hostile/asteroid/hivelordbrood/slaughter(H.loc)
 
-/mob/living/simple_animal/hostile/asteroid/hivelordbrood/slaughter
+/mob/living/danimal/hostile/asteroid/hivelordbrood/slaughter
 	name = "slaughterling"
 	desc = "Though not yet strong enough to create a true physical form, it's nonetheless determined to murder you."
 	icon_state = "bloodbrood"
@@ -237,9 +237,9 @@ Difficulty: Hard
 	weather_immunities = list("lava","ash")
 	has_field_of_vision = FALSE
 
-/mob/living/simple_animal/hostile/asteroid/hivelordbrood/slaughter/CanAllowThrough(atom/movable/mover, border_dir)
+/mob/living/danimal/hostile/asteroid/hivelordbrood/slaughter/CanAllowThrough(atom/movable/mover, border_dir)
 	..()
-	if(istype(mover, /mob/living/simple_animal/hostile/megafauna/bubblegum))
+	if(istype(mover, /mob/living/danimal/hostile/megafauna/bubblegum))
 		return 1
 	return 0
 

@@ -371,7 +371,7 @@ IMPORTANT FACTORS TO CONSIDER WHILE BALANCING
 				M.visible_message("[M] suddenly shudders, and splits into a funky smelling copy of themselves!")
 				M.emote("scream")
 				M.adjustToxLoss(30, 0)
-				var/mob/living/simple_animal/hostile/unemployedclone/ZI = new(get_turf(M.loc))
+				var/mob/living/danimal/hostile/unemployedclone/ZI = new(get_turf(M.loc))
 				ZI.damage_coeff = list(BRUTE = ((1 / volume)**0.25) , BURN = ((1 / volume)**0.1), TOX = 1, CLONE = 1, STAMINA = 0, OXY = 1)
 				ZI.real_name = M.real_name//Give your offspring a big old kiss.
 				ZI.name = M.real_name
@@ -382,7 +382,7 @@ IMPORTANT FACTORS TO CONSIDER WHILE BALANCING
 			else//easier to deal with
 				to_chat(M, span_notice("The pentetic acid seems to have stopped the decay for now, clumping up the cells into a horrifying tumour!"))
 				M.set_nutrition(startHunger - 500)
-				var/mob/living/simple_animal/slime/S = new(get_turf(M.loc),"grey") //TODO: replace slime as own simplemob/add tumour slime cores for science/chemistry interplay
+				var/mob/living/danimal/slime/S = new(get_turf(M.loc),"grey") //TODO: replace slime as own simplemob/add tumour slime cores for science/chemistry interplay
 				S.damage_coeff = list(BRUTE = ((1 / volume)**0.1) , BURN = 2, TOX = 1, CLONE = 1, STAMINA = 0, OXY = 1)
 				S.name = "Living teratoma"
 				S.real_name = "Living teratoma"//horrifying!!

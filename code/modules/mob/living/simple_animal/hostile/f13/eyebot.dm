@@ -2,7 +2,7 @@
 // EYEBOTS //
 /////////////
 
-/mob/living/simple_animal/hostile/eyebot
+/mob/living/danimal/hostile/eyebot
 	name = "eyebot"
 	desc = "A hovering, propaganda-spewing reconnaissance and surveillance robot with radio antennas pointing out its back and loudspeakers blaring out the front."
 	icon = 'icons/fallout/mobs/robots/eyebots.dmi'
@@ -40,7 +40,6 @@
 		"supermutant",
 		"bighorner"
 		)
-	harm_intent_damage = 8
 	melee_damage_lower = 2
 	melee_damage_upper = 3
 	minimum_distance = 6
@@ -80,16 +79,16 @@
 		MOB_SPEED_LIST(3.5, 4, 4.5),
 	)
 
-/mob/living/simple_animal/hostile/eyebot/New()
+/mob/living/danimal/hostile/eyebot/New()
 	..()
 	name = "ED-[rand(1,99)]"
 
-/mob/living/simple_animal/hostile/eyebot/become_the_mob(mob/user)
+/mob/living/danimal/hostile/eyebot/become_the_mob(mob/user)
 	send_mobs = /obj/effect/proc_holder/mob_common/direct_mobs/robot
 	call_backup = /obj/effect/proc_holder/mob_common/summon_backup/robot
 	. = ..()
 
-/mob/living/simple_animal/hostile/eyebot/playable
+/mob/living/danimal/hostile/eyebot/playable
 	ranged = FALSE
 	health = 30
 	maxHealth = 30
@@ -100,14 +99,13 @@
 	idlesound = null
 	see_in_dark = 8
 	wander = 0
-	force_threshold = 10
 	anchored = FALSE
 	del_on_death = FALSE
 	dextrous = TRUE
 	possible_a_intents = list(INTENT_HELP, INTENT_HARM)
 	speed = 2
 
-/mob/living/simple_animal/hostile/eyebot/floatingeye
+/mob/living/danimal/hostile/eyebot/floatingeye
 	name = "floating eyebot"
 	desc = "A quick-observation robot commonly found in Pre-Fall military installations.<br>The floating eyebot uses a powerful taser to keep intruders in line."
 	icon_state = "floatingeye"
@@ -120,16 +118,16 @@
 	projectiletype = /obj/item/projectile/energy/electrode
 	projectilesound = 'sound/weapons/resonator_blast.ogg'
 
-/mob/living/simple_animal/hostile/eyebot/floatingeye/New()
+/mob/living/danimal/hostile/eyebot/floatingeye/New()
 	..()
 	name = "FEB-[rand(1,99)]"
 
-/mob/living/simple_animal/hostile/eyebot/floatingeye/become_the_mob(mob/user)
+/mob/living/danimal/hostile/eyebot/floatingeye/become_the_mob(mob/user)
 	send_mobs = null
 	call_backup = null
 	. = ..()
 
-/mob/living/simple_animal/pet/dog/eyebot //It's a propaganda eyebot, not a dog, but...
+/mob/living/danimal/pet/dog/eyebot //It's a propaganda eyebot, not a dog, but...
 	name = "propaganda eyebot"
 	desc = "This eyebot's weapons module has been removed and replaced with a loudspeaker. It appears to be shouting Pre-Fall propaganda."
 	icon = 'icons/fallout/mobs/robots/eyebots.dmi'
@@ -154,24 +152,24 @@
 	guaranteed_butcher_results = list(/obj/effect/gibspawner/robot = 1)
 	blood_volume = 0
 
-/mob/living/simple_animal/pet/dog/eyebot/ComponentInitialize()
+/mob/living/danimal/pet/dog/eyebot/ComponentInitialize()
 	. = ..()
 	AddElement(/datum/element/wuv, "beeps happily!", EMOTE_AUDIBLE)
 
-/mob/living/simple_animal/pet/dog/eyebot/emp_act(severity)
+/mob/living/danimal/pet/dog/eyebot/emp_act(severity)
 	. = ..()
 	if(. & EMP_PROTECT_SELF)
 		return
 	var/emp_damage = round((maxHealth * 0.1) * (severity * 0.1)) // 10% of max HP * 10% of severity(Usually around 20-40)
 	adjustBruteLoss(emp_damage)
 
-/mob/living/simple_animal/pet/dog/eyebot/panzer
+/mob/living/danimal/pet/dog/eyebot/panzer
 	name = "Pvt. Eye"
 	desc = "This eyebot's weapons module has been removed and replaced with a transmitter of some kind. It appears to be simply observing and feeding information to something passively."
 	//emote_see = list("buzzes.","pings.","floats in place","beeps.","bobs left and right","bobs up and down")
 	speak_chance = 1
 
-/mob/living/simple_animal/pet/dog/eyebot/playable
+/mob/living/danimal/pet/dog/eyebot/playable
 	health = 200
 	maxHealth = 200
 	attack_verb_simple = "zaps"
@@ -179,20 +177,19 @@
 	idlesound = null
 	see_in_dark = 8
 	wander = 0
-	force_threshold = 10
 	anchored = FALSE
 	del_on_death = FALSE
 	dextrous = TRUE
 	possible_a_intents = list(INTENT_HELP, INTENT_HARM)
 	speed = 2
 
-/mob/living/simple_animal/pet/dog/eyebot/playable/become_the_mob(mob/user)
+/mob/living/danimal/pet/dog/eyebot/playable/become_the_mob(mob/user)
 	send_mobs = null
 	call_backup = null
 	. = ..()
 
 //Junkers
-/mob/living/simple_animal/hostile/eyebot/reinforced
+/mob/living/danimal/hostile/eyebot/reinforced
 	name = "reinforced eyebot"
 	desc = "An eyebot with beefier protection, and extra electronic aggression."
 	color = "#B85C00"
@@ -208,14 +205,14 @@
 	retreat_distance = 6
 	bounty = 20
 
-/mob/living/simple_animal/hostile/eyebot/reinforced/become_the_mob(mob/user)
+/mob/living/danimal/hostile/eyebot/reinforced/become_the_mob(mob/user)
 	send_mobs = null
 	call_backup = null
 	. = ..()
 
 //Start of colfers Hivebots
 
-/mob/living/simple_animal/hostile/eyebot/playable/hivebot
+/mob/living/danimal/hostile/eyebot/playable/hivebot
 	name = "Cheap Ranged Hivebot"
 	desc = "A friendly hivebot with a basic, constant beam, useful for chewing through the weakest of the wasteland."
 	ranged = TRUE
@@ -273,15 +270,15 @@
 	loot_drop_amount = 0
 	loot_amount_random = FALSE
 
-/mob/living/simple_animal/hostile/eyebot/playable/hivebot/Initialize(mapload)
+/mob/living/danimal/hostile/eyebot/playable/hivebot/Initialize(mapload)
 	. = ..()
 	notify_ghosts("A new FRIENDLY hivebot has been created somewhere on the map, click it to take control!", source = src, action=NOTIFY_ATTACK, flashwindow = FALSE, ignore_key = POLL_IGNORE_FUGITIVE)
 
-/mob/living/simple_animal/hostile/eyebot/playable/hivebot/New()
+/mob/living/danimal/hostile/eyebot/playable/hivebot/New()
 	..()
 	name = "Cheap Ranged Hivebot-[rand(1,99)]"
 
-/mob/living/simple_animal/hostile/eyebot/playable/hivebot/examine(mob/user)
+/mob/living/danimal/hostile/eyebot/playable/hivebot/examine(mob/user)
 	. = list("<span class='info'>*---------*\nThis is [icon2html(src, user)] \a <b>[src]</b>!")
 
 	if(health != maxHealth)
@@ -297,7 +294,7 @@
 			. += span_deadsay("A message repeatedly flashes on its display: \"ERROR -- OFFLINE\".")
 	. += "*---------*</span>"
 
-/mob/living/simple_animal/hostile/eyebot/playable/hivebot/attackby(obj/item/I, mob/user)
+/mob/living/danimal/hostile/eyebot/playable/hivebot/attackby(obj/item/I, mob/user)
 	. = ..()
 	if(istype(I, /obj/item/screwdriver) && stat != DEAD)
 		if(health < maxHealth)
@@ -311,12 +308,12 @@
 			to_chat(user, span_warning("[src]'s screws can't get any tighter!"))
 		return //This used to not exist and drones who repaired themselves also stabbed the shit out of themselves.
 
-/mob/living/simple_animal/hostile/eyebot/playable/hivebot/attackby(obj/item/I, mob/user)
+/mob/living/danimal/hostile/eyebot/playable/hivebot/attackby(obj/item/I, mob/user)
 	. = ..()
 	if(istype(I, /obj/item/multitool) && stat == DEAD)
 		try_reactivating(user)
 
-/mob/living/simple_animal/hostile/eyebot/playable/hivebot/proc/try_reactivating(mob/living/user)
+/mob/living/danimal/hostile/eyebot/playable/hivebot/proc/try_reactivating(mob/living/user)
 	/*var/mob/dead/observer/G = get_ghost()
 	if(!client && (!G || !G.client))
 		var/list/faux_gadgets = list("hypertext inflator","failsafe directory","DRM switch","stack initializer",\
@@ -341,7 +338,7 @@
 
 // The other hivebots
 
-/mob/living/simple_animal/hostile/eyebot/playable/hivebot/tier2
+/mob/living/danimal/hostile/eyebot/playable/hivebot/tier2
 	desc = "A friendly hivebot with a powerful laser burst rifle."
 	icon_state = "rangedarm_hivebot"
 	icon_living = "rangedarm_hivebot"
@@ -359,11 +356,11 @@
 	maxHealth = 45
 	move_to_delay = 6
 
-/mob/living/simple_animal/hostile/eyebot/playable/hivebot/tier2/New()
+/mob/living/danimal/hostile/eyebot/playable/hivebot/tier2/New()
 	..()
 	name = "Ranged Hivebot-[rand(1,99)]"
 
-/mob/living/simple_animal/hostile/eyebot/playable/hivebot/tier3
+/mob/living/danimal/hostile/eyebot/playable/hivebot/tier3
 	desc = "An advanced friendly hivebot with a heavy laser cannon."
 	icon_state = "hunter_hivebot"
 	icon_living = "hunter_hivebot"
@@ -382,12 +379,12 @@
 	speed = 2
 	move_to_delay = 8
 
-/mob/living/simple_animal/hostile/eyebot/playable/hivebot/tier3/New()
+/mob/living/danimal/hostile/eyebot/playable/hivebot/tier3/New()
 	..()
 	name = "Advanced Ranged Hivebot-[rand(1,99)]"
 // Melee start
 
-/mob/living/simple_animal/hostile/eyebot/playable/hivebot/melee
+/mob/living/danimal/hostile/eyebot/playable/hivebot/melee
 	name = "Cheap Melee Hivebot"
 	desc = "A friendly hivebot that cuts down foes ruthlessly in melee without a care for itself."
 	ranged = FALSE
@@ -397,7 +394,6 @@
 	move_to_delay = 0.2
 	retreat_distance = 0
 	minimum_distance = 0
-	harm_intent_damage = 7
 	rapid_melee = 2
 	health = 50
 	maxHealth = 50
@@ -407,11 +403,11 @@
 	melee_damage_upper = 10
 	melee_attack_cooldown_duration = 0.5 SECONDS
 
-/mob/living/simple_animal/hostile/eyebot/playable/hivebot/melee/New()
+/mob/living/danimal/hostile/eyebot/playable/hivebot/melee/New()
 	..()
 	name = "Cheap Melee Hivebot-[rand(1,99)]"
 
-/mob/living/simple_animal/hostile/eyebot/playable/hivebot/melee/tier2
+/mob/living/danimal/hostile/eyebot/playable/hivebot/melee/tier2
 	name = "Melee Hivebot"
 	desc = "A friendly hivebot that cuts down foes ruthlessly in melee without a care for itself."
 	ranged = FALSE
@@ -428,11 +424,11 @@
 	melee_damage_upper = 15
 	melee_attack_cooldown_duration = 1 SECONDS
 
-/mob/living/simple_animal/hostile/eyebot/playable/hivebot/melee/tier2/New()
+/mob/living/danimal/hostile/eyebot/playable/hivebot/melee/tier2/New()
 	..()
 	name = "Melee Hivebot-[rand(1,99)]"
 
-/mob/living/simple_animal/hostile/eyebot/playable/hivebot/melee/tier3
+/mob/living/danimal/hostile/eyebot/playable/hivebot/melee/tier3
 	name = "Advanced Melee Hivebot"
 	desc = "A friendly hivebot that cuts down foes ruthlessly in melee without a care for itself."
 	ranged = FALSE
@@ -449,13 +445,13 @@
 	melee_damage_upper = 20
 	melee_attack_cooldown_duration = 2 SECONDS
 
-/mob/living/simple_animal/hostile/eyebot/playable/hivebot/melee/tier3/New()
+/mob/living/danimal/hostile/eyebot/playable/hivebot/melee/tier3/New()
 	..()
 	name = "Advanced Melee Hivebot-[rand(1,99)]"
 
 //Joke one
 
-/mob/living/simple_animal/hostile/eyebot/playable/hivebot/joketier
+/mob/living/danimal/hostile/eyebot/playable/hivebot/joketier
 	name = "Hivebot Fortress"
 	desc = "A flying fortress armed with laser miniguns, a danger to all."
 	projectiletype = /obj/item/projectile/beam/laser/cranklasergun/tg

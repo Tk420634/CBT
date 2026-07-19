@@ -20,7 +20,7 @@
 		H.quick_equip()
 		return TRUE
 	else if(isanimal(user.mob))
-		var/mob/living/simple_animal/SA = user.mob
+		var/mob/living/danimal/SA = user.mob
 		SA.quick_equip()
 
 /datum/keybinding/human/quick_equipbelt

@@ -51,7 +51,7 @@
 	if(QDELETED(src) || isnull(loc))
 		return
 	src.animate_atom_living()
-	var/mob/living/simple_animal/hostile/mimic/M = loc
+	var/mob/living/danimal/hostile/mimic/M = loc
 	M.say(pick("Whooee! Time for a hootenanny!", "Rough 'em up boys!", "Yeehaw! Freedom at last!", "Y'all about to get a good old fashioned spanking!"))
 
 /obj/item/clothing/head/hattip/proc/handle_speech(datum/source, speech_args)

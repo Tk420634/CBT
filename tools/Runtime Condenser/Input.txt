@@ -4042,8 +4042,8 @@ the back (/atom/movable/screen): Click(null, "mapwindow.map", "icon-x=14;icon-y=
 Rebooted server.
 Sun Jul 15 05:48:07 2012
 Running TG Revision Number: 4060.
-### VarEdit by Yinadele: /mob/living/simple_animal/cat/Runtime ckey=bossname
-### VarEdit by Yinadele: /mob/living/simple_animal/cat/Runtime universal_speak=0
+### VarEdit by Yinadele: /mob/living/danimal/cat/Runtime ckey=bossname
+### VarEdit by Yinadele: /mob/living/danimal/cat/Runtime universal_speak=0
 runtime error: Cannot read null.slot_flags
 proc name: db click (/mob/living/carbon/human/db_click)
   source file: inventory.dm,1083
@@ -4137,9 +4137,9 @@ Samantha Kendrick (/mob/living/carbon/human): db click("shoes", 1)
 the shoes (/atom/movable/screen): attack hand(Samantha Kendrick (/mob/living/carbon/human), 1)
 the shoes (/atom/movable/screen): DblClick(null, null, null)
 the shoes (/atom/movable/screen): Click(null, "mapwindow.map", "icon-x=16;icon-y=19;left=1;scr...")
-### VarEdit by Scaredofshadows: /mob/living/simple_animal/corgi/Ian ckey=laharlmontgommery
+### VarEdit by Scaredofshadows: /mob/living/danimal/corgi/Ian ckey=laharlmontgommery
 Sun Jul 15 10:43:09 2012
-### VarEdit by Scaredofshadows: /mob/living/simple_animal/cat/Runtime ckey=drlareku
+### VarEdit by Scaredofshadows: /mob/living/danimal/cat/Runtime ckey=drlareku
 runtime error: Cannot read null.slot_flags
 proc name: db click (/mob/living/carbon/human/db_click)
   source file: inventory.dm,1093
@@ -4150,8 +4150,8 @@ Rowdy Randy (/mob/living/carbon/human): db click("eyes", 0)
 the eyes (/atom/movable/screen): attack hand(Rowdy Randy (/mob/living/carbon/human), 0)
 the eyes (/atom/movable/screen): DblClick(null, null, null)
 the eyes (/atom/movable/screen): Click(null, "mapwindow.map", "icon-x=18;icon-y=20;left=1;scr...")
-### VarEdit by Scaredofshadows: /mob/living/simple_animal/cat/Runtime canmove=1
-### VarEdit by Scaredofshadows: /mob/living/simple_animal/parrot/DrProfessor ckey=kyora473
+### VarEdit by Scaredofshadows: /mob/living/danimal/cat/Runtime canmove=1
+### VarEdit by Scaredofshadows: /mob/living/danimal/parrot/DrProfessor ckey=kyora473
 runtime error: Cannot read null.amount
 proc name: attackby (/obj/machinery/constructable_frame/machine_frame/attackby)
   source file: constructable_frame.dm,27
@@ -4172,14 +4172,14 @@ the head (/atom/movable/screen): attack hand(Quinton Bould (/mob/living/carbon/h
 the head (/atom/movable/screen): DblClick(null, null, null)
 the head (/atom/movable/screen): Click(null, "mapwindow.map", "icon-x=15;icon-y=28;left=1;scr...")
 runtime error: Cannot read null.loc
-proc name: Life (/mob/living/simple_animal/corgi/Ian/Life)
+proc name: Life (/mob/living/danimal/corgi/Ian/Life)
   source file: corgi.dm,304
   usr: null
-  src: Captain Ian (/mob/living/simple_animal/corgi/Ian)
+  src: Captain Ian (/mob/living/danimal/corgi/Ian)
   call stack:
-Captain Ian (/mob/living/simple_animal/corgi/Ian): Life()
+Captain Ian (/mob/living/danimal/corgi/Ian): Life()
 /datum/controller/game_control... (/datum/controller/game_controller): process()
-### VarEdit by Scaredofshadows: /mob/living/simple_animal/corgi/Ian real_name=Fluffum-Wuffums
+### VarEdit by Scaredofshadows: /mob/living/danimal/corgi/Ian real_name=Fluffum-Wuffums
 Rebooted server.
 Running TG Revision Number: 4060.
 runtime error: Cannot read null.slot_flags
@@ -4426,12 +4426,12 @@ the storage1 (/atom/movable/screen): attack hand(Rocky McDoughboy XIV (/mob/livi
 the storage1 (/atom/movable/screen): DblClick(null, null, null)
 the storage1 (/atom/movable/screen): Click(null, "mapwindow.map", "icon-x=15;icon-y=14;left=1;scr...")
 runtime error: Cannot read null.loc
-proc name: Life (/mob/living/simple_animal/corgi/Ian/Life)
+proc name: Life (/mob/living/danimal/corgi/Ian/Life)
   source file: corgi.dm,304
   usr: null
-  src: Ian (/mob/living/simple_animal/corgi/Ian)
+  src: Ian (/mob/living/danimal/corgi/Ian)
   call stack:
-Ian (/mob/living/simple_animal/corgi/Ian): Life()
+Ian (/mob/living/danimal/corgi/Ian): Life()
 /datum/controller/game_control... (/datum/controller/game_controller): process()
 Rebooted server.
 Running TG Revision Number: 4060.

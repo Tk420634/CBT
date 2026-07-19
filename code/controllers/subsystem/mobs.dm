@@ -12,13 +12,17 @@ SUBSYSTEM_DEF(mobs)
 	var/static/list/cheeserats = list()
 	var/buggy_mob_running_away = FALSE
 
+	var/use_view_for_close_range_los = TRUE
+	var/max_view_range = 11 // world.view...ish
+	/// mobs skip LOS checks for target retention if the target is within this range
+	var/always_retain_target_range = 3
+
+	var/distance_where_a_player_needs_to_be_in_for_npcs_to_fight_other_npcs = 12
+	var/mobs_only_attack_players = TRUE // this feature sucks
+
 	var/there_is_no_escape = FALSE // there is escape
 	var/debug_no_icon_2_html = FALSE
 	var/debug_everyone_has_robuster_searching = FALSE
-
-	var/distance_where_a_player_needs_to_be_in_for_npcs_to_fight_other_npcs = 12
-
-	var/mobs_only_attack_players = TRUE // this feature sucks
 
 /datum/controller/subsystem/mobs/stat_entry(msg)
 	msg = "P:[length(GLOB.mob_living_list)]"
@@ -77,20 +81,36 @@ SUBSYSTEM_DEF(mobs)
 	return typesof(mobpath)
 /* end deprocatid */
 
-//todo: move these vars to the actual file for hostile
-/mob/living/simple_animal/hostile
-	var/current_target_is_from_previous_tick = FALSE
-	var/should_perform_dodge = FALSE
-	var/should_attack_melee = FALSE
-	var/should_attack_ranged = FALSE
-	var/should_smash = FALSE
-	var/should_windup_attack = FALSE
+/datum/mob_target_data
+	var/datum/weakref/target_ref
+	var/list/target_eval = list()
+	var/time_targetted = 0
 
+/datum/mob_target_data/Destroy()
+	clear_target()
+	. = ..()
 
+/datum/mob_target_data/proc/set_target(atom/target, list/eval = list())
+	if(!target || QDELETED(target))
+		return
+	target_ref = WEAKREF(target)
+	time_targetted = world.time
 
+/datum/mob_target_data/proc/clear_target()
+	target_ref = null
+	time_targetted = 0
 
+/datum/mob_target_data/proc/set_target_eval(list/eval = list())
+	target_eval = eval.Copy()
 
+/datum/mob_target_data/proc/get_target()
+	return GET_WEAKREF(target_ref)
 
+/datum/mob_target_data/proc/get_time_targetted()
+	return time_targetted
+
+/datum/mob_target_data/proc/get_target_eval()
+	return target_eval
 
 
 

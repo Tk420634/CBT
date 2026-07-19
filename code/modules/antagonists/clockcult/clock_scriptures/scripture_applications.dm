@@ -115,7 +115,7 @@
 	sort_priority = 5
 
 /datum/clockwork_scripture/memory_allocation/check_special_requirements()
-	for(var/mob/living/simple_animal/hostile/clockwork/marauder/guardian/M in GLOB.all_clockwork_mobs)
+	for(var/mob/living/danimal/hostile/clockwork/marauder/guardian/M in GLOB.all_clockwork_mobs)
 		if(M.host == invoker)
 			to_chat(invoker, span_warning("You can only house one guardian at a time!"))
 			return FALSE
@@ -151,7 +151,7 @@
 		return FALSE
 	clockwork_say(invoker, text2ratvar("...sword and shield!"))
 	var/mob/dead/observer/theghost = pick(marauder_candidates)
-	var/mob/living/simple_animal/hostile/clockwork/marauder/guardian/M = new(invoker)
+	var/mob/living/danimal/hostile/clockwork/marauder/guardian/M = new(invoker)
 	M.key = theghost.key
 	M.bind_to_host(invoker)
 	invoker.visible_message(span_warning("The tendril retracts from [invoker]'s head, sealing the entry wound as it does so!"), \
@@ -175,7 +175,7 @@
 	quickbind = TRUE
 	quickbind_desc = "Creates a clockwork marauder, used for frontline combat."
 	object_path = /obj/item/clockwork/construct_chassis/clockwork_marauder
-	construct_type = /mob/living/simple_animal/hostile/clockwork/marauder
+	construct_type = /mob/living/danimal/hostile/clockwork/marauder
 	combat_construct = TRUE
 	var/static/last_marauder = 0
 

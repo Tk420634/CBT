@@ -3,7 +3,7 @@
 	name = "lightning chain"
 	layer = LYING_MOB_LAYER
 
-/mob/living/simple_animal/hostile/guardian/beam
+/mob/living/danimal/hostile/guardian/beam
 	melee_damage_lower = 10
 	melee_damage_upper = 10
 	attack_verb_continuous = "shocks"
@@ -19,7 +19,7 @@
 	var/list/enemychains = list()
 	var/successfulshocks = 0
 
-/mob/living/simple_animal/hostile/guardian/beam/AttackingTarget()
+/mob/living/danimal/hostile/guardian/beam/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(. && isliving(my_target) && my_target != src && my_target != summoner)
@@ -34,11 +34,11 @@
 			enemychains -= C
 		enemychains += Beam(my_target, "lightning[rand(1,12)]", time=70, maxdistance=13, beam_type=/obj/effect/ebeam/chain)
 
-/mob/living/simple_animal/hostile/guardian/beam/Destroy()
+/mob/living/danimal/hostile/guardian/beam/Destroy()
 	removechains()
 	return ..()
 
-/mob/living/simple_animal/hostile/guardian/beam/Manifest()
+/mob/living/danimal/hostile/guardian/beam/Manifest()
 	. = ..()
 	if(.)
 		if(summoner)
@@ -50,12 +50,12 @@
 				successfulshocks++
 			sleep(3)
 
-/mob/living/simple_animal/hostile/guardian/beam/Recall()
+/mob/living/danimal/hostile/guardian/beam/Recall()
 	. = ..()
 	if(.)
 		removechains()
 
-/mob/living/simple_animal/hostile/guardian/beam/proc/cleardeletedchains()
+/mob/living/danimal/hostile/guardian/beam/proc/cleardeletedchains()
 	if(summonerchain && QDELETED(summonerchain))
 		summonerchain = null
 	if(enemychains.len)
@@ -64,7 +64,7 @@
 			if(!chain || QDELETED(cd))
 				enemychains -= chain
 
-/mob/living/simple_animal/hostile/guardian/beam/proc/shockallchains()
+/mob/living/danimal/hostile/guardian/beam/proc/shockallchains()
 	. = 0
 	cleardeletedchains()
 	if(summoner)
@@ -75,7 +75,7 @@
 		for(var/chain in enemychains)
 			. += chainshock(chain)
 
-/mob/living/simple_animal/hostile/guardian/beam/proc/removechains()
+/mob/living/danimal/hostile/guardian/beam/proc/removechains()
 	if(summonerchain)
 		qdel(summonerchain)
 		summonerchain = null
@@ -84,7 +84,7 @@
 			qdel(chain)
 		enemychains = list()
 
-/mob/living/simple_animal/hostile/guardian/beam/proc/chainshock(datum/beam/B)
+/mob/living/danimal/hostile/guardian/beam/proc/chainshock(datum/beam/B)
 	. = 0
 	var/list/turfs = list()
 	for(var/E in B.elements)

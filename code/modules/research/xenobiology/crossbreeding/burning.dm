@@ -31,7 +31,7 @@ Burning extracts:
 	colour = "grey"
 
 /obj/item/slimecross/burning/grey/do_effect(mob/user)
-	var/mob/living/simple_animal/slime/S = new(get_turf(user),"grey")
+	var/mob/living/danimal/slime/S = new(get_turf(user),"grey")
 	S.visible_message(span_danger("A baby slime emerges from [src], and it nuzzles [user] before burbling hungrily!"))
 	S.Friends[user] = 20 //Gas, gas, gas
 	S.bodytemperature = T0C + 400 //We gonna step on the gas.
@@ -183,7 +183,7 @@ Burning extracts:
 
 /obj/item/slimecross/burning/red/do_effect(mob/user)
 	user.visible_message(span_danger("[src] pulses a hazy red aura for a moment, which wraps around [user]!"))
-	for(var/mob/living/simple_animal/slime/S in view(7, get_turf(user)))
+	for(var/mob/living/danimal/slime/S in view(7, get_turf(user)))
 		if(user in S.Friends)
 			var/friendliness = S.Friends[user]
 			S.Friends = list()
@@ -230,7 +230,7 @@ Burning extracts:
 /obj/item/slimecross/burning/gold/do_effect(mob/user)
 	user.visible_message(span_danger("[src] shudders violently, and summons an army for [user]!"))
 	for(var/i in 1 to 3) //Less than gold normally does, since it's safer and faster.
-		var/mob/living/simple_animal/S = create_random_mob(get_turf(user), HOSTILE_SPAWN)
+		var/mob/living/danimal/S = create_random_mob(get_turf(user), HOSTILE_SPAWN)
 		S.faction |= "[REF(user)]"
 		if(prob(50))
 			for(var/j = 1, j <= rand(1, 3), j++)
@@ -467,7 +467,7 @@ Burning extracts:
 	cooldown_min = 0
 	charge_max = 0
 	invocation_type = "none"
-	shapeshift_type = /mob/living/simple_animal/slime/transformedslime
+	shapeshift_type = /mob/living/danimal/slime/transformedslime
 	convert_damage = TRUE
 	convert_damage_type = CLONE
 	var/remove_on_restore = FALSE
@@ -478,8 +478,8 @@ Burning extracts:
 			M.mind.RemoveSpell(src)
 	..()
 
-/mob/living/simple_animal/slime/transformedslime
+/mob/living/danimal/slime/transformedslime
 
-/mob/living/simple_animal/slime/transformedslime/Reproduce() //Just in case.
+/mob/living/danimal/slime/transformedslime/Reproduce() //Just in case.
 	to_chat(src, span_warning("I can't reproduce..."))
 	return

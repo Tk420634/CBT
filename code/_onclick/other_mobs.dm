@@ -210,24 +210,24 @@
 	Slimes
 	Nothing happening here
 */
-/mob/living/simple_animal/slime/UnarmedAttack(atom/A, proximity, intent = a_intent, flags = NONE)
+/mob/living/danimal/slime/UnarmedAttack(atom/A, proximity, intent = a_intent, flags = NONE)
 	A.attack_slime(src, intent, flags)
 
 /atom/proc/attack_slime(mob/user)
 	return
-/mob/living/simple_animal/slime/RestrainedClickOn(atom/A)
+/mob/living/danimal/slime/RestrainedClickOn(atom/A)
 	return
 
 /*
 	Drones
 */
-/mob/living/simple_animal/drone/UnarmedAttack(atom/A, proximity, intent = a_intent, flags = NONE)
+/mob/living/danimal/drone/UnarmedAttack(atom/A, proximity, intent = a_intent, flags = NONE)
 	A.attack_drone(src, intent, flags)
 
 /atom/proc/attack_drone(mob/living/simple_animal/drone/user)
 	attack_hand(user) //defaults to attack_hand. Override it when you don't want drones to do same stuff as humans.
 
-/mob/living/simple_animal/slime/RestrainedClickOn(atom/A)
+/mob/living/danimal/slime/RestrainedClickOn(atom/A)
 	return
 
 /*
@@ -251,7 +251,7 @@
 /*
 	Simple animals
 */
-/mob/living/simple_animal/UnarmedAttack(atom/A, proximity, intent = a_intent, flags = NONE)
+/mob/living/danimal/UnarmedAttack(atom/A, proximity, intent = a_intent, flags = NONE)
 	if(!dextrous)
 		return ..()
 	if(!ismob(A))
@@ -266,7 +266,7 @@
 /*
 	Hostile animals
 */
-/mob/living/simple_animal/hostile/UnarmedAttack(atom/attack_target, proximity, intent = a_intent, flags = NONE)
+/mob/living/danimal/hostile/UnarmedAttack(atom/attack_target, proximity, intent = a_intent, flags = NONE)
 	GiveTarget(attack_target)
 	if(dextrous && !ismob(attack_target))
 		return ..()

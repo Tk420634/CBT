@@ -655,7 +655,7 @@
 /datum/chemical_reaction/corgium/on_reaction(datum/reagents/holder, multiplier)
 	var/location = get_turf(holder.my_atom)
 	for(var/i = rand(1, multiplier), i <= multiplier, i++) // More lulz.
-		new /mob/living/simple_animal/pet/dog/corgi(location)
+		new /mob/living/danimal/pet/dog/corgi(location)
 	..()
 
 /datum/chemical_reaction/hair_dye

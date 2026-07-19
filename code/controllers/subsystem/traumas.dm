@@ -59,102 +59,102 @@ SUBSYSTEM_DEF(traumas)
 
 	phobia_mobs = list(
 		"spiders"  = typecacheof(list(
-			/mob/living/simple_animal/hostile/poison/giant_spider,
-			/mob/living/simple_animal/hostile/radscorpion)
+			/mob/living/danimal/hostile/poison/giant_spider,
+			/mob/living/danimal/hostile/radscorpion)
 			),
 
 		"security" = typecacheof(list(
-			/mob/living/simple_animal/bot/secbot,
-			/mob/living/simple_animal/bot/ed209)
+			/mob/living/danimal/bot/secbot,
+			/mob/living/danimal/bot/ed209)
 			),
 
 		"lizards"  = typecacheof(list(
-			/mob/living/simple_animal/hostile/lizard,
-			/mob/living/simple_animal/hostile/gecko,
-			/mob/living/simple_animal/hostile/stalker,
-			/mob/living/simple_animal/hostile/stalkeryoung
+			/mob/living/danimal/hostile/lizard,
+			/mob/living/danimal/hostile/gecko,
+			/mob/living/danimal/hostile/stalker,
+			/mob/living/danimal/hostile/stalkeryoung
 			)
 			),
 
 		"skeletons" = typecacheof(list(
-			/mob/living/simple_animal/hostile/skeleton)
+			/mob/living/danimal/hostile/skeleton)
 			),
 
 		"snakes"   = typecacheof(list(
-			/mob/living/simple_animal/hostile/retaliate/poison/snake,
-			/mob/living/simple_animal/hostile/stalker,
-			/mob/living/simple_animal/hostile/stalkeryoung)
+			/mob/living/danimal/hostile/retaliate/poison/snake,
+			/mob/living/danimal/hostile/stalker,
+			/mob/living/danimal/hostile/stalkeryoung)
 			),
 
 		"robots"   = typecacheof(list(
 			/mob/living/silicon/robot,
 			/mob/living/silicon/ai,
-			/mob/living/simple_animal/drone,
-			/mob/living/simple_animal/bot,
-			/mob/living/simple_animal/hostile/swarmer,
-			/mob/living/simple_animal/hostile/handy,
-			/mob/living/simple_animal/hostile/eyebot)
+			/mob/living/danimal/drone,
+			/mob/living/danimal/bot,
+			/mob/living/danimal/hostile/swarmer,
+			/mob/living/danimal/hostile/handy,
+			/mob/living/danimal/hostile/eyebot)
 			),
 
 		"doctors"   = typecacheof(list(
-			/mob/living/simple_animal/bot/medbot)
+			/mob/living/danimal/bot/medbot)
 			),
 
 		"the supernatural"   = typecacheof(list(
-			/mob/living/simple_animal/hostile/construct,
-//			/mob/living/simple_animal/hostile/clockwork,
-//			/mob/living/simple_animal/drone/cogscarab,
-			/mob/living/simple_animal/revenant,
-			/mob/living/simple_animal/shade)
+			/mob/living/danimal/hostile/construct,
+//			/mob/living/danimal/hostile/clockwork,
+//			/mob/living/danimal/drone/cogscarab,
+			/mob/living/danimal/revenant,
+			/mob/living/danimal/shade)
 			),
 
 		"aliens"   = typecacheof(list(
 			/mob/living/carbon/alien,
-			/mob/living/simple_animal/slime)
+			/mob/living/danimal/slime)
 			),
 
 		"conspiracies" = typecacheof(list(
-			/mob/living/simple_animal/bot/secbot,
-			/mob/living/simple_animal/bot/ed209,
-			/mob/living/simple_animal/drone,
-			/mob/living/simple_animal/pet/penguin)
+			/mob/living/danimal/bot/secbot,
+			/mob/living/danimal/bot/ed209,
+			/mob/living/danimal/drone,
+			/mob/living/danimal/pet/penguin)
 			),
 
 		"birds" = typecacheof(list(
-			/mob/living/simple_animal/parrot,
-			/mob/living/simple_animal/chick,
-			/mob/living/simple_animal/chicken,
-			/mob/living/simple_animal/pet/penguin,
-			/mob/living/simple_animal/bird)
+			/mob/living/danimal/parrot,
+			/mob/living/danimal/chick,
+			/mob/living/danimal/chicken,
+			/mob/living/danimal/pet/penguin,
+			/mob/living/danimal/bird)
 			),
 
 		"dogs" = typecacheof(list(
-			/mob/living/simple_animal/pet/dog,
-			/mob/living/simple_animal/hostile/stickman/dog,
-			/mob/living/simple_animal/pet/wolf,
-			/mob/living/simple_animal/hostile/wolf,
-			/mob/living/simple_animal/hostile/stalker,
-			/mob/living/simple_animal/hostile/stalkeryoung)
+			/mob/living/danimal/pet/dog,
+			/mob/living/danimal/hostile/stickman/dog,
+			/mob/living/danimal/pet/wolf,
+			/mob/living/danimal/hostile/wolf,
+			/mob/living/danimal/hostile/stalker,
+			/mob/living/danimal/hostile/stalkeryoung)
 			),
 
 		"anime" = typecacheof(list(
-			/mob/living/simple_animal/hostile/guardian)
+			/mob/living/danimal/hostile/guardian)
 			),
 
 		"cats"= typecacheof(list(
-			/mob/living/simple_animal/pet/cat,
-			/mob/living/simple_animal/hostile/cat_butcherer)
+			/mob/living/danimal/pet/cat,
+			/mob/living/danimal/hostile/cat_butcherer)
 			),
 
 		"rats"= typecacheof(list(
-			/mob/living/simple_animal/mouse,
-			/mob/living/simple_animal/hostile/molerat,
-			/mob/living/simple_animal/hostile/rat)
+			/mob/living/danimal/mouse,
+			/mob/living/danimal/hostile/molerat,
+			/mob/living/danimal/hostile/rat)
 			),
 
 		"eye" = typecacheof(list(
-			/mob/living/simple_animal/hostile/asteroid/basilisk/watcher,
-			/mob/living/simple_animal/hostile/carp/eyeball)
+			/mob/living/danimal/hostile/asteroid/basilisk/watcher,
+			/mob/living/danimal/hostile/carp/eyeball)
 			)
 		)
 

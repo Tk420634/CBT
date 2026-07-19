@@ -76,7 +76,7 @@ GLOBAL_LIST_INIT(ventcrawl_machinery, typecacheof(list(
 	else
 		to_chat(src, span_warning("This ventilation duct is not connected to anything!"))
 
-/mob/living/simple_animal/slime/handle_ventcrawl(atom/A)
+/mob/living/danimal/slime/handle_ventcrawl(atom/A)
 	if(buckled)
 		to_chat(src, "<i>I can't vent crawl while feeding...</i>")
 		return

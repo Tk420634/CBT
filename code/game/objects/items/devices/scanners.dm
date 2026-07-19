@@ -921,7 +921,7 @@ GENETICS SCANNER
 	if (!isslime(M))
 		to_chat(user, span_warning("This device can only scan slimes!"))
 		return
-	var/mob/living/simple_animal/slime/T = M
+	var/mob/living/danimal/slime/T = M
 	slime_scan(T, user)
 
 /proc/slime_scan(mob/living/simple_animal/slime/T, mob/living/user)

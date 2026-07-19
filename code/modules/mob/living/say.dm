@@ -427,7 +427,7 @@
 	I.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
 	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(flick_overlay), I, speech_bubble_recipients, 30)
 
-/mob/living/simple_animal/debug_chatterboy
+/mob/living/danimal/debug_chatterboy
 	name = "Chatterboy"
 	desc = "A debug chatterboy. He's here to help you debug your chatterboys. He's not actually a chatterboy, though. He's just a rock."
 	icon = 'modular_coyote/icons/objects/c13ammo.dmi'
@@ -436,7 +436,7 @@
 	wander = FALSE
 	var/speak_cooldown = 0
 
-/mob/living/simple_animal/debug_chatterboy/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/debug_chatterboy/BiologicalLife(seconds, times_fired)
 	. = ..()
 	// if(speak_cooldown > world.time)
 	// 	return
@@ -460,11 +460,11 @@
 	playsound(src, 'sound/effects/bwoing.ogg', 100, TRUE)
 	say(speech)
 
-/mob/living/simple_animal/debug_chatterboy/radiolad
+/mob/living/danimal/debug_chatterboy/radiolad
 	name = "Chatterboy w/ radio"
 	desc = "A debug chatterboy w a radoi. He's here to help you debug your chatterboys. He's not actually a chatterboy, though. He's just a rock."
 
-/mob/living/simple_animal/debug_chatterboy/radiolad/Initialize()
+/mob/living/danimal/debug_chatterboy/radiolad/Initialize()
 	var/obj/item/radio/R = new(get_turf(src))
 	R.broadcasting = TRUE
 	R.listening = TRUE

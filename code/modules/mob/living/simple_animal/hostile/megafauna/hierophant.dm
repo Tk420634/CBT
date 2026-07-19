@@ -34,7 +34,7 @@ Difficulty: Normal
 
 */
 
-/mob/living/simple_animal/hostile/megafauna/hierophant
+/mob/living/danimal/hostile/megafauna/hierophant
 	name = "hierophant"
 	desc = "A massive metal club that hangs in the air as though waiting. It'll make you dance to its beat."
 	health = 2500
@@ -78,15 +78,15 @@ Difficulty: Normal
 	var/list/kill_phrases = list("Wsyvgi sj irivkc xettih. Vitemvmrk...", "Irivkc wsyvgi jsyrh. Vitemvmrk...", "Jyip jsyrh. Egxmzexmrk vitemv gcgpiw...", "Kix fiex. Liepmrk...")
 	var/list/target_phrases = list("Xevkix psgexih.", "Iriqc jsyrh.", "Eguymvih xevkix.")
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/Initialize()
+/mob/living/danimal/hostile/megafauna/hierophant/Initialize()
 	. = ..()
 	internal = new/obj/item/gps/internal/hierophant(src)
 	spawned_beacon = new(loc)
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/spawn_crusher_loot()
+/mob/living/danimal/hostile/megafauna/hierophant/spawn_crusher_loot()
 	new /obj/item/crusher_trophy/vortex_talisman(get_turf(spawned_beacon))
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/megafauna/hierophant/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if(spawned_beacon && !QDELETED(spawned_beacon) && !client)
@@ -105,7 +105,7 @@ Difficulty: Normal
 			else
 				visible_message(span_hierophant("\"Vitemvw gsqtpixi. Stivexmsrep ijjmgmirgc gsqtvsqmwih.\""))
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/death()
+/mob/living/danimal/hostile/megafauna/hierophant/death()
 	if(health > 0 || stat == DEAD)
 		return
 	else
@@ -117,12 +117,12 @@ Difficulty: Normal
 		burst(get_turf(src))
 		..()
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/Destroy()
+/mob/living/danimal/hostile/megafauna/hierophant/Destroy()
 	qdel(spawned_beacon)
 	. = ..()
 
 /*
-/mob/living/simple_animal/hostile/megafauna/hierophant/devour(mob/living/L)
+/mob/living/danimal/hostile/megafauna/hierophant/devour(mob/living/L)
 	for(var/obj/item/W in L)
 		if(!L.dropItemToGround(W))
 			qdel(W)
@@ -132,12 +132,12 @@ Difficulty: Normal
 	L.dust()
 */
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/EvalTarget(atom/the_target)
+/mob/living/danimal/hostile/megafauna/hierophant/EvalTarget(atom/the_target)
 	. = ..()
-	if(istype(the_target, /mob/living/simple_animal/hostile/asteroid/hivelordbrood)) //ignore temporary targets in favor of more permanent targets
+	if(istype(the_target, /mob/living/danimal/hostile/asteroid/hivelordbrood)) //ignore temporary targets in favor of more permanent targets
 		return FALSE
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/GiveTarget(new_target)
+/mob/living/danimal/hostile/megafauna/hierophant/GiveTarget(new_target)
 	var/atom/my_target = get_target()
 	var/targets_the_same = (new_target == my_target)
 	. = ..()
@@ -146,13 +146,13 @@ Difficulty: Normal
 		if(spawned_beacon && loc == spawned_beacon.loc && did_reset)
 			arena_trap(src)
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/danimal/hostile/megafauna/hierophant/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	. = ..()
 	if(src && . > 0 && !blinking)
 		wander = TRUE
 		did_reset = FALSE
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/AttackingTarget()
+/mob/living/danimal/hostile/megafauna/hierophant/AttackingTarget()
 	var/atom/my_target = get_target()
 	if(!blinking)
 		if(my_target && isliving(my_target))
@@ -169,15 +169,15 @@ Difficulty: Normal
 					OpenFire()
 			return ..()
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/DestroySurroundings()
+/mob/living/danimal/hostile/megafauna/hierophant/DestroySurroundings()
 	if(!blinking)
 		..()
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/Move()
+/mob/living/danimal/hostile/megafauna/hierophant/Move()
 	if(!blinking)
 		. = ..()
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/Moved(oldLoc, movement_dir)
+/mob/living/danimal/hostile/megafauna/hierophant/Moved(oldLoc, movement_dir)
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!stat && .)
@@ -187,18 +187,18 @@ Difficulty: Normal
 		if(my_target)
 			arena_trap(my_target)
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/perform_move_action(target, delay, minimum_distance)
+/mob/living/danimal/hostile/megafauna/hierophant/perform_move_action(target, delay, minimum_distance)
 	wander = TRUE
 	if(!blinking)
 		..()
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/proc/calculate_rage() //how angry we are overall
+/mob/living/danimal/hostile/megafauna/hierophant/proc/calculate_rage() //how angry we are overall
 	did_reset = FALSE //oh hey we're doing SOMETHING, clearly we might need to heal if we recall
 	anger_modifier = clamp(((maxHealth - health) / 42),0,50)
 	burst_range = initial(burst_range) + round(anger_modifier * 0.08)
 	beam_range = initial(beam_range) + round(anger_modifier * 0.12)
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/OpenFire()
+/mob/living/danimal/hostile/megafauna/hierophant/OpenFire()
 	calculate_rage()
 	if(blinking)
 		return
@@ -318,7 +318,7 @@ Difficulty: Normal
 	else //just release a burst of power
 		INVOKE_ASYNC(src,PROC_REF(burst), get_turf(src))
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/proc/diagonal_blasts(mob/victim) //fire diagonal cross blasts with a delay
+/mob/living/danimal/hostile/megafauna/hierophant/proc/diagonal_blasts(mob/victim) //fire diagonal cross blasts with a delay
 	var/turf/T = get_turf(victim)
 	if(!T)
 		return
@@ -329,7 +329,7 @@ Difficulty: Normal
 	for(var/d in GLOB.diagonals)
 		INVOKE_ASYNC(src,PROC_REF(blast_wall), T, d)
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/proc/cardinal_blasts(mob/victim) //fire cardinal cross blasts with a delay
+/mob/living/danimal/hostile/megafauna/hierophant/proc/cardinal_blasts(mob/victim) //fire cardinal cross blasts with a delay
 	var/turf/T = get_turf(victim)
 	if(!T)
 		return
@@ -340,7 +340,7 @@ Difficulty: Normal
 	for(var/d in GLOB.cardinals)
 		INVOKE_ASYNC(src,PROC_REF(blast_wall), T, d)
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/proc/alldir_blasts(mob/victim) //fire alldir cross blasts with a delay
+/mob/living/danimal/hostile/megafauna/hierophant/proc/alldir_blasts(mob/victim) //fire alldir cross blasts with a delay
 	var/turf/T = get_turf(victim)
 	if(!T)
 		return
@@ -351,7 +351,7 @@ Difficulty: Normal
 	for(var/d in GLOB.alldirs)
 		INVOKE_ASYNC(src,PROC_REF(blast_wall), T, d)
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/proc/blast_wall(turf/T, set_dir) //make a wall of blasts beam_range tiles long
+/mob/living/danimal/hostile/megafauna/hierophant/proc/blast_wall(turf/T, set_dir) //make a wall of blasts beam_range tiles long
 	var/range = beam_range
 	var/turf/previousturf = T
 	var/turf/J = get_step(previousturf, set_dir)
@@ -360,7 +360,7 @@ Difficulty: Normal
 		previousturf = J
 		J = get_step(previousturf, set_dir)
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/proc/arena_trap(mob/victim) //trap a targette in an arena
+/mob/living/danimal/hostile/megafauna/hierophant/proc/arena_trap(mob/victim) //trap a targette in an arena
 	var/turf/T = get_turf(victim)
 	if(!istype(victim) || victim.stat == DEAD || !T || arena_cooldown > world.time)
 		return
@@ -376,7 +376,7 @@ Difficulty: Normal
 	if(get_dist(src, T) >= 11) //hey you're out of range I need to get closer to you!
 		INVOKE_ASYNC(src,PROC_REF(blink), T)
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/proc/arena_squares(turf/T, set_dir) //make a fancy effect extending from the arena targette
+/mob/living/danimal/hostile/megafauna/hierophant/proc/arena_squares(turf/T, set_dir) //make a fancy effect extending from the arena targette
 	var/turf/previousturf = T
 	var/turf/J = get_step(previousturf, set_dir)
 	for(var/i in 1 to 10)
@@ -386,7 +386,7 @@ Difficulty: Normal
 		J = get_step(previousturf, set_dir)
 		sleep(0.5)
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/proc/blink(mob/victim) //blink to a targette
+/mob/living/danimal/hostile/megafauna/hierophant/proc/blink(mob/victim) //blink to a targette
 	if(blinking || !victim)
 		return
 	var/turf/T = get_turf(victim)
@@ -419,7 +419,7 @@ Difficulty: Normal
 	sleep(1) //at this point the blasts we made detonate
 	blinking = FALSE
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/proc/melee_blast(mob/victim) //make a 3x3 blast around a targette
+/mob/living/danimal/hostile/megafauna/hierophant/proc/melee_blast(mob/victim) //make a 3x3 blast around a targette
 	if(!victim)
 		return
 	var/turf/T = get_turf(victim)
@@ -431,7 +431,7 @@ Difficulty: Normal
 	for(var/t in RANGE_TURFS(1, T))
 		new /obj/effect/temp_visual/hierophant/blast(t, src, FALSE)
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/proc/burst(turf/original, spread_speed = 0.5) //release a wave of blasts
+/mob/living/danimal/hostile/megafauna/hierophant/proc/burst(turf/original, spread_speed = 0.5) //release a wave of blasts
 	playsound(original,'sound/machines/airlockopen.ogg', 200, 1)
 	var/last_dist = 0
 	var/list/hit_mobs = list()		//don't hit people multiple times.
@@ -445,7 +445,7 @@ Difficulty: Normal
 			sleep(1 + min(burst_range - last_dist, 12) * spread_speed) //gets faster as it gets further out
 		new /obj/effect/temp_visual/hierophant/blast(T, src, FALSE, hit_mobs)
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/AltClickOn(atom/A) //player control handler(don't give this to a player holy fuck)
+/mob/living/danimal/hostile/megafauna/hierophant/AltClickOn(atom/A) //player control handler(don't give this to a player holy fuck)
 	if(!istype(A) || get_dist(A, src) <= 2)
 		return AltClickNoInteract(src, A)
 	blink(A)
@@ -659,14 +659,14 @@ Difficulty: Normal
 		var/armor = L.run_armor_check(limb_to_hit, "melee", "Your armor absorbs [src]!", "Your armor blocks part of [src]!", 50, "Your armor was penetrated by [src]!")
 		L.apply_damage(damage, BURN, limb_to_hit, armor, wound_bonus=CANT_WOUND)
 		if(ishostile(L))
-			var/mob/living/simple_animal/hostile/H = L //mobs find and damage you...
-			if(H.stat == CONSCIOUS && !H.target && H.AIStatus != AI_OFF && !H.client)
+			var/mob/living/danimal/hostile/H = L //mobs find and damage you...
+			if(H.stat == CONSCIOUS && !H.get_target() && H.AIStatus != AI_OFF && !H.client)
 				if(!QDELETED(caster))
 					if(get_dist(H, caster) <= H.aggroed_vision_range)
-						H.GetPossibleTargets(list(caster), 1)
+						H.GiveTarget(caster, TRUE)
 					else
 						H.perform_move_action(get_turf(caster), H.move_to_delay, 3)
-		if(monster_damage_boost && (ismegafauna(L) || istype(L, /mob/living/simple_animal/hostile/asteroid)))
+		if(monster_damage_boost && (ismegafauna(L) || istype(L, /mob/living/danimal/hostile/asteroid)))
 			L.adjustBruteLoss(damage)
 		log_combat(caster, L, "struck with a [name]")
 	for(var/obj/mecha/M in T.contents - hit_things) //also damage mechs.

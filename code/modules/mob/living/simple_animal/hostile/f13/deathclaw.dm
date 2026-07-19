@@ -3,7 +3,7 @@
 */
 
 //Base Deathclaw
-/mob/living/simple_animal/hostile/aethergiest
+/mob/living/danimal/hostile/aethergiest
 	name = "aethergiest"
 	desc = "A massive multidimensional predator.  Here to eat you and your alternate dimension self's dog. Fight or flee, but do it quick."
 	icon = 'icons/fallout/mobs/monsters/deathclaw.dmi'
@@ -74,11 +74,11 @@
 	bounty = 100
 
 
-/mob/living/simple_animal/hostile/aethergiest/Initialize()
+/mob/living/danimal/hostile/aethergiest/Initialize()
 	. = ..()
 	recenter_wide_sprite()
 
-/mob/living/simple_animal/hostile/aethergiest/playable
+/mob/living/danimal/hostile/aethergiest/playable
 	emote_taunt_sound = null
 	emote_taunt = null
 	emote_taunt_sound = null
@@ -87,7 +87,7 @@
 	wander = FALSE
 
 /// Override this with what should happen when going from high health to low health
-/mob/living/simple_animal/hostile/aethergiest/make_low_health()
+/mob/living/danimal/hostile/aethergiest/make_low_health()
 	visible_message(span_danger("[src] lets out a vicious roar!!!"))
 	playsound(src, 'sound/f13npc/deathclaw/aggro2.ogg', 100, 1, SOUND_DISTANCE(20))
 	color = color_mad
@@ -106,7 +106,7 @@
 	is_low_health = TRUE
 
 /// Override this with what should happen when going from low health to high health
-/mob/living/simple_animal/hostile/aethergiest/make_high_health()
+/mob/living/danimal/hostile/aethergiest/make_high_health()
 	visible_message(span_danger("[src] calms down."))
 	color = initial(color)
 	reach = initial(reach)
@@ -122,7 +122,7 @@
 	alternate_attack_prob = initial(alternate_attack_prob)
 	is_low_health = FALSE
 
-/mob/living/simple_animal/hostile/aethergiest/AlternateAttackingTarget(atom/the_target)
+/mob/living/danimal/hostile/aethergiest/AlternateAttackingTarget(atom/the_target)
 	if(!ismovable(the_target))
 		return
 	var/atom/movable/throwee = the_target
@@ -132,13 +132,13 @@
 	throwee.safe_throw_at(throw_target, 10, 1, src, TRUE)
 	playsound(get_turf(throwee), 'sound/effects/Flesh_Break_1.ogg')
 
-/mob/living/simple_animal/hostile/aethergiest/Move()
+/mob/living/danimal/hostile/aethergiest/Move()
 	if(is_low_health && health > 0)
 		new /obj/effect/temp_visual/decoy/fading(loc,src)
 		DestroySurroundings()
 	. = ..()
 
-/mob/living/simple_animal/hostile/aethergiest/Bump(atom/A)
+/mob/living/danimal/hostile/aethergiest/Bump(atom/A)
 	if((isturf(A) || isobj(A)) && A.density)
 		if(health <= 0)
 			playsound(get_turf(src), 'sound/effects/Flesh_Break_2.ogg', 100, 1, ignore_walls = TRUE)
@@ -152,7 +152,7 @@
 	..()
 
 // Mother death claw
-/mob/living/simple_animal/hostile/aethergiest/mother
+/mob/living/danimal/hostile/aethergiest/mother
 	name = "mother aethergiest"
 	desc = "A massive, reptilian creature with powerful muscles, razor-sharp claws, and aggression to match. This one is an angry mother."
 	gender = FEMALE
@@ -171,7 +171,7 @@
 	loot_amount_random = TRUE
 	bounty = 150
 
-/mob/living/simple_animal/hostile/retaliate/aethergiest
+/mob/living/danimal/hostile/retaliate/aethergiest
 	name = "aethergiest"
 	desc = "A massive, reptilian creature with powerful muscles, razor-sharp claws."
 	icon = 'icons/fallout/mobs/monsters/deathclaw.dmi'
@@ -233,11 +233,11 @@
 	)
 	despawns_when_lonely = FALSE
 
-/mob/living/simple_animal/hostile/retaliate/aethergiest/Initialize()
+/mob/living/danimal/hostile/retaliate/aethergiest/Initialize()
 	. = ..()
 	recenter_wide_sprite()
 
-/mob/living/simple_animal/hostile/retaliate/aethergiest/playable
+/mob/living/danimal/hostile/retaliate/aethergiest/playable
 	emote_taunt_sound = null
 	emote_taunt = null
 	emote_taunt_sound = null
@@ -246,7 +246,7 @@
 	wander = FALSE
 
 /// Override this with what should happen when going from high health to low health
-/mob/living/simple_animal/hostile/retaliate/aethergiest/make_low_health()
+/mob/living/danimal/hostile/retaliate/aethergiest/make_low_health()
 	visible_message(span_danger("[src] lets out a vicious roar!!!"))
 	playsound(src, 'sound/f13npc/deathclaw/aggro2.ogg', 100, 1, SOUND_DISTANCE(20))
 	color = color_mad
@@ -264,7 +264,7 @@
 	is_low_health = TRUE
 
 /// Override this with what should happen when going from low health to high health
-/mob/living/simple_animal/hostile/aethergiest/retaliate/make_high_health()
+/mob/living/danimal/hostile/aethergiest/retaliate/make_high_health()
 	visible_message(span_danger("[src] calms down."))
 	color = initial(color)
 	reach = initial(reach)
@@ -279,7 +279,7 @@
 	alternate_attack_prob = initial(alternate_attack_prob)
 	is_low_health = FALSE
 
-/mob/living/simple_animal/hostile/aethergiest/retaliate/AlternateAttackingTarget(atom/the_target)
+/mob/living/danimal/hostile/aethergiest/retaliate/AlternateAttackingTarget(atom/the_target)
 	if(!ismovable(the_target))
 		return
 	var/atom/movable/throwee = the_target
@@ -289,13 +289,13 @@
 	throwee.safe_throw_at(throw_target, 10, 1, src, TRUE)
 	playsound(get_turf(throwee), 'sound/effects/Flesh_Break_1.ogg')
 
-/mob/living/simple_animal/hostile/retaliate/aethergiest/Move()
+/mob/living/danimal/hostile/retaliate/aethergiest/Move()
 	if(is_low_health && health > 0)
 		new /obj/effect/temp_visual/decoy/fading(loc,src)
 		DestroySurroundings()
 	. = ..()
 
-/mob/living/simple_animal/hostile/retaliate/aethergiest/Bump(atom/A)
+/mob/living/danimal/hostile/retaliate/aethergiest/Bump(atom/A)
 	if(is_low_health)
 		if((isturf(A) || isobj(A)) && A.density)
 			A.ex_act(EXPLODE_HEAVY)
@@ -309,7 +309,7 @@
 	..()
 
 // Mother death claw - egglaying
-/mob/living/simple_animal/hostile/retaliate/aethergiest/mother
+/mob/living/danimal/hostile/retaliate/aethergiest/mother
 	name = "mother aethergiest"
 	desc = "A massive, reptilian creature with powerful muscles, razor-sharp claws. This one is an BIG mother."
 	gender = FEMALE
@@ -331,17 +331,17 @@
 							/obj/item/stack/sheet/animalhide/aethergiest = 3)
 	var/static/aethergiest_mother_count = 0
 
-/mob/living/simple_animal/hostile/retaliate/aethergiest/mother/Initialize()
+/mob/living/danimal/hostile/retaliate/aethergiest/mother/Initialize()
 	. = ..()
 	pixel_x = rand(-6, 6)
 	pixel_y = rand(0, 10)
 	++aethergiest_mother_count
 
-/mob/living/simple_animal/hostile/retaliate/aethergiest/mother/Destroy()
+/mob/living/danimal/hostile/retaliate/aethergiest/mother/Destroy()
 	--aethergiest_mother_count
 	return ..()
 
-/mob/living/simple_animal/hostile/retaliate/aethergiest/mother/attackby(obj/item/O, mob/user, params)
+/mob/living/danimal/hostile/retaliate/aethergiest/mother/attackby(obj/item/O, mob/user, params)
 	if(istype(O, food_type)) //feedin' dem claws
 		if(!stat && eggsleft < 8)
 			var/feedmsg = "[user] feeds [O] to [name]! [pick(feedMessages)]"
@@ -353,7 +353,7 @@
 	else
 		..()
 
-/mob/living/simple_animal/hostile/retaliate/aethergiest/mother/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/retaliate/aethergiest/mother/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if((!stat && prob(3) && eggsleft > 0) && egg_type)
@@ -372,13 +372,13 @@
 		amount_grown += rand(1,2)
 		if(amount_grown >= 100)
 			visible_message("[src] hatches with a quiet cracking sound, swelling to full size.")
-			new /mob/living/simple_animal/hostile/retaliate/aethergiest/mother(get_turf(src))
+			new /mob/living/danimal/hostile/retaliate/aethergiest/mother(get_turf(src))
 			STOP_PROCESSING(SSobj, src)
 			qdel(src)
 	else
 		STOP_PROCESSING(SSobj, src)
 
-/mob/living/simple_animal/hostile/aethergiest/butter
+/mob/living/danimal/hostile/aethergiest/butter
 	name = "butterclaw"
 	desc = "A massive, reptilian creature with powerful muscles, razor-sharp claws, and aggression to match. This one is...made out of butter?"
 	icon_state = "deathclaw_butter"
@@ -390,7 +390,7 @@
 							/obj/item/stack/sheet/animalhide/aethergiest = 3)
 
 //Legendary Deathclaw
-/mob/living/simple_animal/hostile/aethergiest/legendary
+/mob/living/danimal/hostile/aethergiest/legendary
 	name = "legendary aethergiest"
 	desc = "A massive, reptilian creature with powerful muscles, razor-sharp claws, and aggression to match. This one is a legendary enemy."
 	armor_list = ARMOR_VALUE_DEATHCLAW_MOTHER
@@ -406,14 +406,14 @@
 	loot_amount_random = TRUE
 	bounty = 250
 
-/mob/living/simple_animal/hostile/aethergiest/legendary/death(gibbed)
+/mob/living/danimal/hostile/aethergiest/legendary/death(gibbed)
 	var/turf/T = get_turf(src)
 	if(prob(60))
 		new /obj/item/melee/unarmed/aethergiestgauntlet(T)
 	. = ..()
 
 //Power Armor Deathclaw the tankest and the scariest aethergiest in the West. One mistake will end you. May the choice be with you.
-/mob/living/simple_animal/hostile/aethergiest/power_armor
+/mob/living/danimal/hostile/aethergiest/power_armor
 	name = "power armored aethergiest"
 	desc = "A massive, reptilian creature with powerful muscles, razor-sharp claws, and aggression to match. Someone had managed to put power armor on him."
 	icon_state = "combatclaw"
@@ -432,7 +432,7 @@
 
 
 /// Code for aethergiest charging. It barely works
-/* /mob/living/simple_animal/hostile/aethergiest/bullet_act(obj/item/projectile/Proj)
+/* /mob/living/danimal/hostile/aethergiest/bullet_act(obj/item/projectile/Proj)
 	if(!Proj)
 		return
 	if(!charging)
@@ -440,19 +440,19 @@
 		addtimer(CALLBACK(src,PROC_REF(Charge)), 3)
 	. = ..() // I swear I looked at this like 10 times before, never once noticed this wasnt here, fmdakm
 
-/mob/living/simple_animal/hostile/aethergiest/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
+/mob/living/danimal/hostile/aethergiest/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
 	if(!charging)
 		..()
 
-/mob/living/simple_animal/hostile/aethergiest/AttackingTarget()
+/mob/living/danimal/hostile/aethergiest/AttackingTarget()
 	if(!charging)
 		return ..()
 
-/mob/living/simple_animal/hostile/aethergiest/perform_move_action(target, delay, minimum_distance)
+/mob/living/danimal/hostile/aethergiest/perform_move_action(target, delay, minimum_distance)
 	if(!charging)
 		..()
 
-/mob/living/simple_animal/hostile/aethergiest/proc/Charge()
+/mob/living/danimal/hostile/aethergiest/proc/Charge()
 	var/turf/T = get_turf(target)
 	if(!T || T == loc)
 		return
@@ -465,19 +465,19 @@
 	animate(D, alpha = 0, color = "#FF0000", transform = matrix()*2, time = 1)
 	throw_at(T, get_dist(src, T), 1, src, 0, callback = CALLBACK(src,PROC_REF(charge_end)))
 
-/mob/living/simple_animal/hostile/aethergiest/proc/charge_end(list/effects_to_destroy)
+/mob/living/danimal/hostile/aethergiest/proc/charge_end(list/effects_to_destroy)
 	charging = FALSE
 	if(target)
 		perform_move_action(target, move_to_delay, minimum_distance)
 
-/mob/living/simple_animal/hostile/aethergiest/Bump(atom/A)
+/mob/living/danimal/hostile/aethergiest/Bump(atom/A)
 	if(charging)
 		if(isturf(A) || isobj(A) && A.density)
 			A.ex_act(EXPLODE_HEAVY)
 		DestroySurroundings()
 	..()
 
-/mob/living/simple_animal/hostile/aethergiest/throw_impact(atom/A)
+/mob/living/danimal/hostile/aethergiest/throw_impact(atom/A)
 	if(!charging)
 		return ..()
 

@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/stickman
+/mob/living/danimal/hostile/stickman
 	name = "Angry Stick Man"
 	desc = "A being from a realm with only 2 dimensions. At least it's trying to stay faced towards you."
 	icon_state = "stickman"
@@ -15,7 +15,6 @@
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	maxHealth = 100
 	health = 100
-	harm_intent_damage = 5
 	obj_damage = 0
 	melee_damage_lower = 10
 	melee_damage_upper = 10
@@ -29,7 +28,7 @@
 	check_friendly_fire = 1
 	status_flags = CANPUSH
 
-/mob/living/simple_animal/hostile/stickman/ranged
+/mob/living/danimal/hostile/stickman/ranged
 	ranged = 1
 	retreat_distance = 5
 	minimum_distance = 5
@@ -38,7 +37,7 @@
 	casingtype = /obj/item/ammo_casing/c10mm
 	projectilesound = 'sound/misc/bang.ogg'
 
-/mob/living/simple_animal/hostile/stickman/dog
+/mob/living/danimal/hostile/stickman/dog
 	name = "Angry Stick Dog"
 	desc = "Stickman's best friend, if he could see him at least."
 	icon_state = "stickdog"
@@ -46,6 +45,6 @@
 	icon_dead = "stickdog_dead"
 	mob_biotypes = MOB_BEAST
 
-/mob/living/simple_animal/hostile/stickman/Initialize(mapload)
+/mob/living/danimal/hostile/stickman/Initialize(mapload)
 	. = ..()
 	new /obj/effect/temp_visual/paper_scatter(src)

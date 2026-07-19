@@ -533,16 +533,16 @@
 /obj/effect/spawner/bundle/mobs/debug/melee_special
 	name = "special debug thing that fenny shouldnt map in"
 	items = list(
-		/mob/living/simple_animal/hostile/rat/skitter/melee_debug,
-		/mob/living/simple_animal/hostile/rat/skitter/melee_debug,
-		/mob/living/simple_animal/hostile/rat/skitter/melee_debug,
-		/mob/living/simple_animal/hostile/rat/skitter/melee_debug,
-		/mob/living/simple_animal/hostile/rat/skitter/melee_debug,
+		/mob/living/danimal/hostile/rat/skitter/melee_debug,
+		/mob/living/danimal/hostile/rat/skitter/melee_debug,
+		/mob/living/danimal/hostile/rat/skitter/melee_debug,
+		/mob/living/danimal/hostile/rat/skitter/melee_debug,
+		/mob/living/danimal/hostile/rat/skitter/melee_debug,
 		/obj/item/debug_melee_turf_thing,
 		/obj/item/melee/coyote/oldpike,
 	)
 
-/mob/living/simple_animal/hostile/rat/skitter/melee_debug
+/mob/living/danimal/hostile/rat/skitter/melee_debug
 	name = "debug rat"
 	desc = "Its a rat!"
 	melee_damage_lower = 0.01
@@ -558,7 +558,7 @@
 	variation_list = list(
 	)
 
-/mob/living/simple_animal/hostile/rat/skitter/melee_debug/attacked_by(obj/item/I, mob/living/user, attackchain_flags = NONE, damage_multiplier = 1, damage_addition, damage_override)
+/mob/living/danimal/hostile/rat/skitter/melee_debug/attacked_by(obj/item/I, mob/living/user, attackchain_flags = NONE, damage_multiplier = 1, damage_addition, damage_override)
 	say("I took damage! [damage_override] to be exact! Weapon's damage is [I.force]! Thanks [user]!", only_overhead = TRUE)
 	return ..()
 

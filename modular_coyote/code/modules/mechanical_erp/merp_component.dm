@@ -97,7 +97,7 @@
 /datum/component/merp/proc/give_merp_initiator()
 	MERP_MASTER
 	if(isanimal(master))
-		var/mob/living/simple_animal/merpimal = master
+		var/mob/living/danimal/merpimal = master
 		if(!merpimal.dextrous)
 			var/urnotdextrous = "You aren't dextrous enough to MERP!"
 			switch(rand(1,6))

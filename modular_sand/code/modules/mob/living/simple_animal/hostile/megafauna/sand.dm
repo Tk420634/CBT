@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/megafauna/sand
+/mob/living/danimal/hostile/megafauna/sand
 	name = "Sand"
 	desc = "Its our lord, Sand... you better not be a sinner..."
 	icon = 'modular_sand/icons/mob/lavaland/Sand.dmi'

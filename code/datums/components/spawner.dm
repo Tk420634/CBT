@@ -1,5 +1,5 @@
 /datum/component/spawner
-	var/list/mob_types = list(/mob/living/simple_animal/hostile/carp)
+	var/list/mob_types = list(/mob/living/danimal/hostile/carp)
 	/// List of 'special' mobs to spawn
 	/// Format: list(special_mob_datum)
 	var/list/special_mobs = list()
@@ -253,7 +253,7 @@
 	if(!clear_spawned_mobs)
 		return
 	for(var/datum/weakref/mob_ref as anything in spawned_mobs)
-		var/mob/living/simple_animal/removed_animal = mob_ref.resolve()
+		var/mob/living/danimal/removed_animal = mob_ref.resolve()
 		if(!removed_animal)
 			continue
 		if(removed_animal.nest == src)
@@ -396,7 +396,7 @@
 	if(LAZYLEN(spawned_mobs) < max_mobs)
 		return TRUE
 	for(var/datum/weakref/mob_ref in spawned_mobs)
-		var/mob/living/simple_animal/removed_animal = mob_ref.resolve()
+		var/mob/living/danimal/removed_animal = mob_ref.resolve()
 		if(!removed_animal)
 			spawned_mobs -= mob_ref
 		else if(removed_animal.health <= 0)
@@ -419,7 +419,7 @@
 	if(LAZYLEN(special_mobs))
 		var/datum/special_mob_datum/spawner_special = pick(special_mobs)
 		if(spawner_special)
-			var/mob/living/simple_animal/hostile/mobbie = spawner_special.make_special_mob(src)
+			var/mob/living/danimal/hostile/mobbie = spawner_special.make_special_mob(src)
 			spawned_mobs |= WEAKREF(mobbie)
 			mobbie.nest = WEAKREF(P)
 			qdel(spawner_special)
@@ -427,7 +427,7 @@
 	var/chosen_mob
 	var/override_mob = LAZYACCESS(overrides, "which_mob")
 	var/override_swarm = LAZYACCESS(overrides, "how_many")
-	var/mob/living/simple_animal/L = override_mob
+	var/mob/living/danimal/L = override_mob
 	var/how_many = override_swarm || swarm_size
 	for(var/i in 1 to how_many)
 		if(ispath(L) && mob_types[L] >= 1)
@@ -639,7 +639,7 @@
 	nest_layer                = P.layer
 
 /datum/nest_box/Destroy(force, ...)
-	var/mob/living/simple_animal/nest_spawn_hole_guy/NSHG = GET_WEAKREF(assigned_to)
+	var/mob/living/danimal/nest_spawn_hole_guy/NSHG = GET_WEAKREF(assigned_to)
 	if(istype(NSHG))
 		NSHG.nest_seed = null
 	SSmonster_wave.unregister_nest_seed(src)
@@ -715,7 +715,7 @@
 	radius = clamp(radius + rand(-2, 2), 1, 20)
 	var/list/new_paths = list()
 	for(var/mobpath in mob_types)
-		var/mob/living/simple_animal/hostile/baddie = mobpath
+		var/mob/living/danimal/hostile/baddie = mobpath
 		if(ispath(baddie) && initial(baddie.bossmob) == TRUE)
 			new_paths[mobpath] = mob_types[mobpath] // rolled a boss, honor tht
 			continue
@@ -725,222 +725,222 @@
 		// ignore_faction = TRUE // cant guarantee they wont infight with the new guys, so lets guarantee it
 		var/list/potentials = list()
 		/// if its a robot, turn that robot into a different robot!
-		if(ispath(mobpath, /mob/living/simple_animal/hostile/eyebot))
-			potentials |= typesof(/mob/living/simple_animal/hostile/eyebot) - mobpath
+		if(ispath(mobpath, /mob/living/danimal/hostile/eyebot))
+			potentials |= typesof(/mob/living/danimal/hostile/eyebot) - mobpath
 			if(prob(50))
-				potentials |= typesof(/mob/living/simple_animal/hostile/hivebot)
-				potentials |= /mob/living/simple_animal/hostile/handy // just the root, most are rather rough
-		else if(ispath(mobpath, /mob/living/simple_animal/hostile/handy)) // somehow encapsulates a heckton of horrible bots
-			if(mobpath == /mob/living/simple_animal/hostile/handy) // base handies shouldnt mutate into anything horrifying
-				potentials |= typesof(/mob/living/simple_animal/hostile/hivebot)
-				potentials |= typesof(/mob/living/simple_animal/hostile/eyebot)
+				potentials |= typesof(/mob/living/danimal/hostile/hivebot)
+				potentials |= /mob/living/danimal/hostile/handy // just the root, most are rather rough
+		else if(ispath(mobpath, /mob/living/danimal/hostile/handy)) // somehow encapsulates a heckton of horrible bots
+			if(mobpath == /mob/living/danimal/hostile/handy) // base handies shouldnt mutate into anything horrifying
+				potentials |= typesof(/mob/living/danimal/hostile/hivebot)
+				potentials |= typesof(/mob/living/danimal/hostile/eyebot)
 				if(prob(25)) // sike, lets mutate them into something else
-					potentials |= typesof(/mob/living/simple_animal/hostile/handy)
-					potentials |= typesof(/mob/living/simple_animal/hostile/securitron)
+					potentials |= typesof(/mob/living/danimal/hostile/handy)
+					potentials |= typesof(/mob/living/danimal/hostile/securitron)
 					potentials -= mobpath
-			else if(ispath(mobpath, /mob/living/simple_animal/hostile/handy/protectron)) // protectrons
-				potentials |= typesof(/mob/living/simple_animal/hostile/handy/protectron)
+			else if(ispath(mobpath, /mob/living/danimal/hostile/handy/protectron)) // protectrons
+				potentials |= typesof(/mob/living/danimal/hostile/handy/protectron)
 				if(prob(50))
-					potentials |= typesof(/mob/living/simple_animal/hostile/hivebot)
-					potentials |= typesof(/mob/living/simple_animal/hostile/handy) // cut loose, and fancy free
+					potentials |= typesof(/mob/living/danimal/hostile/hivebot)
+					potentials |= typesof(/mob/living/danimal/hostile/handy) // cut loose, and fancy free
 				potentials -= mobpath
-			else if(ispath(mobpath, /mob/living/simple_animal/hostile/handy/assaultron)\
-				|| ispath(mobpath, /mob/living/simple_animal/hostile/handy/robobrain)\
-				|| ispath(mobpath, /mob/living/simple_animal/hostile/handy/gutsy)) // the big baddies
-				potentials |= typesof(/mob/living/simple_animal/hostile/handy) // cut loose, and fancy free
+			else if(ispath(mobpath, /mob/living/danimal/hostile/handy/assaultron)\
+				|| ispath(mobpath, /mob/living/danimal/hostile/handy/robobrain)\
+				|| ispath(mobpath, /mob/living/danimal/hostile/handy/gutsy)) // the big baddies
+				potentials |= typesof(/mob/living/danimal/hostile/handy) // cut loose, and fancy free
 				if(prob(50))
-					potentials |= typesof(/mob/living/simple_animal/hostile/securitron) // branch off to a whole other tree!
-				potentials -= /mob/living/simple_animal/hostile/handy 
+					potentials |= typesof(/mob/living/danimal/hostile/securitron) // branch off to a whole other tree!
+				potentials -= /mob/living/danimal/hostile/handy 
 				potentials -= mobpath
 			else // some other wierd hendybot
-				potentials |= typesof(/mob/living/simple_animal/hostile/handy) // cut loose, and fancy free
-				potentials |= typesof(/mob/living/simple_animal/hostile/securitron) // branch off to a whole other tree!
+				potentials |= typesof(/mob/living/danimal/hostile/handy) // cut loose, and fancy free
+				potentials |= typesof(/mob/living/danimal/hostile/securitron) // branch off to a whole other tree!
 				potentials -= mobpath
-		else if(ispath(mobpath, /mob/living/simple_animal/hostile/securitron)) // they're all just outright better than handies
-			potentials |= typesof(/mob/living/simple_animal/hostile/handy) // cut loose, and fancy free
-			potentials |= typesof(/mob/living/simple_animal/hostile/securitron) // branch off to a whole other tree!
+		else if(ispath(mobpath, /mob/living/danimal/hostile/securitron)) // they're all just outright better than handies
+			potentials |= typesof(/mob/living/danimal/hostile/handy) // cut loose, and fancy free
+			potentials |= typesof(/mob/living/danimal/hostile/securitron) // branch off to a whole other tree!
 			potentials -= mobpath
-		else if(ispath(mobpath, /mob/living/simple_animal/hostile/hivebot))
-			potentials |= typesof(/mob/living/simple_animal/hostile/hivebot)
+		else if(ispath(mobpath, /mob/living/danimal/hostile/hivebot))
+			potentials |= typesof(/mob/living/danimal/hostile/hivebot)
 			potentials -= mobpath
 			if(prob(50))
-				potentials |= typesof(/mob/living/simple_animal/hostile/eyebot)
+				potentials |= typesof(/mob/living/danimal/hostile/eyebot)
 		/// return of the raiders
-		else if(ispath(mobpath, /mob/living/simple_animal/hostile/raider))
-			potentials |= typesof(/mob/living/simple_animal/hostile/raider)
-			potentials -= typesof(/mob/living/simple_animal/hostile/raider/ranged/boss/mangomatt) // remove unique bosses
-			potentials -= typesof(/mob/living/simple_animal/hostile/raider/ranged/boss/blueberrybates) // remove unique bosses
+		else if(ispath(mobpath, /mob/living/danimal/hostile/raider))
+			potentials |= typesof(/mob/living/danimal/hostile/raider)
+			potentials -= typesof(/mob/living/danimal/hostile/raider/ranged/boss/mangomatt) // remove unique bosses
+			potentials -= typesof(/mob/living/danimal/hostile/raider/ranged/boss/blueberrybates) // remove unique bosses
 			if(prob(50))
-				potentials |= typesof(/mob/living/simple_animal/hostile/renegade)
+				potentials |= typesof(/mob/living/danimal/hostile/renegade)
 				if(prob(80))
-					potentials -= typesof(/mob/living/simple_animal/hostile/renegade/meister)
-					potentials -= typesof(/mob/living/simple_animal/hostile/renegade/traitor)
+					potentials -= typesof(/mob/living/danimal/hostile/renegade/meister)
+					potentials -= typesof(/mob/living/danimal/hostile/renegade/traitor)
 			if(prob(10))
-				potentials |= typesof(/mob/living/simple_animal/hostile/skeleton) // SP00KY SCARY SKELETONS
+				potentials |= typesof(/mob/living/danimal/hostile/skeleton) // SP00KY SCARY SKELETONS
 			if(prob(25))
-				potentials |= typesof(/mob/living/simple_animal/hostile/gorilla)
+				potentials |= typesof(/mob/living/danimal/hostile/gorilla)
 			potentials -= mobpath
 		/// release the renegades
-		else if(ispath(mobpath, /mob/living/simple_animal/hostile/renegade))
-			potentials |= typesof(/mob/living/simple_animal/hostile/renegade)
+		else if(ispath(mobpath, /mob/living/danimal/hostile/renegade))
+			potentials |= typesof(/mob/living/danimal/hostile/renegade)
 			if(prob(80))
-				potentials -= typesof(/mob/living/simple_animal/hostile/renegade/meister)
-				potentials -= typesof(/mob/living/simple_animal/hostile/renegade/traitor)
-				potentials -= typesof(/mob/living/simple_animal/hostile/renegade/syndicate/mecha_pilot)
+				potentials -= typesof(/mob/living/danimal/hostile/renegade/meister)
+				potentials -= typesof(/mob/living/danimal/hostile/renegade/traitor)
+				potentials -= typesof(/mob/living/danimal/hostile/renegade/syndicate/mecha_pilot)
 			if(prob(25))
-				potentials |= typesof(/mob/living/simple_animal/hostile/raider)
+				potentials |= typesof(/mob/living/danimal/hostile/raider)
 			if(prob(10))
-				potentials |= typesof(/mob/living/simple_animal/hostile/skeleton) // SP00KY SCARY SKELETONS
+				potentials |= typesof(/mob/living/danimal/hostile/skeleton) // SP00KY SCARY SKELETONS
 			if(prob(25))
-				potentials |= typesof(/mob/living/simple_animal/hostile/aethergiest)
+				potentials |= typesof(/mob/living/danimal/hostile/aethergiest)
 			potentials -= mobpath
 		/// shuffle the ghouls
-		else if(ispath(mobpath, /mob/living/simple_animal/hostile/ghoul))
-			potentials |= typesof(/mob/living/simple_animal/hostile/skeleton)
-			potentials |= typesof(/mob/living/simple_animal/hostile/ghoul)
+		else if(ispath(mobpath, /mob/living/danimal/hostile/ghoul))
+			potentials |= typesof(/mob/living/danimal/hostile/skeleton)
+			potentials |= typesof(/mob/living/danimal/hostile/ghoul)
 			if(prob(80))
-				potentials -= typesof(/mob/living/simple_animal/hostile/ghoul/legendary)
+				potentials -= typesof(/mob/living/danimal/hostile/ghoul/legendary)
 			// if(prob(95))
-			// 	potentials -= typesof(/mob/living/simple_animal/hostile/ghoul/wyomingghost)
+			// 	potentials -= typesof(/mob/living/danimal/hostile/ghoul/wyomingghost)
 		/// the bugs are back in town
-		else if(ispath(mobpath, /mob/living/simple_animal/hostile/giantant)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/pillbug)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/fireant)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/radscorpion)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/poison/giant_spider)\
+		else if(ispath(mobpath, /mob/living/danimal/hostile/giantant)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/pillbug)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/fireant)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/radscorpion)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/poison/giant_spider)\
 			|| prob(15))
-			if(ispath(mobpath, /mob/living/simple_animal/hostile/pillbug) && prob(80))
-				potentials |= typesof(/mob/living/simple_animal/hostile/pillbug)
-				potentials -= /mob/living/simple_animal/hostile/pillbug
+			if(ispath(mobpath, /mob/living/danimal/hostile/pillbug) && prob(80))
+				potentials |= typesof(/mob/living/danimal/hostile/pillbug)
+				potentials -= /mob/living/danimal/hostile/pillbug
 			else
-				potentials |= typesof(/mob/living/simple_animal/hostile/fireant)
-				potentials |= typesof(/mob/living/simple_animal/hostile/radscorpion)
-				potentials |= typesof(/mob/living/simple_animal/hostile/poison/giant_spider)
-				potentials |= typesof(/mob/living/simple_animal/hostile/giantant)
-				potentials |= typesof(/mob/living/simple_animal/hostile/pillbug)
+				potentials |= typesof(/mob/living/danimal/hostile/fireant)
+				potentials |= typesof(/mob/living/danimal/hostile/radscorpion)
+				potentials |= typesof(/mob/living/danimal/hostile/poison/giant_spider)
+				potentials |= typesof(/mob/living/danimal/hostile/giantant)
+				potentials |= typesof(/mob/living/danimal/hostile/pillbug)
 			potentials -= mobpath
 		/// larger animals 
-		else if(ispath(mobpath, /mob/living/simple_animal/hostile/gorilla)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/bear)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/wolf)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/alligator)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/mirelurk)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/aethergiest)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/hellpig)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/texas_rattler)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/stalker)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/jungle/mega_arachnid)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/dinosaur)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/kangaroo)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/bloodbird)\
+		else if(ispath(mobpath, /mob/living/danimal/hostile/gorilla)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/bear)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/wolf)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/alligator)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/mirelurk)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/aethergiest)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/hellpig)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/texas_rattler)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/stalker)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/jungle/mega_arachnid)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/dinosaur)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/kangaroo)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/bloodbird)\
 			|| prob(15))
-			potentials |= typesof(/mob/living/simple_animal/hostile/gorilla)
-			potentials |= typesof(/mob/living/simple_animal/hostile/bear)
-			potentials |= typesof(/mob/living/simple_animal/hostile/wolf)
-			potentials |= typesof(/mob/living/simple_animal/hostile/alligator)
-			potentials |= typesof(/mob/living/simple_animal/hostile/mirelurk)
-			if((ispath(mobpath, /mob/living/simple_animal/hostile/aethergiest) && prob(50)) || prob(50))
-				potentials |= typesof(/mob/living/simple_animal/hostile/aethergiest)
+			potentials |= typesof(/mob/living/danimal/hostile/gorilla)
+			potentials |= typesof(/mob/living/danimal/hostile/bear)
+			potentials |= typesof(/mob/living/danimal/hostile/wolf)
+			potentials |= typesof(/mob/living/danimal/hostile/alligator)
+			potentials |= typesof(/mob/living/danimal/hostile/mirelurk)
+			if((ispath(mobpath, /mob/living/danimal/hostile/aethergiest) && prob(50)) || prob(50))
+				potentials |= typesof(/mob/living/danimal/hostile/aethergiest)
 				if(prob(80))
-					potentials -= typesof(/mob/living/simple_animal/hostile/aethergiest/power_armor)
-					potentials -= typesof(/mob/living/simple_animal/hostile/aethergiest/legendary)
-			if((ispath(mobpath, /mob/living/simple_animal/hostile/hellpig) && prob(50)) || prob(50))
-				potentials |= typesof(/mob/living/simple_animal/hostile/hellpig)
-			if(ispath(mobpath, /mob/living/simple_animal/hostile/texas_rattler) || prob(50))
-				potentials |= typesof(/mob/living/simple_animal/hostile/texas_rattler)
-			potentials |= typesof(/mob/living/simple_animal/hostile/stalker)
-			potentials |= typesof(/mob/living/simple_animal/hostile/jungle/mega_arachnid)
-			potentials |= typesof(/mob/living/simple_animal/hostile/dinosaur)
-			potentials |= typesof(/mob/living/simple_animal/hostile/kangaroo)
-			potentials |= typesof(/mob/living/simple_animal/hostile/bloodbird)
+					potentials -= typesof(/mob/living/danimal/hostile/aethergiest/power_armor)
+					potentials -= typesof(/mob/living/danimal/hostile/aethergiest/legendary)
+			if((ispath(mobpath, /mob/living/danimal/hostile/hellpig) && prob(50)) || prob(50))
+				potentials |= typesof(/mob/living/danimal/hostile/hellpig)
+			if(ispath(mobpath, /mob/living/danimal/hostile/texas_rattler) || prob(50))
+				potentials |= typesof(/mob/living/danimal/hostile/texas_rattler)
+			potentials |= typesof(/mob/living/danimal/hostile/stalker)
+			potentials |= typesof(/mob/living/danimal/hostile/jungle/mega_arachnid)
+			potentials |= typesof(/mob/living/danimal/hostile/dinosaur)
+			potentials |= typesof(/mob/living/danimal/hostile/kangaroo)
+			potentials |= typesof(/mob/living/danimal/hostile/bloodbird)
 			if(prob(1))
-				potentials |= typesof(/mob/living/simple_animal/hostile/gelcube)
+				potentials |= typesof(/mob/living/danimal/hostile/gelcube)
 			potentials -= mobpath
 		/// skeleton clause
-		else if(ispath(mobpath, /mob/living/simple_animal/hostile/skeleton))
-			potentials |= typesof(/mob/living/simple_animal/hostile/ghoul)
+		else if(ispath(mobpath, /mob/living/danimal/hostile/skeleton))
+			potentials |= typesof(/mob/living/danimal/hostile/ghoul)
 			if(prob(50))
-				potentials |= typesof(/mob/living/simple_animal/hostile/raider)
+				potentials |= typesof(/mob/living/danimal/hostile/raider)
 				if(prob(50))
-					potentials |= typesof(/mob/living/simple_animal/hostile/renegade)
+					potentials |= typesof(/mob/living/danimal/hostile/renegade)
 					if(prob(50))
-						potentials -= typesof(/mob/living/simple_animal/hostile/renegade/meister)
-						potentials -= typesof(/mob/living/simple_animal/hostile/renegade/traitor)
-						potentials -= typesof(/mob/living/simple_animal/hostile/renegade/syndicate/mecha_pilot)
+						potentials -= typesof(/mob/living/danimal/hostile/renegade/meister)
+						potentials -= typesof(/mob/living/danimal/hostile/renegade/traitor)
+						potentials -= typesof(/mob/living/danimal/hostile/renegade/syndicate/mecha_pilot)
 			potentials -= mobpath
-			potentials -= typesof(/mob/living/simple_animal/hostile/ghoul/legendary)
-			// potentials -= typesof(/mob/living/simple_animal/hostile/ghoul/wyomingghost)
-			potentials -= typesof(/mob/living/simple_animal/hostile/raider/ranged/boss)
+			potentials -= typesof(/mob/living/danimal/hostile/ghoul/legendary)
+			// potentials -= typesof(/mob/living/danimal/hostile/ghoul/wyomingghost)
+			potentials -= typesof(/mob/living/danimal/hostile/raider/ranged/boss)
 		/// the rest of the animals
-		else if(ispath(mobpath, /mob/living/simple_animal/hostile/gecko)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/rat)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/molerat)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/pillbug)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/cazador)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/lizard)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/lightgeist)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/stalkeryoung)\
-			|| ispath(mobpath, /mob/living/simple_animal/hostile/carp)\
+		else if(ispath(mobpath, /mob/living/danimal/hostile/gecko)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/rat)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/molerat)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/pillbug)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/cazador)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/lizard)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/lightgeist)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/stalkeryoung)\
+			|| ispath(mobpath, /mob/living/danimal/hostile/carp)\
 			|| prob(10))
-			if(istype(mobpath, /mob/living/simple_animal/hostile/molerat) && prob(80))
-				potentials |= typesof(/mob/living/simple_animal/hostile/molerat)
-				potentials -= /mob/living/simple_animal/hostile/molerat
+			if(istype(mobpath, /mob/living/danimal/hostile/molerat) && prob(80))
+				potentials |= typesof(/mob/living/danimal/hostile/molerat)
+				potentials -= /mob/living/danimal/hostile/molerat
 			else			
-				potentials |= typesof(/mob/living/simple_animal/hostile/gecko)
-				potentials -= typesof(/mob/living/simple_animal/hostile/gecko/debug)
+				potentials |= typesof(/mob/living/danimal/hostile/gecko)
+				potentials -= typesof(/mob/living/danimal/hostile/gecko/debug)
 				if(prob(30))
-					potentials -= typesof(/mob/living/simple_animal/hostile/gecko/tribal/shaman)
+					potentials -= typesof(/mob/living/danimal/hostile/gecko/tribal/shaman)
 				if(prob(90))
-					potentials -= typesof(/mob/living/simple_animal/hostile/gecko/tribal/head_shaman)
+					potentials -= typesof(/mob/living/danimal/hostile/gecko/tribal/head_shaman)
 				if(prob(30))
-					potentials -= typesof(/mob/living/simple_animal/hostile/gecko/tribal/chieftain)
-				potentials |= typesof(/mob/living/simple_animal/hostile/rat)
-				potentials |= typesof(/mob/living/simple_animal/hostile/molerat)
-				potentials |= typesof(/mob/living/simple_animal/hostile/pillbug)
-				potentials |= typesof(/mob/living/simple_animal/hostile/carp)
-				potentials -= typesof(/mob/living/simple_animal/hostile/carp/ranged) // no more literal deathray fish
-				potentials |= typesof(/mob/living/simple_animal/hostile/cazador)
-				potentials |= typesof(/mob/living/simple_animal/hostile/stalkeryoung)
-				potentials |= typesof(/mob/living/simple_animal/hostile/lizard)
-				potentials |= typesof(/mob/living/simple_animal/hostile/lightgeist)
+					potentials -= typesof(/mob/living/danimal/hostile/gecko/tribal/chieftain)
+				potentials |= typesof(/mob/living/danimal/hostile/rat)
+				potentials |= typesof(/mob/living/danimal/hostile/molerat)
+				potentials |= typesof(/mob/living/danimal/hostile/pillbug)
+				potentials |= typesof(/mob/living/danimal/hostile/carp)
+				potentials -= typesof(/mob/living/danimal/hostile/carp/ranged) // no more literal deathray fish
+				potentials |= typesof(/mob/living/danimal/hostile/cazador)
+				potentials |= typesof(/mob/living/danimal/hostile/stalkeryoung)
+				potentials |= typesof(/mob/living/danimal/hostile/lizard)
+				potentials |= typesof(/mob/living/danimal/hostile/lightgeist)
 			potentials -= mobpath
 		/// misc wierdoes
-		else if(istype(mobpath, /mob/living/simple_animal/hostile/trog)\
-			|| istype(mobpath, /mob/living/simple_animal/hostile/centaur)\
-			|| istype(mobpath, /mob/living/simple_animal/hostile/supermutant)\
-			|| istype(mobpath, /mob/living/simple_animal/hostile/alien)\
-			|| istype(mobpath, /mob/living/simple_animal/hostile/faithless)\
-			|| istype(mobpath, /mob/living/simple_animal/hostile/gelcube)\
-			|| istype(mobpath, /mob/living/simple_animal/hostile/jungle/leaper)\
-			|| istype(mobpath, /mob/living/simple_animal/hostile/jungle/mega_arachnid)\
-			|| istype(mobpath, /mob/living/simple_animal/hostile/jungle/seedling)\
-			|| istype(mobpath, /mob/living/simple_animal/hostile/jungle/mook)\
-			|| istype(mobpath, /mob/living/simple_animal/hostile/mimic)\
-			|| istype(mobpath, /mob/living/simple_animal/hostile/shark)\
-			|| istype(mobpath, /mob/living/simple_animal/hostile/killertomato)\
+		else if(istype(mobpath, /mob/living/danimal/hostile/trog)\
+			|| istype(mobpath, /mob/living/danimal/hostile/centaur)\
+			|| istype(mobpath, /mob/living/danimal/hostile/supermutant)\
+			|| istype(mobpath, /mob/living/danimal/hostile/alien)\
+			|| istype(mobpath, /mob/living/danimal/hostile/faithless)\
+			|| istype(mobpath, /mob/living/danimal/hostile/gelcube)\
+			|| istype(mobpath, /mob/living/danimal/hostile/jungle/leaper)\
+			|| istype(mobpath, /mob/living/danimal/hostile/jungle/mega_arachnid)\
+			|| istype(mobpath, /mob/living/danimal/hostile/jungle/seedling)\
+			|| istype(mobpath, /mob/living/danimal/hostile/jungle/mook)\
+			|| istype(mobpath, /mob/living/danimal/hostile/mimic)\
+			|| istype(mobpath, /mob/living/danimal/hostile/shark)\
+			|| istype(mobpath, /mob/living/danimal/hostile/killertomato)\
 			|| prob(15))
-			potentials |= typesof(/mob/living/simple_animal/hostile/trog)
-			potentials |= typesof(/mob/living/simple_animal/hostile/centaur)
-			potentials |= typesof(/mob/living/simple_animal/hostile/supermutant)
+			potentials |= typesof(/mob/living/danimal/hostile/trog)
+			potentials |= typesof(/mob/living/danimal/hostile/centaur)
+			potentials |= typesof(/mob/living/danimal/hostile/supermutant)
 			if(prob(90))
-				potentials |= typesof(/mob/living/simple_animal/hostile/supermutant/legendary)
+				potentials |= typesof(/mob/living/danimal/hostile/supermutant/legendary)
 			if(prob(75))
-				potentials |= typesof(/mob/living/simple_animal/hostile/supermutant/nightkin)
-			potentials |= typesof(/mob/living/simple_animal/hostile/alien)
+				potentials |= typesof(/mob/living/danimal/hostile/supermutant/nightkin)
+			potentials |= typesof(/mob/living/danimal/hostile/alien)
 			if(prob(90))
-				potentials |= typesof(/mob/living/simple_animal/hostile/alien/queen)
-			potentials |= typesof(/mob/living/simple_animal/hostile/faithless)
-			potentials |= typesof(/mob/living/simple_animal/hostile/gelcube)
-			potentials |= typesof(/mob/living/simple_animal/hostile/jungle/leaper)
-			potentials |= typesof(/mob/living/simple_animal/hostile/jungle/mega_arachnid)
-			potentials |= typesof(/mob/living/simple_animal/hostile/jungle/seedling)
-			potentials |= typesof(/mob/living/simple_animal/hostile/jungle/mook)
-			potentials |= typesof(/mob/living/simple_animal/hostile/mimic)
-			potentials |= typesof(/mob/living/simple_animal/hostile/shark)
-			potentials |= typesof(/mob/living/simple_animal/hostile/killertomato)
+				potentials |= typesof(/mob/living/danimal/hostile/alien/queen)
+			potentials |= typesof(/mob/living/danimal/hostile/faithless)
+			potentials |= typesof(/mob/living/danimal/hostile/gelcube)
+			potentials |= typesof(/mob/living/danimal/hostile/jungle/leaper)
+			potentials |= typesof(/mob/living/danimal/hostile/jungle/mega_arachnid)
+			potentials |= typesof(/mob/living/danimal/hostile/jungle/seedling)
+			potentials |= typesof(/mob/living/danimal/hostile/jungle/mook)
+			potentials |= typesof(/mob/living/danimal/hostile/mimic)
+			potentials |= typesof(/mob/living/danimal/hostile/shark)
+			potentials |= typesof(/mob/living/danimal/hostile/killertomato)
 			potentials -= mobpath
 		if(LAZYLEN(potentials))
-			var/mob/living/simple_animal/my_choose = pick(potentials)
+			var/mob/living/danimal/my_choose = pick(potentials)
 			new_paths[pick(potentials)] = (ispath(my_choose) && initial(my_choose.bossmob)) ? 1 : clamp(mob_types[mobpath] + rand(-1, -2), 1, 100)
 			continue
 		new_paths[mobpath] = clamp(mob_types[mobpath] + rand(-1, -2), 1, 100)
@@ -948,10 +948,10 @@
 	nest_name = "Class \Roman[generation] ex-vivo delivery chamber"
 	nest_desc = "A cool hole in the ground full of cool things. Stick your hand in and see! (Warning: Cool things are actually baddies)"
 	if(prob(2))
-		new_paths[/mob/living/simple_animal/hostile/amusing_duck] = 3 // quaCK
+		new_paths[/mob/living/danimal/hostile/amusing_duck] = 3 // quaCK
 		nest_desc += " Disclaimer: Lay egg is true."
 	if(prob(2))
-		new_paths[/mob/living/simple_animal/hostile/goose] = 15 // cool
+		new_paths[/mob/living/danimal/hostile/goose] = 15 // cool
 		nest_desc += " Also there's a lot of angry honking in there. Weird."
 		swarm_size += 1
 	mob_types = new_paths.Copy()
@@ -1043,7 +1043,7 @@
 	if(!istype(myspawner.parent))
 		return
 	var/turf/putemhere = get_turf(myspawner.parent)
-	var/mob/living/simple_animal/hostile/cool_mob = new mob_type(putemhere)
+	var/mob/living/danimal/hostile/cool_mob = new mob_type(putemhere)
 	if(cool_mob)
 		cool_mob.name = name
 		cool_mob.desc = desc

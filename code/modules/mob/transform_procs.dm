@@ -450,18 +450,18 @@
 	for(var/t in bodyparts)
 		qdel(t)
 
-	var/mob/living/simple_animal/slime/new_slime
+	var/mob/living/danimal/slime/new_slime
 	if(reproduce)
 		var/number = pick(14;2,3,4)	//reproduce (has a small chance of producing 3 or 4 offspring)
 		var/list/babies = list()
 		for(var/i=1,i<=number,i++)
-			var/mob/living/simple_animal/slime/M = new/mob/living/simple_animal/slime(loc)
+			var/mob/living/danimal/slime/M = new/mob/living/danimal/slime(loc)
 			M.set_nutrition(round(nutrition/number))
 			step_away(M,src)
 			babies += M
 		new_slime = pick(babies)
 	else
-		new_slime = new /mob/living/simple_animal/slime(loc)
+		new_slime = new /mob/living/danimal/slime(loc)
 	new_slime.a_intent = INTENT_HARM
 	if(mind && mind_transfer)
 		mind.transfer_to(new_slime)
@@ -495,7 +495,7 @@
 	for(var/t in bodyparts)	//this really should not be necessary
 		qdel(t)
 
-	var/mob/living/simple_animal/pet/dog/corgi/new_corgi = new /mob/living/simple_animal/pet/dog/corgi (loc)
+	var/mob/living/danimal/pet/dog/corgi/new_corgi = new /mob/living/danimal/pet/dog/corgi (loc)
 	new_corgi.a_intent = INTENT_HARM
 	if(mind && mind_transfer)
 		mind.transfer_to(new_corgi)
@@ -522,7 +522,7 @@
 	Paralyze(INFINITY)
 	icon = null
 	invisibility = INVISIBILITY_MAXIMUM
-	var/mob/living/simple_animal/hostile/gorilla/new_gorilla = new (get_turf(src))
+	var/mob/living/danimal/hostile/gorilla/new_gorilla = new (get_turf(src))
 	new_gorilla.a_intent = INTENT_HARM
 	if(mind && mind_transfer)
 		mind.transfer_to(new_gorilla)
@@ -534,7 +534,7 @@
 
 /mob/living/carbon/human/Animalize(mind_transfer = TRUE)
 
-	var/list/mobtypes = typesof(/mob/living/simple_animal)
+	var/list/mobtypes = typesof(/mob/living/danimal)
 	var/mobpath = input("Which type of mob should [src] turn into?", "Choose a type") as null|anything in mobtypes
 	if(!mobpath)
 		return
@@ -569,7 +569,7 @@
 
 /mob/proc/Animalize(mind_transfer = TRUE)
 
-	var/list/mobtypes = typesof(/mob/living/simple_animal)
+	var/list/mobtypes = typesof(/mob/living/danimal)
 	var/mobpath = input("Which type of mob should [src] turn into?", "Choose a type") as null|anything in mobtypes
 	if(!mobpath)
 		return
@@ -600,29 +600,29 @@
 	if(!MP)
 		return 0	//Sanity, this should never happen.
 
-	if(ispath(MP, /mob/living/simple_animal/hostile/construct))
+	if(ispath(MP, /mob/living/danimal/hostile/construct))
 		return 0 //Verbs do not appear for players.
 
 //Good mobs!
-	if(ispath(MP, /mob/living/simple_animal/pet/cat))
+	if(ispath(MP, /mob/living/danimal/pet/cat))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/pet/dog/corgi))
+	if(ispath(MP, /mob/living/danimal/pet/dog/corgi))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/crab))
+	if(ispath(MP, /mob/living/danimal/crab))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/hostile/carp))
+	if(ispath(MP, /mob/living/danimal/hostile/carp))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/hostile/mushroom))
+	if(ispath(MP, /mob/living/danimal/hostile/mushroom))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/shade))
+	if(ispath(MP, /mob/living/danimal/shade))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/hostile/killertomato))
+	if(ispath(MP, /mob/living/danimal/hostile/killertomato))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/mouse))
+	if(ispath(MP, /mob/living/danimal/mouse))
 		return 1 //It is impossible to pull up the player panel for mice (Fixed! - Nodrak)
-	if(ispath(MP, /mob/living/simple_animal/hostile/bear))
+	if(ispath(MP, /mob/living/danimal/hostile/bear))
 		return 1 //Bears will auto-attack mobs, even if they're player controlled (Fixed! - Nodrak)
-	if(ispath(MP, /mob/living/simple_animal/parrot))
+	if(ispath(MP, /mob/living/danimal/parrot))
 		return 1 //Parrots are no longer unfinished! -Nodrak
 
 	//Not in here? Must be untested!
@@ -632,9 +632,9 @@
 
 /mob/living/proc/turn_into_pickle()
 	//if they're already a pickle, turn them back instead
-	if(istype(src, /mob/living/simple_animal/pickle))
+	if(istype(src, /mob/living/danimal/pickle))
 		//turn them back from being a pickle, but release them alive
-		var/mob/living/simple_animal/pickle/existing_pickle = src
+		var/mob/living/danimal/pickle/existing_pickle = src
 		if(existing_pickle.original_body)
 			existing_pickle.original_body.forceMove(get_turf(src))
 			if(mind)
@@ -642,7 +642,7 @@
 			qdel(src)
 	else
 		//make a new pickle on the tile and move their mind into it if possible
-		var/mob/living/simple_animal/pickle/new_pickle = new /mob/living/simple_animal/pickle(get_turf(src))
+		var/mob/living/danimal/pickle/new_pickle = new /mob/living/danimal/pickle(get_turf(src))
 		new_pickle.original_body = src
 		if(mind)
 			mind.transfer_to(new_pickle)

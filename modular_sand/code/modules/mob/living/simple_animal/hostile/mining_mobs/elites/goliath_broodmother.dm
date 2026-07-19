@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/asteroid/elite/broodmother/ComponentInitialize()
+/mob/living/danimal/hostile/asteroid/elite/broodmother/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("punches through the broodmother's womb, ripping out a little goliath which is promptly shoved on their mouth!", "rips off the broodmother's tentacles by hand, then knees their head until it caves in!"), \

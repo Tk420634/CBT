@@ -1,5 +1,5 @@
 //A fragile mob that becomes temporarily invincible and large to attack
-/mob/living/simple_animal/hostile/asteroid/fugu
+/mob/living/danimal/hostile/asteroid/fugu
 	name = "wumborian fugu"
 	desc = "The wumborian fugu rapidly increases its body mass in order to ward off its prey. Great care should be taken to avoid it while it's in this state as it is nearly invincible, but it cannot maintain its form forever."
 	icon = 'icons/mob/lavaland/64x64megafauna.dmi'
@@ -19,7 +19,6 @@
 	maxHealth = 50
 	health = 50
 	pixel_x = -16
-	harm_intent_damage = 5
 	obj_damage = 0
 	melee_damage_lower = 0
 	melee_damage_upper = 0
@@ -36,16 +35,16 @@
 	var/datum/action/innate/fugu/expand/E
 	loot = list(/obj/item/fugu_gland{layer = ABOVE_MOB_LAYER})
 
-/mob/living/simple_animal/hostile/asteroid/fugu/Initialize()
+/mob/living/danimal/hostile/asteroid/fugu/Initialize()
 	. = ..()
 	E = new
 	E.Grant(src)
 
-/mob/living/simple_animal/hostile/asteroid/fugu/Destroy()
+/mob/living/danimal/hostile/asteroid/fugu/Destroy()
 	QDEL_NULL(E)
 	return ..()
 
-/mob/living/simple_animal/hostile/asteroid/fugu/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/asteroid/fugu/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if(!wumbo)
@@ -53,12 +52,12 @@
 	if(get_target() && AIStatus == AI_ON)
 		E.Activate()
 
-/mob/living/simple_animal/hostile/asteroid/fugu/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/danimal/hostile/asteroid/fugu/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	if(!forced && wumbo)
 		return FALSE
 	. = ..()
 
-/mob/living/simple_animal/hostile/asteroid/fugu/Aggro()
+/mob/living/danimal/hostile/asteroid/fugu/Aggro()
 	..()
 	E.Activate()
 
@@ -71,7 +70,7 @@
 	button_icon_state = "expand"
 
 /datum/action/innate/fugu/expand/Activate()
-	var/mob/living/simple_animal/hostile/asteroid/fugu/F = owner
+	var/mob/living/danimal/hostile/asteroid/fugu/F = owner
 	if(F.wumbo)
 		to_chat(F, span_notice("YOU'RE ALREADY WUMBO!"))
 		return
@@ -86,7 +85,6 @@
 	F.obj_damage = 60
 	F.melee_damage_lower = 15
 	F.melee_damage_upper = 20
-	F.harm_intent_damage = 0
 	F.throw_message = "is absorbed by the girth of the"
 	F.retreat_distance = null
 	F.minimum_distance = 1
@@ -94,9 +92,9 @@
 	F.environment_smash = ENVIRONMENT_SMASH_WALLS
 	F.mob_size = MOB_SIZE_LARGE
 	F.speed = 1
-	addtimer(CALLBACK(F, /mob/living/simple_animal/hostile/asteroid/fugu/proc/Deflate), 100)
+	addtimer(CALLBACK(F, /mob/living/danimal/hostile/asteroid/fugu/proc/Deflate), 100)
 
-/mob/living/simple_animal/hostile/asteroid/fugu/proc/Deflate()
+/mob/living/danimal/hostile/asteroid/fugu/proc/Deflate()
 	if(wumbo)
 		walk(src, 0)
 		wumbo = 0
@@ -104,7 +102,6 @@
 		obj_damage = 0
 		melee_damage_lower = 0
 		melee_damage_upper = 0
-		harm_intent_damage = 5
 		throw_message = "is avoided by the"
 		retreat_distance = 9
 		minimum_distance = 9
@@ -114,7 +111,7 @@
 		mob_size = MOB_SIZE_SMALL
 		speed = 0
 
-/mob/living/simple_animal/hostile/asteroid/fugu/death(gibbed)
+/mob/living/danimal/hostile/asteroid/fugu/death(gibbed)
 	Deflate()
 	..(gibbed)
 
@@ -131,7 +128,7 @@
 /obj/item/fugu_gland/afterattack(atom/target, mob/user, proximity_flag)
 	. = ..()
 	if(proximity_flag && isanimal(target))
-		var/mob/living/simple_animal/A = target
+		var/mob/living/danimal/A = target
 		if(A.buffed || (A.type in banned_mobs) || A.stat)
 			to_chat(user, span_warning("Something's interfering with [src]'s effects. It's no use."))
 			return

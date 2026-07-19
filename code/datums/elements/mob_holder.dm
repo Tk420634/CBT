@@ -39,7 +39,7 @@
 // 	if(!user.Adjacent(source) || user.incapacitated(allow_crit = TRUE))
 // 		return FALSE
 // 	if(isanimal(user))
-// 		var/mob/living/simple_animal/S = user
+// 		var/mob/living/danimal/S = user
 // 		if(!S.dextrous)
 // 			to_chat(user, span_warning("You aren't dextrous enough to do that!"))
 // 			return FALSE

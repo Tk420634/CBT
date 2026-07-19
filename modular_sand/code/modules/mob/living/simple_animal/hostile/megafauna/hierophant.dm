@@ -1,8 +1,8 @@
-/mob/living/simple_animal/hostile/megafauna/hierophant
+/mob/living/danimal/hostile/megafauna/hierophant
 	loot = list(/obj/item/hierophant_club, /obj/item/borg/upgrade/modkit/wall)
 	crusher_loot = list(/obj/item/hierophant_club, /obj/item/borg/upgrade/modkit/wall)
 
-/mob/living/simple_animal/hostile/megafauna/hierophant/ComponentInitialize()
+/mob/living/danimal/hostile/megafauna/hierophant/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("grabs the floating club by the hilt, and violently smashes it onto the ground, killing it!", "jumps onto the hierophant and rips off their beacon with one hand as it crackles and explodes!"), \

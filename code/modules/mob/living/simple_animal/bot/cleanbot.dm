@@ -1,5 +1,5 @@
 //Cleanbot
-/mob/living/simple_animal/bot/cleanbot
+/mob/living/danimal/bot/cleanbot
 	name = "\improper Cleanbot"
 	desc = "A little cleaning robot, he looks so excited!"
 	icon = 'icons/mob/aibots.dmi'
@@ -53,7 +53,7 @@
 	var/list/prefixes
 	var/list/suffixes
 
-/mob/living/simple_animal/bot/cleanbot/proc/deputize(obj/item/W, mob/user)
+/mob/living/danimal/bot/cleanbot/proc/deputize(obj/item/W, mob/user)
 	if(in_range(src, user))
 		to_chat(user, span_notice("You attach \the [W] to \the [src]."))
 		user.transferItemToLoc(W, src)
@@ -63,7 +63,7 @@
 			weapon.force = weapon.force / 2
 		add_overlay(image(icon=weapon.lefthand_file,icon_state=weapon.inhand_icon_state))
 
-/mob/living/simple_animal/bot/cleanbot/proc/update_titles()
+/mob/living/danimal/bot/cleanbot/proc/update_titles()
 	var/working_title = ""
 
 	for(var/pref in prefixes)
@@ -84,12 +84,12 @@
 
 	name = working_title
 
-/mob/living/simple_animal/bot/cleanbot/examine(mob/user)
+/mob/living/danimal/bot/cleanbot/examine(mob/user)
 	. = ..()
 	if(weapon)
 		. += " <span class='warning'>Is that \a [weapon] taped to it...?</span>"
 
-/mob/living/simple_animal/bot/cleanbot/Initialize()
+/mob/living/danimal/bot/cleanbot/Initialize()
 	. = ..()
 	chosen_name = name
 	get_targets()
@@ -104,24 +104,24 @@
 	prefixes = list(command, security, engineering)
 	suffixes = list(research, medical, legal)
 
-/mob/living/simple_animal/bot/cleanbot/Destroy()
+/mob/living/danimal/bot/cleanbot/Destroy()
 	if(weapon)
 		var/atom/Tsec = drop_location()
 		weapon.force = weapon_orig_force
 		drop_part(weapon, Tsec)
 	return ..()
 
-/mob/living/simple_animal/bot/cleanbot/turn_on()
+/mob/living/danimal/bot/cleanbot/turn_on()
 	..()
 	icon_state = "cleanbot[on]"
 	bot_core.updateUsrDialog()
 
-/mob/living/simple_animal/bot/cleanbot/turn_off()
+/mob/living/danimal/bot/cleanbot/turn_off()
 	..()
 	icon_state = "cleanbot[on]"
 	bot_core.updateUsrDialog()
 
-/mob/living/simple_animal/bot/cleanbot/bot_reset()
+/mob/living/danimal/bot/cleanbot/bot_reset()
 	..()
 	if(weapon && (emagged == 2))
 		weapon.force = weapon_orig_force
@@ -129,12 +129,12 @@
 	target = null
 	oldloc = null
 
-/mob/living/simple_animal/bot/cleanbot/set_custom_texts()
+/mob/living/danimal/bot/cleanbot/set_custom_texts()
 	text_hack = "You corrupt [name]'s cleaning software."
 	text_dehack = "[name]'s software has been reset!"
 	text_dehack_fail = "[name] does not seem to respond to your repair code!"
 
-/mob/living/simple_animal/bot/cleanbot/on_entered(atom/movable/AM)
+/mob/living/danimal/bot/cleanbot/on_entered(atom/movable/AM)
 	. = ..()
 
 	zone_selected = pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
@@ -150,7 +150,7 @@
 		INVOKE_ASYNC(weapon, TYPE_PROC_REF(/obj/item/weapon/,attack), C, src)
 		C.Knockdown(20)
 
-/mob/living/simple_animal/bot/cleanbot/attackby(obj/item/W, mob/user, params)
+/mob/living/danimal/bot/cleanbot/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/card/id)||istype(W, /obj/item/pda))
 		if(bot_core.allowed(user) && !open && !emagged)
 			locked = !locked
@@ -202,7 +202,7 @@
 	else
 		return ..()
 
-/mob/living/simple_animal/bot/cleanbot/emag_act(mob/user)
+/mob/living/danimal/bot/cleanbot/emag_act(mob/user)
 	. = ..()
 	if(emagged == 2)
 		if(weapon)
@@ -210,7 +210,7 @@
 		if(user)
 			to_chat(user, span_danger("[src] buzzes and beeps."))
 
-/mob/living/simple_animal/bot/cleanbot/process_scan(atom/A)
+/mob/living/danimal/bot/cleanbot/process_scan(atom/A)
 	if(iscarbon(A))
 		var/mob/living/carbon/C = A
 		if(C.stat != DEAD && C.lying)
@@ -222,7 +222,7 @@
 				return
 		return A
 
-/mob/living/simple_animal/bot/cleanbot/handle_automated_action()
+/mob/living/danimal/bot/cleanbot/handle_automated_action()
 	if(!..())
 		return
 
@@ -252,7 +252,7 @@
 		target = scan(/mob/living/carbon)
 
 	if(!target && pests) //Search for pests to exterminate first.
-		target = scan(/mob/living/simple_animal)
+		target = scan(/mob/living/danimal)
 
 	if(!target) //Search for decals then.
 		target = scan(/obj/effect/decal/cleanable)
@@ -303,7 +303,7 @@
 
 	oldloc = loc
 
-/mob/living/simple_animal/bot/cleanbot/proc/get_targets()
+/mob/living/danimal/bot/cleanbot/proc/get_targets()
 	target_types = list(
 		/obj/effect/decal/cleanable/vomit,
 		/obj/effect/decal/cleanable/crayon,
@@ -337,8 +337,8 @@
 		target_types += /obj/effect/decal/cleanable/oil
 
 	if(pests)
-		target_types += /mob/living/simple_animal/cockroach
-		target_types += /mob/living/simple_animal/mouse
+		target_types += /mob/living/danimal/cockroach
+		target_types += /mob/living/danimal/mouse
 
 	if(trash)
 		target_types += /obj/item/trash
@@ -346,7 +346,7 @@
 
 	target_types = typecacheof(target_types)
 
-/mob/living/simple_animal/bot/cleanbot/UnarmedAttack(atom/A, proximity, intent = a_intent, flags = NONE)
+/mob/living/danimal/bot/cleanbot/UnarmedAttack(atom/A, proximity, intent = a_intent, flags = NONE)
 	if(istype(A, /obj/effect/decal/cleanable) || istype(A, /obj/item/ammo_casing))
 		anchored = TRUE
 		icon_state = "cleanbot-c"
@@ -371,8 +371,8 @@
 		visible_message(span_danger("[src] sprays hydrofluoric acid at [A]!"))
 		playsound(src, 'sound/effects/spray2.ogg', 50, 1, -6)
 		A.acid_act(75, 10)
-	else if(istype(A, /mob/living/simple_animal/cockroach) || istype(A, /mob/living/simple_animal/mouse))
-		var/mob/living/simple_animal/M = target
+	else if(istype(A, /mob/living/danimal/cockroach) || istype(A, /mob/living/danimal/mouse))
+		var/mob/living/danimal/M = target
 		if(!M.stat)
 			visible_message(span_danger("[src] smashes [target] with its mop!"))
 			M.death()
@@ -405,7 +405,7 @@
 	else
 		..()
 
-/mob/living/simple_animal/bot/cleanbot/explode()
+/mob/living/danimal/bot/cleanbot/explode()
 	on = FALSE
 	visible_message(span_boldannounce("[src] blows apart!"))
 	var/atom/Tsec = drop_location()
@@ -424,7 +424,7 @@
 	req_one_access = list(ACCESS_JANITOR, ACCESS_ROBOTICS, ACCESS_FOLLOWER, ACCESS_SCIENCE)
 
 
-/mob/living/simple_animal/bot/cleanbot/get_controls(mob/user)
+/mob/living/danimal/bot/cleanbot/get_controls(mob/user)
 	var/dat
 	dat += hack(user)
 	dat += showpai(user)
@@ -439,7 +439,7 @@ Maintenance panel panel is [open ? "opened" : "closed"]"})
 		dat += "<BR><BR>Patrol Station: <A href='?src=[REF(src)];operation=patrol'>[auto_patrol ? "Yes" : "No"]</A>"
 	return dat
 
-/mob/living/simple_animal/bot/cleanbot/Topic(href, href_list)
+/mob/living/danimal/bot/cleanbot/Topic(href, href_list)
 	if(..())
 		return 1
 	if(href_list["operation"])

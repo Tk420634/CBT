@@ -21,7 +21,7 @@
 		C.toggle_throw_mode()
 		return TRUE
 	if(isanimal(user.mob))
-		var/mob/living/simple_animal/A = user.mob
+		var/mob/living/danimal/A = user.mob
 		A.toggle_throw_mode()
 		return TRUE
 
@@ -82,7 +82,7 @@
 		C.do_wield()
 		return TRUE
 	else if(isanimal(user.mob))
-		var/mob/living/simple_animal/A = user.mob
+		var/mob/living/danimal/A = user.mob
 		A.do_wield()
 		return TRUE
 

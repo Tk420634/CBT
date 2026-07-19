@@ -1,15 +1,15 @@
-/mob/living/simple_animal/hostile/gorilla/proc/apply_overlay(cache_index)
+/mob/living/danimal/hostile/gorilla/proc/apply_overlay(cache_index)
 	. = gorilla_overlays[cache_index]
 	if(.)
 		add_overlay(.)
 
-/mob/living/simple_animal/hostile/gorilla/proc/remove_overlay(cache_index)
+/mob/living/danimal/hostile/gorilla/proc/remove_overlay(cache_index)
 	var/I = gorilla_overlays[cache_index]
 	if(I)
 		cut_overlay(I)
 		gorilla_overlays[cache_index] = null
 
-/mob/living/simple_animal/hostile/gorilla/update_inv_hands()
+/mob/living/danimal/hostile/gorilla/update_inv_hands()
 	cut_overlays("standing_overlay")
 	remove_overlay(GORILLA_HANDS_LAYER)
 
@@ -48,6 +48,6 @@
 	add_overlay("standing_overlay")
 	return ..()
 
-/mob/living/simple_animal/hostile/gorilla/regenerate_icons()
+/mob/living/danimal/hostile/gorilla/regenerate_icons()
 	update_inv_hands()
 

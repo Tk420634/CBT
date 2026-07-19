@@ -6,7 +6,7 @@
 -Assaultrons
 */
 
-/mob/living/simple_animal/hostile/handy
+/mob/living/danimal/hostile/handy
 	bounty = 20
 	name = "mr. handy"
 	desc = "A crazed Pre-Fall household assistant robot, armed with a cutting saw."
@@ -79,7 +79,7 @@
 	pop_required_to_jump_into = MED_MOB_MIN_PLAYERS
 	desc_short = "A snooty robot with a circular saw."
 
-/mob/living/simple_animal/hostile/handy/playable
+/mob/living/danimal/hostile/handy/playable
 	armor_list = ARMOR_VALUE_ROBOT_CIVILIAN
 	maxHealth = 300
 	health = 300
@@ -90,24 +90,23 @@
 	idlesound = null
 	see_in_dark = 8
 	wander = FALSE
-	force_threshold = 10
 	anchored = FALSE
 	del_on_death = FALSE
 	dextrous = TRUE
 	possible_a_intents = list(INTENT_HELP, INTENT_HARM)
 	ranged = FALSE
 
-/mob/living/simple_animal/hostile/handy/Initialize()
+/mob/living/danimal/hostile/handy/Initialize()
 	. = ..()
 	add_overlay("eyes-[initial(icon_state)]")
 
-/mob/living/simple_animal/hostile/handy/nsb //NSB + Raider Bunker specific
+/mob/living/danimal/hostile/handy/nsb //NSB + Raider Bunker specific
 	name = "mr.handy"
 	aggroed_vision_range = 15
 	faction = list("raider")
 	obj_damage = 300
 
-/mob/living/simple_animal/hostile/handy/gutsy
+/mob/living/danimal/hostile/handy/gutsy
 	bounty = 50
 	name = "mr. gutsy"
 	desc = "A Pre-Fall combat robot based off the Mr. Handy design, armed with plasma weaponry and a deadly close-range flamer."
@@ -174,7 +173,7 @@
 	loot_drop_amount = 2
 	loot_amount_random = TRUE
 
-/mob/living/simple_animal/hostile/handy/gutsy/playable
+/mob/living/danimal/hostile/handy/gutsy/playable
 	armor_list = ARMOR_VALUE_ROBOT_MILITARY
 	maxHealth = 100
 	health = 100
@@ -187,20 +186,19 @@
 	see_in_dark = 8
 	environment_smash = 2 //can break lockers, but not walls
 	wander = FALSE
-	force_threshold = 10
 	anchored = FALSE
 	del_on_death = FALSE
 	possible_a_intents = list(INTENT_HELP, INTENT_HARM)
 	dextrous = TRUE
 	ranged = FALSE
 
-/mob/living/simple_animal/hostile/handy/gutsy/nsb //NSB + Raider Bunker specific
+/mob/living/danimal/hostile/handy/gutsy/nsb //NSB + Raider Bunker specific
 	name = "mr. gutsy"
 	aggroed_vision_range = 15
 	faction = list("raider")
 	obj_damage = 300
 
-/mob/living/simple_animal/hostile/handy/liberator
+/mob/living/danimal/hostile/handy/liberator
 	bounty = 15
 	name = "liberator"
 	desc = "A small Pre-Fall droned used by the People's Liberation Army."
@@ -245,7 +243,7 @@
 	)
 	desc_short = "A robot that shoots lasers."
 
-/mob/living/simple_animal/hostile/handy/liberator/yellow
+/mob/living/danimal/hostile/handy/liberator/yellow
 	name = "liberator"
 	desc = "A small Pre-Fall droned used by the People's Liberation Army."
 	icon_state = "liberator_y"
@@ -253,7 +251,7 @@
 	icon_living = "liberator_y"
 	icon_dead = "liberator_y_d"
 
-/mob/living/simple_animal/hostile/handy/robobrain
+/mob/living/danimal/hostile/handy/robobrain
 	bounty = 40
 	name = "robobrain"
 	desc = "A next-gen cyborg developed by General Atomic International"
@@ -296,10 +294,10 @@
 	)
 	desc_short = "A brainy robot with lasers."
 
-/mob/living/simple_animal/hostile/handy/robobrain/AttackingTarget()
+/mob/living/danimal/hostile/handy/robobrain/AttackingTarget()
 	. = ..()
 
-/mob/living/simple_animal/hostile/handy/robobrain/nsb //NSB + Raider Bunker specific
+/mob/living/danimal/hostile/handy/robobrain/nsb //NSB + Raider Bunker specific
 	name = "robobrain"
 	aggroed_vision_range = 15
 	faction = list("raider")
@@ -308,7 +306,7 @@
 	health = 300
 	maxHealth = 300
 
-/mob/living/simple_animal/hostile/handy/protectron
+/mob/living/danimal/hostile/handy/protectron
 	bounty = 38
 	name = "protectron"
 	desc = "A Pre-Fall security robot armed with deadly lasers."
@@ -405,7 +403,7 @@
 	pop_required_to_jump_into = SMALL_MOB_MIN_PLAYERS
 	desc_short = "A clunky hunk of junk with a laser."
 
-/mob/living/simple_animal/hostile/handy/protectron/playable
+/mob/living/danimal/hostile/handy/protectron/playable
 	ranged = FALSE
 	melee_damage_lower = 25
 	melee_damage_upper = 38
@@ -420,19 +418,18 @@
 	see_in_dark = 8
 	environment_smash = 1 //can break lockers, but not walls
 	wander = FALSE
-	force_threshold = 10
 	anchored = FALSE
 	del_on_death = FALSE
 	possible_a_intents = list(INTENT_HELP, INTENT_HARM)
 
-/mob/living/simple_animal/hostile/handy/protectron/nsb //NSB + Raider Bunker specific
+/mob/living/danimal/hostile/handy/protectron/nsb //NSB + Raider Bunker specific
 	name = "protectron"
 	aggroed_vision_range = 15
 	can_ghost_into = FALSE
 	faction = list("raider")
 	obj_damage = 300
 
-/mob/living/simple_animal/pet/dog/protectron //Not an actual dog
+/mob/living/danimal/pet/dog/protectron //Not an actual dog
 	name = "Trading Protectron"
 	desc = "A standard RobCo RX2 V1.16.4 \"Trade-o-Vend\", loaded with Trade protocols.<br>Looks like it was kept operational for an indefinite period of time. Its body is covered in cracks and dents of various sizes.<br>As it has been repaired countless times, it's amazing the machine is still functioning at all."
 	icon = 'icons/fallout/mobs/robots/protectrons.dmi'
@@ -484,7 +481,7 @@
 	guaranteed_butcher_results = list(/obj/effect/gibspawner/robot = 1)
 	blood_volume = 0
 
-/mob/living/simple_animal/hostile/handy/assaultron
+/mob/living/danimal/hostile/handy/assaultron
 	name = "assaultron"
 	desc = "A deadly close combat robot developed by RobCo in a vaguely feminine, yet ominous chassis."
 	icon_state = "assaultron"
@@ -515,16 +512,15 @@
 	idlesound = FALSE
 	desc_short = "A sexy robot."
 
-/mob/living/simple_animal/hostile/handy/assaultron/nsb //NSB + Raider Bunker specific.
+/mob/living/danimal/hostile/handy/assaultron/nsb //NSB + Raider Bunker specific.
 	name = "assaultron"
 	aggroed_vision_range = 15
 	faction = list("raider")
 	obj_damage = 300
 	can_ghost_into = FALSE
 
-/mob/living/simple_animal/hostile/handy/assaultron/playable
+/mob/living/danimal/hostile/handy/assaultron/playable
 	see_in_dark = 8
-	force_threshold = 15
 	wander = 0
 	anchored = FALSE
 	del_on_death = FALSE
@@ -533,14 +529,14 @@
 	deathmessage = "abruptly shuts down, falling to the ground!"
 	can_ghost_into = FALSE
 
-/mob/living/simple_animal/hostile/handy/assaultron/playable/medical
+/mob/living/danimal/hostile/handy/assaultron/playable/medical
 	name = "SA-S-E"
 	desc = "An Assaultron modified for the Medical field, SA-S-E forgoes the weaponry and deadliness of her military countarparts to save lives. Painted white with blue highlights, and a blue cross on the front of her visor, this robot comes equipped with what looks like modified medical gear. Her head has no eye-laser, instead a gently pulsing blue eye that scans people the analyze their health, a defibrilator on her back, and articulated hands to be able to use the myriad medical tools strapped to parts of her body under protective cases all show this model is meant to save lives. She's stockier than other Assaultrons due to all the added gear, and her legs seem much thicker than normal due to reinforced servos and gears."
 	icon_state = "assaultron_sase"
 	icon_dead = "assaultron_sase_dead"
 
 //Junkers
-/mob/living/simple_animal/hostile/handy/gutsy/flamer
+/mob/living/danimal/hostile/handy/gutsy/flamer
 	name = "Mr. Burnsy"
 	desc = "A modified mr. gutsy, equipped with a more precise flamer, ditching it's plasma weaponry."
 	color = "#B85C00"
@@ -549,7 +545,7 @@
 	extra_projectiles = 1
 	can_ghost_into = FALSE
 
-/mob/living/simple_animal/hostile/handy/assaultron/laser
+/mob/living/danimal/hostile/handy/assaultron/laser
 	bounty = 15
 	name = "red eye assaultron"
 	desc = "A modified assaultron. It's eye has been outfitted with a deadly laser."

@@ -447,11 +447,11 @@
 /obj/vore_belly/proc/ooc_escape(datum/source, mob/living/living_prey)
 	SIGNAL_HANDLER
 	release_specific_contents(source, living_prey, TRUE)
-		// for(var/mob/living/simple_animal/SA in range(10))
+		// for(var/mob/living/danimal/SA in range(10))
 		// 	SA.prey_excludes[src] = world.time
 
 		/* if(isanimal(B.owner))
-			var/mob/living/simple_animal/SA = B.owner
+			var/mob/living/danimal/SA = B.owner
 			SA.update_icons() */
 
 	//You're in a dogborg!

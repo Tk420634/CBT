@@ -33,11 +33,11 @@
  * 
  */
 #define MOB_MASTER \
-	var/mob/living/simple_animal/master = GET_WEAKREF(my_mob);\
+	var/mob/living/danimal/master = GET_WEAKREF(my_mob);\
 	if(!istype(master)){return}
 
 #define HOSTILE_MASTER \
-	var/mob/living/simple_animal/hostile/hosmaster = GET_WEAKREF(my_mob);\
+	var/mob/living/danimal/hostile/hosmaster = GET_WEAKREF(my_mob);\
 	if(!istype(hosmaster)){return}
 
 #define RTS_DISPOSITION_NORMAL 0
@@ -69,7 +69,7 @@
 	if(!my_mob)
 		qdel(src)
 		CRASH("rts_mob_order_handler.New() called with no mob. Whyyyyy")
-	if(!istype(my_mob, /mob/living/simple_animal))
+	if(!istype(my_mob, /mob/living/danimal))
 		qdel(src)
 		CRASH("rts_mob_order_handler can't handle non-simple_animal mobs!")
 	src.my_mob = WEAKREF(my_mob)

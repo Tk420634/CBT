@@ -1,7 +1,7 @@
-/mob/living/simple_animal/hostile/megafauna/demonic_frost_miner
+/mob/living/danimal/hostile/megafauna/demonic_frost_miner
 	deathsound = "bodyfall"
 
-/mob/living/simple_animal/hostile/megafauna/demonic_frost_miner/ComponentInitialize()
+/mob/living/danimal/hostile/megafauna/demonic_frost_miner/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("grabs the demonic miner's arm, flips their cleaving saw with the other hand, and forcefully makes them chop off their own head with it!", "grabs demonic miner by their PKA, aims it at their head and then shoots, splattering his brains out!", "rips out both of the demonic miner's arms, then kicks their limp torso on the groundd and curbstomps their head in so hard it explodes!"), \

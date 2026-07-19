@@ -1,6 +1,6 @@
 
 
-/mob/living/simple_animal/hostile/carp/eyeball
+/mob/living/danimal/hostile/carp/eyeball
 	name = "eyeball"
 	desc = "An odd looking creature, it won't stop staring..."
 	icon_state = "eyeball"
@@ -18,7 +18,6 @@
 	health = 45
 	speak_emote = list("telepathically cries")
 
-	harm_intent_damage = 8
 	obj_damage = 60
 	melee_damage_lower = 20
 	melee_damage_upper = 25

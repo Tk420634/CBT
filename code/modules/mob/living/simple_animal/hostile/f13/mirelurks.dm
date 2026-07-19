@@ -6,7 +6,7 @@
 ///////////////
 
 // MIRELURK ADULT
-/mob/living/simple_animal/hostile/mirelurk
+/mob/living/danimal/hostile/mirelurk
 	bounty = 15
 	name = "mirelurk"
 	desc = "A giant mutated crustacean, with a hardened exo-skeleton."
@@ -63,7 +63,7 @@
 	loot_amount_random = TRUE
 
 // MIRELURK HUNTER MALES
-/mob/living/simple_animal/hostile/mirelurk/hunter
+/mob/living/danimal/hostile/mirelurk/hunter
 	bounty = 18
 	name = "mirelurk hunter"
 	desc = "A giant mutated crustacean, with a hardened exoskeleton. Its appearance makes you shudder in fear. This one has giant, razor sharp claw pincers."
@@ -96,7 +96,7 @@
 	loot_amount_random = TRUE
 
 // MIRELURK BABY
-/mob/living/simple_animal/hostile/mirelurk/baby
+/mob/living/danimal/hostile/mirelurk/baby
 	bounty = 5
 	name = "mirelurk baby"
 	desc = "A neophyte mirelurk baby, mostly harmless. Adults respond to their chittering if distressed."
@@ -129,10 +129,10 @@
 	loot_amount_random = TRUE
 
 
-/mob/living/simple_animal/hostile/mirelurk/baby/Initialize()
+/mob/living/danimal/hostile/mirelurk/baby/Initialize()
 	. = ..()
 
-/mob/living/simple_animal/hostile/mirelurk/baby/Aggro()
+/mob/living/danimal/hostile/mirelurk/baby/Aggro()
 	..()
 	summon_backup(10)
 

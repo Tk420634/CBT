@@ -2,7 +2,7 @@
 	damage = 15
 	damage_type = BRUTE
 
-/mob/living/simple_animal/hostile/hivebot
+/mob/living/danimal/hostile/hivebot
 	name = "hivebot"
 	desc = "A strange robot that does not seem pleased to meet you."
 	icon = 'icons/mob/hivebot.dmi'
@@ -43,11 +43,11 @@
 		SP_DISTANT_RANGE(RIFLE_LIGHT_RANGE_DISTANT)
 	)
 
-/mob/living/simple_animal/hostile/hivebot/Initialize()
+/mob/living/danimal/hostile/hivebot/Initialize()
 	. = ..()
 	deathmessage = "[src] blows apart!"
 
-/mob/living/simple_animal/hostile/hivebot/range
+/mob/living/danimal/hostile/hivebot/range
 	name = "combat hivebot"
 	desc = "An armed robot that does not seem pleased to meet you."
 	icon_state = "ranged"
@@ -57,7 +57,7 @@
 	retreat_distance = 5
 	minimum_distance = 5
 
-/mob/living/simple_animal/hostile/hivebot/rapid
+/mob/living/danimal/hostile/hivebot/rapid
 	name = "gunner hivebot"
 	icon_state = "ranged"
 	icon_living = "ranged"
@@ -67,7 +67,7 @@
 	retreat_distance = 5
 	minimum_distance = 5
 
-/mob/living/simple_animal/hostile/hivebot/engineering
+/mob/living/danimal/hostile/hivebot/engineering
 	name = "engineering hivebot"
 	icon_state = "EngBot"
 	icon_living = "EngBot"
@@ -76,7 +76,7 @@
 	health = 75
 	maxHealth = 75
 
-/mob/living/simple_animal/hostile/hivebot/strong
+/mob/living/danimal/hostile/hivebot/strong
 	name = "elite hivebot"
 	icon_state = "strong"
 	icon_living = "strong"
@@ -86,6 +86,6 @@
 	maxHealth = 100
 	ranged = 1
 
-/mob/living/simple_animal/hostile/hivebot/death(gibbed)
+/mob/living/danimal/hostile/hivebot/death(gibbed)
 	do_sparks(3, TRUE, src)
 	..(1)

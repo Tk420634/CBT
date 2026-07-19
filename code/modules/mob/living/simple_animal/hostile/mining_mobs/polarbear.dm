@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/asteroid/polarbear
+/mob/living/danimal/hostile/asteroid/polarbear
 	name = "polar bear"
 	desc = "An aggressive animal that defends its territory with incredible power. These beasts don't run from their enemies."
 	icon = 'icons/mob/icemoon/icemoon_monsters.dmi'
@@ -31,7 +31,7 @@
 	/// Message for when the polar bear starts to attack faster
 	var/aggressive_message_said = FALSE
 
-/mob/living/simple_animal/hostile/asteroid/polarbear/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/danimal/hostile/asteroid/polarbear/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	. = ..()
 	if(health > maxHealth*0.5)
 		rapid_melee = initial(rapid_melee)
@@ -42,7 +42,7 @@
 		aggressive_message_said = TRUE
 	rapid_melee = 2
 
-/mob/living/simple_animal/hostile/asteroid/polarbear/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/asteroid/polarbear/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if(get_target())
@@ -50,7 +50,7 @@
 	adjustHealth(-maxHealth*0.025)
 	aggressive_message_said = FALSE
 
-/mob/living/simple_animal/hostile/asteroid/polarbear/death(gibbed)
+/mob/living/danimal/hostile/asteroid/polarbear/death(gibbed)
 	move_force = MOVE_FORCE_DEFAULT
 	move_resist = MOVE_RESIST_DEFAULT
 	pull_force = PULL_FORCE_DEFAULT

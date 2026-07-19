@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/cat_butcherer
+/mob/living/danimal/hostile/cat_butcherer
 	name = "Cat Surgeon"
 	desc = "A man with the quest of chasing endless feline tail."
 	icon = 'icons/mob/simple_human.dmi'
@@ -12,7 +12,6 @@
 	robust_searching = 1
 	maxHealth = 100
 	health = 100
-	harm_intent_damage = 5
 	melee_damage_lower = 15
 	melee_damage_upper = 15
 	attack_verb_continuous = "slashes at"
@@ -27,7 +26,7 @@
 	check_friendly_fire = 1
 	status_flags = CANPUSH
 
-/mob/living/simple_animal/hostile/cat_butcherer/AttackingTarget()
+/mob/living/danimal/hostile/cat_butcherer/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!. || !prob(35) || !iscarbon(my_target))

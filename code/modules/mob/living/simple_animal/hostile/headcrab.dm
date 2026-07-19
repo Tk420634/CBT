@@ -1,6 +1,6 @@
 #define EGG_INCUBATION_TIME 120
 
-/mob/living/simple_animal/hostile/headcrab
+/mob/living/danimal/hostile/headcrab
 	name = "headslug"
 	desc = "Absolutely not de-beaked or harmless. Keep away from corpses."
 	icon_state = "headcrab"
@@ -25,7 +25,7 @@
 	var/egg_lain = 0
 	gold_core_spawnable = NO_SPAWN //are you sure about this?? // CITADEL CHANGE, Yes.
 
-/mob/living/simple_animal/hostile/headcrab/proc/Infect(mob/living/carbon/victim)
+/mob/living/danimal/hostile/headcrab/proc/Infect(mob/living/carbon/victim)
 	var/obj/item/organ/body_egg/changeling_egg/egg = new(victim)
 	egg.Insert(victim)
 	if(origin)
@@ -38,7 +38,7 @@
 					span_danger("We inject our egg into [victim]'s body!"))
 	egg_lain = 1
 
-/mob/living/simple_animal/hostile/headcrab/AttackingTarget()
+/mob/living/danimal/hostile/headcrab/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!. || egg_lain || !iscarbon(my_target) || ismonkey(my_target))

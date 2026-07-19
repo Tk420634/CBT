@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/tree
+/mob/living/danimal/hostile/tree
 	name = "pine tree"
 	desc = "A pissed off tree-like alien. It seems annoyed with the festivities..."
 	icon = 'icons/obj/flora/pinetrees.dmi'
@@ -22,7 +22,6 @@
 
 	pixel_x = -16
 
-	harm_intent_damage = 5
 	melee_damage_lower = 8
 	melee_damage_upper = 12
 	attack_verb_continuous = "bites"
@@ -43,7 +42,7 @@
 	gold_core_spawnable = HOSTILE_SPAWN
 	del_on_death = 1
 
-/mob/living/simple_animal/hostile/tree/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/tree/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if(isopenturf(loc))
@@ -56,7 +55,7 @@
 					T.air.adjust_moles(GAS_CO2, -amt)
 					T.atmos_spawn_air("o2=[amt];TEMP=293.15")
 
-/mob/living/simple_animal/hostile/tree/AttackingTarget()
+/mob/living/danimal/hostile/tree/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!iscarbon(my_target))
@@ -67,7 +66,7 @@
 		C.visible_message(span_danger("\The [src] knocks down \the [C]!"), \
 				span_userdanger("\The [src] knocks you down!"))
 
-/mob/living/simple_animal/hostile/tree/festivus
+/mob/living/danimal/hostile/tree/festivus
 	name = "festivus pole"
 	desc = "Serenity now... SERENITY NOW!"
 	icon_state = "festivus_pole"

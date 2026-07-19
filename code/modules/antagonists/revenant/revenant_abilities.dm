@@ -1,5 +1,5 @@
 
-/mob/living/simple_animal/revenant/ClickOn(atom/A, params) //revenants can't interact with the world directly.
+/mob/living/danimal/revenant/ClickOn(atom/A, params) //revenants can't interact with the world directly.
 	var/list/modifiers = params2list(params)
 	if(modifiers["shift"])
 		ShiftClickOn(A)
@@ -16,7 +16,7 @@
 
 
 //Harvest; activated ly clicking the target, will try to drain their essence.
-/mob/living/simple_animal/revenant/proc/Harvest(mob/living/carbon/human/target)
+/mob/living/danimal/revenant/proc/Harvest(mob/living/carbon/human/target)
 	set waitfor = FALSE
 	if(!castcheck(0))
 		return
@@ -287,7 +287,7 @@
 			INVOKE_ASYNC(src,PROC_REF(malfunction), T, user)
 
 /obj/effect/proc_holder/spell/aoe_turf/revenant/malfunction/proc/malfunction(turf/T, mob/user)
-	for(var/mob/living/simple_animal/bot/bot in T)
+	for(var/mob/living/danimal/bot/bot in T)
 		if(!bot.emagged)
 			new /obj/effect/temp_visual/revenant(bot.loc)
 			bot.locked = FALSE

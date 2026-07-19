@@ -1,6 +1,6 @@
 // A mob which only moves when it isn't being watched by living beings.
 
-/mob/living/simple_animal/hostile/statue
+/mob/living/danimal/hostile/statue
 	name = "statue" // matches the name of the statue with the flesh-to-stone spell
 	desc = "An incredibly lifelike marble carving. Its eyes seem to follow you.." // same as an ordinary statue with the added "eye following you" description
 	icon = 'icons/obj/statue.dmi'
@@ -20,7 +20,6 @@
 	healable = 0
 	blood_volume = 0
 
-	harm_intent_damage = 10
 	obj_damage = 100
 	melee_damage_lower = 68
 	melee_damage_upper = 83
@@ -57,7 +56,7 @@
 
 // No movement while seen code.
 
-/mob/living/simple_animal/hostile/statue/Initialize(mapload, mob/living/creator)
+/mob/living/danimal/hostile/statue/Initialize(mapload, mob/living/creator)
 	. = ..()
 	// Give spells
 	LAZYINITLIST(mob_spell_list)
@@ -69,20 +68,20 @@
 	if(creator)
 		src.creator = creator
 
-/mob/living/simple_animal/hostile/statue/med_hud_set_health()
+/mob/living/danimal/hostile/statue/med_hud_set_health()
 	return //we're a statue we're invincible
 
-/mob/living/simple_animal/hostile/statue/med_hud_set_status()
+/mob/living/danimal/hostile/statue/med_hud_set_status()
 	return //we're a statue we're invincible
 
-/mob/living/simple_animal/hostile/statue/Move(turf/NewLoc)
+/mob/living/danimal/hostile/statue/Move(turf/NewLoc)
 	if(can_be_seen(NewLoc))
 		if(client)
 			to_chat(src, span_warning("You cannot move, there are eyes on you!"))
 		return 0
 	return ..()
 
-/mob/living/simple_animal/hostile/statue/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/statue/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	var/atom/my_target = get_target()
@@ -94,10 +93,10 @@
 		return
 	// This one is closer.
 	if(get_dist(watching, src) > get_dist(my_target, src))
-		LoseTarget()
+		DropTarget()
 		GiveTarget(watching)
 
-/mob/living/simple_animal/hostile/statue/AttackingTarget()
+/mob/living/danimal/hostile/statue/AttackingTarget()
 	if(can_be_seen(get_turf(loc)))
 		if(client)
 			to_chat(src, span_warning("You cannot attack, there are eyes on you!"))
@@ -105,15 +104,15 @@
 	else
 		return ..()
 
-/mob/living/simple_animal/hostile/statue/DestroyPathToTarget()
+/mob/living/danimal/hostile/statue/DestroyPathToTarget()
 	if(!can_be_seen(get_turf(loc)))
 		..()
 
-/mob/living/simple_animal/hostile/statue/face_atom()
+/mob/living/danimal/hostile/statue/face_atom()
 	if(!can_be_seen(get_turf(loc)))
 		..()
 
-/mob/living/simple_animal/hostile/statue/proc/can_be_seen(turf/destination)
+/mob/living/danimal/hostile/statue/proc/can_be_seen(turf/destination)
 	if(!cannot_be_seen)
 		return null
 	// Check for darkness
@@ -139,18 +138,18 @@
 
 // Cannot talk
 
-/mob/living/simple_animal/hostile/statue/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null, only_overhead)
+/mob/living/danimal/hostile/statue/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null, only_overhead)
 	return 0
 
 // Turn to dust when gibbed
 
-/mob/living/simple_animal/hostile/statue/gib()
+/mob/living/danimal/hostile/statue/gib()
 	dust()
 
 
 // Stop attacking clientless mobs
 
-/mob/living/simple_animal/hostile/statue/EvalTarget(atom/the_target)
+/mob/living/danimal/hostile/statue/EvalTarget(atom/the_target)
 	if(isliving(the_target))
 		var/mob/living/L = the_target
 		if(!L.client && !L.ckey)
@@ -159,7 +158,7 @@
 
 // Don't attack your creator if there is one
 
-/mob/living/simple_animal/hostile/statue/ListTargets()
+/mob/living/danimal/hostile/statue/ListTargets()
 	. = ..()
 	return . - creator
 
@@ -226,10 +225,10 @@
 				name = "Toggle Nightvision \[ON]"
 		target.update_sight()
 
-/mob/living/simple_animal/hostile/statue/sentience_act()
+/mob/living/danimal/hostile/statue/sentience_act()
 	faction -= "neutral"
 
-/mob/living/simple_animal/hostile/statue/restrained(ignore_grab)
+/mob/living/danimal/hostile/statue/restrained(ignore_grab)
 	. = ..()
 	if(can_be_seen(loc))
 		return 1

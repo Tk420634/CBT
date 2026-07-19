@@ -99,7 +99,7 @@
 	var/static/list/non_simple_animals = typecacheof(list(/mob/living/carbon/monkey, /mob/living/carbon/alien))
 	if(isanimal(target) || is_type_in_typecache(target,non_simple_animals))
 		if(isanimal(target))
-			var/mob/living/simple_animal/A = target
+			var/mob/living/danimal/A = target
 			if(!A.healable)//simple approximation of being animal not a robot or similar
 				to_chat(user, span_warning("No compatible DNA detected"))
 				return

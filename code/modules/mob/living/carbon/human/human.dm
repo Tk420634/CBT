@@ -236,9 +236,9 @@ GLOBAL_VAR_INIT(crotch_call_cooldown, 0)
 // this could be made more general, but for now just handle mulebot
 /mob/living/carbon/human/on_entered(atom/movable/AM)
 	..()
-	var/mob/living/simple_animal/bot/mulebot/MB = AM
+	var/mob/living/danimal/bot/mulebot/MB = AM
 	if(istype(MB))
-		INVOKE_ASYNC(MB, TYPE_PROC_REF(/mob/living/simple_animal/bot/mulebot/,RunOver), src)
+		INVOKE_ASYNC(MB, TYPE_PROC_REF(/mob/living/danimal/bot/mulebot/,RunOver), src)
 
 	spreadFire(AM)
 

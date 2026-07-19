@@ -49,6 +49,6 @@
 	output = /obj/item/reagent_containers/food/snacks/cornchips
 
 /datum/food_processor_process/mob/slime
-	input = /mob/living/simple_animal/slime
+	input = /mob/living/danimal/slime
 	output = null
 	required_machine = /obj/machinery/processor/slime

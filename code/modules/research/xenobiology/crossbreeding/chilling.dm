@@ -212,7 +212,7 @@ Chilling extracts:
 
 /obj/item/slimecross/chilling/red/do_effect(mob/user)
 	var/slimesfound = FALSE
-	for(var/mob/living/simple_animal/slime/S in view(get_turf(user), 7))
+	for(var/mob/living/danimal/slime/S in view(get_turf(user), 7))
 		slimesfound = TRUE
 		S.docile = TRUE
 	if(slimesfound)
@@ -248,7 +248,7 @@ Chilling extracts:
 
 /obj/item/slimecross/chilling/pink/do_effect(mob/user)
 	user.visible_message(span_notice("[src] cracks like an egg, and an adorable puppy comes tumbling out!"))
-	new /mob/living/simple_animal/pet/dog/corgi/puppy/slime(get_turf(user))
+	new /mob/living/danimal/pet/dog/corgi/puppy/slime(get_turf(user))
 	..()
 
 /obj/item/slimecross/chilling/gold

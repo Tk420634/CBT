@@ -1,5 +1,5 @@
 //Protector
-/mob/living/simple_animal/hostile/guardian/protector
+/mob/living/danimal/hostile/guardian/protector
 	range = 15 //worse for it due to how it leashes
 	damage_coeff = list(BRUTE = 0.4, BURN = 0.4, TOX = 0.4, CLONE = 0.4, STAMINA = 0, OXY = 0.4)
 	playstyle_string = "<span class='holoparasite'>As a <b>protector</b> type you cause your summoner to leash to you instead of you leashing to them and have two modes; Combat Mode, where you do and take medium damage, and Protection Mode, where you do and take almost no damage, but move slightly slower.</span>"
@@ -9,7 +9,7 @@
 	toggle_button_type = /atom/movable/screen/guardian/ToggleMode
 	var/toggle = FALSE
 
-/mob/living/simple_animal/hostile/guardian/protector/ex_act(severity)
+/mob/living/danimal/hostile/guardian/protector/ex_act(severity)
 	if(severity == 1)
 		adjustBruteLoss(400) //if in protector mode, will do 20 damage and not actually necessarily kill the summoner
 	else
@@ -17,7 +17,7 @@
 	if(toggle)
 		visible_message(span_danger("The explosion glances off [src]'s energy shielding!"))
 
-/mob/living/simple_animal/hostile/guardian/protector/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/danimal/hostile/guardian/protector/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	. = ..()
 	if(. > 0 && toggle)
 		var/image/I = new('icons/effects/effects.dmi', src, "shield-flash", MOB_LAYER+0.01, dir = pick(GLOB.cardinals))
@@ -25,7 +25,7 @@
 			I.color = guardiancolor
 		flick_overlay_view(I, src, 5)
 
-/mob/living/simple_animal/hostile/guardian/protector/ToggleMode()
+/mob/living/danimal/hostile/guardian/protector/ToggleMode()
 	if(cooldown > world.time)
 		return 0
 	cooldown = world.time + 10
@@ -49,7 +49,7 @@
 		to_chat(src, "<span class='danger'><B>You switch to protection mode.</span></B>")
 		toggle = TRUE
 
-/mob/living/simple_animal/hostile/guardian/protector/snapback() //snap to what? snap to the guardian!
+/mob/living/danimal/hostile/guardian/protector/snapback() //snap to what? snap to the guardian!
 	if(summoner)
 		if(get_dist(get_turf(summoner),get_turf(src)) <= range)
 			return

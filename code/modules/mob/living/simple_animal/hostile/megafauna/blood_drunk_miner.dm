@@ -20,7 +20,7 @@ Difficulty: Medium
 
 */
 
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner
+/mob/living/danimal/hostile/megafauna/blood_drunk_miner
 	name = "blood-drunk miner"
 	desc = "A miner destined to wander forever, engaged in an endless hunt."
 	health = 900
@@ -56,10 +56,10 @@ Difficulty: Medium
 
 	footstep_type = FOOTSTEP_MOB_HEAVY
 
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/guidance
+/mob/living/danimal/hostile/megafauna/blood_drunk_miner/guidance
 	guidance = TRUE
 
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/hunter/AttackingTarget()
+/mob/living/danimal/hostile/megafauna/blood_drunk_miner/hunter/AttackingTarget()
 	. = ..()
 	if(. && prob(12))
 		INVOKE_ASYNC(src,PROC_REF(dash))
@@ -81,34 +81,34 @@ Difficulty: Medium
 	icon_state = "ka_tracer"
 	range = MINER_DASH_RANGE
 
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/Initialize()
+/mob/living/danimal/hostile/megafauna/blood_drunk_miner/Initialize()
 	. = ..()
 	internal = new/obj/item/gps/internal/miner(src)
 	miner_saw = new(src)
 
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/danimal/hostile/megafauna/blood_drunk_miner/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	var/adjustment_amount = amount * 0.1
 	if(world.time + adjustment_amount > next_action)
 		DelayNextAction(adjustment_amount, considered_action = FALSE, flush = TRUE) //attacking it interrupts it attacking, but only briefly
 	. = ..()
 
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/death()
+/mob/living/danimal/hostile/megafauna/blood_drunk_miner/death()
 	if(health > 0)
 		return
 	new /obj/effect/temp_visual/dir_setting/miner_death(loc, dir)
 	return ..()
 
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/Move(atom/newloc)
+/mob/living/danimal/hostile/megafauna/blood_drunk_miner/Move(atom/newloc)
 	if(dashing || (newloc && newloc.z == z && (islava(newloc) || ischasm(newloc)))) //we're not stupid!
 		return FALSE
 	return ..()
 
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/ex_act(severity, target)
+/mob/living/danimal/hostile/megafauna/blood_drunk_miner/ex_act(severity, target)
 	if(dash())
 		return
 	return ..()
 
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/AttackingTarget()
+/mob/living/danimal/hostile/megafauna/blood_drunk_miner/AttackingTarget()
 	var/atom/my_target = get_target()
 	if(QDELETED(my_target))
 		return
@@ -136,12 +136,12 @@ Difficulty: Medium
 	INVOKE_ASYNC(src,PROC_REF(quick_attack_loop))
 	return TRUE
 
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
+/mob/living/danimal/hostile/megafauna/blood_drunk_miner/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
 	if(!used_item && !isturf(A))
 		used_item = miner_saw
 	..()
 
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/GiveTarget(new_target)
+/mob/living/danimal/hostile/megafauna/blood_drunk_miner/GiveTarget(new_target)
 	var/atom/my_target = get_target()
 	var/targets_the_same = (new_target == my_target)
 	. = ..()
@@ -150,7 +150,7 @@ Difficulty: Medium
 		transform_weapon()
 		INVOKE_ASYNC(src,PROC_REF(quick_attack_loop))
 
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/OpenFire()
+/mob/living/danimal/hostile/megafauna/blood_drunk_miner/OpenFire()
 	var/atom/my_target = get_target()
 	perform_move_action(my_target, move_to_delay, minimum_distance)
 	if(get_dist(src, my_target) > MINER_DASH_RANGE && dash_cooldown <= world.time)
@@ -159,7 +159,7 @@ Difficulty: Medium
 		shoot_ka()
 	transform_weapon()
 
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/proc/shoot_ka()
+/mob/living/danimal/hostile/megafauna/blood_drunk_miner/proc/shoot_ka()
 	var/atom/my_target = get_target()
 	if(ranged_cooldown <= world.time && get_dist(src, my_target) <= MINER_DASH_RANGE && !Adjacent(my_target))
 		ranged_cooldown = world.time + ranged_cooldown_time
@@ -172,7 +172,7 @@ Difficulty: Medium
 //I'm still of the belief that this entire proc needs to be wiped from existence.
 //  do not take my touching of it to be endorsement of it. ~mso
 // hi, lagg here, fuckin proc sucks, bye!
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/proc/quick_attack_loop()
+/mob/living/danimal/hostile/megafauna/blood_drunk_miner/proc/quick_attack_loop()
 	var/atom/my_target = get_target()
 	// while(!QDELETED(my_target) && !CheckActionCooldown()) //this is done this way because next_move can change to be sooner while we sleep.
 	// 	stoplag(1)
@@ -186,7 +186,7 @@ Difficulty: Medium
 		return
 	AttackingTarget()
 
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/proc/dash(atom/dash_target)
+/mob/living/danimal/hostile/megafauna/blood_drunk_miner/proc/dash(atom/dash_target)
 	if(world.time < dash_cooldown)
 		return
 	var/list/accessable_turfs = list()
@@ -238,7 +238,7 @@ Difficulty: Medium
 	shoot_ka()
 	return TRUE
 
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/proc/transform_weapon()
+/mob/living/danimal/hostile/megafauna/blood_drunk_miner/proc/transform_weapon()
 	if(time_until_next_transform <= world.time)
 		miner_saw.transform_cooldown = 0
 		miner_saw.transform_weapon(src, TRUE)
@@ -273,7 +273,7 @@ Difficulty: Medium
 	desc = "The sweet blood, oh, it sings to me."
 	invisibility = 100
 
-/mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/doom
+/mob/living/danimal/hostile/megafauna/blood_drunk_miner/doom
 	name = "hostile-environment miner"
 	desc = "A miner destined to hop across dimensions for all eternity, hunting anomalous creatures."
 	speed = 8

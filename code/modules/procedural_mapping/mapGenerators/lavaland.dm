@@ -10,9 +10,9 @@
 
 /datum/mapGeneratorModule/splatterLayer/lavalandMonsters
 	spawnableTurfs = list()
-	spawnableAtoms = list(/mob/living/simple_animal/hostile/asteroid/goliath/beast = 10,
-	/mob/living/simple_animal/hostile/asteroid/hivelord/legion = 10,
-	/mob/living/simple_animal/hostile/asteroid/basilisk/watcher = 10)
+	spawnableAtoms = list(/mob/living/danimal/hostile/asteroid/goliath/beast = 10,
+	/mob/living/danimal/hostile/asteroid/hivelord/legion = 10,
+	/mob/living/danimal/hostile/asteroid/basilisk/watcher = 10)
 
 /datum/mapGeneratorModule/splatterLayer/lavalandTendrils
 	spawnableTurfs = list()

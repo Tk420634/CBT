@@ -3,7 +3,7 @@
 // -------------------------------------
 // CENTAUR
 
-/mob/living/simple_animal/hostile/centaur
+/mob/living/danimal/hostile/centaur
 	name = "centaur"
 	desc = "The result of infection by FEV gone horribly wrong."
 	icon = 'icons/fallout/mobs/monsters/freaks.dmi'
@@ -16,7 +16,6 @@
 	maxHealth = 80
 	health = 80
 	speed = 2
-	harm_intent_damage = 8
 	melee_damage_lower = 4 // damage range is punch min, average is 15 when in melee
 	melee_damage_upper = 20
 	ranged = TRUE
@@ -69,28 +68,28 @@
 	damage = 25
 	icon_state = "toxin"
 
-/mob/living/simple_animal/hostile/centaur/strong // Mostly for FEV mutation
+/mob/living/danimal/hostile/centaur/strong // Mostly for FEV mutation
 	maxHealth = 400
 	health = 400
 	melee_damage_lower = 35
 	melee_damage_upper = 35
 
 
-/mob/living/simple_animal/hostile/centaur/lazy_larry
+/mob/living/danimal/hostile/centaur/lazy_larry
 	name = "Lazy Larry (and his dog Jeffery)"
 	desc = "That's Larry.  He's aight."
 	faction = list("hostile","supermutant","neutral")
 	despawns_when_lonely = FALSE
 	environment_smash = NONE
 
-/mob/living/simple_animal/hostile/centaur/lazy_larry/Initialize()
+/mob/living/danimal/hostile/centaur/lazy_larry/Initialize()
 	. = ..()
 	buckle_up()
 
 // -----------------------------------
 // ABOMINATION
 
-/mob/living/simple_animal/hostile/abomination
+/mob/living/danimal/hostile/abomination
 	name = "abomination"
 	desc = "A horrible fusion of man, animal, and something entirely different. It quakes and shudders, looking to be in an immense amount of pain. Blood and other fluids ooze from various gashes and lacerations on its body, punctuated by mouths that gnash and scream."
 	icon = 'icons/fallout/mobs/monsters/freaks.dmi'
@@ -101,7 +100,6 @@
 	maxHealth = 1000
 	health = 1000
 	speed = -0.5
-	harm_intent_damage = 8
 	melee_damage_lower = 30
 	melee_damage_upper = 40
 
@@ -116,14 +114,14 @@
 	death_sound = 'sound/voice/abomburning.ogg'
 	despawns_when_lonely = FALSE // too ANGRY to despawn
 /*
-/mob/living/simple_animal/hostile/abomination/AttackingTarget()
+/mob/living/danimal/hostile/abomination/AttackingTarget()
 	. = ..()
 	if(. && ishuman(target))
 		var/mob/living/carbon/human/H = target
 		var/choice = pick(1, 1, 2, 2, 3, 4)
 		H.reagents.add_reagent(/datum/reagent/toxin/FEV_solution, choice)
 */
-/mob/living/simple_animal/hostile/abomination/Initialize()
+/mob/living/danimal/hostile/abomination/Initialize()
 	. = ..()
 	abom_sounds = list(
 		'sound/voice/abomination1.ogg',
@@ -133,14 +131,14 @@
 		'sound/voice/abomscream3.ogg'
 	)
 
-/mob/living/simple_animal/hostile/abomination/say(message, datum/language/language = null, list/spans = list(), language, sanitize, ignore_spam, forced = null, only_overhead)
+/mob/living/danimal/hostile/abomination/say(message, datum/language/language = null, list/spans = list(), language, sanitize, ignore_spam, forced = null, only_overhead)
 	..()
 	if(stat)
 		return
 	var/chosen_sound = pick(abom_sounds)
 	playsound(src, chosen_sound, 25, TRUE)
 
-/mob/living/simple_animal/hostile/abomination/Life()
+/mob/living/danimal/hostile/abomination/Life()
 	..()
 	if(stat)
 		return
@@ -148,11 +146,10 @@
 		var/chosen_sound = pick(abom_sounds)
 		playsound(src, chosen_sound, 70, TRUE)
 
-/mob/living/simple_animal/hostile/abomination/weak // For FEV mutation.
+/mob/living/danimal/hostile/abomination/weak // For FEV mutation.
 	environment_smash = ENVIRONMENT_SMASH_STRUCTURES // So you don't break walls
 	maxHealth = 500
 	health = 500
-	harm_intent_damage = 8
 	melee_damage_lower = 20
 	melee_damage_upper = 30
 	speed = 2
@@ -161,7 +158,7 @@
 // ------------------------------------------
 // HORROR
 
-/mob/living/simple_animal/hostile/abomhorror
+/mob/living/danimal/hostile/abomhorror
 	name = "failed experiment"
 	desc = "A terrible fusion of man, animal, and something else entirely. It looks to be in great pain."
 	speak_emote = list("screams", "clicks", "chitters", "barks", "moans", "growls", "meows", "reverberates", "roars", "squeaks", "rattles", "exclaims", "yells", "remarks", "mumbles", "jabbers", "stutters", "seethes")
@@ -173,7 +170,6 @@
 	speed = -0.5
 	maxHealth = 700
 	health = 700
-	harm_intent_damage = 8
 	melee_damage_lower = 30
 	melee_damage_upper = 40
 
@@ -185,11 +181,10 @@
 	deathmessage = "wails as its form shudders and violently comes to a stop."
 
 // NSB variant, some sort of bulletsponge
-/mob/living/simple_animal/hostile/abomhorror/nsb
+/mob/living/danimal/hostile/abomhorror/nsb
 	maxHealth = 1000
 	health = 1000
 	desc = "A terrible fusion of man, animal, and something else entirely. It looks to be in great pain, constantly shuddering violently and seeming relatively docile to the robots and raiders of the bunker. Huh."
-	harm_intent_damage = 8
 	melee_damage_lower = 40
 	melee_damage_upper = 50
 	obj_damage = 300
@@ -198,18 +193,18 @@
 	speed = -1
 	deathmessage = "wails as its form shudders and violently comes to a stop."
 
-/mob/living/simple_animal/hostile/abomhorror/nsb/Initialize()
+/mob/living/danimal/hostile/abomhorror/nsb/Initialize()
 	. = ..()
 	abom_sounds = list('sound/voice/abomination1.ogg', 'sound/voice/abomscream.ogg', 'sound/voice/abommoan.ogg', 'sound/voice/abomscream2.ogg', 'sound/voice/abomscream3.ogg')
 
-/mob/living/simple_animal/hostile/abomhorror/nsb/say(message, datum/language/language = null, list/spans = list(), language, sanitize, ignore_spam, forced = null, only_overhead)
+/mob/living/danimal/hostile/abomhorror/nsb/say(message, datum/language/language = null, list/spans = list(), language, sanitize, ignore_spam, forced = null, only_overhead)
 	..()
 	if(stat)
 		return
 	var/chosen_sound = pick(abom_sounds)
 	playsound(src, chosen_sound, 50, TRUE)
 
-/mob/living/simple_animal/hostile/abomhorror/nsb/Life()
+/mob/living/danimal/hostile/abomhorror/nsb/Life()
 	..()
 	if(stat)
 		return

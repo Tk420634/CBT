@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/megafauna/captainarlem
+/mob/living/danimal/hostile/megafauna/captainarlem
 	name = "Captain Arlem"
 	desc = "A grotesque, Enclave-manufactured and Enclave-loyal prime super mutant given cybernetic augmentations, unique hardened power armor, and an arm-mounted plasma repeater, alongside drug cocktails administered by his suit. Your ride's over mutie, time to die."
 	health = 3000
@@ -38,12 +38,12 @@
 	loot = list(/obj/item/keycard/library)
 
 
-/mob/living/simple_animal/hostile/megafauna/captainarlem/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/megafauna/captainarlem/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	move_to_delay = clamp(round((health/maxHealth) * 10), 3, 10)
 
-/mob/living/simple_animal/hostile/megafauna/captainarlem/OpenFire()
+/mob/living/danimal/hostile/megafauna/captainarlem/OpenFire()
 	anger_modifier = clamp(((maxHealth - health)/50),0,20)
 	if(charging)
 		return
@@ -64,28 +64,28 @@
 			INVOKE_ASYNC(src,PROC_REF(triple_charge))
 			visible_message("<span class='colossus'>\"<b>YOUR RIDE IS OVER MUTIE, TIME TO DIE!</b>\"</span>")
 			
-/mob/living/simple_animal/hostile/megafauna/captainarlem/Initialize()
+/mob/living/danimal/hostile/megafauna/captainarlem/Initialize()
 	. = ..()
-	for(var/mob/living/simple_animal/hostile/megafauna/captainarlem/B in GLOB.mob_list)
+	for(var/mob/living/danimal/hostile/megafauna/captainarlem/B in GLOB.mob_list)
 		if(B != src)
 			return INITIALIZE_HINT_QDEL //There can be only one
 
-/mob/living/simple_animal/hostile/megafauna/captainarlem/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
+/mob/living/danimal/hostile/megafauna/captainarlem/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
 	if(charging)
 		return
 	..()
 
-/mob/living/simple_animal/hostile/megafauna/captainarlem/AttackingTarget()
+/mob/living/danimal/hostile/megafauna/captainarlem/AttackingTarget()
 	if(charging)
 		return
 	..()
 
-/mob/living/simple_animal/hostile/megafauna/captainarlem/perform_move_action(target, delay, minimum_distance)
+/mob/living/danimal/hostile/megafauna/captainarlem/perform_move_action(target, delay, minimum_distance)
 	if(charging)
 		return
 	..()
 
-/mob/living/simple_animal/hostile/megafauna/captainarlem/Move()
+/mob/living/danimal/hostile/megafauna/captainarlem/Move()
 	if(!stat)
 		playsound(src.loc, 'sound/effects/meteorimpact.ogg', 200, 1, 2, 1)
 	if(charging)
@@ -95,14 +95,14 @@
 	if(charging)
 		DestroySurroundings()
 
-/mob/living/simple_animal/hostile/megafauna/captainarlem/proc/triple_charge()
+/mob/living/danimal/hostile/megafauna/captainarlem/proc/triple_charge()
 	charge()
 	sleep(10)
 	charge()
 	sleep(10)
 	charge()
 
-/mob/living/simple_animal/hostile/megafauna/captainarlem/proc/charge()
+/mob/living/danimal/hostile/megafauna/captainarlem/proc/charge()
 	var/atom/my_target = get_target()
 	var/turf/T = get_turf(my_target)
 	if(!T || T == loc)
@@ -120,14 +120,14 @@
 	perform_move_action(my_target, move_to_delay, minimum_distance)
 
 
-/mob/living/simple_animal/hostile/megafauna/captainarlem/Bump(atom/A)
+/mob/living/danimal/hostile/megafauna/captainarlem/Bump(atom/A)
 	if(charging)
 		if(isturf(A) || isobj(A) && A.density)
 			A.ex_act(EXPLODE_HEAVY)
 		DestroySurroundings()
 	..()
 
-/mob/living/simple_animal/hostile/megafauna/captainarlem/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
+/mob/living/danimal/hostile/megafauna/captainarlem/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	if(!charging)
 		return ..()
 
@@ -143,7 +143,7 @@
 
 	charging = 0
 
-/mob/living/simple_animal/hostile/megafauna/captainarlem/proc/fire_plasmacaster(turf/marker, set_angle)
+/mob/living/danimal/hostile/megafauna/captainarlem/proc/fire_plasmacaster(turf/marker, set_angle)
 	if(!isnum(set_angle) && (!marker || marker == loc))
 		return
 	var/turf/startloc = get_turf(src)
@@ -155,8 +155,8 @@
 		P.original = my_target
 	P.fire(set_angle)
 
-/mob/living/simple_animal/hostile/megafauna/captainarlem/proc/blast(set_angle)
-	var/turf/target_turf = get_turf(target)
+/mob/living/danimal/hostile/megafauna/captainarlem/proc/blast(set_angle)
+	var/turf/target_turf = get_turf(get_target())
 	playsound(src, 'sound/weapons/lasercannonfire.ogg', 200, 1, 2)
 	newtonian_move(get_dir(target_turf, src))
 	var/angle_to_target = Get_Angle(src, target_turf)
@@ -166,17 +166,17 @@
 	for(var/i in plasmacaster_angles)
 		fire_plasmacaster(target_turf, angle_to_target + i)
 
-/mob/living/simple_animal/hostile/megafauna/captainarlem/proc/eyebots()
+/mob/living/danimal/hostile/megafauna/captainarlem/proc/eyebots()
 	visible_message(span_danger("[src] presses a button on their wrist, activating some of the eyebots!"))
 	for(var/obj/effect/decal/remains/deadeyebot/H in range(src, 10))
 		if(prob(40))
-			new /mob/living/simple_animal/hostile/eyebot(H.loc)
+			new /mob/living/danimal/hostile/eyebot(H.loc)
 	
-/mob/living/simple_animal/hostile/megafauna/captainarlem/proc/self_destruct()
+/mob/living/danimal/hostile/megafauna/captainarlem/proc/self_destruct()
 	explosion(src,3,5,7,7)
 	qdel(src)
 
-/mob/living/simple_animal/hostile/megafauna/captainarlem/death()
+/mob/living/danimal/hostile/megafauna/captainarlem/death()
 	do_sparks(3, TRUE, src)
 	addtimer(CALLBACK(src,PROC_REF(self_destruct)), 4 SECONDS)
 	return ..()

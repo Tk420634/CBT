@@ -1,5 +1,5 @@
 //A speedy, annoying and scaredy demon
-/mob/living/simple_animal/hostile/asteroid/imp
+/mob/living/danimal/hostile/asteroid/imp
 	name = "lava imp"
 	desc = "Lowest on the hierarchy of slaughter demons, this one is still nothing to sneer at."
 	icon = 'modular_sand/icons/mob/lavaland/lavaland_monsters.dmi'
@@ -20,7 +20,6 @@
 	speed = 1
 	maxHealth = 150
 	health = 150
-	harm_intent_damage = 15
 	obj_damage = 60
 	melee_damage_lower = 15
 	melee_damage_upper = 15
@@ -38,7 +37,7 @@
 	robust_searching = FALSE
 	death_sound = 'modular_sand/sound/misc/impdies.wav'
 
-/mob/living/simple_animal/hostile/asteroid/imp/ComponentInitialize()
+/mob/living/danimal/hostile/asteroid/imp/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("grabs the imp's eyes and rips them out, shoving the bloody imp aside!", "grabs and crushes the imp's skull apart with their bare hands!", "rips the imp's head clean off with their bare hands!"), \
@@ -49,19 +48,19 @@
 		threshold = (maxHealth/10 * 1.5), \
 		crusher_drop_mod = 2)
 
-/mob/living/simple_animal/hostile/asteroid/imp/attacked_by(obj/item/I, mob/living/user)
+/mob/living/danimal/hostile/asteroid/imp/attacked_by(obj/item/I, mob/living/user)
 	. = ..()
 	playsound(src, 'modular_sand/sound/misc/impinjured.wav', rand(25,100), -1) //HURT ME PLENTY
 
-/mob/living/simple_animal/hostile/asteroid/imp/bullet_act(obj/item/projectile/P)
+/mob/living/danimal/hostile/asteroid/imp/bullet_act(obj/item/projectile/P)
 	. = ..()
 	playsound(src, 'modular_sand/sound/misc/impinjured.wav', rand(25,100), -1)
 
-/mob/living/simple_animal/hostile/asteroid/imp/Aggro()
+/mob/living/danimal/hostile/asteroid/imp/Aggro()
 	. = ..()
 	playsound(src, pick('modular_sand/sound/misc/impsight.wav', 'modular_sand/sound/misc/impsight2.wav'), rand(50,75), -1)
 
-/mob/living/simple_animal/hostile/asteroid/imp/LoseAggro()
+/mob/living/danimal/hostile/asteroid/imp/LoseAggro()
 	. = ..()
 	playsound(src, pick('modular_sand/sound/misc/impnearby.wav', 'modular_sand/sound/misc/impnearby.wav'), rand(25, 60), -1)
 

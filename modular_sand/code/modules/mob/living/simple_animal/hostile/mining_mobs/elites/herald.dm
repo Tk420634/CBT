@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/asteroid/elite/herald/ComponentInitialize()
+/mob/living/danimal/hostile/asteroid/elite/herald/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("grabs the herald by it's legs and smashes it repeatedly on the ground, bits and pieces of flesh flying off until it dies!"), \

@@ -6,19 +6,19 @@
 //Drone visuals
 
 
-/mob/living/simple_animal/drone/proc/apply_overlay(cache_index)
+/mob/living/danimal/drone/proc/apply_overlay(cache_index)
 	if((. = drone_overlays[cache_index]))
 		add_overlay(.)
 
 
-/mob/living/simple_animal/drone/proc/remove_overlay(cache_index)
+/mob/living/danimal/drone/proc/remove_overlay(cache_index)
 	var/I = drone_overlays[cache_index]
 	if(I)
 		cut_overlay(I)
 		drone_overlays[cache_index] = null
 
 
-/mob/living/simple_animal/drone/update_inv_hands()
+/mob/living/danimal/drone/update_inv_hands()
 	remove_overlay(DRONE_HANDS_LAYER)
 	var/list/hands_overlays = list()
 
@@ -59,13 +59,13 @@
 	apply_overlay(DRONE_HANDS_LAYER)
 
 
-/mob/living/simple_animal/drone/update_inv_internal_storage()
+/mob/living/danimal/drone/update_inv_internal_storage()
 	if(internal_storage && client && hud_used && hud_used.hud_shown)
 		internal_storage.screen_loc = ui_drone_storage
 		client.screen += internal_storage
 
 
-/mob/living/simple_animal/drone/update_inv_head()
+/mob/living/danimal/drone/update_inv_head()
 	remove_overlay(DRONE_HEAD_LAYER)
 
 	if(head)
@@ -82,10 +82,10 @@
 
 	apply_overlay(DRONE_HEAD_LAYER)
 
-/mob/living/simple_animal/drone/update_inv_wear_mask()
+/mob/living/danimal/drone/update_inv_wear_mask()
 	update_inv_head()
 
-/mob/living/simple_animal/drone/regenerate_icons()
+/mob/living/danimal/drone/regenerate_icons()
 	// Drones only have 4 slots, which in this specific instance
 	// is a small blessing.
 	update_inv_hands()
@@ -93,7 +93,7 @@
 	update_inv_internal_storage()
 
 
-/mob/living/simple_animal/drone/proc/pickVisualAppearence()
+/mob/living/danimal/drone/proc/pickVisualAppearence()
 	picked = FALSE
 	var/appearence = input("Choose your appearance!", "Appearance", "Maintenance Drone") in list("Maintenance Drone", "Repair Drone", "Scout Drone")
 	switch(appearence)
@@ -123,7 +123,7 @@
 
 
 
-/mob/living/simple_animal/drone/proc/getItemPixelShiftY()
+/mob/living/danimal/drone/proc/getItemPixelShiftY()
 	switch(visualAppearence)
 		if(MAINTDRONE)
 			. = 0

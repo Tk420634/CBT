@@ -1,4 +1,4 @@
-/mob/living/simple_animal/butterfly
+/mob/living/danimal/butterfly
 	name = "butterfly"
 	desc = "A colorful butterfly, how'd it get up here?"
 	icon_state = "butterfly"
@@ -14,7 +14,6 @@
 	speak_emote = list("flutters")
 	maxHealth = 2
 	health = 2
-	harm_intent_damage = 1
 	friendly_verb_continuous = "nudges"
 	friendly_verb_simple = "nudge"
 	density = FALSE
@@ -29,10 +28,10 @@
 	verb_exclaim = "flutters intensely"
 	verb_yell = "flutters intensely"
 
-/mob/living/simple_animal/butterfly/Initialize()
+/mob/living/danimal/butterfly/Initialize()
 	. = ..()
 	var/newcolor = rgb(rand(0, 255), rand(0, 255), rand(0, 255))
 	add_atom_colour(newcolor, FIXED_COLOUR_PRIORITY)
 
-/mob/living/simple_animal/butterfly/bee_friendly()
+/mob/living/danimal/butterfly/bee_friendly()
 	return TRUE //treaty signed at the Beeneeva convention

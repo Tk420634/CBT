@@ -1230,7 +1230,7 @@
 		transfer_ckey(new_mob)
 
 	for(var/para in hasparasites())
-		var/mob/living/simple_animal/hostile/guardian/G = para
+		var/mob/living/danimal/hostile/guardian/G = para
 		G.summoner = new_mob
 		G.Recall()
 		to_chat(G, span_holoparasite("Your summoner has changed form!"))

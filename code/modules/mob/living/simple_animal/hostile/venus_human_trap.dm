@@ -31,7 +31,7 @@
  */
 /obj/structure/alien/resin/flower_bud_enemy/proc/bear_fruit()
 	visible_message(span_danger("The plant has borne fruit!"))
-	new /mob/living/simple_animal/hostile/venus_human_trap(get_turf(src))
+	new /mob/living/danimal/hostile/venus_human_trap(get_turf(src))
 	qdel(src)
 
 /obj/effect/ebeam/vine
@@ -67,7 +67,7 @@
  * Akin to certain spiders, venus human traps can also be possessed and controlled by ghosts.
  *
  */
-/mob/living/simple_animal/hostile/venus_human_trap
+/mob/living/danimal/hostile/venus_human_trap
 	name = "venus human trap"
 	desc = "Now you know how the fly feels."
 	icon = 'icons/fallout/mobs/monsters/freaks.dmi'	
@@ -79,7 +79,6 @@
 	obj_damage = 60
 	melee_damage_lower = 25
 	melee_damage_upper = 25
-	harm_intent_damage = 5
 
 	layer = SPACEVINE_MOB_LAYER
 	ranged = TRUE
@@ -100,24 +99,24 @@
 	/// Whether or not this plant is ghost possessable
 	var/playable_plant = FALSE //Normal plants can **not** have players.
 
-/mob/living/simple_animal/hostile/venus_human_trap/ghost_playable
+/mob/living/danimal/hostile/venus_human_trap/ghost_playable
 	playable_plant = TRUE //For admins that want to buss some harmless plants
 
-/mob/living/simple_animal/hostile/venus_human_trap/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/venus_human_trap/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	pull_vines()
 
-/mob/living/simple_animal/hostile/venus_human_trap/death(gibbed)
+/mob/living/danimal/hostile/venus_human_trap/death(gibbed)
 	QDEL_LIST(vines)
 	. = ..()
 
-/mob/living/simple_animal/hostile/venus_human_trap/Destroy()
+/mob/living/danimal/hostile/venus_human_trap/Destroy()
 	QDEL_LIST(vines)
 	. = ..()
 
 
-/mob/living/simple_animal/hostile/venus_human_trap/AttackingTarget()
+/mob/living/danimal/hostile/venus_human_trap/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!isliving(my_target))
@@ -126,7 +125,7 @@
 	if(L.stat != DEAD)
 		adjustHealth(-maxHealth * 0.1)
 
-/mob/living/simple_animal/hostile/venus_human_trap/OpenFire(atom/the_target)
+/mob/living/danimal/hostile/venus_human_trap/OpenFire(atom/the_target)
 	for(var/datum/beam/B in vines)
 		if(B.target == the_target)
 			pull_vines()
@@ -149,11 +148,11 @@
 		L.Paralyze(20)
 	ranged_cooldown = world.time + ranged_cooldown_time
 
-/mob/living/simple_animal/hostile/venus_human_trap/Login()
+/mob/living/danimal/hostile/venus_human_trap/Login()
 	. = ..()
 	to_chat(src, span_boldwarning("You a venus human trap!  Protect the kudzu at all costs, and feast on those who oppose you!"))
 
-/mob/living/simple_animal/hostile/venus_human_trap/attack_ghost(mob/user)
+/mob/living/danimal/hostile/venus_human_trap/attack_ghost(mob/user)
 	. = ..()
 	if(.)
 		return
@@ -168,7 +167,7 @@
  * * mob/user - The ghost to possibly control the plant
  */
 
-/mob/living/simple_animal/hostile/venus_human_trap/proc/humanize_plant(mob/user)
+/mob/living/danimal/hostile/venus_human_trap/proc/humanize_plant(mob/user)
 	if(key || !playable_plant || stat)
 		return
 	var/plant_ask = alert("Become a venus human trap?", "Are you reverse vegan?", "Yes", "No")
@@ -187,7 +186,7 @@
  * If the target is on the same tile as the plant, destroy the vine
  * Removes any QDELETED vines from the vines list.
  */
-/mob/living/simple_animal/hostile/venus_human_trap/proc/pull_vines()
+/mob/living/danimal/hostile/venus_human_trap/proc/pull_vines()
 	for(var/datum/beam/B in vines)
 		if(istype(B.target, /atom/movable))
 			var/atom/movable/AM = B.target
@@ -204,5 +203,5 @@
  * Arguments:
  * * datum/beam/vine - The vine to be removed from the list.
  */
-/mob/living/simple_animal/hostile/venus_human_trap/proc/remove_vine(datum/beam/vine, force)
+/mob/living/danimal/hostile/venus_human_trap/proc/remove_vine(datum/beam/vine, force)
 	vines -= vine

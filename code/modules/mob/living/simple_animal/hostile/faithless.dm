@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/faithless
+/mob/living/danimal/hostile/faithless
 	name = "The Faithless"
 	desc = "The Wish Granter's faith in humanity, incarnate."
 	icon_state = "faithless"
@@ -23,7 +23,6 @@
 	robust_searching = 1
 	blood_volume = 0
 
-	harm_intent_damage = 8
 	obj_damage = 50
 	melee_damage_lower = 15
 	melee_damage_upper = 15
@@ -40,7 +39,7 @@
 
 	footstep_type = FOOTSTEP_MOB_SHOE
 
-/mob/living/simple_animal/hostile/faithless/AttackingTarget()
+/mob/living/danimal/hostile/faithless/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!. || !prob(14) || !ishuman(my_target))

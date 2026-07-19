@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/lizard
+/mob/living/danimal/hostile/lizard
 	name = "Lizard"
 	desc = "A cute tiny lizard."
 	icon_state = "lizard"
@@ -26,20 +26,20 @@
 	gold_core_spawnable = FRIENDLY_SPAWN
 	obj_damage = 0
 	environment_smash = ENVIRONMENT_SMASH_NONE
-	var/static/list/edibles = typecacheof(list(/mob/living/simple_animal/butterfly, /mob/living/simple_animal/cockroach)) //list of atoms, however turfs won't affect AI, but will affect consumption.
+	var/static/list/edibles = typecacheof(list(/mob/living/danimal/butterfly, /mob/living/danimal/cockroach)) //list of atoms, however turfs won't affect AI, but will affect consumption.
 
-/mob/living/simple_animal/hostile/lizard/ComponentInitialize()
+/mob/living/danimal/hostile/lizard/ComponentInitialize()
 	. = ..()
 	AddElement(/datum/element/mob_holder, worn_state = "lizard", inv_slots = INV_SLOTBIT_HEAD) //you can hold lizards now.
 
-/mob/living/simple_animal/hostile/lizard/EvalTarget(atom/the_target)//Can we actually attack a possible target?
+/mob/living/danimal/hostile/lizard/EvalTarget(atom/the_target)//Can we actually attack a possible target?
 	if(see_invisible < the_target.invisibility)//Target's invisible to us, forget it
 		return FALSE
 	if(is_type_in_typecache(the_target,edibles))
 		return TRUE
 	return FALSE
 
-/mob/living/simple_animal/hostile/lizard/AttackingTarget()
+/mob/living/danimal/hostile/lizard/AttackingTarget()
 	var/atom/my_target = get_target()
 	if(!is_type_in_typecache(my_target,edibles)) //Makes sure player lizards only consume edibles.
 		return ..()

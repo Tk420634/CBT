@@ -97,7 +97,7 @@
 		puff.start()
 
 	//STEP FIVE: Create animal at prev location
-	var/mob/living/simple_animal/SA = pick(/mob/living/simple_animal/mouse,/mob/living/simple_animal/mouse,/mob/living/simple_animal/mouse, /mob/living/simple_animal/hostile/retaliate/bat) //prob(300) /mob/living/simple_animal/mouse,
+	var/mob/living/danimal/SA = pick(/mob/living/danimal/mouse,/mob/living/danimal/mouse,/mob/living/danimal/mouse, /mob/living/danimal/hostile/retaliate/bat) //prob(300) /mob/living/danimal/mouse,
 	new SA (owner.loc)
 	// TELEPORT: Move to Coffin & Close it!
 	user.set_resting(TRUE, TRUE, FALSE)

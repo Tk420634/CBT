@@ -483,7 +483,7 @@
 	colour = "grey"
 
 /datum/status_effect/stabilized/grey/tick()
-	for(var/mob/living/simple_animal/slime/S in range(1, get_turf(owner)))
+	for(var/mob/living/danimal/slime/S in range(1, get_turf(owner)))
 		if(!(owner in S.Friends))
 			to_chat(owner, span_notice("[linked_extract] pulses gently as it communicates with [S]"))
 			S.Friends[owner] = 1
@@ -844,12 +844,12 @@
 	return ..()
 
 /datum/status_effect/stabilized/pink/tick()
-	for(var/mob/living/simple_animal/M in view(7,get_turf(owner)))
+	for(var/mob/living/danimal/M in view(7,get_turf(owner)))
 		if(!(M in mobs))
 			mobs += M
 			M.apply_status_effect(/datum/status_effect/pinkdamagetracker)
 			M.faction |= faction_name
-	for(var/mob/living/simple_animal/M in mobs)
+	for(var/mob/living/danimal/M in mobs)
 		if(!(M in view(7,get_turf(owner))))
 			M.faction -= faction_name
 			M.remove_status_effect(/datum/status_effect/pinkdamagetracker)
@@ -872,7 +872,7 @@
 	return ..()
 
 /datum/status_effect/stabilized/pink/on_remove()
-	for(var/mob/living/simple_animal/M in mobs)
+	for(var/mob/living/danimal/M in mobs)
 		M.faction -= faction_name
 		M.remove_status_effect(/datum/status_effect/pinkdamagetracker)
 	for(var/i in owner.faction)
@@ -951,7 +951,7 @@
 /datum/status_effect/stabilized/gold
 	id = "stabilizedgold"
 	colour = "gold"
-	var/mob/living/simple_animal/familiar
+	var/mob/living/danimal/familiar
 
 /datum/status_effect/stabilized/gold/tick()
 	var/obj/item/slimecross/stabilized/gold/linked = linked_extract

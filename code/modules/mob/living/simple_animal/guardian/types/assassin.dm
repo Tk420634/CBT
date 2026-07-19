@@ -1,5 +1,5 @@
 //Assassin
-/mob/living/simple_animal/hostile/guardian/assassin
+/mob/living/danimal/hostile/guardian/assassin
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
 	attack_sound = 'sound/weapons/bladeslice.ogg'
@@ -15,23 +15,23 @@
 	var/atom/movable/screen/alert/canstealthalert
 	var/atom/movable/screen/alert/instealthalert
 
-/mob/living/simple_animal/hostile/guardian/assassin/Initialize()
+/mob/living/danimal/hostile/guardian/assassin/Initialize()
 	. = ..()
 	stealthcooldown = 0
 
-/mob/living/simple_animal/hostile/guardian/assassin/PhysicalLife()
+/mob/living/danimal/hostile/guardian/assassin/PhysicalLife()
 	if(!(. = ..()))
 		return
 	updatestealthalert()
 	if(loc == summoner && toggle)
 		ToggleMode(0)
 
-/mob/living/simple_animal/hostile/guardian/assassin/get_status_tab_items()
+/mob/living/danimal/hostile/guardian/assassin/get_status_tab_items()
 	. = ..()
 	if(stealthcooldown >= world.time)
 		. += "Stealth Cooldown Remaining: [DisplayTimeText(stealthcooldown - world.time)]"
 
-/mob/living/simple_animal/hostile/guardian/assassin/AttackingTarget()
+/mob/living/danimal/hostile/guardian/assassin/AttackingTarget()
 	. = ..()
 	if(!.)
 		return
@@ -39,16 +39,16 @@
 	if(toggle && (isliving(my_target) || istype(my_target, /obj/structure/window) || istype(my_target, /obj/structure/grille)))
 		ToggleMode(1)
 
-/mob/living/simple_animal/hostile/guardian/assassin/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/danimal/hostile/guardian/assassin/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	. = ..()
 	if(. > 0 && toggle)
 		ToggleMode(1)
 
-/mob/living/simple_animal/hostile/guardian/assassin/Recall()
+/mob/living/danimal/hostile/guardian/assassin/Recall()
 	if(..() && toggle)
 		ToggleMode(0)
 
-/mob/living/simple_animal/hostile/guardian/assassin/ToggleMode(forced = 0)
+/mob/living/danimal/hostile/guardian/assassin/ToggleMode(forced = 0)
 	if(toggle)
 		melee_damage_lower = initial(melee_damage_lower)
 		melee_damage_upper = initial(melee_damage_upper)
@@ -80,7 +80,7 @@
 	else if(!forced)
 		to_chat(src, "<span class='danger'><B>You cannot yet enter stealth, wait another [DisplayTimeText(stealthcooldown - world.time)]!</span></B>")
 
-/mob/living/simple_animal/hostile/guardian/assassin/proc/updatestealthalert()
+/mob/living/danimal/hostile/guardian/assassin/proc/updatestealthalert()
 	if(stealthcooldown <= world.time)
 		if(toggle)
 			if(!instealthalert)

@@ -143,7 +143,7 @@
 	invocation = "Squeak!"
 	charge_max = 50
 	cooldown_min = 50
-	shapeshift_type = /mob/living/simple_animal/hostile/retaliate/bat
+	shapeshift_type = /mob/living/danimal/hostile/retaliate/bat
 	var/ventcrawl_nude_only = TRUE
 	var/transfer_name = TRUE
 
@@ -155,8 +155,8 @@
 
 	var/mob/living/shape = new shapeshift_type(caster.loc)
 	H = new(shape,src,caster)
-	if(istype(H, /mob/living/simple_animal))
-		var/mob/living/simple_animal/SA = H
+	if(istype(H, /mob/living/danimal))
+		var/mob/living/danimal/SA = H
 		if((caster.get_blood(FALSE) >= (BLOOD_VOLUME_SYMPTOMS_DEBILITATING*caster.blood_ratio)) || (ventcrawl_nude_only && length(caster.get_equipped_items(include_pockets = TRUE))))
 			SA.ventcrawler = FALSE
 	if(transfer_name)

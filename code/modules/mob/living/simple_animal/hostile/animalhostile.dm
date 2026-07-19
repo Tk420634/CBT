@@ -1,15 +1,15 @@
 /*Common East Coast hostile critters -Pebbles
-- Ghoul Rotter		/mob/living/simple_animal/hostile/ghoulrotter
+- Ghoul Rotter		/mob/living/danimal/hostile/ghoulrotter
 	Just trying to make a new ghoul sprite thats less ass
-- Skolf				/mob/living/simple_animal/hostile/skolf
+- Skolf				/mob/living/danimal/hostile/skolf
 	Packs, pretty deadly to lightly armored people, dont place in low threat areas. Sort of glass cannons?
 
 Uncommon critters
-- Yao Guai 			/mob/living/simple_animal/hostile/yaoguai
+- Yao Guai 			/mob/living/danimal/hostile/yaoguai
 	Really tough beast packing a punch. Must be dangerous to PA people.
-- Aradnid			/mob/living/simple_animal/hostile/aradnid
+- Aradnid			/mob/living/danimal/hostile/aradnid
 	Injects rads. Only map near toxic sites.
-- Scolopendra		/mob/living/simple_animal/hostile/scolopendra
+- Scolopendra		/mob/living/danimal/hostile/scolopendra
 	Tunnel critter, very fast, modest brute, high toxin damage, decently tough. Supposed to make narrow tunnels scary.
 
 Stuff not supposed to be in East coast (to differentiate, give flavour. Less is more. Don't listen to Bethesda.)
@@ -22,7 +22,7 @@ General thoughts: More traits possible to add? Like resists to energy weapons/ba
 to produce smoke or slow down victims? Stuff like that added to a couple would be fun.
 */
 
-/mob/living/simple_animal/hostile/ghoulrotter
+/mob/living/danimal/hostile/ghoulrotter
 	name = "rotting ghoul"
 	desc = "A bloated ghoul that has lost its mind and become aggressive."
 	icon = 'icons/fallout/mobs/humans/ghouls.dmi'
@@ -38,7 +38,6 @@ to produce smoke or slow down victims? Stuff like that added to a couple would b
 	maxHealth = 80
 	health = 80
 	speed = 2.5
-	harm_intent_damage = 8
 	melee_damage_lower = 15
 	melee_damage_upper = 20
 	attack_verb_simple = "claw"
@@ -60,7 +59,7 @@ to produce smoke or slow down victims? Stuff like that added to a couple would b
 	death_sound = 'sound/f13npc/ghoul/ghoul_death.ogg'
 
 
-/mob/living/simple_animal/hostile/skolf
+/mob/living/danimal/hostile/skolf
 	name = "skull wolf"
 	desc = "Half rotted by radiation, blind, hunting by smell and sound."
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
@@ -90,7 +89,7 @@ to produce smoke or slow down victims? Stuff like that added to a couple would b
 
 // Uncommon beasts
 
-/mob/living/simple_animal/hostile/yaoguai
+/mob/living/danimal/hostile/yaoguai
 	name = "Yao Guai"
 	desc = "Radiation has caused the brown bear to lose its pelt, grow large with ulcers and a rage fueled by agony. The chinese name for them has stuck."
 	icon_gib = null
@@ -107,7 +106,6 @@ to produce smoke or slow down victims? Stuff like that added to a couple would b
 	speed = 1
 	maxHealth = 350
 	health = 350
-	harm_intent_damage = 8
 	obj_damage = 15
 	melee_damage_lower = 20
 	melee_damage_upper = 45
@@ -120,7 +118,7 @@ to produce smoke or slow down victims? Stuff like that added to a couple would b
 	a_intent = INTENT_HARM
 
 //Want to make these cause like 100 rads or so per bite plus their damage, maybe a little less. Instead of toxins. Remove comment if able to solve it.
-/mob/living/simple_animal/hostile/aradnid
+/mob/living/danimal/hostile/aradnid
 	name = "aradnid"
 	desc = "Deeply disturbing creature, they can only consume radiated meat and drag their prey to contaminated areas to tenderize them."
 	mob_biotypes = MOB_ORGANIC|MOB_BUG
@@ -154,7 +152,7 @@ to produce smoke or slow down victims? Stuff like that added to a couple would b
 	has_field_of_vision = FALSE // 360° vision.
 
 
-/mob/living/simple_animal/hostile/aradnid/AttackingTarget()
+/mob/living/danimal/hostile/aradnid/AttackingTarget()
 	. = ..()
 	if(. && ishuman(target))
 		var/mob/living/carbon/human/H = target
@@ -163,7 +161,7 @@ to produce smoke or slow down victims? Stuff like that added to a couple would b
 
 
 
-/mob/living/simple_animal/hostile/scolopendra
+/mob/living/danimal/hostile/scolopendra
 	name = "Scolopendra"
 	desc = "The clicking of chitin and multitudes of legs is all you hear before the huge centipede rushes in to catch its prey."
 	icon_gib = null
@@ -180,7 +178,6 @@ to produce smoke or slow down victims? Stuff like that added to a couple would b
 	speed = 4
 	maxHealth = 300
 	health = 300
-	harm_intent_damage = 8
 	obj_damage = 15
 	melee_damage_lower = 15
 	melee_damage_upper = 25
@@ -193,7 +190,7 @@ to produce smoke or slow down victims? Stuff like that added to a couple would b
 	a_intent = INTENT_HARM
 
 
-/mob/living/simple_animal/hostile/scolopendra/AttackingTarget()
+/mob/living/danimal/hostile/scolopendra/AttackingTarget()
 	. = ..()
 	if(. && ishuman(target))
 		var/mob/living/carbon/human/H = target

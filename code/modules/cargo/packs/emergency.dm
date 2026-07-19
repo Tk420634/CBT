@@ -60,10 +60,10 @@
 	name = "Emergency Bot/Internals Crate"
 	desc = "Explosions got you down? These supplies are guaranteed to patch up holes, in stations and people alike! Comes with two floorbots, two medbots, five oxygen masks and five small oxygen tanks."
 	cost = 2750
-	contains = list(/mob/living/simple_animal/bot/floorbot,
-					/mob/living/simple_animal/bot/floorbot,
-					/mob/living/simple_animal/bot/medbot,
-					/mob/living/simple_animal/bot/medbot,
+	contains = list(/mob/living/danimal/bot/floorbot,
+					/mob/living/danimal/bot/floorbot,
+					/mob/living/danimal/bot/medbot,
+					/mob/living/danimal/bot/medbot,
 					/obj/item/tank/internals/air,
 					/obj/item/tank/internals/air,
 					/obj/item/tank/internals/air,

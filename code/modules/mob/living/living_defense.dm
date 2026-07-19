@@ -121,7 +121,7 @@
 		return FALSE
 	if(!isanimal(P.firer)) // Only simplemobs here pls
 		return FALSE
-	var/mob/living/simple_animal/shootre = P.firer
+	var/mob/living/danimal/shootre = P.firer
 	if(!shootre.ckey) // Only player controlled mobs here pls
 		return FALSE
 	if(stat) // Only if the person getting wrecked is not awake (crit, sleeping, etc)
@@ -539,15 +539,15 @@
 			addtimer(CALLBACK(usr, GLOBAL_PROC_REF(cult_ending_helper), 1), 120)
 			addtimer(CALLBACK(usr, GLOBAL_PROC_REF(ending_helper)), 270)
 	if(client)
-		INVOKE_ASYNC(GLOBAL_PROC_REF(makeNewConstruct), /mob/living/simple_animal/hostile/construct/harvester, src, null, TRUE) // must pass keyword args explicitly
+		INVOKE_ASYNC(GLOBAL_PROC_REF(makeNewConstruct), /mob/living/danimal/hostile/construct/harvester, src, null, TRUE) // must pass keyword args explicitly
 	else
 		switch(rand(1, 6))
 			if(1)
-				new /mob/living/simple_animal/hostile/construct/armored/hostile(get_turf(src))
+				new /mob/living/danimal/hostile/construct/armored/hostile(get_turf(src))
 			if(2)
-				new /mob/living/simple_animal/hostile/construct/wraith/hostile(get_turf(src))
+				new /mob/living/danimal/hostile/construct/wraith/hostile(get_turf(src))
 			if(3 to 6)
-				new /mob/living/simple_animal/hostile/construct/builder/hostile(get_turf(src))
+				new /mob/living/danimal/hostile/construct/builder/hostile(get_turf(src))
 	spawn_dust()
 	gib()
 	return TRUE

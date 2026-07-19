@@ -24,7 +24,7 @@
 	hosthealth = null
 	return ..()
 
-/*/mob/living/simple_animal/hostile/clockwork/marauder/guardian/create_mob_hud()
+/*/mob/living/danimal/hostile/clockwork/marauder/guardian/create_mob_hud()
 	if(client && !hud_used)
 		hud_used = new /datum/hud/marauder(src, ui_style2icon(client.prefs.UI_style))
 
@@ -37,8 +37,8 @@
 	desc = "Emerge or Return."
 
 /atom/movable/screen/marauder/emerge/Click()
-	if(istype(usr, /mob/living/simple_animal/hostile/clockwork/marauder/guardian))
-		var/mob/living/simple_animal/hostile/clockwork/marauder/guardian/G = usr
+	if(istype(usr, /mob/living/danimal/hostile/clockwork/marauder/guardian))
+		var/mob/living/danimal/hostile/clockwork/marauder/guardian/G = usr
 		if(G.is_in_host())
 			G.try_emerge()
 		else

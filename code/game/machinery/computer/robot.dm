@@ -67,7 +67,7 @@
 		data["cyborgs"] += list(cyborg_data)
 
 	data["drones"] = list()
-	for(var/mob/living/simple_animal/drone/D in GLOB.drones_list)
+	for(var/mob/living/danimal/drone/D in GLOB.drones_list)
 		if(D.hacked)
 			continue
 		if(z != (get_turf(D)).z)
@@ -127,7 +127,7 @@
 					add_servant_of_ratvar(R)*/
 		if("killdrone")
 			if(allowed(usr))
-				var/mob/living/simple_animal/drone/D = locate(params["ref"]) in GLOB.mob_list
+				var/mob/living/danimal/drone/D = locate(params["ref"]) in GLOB.mob_list
 				if(D.hacked)
 					to_chat(usr, span_danger("ERROR: [D] is not responding to external commands."))
 				else

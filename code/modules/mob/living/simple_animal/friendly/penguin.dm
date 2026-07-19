@@ -1,6 +1,6 @@
 //Penguins
 
-/mob/living/simple_animal/pet/penguin
+/mob/living/danimal/pet/penguin
 	response_help_continuous = "pets"
 	response_help_simple = "pet"
 	response_disarm_continuous = "bops"
@@ -20,7 +20,7 @@
 
 	footstep_type = FOOTSTEP_MOB_BAREFOOT
 
-/mob/living/simple_animal/pet/penguin/emperor
+/mob/living/danimal/pet/penguin/emperor
 	name = "Emperor penguin"
 	real_name = "penguin"
 	desc = "Emperor of all they survey."
@@ -30,7 +30,7 @@
 	guaranteed_butcher_results = list()
 	gold_core_spawnable = FRIENDLY_SPAWN
 
-/mob/living/simple_animal/pet/penguin/emperor/shamebrero
+/mob/living/danimal/pet/penguin/emperor/shamebrero
 	name = "Shamebrero penguin"
 	desc = "Shameful of all he surveys."
 	icon_state = "penguin_shamebrero"
@@ -38,7 +38,7 @@
 	gold_core_spawnable = NO_SPAWN
 	unique_pet = TRUE
 
-/mob/living/simple_animal/pet/penguin/baby
+/mob/living/danimal/pet/penguin/baby
 	//speak = list("gah", "noot noot", "noot!", "noot", "squeee!", "noo!")
 	name = "Penguin chick"
 	real_name = "penguin"

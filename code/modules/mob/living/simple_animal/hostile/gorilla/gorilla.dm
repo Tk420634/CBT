@@ -1,7 +1,7 @@
 #define GORILLA_HANDS_LAYER 1
 #define GORILLA_TOTAL_LAYERS 1
 
-/mob/living/simple_animal/hostile/gorilla
+/mob/living/danimal/hostile/gorilla
 	name = "gorilla"
 	desc = "A ground-dwelling, predominantly herbivorous ape that inhabits the forests of central Africa."
 	icon = 'icons/mob/gorilla.dmi'
@@ -44,7 +44,7 @@
 
 // Gorillas like to dismember limbs from unconcious mobs.
 // Returns null when the target is not an unconcious carbon mob; a list of limbs (possibly empty) otherwise.
-/mob/living/simple_animal/hostile/gorilla/proc/target_bodyparts(atom/the_target)
+/mob/living/danimal/hostile/gorilla/proc/target_bodyparts(atom/the_target)
 	var/list/parts = list()
 	if(iscarbon(the_target))
 		var/mob/living/carbon/C = the_target
@@ -56,7 +56,7 @@
 						parts += BP
 			return parts
 
-/mob/living/simple_animal/hostile/gorilla/AttackingTarget()
+/mob/living/danimal/hostile/gorilla/AttackingTarget()
 	if(client)
 		oogaooga()
 	var/atom/my_target = get_target()
@@ -77,16 +77,16 @@
 			L.DefaultCombatKnockdown(20)
 			visible_message(span_danger("[src] knocks [L] down!"))
 
-/mob/living/simple_animal/hostile/gorilla/EvalTarget(atom/the_target)
+/mob/living/danimal/hostile/gorilla/EvalTarget(atom/the_target)
 	var/list/parts = target_bodyparts(get_target())
 	return ..() && !istype(the_target, /mob/living/carbon/monkey) && (!parts  || parts.len > 3)
 
 
-/mob/living/simple_animal/hostile/gorilla/CanSmashTurfs(turf/T)
+/mob/living/danimal/hostile/gorilla/CanSmashTurfs(turf/T)
 	return iswallturf(T)
 
 
-/mob/living/simple_animal/hostile/gorilla/gib(no_brain)
+/mob/living/danimal/hostile/gorilla/gib(no_brain)
 	if(!no_brain)
 		var/mob/living/brain/B = new(drop_location())
 		B.name = real_name
@@ -95,23 +95,23 @@
 			mind.transfer_to(B)
 	..()
 
-/mob/living/simple_animal/hostile/gorilla/handle_automated_speech(override)
+/mob/living/danimal/hostile/gorilla/handle_automated_speech(override)
 	if(speak_chance && (override || prob(speak_chance)))
 		playsound(src, 'sound/creatures/gorilla.ogg', 200)
 	..()
 
-/mob/living/simple_animal/hostile/gorilla/can_use_guns(obj/item/G)
+/mob/living/danimal/hostile/gorilla/can_use_guns(obj/item/G)
 	to_chat(src, span_warning("Your meaty finger is much too large for the trigger guard!"))
 	return FALSE
 
 
-/mob/living/simple_animal/hostile/gorilla/proc/oogaooga()
+/mob/living/danimal/hostile/gorilla/proc/oogaooga()
 	oogas++
 	if(oogas >= rand(2,6))
 		playsound(src, 'sound/creatures/gorilla.ogg', 200)
 		oogas = 0
 
-/mob/living/simple_animal/hostile/gorilla/familiar
+/mob/living/danimal/hostile/gorilla/familiar
 	name = "familiar gorilla"
 	desc = "There is no need to be upset."
 	unique_name = FALSE

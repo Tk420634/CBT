@@ -64,7 +64,7 @@
 //		new /datum/data/mining_equipment("Ice hiking boots",            /obj/item/clothing/shoes/winterboots/ice_boots,				        2500),
 //		new /datum/data/mining_equipment("Luxury Shelter Capsule",		/obj/item/survivalcapsule/luxury,									3000),
 //		new /datum/data/mining_equipment("Luxury Bar Capsule",			/obj/item/survivalcapsule/luxuryelite,								10000),
-//		new /datum/data/mining_equipment("Nanotrasen Minebot",			/mob/living/simple_animal/hostile/mining_drone,						800),
+//		new /datum/data/mining_equipment("Nanotrasen Minebot",			/mob/living/danimal/hostile/mining_drone,						800),
 //		new /datum/data/mining_equipment("Minebot Melee Upgrade",		/obj/item/mine_bot_upgrade,											400),
 //		new /datum/data/mining_equipment("Minebot Armor Upgrade",		/obj/item/mine_bot_upgrade/health,									400),
 //		new /datum/data/mining_equipment("Minebot Cooldown Upgrade",	/obj/item/borg/upgrade/modkit/cooldown/minebot,						600),
@@ -216,7 +216,7 @@
 			new /obj/item/extinguisher/mini(drop_location)
 			new /obj/item/resonator(drop_location)
 		if("Minebot Kit")
-			new /mob/living/simple_animal/hostile/mining_drone(drop_location)
+			new /mob/living/danimal/hostile/mining_drone(drop_location)
 			new /obj/item/weldingtool/hugetank(drop_location)
 			new /obj/item/clothing/head/welding(drop_location)
 			new /obj/item/borg/upgrade/modkit/minebot_passthrough(drop_location)

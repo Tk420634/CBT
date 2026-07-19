@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/asteroid/curseblob
+/mob/living/danimal/hostile/asteroid/curseblob
 	name = "curse mass"
 	desc = "A mass of purple... smoke?"
 	icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
@@ -28,20 +28,20 @@
 	var/mob/living/set_target
 	var/timerid
 
-/mob/living/simple_animal/hostile/asteroid/curseblob/Initialize(mapload)
+/mob/living/danimal/hostile/asteroid/curseblob/Initialize(mapload)
 	. = ..()
 	timerid = QDEL_IN(src, 600)
 	playsound(src, 'sound/effects/curse1.ogg', 100, 1, -1)
 
-/mob/living/simple_animal/hostile/asteroid/curseblob/Destroy()
+/mob/living/danimal/hostile/asteroid/curseblob/Destroy()
 	new /obj/effect/temp_visual/dir_setting/curse/blob(loc, dir)
 	doing_move_loop = FALSE
 	return ..()
 
-/mob/living/simple_animal/hostile/asteroid/curseblob/perform_move_action(move_target, delay, minimum_distance)
+/mob/living/danimal/hostile/asteroid/curseblob/perform_move_action(move_target, delay, minimum_distance)
 	move_loop(get_target(), delay)
 
-/mob/living/simple_animal/hostile/asteroid/curseblob/proc/move_loop(move_target, delay)
+/mob/living/danimal/hostile/asteroid/curseblob/proc/move_loop(move_target, delay)
 	set waitfor = FALSE
 	if(doing_move_loop)
 		return
@@ -55,24 +55,24 @@
 		sleep(delay)
 	doing_move_loop = FALSE
 
-/mob/living/simple_animal/hostile/asteroid/curseblob/proc/check_for_target()
+/mob/living/danimal/hostile/asteroid/curseblob/proc/check_for_target()
 	if(QDELETED(set_target) || set_target.stat != CONSCIOUS || z != set_target.z)
 		qdel(src)
 		return TRUE
 
-/mob/living/simple_animal/hostile/asteroid/curseblob/GiveTarget(new_target)
+/mob/living/danimal/hostile/asteroid/curseblob/GiveTarget(new_target)
 	if(check_for_target())
 		return
 	new_target = set_target
 	. = ..()
-	perform_move_action(target, move_to_delay)
+	perform_move_action(get_target(), move_to_delay)
 
-/mob/living/simple_animal/hostile/asteroid/curseblob/LoseTarget() //we can't lose our target!
+/mob/living/danimal/hostile/asteroid/curseblob/OnTargetLost() //we can't lose our target!
 	if(check_for_target())
 		return
 
 //if it's not our target, we ignore it
-/mob/living/simple_animal/hostile/asteroid/curseblob/CanAllowThrough(atom/movable/mover, border_dir)
+/mob/living/danimal/hostile/asteroid/curseblob/CanAllowThrough(atom/movable/mover, border_dir)
 	..()
 	if(mover == set_target)
 		return FALSE
@@ -82,7 +82,7 @@
 			return FALSE
 	return TRUE
 
-#define IGNORE_PROC_IF_NOT_TARGET(X) /mob/living/simple_animal/hostile/asteroid/curseblob/##X(AM) { if (AM == set_target) return ..(); }
+#define IGNORE_PROC_IF_NOT_TARGET(X) /mob/living/danimal/hostile/asteroid/curseblob/##X(AM) { if (AM == set_target) return ..(); }
 
 IGNORE_PROC_IF_NOT_TARGET(attack_hand)
 
@@ -98,12 +98,12 @@ IGNORE_PROC_IF_NOT_TARGET(attack_animal)
 
 IGNORE_PROC_IF_NOT_TARGET(attack_slime)
 
-/mob/living/simple_animal/hostile/asteroid/curseblob/bullet_act(obj/item/projectile/Proj)
+/mob/living/danimal/hostile/asteroid/curseblob/bullet_act(obj/item/projectile/Proj)
 	if(Proj.firer != set_target)
 		return BULLET_ACT_FORCE_PIERCE
 	return ..()
 
-/mob/living/simple_animal/hostile/asteroid/curseblob/attacked_by(obj/item/I, mob/living/L, attackchain_flags = NONE, damage_multiplier = 1, damage_addition, damage_override)
+/mob/living/danimal/hostile/asteroid/curseblob/attacked_by(obj/item/I, mob/living/L, attackchain_flags = NONE, damage_multiplier = 1, damage_addition, damage_override)
 	if(L != set_target)
 		I.ApplyAttackCooldown(L, src)
 		return

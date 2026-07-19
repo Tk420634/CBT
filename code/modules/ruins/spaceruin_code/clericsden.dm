@@ -15,7 +15,7 @@
 /obj/item/paper/fluff/ruins/clericsden/warning
 	info = "FATHER ODIVALLUS DO NOT GO FORWARD WITH THE RITUAL. THE ASTEROID WE'RE ANCHORED TO IS UNSTABLE, YOU WILL DESTROY THE STATION. I HOPE THIS REACHES YOU IN TIME. FATHER AURELLION."
 
-/mob/living/simple_animal/hostile/construct/proteon
+/mob/living/danimal/hostile/construct/proteon
 	name = "Proteon"
 	real_name = "Proteon"
 	desc = "A weaker construct meant to scour ruins for objects of Nar'Sie's affection. Those barbed claws are no joke."
@@ -32,6 +32,6 @@
 	attack_sound = 'sound/weapons/punch2.ogg'
 	playstyle_string = "<b>You are a Proteon. Your abilities in combat are outmatched by most combat constructs, but you are still fast and nimble. Run metal and supplies, and cooperate with your fellow cultists.</b>"
 
-/mob/living/simple_animal/hostile/construct/proteon/hostile //Style of mob spawned by trapped cult runes in the cleric ruin.
+/mob/living/danimal/hostile/construct/proteon/hostile //Style of mob spawned by trapped cult runes in the cleric ruin.
 	AIStatus = AI_ON
 	environment_smash = ENVIRONMENT_SMASH_STRUCTURES //standard ai construct behavior, breaks things if it wants, but not walls.

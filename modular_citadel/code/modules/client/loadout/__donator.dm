@@ -1162,7 +1162,7 @@
 
 /obj/item/pet_carrier/eye/Initialize()
     . = ..()
-    var/mob/living/simple_animal/pet/dog/eyebot/panzer/pvt_eye = new(src)
+    var/mob/living/danimal/pet/dog/eyebot/panzer/pvt_eye = new(src)
     add_occupant(pvt_eye)
 
 /datum/gear/donator/kits/panzer
@@ -1532,7 +1532,7 @@
 
 /obj/item/pet_carrier/paws/Initialize()
 	. = ..()
-	var/mob/living/simple_animal/pet/fox/paws/pet_paws = new(src)
+	var/mob/living/danimal/pet/fox/paws/pet_paws = new(src)
 	add_occupant(pet_paws)
 
 /obj/item/pet_carrier/fluffy
@@ -1541,7 +1541,7 @@
 
 /obj/item/pet_carrier/fluffy/Initialize()
 	. = ..()
-	var/mob/living/simple_animal/pet/mothroach/tox/pet_fluffy = new(src)
+	var/mob/living/danimal/pet/mothroach/tox/pet_fluffy = new(src)
 	add_occupant(pet_fluffy)
 
 

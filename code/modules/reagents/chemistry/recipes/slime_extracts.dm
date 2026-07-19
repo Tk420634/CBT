@@ -24,7 +24,7 @@
 	required_other = TRUE
 
 /datum/chemical_reaction/slime/slimespawn/on_reaction(datum/reagents/holder)
-	var/mob/living/simple_animal/slime/S = new(get_turf(holder.my_atom), "grey")
+	var/mob/living/danimal/slime/S = new(get_turf(holder.my_atom), "grey")
 	S.visible_message(span_danger("Infused with plasma, the core begins to quiver and grow, and a new baby slime emerges from it!"))
 	..()
 
@@ -379,7 +379,7 @@
 	required_other = TRUE
 
 /datum/chemical_reaction/slime/slimebloodlust/on_reaction(datum/reagents/holder)
-	for(var/mob/living/simple_animal/slime/slime in viewers(get_turf(holder.my_atom), null))
+	for(var/mob/living/danimal/slime/slime in viewers(get_turf(holder.my_atom), null))
 		if(slime.docile) //Undoes docility, but doesn't make rabid.
 			slime.visible_message(span_danger("[slime] forgets its training, becoming wild once again!"))
 			slime.docile = FALSE

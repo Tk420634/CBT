@@ -43,7 +43,7 @@ When Sif dies, it leaves behind a:
 Difficulty: Medium
 */
 
-/mob/living/simple_animal/hostile/megafauna/sif
+/mob/living/danimal/hostile/megafauna/sif
 	name = "Great Brown Wolf Sif"
 	desc = "Guardian of the abyss. Looks pretty pissed that you're here."
 	health = 2000
@@ -87,7 +87,7 @@ Difficulty: Medium
 						 //enough it will use a special attack then reset the variable to 0w
 	var/list/hit_things = list()
 
-/mob/living/simple_animal/hostile/megafauna/sif/ComponentInitialize()
+/mob/living/danimal/hostile/megafauna/sif/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("climbs atop the wolf's head as it dangles weakly near the ground, ripping its left eye off and jumping down before punching through it's cranium!", "goes around the wolf and rips off their tail, using it as whip on the fiend"), \
@@ -100,7 +100,7 @@ Difficulty: Medium
 	gpstag = "Infinity Signal"
 	desc = "No, it's not thanos."
 
-/mob/living/simple_animal/hostile/megafauna/sif/Initialize(mapload)
+/mob/living/danimal/hostile/megafauna/sif/Initialize(mapload)
 	. = ..()
 	internal = new /obj/item/gps/internal/sif(src)
 
@@ -125,14 +125,14 @@ Difficulty: Medium
 	playsound(get_turf(src.loc), 'sound/effects/curse1.ogg', 100, 1)
 	spawn(30)
 		if(!QDELETED(src))
-			new /mob/living/simple_animal/hostile/megafauna/sif(get_turf(src.loc))
+			new /mob/living/danimal/hostile/megafauna/sif(get_turf(src.loc))
 			visible_message(span_notice("The ground shakes."))
 			playsound(get_turf(src.loc), 'sound/effects/curse3.ogg', 100, 1)
 			playsound(get_turf(src.loc), 'sound/effects/meteorimpact.ogg', 100, 1)
 			qdel(src)
 
 //Sif's charge attack
-/mob/living/simple_animal/hostile/megafauna/sif/proc/rush()
+/mob/living/danimal/hostile/megafauna/sif/proc/rush()
 
 	//Target
 	if(!target)
@@ -165,7 +165,7 @@ Difficulty: Medium
 	charging = FALSE
 	//Stop charging
 
-/mob/living/simple_animal/hostile/megafauna/sif/Move()
+/mob/living/danimal/hostile/megafauna/sif/Move()
 	//Move
 	..()
 
@@ -206,12 +206,12 @@ Difficulty: Medium
 			DestroySurroundings()
 
 //Sif's AOE spin attack
-/mob/living/simple_animal/hostile/megafauna/sif/proc/spinAttack()
+/mob/living/danimal/hostile/megafauna/sif/proc/spinAttack()
 	src.spinning = TRUE
 	spin(5,2)// Spin me boi
 
 //Chance to dodge projectiles when angered or enraged
-/mob/living/simple_animal/hostile/megafauna/sif/bullet_act(obj/item/projectile/P)
+/mob/living/danimal/hostile/megafauna/sif/bullet_act(obj/item/projectile/P)
 	var/passed = 0
 
 	if(angered)
@@ -234,7 +234,7 @@ Difficulty: Medium
 	return ..()
 
 //Sets Sif's angered stats
-/mob/living/simple_animal/hostile/megafauna/sif/proc/angered()
+/mob/living/danimal/hostile/megafauna/sif/proc/angered()
 	src.angered = TRUE
 	src.stageTwo = TRUE
 	src.visible_message(span_userdanger("[src] lets out a ear ripping howl!"), span_userdanger("[src] lets out an ear ripping roar!"))
@@ -248,7 +248,7 @@ Difficulty: Medium
 	src.rapid_melee = 3
 
 //Sets Sif's enraged stats
-/mob/living/simple_animal/hostile/megafauna/sif/proc/enraged()
+/mob/living/danimal/hostile/megafauna/sif/proc/enraged()
 	src.stageThree = TRUE
 	src.enraged = TRUE
 	src.visible_message(span_userdanger("[src] lets out a ear ripping yelp!"), span_userdanger("[src] lets out an ear ripping yelp!"))
@@ -263,7 +263,7 @@ Difficulty: Medium
 	src.dodge_prob = 50
 
 //Chooses a random special
-/mob/living/simple_animal/hostile/megafauna/sif/proc/special()
+/mob/living/danimal/hostile/megafauna/sif/proc/special()
 	src.currentPower = 0
 	switch(rand(1,2))
 		if(1)
@@ -271,7 +271,7 @@ Difficulty: Medium
 		if(2)
 			spinAttack()
 
-/mob/living/simple_animal/hostile/megafauna/sif/proc/default_attackspeed()
+/mob/living/danimal/hostile/megafauna/sif/proc/default_attackspeed()
 	if(stageTwo)
 		src.move_to_delay = 2
 		return 10
@@ -282,32 +282,32 @@ Difficulty: Medium
 	src.move_to_delay = 3
 	return 2
 
-/mob/living/simple_animal/hostile/megafauna/sif/do_attack_animation(atom/A, visual_effect_icon,used_item, no_effect)
+/mob/living/danimal/hostile/megafauna/sif/do_attack_animation(atom/A, visual_effect_icon,used_item, no_effect)
 	if(charging == FALSE)
 		..()
 
 //Attack speed delay
 //bob's note: everything here is well coded except this like why would you not just use changeNext_move()
-/mob/living/simple_animal/hostile/megafauna/sif/AttackingTarget()
+/mob/living/danimal/hostile/megafauna/sif/AttackingTarget()
 	if(charging == FALSE)
 		. = ..()
 		if(.)
 			recovery_time = world.time + 10
 
-/mob/living/simple_animal/hostile/megafauna/sif/perform_move_action(target, delay, minimum_distance)
+/mob/living/danimal/hostile/megafauna/sif/perform_move_action(target, delay, minimum_distance)
 	if(charging == FALSE)
 		..()
 
-/mob/living/simple_animal/hostile/megafauna/sif/perform_automated_combat_move(list/possible_targets)
+/mob/living/danimal/hostile/megafauna/sif/perform_automated_combat_move(list/possible_targets)
 	if(charging == FALSE)
 		..()
 
 //Immune to explosions when spinning or charging
-/mob/living/simple_animal/hostile/megafauna/sif/ex_act(severity, target)
+/mob/living/danimal/hostile/megafauna/sif/ex_act(severity, target)
 	return 0
 
 //stop spinning if you lose the target
-/mob/living/simple_animal/hostile/megafauna/sif/LoseTarget()
+/mob/living/danimal/hostile/megafauna/sif/OnTargetLost()
 	. = ..()
 	if(spinning)
 		icon_state = "Great_Brown_Wolf"
@@ -316,7 +316,7 @@ Difficulty: Medium
 		src.speed = default_attackspeed()
 		hit_things = list()
 
-/mob/living/simple_animal/hostile/megafauna/sif/Moved()
+/mob/living/danimal/hostile/megafauna/sif/Moved()
 
 	if(can_special == 1)
 
@@ -352,7 +352,7 @@ Difficulty: Medium
 	..()
 
 //Activated when sif collides with target when charging.
-/mob/living/simple_animal/hostile/megafauna/sif/Bump(atom/A)
+/mob/living/danimal/hostile/megafauna/sif/Bump(atom/A)
 	if(charging == TRUE)
 		if(isturf(A) || isobj(A) && A.density)
 			A.ex_act(EXPLODE_HEAVY)

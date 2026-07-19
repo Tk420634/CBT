@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/trog
+/mob/living/danimal/hostile/trog
 	bounty = 27
 	name = "trog"
 	desc = "A human who has mutated and regressed back to a primal, cannibalistic state. Rumor says they're poisonous as well. Want to find out? "
@@ -13,7 +13,6 @@
 	obj_damage = 30
 	melee_damage_lower = 5
 	melee_damage_upper = 15
-	harm_intent_damage = 5
 	waddle_amount = 2
 	waddle_up_time = 1
 	waddle_side_time = 1
@@ -35,7 +34,7 @@
 	loot_drop_amount = 2
 	loot_amount_random = TRUE
 
-/mob/living/simple_animal/hostile/trog/sporecarrier
+/mob/living/danimal/hostile/trog/sporecarrier
 	name = "spore carrier"
 	desc = "A victim of the beauveria mordicana fungus, these corpses sole purpose is to spread its spores."
 	icon_state = "spore_carrier"
@@ -43,7 +42,6 @@
 	icon_dead = "spore_dead"
 	health = 80
 	maxHealth = 80
-	harm_intent_damage = 5
 	melee_damage_lower = 10
 	melee_damage_upper = 25
 	attack_sound = 'sound/hallucinations/growl1.ogg'
@@ -51,7 +49,7 @@
 	faction = list("plants")
 	guaranteed_butcher_results = list(/obj/item/stack/sheet/bone = 1, /obj/effect/gibspawner/generic/animal)
 
-/mob/living/simple_animal/hostile/trog/tunneler
+/mob/living/danimal/hostile/trog/tunneler
 	name = "tunneler"
 	desc = "A mutated creature that is sensitive to light, but can swarm and kill even Deathclaws."
 	icon_state = "tunneler"
@@ -85,11 +83,11 @@
 	guaranteed_butcher_results = list(/obj/item/stack/sheet/bone = 1)
 	death_sound = 'sound/f13npc/ghoul/ghoul_death.ogg'
 
-/mob/living/simple_animal/hostile/trog/tunneler/Aggro()
+/mob/living/danimal/hostile/trog/tunneler/Aggro()
 	..()
 	summon_backup(15)
 
-/mob/living/simple_animal/hostile/trog/tunneler/AttackingTarget()
+/mob/living/danimal/hostile/trog/tunneler/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!. || !ishuman(my_target))
@@ -99,7 +97,7 @@
 	H.adjustStaminaLoss(3)
 
 
-/mob/living/simple_animal/hostile/trog/tunneler/blindone
+/mob/living/danimal/hostile/trog/tunneler/blindone
 	bounty = 300
 	name = "Blind One"
 	desc = "A...tunneler? Her scales reflect the light oddly, almost making her transparent, but her eyes are solid. She moves blindingly quickly, darting in and out of view despite her size. Overfilled, swelling venom-sacs line her throat."
@@ -147,11 +145,11 @@
 							/obj/item/stack/sheet/animalhide/human = 1,
 							/obj/item/stack/sheet/bone = 1)
 
-/mob/living/simple_animal/hostile/trog/tunneler/blindone/Aggro()
+/mob/living/danimal/hostile/trog/tunneler/blindone/Aggro()
 	..()
 	summon_backup(15)
 
-/mob/living/simple_animal/hostile/trog/tunneler/blindone/AttackingTarget()
+/mob/living/danimal/hostile/trog/tunneler/blindone/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!. || !ishuman(my_target))

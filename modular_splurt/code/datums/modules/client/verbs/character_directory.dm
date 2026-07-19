@@ -116,7 +116,7 @@ GLOBAL_LIST_INIT(char_directory_erptags, list("Top", "Bottom", "Switch", "No ERP
 			var/mob/living/carbon/human/H = M
 			species = "[H.custom_species ? H.custom_species : H.dna.species]"
 		else if(isanimal(M))
-			var/mob/living/simple_animal/SA = M
+			var/mob/living/danimal/SA = M
 			species = initial(SA.name)
 		else
 			species = C.prefs.pref_species

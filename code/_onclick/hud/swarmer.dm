@@ -10,7 +10,7 @@
 
 /atom/movable/screen/swarmer/FabricateTrap/Click()
 	if(isswarmer(usr))
-		var/mob/living/simple_animal/hostile/swarmer/S = usr
+		var/mob/living/danimal/hostile/swarmer/S = usr
 		S.CreateTrap()
 
 /atom/movable/screen/swarmer/Barricade
@@ -20,7 +20,7 @@
 
 /atom/movable/screen/swarmer/Barricade/Click()
 	if(isswarmer(usr))
-		var/mob/living/simple_animal/hostile/swarmer/S = usr
+		var/mob/living/danimal/hostile/swarmer/S = usr
 		S.CreateBarricade()
 
 /atom/movable/screen/swarmer/Replicate
@@ -30,7 +30,7 @@
 
 /atom/movable/screen/swarmer/Replicate/Click()
 	if(isswarmer(usr))
-		var/mob/living/simple_animal/hostile/swarmer/S = usr
+		var/mob/living/danimal/hostile/swarmer/S = usr
 		S.CreateSwarmer()
 
 /atom/movable/screen/swarmer/RepairSelf
@@ -40,7 +40,7 @@
 
 /atom/movable/screen/swarmer/RepairSelf/Click()
 	if(isswarmer(usr))
-		var/mob/living/simple_animal/hostile/swarmer/S = usr
+		var/mob/living/danimal/hostile/swarmer/S = usr
 		S.RepairSelf()
 
 /atom/movable/screen/swarmer/ToggleLight
@@ -50,7 +50,7 @@
 
 /atom/movable/screen/swarmer/ToggleLight/Click()
 	if(isswarmer(usr))
-		var/mob/living/simple_animal/hostile/swarmer/S = usr
+		var/mob/living/danimal/hostile/swarmer/S = usr
 		S.ToggleLight()
 
 /atom/movable/screen/swarmer/ContactSwarmers
@@ -60,7 +60,7 @@
 
 /atom/movable/screen/swarmer/ContactSwarmers/Click()
 	if(isswarmer(usr))
-		var/mob/living/simple_animal/hostile/swarmer/S = usr
+		var/mob/living/danimal/hostile/swarmer/S = usr
 		S.ContactSwarmers()
 
 /datum/hud/swarmer/New(mob/owner)

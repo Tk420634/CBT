@@ -290,7 +290,7 @@
 				INVOKE_ASYNC(C, TYPE_PROC_REF(/mob/living/carbon,equip_to_slot), src, SLOT_LEGCUFFED)
 				SSblackbox.record_feedback("tally", "handcuffs", 1, type)
 	else if(snap && isanimal(L))
-		var/mob/living/simple_animal/SA = L
+		var/mob/living/danimal/SA = L
 		if(SA.mob_size <= MOB_SIZE_TINY) //don't close the trap if they're as small as a mouse.
 			snap = FALSE
 	if(snap)

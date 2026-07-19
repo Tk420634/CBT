@@ -32,7 +32,7 @@ SUBSYSTEM_DEF(npcpool)
 	var/list/currentrun = src.currentrun
 
 	while(currentrun.len)
-		var/mob/living/simple_animal/SA = currentrun[currentrun.len]
+		var/mob/living/danimal/SA = currentrun[currentrun.len]
 		--currentrun.len
 
 		if (QDELETED(SA)) // Some issue causes nulls to get into this list some times. This keeps it running, but the bug is still there.
@@ -73,7 +73,7 @@ SUBSYSTEM_DEF(npcpool)
 		return
 	if(max_range <= 0)
 		return
-	for(var/mob/living/simple_animal/M in GLOB.simple_animals[AI_ON])
+	for(var/mob/living/danimal/M in GLOB.simple_animals[AI_ON])
 		if(!M.attractable)
 			continue
 		if(GET_DIST_EUCLIDEAN(M, doer) > max_range)
@@ -92,7 +92,7 @@ SUBSYSTEM_DEF(npcpool)
 	. = ..()
 
 /datum/wander_attractor/Destroy()
-	var/mob/living/simple_animal/SA = GET_WEAKREF(owner)
+	var/mob/living/danimal/SA = GET_WEAKREF(owner)
 	if(SA)
 		SA.InterruptAttractionMovement()
 		SA.current_attraction = null

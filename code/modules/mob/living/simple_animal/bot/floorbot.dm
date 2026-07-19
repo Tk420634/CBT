@@ -1,5 +1,5 @@
 //Floorbot
-/mob/living/simple_animal/bot/floorbot
+/mob/living/danimal/bot/floorbot
 	name = "\improper Floorbot"
 	desc = "A little floor repairing robot, he looks so excited!"
 	icon = 'icons/mob/aibots.dmi'
@@ -43,22 +43,22 @@
 	#define REPLACE_TILE		6
 	#define TILE_EMAG		7
 
-/mob/living/simple_animal/bot/floorbot/Initialize()
+/mob/living/danimal/bot/floorbot/Initialize()
 	. = ..()
 	update_icon()
 	var/datum/job/engineer/J = new/datum/job/engineer
 	access_card.access += J.get_access()
 	prev_access = access_card.access
 
-/mob/living/simple_animal/bot/floorbot/turn_on()
+/mob/living/danimal/bot/floorbot/turn_on()
 	. = ..()
 	update_icon()
 
-/mob/living/simple_animal/bot/floorbot/turn_off()
+/mob/living/danimal/bot/floorbot/turn_off()
 	..()
 	update_icon()
 
-/mob/living/simple_animal/bot/floorbot/bot_reset()
+/mob/living/danimal/bot/floorbot/bot_reset()
 	..()
 	target = null
 	oldloc = null
@@ -66,12 +66,12 @@
 	anchored = FALSE
 	update_icon()
 
-/mob/living/simple_animal/bot/floorbot/set_custom_texts()
+/mob/living/danimal/bot/floorbot/set_custom_texts()
 	text_hack = "You corrupt [name]'s construction protocols."
 	text_dehack = "You detect errors in [name] and reset his programming."
 	text_dehack_fail = "[name] is not responding to reset commands!"
 
-/mob/living/simple_animal/bot/floorbot/get_controls(mob/user)
+/mob/living/danimal/bot/floorbot/get_controls(mob/user)
 	var/dat
 	dat += hack(user)
 	dat += showpai(user)
@@ -101,7 +101,7 @@
 
 	return dat
 
-/mob/living/simple_animal/bot/floorbot/attackby(obj/item/W , mob/user, params)
+/mob/living/danimal/bot/floorbot/attackby(obj/item/W , mob/user, params)
 	if(istype(W, /obj/item/stack/tile/plasteel))
 		to_chat(user, span_notice("The floorbot can produce normal tiles itself."))
 		return
@@ -155,13 +155,13 @@
 	else
 		..()
 
-/mob/living/simple_animal/bot/floorbot/emag_act(mob/user)
+/mob/living/danimal/bot/floorbot/emag_act(mob/user)
 	. = ..()
 	if(emagged == 2)
 		if(user)
 			to_chat(user, span_danger("[src] buzzes and beeps."))
 
-/mob/living/simple_animal/bot/floorbot/Topic(href, href_list)
+/mob/living/danimal/bot/floorbot/Topic(href, href_list)
 	if(..())
 		return 1
 
@@ -195,12 +195,12 @@
 					targetdirection = null
 	update_controls()
 
-/mob/living/simple_animal/bot/floorbot/proc/empty_tiles()
+/mob/living/danimal/bot/floorbot/proc/empty_tiles()
 	new tiletype(drop_location(), specialtiles)
 	specialtiles = 0
 	tiletype = null
 
-/mob/living/simple_animal/bot/floorbot/handle_automated_action()
+/mob/living/danimal/bot/floorbot/handle_automated_action()
 	if(!..())
 		return
 
@@ -293,7 +293,7 @@
 
 	oldloc = loc
 
-/mob/living/simple_animal/bot/floorbot/proc/is_hull_breach(turf/t) //Ignore space tiles not considered part of a structure, also ignores shuttle docking areas.
+/mob/living/danimal/bot/floorbot/proc/is_hull_breach(turf/t) //Ignore space tiles not considered part of a structure, also ignores shuttle docking areas.
 	var/area/t_area = get_area(t)
 	if(t_area && (t_area.name == "Space" || findtext(t_area.name, "huttle")))
 		return 0
@@ -301,7 +301,7 @@
 		return 1
 
 //Floorbots, having several functions, need sort out special conditions here.
-/mob/living/simple_animal/bot/floorbot/process_scan(scan_target)
+/mob/living/danimal/bot/floorbot/process_scan(scan_target)
 	var/result
 	var/turf/open/floor/F
 	switch(process_type)
@@ -333,7 +333,7 @@
 			result = scan_target
 	return result
 
-/mob/living/simple_animal/bot/floorbot/proc/repair(turf/target_turf)
+/mob/living/danimal/bot/floorbot/proc/repair(turf/target_turf)
 
 	if(isspaceturf(target_turf))
 		//Must be a hull breach or in line mode to continue.
@@ -386,11 +386,11 @@
 	anchored = FALSE
 	target = null
 
-/mob/living/simple_animal/bot/floorbot/update_icon()
+/mob/living/danimal/bot/floorbot/update_icon()
 	icon_state = "floorbot[on]"
 
 
-/mob/living/simple_animal/bot/floorbot/explode()
+/mob/living/danimal/bot/floorbot/explode()
 	on = FALSE
 	visible_message(span_boldannounce("[src] blows apart!"))
 	var/atom/Tsec = drop_location()
@@ -413,7 +413,7 @@
 /obj/machinery/bot_core/floorbot
 	req_one_access = list(ACCESS_CONSTRUCTION, ACCESS_ROBOTICS)
 
-/mob/living/simple_animal/bot/floorbot/UnarmedAttack(atom/A, proximity, intent = a_intent, flags = NONE)
+/mob/living/danimal/bot/floorbot/UnarmedAttack(atom/A, proximity, intent = a_intent, flags = NONE)
 	if(isturf(A))
 		repair(A)
 	else

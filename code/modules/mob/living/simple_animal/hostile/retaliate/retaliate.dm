@@ -1,8 +1,8 @@
-/mob/living/simple_animal/hostile/retaliate
+/mob/living/danimal/hostile/retaliate
 	///A list of weakrefs pointing at things that we consider targets
 	var/list/enemies = list()
 
-/mob/living/simple_animal/hostile/retaliate/Found(atom/A)
+/mob/living/danimal/hostile/retaliate/Found(atom/A)
 	if(isliving(A))
 		var/mob/living/L = A
 		if(!L.stat)
@@ -14,7 +14,7 @@
 		if(M.occupant)
 			return A
 
-/mob/living/simple_animal/hostile/retaliate/ListTargets()
+/mob/living/danimal/hostile/retaliate/ListTargets()
 	if(!enemies.len)
 		return list()
 	var/list/see = ..()
@@ -29,7 +29,7 @@
 	see &= actual_enemies // Remove all entries that aren't in enemies
 	return see
 
-/mob/living/simple_animal/hostile/retaliate/proc/Retaliate()
+/mob/living/danimal/hostile/retaliate/proc/Retaliate()
 	var/list/around = view(src, vision_range)
 
 	for(var/atom/movable/A in around)
@@ -45,12 +45,12 @@
 				enemies |= WEAKREF(M)
 				enemies |= WEAKREF(M.occupant)
 
-	for(var/mob/living/simple_animal/hostile/retaliate/H in around)
+	for(var/mob/living/danimal/hostile/retaliate/H in around)
 		if(mob_faction_is_friendly_to_target(H) && !attack_same && !H.attack_same)
 			H.enemies |= enemies
 	return 0
 
-/mob/living/simple_animal/hostile/retaliate/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/danimal/hostile/retaliate/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	. = ..()
 	if(. > 0 && stat == CONSCIOUS)
 		Retaliate()

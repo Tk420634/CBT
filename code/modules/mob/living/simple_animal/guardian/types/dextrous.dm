@@ -1,5 +1,5 @@
 //Dextrous
-/mob/living/simple_animal/hostile/guardian/dextrous
+/mob/living/danimal/hostile/guardian/dextrous
 	melee_damage_lower = 10
 	melee_damage_upper = 10
 	damage_coeff = list(BRUTE = 0.75, BURN = 0.75, TOX = 0.75, CLONE = 0.75, STAMINA = 0, OXY = 0.75)
@@ -10,12 +10,12 @@
 	dextrous = TRUE
 	held_items = list(null, null)
 
-/mob/living/simple_animal/hostile/guardian/dextrous/death(gibbed)
+/mob/living/danimal/hostile/guardian/dextrous/death(gibbed)
 	..()
 	if(internal_storage)
 		dropItemToGround(internal_storage)
 
-/mob/living/simple_animal/hostile/guardian/dextrous/examine(mob/user)
+/mob/living/danimal/hostile/guardian/dextrous/examine(mob/user)
 	if(dextrous)
 		. = list("<span class='info'>*---------*\nThis is [icon2html(src)] \a <b>[src]</b>!\n[desc]")
 
@@ -28,19 +28,19 @@
 	else
 		return ..()
 
-/mob/living/simple_animal/hostile/guardian/dextrous/Recall(forced)
+/mob/living/danimal/hostile/guardian/dextrous/Recall(forced)
 	if(!summoner || loc == summoner || (cooldown > world.time && !forced))
 		return FALSE
 	drop_all_held_items()
 	return ..() //lose items, then return
 
-/mob/living/simple_animal/hostile/guardian/dextrous/snapback()
+/mob/living/danimal/hostile/guardian/dextrous/snapback()
 	if(summoner && !(get_dist(get_turf(summoner),get_turf(src)) <= range))
 		drop_all_held_items()
 		..() //lose items, then return
 
 //SLOT HANDLING BULLSHIT FOR INTERNAL STORAGE
-/mob/living/simple_animal/hostile/guardian/dextrous/doUnEquip(obj/item/I, force, newloc, no_move, invdrop = TRUE)
+/mob/living/danimal/hostile/guardian/dextrous/doUnEquip(obj/item/I, force, newloc, no_move, invdrop = TRUE)
 	if(..())
 		update_inv_hands()
 		if(I == internal_storage)
@@ -49,7 +49,7 @@
 		return 1
 	return 0
 
-/mob/living/simple_animal/hostile/guardian/dextrous/can_equip(obj/item/I, slot, disable_warning = FALSE, bypass_equip_delay_self = FALSE, clothing_check = FALSE, list/return_warning)
+/mob/living/danimal/hostile/guardian/dextrous/can_equip(obj/item/I, slot, disable_warning = FALSE, bypass_equip_delay_self = FALSE, clothing_check = FALSE, list/return_warning)
 	switch(slot)
 		if(SLOT_GENERIC_DEXTROUS_STORAGE)
 			if(internal_storage)
@@ -57,7 +57,7 @@
 			return 1
 	..()
 
-/mob/living/simple_animal/hostile/guardian/dextrous/equip_to_slot(obj/item/I, slot)
+/mob/living/danimal/hostile/guardian/dextrous/equip_to_slot(obj/item/I, slot)
 	if(!..())
 		return
 
@@ -68,17 +68,17 @@
 		else
 			to_chat(src, span_danger("You are trying to equip this item to an unsupported inventory slot. Report this to a coder!"))
 
-/mob/living/simple_animal/hostile/guardian/dextrous/getBackSlot()
+/mob/living/danimal/hostile/guardian/dextrous/getBackSlot()
 	return SLOT_GENERIC_DEXTROUS_STORAGE
 
-/mob/living/simple_animal/hostile/guardian/dextrous/getBeltSlot()
+/mob/living/danimal/hostile/guardian/dextrous/getBeltSlot()
 	return SLOT_GENERIC_DEXTROUS_STORAGE
 
-/mob/living/simple_animal/hostile/guardian/dextrous/update_inv_internal_storage()
+/mob/living/danimal/hostile/guardian/dextrous/update_inv_internal_storage()
 	if(internal_storage && client && hud_used && hud_used.hud_shown)
 		internal_storage.screen_loc = ui_id
 		client.screen += internal_storage
 
-/mob/living/simple_animal/hostile/guardian/dextrous/regenerate_icons()
+/mob/living/danimal/hostile/guardian/dextrous/regenerate_icons()
 	..()
 	update_inv_internal_storage()

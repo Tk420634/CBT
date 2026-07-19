@@ -35,7 +35,7 @@
 				S.cell.use(200)
 		if(ismonkey(user))
 			sound = 'modular_citadel/sound/voice/scream_monkey.ogg'
-		if(istype(user, /mob/living/simple_animal/hostile/gorilla))
+		if(istype(user, /mob/living/danimal/hostile/gorilla))
 			sound = 'sound/creatures/gorilla.ogg'
 		if(ishuman(user))
 			user.adjustOxyLoss(5)

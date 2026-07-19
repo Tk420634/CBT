@@ -2,7 +2,7 @@
 // VAULT NPC //
 ///////////////
 
-/mob/living/simple_animal/hostile/vault
+/mob/living/danimal/hostile/vault
 	name = "Vault Dweller"
 	desc = "Just a Vault Dweller"
 	icon = 'icons/fallout/mobs/humans/fallout_npc.dmi'
@@ -19,7 +19,6 @@
 	robust_searching = 1
 	maxHealth = 100
 	health = 100
-	harm_intent_damage = 8
 	melee_damage_lower = 5
 	melee_damage_upper = 10
 	attack_verb_simple = "punches"
@@ -49,43 +48,43 @@
 	uniform = /obj/item/clothing/under/f13/vault/v13
 	shoes = /obj/item/clothing/shoes/jackboots
 
-/mob/living/simple_animal/hostile/vault/dweller
+/mob/living/danimal/hostile/vault/dweller
 	minimum_distance = 10
 	retreat_distance = 10
 	obj_damage = 0
 	environment_smash = 0
 
-/mob/living/simple_animal/hostile/vault/dweller/Aggro()
+/mob/living/danimal/hostile/vault/dweller/Aggro()
 	..()
 	summon_backup(15)
 	say("HELP!!", only_overhead = TRUE)
 
-/mob/living/simple_animal/hostile/vault/dweller/dweller1
+/mob/living/danimal/hostile/vault/dweller/dweller1
 	icon_state = "vault_dweller1"
 	icon_living = "vault_dweller1"
 	icon_dead = "vault_dweller1_dead"
 
-/mob/living/simple_animal/hostile/vault/dweller/dweller2
+/mob/living/danimal/hostile/vault/dweller/dweller2
 	icon_state = "vault_dweller2"
 	icon_living = "vault_dweller2"
 	icon_dead = "vault_dweller2_dead"
 
-/mob/living/simple_animal/hostile/vault/dweller/dweller3
+/mob/living/danimal/hostile/vault/dweller/dweller3
 	icon_state = "vault_dweller3"
 	icon_living = "vault_dweller3"
 	icon_dead = "vault_dweller3_dead"
 
-/mob/living/simple_animal/hostile/vault/dweller/dweller4
+/mob/living/danimal/hostile/vault/dweller/dweller4
 	icon_state = "vault_dweller4"
 	icon_living = "vault_dweller4"
 	icon_dead = "vault_dweller4_dead"
 
-/mob/living/simple_animal/hostile/vault/dweller/dweller5
+/mob/living/danimal/hostile/vault/dweller/dweller5
 	icon_state = "vault_dweller5"
 	icon_living = "vault_dweller5"
 	icon_dead = "vault_dweller5_dead"
 
-/mob/living/simple_animal/hostile/vault/security
+/mob/living/danimal/hostile/vault/security
 	name = "Vault Security"
 	desc = "Just a Vault Security"
 	icon_state = "vault_dweller_sec"
@@ -112,7 +111,7 @@
 	)
 	speed = 10 // added to make his dumbass hold still - Jaeger
 
-/mob/living/simple_animal/hostile/vault/security/Aggro()
+/mob/living/danimal/hostile/vault/security/Aggro()
 	..()
 	summon_backup(15)
 
@@ -130,7 +129,7 @@
 /////////////////
 
 // Enclave specialist, basic fighter
-/mob/living/simple_animal/hostile/enclave
+/mob/living/danimal/hostile/enclave
 	name = "enclave specialist"
 	desc = "A Enclave soldier with combat armor and a G-11 rifle."
 	icon = 'icons/fallout/mobs/humans/fallout_npc.dmi'
@@ -156,7 +155,6 @@
 	health = 200
 	melee_damage_lower = 15
 	melee_damage_upper = 35
-	harm_intent_damage = 8
 	loot = list(/obj/effect/gibspawner/human)
 	loot_drop_amount = 2
 	loot_amount_random = TRUE
@@ -188,7 +186,7 @@
 	override_ignore_other_mobs = TRUE
 
 // Enclave Scientist
-/mob/living/simple_animal/hostile/enclave/scientist
+/mob/living/danimal/hostile/enclave/scientist
 	name = "enclave scientist"
 	desc = "An Enclave Scientist wearing an advanced radiation suit. While they may run from you, that does not exempt them from the evil they have committed."
 	icon_state = "enclave_scientist"
@@ -223,13 +221,13 @@
 	tactical_retreat = 10
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
-/mob/living/simple_animal/hostile/enclave/scientist/Aggro()
+/mob/living/danimal/hostile/enclave/scientist/Aggro()
 	..()
 	summon_backup(15)
 	say("Intruder!!", only_overhead = TRUE) 
 
 // Enclave Armored Infantry
-/mob/living/simple_animal/hostile/enclave/soldier
+/mob/living/danimal/hostile/enclave/soldier
 	name = "enclave armored infantry"
 	desc = "An Enclave Soldier wearing Advanced Power Armor and a plasma multi-caster. Play time's over, mutie."
 	icon_state = "enclave_armored"
@@ -292,7 +290,7 @@
 // BROTHERHOOD NPC //
 /////////////////////
 
-/mob/living/simple_animal/hostile/bs
+/mob/living/danimal/hostile/bs
 	name = "Tech-Trooper"
 	desc = "The something another never fails."
 	icon = 'icons/fallout/mobs/humans/fallout_npc.dmi'
@@ -310,7 +308,6 @@
 	robust_searching = 1
 	maxHealth = 200
 	health = 200
-	harm_intent_damage = 8
 	melee_damage_lower = 7
 	melee_damage_upper = 15
 	attack_verb_simple = "pistol-whips"
@@ -339,7 +336,7 @@
 	mask = /obj/item/clothing/mask/gas/sechailer
 	head = /obj/item/clothing/head/helmet/f13/combat/brotherhood
 
-/mob/living/simple_animal/hostile/bs/knight
+/mob/living/danimal/hostile/bs/knight
 	name = "Tech-trooper Leftenant"
 	desc = "A loser wielding a laser pistol and older issue combat armor."
 	icon_state = "bs_knight"
@@ -366,7 +363,7 @@
 	)
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
-/mob/living/simple_animal/hostile/bs/paladin
+/mob/living/danimal/hostile/bs/paladin
 	name = "Tech-Trooper Commander"
 	desc = "A dork equipped with an AER9 and T-51b power armor. The idiots have arrived."
 	icon_state = "bs_paladin"
@@ -410,7 +407,7 @@
 // NCR = NPC //
 ///////////////
 
-/mob/living/simple_animal/hostile/ncr
+/mob/living/danimal/hostile/ncr
 	name = "NCR"
 	desc = "For the Republic!"
 	icon = 'icons/fallout/mobs/humans/fallout_npc.dmi'
@@ -428,7 +425,6 @@
 	robust_searching = 1
 	maxHealth = 120
 	health = 120
-	harm_intent_damage = 8
 	melee_damage_lower = 8
 	melee_damage_upper = 15
 	attack_verb_simple = "áüåò"
@@ -452,7 +448,7 @@
 	shoes = /obj/item/clothing/shoes/f13/military/ncr
 	head = /obj/item/clothing/head/f13/ncr
 
-/mob/living/simple_animal/hostile/ncr/trooper
+/mob/living/danimal/hostile/ncr/trooper
 	name = "NCR Trooper"
 	desc = "A standard NCR Trooper wielding a service rifle and equipped with a patrol vest."
 	icon_state = "ncr_trooper"
@@ -478,7 +474,7 @@
 	)
 	speed = 10 // added to make his dumbass hold still - Jaeger
 
-/mob/living/simple_animal/hostile/ncr/ranger
+/mob/living/danimal/hostile/ncr/ranger
 	name = "NCR Ranger"
 	desc = "A Ranger of the NCRA, wielding a big iron on his hip and equipped with a ranger patrol vest."
 	icon_state = "ncr_sergeant"
@@ -518,7 +514,7 @@
 // LEGION NPC //
 ////////////////
 
-/mob/living/simple_animal/hostile/legion
+/mob/living/danimal/hostile/legion
 	name = "Legion"
 	desc = "True to Caesar."
 	icon = 'icons/fallout/mobs/humans/fallout_npc.dmi'
@@ -536,7 +532,6 @@
 	robust_searching = 1
 	maxHealth = 120
 	health = 120
-	harm_intent_damage = 8
 	melee_damage_lower = 8
 	melee_damage_upper = 15
 	attack_verb_simple = "attacks"
@@ -559,7 +554,7 @@
 	shoes = /obj/item/clothing/shoes/f13/military/legion
 	head = /obj/item/clothing/head/helmet/f13/legion/prime
 
-/mob/living/simple_animal/hostile/legion/prime
+/mob/living/danimal/hostile/legion/prime
 	name = "Legion Prime"
 	desc = "A Prime Legionary, equipped with a hunting rifle."
 	icon_state = "legion_prime"
@@ -586,7 +581,7 @@
 	)
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
-/mob/living/simple_animal/hostile/legion/decan
+/mob/living/danimal/hostile/legion/decan
 	name = "Legion Decanus"
 	desc = "A Prime Decanus, equipped with a hunting rifle."
 	icon_state = "legion_decan"
@@ -614,7 +609,7 @@
 	)
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
-/mob/living/simple_animal/hostile/legion/decan
+/mob/living/danimal/hostile/legion/decan
 
 /obj/effect/mob_spawn/human/corpse/legion/decan
 	name = "Legion Decanus"
@@ -628,7 +623,7 @@
 // TRIBAL NPC //
 ////////////////
 
-/mob/living/simple_animal/hostile/tribe
+/mob/living/danimal/hostile/tribe
 	name = "Lost Ones Hunter"
 	desc = "A Lost ones hunter, once part of the Sulphur Bottom tribe these lunatics have fallen to canibalism and baser instincts."
 	icon = 'icons/fallout/mobs/humans/fallout_npc.dmi'
@@ -646,7 +641,6 @@
 	robust_searching = 1
 	maxHealth = 160
 	health = 160
-	harm_intent_damage = 8
 	melee_damage_lower = 22
 	melee_damage_upper = 47
 	attack_verb_simple = "attacks"

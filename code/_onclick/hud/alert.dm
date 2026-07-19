@@ -405,7 +405,7 @@ GLOBAL_VAR(home_portal_coords)
 	alerttooltipstyle = "cult"
 	var/static/image/narnar
 	var/angle = 0
-	var/mob/living/simple_animal/hostile/construct/Cviewer = null
+	var/mob/living/danimal/hostile/construct/Cviewer = null
 
 /atom/movable/screen/alert/bloodsense/Initialize()
 	. = ..()

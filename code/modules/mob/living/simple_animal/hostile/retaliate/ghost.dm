@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/retaliate/ghost
+/mob/living/danimal/hostile/retaliate/ghost
 	name = "ghost"
 	desc = "A soul of the dead, spooky."
 	icon = 'icons/mob/mob.dmi'
@@ -18,7 +18,6 @@
 	speed = 0
 	maxHealth = 40
 	health = 40
-	harm_intent_damage = 10
 	melee_damage_lower = 15
 	melee_damage_upper = 15
 	del_on_death = 1
@@ -48,7 +47,7 @@
 	var/mutable_appearance/ghost_facial_hair
 	var/random = TRUE //if you want random names for ghosts or not
 
-/mob/living/simple_animal/hostile/retaliate/ghost/Initialize()
+/mob/living/danimal/hostile/retaliate/ghost/Initialize()
 	. = ..()
 	give_hair()
 	if(random)
@@ -59,7 +58,7 @@
 				name = "ghost of [pick(GLOB.first_names_female)] [pick(GLOB.last_names)]"
 
 
-/mob/living/simple_animal/hostile/retaliate/ghost/proc/give_hair()
+/mob/living/danimal/hostile/retaliate/ghost/proc/give_hair()
 	if(ghost_hair_style != null)
 		ghost_hair = mutable_appearance('icons/mob/hair.dmi', "hair_[ghost_hair_style]", -HAIR_LAYER)
 		ghost_hair.alpha = 200

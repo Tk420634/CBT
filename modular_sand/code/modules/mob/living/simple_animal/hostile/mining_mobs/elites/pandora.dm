@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/asteroid/elite/pandora/ComponentInitialize()
+/mob/living/danimal/hostile/asteroid/elite/pandora/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("grabs the pandora and closes it for good!"), \

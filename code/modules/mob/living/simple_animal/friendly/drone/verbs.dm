@@ -5,14 +5,14 @@
 //Drone verbs that appear in the Drone tab and on buttons
 
 
-/mob/living/simple_animal/drone/verb/check_laws()
+/mob/living/danimal/drone/verb/check_laws()
 	set category = "Drone"
 	set name = "Check Laws"
 
 	to_chat(src, "<b>Drone Laws</b>")
 	to_chat(src, laws)
 
-/mob/living/simple_animal/drone/verb/drone_ping()
+/mob/living/danimal/drone/verb/drone_ping()
 	set category = "Drone"
 	set name = "Drone ping"
 

@@ -34,12 +34,12 @@
 	current_user = user
 
 	for(var/B in GLOB.bots_list)
-		var/mob/living/simple_animal/bot/Bot = B
+		var/mob/living/danimal/bot/Bot = B
 		if(!Bot.on || Bot.z != zlevel || Bot.remote_disabled) //Only non-emagged bots on the same Z-level are detected!
 			continue //Also, the PDA must have access to the bot type.
 		var/list/newbot = list("name" = Bot.name, "mode" = Bot.get_mode_ui(), "model" = Bot.model, "locat" = get_area(Bot), "bot_ref" = REF(Bot), "mule_check" = FALSE)
 		if(Bot.bot_type == MULE_BOT)
-			var/mob/living/simple_animal/bot/mulebot/MULE = Bot
+			var/mob/living/danimal/bot/mulebot/MULE = Bot
 			mulelist += list(list("name" = MULE.name, "dest" = MULE.destination, "power" = MULE.cell ? MULE.cell.percent() : 0, "home" = MULE.home_destination, "autoReturn" = MULE.auto_return, "autoPickup" = MULE.auto_pickup, "reportDelivery" = MULE.report_delivery, "mule_ref" = REF(MULE)))
 			if(MULE.load)
 				data["load"] = MULE.load.name
@@ -64,7 +64,7 @@
 
 	var/list/standard_actions = list("patroloff", "patrolon", "ejectpai")
 	var/list/MULE_actions = list("stop", "go", "home", "destination", "setid", "sethome", "unload", "autoret", "autopick", "report", "ejectpai")
-	var/mob/living/simple_animal/bot/Bot = locate(params["robot"]) in GLOB.bots_list
+	var/mob/living/danimal/bot/Bot = locate(params["robot"]) in GLOB.bots_list
 	if (action in standard_actions)
 		Bot.bot_control(action, current_user, current_access)
 	if (action in MULE_actions)

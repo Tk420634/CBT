@@ -2,7 +2,7 @@
 	///This player has been standing still for very long and are probably roleplaying. They won't use up nutrition until they start moving again.
 	var/insanelycomfy = FALSE
 
-/mob/living/simple_animal/hostile/hellpig
+/mob/living/danimal/hostile/hellpig
 	name = "hellpig"
 	desc = "A mutated American boar, sporting razor sharp tucks and a nasty temper."
 	icon = 'modular_coyote/icons/mob/hellpig.dmi'
@@ -28,13 +28,13 @@
 	loot_drop_amount = 4
 	am_important = TRUE
 
-/mob/living/simple_animal/hostile/hellpig/Initialize()
+/mob/living/danimal/hostile/hellpig/Initialize()
 	. = ..()
 	recenter_wide_sprite()
 
 //Cat slugs
 
-/mob/living/simple_animal/pet/catslug
+/mob/living/danimal/pet/catslug
 	name = "catslug"
 	desc = "A noodley bodied creature with thin arms and legs, and gloomy dark eyes."
 	icon_state = "catslug"
@@ -56,7 +56,6 @@
 	waddle_amount = 3
 	waddle_up_time = 1
 	waddle_side_time = 2
-	harm_intent_damage = 2
 	melee_damage_lower = 2
 	melee_damage_upper = 5
 	dextrous = TRUE
@@ -66,7 +65,7 @@
 	can_ghost_into = TRUE
 	head_offset = -9
 
-/mob/living/simple_animal/pet/catslug/proc/catslug_color()
+/mob/living/danimal/pet/catslug/proc/catslug_color()
 	set name = "Pick Color"
 	set category = "IC"
 	set desc = "You can set your color!"
@@ -75,12 +74,12 @@
 		color = newcolor
 	update_icon()
 
-/mob/living/simple_animal/pet/catslug/Initialize()
+/mob/living/danimal/pet/catslug/Initialize()
 	. = ..()
-	verbs += /mob/living/simple_animal/pet/catslug/proc/catslug_color
+	verbs += /mob/living/danimal/pet/catslug/proc/catslug_color
 	add_verb(src, /mob/living/proc/lay_down)
 
-/mob/living/simple_animal/pet/catslug/update_mobility()
+/mob/living/danimal/pet/catslug/update_mobility()
 	. = ..()
 	if(client && stat != DEAD)
 		if(!CHECK_MOBILITY(src, MOBILITY_STAND))
@@ -91,17 +90,17 @@
 			collar_type = "[initial(collar_type)]"
 	regenerate_icons()
 /* Slugcat helmet/hat sprites were a bit of a headache so we're not doing it right now : ^ ))))
-/mob/living/simple_animal/pet/catslug/proc/apply_overlay(cache_index)
+/mob/living/danimal/pet/catslug/proc/apply_overlay(cache_index)
 	if((. = overlays[cache_index]))
 		add_overlay(.)
 
-/mob/living/simple_animal/pet/catslug/proc/remove_overlay(cache_index)
+/mob/living/danimal/pet/catslug/proc/remove_overlay(cache_index)
 	var/I = overlays[cache_index]
 	if(I)
 		cut_overlay(I)
 		overlays[cache_index] = null
 
-/mob/living/simple_animal/pet/catslug/update_inv_head()
+/mob/living/danimal/pet/catslug/update_inv_head()
 	remove_overlay(DRONE_HEAD_LAYER)
 
 	if(head)
@@ -116,7 +115,7 @@
 	apply_overlay(DRONE_HEAD_LAYER)
 */
 //Slugcat OC for thingpony
-/mob/living/simple_animal/pet/catslug/meadow
+/mob/living/danimal/pet/catslug/meadow
 	name = "Meadow"
 	desc = "A noodly creature with soft looking fur. This one has orange and black patches upon it's white fur! (OOC notes : Fine with most Rp! No snuff or scat) Ref: https://cdn.discordapp.com/attachments/986783005743923230/1071899061919166624/Meadow.png"
 	icon_state = "calicoslug"
@@ -125,7 +124,7 @@
 	gender = "female"
 
 //Slugcat OC for Gamma
-/mob/living/simple_animal/pet/catslug/sunrise
+/mob/living/danimal/pet/catslug/sunrise
 	name = "Falling Sunrise"
 	desc = "This somewhat large Scug, standing at about 3'10, is mostly magenta, though his head is covered with a Vulture mask. He is frequently seen around town, or out doing light hunting in the wastes. He is capable of English speech. OOC : ERP Ok, Non-Con is a No, Unsanitary is a No"
 	icon_state = "sunrise"
@@ -134,7 +133,7 @@
 	gender = "male"
 
 //Slugcat OC for Puff
-/mob/living/simple_animal/pet/catslug/cherish
+/mob/living/danimal/pet/catslug/cherish
 	name = "Cherish"
 	desc = "A thickly furred, emerald catslug with big, shiny dark eyes that are constantly mooned with mirth. A red sash is wrapped over their chest; A keepsake, perhaps?"
 	icon_state = "saintslug"
@@ -143,7 +142,7 @@
 	gender = "plural"
 //Mobs from Virgo
 
-/mob/living/simple_animal/pet/wolf/direwolf
+/mob/living/danimal/pet/wolf/direwolf
 	name = "dire wolf"
 	desc = "The biggest and baddest wolf around"
 	icon = 'modular_coyote/icons/mob/vore64x32.dmi'
@@ -154,44 +153,43 @@
 	old_y = 0
 	pixel_x = -16
 	pixel_y = 0
-	harm_intent_damage = 10
 	melee_damage_lower = 10
 	melee_damage_upper = 20
 	health = 300
 	maxHealth = 300
 
-/mob/living/simple_animal/pet/wolf/direwolf/Initialize()
+/mob/living/danimal/pet/wolf/direwolf/Initialize()
 	. = ..()
 	recenter_wide_sprite()
 
-/mob/living/simple_animal/pet/wolf/direwolf/dog
+/mob/living/danimal/pet/wolf/direwolf/dog
 	name = "large dog"
 	desc = "The biggest and goodest dog around."
 	icon_dead = "diredog-dead"
 	icon_living = "diredog"
 	icon_state = "diredog"
 
-/mob/living/simple_animal/pet/wolf/direwolf/dog/sec
+/mob/living/danimal/pet/wolf/direwolf/dog/sec
 	name = "large guard dog"
 	icon_dead = "diredogs-dead"
 	icon_living = "diredogs"
 	icon_state = "diredogs"
 
-/mob/living/simple_animal/pet/wolf/direwolf/rykka
+/mob/living/danimal/pet/wolf/direwolf/rykka
 	name = "Rykka"
 	desc = "This big canine looks like a GSD."
 	icon_dead = "rykka-dead"
 	icon_living = "rykka"
 	icon_state = "rykka"
 
-/mob/living/simple_animal/pet/wolf/direwolf/andrews
+/mob/living/danimal/pet/wolf/direwolf/andrews
 	name = "andrewsarchus"
 	desc = "That's one massive mean-looking piece of long extinct megafauna."
 	icon_dead = "andrews-dead"
 	icon_living = "andrews"
 	icon_state = "andrews"
 
-/mob/living/simple_animal/hostile/alligator
+/mob/living/danimal/hostile/alligator
 	name = "Alligator"
 	desc = "A large reptile with sharp looking teeth."
 	icon = 'modular_coyote/icons/mob/alligator.dmi'
@@ -205,21 +203,21 @@
 	emote_taunt_sound = list('sound/alien/Voice/growl1.ogg', 'sound/alien/Voice/growl3.ogg', )
 	idlesound = list('sound/alien/Voice/hiss1.ogg',)
 
-/mob/living/simple_animal/hostile/alligator/Initialize()
+/mob/living/danimal/hostile/alligator/Initialize()
 	. = ..()
 	recenter_wide_sprite()
 
 //Dinos
 
-/mob/living/simple_animal/hostile/dinosaur/Initialize()
+/mob/living/danimal/hostile/dinosaur/Initialize()
 	. = ..()
 	recenter_wide_sprite()
 
-/mob/living/simple_animal/hostile/retaliate/goat/dinosaur/Initialize()
+/mob/living/danimal/hostile/retaliate/goat/dinosaur/Initialize()
 	. = ..()
 	recenter_wide_sprite()
 
-/mob/living/simple_animal/hostile/retaliate/goat/dinosaur/triceratops/bull
+/mob/living/danimal/hostile/retaliate/goat/dinosaur/triceratops/bull
 	name = "Bull Triceratops"
 	desc = "With its 3 horns, a parrot-like beak and a large frill that could reach nearly 1 metre (3 feet) across, the Triceratops skull is one of the largest and most striking of any land animal."
 	icon = 'modular_coyote/icons/mob/dinosaurs68x45.dmi'
@@ -234,7 +232,7 @@
 	melee_damage_lower = 5
 	melee_damage_upper = 10
 
-/mob/living/simple_animal/hostile/retaliate/goat/dinosaur/triceratops/cow
+/mob/living/danimal/hostile/retaliate/goat/dinosaur/triceratops/cow
 	name = "Cow Triceratops"
 	desc = "With its 3 horns, a parrot-like beak and a large frill that could reach nearly 1 metre (3 feet) across, the Triceratops skull is one of the largest and most striking of any land animal."
 	icon = 'modular_coyote/icons/mob/dinosaurs68x45.dmi'
@@ -249,7 +247,7 @@
 	melee_damage_lower = 5
 	melee_damage_upper = 10
 
-/mob/living/simple_animal/hostile/dinosaur/velociraptor
+/mob/living/danimal/hostile/dinosaur/velociraptor
 	name = "velociraptor"
 	desc = " Its sleek body was lightweight and built for speed, making it an effective predator. Its head was long and narrow, its snout was somewhat flattened, and it had a fairly large brain."
 	icon = 'modular_coyote/icons/mob/dinosaurs68x45.dmi'
@@ -264,7 +262,7 @@
 	melee_damage_lower = 20
 	melee_damage_upper = 30
 
-/mob/living/simple_animal/hostile/dinosaur/pachycephalosaurus
+/mob/living/danimal/hostile/dinosaur/pachycephalosaurus
 	name = "pachycephalosaurus"
 	desc = "A biped with strong hind limbs and little developed forelimbs. Featuring a high, domelike skull."
 	icon = 'modular_coyote/icons/mob/dinosaurs45x27.dmi'
@@ -276,7 +274,7 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 20
 
-/mob/living/simple_animal/hostile/dinosaur/dimetrodon
+/mob/living/danimal/hostile/dinosaur/dimetrodon
 	name = "dimetrodon"
 	desc = "A carnivore with a large sail upon it's back."
 	icon = 'modular_coyote/icons/mob/dinosaurs45x27.dmi'
@@ -288,7 +286,7 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 20
 
-/mob/living/simple_animal/hostile/dinosaur/mammoth
+/mob/living/danimal/hostile/dinosaur/mammoth
 	name = "mammoth"
 	desc = "A large creature with long, curved tusks and thick hair upon it's body."
 	icon = 'modular_coyote/icons/mob/dinosaurs128x96.dmi'
@@ -300,7 +298,7 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 20
 
-/mob/living/simple_animal/hostile/dinosaur/rex
+/mob/living/danimal/hostile/dinosaur/rex
 	name = "Rex"
 	desc = "Standing about 40 feet tall, this creature looks rather strong and powerful."
 	icon = 'modular_coyote/icons/mob/dinosaurs128x96.dmi'
@@ -314,7 +312,7 @@
 
 //Kangaroo
 
-/mob/living/simple_animal/hostile/kangaroo //cause roo's be mean
+/mob/living/danimal/hostile/kangaroo //cause roo's be mean
 	name = "Kangaroo"
 	desc = "A marsupial! One that posseses powerful hind legs, a long strong tail and small front legs."
 	icon = 'modular_coyote/icons/mob/kangaroo.dmi'
@@ -329,14 +327,14 @@
 	melee_damage_lower = 5
 	melee_damage_upper = 10
 
-/mob/living/simple_animal/pet/kiwi
+/mob/living/danimal/pet/kiwi
 	name = "Kiwi"
 	icon = 'modular_coyote/icons/mob/kiwi.dmi'
 	icon_dead = "kiwi_dead"
 	icon_living = "kiwi"
 	icon_state = "kiwi"
 
-/mob/living/simple_animal/pet/sheep
+/mob/living/danimal/pet/sheep
 	name = "Sheep"
 	icon = 'modular_coyote/icons/mob/sheep.dmi'
 	icon_dead = "sheep_dead"
@@ -344,7 +342,7 @@
 	icon_state = "sheep"
 
 //raccoons
-/mob/living/simple_animal/raccoon //the base, generic raccoon
+/mob/living/danimal/raccoon //the base, generic raccoon
 	name = "Raccoon"
 	desc = "A trash panda! Aw, how cute."
 	icon = 'modular_coyote/icons/mob/raccoon.dmi'
@@ -366,12 +364,12 @@
 	response_harm_continuous = "stamps on"
 	response_harm_simple = "stamp"
 
-/mob/living/simple_animal/raccoon/Initialize()
+/mob/living/danimal/raccoon/Initialize()
     .=..()
     resize = 0.5
     update_transform()
 
-/mob/living/simple_animal/raccoon/brown
+/mob/living/danimal/raccoon/brown
 	name = "Raccoon"
 	desc = "A trash panda! Aw, how cute. This one is brown."
 	icon = 'modular_coyote/icons/mob/raccoon.dmi'
@@ -379,7 +377,7 @@
 	icon_living = "raccoon_brown"
 	icon_state = "raccoon_brown"
 
-/mob/living/simple_animal/raccoon/redbrown
+/mob/living/danimal/raccoon/redbrown
 	name = "Raccoon"
 	desc = "A trash panda! Aw, how cute. This one is redish brown."
 	icon = 'modular_coyote/icons/mob/raccoon.dmi'
@@ -387,7 +385,7 @@
 	icon_living = "raccoon_redbrown"
 	icon_state = "raccoon_redbrown"
 
-/mob/living/simple_animal/raccoon/orange
+/mob/living/danimal/raccoon/orange
 	name = "Raccoon"
 	desc = "A trash panda! Aw, how cute. This one is orange."
 	icon = 'modular_coyote/icons/mob/raccoon.dmi'
@@ -395,7 +393,7 @@
 	icon_living = "raccoon_orange"
 	icon_state = "raccoon_orange"
 
-/mob/living/simple_animal/raccoon/lightgrey
+/mob/living/danimal/raccoon/lightgrey
 	name = "Raccoon"
 	desc = "A trash panda! Aw, how cute. This one is light grey. It seems like it likes donuts."
 	icon = 'modular_coyote/icons/mob/raccoon.dmi'
@@ -403,7 +401,7 @@
 	icon_living = "raccoon_lightgrey"
 	icon_state = "raccoon_lightgrey"
 
-/mob/living/simple_animal/raccoon/darkbrown
+/mob/living/danimal/raccoon/darkbrown
 	name = "Raccoon"
 	desc = "A trash panda! Aw, how cute. This one is dark brown."
 	icon = 'modular_coyote/icons/mob/raccoon.dmi'
@@ -411,7 +409,7 @@
 	icon_living = "raccoon_darkbrown"
 	icon_state = "raccoon_darkbrown"
 
-/mob/living/simple_animal/raccoon/red
+/mob/living/danimal/raccoon/red
 	name = "Raccoon"
 	desc = "A trash panda! Aw, how cute. This one is red"
 	icon = 'modular_coyote/icons/mob/raccoon.dmi'
@@ -419,7 +417,7 @@
 	icon_living = "raccoon_red"
 	icon_state = "raccoon_red"
 
-/mob/living/simple_animal/raccoon/oakbrown
+/mob/living/danimal/raccoon/oakbrown
 	name = "Raccoon"
 	desc = "A trash panda! Aw, how cute. This one is oak brown"
 	icon = 'modular_coyote/icons/mob/raccoon.dmi'
@@ -427,7 +425,7 @@
 	icon_living = "raccoon_oakbrown"
 	icon_state = "raccoon_oakbrown"
 
-/mob/living/simple_animal/armadillo
+/mob/living/danimal/armadillo
 	name = "Armadillo"
 	desc = "Better hope he doesn't cross the road to see the spirit of the west."
 	icon = 'modular_coyote/icons/mob/armadillo.dmi'
@@ -448,7 +446,7 @@
 	response_harm_continuous = "stamps on"
 	response_harm_simple = "stamp"
 
-/mob/living/simple_animal/uffalo
+/mob/living/danimal/uffalo
 	name = "Uffalo"
 	desc = "Some sort of..mutant buffallo creature. Gross."
 	icon = 'modular_coyote/icons/mob/uffalo.dmi'
@@ -460,13 +458,13 @@
 	health = 100
 	guaranteed_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab = 6)
 
-/mob/living/simple_animal/uffalo/Initialize()
+/mob/living/danimal/uffalo/Initialize()
 	. = ..()
 	recenter_wide_sprite()
 
 //Start Advanced Mobs//
 
-/mob/living/simple_animal/advanced/tenderclawmale
+/mob/living/danimal/advanced/tenderclawmale
 	name = "male tenderclaw"
 	desc = "A..aethergiest? Or, well. It sort of looks like a aethergiest. Just, softer and friendler!"
 	icon = 'modular_coyote/icons/mob/newclaws.dmi'
@@ -474,7 +472,7 @@
 	icon_living = "newclaw"
 	icon_dead = "newclaw_d"
 
-/mob/living/simple_animal/advanced/tenderclawfemale
+/mob/living/danimal/advanced/tenderclawfemale
 	name = "female tenderclaw"
 	desc = "A..aethergiest? Or, well. It sort of looks like a aethergiest. Just, softer and friendler!"
 	icon = 'modular_coyote/icons/mob/newclaws.dmi'
@@ -482,7 +480,7 @@
 	icon_living = "femclaw"
 	icon_dead = "femclaw_d"
 
-/mob/living/simple_animal/advanced/tenderclawherm
+/mob/living/danimal/advanced/tenderclawherm
 	name = "herm tenderclaw"
 	desc = "A..aethergiest? Or, well. It sort of looks like a aethergiest. Just, softer and friendler!"
 	icon = 'modular_coyote/icons/mob/newclaws.dmi'
@@ -490,7 +488,7 @@
 	icon_living = "hermclaw"
 	icon_dead = "hermclaw_d"
 
-/mob/living/simple_animal/advanced/nightstalker
+/mob/living/danimal/advanced/nightstalker
 	name = "nightstalker"
 	desc = "A nightstalker!"
 	icon = 'icons/fallout/mobs/animals/nightstalker.dmi'
@@ -498,7 +496,7 @@
 	icon_living = "nightstalker"
 	icon_dead = "nightstalker-dead"
 
-/mob/living/simple_animal/advanced/wendigo
+/mob/living/danimal/advanced/wendigo
 	name = "wendigo"
 	desc = "A mythological man-eating legendary creature, you probably aren't going to survive this.!"
 	icon = 'icons/mob/icemoon/64x64megafauna.dmi'
@@ -507,140 +505,140 @@
 	icon_dead = "wendigo_dead"
 
 //The simple version of the dog borgs.
-/mob/living/simple_animal/advanced/blade//Yes they are pokemon, shut.
+/mob/living/danimal/advanced/blade//Yes they are pokemon, shut.
 	name = "blade borg"
 	icon = 'modular_coyote/icons/mob/dogborg.dmi'
 	icon_state = "blade"
 	icon_living = "blade"
 	icon_dead = "blade-wreck"
 
-/mob/living/simple_animal/advanced/k9
+/mob/living/danimal/advanced/k9
 	name = "k9"
 	icon = 'modular_coyote/icons/mob/dogborg.dmi'
 	icon_state = "k9"
 	icon_living = "k9"
 	icon_dead = "k9-wreck"
 
-/mob/living/simple_animal/advanced/k9
+/mob/living/danimal/advanced/k9
 	name = "k9"
 	icon = 'modular_coyote/icons/mob/dogborg.dmi'
 	icon_state = "blocky_valesec"
 	icon_living = "blocky_valesec"
 	icon_dead = "blocky_valesec-wreck"
 
-/mob/living/simple_animal/advanced/medihound
+/mob/living/danimal/advanced/medihound
 	name = "medihound"
 	icon = 'modular_coyote/icons/mob/dogborg.dmi'
 	icon_state = "light_valemed"
 	icon_living = "light_valemed"
 	icon_dead = "light_valemed-wreck"
 
-/mob/living/simple_animal/advanced/k69
+/mob/living/danimal/advanced/k69
 	name = "k69"
 	icon = 'modular_coyote/icons/mob/dogborg.dmi'
 	icon_state = "k69"
 	icon_living = "k69"
 	icon_dead = "k69-wreck"
 
-/mob/living/simple_animal/advanced/scrubpup
+/mob/living/danimal/advanced/scrubpup
 	name = "scrubpup"
 	icon = 'modular_coyote/icons/mob/dogborg.dmi'
 	icon_state = "scrubpup"
 	icon_living = "scrubpup"
 	icon_dead = "scrubpup-wreck"
 
-/mob/living/simple_animal/advanced/alinaeng
+/mob/living/danimal/advanced/alinaeng
 	name = "engineering hound"
 	icon = 'modular_coyote/icons/mob/dogborg.dmi'
 	icon_state = "alina-eng"
 	icon_living = "alina-eng"
 	icon_dead = "alina-eng-wreck"
 
-/mob/living/simple_animal/advanced/alinasec
+/mob/living/danimal/advanced/alinasec
 	name = "security hound"
 	icon = 'modular_coyote/icons/mob/dogborg.dmi'
 	icon_state = "alina-sec"
 	icon_living = "alina-sec"
 	icon_dead = "alina-sec-wreck"
 
-/mob/living/simple_animal/advanced/alinamed
+/mob/living/danimal/advanced/alinamed
 	name = "medical hound"
 	icon = 'modular_coyote/icons/mob/dogborg.dmi'
 	icon_state = "alina-med"
 	icon_living = "alina-med"
 	icon_dead = "alina-med-wreck"
 
-/mob/living/simple_animal/advanced/medihounddark
+/mob/living/danimal/advanced/medihounddark
 	name = "medical hound dark"
 	icon = 'modular_coyote/icons/mob/dogborg.dmi'
 	icon_state = "dark_valemed"
 	icon_living = "dark_valemed"
 	icon_dead = "dark_valemed-wreck"
 
-/mob/living/simple_animal/advanced/pupdozer
+/mob/living/danimal/advanced/pupdozer
 	name = "pupdozer"
 	icon = 'modular_coyote/icons/mob/dogborg.dmi'
 	icon_state = "pupdozer_valeeng"
 	icon_living = "pupdozer_valeeng"
 	icon_dead = "pupdozer_valeeng-wreck"
 
-/mob/living/simple_animal/advanced/k9dark
+/mob/living/danimal/advanced/k9dark
 	name = "k9 dark"
 	icon = 'modular_coyote/icons/mob/dogborg.dmi'
 	icon_state = "dark_valesec"
 	icon_living = "dark_valesec"
 	icon_dead = "dark_valesec-wreck"
 
-/mob/living/simple_animal/advanced/valemed
+/mob/living/danimal/advanced/valemed
 	name = "vale med"
 	icon = 'modular_coyote/icons/mob/dogborg.dmi'
 	icon_state = "valemed"
 	icon_living = "valemed"
 	icon_dead = "valemed-wreck"
 
-/mob/living/simple_animal/advanced/valesci
+/mob/living/danimal/advanced/valesci
 	name = "vale sci"
 	icon = 'modular_coyote/icons/mob/dogborg.dmi'
 	icon_state = "valesci"
 	icon_living = "valesci"
 	icon_dead = "valesci-wreck"
 
-/mob/living/simple_animal/advanced/valesesc
+/mob/living/danimal/advanced/valesesc
 	name = "Vale sec"
 	icon = 'modular_coyote/icons/mob/dogborg.dmi'
 	icon_state = "valesec"
 	icon_living = "valesec"
 	icon_dead = "valesec-wreck"
 
-/mob/living/simple_animal/advanced/valeseng
+/mob/living/danimal/advanced/valeseng
 	name = "Vale eng"
 	icon = 'modular_coyote/icons/mob/dogborg.dmi'
 	icon_state = "valeeng"
 	icon_living = "valeeng"
 	icon_dead = "valeeng-wreck"
 
-/mob/living/simple_animal/advanced/valemine
+/mob/living/danimal/advanced/valemine
 	name = "Vale mine"
 	icon = 'modular_coyote/icons/mob/dogborg.dmi'
 	icon_state = "valemine"
 	icon_living = "valemine"
 	icon_dead = "valemine-wreck"
 
-/mob/living/simple_animal/advanced/k50
+/mob/living/danimal/advanced/k50
 	name = "k50"
 	icon = 'modular_coyote/icons/mob/dogborg.dmi'
 	icon_state = "blocky_valeserv"
 	icon_living = "blocky_valeserv"
 	icon_dead = "blocky_valeserv-wreck"
 
-/mob/living/simple_animal/advanced/valeserv
+/mob/living/danimal/advanced/valeserv
 	name = "vale serv"
 	icon = 'modular_coyote/icons/mob/dogborg.dmi'
 	icon_state = "valeserv"
 	icon_living = "valeserv"
 	icon_dead = "valeserv-wreck"
 
-/mob/living/simple_animal/advanced/valeservdark
+/mob/living/danimal/advanced/valeservdark
 	name = "vale serv dark"
 	icon = 'modular_coyote/icons/mob/dogborg.dmi'
 	icon_state = "dark_valeserv"
@@ -649,63 +647,63 @@
 
 
 //Raptor borgs from Virgo
-/mob/living/simple_animal/advanced/secraptor
+/mob/living/danimal/advanced/secraptor
 	name = "security raptor"
 	icon = 'modular_coyote/icons/mob/raptorborg.dmi'
 	icon_state = "secraptor"
 	icon_living = "secraptor"
 	icon_dead = "secraptor-wreck"
 
-/mob/living/simple_animal/advanced/sciraptor
+/mob/living/danimal/advanced/sciraptor
 	name = "science raptor"
 	icon = 'modular_coyote/icons/mob/raptorborg.dmi'
 	icon_state = "sciraptor"
 	icon_living = "sciraptor"
 	icon_dead = "sciraptor-wreck"
 
-/mob/living/simple_animal/advanced/mediraptor
+/mob/living/danimal/advanced/mediraptor
 	name = "medical raptor"
 	icon = 'modular_coyote/icons/mob/raptorborg.dmi'
 	icon_state = "medraptor"
 	icon_living = "medraptor"
 	icon_dead = "medraptor-wreck"
 
-/mob/living/simple_animal/advanced/engiraptor
+/mob/living/danimal/advanced/engiraptor
 	name = "engineering raptor"
 	icon = 'modular_coyote/icons/mob/raptorborg.dmi'
 	icon_state = "engiraptor"
 	icon_living = "engiraptor"
 	icon_dead = "engiraptor-wreck"
 
-/mob/living/simple_animal/advanced/mineraptor
+/mob/living/danimal/advanced/mineraptor
 	name = "mining raptor"
 	icon = 'modular_coyote/icons/mob/raptorborg.dmi'
 	icon_state = "mineraptor"
 	icon_living = "mineraptor"
 	icon_dead = "mineraptor-wreck"
 
-/mob/living/simple_animal/advanced/traumaraptor
+/mob/living/danimal/advanced/traumaraptor
 	name = "trauma raptor"
 	icon = 'modular_coyote/icons/mob/raptorborg.dmi'
 	icon_state = "traumaraptor"
 	icon_living = "traumaraptor"
 	icon_dead = "traumaraptor-wreck"
 
-/mob/living/simple_animal/advanced/janiraptor
+/mob/living/danimal/advanced/janiraptor
 	name = "janitor raptor"
 	icon = 'modular_coyote/icons/mob/raptorborg.dmi'
 	icon_state = "janiraptor"
 	icon_living = "janiraptor"
 	icon_dead = "janiraptor-wreck"
 
-/mob/living/simple_animal/advanced/serviraptor
+/mob/living/danimal/advanced/serviraptor
 	name = "service raptor"
 	icon = 'modular_coyote/icons/mob/raptorborg.dmi'
 	icon_state = "serviraptor"
 	icon_living = "serviraptor"
 	icon_dead = "serviraptor-wreck"
 
-/mob/living/simple_animal/advanced/fancyraptor
+/mob/living/danimal/advanced/fancyraptor
 	name = "fancy raptor"
 	icon = 'modular_coyote/icons/mob/raptorborg.dmi'
 	icon_state = "fancyraptor"
@@ -714,63 +712,63 @@
 
 //raptor mobs from virgo
 
-/mob/living/simple_animal/advanced/purpleraptor
+/mob/living/danimal/advanced/purpleraptor
 	name = "purple raptor - animal"
 	icon = 'modular_coyote/icons/mob/virgo_raptor.dmi'
 	icon_state = "raptorpurple"
 	icon_living = "raptorpurple"
 	icon_dead = "raptorpurple_dead"
 
-/mob/living/simple_animal/advanced/greenraptor
+/mob/living/danimal/advanced/greenraptor
 	name = "green raptor - animal"
 	icon = 'modular_coyote/icons/mob/virgo_raptor.dmi'
 	icon_state = "raptorgreen"
 	icon_living = "raptorgreen"
 	icon_dead = "raptorgreen_dead"
 
-/mob/living/simple_animal/advanced/redraptor
+/mob/living/danimal/advanced/redraptor
 	name = "red raptor - animal"
 	icon = 'modular_coyote/icons/mob/virgo_raptor.dmi'
 	icon_state = "raptorred"
 	icon_living = "raptorred"
 	icon_dead = "raptorred_dead"
 
-/mob/living/simple_animal/advanced/blueraptor
+/mob/living/danimal/advanced/blueraptor
 	name = "blue raptor - animal"
 	icon = 'modular_coyote/icons/mob/virgo_raptor.dmi'
 	icon_state = "raptorblue"
 	icon_living = "raptorblue"
 	icon_dead = "raptorblue_dead"
 
-/mob/living/simple_animal/advanced/blackraptor
+/mob/living/danimal/advanced/blackraptor
 	name = "black raptor - animal"
 	icon = 'modular_coyote/icons/mob/virgo_raptor.dmi'
 	icon_state = "raptorblack"
 	icon_living = "raptorblack"
 	icon_dead = "raptorblack_dead"
 
-/mob/living/simple_animal/advanced/whiteraptor
+/mob/living/danimal/advanced/whiteraptor
 	name = "white raptor - animal"
 	icon = 'modular_coyote/icons/mob/virgo_raptor.dmi'
 	icon_state = "raptorwhite"
 	icon_living = "raptorwhite"
 	icon_dead = "raptorwhite_dead"
 
-/mob/living/simple_animal/advanced/bat
+/mob/living/danimal/advanced/bat
 	name = "bat"
 	icon = 'icons/mob/animal.dmi'
 	icon_state = "bat"
 	icon_living = "bat"
 	icon_dead = "bat_dead"
 
-/mob/living/simple_animal/advanced/cat
+/mob/living/danimal/advanced/cat
 	name = "cat"
 	icon = 'icons/mob/pets.dmi'
 	icon_state = "cat2"
 	icon_living = "cat2"
 	icon_dead = "cat2_dead"
 
-/mob/living/simple_animal/advanced/bighorn
+/mob/living/danimal/advanced/bighorn
 	name = "bighorner"
 	icon = 'icons/fallout/mobs/animals/farmanimals.dmi'
 	icon_state = "bighorner"
@@ -779,82 +777,82 @@
 
 //More Virgo mobs
 //Big wolfs
-/mob/living/simple_animal/advanced/bigwolf
+/mob/living/danimal/advanced/bigwolf
 	name = "big wolf - black"
 	icon = 'modular_coyote/icons/mob/vore128x64.dmi'
 	icon_state = "blackwolf"
 	icon_living = "blackwolf"
 	icon_dead = "blackwolf_dead"
 
-/mob/living/simple_animal/advanced/bigwolf/Initialize()
+/mob/living/danimal/advanced/bigwolf/Initialize()
     .=..()
     resize = 0.5
     update_transform()
 
-/mob/living/simple_animal/advanced/sifwolf
+/mob/living/danimal/advanced/sifwolf
 	name = "big wolf - silver"
 	icon = 'modular_coyote/icons/mob/vore128x64.dmi'
 	icon_state = "sifwolf"
 	icon_living = "sifwolf"
 	icon_dead = "sifwolf_dead"
 
-/mob/living/simple_animal/advanced/sifwolf/Initialize()
+/mob/living/danimal/advanced/sifwolf/Initialize()
     .=..()
     resize = 0.5
     update_transform()
 
-/mob/living/simple_animal/advanced/whitewolf
+/mob/living/danimal/advanced/whitewolf
 	name = "big wolf - white"
 	icon = 'modular_coyote/icons/mob/vore128x64.dmi'
 	icon_state = "whitewolf"
 	icon_living = "whitewolf"
 	icon_dead = "whitewolf_dead"
 
-/mob/living/simple_animal/advanced/whitewolf/Initialize()
+/mob/living/danimal/advanced/whitewolf/Initialize()
     .=..()
     resize = 0.5
     update_transform()
 
 //Leopardmanders
 
-/mob/living/simple_animal/advanced/leopardmander
+/mob/living/danimal/advanced/leopardmander
 	name = "leopardmander -blue"
 	icon = 'modular_coyote/icons/mob/vore128x64.dmi'
 	icon_state = "leopardmander_blue"
 	icon_living = "leopardmander_blue"
 	icon_dead = "leopardmander_blue_dead"
 
-/mob/living/simple_animal/advanced/leopardmander/Initialize()
+/mob/living/danimal/advanced/leopardmander/Initialize()
     .=..()
     resize = 0.5
     update_transform()
 
-/mob/living/simple_animal/advanced/leopardmanderwhite
+/mob/living/danimal/advanced/leopardmanderwhite
 	name = "leopardmander - white"
 	icon = 'modular_coyote/icons/mob/vore128x64.dmi'
 	icon_state = "leopardmander"
 	icon_living = "leopardmander"
 	icon_dead = "leopardmander_dead"
 
-/mob/living/simple_animal/advanced/leopardmanderwhite/Initialize()
+/mob/living/danimal/advanced/leopardmanderwhite/Initialize()
     .=..()
     resize = 0.5
     update_transform()
 
-/mob/living/simple_animal/advanced/leopardmanderexotic
+/mob/living/danimal/advanced/leopardmanderexotic
 	name = "leopardmander - exotic"
 	icon = 'modular_coyote/icons/mob/vore128x64.dmi'
 	icon_state = "leopardmander_exotic"
 	icon_living = "leopardmander_exotic"
 	icon_dead = "leopardmander_exotic_dead"
 
-/mob/living/simple_animal/advanced/leopardmanderexotic/Initialize()
+/mob/living/danimal/advanced/leopardmanderexotic/Initialize()
     .=..()
     resize = 0.5
     update_transform()
 
 
-/mob/living/simple_animal/advanced/gecko
+/mob/living/danimal/advanced/gecko
 	name = "gecko"
 	desc = "A large mutated reptile with sharp teeth."
 	icon = 'icons/fallout/mobs/animals/wasteanimals.dmi'
@@ -862,7 +860,7 @@
 	icon_living = "gekko"
 	icon_dead = "gekko_dead"
 
-/mob/living/simple_animal/advanced/gecko_villager
+/mob/living/danimal/advanced/gecko_villager
 	name = "gecko villager"
 	desc = "A large mutated reptile that has learned the basics of tool usage."
 	icon = 'icons/fallout/mobs/animals/gecktribe.dmi'
@@ -872,7 +870,7 @@
 
 
 
-/mob/living/simple_animal/advanced/gecko_leader
+/mob/living/danimal/advanced/gecko_leader
 	name = "gecko leader"
 	desc = "A large mutated reptile that has learned the basics of checks and balances."
 	icon = 'icons/fallout/mobs/animals/gecktribe.dmi'
@@ -880,7 +878,7 @@
 	icon_living = "gekko_tribe_leader"
 	icon_dead = "gekko_dead"
 
-/mob/living/simple_animal/advanced/gecko_shaman
+/mob/living/danimal/advanced/gecko_shaman
 	name = "gecko shaman"
 	desc = "A large mutated reptile that has learned the basics of magic."
 	icon = 'icons/fallout/mobs/animals/gecktribe.dmi'
@@ -888,7 +886,7 @@
 	icon_living = "gekko_tribe_shaman"
 	icon_dead = "gekko_dead"
 
-/mob/living/simple_animal/advanced/molerat
+/mob/living/danimal/advanced/molerat
 	name = "molerat"
 	desc = "A large mutated rat-mole hybrid that finds its way everywhere. Common in caves and underground areas."
 	icon = 'icons/fallout/mobs/animals/wasteanimals.dmi'
@@ -896,7 +894,7 @@
 	icon_living = "molerat"
 	icon_dead = "molerat_dead"
 
-/mob/living/simple_animal/advanced/dog
+/mob/living/danimal/advanced/dog
 	name = "dog"
 	desc = "Some kind of dog."
 	icon = 'icons/fallout/mobs/animals/dogs.dmi'
@@ -904,7 +902,7 @@
 	icon_living = "dog_feral"
 	icon_dead = "dog_feral_dead"
 
-/mob/living/simple_animal/advanced/rottweiler
+/mob/living/danimal/advanced/rottweiler
 	name = "rottweiler"
 	desc = "Some kind of dog."
 	icon = 'icons/fallout/mobs/animals/dogs.dmi'
@@ -912,7 +910,7 @@
 	icon_living = "rottweiler"
 	icon_dead = "rottweiler_dead"
 
-/mob/living/simple_animal/advanced/labretriever
+/mob/living/danimal/advanced/labretriever
 	name = "labrador retriever"
 	desc = "Some kind of dog."
 	icon = 'icons/fallout/mobs/animals/dogs.dmi'
@@ -920,7 +918,7 @@
 	icon_living = "tippen"
 	icon_dead = "tippen_dead"
 
-/mob/living/simple_animal/advanced/shepherd
+/mob/living/danimal/advanced/shepherd
 	name = "shepherd"
 	desc = "Some kind of dog."
 	icon = 'icons/fallout/mobs/animals/dogs.dmi'
@@ -928,7 +926,7 @@
 	icon_living = "shepherd"
 	icon_dead = "shepherd_dead"
 
-/mob/living/simple_animal/advanced/wolf
+/mob/living/danimal/advanced/wolf
 	name = "wolf"
 	desc = "Some kind of wild dog thing."
 	icon = 'icons/fallout/mobs/animals/dogs.dmi'
@@ -936,7 +934,7 @@
 	icon_living = "wolf"
 	icon_dead = "wolf_dead"
 
-/mob/living/simple_animal/advanced/direwolf
+/mob/living/danimal/advanced/direwolf
 	name = "white dire wolf"
 	desc = "Some kind of wild dog thing."
 	icon = 'modular_coyote/icons/mob/vore64x32.dmi'
@@ -944,7 +942,7 @@
 	icon_living = "direwolf"
 	icon_dead = "direwolf_dead"
 
-/mob/living/simple_animal/advanced/hyotie
+/mob/living/danimal/advanced/hyotie
 	name = "hyotie"
 	desc = "Some kind of mix of otie and hyena."
 	icon = 'modular_coyote/icons/mob/vore64x32.dmi'
@@ -952,7 +950,7 @@
 	icon_living = "andrews"
 	icon_dead = "andrews_dead"
 
-/mob/living/simple_animal/advanced/direwolf_black
+/mob/living/danimal/advanced/direwolf_black
 	name = "black direwolf"
 	desc = "Some kind of big black dog."
 	icon = 'modular_coyote/icons/mob/vore64x32.dmi'
@@ -960,7 +958,7 @@
 	icon_living = "rykka"
 	icon_dead = "rykka_dead"
 
-/mob/living/simple_animal/advanced/hellhound
+/mob/living/danimal/advanced/hellhound
 	name = "hellound"
 	desc = "It's a fire doggo from hell."
 	icon = 'modular_coyote/icons/mob/paramob.dmi'
@@ -968,7 +966,7 @@
 	icon_living = "hellhound"
 	icon_dead = "hellhound_dead"
 
-/mob/living/simple_animal/advanced/hellhound_greater
+/mob/living/danimal/advanced/hellhound_greater
 	name = "greater hellound"
 	desc = "It's a fire doggo from hell."
 	icon = 'modular_coyote/icons/mob/paramob.dmi'
@@ -976,7 +974,7 @@
 	icon_living = "hellhoundgreater"
 	icon_dead = "hellhound_dead"
 
-/mob/living/simple_animal/advanced/rabbit
+/mob/living/danimal/advanced/rabbit
 	name = "bunny"
 	desc = "Hoppity hop, easter is on it's way."
 	icon = 'modular_coyote/icons/mob/paramob.dmi'
@@ -984,7 +982,7 @@
 	icon_living = "bunny"
 	icon_dead = "bunny_dead"
 
-/mob/living/simple_animal/advanced/yaoguai
+/mob/living/danimal/advanced/yaoguai
 	name = "tamed Yaoguai"
 	desc = "Some kind of big black dog."
 	icon = 'icons/fallout/mobs/animals/yaoguai.dmi'
@@ -993,7 +991,7 @@
 	icon_dead = "yaoguai_dead"
 
 //By request, xenomorphs
-/mob/living/simple_animal/advanced/xeno
+/mob/living/danimal/advanced/xeno
 	name = "Xenomorph Drone"
 	desc = "Don't tell Riply..."
 	icon = 'modular_coyote/icons/mob/aliens.dmi'
@@ -1001,7 +999,7 @@
 	icon_living = "aliend"
 	icon_dead = "aliend_dead"
 
-/mob/living/simple_animal/advanced/xenos
+/mob/living/danimal/advanced/xenos
 	name = "Xenomorph Sentry"
 	desc = "Don't tell Riply..."
 	icon = 'modular_coyote/icons/mob/aliens.dmi'
@@ -1009,7 +1007,7 @@
 	icon_living = "alienq"
 	icon_dead = "alienq_dead"
 
-/mob/living/simple_animal/advanced/xenoh
+/mob/living/danimal/advanced/xenoh
 	name = "Xenomorph Hunter"
 	desc = "Don't tell Riply..."
 	icon = 'modular_coyote/icons/mob/aliens.dmi'
@@ -1017,7 +1015,7 @@
 	icon_living = "alienh"
 	icon_dead = "alienh_dead"
 
-/mob/living/simple_animal/advanced/xenop
+/mob/living/danimal/advanced/xenop
 	name = "Xenomorph Protector"
 	desc = "Don't tell Riply..."
 	icon = 'icons/mob/alienqueen.dmi'
@@ -1025,7 +1023,7 @@
 	icon_living = "alienp"
 	icon_dead = "alienp_dead"
 
-/mob/living/simple_animal/advanced/xenoq
+/mob/living/danimal/advanced/xenoq
 	name = "Xenomorph Queen"
 	desc = "Don't tell Riply..."
 	icon = 'icons/mob/alienqueen.dmi'
@@ -1033,12 +1031,12 @@
 	icon_living = "alienq"
 	icon_dead = "alienq_dead"
 
-/mob/living/simple_animal/advanced/xenoq/Initialize()
+/mob/living/danimal/advanced/xenoq/Initialize()
     .=..()
     resize = 0.7
     update_transform()
 
-/mob/living/simple_animal/advanced/mousegrey
+/mob/living/danimal/advanced/mousegrey
 	name = "grey mouse"
 	desc = "Now you see it, now you don't."
 	icon = 'icons/mob/animal.dmi'
@@ -1046,7 +1044,7 @@
 	icon_living = "mouse_gray"
 	icon_dead = "mouse_gray_dead"
 
-/mob/living/simple_animal/advanced/mousebrown
+/mob/living/danimal/advanced/mousebrown
 	name = "brown mouse"
 	desc = "Now you see it, now you don't."
 	icon = 'icons/mob/animal.dmi'
@@ -1054,7 +1052,7 @@
 	icon_living = "mouse_brown"
 	icon_dead = "mouse_brown_dead"
 
-/mob/living/simple_animal/advanced/mousewhite
+/mob/living/danimal/advanced/mousewhite
 	name = "white mouse"
 	desc = "Now you see it, now you don't."
 	icon = 'icons/mob/animal.dmi'
@@ -1062,7 +1060,7 @@
 	icon_living = "mouse_white"
 	icon_dead = "mouse_white_dead"
 
-/mob/living/simple_animal/advanced/opossum
+/mob/living/danimal/advanced/opossum
 	name = "opossum"
 	desc = "It's an opossum, a small scavenging marsupial."
 	icon = 'icons/mob/animal.dmi'
@@ -1070,7 +1068,7 @@
 	icon_living = "possum"
 	icon_dead = "possum_dead"
 
-/mob/living/simple_animal/advanced/greensnake
+/mob/living/danimal/advanced/greensnake
 	name = "green snake"
 	desc = "A slithering, noodle-like thing with a mouth."
 	icon = 'icons/mob/animal.dmi'
@@ -1078,7 +1076,7 @@
 	icon_living = "snake"
 	icon_dead = "snake_dead"
 
-/mob/living/simple_animal/advanced/bee
+/mob/living/danimal/advanced/bee
 	name = "bee"
 	desc = "Bee yourself!"
 	icon = 'icons/mob/animal.dmi'
@@ -1086,7 +1084,7 @@
 	icon_living = "bumbles"
 	icon_dead = "bumbles_dead"
 
-/mob/living/simple_animal/advanced/sophisticatedgorilla
+/mob/living/danimal/advanced/sophisticatedgorilla
 	name = "sophisticated gorilla"
 	desc = "The leg muscles!"
 	icon = 'icons/mob/gorilla.dmi'
@@ -1094,7 +1092,7 @@
 	icon_living = "standing"
 	icon_dead = "standing_dead"
 
-/mob/living/simple_animal/advanced/gorilla
+/mob/living/danimal/advanced/gorilla
 	name = "gorilla"
 	desc = "The muscles!"
 	icon = 'icons/mob/gorilla.dmi'
@@ -1102,7 +1100,7 @@
 	icon_living = "crawling"
 	icon_dead = "crawling_dead"
 
-/mob/living/simple_animal/advanced/mothroach
+/mob/living/danimal/advanced/mothroach
 	name = "mothroach"
 	desc = "This is the adorable by-product of multiple attempts at genetically mixing mothpeople with cockroaches."
 	icon = 'icons/mob/animal.dmi'
@@ -1110,7 +1108,7 @@
 	icon_living = "mothroach"
 	icon_dead = "mothroach_dead"
 
-/mob/living/simple_animal/advanced/bat
+/mob/living/danimal/advanced/bat
 	name = "bat"
 	desc = "Try not to go batty"
 	icon = 'modular_coyote/icons/mob/bat.dmi'
@@ -1118,7 +1116,7 @@
 	icon_living = "bat"
 	icon_dead = "bat_dead"
 
-/mob/living/simple_animal/advanced/parrot
+/mob/living/danimal/advanced/parrot
 	name = "parrot"
 	desc = "SQUAAAAWK!"
 	icon = 'icons/mob/animal.dmi'
@@ -1126,7 +1124,7 @@
 	icon_living = "parrot"
 	icon_dead = "parrot_dead"
 
-/mob/living/simple_animal/advanced/purpledc
+/mob/living/danimal/advanced/purpledc
 	name = "purple cloaked aethergiest"
 	desc = "Gonna rip and tear, in style."
 	icon = 'modular_coyote/icons/mob/deathclaw.dmi'
@@ -1134,7 +1132,7 @@
 	icon_living = "pur"
 	icon_dead = "pur_dead"
 
-/mob/living/simple_animal/advanced/whitedc
+/mob/living/danimal/advanced/whitedc
 	name = "white cloaked aethergiest"
 	desc = "Gonna rip and tear, in style."
 	icon = 'modular_coyote/icons/mob/deathclaw.dmi'
@@ -1142,7 +1140,7 @@
 	icon_living = "whi"
 	icon_dead = "whi_dead"
 
-/mob/living/simple_animal/advanced/reddc
+/mob/living/danimal/advanced/reddc
 	name = "red cloaked aethergiest"
 	desc = "Gonna rip and tear, in style."
 	icon = 'modular_coyote/icons/mob/deathclaw.dmi'
@@ -1150,7 +1148,7 @@
 	icon_living = "red"
 	icon_dead = "red_dead"
 
-/mob/living/simple_animal/advanced/grydc
+/mob/living/danimal/advanced/grydc
 	name = "grey cloaked aethergiest"
 	desc = "Gonna rip and tear, in style."
 	icon = 'modular_coyote/icons/mob/deathclaw.dmi'
@@ -1158,7 +1156,7 @@
 	icon_living = "gry"
 	icon_dead = "gry_dead"
 
-/mob/living/simple_animal/advanced/brodc
+/mob/living/danimal/advanced/brodc
 	name = "brown cloaked aethergiest"
 	desc = "Gonna rip and tear, in style."
 	icon = 'modular_coyote/icons/mob/deathclaw.dmi'
@@ -1166,7 +1164,7 @@
 	icon_living = "bro"
 	icon_dead = "bro_dead"
 
-/mob/living/simple_animal/advanced/hubdc
+/mob/living/danimal/advanced/hubdc
 	name = "black cloaked aethergiest"
 	desc = "Gonna rip and tear, in style."
 	icon = 'modular_coyote/icons/mob/deathclaw.dmi'
@@ -1174,7 +1172,7 @@
 	icon_living = "hub"
 	icon_dead = "hub_dead"
 
-/mob/living/simple_animal/advanced/maidclaw
+/mob/living/danimal/advanced/maidclaw
 	name = "maid aethergiest"
 	desc = "Gonna rip and tear, in style."
 	icon = 'modular_coyote/icons/mob/deathclaw.dmi'
@@ -1182,7 +1180,7 @@
 	icon_living = "maidclaw"
 	icon_dead = "maidclaw_dead"
 
-/mob/living/simple_animal/advanced/queenclaw
+/mob/living/danimal/advanced/queenclaw
 	name = "Queen aethergiest"
 	desc = "Gonna rip and tear, in style."
 	icon = 'modular_coyote/icons/mob/deathclaw.dmi'
@@ -1191,7 +1189,7 @@
 	icon_dead = "aethergiest_queen_dead"
 
 //splurt mobs
-/mob/living/simple_animal/advanced/femdigo
+/mob/living/danimal/advanced/femdigo
 	name = "Female Wendigo"
 	desc = "A curse, Or perhaps a blessing."
 	icon = 'icons/mob/wendigo.dmi'
@@ -1201,7 +1199,7 @@
 
 // Start of colfers silly craftable hivebots
 
-/mob/living/simple_animal/advanced/hivebot
+/mob/living/danimal/advanced/hivebot
 	name = "General Hivebot"
 	desc = "A hivebot?"
 	health = 70
@@ -1227,7 +1225,7 @@
 	icon_living = "mediumarm_hivebot"
 	icon_dead = "mediumarm_hivebot_dead"
 
-/mob/living/simple_animal/advanced/hivebot/cheap
+/mob/living/danimal/advanced/hivebot/cheap
 	name = "Cheap Hivebot"
 	desc = "Cheap hivebot with little health, no special traits."
 	see_in_dark = 4
@@ -1237,7 +1235,7 @@
 	icon_living = "small_hivebot"
 	icon_dead = "small_hivebot_dead"
 
-/mob/living/simple_animal/advanced/hivebot/ranged
+/mob/living/danimal/advanced/hivebot/ranged
 	name = "Ranged Hivebot"
 	desc = "Ranged hivebot, comes with deadeye."
 	health = 50
@@ -1246,7 +1244,7 @@
 	icon_living = "rangedarm_hivebot"
 	icon_dead = "rangedarm_hivebot_dead"
 
-/mob/living/simple_animal/advanced/hivebot/factory
+/mob/living/danimal/advanced/hivebot/factory
 	name = "Factory Hivebot"
 	desc = "Factory hivebot, comes with treasure hunter, quick build, and technophreak"
 	health = 50
@@ -1255,7 +1253,7 @@
 	icon_living = "factory_hivebot"
 	icon_dead = "factory_hivebot_dead"
 
-/mob/living/simple_animal/advanced/hivebot/crystal
+/mob/living/danimal/advanced/hivebot/crystal
 	name = "Crystaline Hivebot"
 	desc = "Comes with improved healing, magegrab, and wand usage."
 	health = 60
@@ -1265,32 +1263,32 @@
 	icon_dead = "crystal_hivebot_dead"
 
 
-/mob/living/simple_animal/advanced/hivebot/crystal/Initialize(trait_source = TRAIT_GENERIC)
+/mob/living/danimal/advanced/hivebot/crystal/Initialize(trait_source = TRAIT_GENERIC)
 	. = ..()
 	ADD_TRAIT(src, TRAIT_WAND_PROFICIENT, "wand_proficient")
 	ADD_TRAIT(src, TRAIT_IMPROVED_HEALING, "improved_healing")
 	ADD_TRAIT(src, TRAIT_MAGEGRAB, "Mage Grab")
 
-/mob/living/simple_animal/advanced/hivebot/ranged/Initialize(trait_source = TRAIT_GENERIC)
+/mob/living/danimal/advanced/hivebot/ranged/Initialize(trait_source = TRAIT_GENERIC)
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NICE_SHOT, "nice_shot")
 
-/mob/living/simple_animal/advanced/hivebot/factory/Initialize(trait_source = TRAIT_GENERIC)
+/mob/living/danimal/advanced/hivebot/factory/Initialize(trait_source = TRAIT_GENERIC)
 	. = ..()
 	/*ADD_TRAIT(src, TRAIT_TREASURE_HUNTER, "treasurehunter")*/// Not until crafting menus are fixed
 	ADD_TRAIT(src, TRAIT_TECHNOPHREAK, "technophreak")
 	ADD_TRAIT(src, TRAIT_QUICK_BUILD, "quick-build")
 
-/mob/living/simple_animal/advanced/hivebot/Initialize(trait_source = TRAIT_GENERIC)
+/mob/living/danimal/advanced/hivebot/Initialize(trait_source = TRAIT_GENERIC)
 	. = ..()
 	ADD_TRAIT(src, TRAIT_IGNOREDAMAGESLOWDOWN, "ignoredamageslowdown")
 	ADD_TRAIT(src, TRAIT_HEAL_TEND, "healing_triage")
 
-/mob/living/simple_animal/advanced/hivebot/Initialize(mapload)
+/mob/living/danimal/advanced/hivebot/Initialize(mapload)
 	. = ..()
 	notify_ghosts("A new FRIENDLY hivebot has been created somewhere on the map, click it to take control!", source = src, action=NOTIFY_ATTACK, flashwindow = FALSE, ignore_key = POLL_IGNORE_FUGITIVE)
 
-/*/mob/living/simple_animal/advanced/hivebot/attack_ghost(mob/dead/observer/ghost)
+/*/mob/living/danimal/advanced/hivebot/attack_ghost(mob/dead/observer/ghost)
 	. = ..()
 	icon_state = input("Default","small_hivebot","smallarm_hivebot","medium_hivebot")
 	if(icon_state == "Default")
@@ -1301,7 +1299,7 @@
 	icon_living = icon_state
 	icon_dead = "[icon_state]_dead"*/ // Would be cool to be able to set your icon, but I don't know how to make it work and im tired grandpa
 
-/mob/living/simple_animal/advanced/hivebot/examine(mob/user)
+/mob/living/danimal/advanced/hivebot/examine(mob/user)
 	. = list("<span class='info'>*---------*\nThis is [icon2html(src, user)] \a <b>[src]</b>!")
 
 	if(health != maxHealth)
@@ -1317,7 +1315,7 @@
 			. += span_deadsay("A message repeatedly flashes on its display: \"ERROR -- OFFLINE\".")
 	. += "*---------*</span>"
 
-/mob/living/simple_animal/advanced/hivebot/attackby(obj/item/I, mob/user)
+/mob/living/danimal/advanced/hivebot/attackby(obj/item/I, mob/user)
 	. = ..()
 	if(istype(I, /obj/item/screwdriver) && stat != DEAD)
 		if(health < maxHealth)
@@ -1331,12 +1329,12 @@
 			to_chat(user, span_warning("[src]'s screws can't get any tighter!"))
 		return //This used to not exist and drones who repaired themselves also stabbed the shit out of themselves.
 
-/mob/living/simple_animal/advanced/hivebot/attackby(obj/item/I, mob/user)
+/mob/living/danimal/advanced/hivebot/attackby(obj/item/I, mob/user)
 	. = ..()
 	if(istype(I, /obj/item/multitool) && stat == DEAD)
 		try_reactivating(user)
 
-/mob/living/simple_animal/advanced/hivebot/proc/try_reactivating(mob/living/user)
+/mob/living/danimal/advanced/hivebot/proc/try_reactivating(mob/living/user)
 	/*var/mob/dead/observer/G = get_ghost()
 	if(!client && (!G || !G.client))
 		var/list/faux_gadgets = list("hypertext inflator","failsafe directory","DRM switch","stack initializer",\
@@ -1359,7 +1357,7 @@
 	else
 		to_chat(user, span_warning("You need to remain still to reactivate [src]!"))
 
-/mob/living/simple_animal/advanced/thicktron_s
+/mob/living/danimal/advanced/thicktron_s
 	name = "Modified Assaultron"
 	desc = "Why is it so thick?"
 	icon = 'icons/mob/splurtbot.dmi'
@@ -1372,7 +1370,7 @@
 
 // Start Pets //
 
-/mob/living/simple_animal/pet/mothroach
+/mob/living/danimal/pet/mothroach
 	name = "mothroach"
 	desc = "This is the adorable by-product of multiple attempts at genetically mixing mothpeople with cockroaches."
 	icon = 'icons/mob/animal.dmi'
@@ -1381,7 +1379,7 @@
 	icon_dead = "mothroach_dead"
 	var/held_icon = "mothroach"
 
-/mob/living/simple_animal/pet/mothroach/tox
+/mob/living/danimal/pet/mothroach/tox
 	name = "Fluffy"
 	desc = "A adorably fluffy mothroach. This moth roach seems to have a collar on its neck, the tag reading 'Fluffy Mckit. If found, return to Tox Mckit'. What a fluffy fella!"
 	icon = 'icons/mob/animal.dmi'
@@ -1408,7 +1406,6 @@
 	waddle_amount = 3
 	waddle_up_time = 1
 	waddle_side_time = 2
-	harm_intent_damage = 2
 	melee_damage_lower = 2
 	melee_damage_upper = 5
 	dextrous = TRUE
@@ -1416,7 +1413,7 @@
 	held_items = list(null, null)
 	healable = 1
 
-/mob/living/simple_animal/pet/pony
+/mob/living/danimal/pet/pony
 	name = "pony"
 	desc = "A cute fluffy pony"
 	icon = 'icons/mob/animal.dmi'
@@ -1424,7 +1421,7 @@
 	icon_living = "pony"
 	icon_dead = "pony_dead"
 
-/mob/living/simple_animal/pet/giraffe
+/mob/living/danimal/pet/giraffe
 	name = "giraffe"
 	desc = "A long necked goat"
 	icon = 'modular_coyote/icons/mob/giraffe.dmi'
@@ -1432,7 +1429,7 @@
 	icon_living = "giraffe"
 	icon_dead = "giraffe_dead"
 
-/mob/living/simple_animal/advanced/kirin
+/mob/living/danimal/advanced/kirin
 	name = "teal kirin"
 	desc = "A mythical type of creature."
 	icon = 'modular_coyote/icons/mob/kirin.dmi'
@@ -1440,7 +1437,7 @@
 	icon_living = "teal_kirin"
 	icon_dead = "teal_kirin_dead"
 
-/mob/living/simple_animal/advanced/kirin/white
+/mob/living/danimal/advanced/kirin/white
 	name = "white kirin"
 	desc = "A mythical type of creature."
 	icon = 'modular_coyote/icons/mob/kirin.dmi'
@@ -1448,7 +1445,7 @@
 	icon_living = "white_kirin"
 	icon_dead = "white_kirin_dead"
 
-/mob/living/simple_animal/advanced/kirin/purple
+/mob/living/danimal/advanced/kirin/purple
 	name = "purple kirin"
 	desc = "A mythical type of creature."
 	icon = 'modular_coyote/icons/mob/kirin.dmi'
@@ -1456,7 +1453,7 @@
 	icon_living = "purple_kirin"
 	icon_dead = "purple_kirin_dead"
 
-/mob/living/simple_animal/advanced/plantmouth
+/mob/living/danimal/advanced/plantmouth
 	name = "Venus Human Trap"
 	desc = "A planty monster with a smile the size of your head"
 	icon = 'icons/effects/spacevines.dmi'
@@ -1464,7 +1461,7 @@
 	icon_living = "venus_human_trap"
 	icon_dead = "venus_human_trap_rest"
 
-/mob/living/simple_animal/advanced/greycat
+/mob/living/danimal/advanced/greycat
 	name = "fluffy cat"
 	desc = "a fluffy grey and white cat."
 	icon = 'modular_coyote/icons/mob/cat.dmi'
@@ -1472,12 +1469,12 @@
 	icon_living = "grey_white"
 	icon_dead = "grey_white_dead"
 
-/mob/living/simple_animal/advanced/greycat/Initialize()
+/mob/living/danimal/advanced/greycat/Initialize()
     .=..()
     resize = 0.5
     update_transform()
 
-/mob/living/simple_animal/advanced/darkbrowntanuki
+/mob/living/danimal/advanced/darkbrowntanuki
 	name = "dark brown tanuki"
 	desc = "A twolegged raccoon dog with a leaf on it's head."
 	icon = 'modular_coyote/icons/mob/tanuki.dmi'
@@ -1485,7 +1482,7 @@
 	icon_living = "dark_brown"
 	icon_dead = "dark_brown_dead"
 
-/mob/living/simple_animal/advanced/darkgreytanuki
+/mob/living/danimal/advanced/darkgreytanuki
 	name = "dark grey tanuki"
 	desc = "A twolegged raccoon dog with a leaf on it's head."
 	icon = 'modular_coyote/icons/mob/tanuki.dmi'
@@ -1493,7 +1490,7 @@
 	icon_living = "dark_grey"
 	icon_dead = "dark_grey_dead"
 
-/mob/living/simple_animal/advanced/unicorn
+/mob/living/danimal/advanced/unicorn
 	name = "unicorn"
 	desc = "Stay away from the red bull."
 	icon = 'modular_coyote/icons/mob/kirin.dmi'
@@ -1503,7 +1500,7 @@
 
 //Ranger Creatures
 
-/mob/living/simple_animal/advanced/longjaw
+/mob/living/danimal/advanced/longjaw
 	name = "longjaw"
 	desc = "A spotted grey creature."
 	icon = 'modular_coyote/icons/mob/rangercritters.dmi'
@@ -1511,7 +1508,7 @@
 	icon_living = "longjaw"
 	icon_dead = "longjaw_dead"
 
-/mob/living/simple_animal/advanced/uttie
+/mob/living/danimal/advanced/uttie
 	name = "utahraptor"
 	desc = "A dinosaur. Oh my."
 	icon = 'modular_coyote/icons/mob/rangercritters.dmi'
@@ -1519,7 +1516,7 @@
 	icon_living = "uttie"
 	icon_dead = "uttie_dead"
 
-/mob/living/simple_animal/advanced/gorgon
+/mob/living/danimal/advanced/gorgon
 	name = "gorgon"
 	desc = "A dinosaur. Oh my."
 	icon = 'modular_coyote/icons/mob/rangercritters.dmi'
@@ -1527,7 +1524,7 @@
 	icon_living = "gorgon"
 	icon_dead = "gorgon_dead"
 
-/mob/living/simple_animal/advanced/rack_deer
+/mob/living/danimal/advanced/rack_deer
 	name = "rack deer"
 	desc = "A strange type of deer."
 	icon = 'modular_coyote/icons/mob/rangercritters.dmi'
@@ -1535,7 +1532,7 @@
 	icon_living = "rack_deer"
 	icon_dead = "rack_deer_dead"
 
-/mob/living/simple_animal/advanced/lightening
+/mob/living/danimal/advanced/lightening
 	name = "lightening Raptor"
 	desc = "A very green raptor."
 	icon = 'modular_coyote/icons/mob/rangercritters.dmi'
@@ -1543,7 +1540,7 @@
 	icon_living = "lightening"
 	icon_dead = "lightening_dead"
 
-/mob/living/simple_animal/advanced/hyena
+/mob/living/danimal/advanced/hyena
 	name = "Hyena"
 	desc = "Cackle."
 	icon = 'modular_coyote/icons/mob/rangercritters.dmi'
@@ -1551,7 +1548,7 @@
 	icon_living = "hyena"
 	icon_dead = "hyena_dead"
 
-/mob/living/simple_animal/advanced/saber_cat
+/mob/living/danimal/advanced/saber_cat
 	name = "saber cat"
 	desc = "My kitty, what long teeth you have."
 	icon = 'modular_coyote/icons/mob/rangercritters.dmi'
@@ -1559,7 +1556,7 @@
 	icon_living = "saber_cat"
 	icon_dead = "saber_cat_dead"
 
-/mob/living/simple_animal/advanced/malkia
+/mob/living/danimal/advanced/malkia
 	name = "malkia"
 	desc = "A strange canine like being."
 	icon = 'modular_coyote/icons/mob/rangercritters.dmi'
@@ -1567,7 +1564,7 @@
 	icon_living = "malkia"
 	icon_dead = "malkia_dead"
 
-/mob/living/simple_animal/whale
+/mob/living/danimal/whale
 	name = "Whale"
 	desc = "What the hell? That's a whale!"
 	icon = 'modular_coyote/icons/mob/space_whale.dmi'
@@ -1578,7 +1575,7 @@
 	health = 200
 	guaranteed_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab = 10)
 
-/mob/living/simple_animal/skunk
+/mob/living/danimal/skunk
 	name = "skunk"
 	desc = "stinky"
 	icon = 'modular_coyote/icons/mob/skunk.dmi'
@@ -1588,7 +1585,7 @@
 	maxHealth = 200
 	health = 200
 
-/mob/living/simple_animal/skunk/eunice
+/mob/living/danimal/skunk/eunice
 	name = "Eunice"
 	desc = "In memory of a most wonderful player who played on our server. Thank you for being an amazing person. We hope you rest in peace."
 	icon = 'modular_coyote/icons/mob/skunk.dmi'

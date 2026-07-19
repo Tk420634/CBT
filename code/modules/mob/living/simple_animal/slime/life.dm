@@ -1,5 +1,5 @@
 
-/mob/living/simple_animal/slime
+/mob/living/danimal/slime
 	var/AIproc = 0 // determines if the AI loop is activated
 	var/Atkcool = 0 // attack cooldown
 	var/Tempstun = 0 // temporary temperature stuns
@@ -7,7 +7,7 @@
 	var/SStun = 0 // stun variable
 
 
-/mob/living/simple_animal/slime/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/slime/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if(buckled)
@@ -20,12 +20,12 @@
 			handle_speech()
 
 // Unlike most of the simple animals, slimes support UNCONSCIOUS
-/mob/living/simple_animal/slime/update_stat()
+/mob/living/danimal/slime/update_stat()
 	if(stat == UNCONSCIOUS && health > 0)
 		return
 	..()
 
-/mob/living/simple_animal/slime/proc/AIprocess()  // the master AI process
+/mob/living/danimal/slime/proc/AIprocess()  // the master AI process
 
 	if(AIproc || stat || client)
 		return
@@ -51,7 +51,7 @@
 			break
 
 		if(Target)
-			if(locate(/mob/living/simple_animal/slime) in Target.buckled_mobs)
+			if(locate(/mob/living/danimal/slime) in Target.buckled_mobs)
 				Target = null
 				AIproc = 0
 				break
@@ -104,7 +104,7 @@
 
 	AIproc = 0
 
-/mob/living/simple_animal/slime/handle_environment(datum/gas_mixture/environment)
+/mob/living/danimal/slime/handle_environment(datum/gas_mixture/environment)
 	if(!environment)
 		return
 
@@ -147,7 +147,7 @@
 
 	return //TODO: DEFERRED
 
-/mob/living/simple_animal/slime/proc/adjust_body_temperature(current, loc_temp, boost)
+/mob/living/danimal/slime/proc/adjust_body_temperature(current, loc_temp, boost)
 	var/temperature = current
 	var/difference = abs(current-loc_temp)	//get difference
 	var/increments// = difference/10			//find how many increments apart they are
@@ -164,12 +164,12 @@
 	temp_change = (temperature - current)
 	return temp_change
 
-/mob/living/simple_animal/slime/handle_status_effects()
+/mob/living/danimal/slime/handle_status_effects()
 	..()
 	if(prob(30) && !stat)
 		adjustBruteLoss(-1)
 
-/mob/living/simple_animal/slime/proc/handle_feeding()
+/mob/living/danimal/slime/proc/handle_feeding()
 	if(!ismob(buckled))
 		return
 	var/mob/M = buckled
@@ -212,7 +212,7 @@
 			"A sharp, deep pain bathes every inch of your body!")]</span>")
 
 	else if(isanimal(M))
-		var/mob/living/simple_animal/SA = M
+		var/mob/living/danimal/SA = M
 
 		var/totaldamage = 0 //total damage done to this unfortunate animal
 		totaldamage += SA.adjustCloneLoss(rand(2,4))
@@ -231,7 +231,7 @@
 	//Heal yourself.
 	adjustBruteLoss(-3)
 
-/mob/living/simple_animal/slime/proc/handle_nutrition()
+/mob/living/danimal/slime/proc/handle_nutrition()
 
 	if(docile) //God as my witness, I will never go hungry again
 		nutrition = 700
@@ -254,7 +254,7 @@
 		else
 			Evolve()
 
-/mob/living/simple_animal/slime/adjust_nutrition(change, max = INFINITY, slime_check = FALSE)
+/mob/living/danimal/slime/adjust_nutrition(change, max = INFINITY, slime_check = FALSE)
 	. = ..()
 	if(!slime_check)
 		return
@@ -267,7 +267,7 @@
 			if(prob(25-powerlevel*5))
 				powerlevel++
 
-/mob/living/simple_animal/slime/proc/handle_targets()
+/mob/living/danimal/slime/proc/handle_targets()
 	update_mobility()
 
 	if(attacked > 50)
@@ -343,7 +343,7 @@
 						if(src.type in H.dna.species.ignored_by)
 							continue
 
-					if(locate(/mob/living/simple_animal/slime) in L.buckled_mobs) // Only one slime can latch on at a time.
+					if(locate(/mob/living/danimal/slime) in L.buckled_mobs) // Only one slime can latch on at a time.
 						continue
 
 					targets += L // Possible target found!
@@ -390,13 +390,13 @@
 		else if(!AIproc)
 			INVOKE_ASYNC(src,PROC_REF(AIprocess))
 
-/mob/living/simple_animal/slime/handle_automated_movement()
+/mob/living/danimal/slime/handle_automated_movement()
 	return //slime random movement is currently handled in handle_targets()
 
-/mob/living/simple_animal/slime/handle_automated_speech()
+/mob/living/danimal/slime/handle_automated_speech()
 	return //slime random speech is currently handled in handle_speech()
 
-/mob/living/simple_animal/slime/proc/handle_mood()
+/mob/living/danimal/slime/proc/handle_mood()
 	var/newmood = ""
 	if (rabid || attacked)
 		newmood = "angry"
@@ -419,7 +419,7 @@
 		mood = newmood
 		regenerate_icons()
 
-/mob/living/simple_animal/slime/proc/handle_speech()
+/mob/living/danimal/slime/proc/handle_speech()
 	//Speech understanding starts here
 	var/to_say
 	if (speech_buffer.len > 0)
@@ -591,31 +591,31 @@
 			if(!stat)
 				say (pick(phrases))
 
-/mob/living/simple_animal/slime/proc/get_max_nutrition() // Can't go above it
+/mob/living/danimal/slime/proc/get_max_nutrition() // Can't go above it
 	if (is_adult)
 		return 1200
 	else
 		return 1000
 
-/mob/living/simple_animal/slime/proc/get_grow_nutrition() // Above it we grow, below it we can eat
+/mob/living/danimal/slime/proc/get_grow_nutrition() // Above it we grow, below it we can eat
 	if (is_adult)
 		return 1000
 	else
 		return 800
 
-/mob/living/simple_animal/slime/proc/get_hunger_nutrition() // Below it we will always eat
+/mob/living/danimal/slime/proc/get_hunger_nutrition() // Below it we will always eat
 	if (is_adult)
 		return 600
 	else
 		return 500
 
-/mob/living/simple_animal/slime/proc/get_starve_nutrition() // Below it we will eat before everything else
+/mob/living/danimal/slime/proc/get_starve_nutrition() // Below it we will eat before everything else
 	if(is_adult)
 		return 300
 	else
 		return 200
 
-/mob/living/simple_animal/slime/proc/will_hunt(hunger = -1) // Check for being stopped from feeding and chasing
+/mob/living/danimal/slime/proc/will_hunt(hunger = -1) // Check for being stopped from feeding and chasing
 	if (docile)
 		return 0
 	if (hunger == 2 || rabid || attacked)

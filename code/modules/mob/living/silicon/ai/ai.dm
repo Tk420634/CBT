@@ -44,7 +44,7 @@
 	radiomod = ";" //AIs will, by default, state their laws on the internal radio.
 	var/obj/item/pda/ai/aiPDA
 	var/obj/item/multitool/aiMulti
-	var/mob/living/simple_animal/bot/Bot
+	var/mob/living/danimal/bot/Bot
 	var/tracking = FALSE //this is 1 if the AI is currently tracking somebody, but the track has not yet been completed.
 	var/datum/effect_system/spark_spread/spark_system//So they can initialize sparks whenever/N
 

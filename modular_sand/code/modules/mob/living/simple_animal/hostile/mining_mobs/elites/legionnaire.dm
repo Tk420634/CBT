@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/asteroid/elite/legionnaire/ComponentInitialize()
+/mob/living/danimal/hostile/asteroid/elite/legionnaire/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("grabs the legionnaire's skull and rips it off, bashing them with it until they break apart and die!"), \

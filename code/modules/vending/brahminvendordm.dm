@@ -92,11 +92,11 @@ GLOBAL_VAR(orbital_cow_cooldown)
 	var/obj/structure/closet/supplypod/bluespacepod/pod = new()
 	pod.explosionSize = list(0,0,2,0) // a bit of a boom
 	pod.setStyle(STYLE_BOX)
-	var/mob/living/simple_animal/cow/brahmin/bessie = new(pod)
+	var/mob/living/danimal/cow/brahmin/bessie = new(pod)
 	var/cowname = pick(GLOB.cow_names)
 	beep_loop()
 	if(cowname == "Cookies and Cream")
-		var/mob/living/simple_animal/cow/brahmin/bessie2 = new(pod)
+		var/mob/living/danimal/cow/brahmin/bessie2 = new(pod)
 		bessie.name = "Cookies"
 		bessie.real_name = "Cookies"
 		bessie.desc = "Iiiiiiit's Cookies!"

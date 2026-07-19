@@ -14,7 +14,7 @@
 /datum/blobstrain/reagent/zombifying_pods/damage_reaction(obj/structure/blob/B, damage, damage_type, damage_flag)
 	if((damage_flag == "melee" || damage_flag == "bullet" || damage_flag == "laser") && damage <= 20 && B.obj_integrity - damage <= 0 && prob(30)) //if the cause isn't fire or a bomb, the damage is less than 21, we're going to die from that damage, 20% chance of a shitty spore.
 		B.visible_message(span_warning("<b>A spore floats free of the blob!</b>"))
-		var/mob/living/simple_animal/hostile/blob/blobspore/weak/BS = new/mob/living/simple_animal/hostile/blob/blobspore/weak(B.loc)
+		var/mob/living/danimal/hostile/blob/blobspore/weak/BS = new/mob/living/danimal/hostile/blob/blobspore/weak(B.loc)
 		BS.overmind = B.overmind
 		BS.update_icons()
 		B.overmind.blob_mobs.Add(BS)
@@ -22,7 +22,7 @@
 
 /datum/blobstrain/reagent/zombifying_pods/expand_reaction(obj/structure/blob/B, obj/structure/blob/newB, turf/T, mob/camera/blob/O)
 	if(prob(10))
-		var/mob/living/simple_animal/hostile/blob/blobspore/weak/BS = new/mob/living/simple_animal/hostile/blob/blobspore/weak(T)
+		var/mob/living/danimal/hostile/blob/blobspore/weak/BS = new/mob/living/danimal/hostile/blob/blobspore/weak(T)
 		BS.overmind = B.overmind
 		BS.update_icons()
 		newB.overmind.blob_mobs.Add(BS)
@@ -37,7 +37,7 @@
 	if(O && ishuman(M) && M.stat == UNCONSCIOUS)
 		M.death() //sleeping in a fight? bad plan.
 		var/points = rand(5, 10)
-		var/mob/living/simple_animal/hostile/blob/blobspore/BS = new/mob/living/simple_animal/hostile/blob/blobspore/weak(get_turf(M))
+		var/mob/living/danimal/hostile/blob/blobspore/BS = new/mob/living/danimal/hostile/blob/blobspore/weak(get_turf(M))
 		BS.overmind = O
 		BS.update_icons()
 		O.blob_mobs.Add(BS)

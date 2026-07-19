@@ -409,12 +409,12 @@
 	clothes_req = FALSE
 	action_background_icon_state = "bg_ecult"
 	sound = 'sound/magic/enter_blood.ogg'
-	possible_shapes = list(/mob/living/simple_animal/mouse,\
-		/mob/living/simple_animal/pet/dog/corgi,\
-		/mob/living/simple_animal/hostile/carp,\
-		/mob/living/simple_animal/bot/secbot,\
-		/mob/living/simple_animal/pet/fox,\
-		/mob/living/simple_animal/pet/cat )
+	possible_shapes = list(/mob/living/danimal/mouse,\
+		/mob/living/danimal/pet/dog/corgi,\
+		/mob/living/danimal/hostile/carp,\
+		/mob/living/danimal/bot/secbot,\
+		/mob/living/danimal/pet/fox,\
+		/mob/living/danimal/pet/cat )
 
 /obj/effect/proc_holder/spell/targeted/emplosion/eldritch
 	name = "Energetic Pulse"
@@ -516,9 +516,9 @@
 
 /obj/effect/proc_holder/spell/targeted/worm_contract/cast(list/targets, mob/user)
 	. = ..()
-	if(!istype(user,/mob/living/simple_animal/hostile/eldritch/armsy))
+	if(!istype(user,/mob/living/danimal/hostile/eldritch/armsy))
 		to_chat(user, span_userdanger("You try to contract your muscles but nothing happens..."))
-	var/mob/living/simple_animal/hostile/eldritch/armsy/armsy = user
+	var/mob/living/danimal/hostile/eldritch/armsy/armsy = user
 	armsy.contract_next_chain_into_single_tile()
 
 /obj/effect/temp_visual/cleave
@@ -582,7 +582,7 @@
 	return TRUE
 
 /obj/effect/proc_holder/spell/pointed/manse_link/cast(list/targets, mob/user)
-	var/mob/living/simple_animal/hostile/eldritch/raw_prophet/originator = user
+	var/mob/living/danimal/hostile/eldritch/raw_prophet/originator = user
 
 	var/mob/living/target = targets[1]
 
@@ -603,7 +603,7 @@
 	button_icon_state = "link_speech"
 	icon_icon = 'icons/mob/actions/actions_slime.dmi'
 	background_icon_state = "bg_ecult"
-	var/mob/living/simple_animal/hostile/eldritch/raw_prophet/originator
+	var/mob/living/danimal/hostile/eldritch/raw_prophet/originator
 
 /datum/action/innate/mansus_speech/New(_originator)
 	. = ..()

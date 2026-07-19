@@ -14,7 +14,7 @@
 	if(mystats > MAX_STATS)
 		return TRUE
 
-/mob/living/simple_animal/hax()
+/mob/living/danimal/hax()
 	if(!advanced)
 		return
 	. = ..()

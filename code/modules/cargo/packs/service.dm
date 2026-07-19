@@ -47,7 +47,7 @@
 	name = "MULEbot Crate"
 	desc = "Pink-haired Quartermaster not doing her job? Replace her with this tireless worker, today!"
 	cost = 2000
-	contains = list(/mob/living/simple_animal/bot/mulebot)
+	contains = list(/mob/living/danimal/bot/mulebot)
 	crate_name = "\improper MULEbot Crate"
 	crate_type = /obj/structure/closet/crate/large 
 

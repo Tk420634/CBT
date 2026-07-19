@@ -19,7 +19,7 @@ Difficulty: Insanely Hard
 
 
 //the king and his court
-/mob/living/simple_animal/hostile/megafauna/king
+/mob/living/danimal/hostile/megafauna/king
 	name = "king of the goats"
 	desc = "The oldest and wisest of the goats. King of his race, peerless in dignity and power. His golden fleece radiates nobility."
 	icon = 'modular_sand/icons/mob/king_of_goats.dmi'
@@ -60,7 +60,7 @@ Difficulty: Insanely Hard
 	var/stun_chance = 5 //chance per attack to Weaken target
 	crusher_loot = list(/obj/item/crusher_trophy/king_goat)
 
-/mob/living/simple_animal/hostile/megafauna/king/ComponentInitialize()
+/mob/living/danimal/hostile/megafauna/king/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("grabs the goat by it's horns, then repeatedly knees it in the face until it's skull cracks open and it fucking dies!", "rips off one of the goat's horns bare-handed, then stabs through their skull with it, killing it!"), \
@@ -70,7 +70,7 @@ Difficulty: Insanely Hard
 		health_given = 50, \
 		threshold = 50)
 
-/mob/living/simple_animal/hostile/megafauna/king/ex_act(severity, target, origin)
+/mob/living/danimal/hostile/megafauna/king/ex_act(severity, target, origin)
 	switch (severity)
 		if (1)
 			adjustBruteLoss(100)
@@ -81,7 +81,7 @@ Difficulty: Insanely Hard
 		if(3)
 			adjustBruteLoss(25)
 
-/mob/living/simple_animal/hostile/megafauna/king/phase2
+/mob/living/danimal/hostile/megafauna/king/phase2
 	name = "emperor of the goats"
 	desc = "The King of Kings, God amongst men, and your superior in every way."
 	icon_state = "king_goat2"
@@ -102,21 +102,21 @@ Difficulty: Insanely Hard
 	var/list/rangers = list()
 	stun_chance = 7
 
-/mob/living/simple_animal/hostile/megafauna/king/phase2/Initialize(mapload)
+/mob/living/danimal/hostile/megafauna/king/phase2/Initialize(mapload)
 	. = ..()
 	update_icon()
 
-/mob/living/simple_animal/hostile/megafauna/king/Found(atom/A)
+/mob/living/danimal/hostile/megafauna/king/Found(atom/A)
 	if(isliving(A))
 		return A
 	return ..()
 
-/mob/living/simple_animal/hostile/retaliate/goat/guard/Found(atom/A)
+/mob/living/danimal/hostile/retaliate/goat/guard/Found(atom/A)
 	if(isliving(A))
 		return A
 	return ..()
 
-/mob/living/simple_animal/hostile/retaliate/goat/guard
+/mob/living/danimal/hostile/retaliate/goat/guard
 	name = "honour guard"
 	desc = "A very handsome and noble beast."
 	icon = 'modular_sand/icons/mob/king_of_goats.dmi'
@@ -138,7 +138,7 @@ Difficulty: Insanely Hard
 	melee_damage_lower = 10
 	melee_damage_upper = 15
 
-/mob/living/simple_animal/hostile/retaliate/goat/guard/master
+/mob/living/danimal/hostile/retaliate/goat/guard/master
 	name = "master of the guard"
 	desc = "A very handsome and noble beast - the most trusted of all the king's men."
 	icon_state = "goat_guard_m"
@@ -151,7 +151,7 @@ Difficulty: Insanely Hard
 	melee_damage_upper = 20
 	move_to_delay = 3
 
-/mob/living/simple_animal/hostile/retaliate/goat/guard/pope
+/mob/living/danimal/hostile/retaliate/goat/guard/pope
 	name = "Goat Pope"
 	desc = "For what is a God without a pope to spread their holy words"
 	icon_state = "goat_pope"
@@ -165,12 +165,12 @@ Difficulty: Insanely Hard
 	move_to_delay = 3
 	loot = list(/obj/item/clothing/head/goatpope)
 
-/mob/living/simple_animal/hostile/megafauna/king/Retaliate()
+/mob/living/danimal/hostile/megafauna/king/Retaliate()
 	..()
 	if(stat == CONSCIOUS && prob(5))
 		visible_message(span_warning("\The [src] bellows indignantly, with a judgemental gleam in his eye."))
 
-/mob/living/simple_animal/hostile/megafauna/king/phase2/Retaliate()
+/mob/living/danimal/hostile/megafauna/king/phase2/Retaliate()
 	set waitfor = FALSE
 	..()
 	if(spellscast < 5)
@@ -186,9 +186,9 @@ Difficulty: Insanely Hard
 		else if(prob(5)) //spawn adds
 			spellscast++
 			visible_message(span_cult("\The [src] summons the imperial guard to his aid, and they appear in a flash!"))
-			var/mob/living/simple_animal/hostile/retaliate/goat/guard/master/M = new(get_step(src,pick(GLOB.cardinals)))
+			var/mob/living/danimal/hostile/retaliate/goat/guard/master/M = new(get_step(src,pick(GLOB.cardinals)))
 			M.enemies |= enemies
-			var/mob/living/simple_animal/hostile/retaliate/goat/guard/G = new(get_step(src,pick(GLOB.cardinals)))
+			var/mob/living/danimal/hostile/retaliate/goat/guard/G = new(get_step(src,pick(GLOB.cardinals)))
 			G.enemies |= enemies
 			G = new(get_step(src,pick(GLOB.cardinals)))
 			G.enemies |= enemies
@@ -222,7 +222,7 @@ Difficulty: Insanely Hard
 
 		else return
 
-/mob/living/simple_animal/hostile/megafauna/king/phase2/proc/phase3_transition()
+/mob/living/danimal/hostile/megafauna/king/phase2/proc/phase3_transition()
 	phase3 = TRUE
 	spellscast = 0
 	maxHealth = 750
@@ -232,7 +232,7 @@ Difficulty: Insanely Hard
 	visible_message(span_cult("\The [src]' wounds close with a flash, and when he emerges, he's even larger than before!"))
 
 
-/mob/living/simple_animal/hostile/megafauna/king/phase2/update_icon()
+/mob/living/danimal/hostile/megafauna/king/phase2/update_icon()
 	var/matrix/M = new
 	if(phase3)
 		icon_state = "king_goat3"
@@ -243,7 +243,7 @@ Difficulty: Insanely Hard
 	transform = M
 	pixel_y = 10
 
-/mob/living/simple_animal/hostile/megafauna/king/phase2/Life()
+/mob/living/danimal/hostile/megafauna/king/phase2/Life()
 	. = ..()
 	if(move_to_delay < 3)
 		move_to_delay += 0.2
@@ -258,23 +258,23 @@ Difficulty: Insanely Hard
 		visible_message(span_cult("The [src]' horns shrink back down to normal size."))
 		melee_damage_lower = 40
 
-/mob/living/simple_animal/hostile/megafauna/king/proc/OnDeath()
+/mob/living/danimal/hostile/megafauna/king/proc/OnDeath()
 	visible_message(span_cult("\The [src] lets loose a terrific wail as its wounds close shut with a flash of light, and its eyes glow even brighter than before!"))
-	new /mob/living/simple_animal/hostile/megafauna/king/phase2(get_turf(src))
+	new /mob/living/danimal/hostile/megafauna/king/phase2(get_turf(src))
 	qdel(src)
 
-/mob/living/simple_animal/hostile/megafauna/king/phase2/OnDeath()
+/mob/living/danimal/hostile/megafauna/king/phase2/OnDeath()
 	if(phase3)
 		visible_message(span_cult("\The [src] shrieks as the seal on his power breaks and he starts to break apart!"))
 		new /obj/structure/ladder/unbreakable/goat(loc)
 		new /obj/item/gun/energy/goatgun(loc)
 		new /obj/item/toy/plush/goatplushie/angry/kinggoat(loc) //If someone dies from this after beating the king goat im going to laugh
 
-/mob/living/simple_animal/hostile/megafauna/king/death()
+/mob/living/danimal/hostile/megafauna/king/death()
 	..()
 	OnDeath()
 
-/mob/living/simple_animal/hostile/megafauna/king/AttackingTarget()
+/mob/living/danimal/hostile/megafauna/king/AttackingTarget()
 	. = ..()
 	if(isliving(target))
 		var/mob/living/L = target
@@ -284,7 +284,7 @@ Difficulty: Insanely Hard
 			L.Stun(5)
 			visible_message(span_warning("\The [L] is bowled over by the impact of [src]'s attack!"))
 
-/mob/living/simple_animal/hostile/megafauna/king/phase2/AttackingTarget()
+/mob/living/danimal/hostile/megafauna/king/phase2/AttackingTarget()
 	. = ..()
 	if(isliving(target))
 		if(melee_damage_type != BRUTE)

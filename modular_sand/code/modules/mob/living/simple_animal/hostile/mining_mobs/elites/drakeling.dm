@@ -14,7 +14,7 @@
   * - Fire moat - Spews fire in all directions.
   */
 
-/mob/living/simple_animal/hostile/asteroid/elite/drakeling
+/mob/living/danimal/hostile/asteroid/elite/drakeling
 	name = "Drakeling"
 	desc = "A small but still fearsome dragon."
 	icon = 'modular_sand/icons/mob/lavaland/lavaland_elites.dmi'
@@ -43,7 +43,7 @@
 								/datum/action/innate/elite_attack/firespew,
 								/datum/action/innate/elite_attack/firemoat)
 
-/mob/living/simple_animal/hostile/asteroid/elite/drakeling/ComponentInitialize()
+/mob/living/danimal/hostile/asteroid/elite/drakeling/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("rips off the little dragon's horns, then shoves them into their mouth!", "grabs the drakeling's head and rips it off violently from their neck with their bare hands!"), \
@@ -81,7 +81,7 @@
 	chosen_message = span_boldwarning("You will now spew fire at all cardinal directions.")
 	chosen_attack_num = FIRE_MOAT
 
-/mob/living/simple_animal/hostile/asteroid/elite/drakeling/OpenFire()
+/mob/living/danimal/hostile/asteroid/elite/drakeling/OpenFire()
 	if(client)
 		switch(chosen_attack)
 			if(LAVA_MOAT)
@@ -105,25 +105,25 @@
 			fire_moat()
 
 //Drakeling actions
-/mob/living/simple_animal/hostile/asteroid/elite/drakeling/proc/lava_moat()
+/mob/living/danimal/hostile/asteroid/elite/drakeling/proc/lava_moat()
 	ranged_cooldown = world.time + 25
 	visible_message(span_boldwarning("[src] spews lava around themselves! Get back!"))
 	for(var/turf/T in oview(1, src))
 		new /obj/effect/temp_visual/lava_warning/drakeling(T, 40)
 
-/mob/living/simple_animal/hostile/asteroid/elite/drakeling/proc/lava_around()
+/mob/living/danimal/hostile/asteroid/elite/drakeling/proc/lava_around()
 	ranged_cooldown = world.time + 50
 	for(var/d in GLOB.cardinals)
 		INVOKE_ASYNC(src,PROC_REF(lava_wall), d, 5)
 
-/mob/living/simple_animal/hostile/asteroid/elite/drakeling/proc/fire_spew()
+/mob/living/danimal/hostile/asteroid/elite/drakeling/proc/fire_spew()
 	ranged_cooldown = world.time + 25
 	visible_message(span_boldwarning("[src] spews fire!"))
 	playsound(src,'sound/magic/Fireball.ogg', 200, 1)
 	sleep(5)
 	fire_wall(src.dir, 10)
 
-/mob/living/simple_animal/hostile/asteroid/elite/drakeling/proc/fire_moat()
+/mob/living/danimal/hostile/asteroid/elite/drakeling/proc/fire_moat()
 	ranged_cooldown = world.time + 100
 	playsound(src,'sound/magic/Fireball.ogg', 200, 1)
 	visible_message(span_boldwarning("[src] violently puffs smoke!They're going to make a fire moat!"))
@@ -133,7 +133,7 @@
 
 // Drakeling helpers
 
-/mob/living/simple_animal/hostile/asteroid/elite/drakeling/proc/fire_wall(dir, range)
+/mob/living/danimal/hostile/asteroid/elite/drakeling/proc/fire_wall(dir, range)
 	var/list/hitlist = list(src)
 	var/turf/T = get_turf(src)
 	for(var/i in 1 to range)
@@ -149,7 +149,7 @@
 		T = get_step(T, dir)
 		sleep(1)
 
-/mob/living/simple_animal/hostile/asteroid/elite/drakeling/proc/lava_wall(dir, range)
+/mob/living/danimal/hostile/asteroid/elite/drakeling/proc/lava_wall(dir, range)
 	var/turf/T = get_turf(src)
 	for(var/i in 1 to range)
 		new /obj/effect/temp_visual/lava_warning/drakeling(T, 40)

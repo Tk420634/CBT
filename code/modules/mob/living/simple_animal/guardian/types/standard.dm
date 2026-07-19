@@ -1,5 +1,5 @@
 //Standard
-/mob/living/simple_animal/hostile/guardian/punch
+/mob/living/danimal/hostile/guardian/punch
 	melee_damage_lower = 20
 	melee_damage_upper = 20
 	obj_damage = 80
@@ -11,7 +11,7 @@
 	carp_fluff_string = span_holoparasite("CARP CARP CARP! You caught one! It's really boring and standard. Better punch some walls to ease the tension.")
 	var/battlecry = "AT"
 
-/mob/living/simple_animal/hostile/guardian/punch/verb/Battlecry()
+/mob/living/danimal/hostile/guardian/punch/verb/Battlecry()
 	set name = "Set Battlecry"
 	set category = "Guardian"
 	set desc = "Choose what you shout as you punch people."
@@ -21,7 +21,7 @@
 
 
 
-/mob/living/simple_animal/hostile/guardian/punch/AttackingTarget()
+/mob/living/danimal/hostile/guardian/punch/AttackingTarget()
 	. = ..()
 	if(isliving(get_target()))
 		say("[battlecry][battlecry][battlecry][battlecry][battlecry][battlecry][battlecry][battlecry][battlecry][battlecry]!!", ignore_spam = TRUE)

@@ -14,11 +14,11 @@
 	description = "Toggle throwing the current item or not."
 
 /datum/keybinding/simple_animal/toggle_throw_mode/down(client/user)
-	var/mob/living/simple_animal/M = user.mob
+	var/mob/living/danimal/M = user.mob
 	M.toggle_throw_mode()
 	return TRUE
 
-/mob/living/simple_animal/proc/toggle_throw_mode()
+/mob/living/danimal/proc/toggle_throw_mode()
 	if(stat)
 		return
 	if(in_throw_mode)
@@ -26,12 +26,12 @@
 	else
 		throw_mode_on()
 
-/mob/living/simple_animal/proc/throw_mode_off()
+/mob/living/danimal/proc/throw_mode_off()
 	in_throw_mode = 0
 	if(client && hud_used)
 		hud_used.throw_icon.icon_state = "act_throw_off"
 
-/mob/living/simple_animal/proc/throw_mode_on()
+/mob/living/danimal/proc/throw_mode_on()
 	in_throw_mode = 1
 	if(client && hud_used)
 		hud_used.throw_icon.icon_state = "act_throw_on"
@@ -83,7 +83,7 @@
 	description = ""
 
 /datum/keybinding/simple_animal/wield/down(client/user)
-	var/mob/living/simple_animal/M = user.mob
+	var/mob/living/danimal/M = user.mob
 	M.do_wield()
 	return TRUE
 */

@@ -6,7 +6,7 @@
 //Drone hands
 
 
-/mob/living/simple_animal/drone/doUnEquip(obj/item/I, force, newloc, no_move, invdrop = TRUE)
+/mob/living/danimal/drone/doUnEquip(obj/item/I, force, newloc, no_move, invdrop = TRUE)
 	if(..())
 		update_inv_hands()
 		if(I == head)
@@ -19,7 +19,7 @@
 	return 0
 
 
-/mob/living/simple_animal/drone/can_equip(obj/item/I, slot, disable_warning = FALSE, bypass_equip_delay_self = FALSE, clothing_check = FALSE, list/return_warning)
+/mob/living/danimal/drone/can_equip(obj/item/I, slot, disable_warning = FALSE, bypass_equip_delay_self = FALSE, clothing_check = FALSE, list/return_warning)
 	switch(slot)
 		if(SLOT_HEAD)
 			if(head)
@@ -34,7 +34,7 @@
 	..()
 
 
-/mob/living/simple_animal/drone/get_item_by_slot(slot_id)
+/mob/living/danimal/drone/get_item_by_slot(slot_id)
 	switch(slot_id)
 		if(SLOT_HEAD)
 			return head
@@ -43,7 +43,7 @@
 	return ..()
 
 
-/mob/living/simple_animal/drone/equip_to_slot(obj/item/I, slot)
+/mob/living/danimal/drone/equip_to_slot(obj/item/I, slot)
 	if(!slot)
 		return
 	if(!istype(I))
@@ -76,8 +76,8 @@
 	//Call back for item being equipped to drone
 	I.equipped(src, slot)
 
-/mob/living/simple_animal/drone/getBackSlot()
+/mob/living/danimal/drone/getBackSlot()
 	return SLOT_GENERIC_DEXTROUS_STORAGE
 
-/mob/living/simple_animal/drone/getBeltSlot()
+/mob/living/danimal/drone/getBeltSlot()
 	return SLOT_GENERIC_DEXTROUS_STORAGE

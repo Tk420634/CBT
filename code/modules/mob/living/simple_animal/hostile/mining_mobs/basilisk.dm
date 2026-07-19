@@ -1,5 +1,5 @@
 //A beast that fire freezing blasts.
-/mob/living/simple_animal/hostile/asteroid/basilisk
+/mob/living/danimal/hostile/asteroid/basilisk
 	name = "basilisk"
 	desc = "A territorial beast, covered in a thick shell that absorbs energy. Its stare causes victims to freeze from the inside."
 	icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
@@ -20,7 +20,6 @@
 	speed = 3
 	maxHealth = 200
 	health = 200
-	harm_intent_damage = 5
 	obj_damage = 60
 	melee_damage_lower = 12
 	melee_damage_upper = 12
@@ -44,14 +43,14 @@
 	flag = "energy"
 	temperature = 50
 
-/mob/living/simple_animal/hostile/asteroid/basilisk/GiveTarget(new_target)
+/mob/living/danimal/hostile/asteroid/basilisk/GiveTarget(new_target)
 	if(!..()) //we have a target
 		return
 	var/atom/my_target = get_target()
 	if(isliving(my_target) && !my_target.Adjacent(get_origin()) && ranged_cooldown <= world.time)//No more being shot at point blank or spammed with RNG beams
 		OpenFire(my_target)
 
-/mob/living/simple_animal/hostile/asteroid/basilisk/ex_act(severity, target)
+/mob/living/danimal/hostile/asteroid/basilisk/ex_act(severity, target)
 	switch(severity)
 		if(1)
 			gib()
@@ -61,7 +60,7 @@
 			adjustBruteLoss(110)
 
 //Watcher
-/mob/living/simple_animal/hostile/asteroid/basilisk/watcher
+/mob/living/danimal/hostile/asteroid/basilisk/watcher
 	name = "watcher"
 	desc = "A levitating, eye-like creature held aloft by winglike formations of sinew. A sharp spine of crystal protrudes from its body."
 	icon = 'icons/mob/lavaland/watcher.dmi'
@@ -87,13 +86,13 @@
 	wanted_objects = list(/obj/item/pen/survival, /obj/item/stack/ore/diamond)
 	field_of_vision_type = FOV_270_DEGREES //Obviously, it's one eyeball.
 
-/mob/living/simple_animal/hostile/asteroid/basilisk/watcher/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/asteroid/basilisk/watcher/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if(stat == CONSCIOUS)
 		consume_bait()
 
-/mob/living/simple_animal/hostile/asteroid/basilisk/watcher/proc/consume_bait()
+/mob/living/danimal/hostile/asteroid/basilisk/watcher/proc/consume_bait()
 	var/obj/item/stack/ore/diamond/diamonds = locate(/obj/item/stack/ore/diamond) in oview(src, 9)
 	var/obj/item/pen/survival/bait = locate(/obj/item/pen/survival) in oview(src, 9)
 	if(!diamonds && !bait)
@@ -111,16 +110,16 @@
 			qdel(bait)
 			visible_message(span_notice("[src] examines [bait] closer, and telekinetically shatters the pen."))
 
-/mob/living/simple_animal/hostile/asteroid/basilisk/watcher/random/Initialize()
+/mob/living/danimal/hostile/asteroid/basilisk/watcher/random/Initialize()
 	. = ..()
 	if(prob(1))
 		if(prob(75))
-			new /mob/living/simple_animal/hostile/asteroid/basilisk/watcher/magmawing(loc)
+			new /mob/living/danimal/hostile/asteroid/basilisk/watcher/magmawing(loc)
 		else
-			new /mob/living/simple_animal/hostile/asteroid/basilisk/watcher/icewing(loc)
+			new /mob/living/danimal/hostile/asteroid/basilisk/watcher/icewing(loc)
 		return INITIALIZE_HINT_QDEL
 
-/mob/living/simple_animal/hostile/asteroid/basilisk/watcher/magmawing
+/mob/living/danimal/hostile/asteroid/basilisk/watcher/magmawing
 	name = "magmawing watcher"
 	desc = "When raised very close to lava, some watchers adapt to the extreme heat and use lava as both a weapon and wings."
 	icon_state = "watcher_magmawing"
@@ -136,7 +135,7 @@
 	crusher_loot = /obj/item/crusher_trophy/blaster_tubes/magma_wing
 	crusher_drop_mod = 60
 
-/mob/living/simple_animal/hostile/asteroid/basilisk/watcher/icewing
+/mob/living/danimal/hostile/asteroid/basilisk/watcher/icewing
 	name = "icewing watcher"
 	desc = "Very rarely, some watchers will eke out an existence far from heat sources. In the absence of warmth, they become icy and fragile but fire much stronger freezing blasts."
 	icon_state = "watcher_icewing"
@@ -177,5 +176,5 @@
 		var/mob/living/L = target
 		L.apply_status_effect(/datum/status_effect/freon/watcher)
 
-/mob/living/simple_animal/hostile/asteroid/basilisk/watcher/tendril
+/mob/living/danimal/hostile/asteroid/basilisk/watcher/tendril
 	fromtendril = TRUE

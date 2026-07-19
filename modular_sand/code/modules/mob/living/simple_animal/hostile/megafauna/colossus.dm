@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/megafauna/colossus/ComponentInitialize()
+/mob/living/danimal/hostile/megafauna/colossus/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("grabs the colossus by the leg, and pulls them down! While downed, they climb on his neck and violently rip off their vocal cords!", "goes around the colossus and climbs them by their back, once on top of their shoulder they grab it's arm and aim the blaster at the creature's head, which finishes itself off with a penetrating death bolt that blasts off their head!"), \

@@ -4,7 +4,7 @@
 // GOAT //
 //////////
 
-/mob/living/simple_animal/hostile/retaliate/goat
+/mob/living/danimal/hostile/retaliate/goat
 	name = "goat"
 	desc = "Not known for their pleasant disposition."
 	icon = 'icons/fallout/mobs/animals/farmanimals.dmi'
@@ -43,17 +43,17 @@
 
 	footstep_type = FOOTSTEP_MOB_SHOE
 
-/mob/living/simple_animal/hostile/retaliate/goat/Initialize(/datum/reagent/milk_reagent)
+/mob/living/danimal/hostile/retaliate/goat/Initialize(/datum/reagent/milk_reagent)
 	if(milk_reagent)
 		src.milk_reagent = milk_reagent
 	udder = new (src, src.milk_reagent)
 	. = ..()
 
-/mob/living/simple_animal/hostile/retaliate/goat/Destroy()
+/mob/living/danimal/hostile/retaliate/goat/Destroy()
 	QDEL_NULL(udder)
 	return ..()
 
-/mob/living/simple_animal/hostile/retaliate/goat/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/retaliate/goat/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if(stat == CONSCIOUS)
@@ -63,7 +63,7 @@
 
 		if(enemies.len && prob(10))
 			enemies.Cut()
-			LoseTarget()
+			DropTarget()
 			src.visible_message(span_notice("[src] calms down."))
 		udder?.generateMilk(milk_reagent)
 		eat_plants()
@@ -74,16 +74,16 @@
 					if(locate(/obj/structure/spacevine) in step || locate(/obj/structure/glowshroom) in step)
 						Move(step, get_dir(src, step))
 
-/mob/living/simple_animal/hostile/retaliate/goat/Retaliate()
+/mob/living/danimal/hostile/retaliate/goat/Retaliate()
 	..()
 	src.visible_message(span_danger("[src] gets an evil-looking gleam in [p_their()] eye."))
 
-/mob/living/simple_animal/hostile/retaliate/goat/Move()
+/mob/living/danimal/hostile/retaliate/goat/Move()
 	. = ..()
 	if(!stat)
 		eat_plants()
 
-/mob/living/simple_animal/hostile/retaliate/goat/proc/eat_plants()
+/mob/living/danimal/hostile/retaliate/goat/proc/eat_plants()
 	var/eaten = FALSE
 	var/obj/structure/spacevine/SV = locate(/obj/structure/spacevine) in loc
 	if(SV)
@@ -98,7 +98,7 @@
 	if(eaten && prob(10))
 		say("Nom", only_overhead = TRUE)
 
-/mob/living/simple_animal/hostile/retaliate/goat/attackby(obj/item/O, mob/user, params)
+/mob/living/danimal/hostile/retaliate/goat/attackby(obj/item/O, mob/user, params)
 	if(stat == CONSCIOUS && istype(O, /obj/item/reagent_containers/glass))
 		udder.milkAnimal(O, user)
 		return 1
@@ -106,7 +106,7 @@
 		return ..()
 
 
-/mob/living/simple_animal/hostile/retaliate/goat/AttackingTarget()
+/mob/living/danimal/hostile/retaliate/goat/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!. || !ishuman(my_target))
@@ -119,7 +119,7 @@
 							span_userdanger("[src] takes a big chomp out of your [NB]!"))
 	NB.dismember()
 //cow
-/mob/living/simple_animal/cow
+/mob/living/danimal/cow
 	name = "cow"
 	desc = "Known for their milk, just don't tip them over."
 	icon = 'icons/fallout/mobs/animals/farmanimals.dmi'
@@ -182,17 +182,17 @@
 	var/brand = ""
 
 
-/mob/living/simple_animal/cow/Initialize()
+/mob/living/danimal/cow/Initialize()
 	udder = new(src, milk_reagent)
 	. = ..()
 	recenter_wide_sprite()
 	quit_stealing_my_bike = TRUE
 
-/mob/living/simple_animal/cow/Destroy()
+/mob/living/danimal/cow/Destroy()
 	QDEL_NULL(udder)
 	return ..()
 
-/mob/living/simple_animal/cow/death(gibbed)
+/mob/living/danimal/cow/death(gibbed)
 	. = ..()
 	if(can_buckle)
 		can_buckle = FALSE
@@ -208,7 +208,7 @@
 	if(saddle)
 		new /obj/item/brahminsaddle(get_turf(src))
 
-/mob/living/simple_animal/cow/examine(mob/user)
+/mob/living/danimal/cow/examine(mob/user)
 	. = ..()
 	if(collar)
 		. += "<br>A collar with a tag etched '[name]' is hanging from its neck."
@@ -236,7 +236,7 @@
 		else
 			. += "<br>They look fuckin <i>famished</i>."
 
-/mob/living/simple_animal/cow/attackby(obj/item/O, mob/user, params)
+/mob/living/danimal/cow/attackby(obj/item/O, mob/user, params)
 	if(stat == CONSCIOUS && istype(O, /obj/item/reagent_containers/glass))
 		udder.milkAnimal(O, user)
 		return TRUE
@@ -317,7 +317,7 @@
 			return
 	. = ..()
 
-/mob/living/simple_animal/cow/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/cow/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if(stat == CONSCIOUS)
@@ -347,21 +347,21 @@
 			else
 				update_speed()
 
-/mob/living/simple_animal/cow/proc/become_hungry()
+/mob/living/danimal/cow/proc/become_hungry()
 	hunger++
 	update_speed()
 
-/mob/living/simple_animal/cow/proc/refuel_horse()
+/mob/living/danimal/cow/proc/refuel_horse()
 	hunger = 1
 	update_speed()
 
-/mob/living/simple_animal/cow/proc/update_speed()
+/mob/living/danimal/cow/proc/update_speed()
 	ride_move_delay = initial(ride_move_delay) + round(log(1.6,hunger), 0.2) // vOv
 	if(saddle)
 		var/datum/component/riding/D = LoadComponent(/datum/component/riding)
 		D.vehicle_move_delay = ride_move_delay
 
-/mob/living/simple_animal/cow/on_attack_hand(mob/living/carbon/M)
+/mob/living/danimal/cow/on_attack_hand(mob/living/carbon/M)
 	if(!stat && M.a_intent == INTENT_DISARM && icon_state != icon_dead)
 		M.visible_message(span_warning("[M] tips over [src]."),
 			span_notice("You tip over [src]."))
@@ -395,13 +395,13 @@
 	else
 		..()
 
-/* /mob/living/simple_animal/cow/ComponentInitialize()
+/* /mob/living/danimal/cow/ComponentInitialize()
 	if(!bags)
 		return
 	AddComponent(/datum/component/storage/concrete/brahminbag)
 	return */
 
-/mob/living/simple_animal/cow/proc/feed_em(obj/item/I, mob/user)
+/mob/living/danimal/cow/proc/feed_em(obj/item/I, mob/user)
 	if(!I || !user)
 		return
 	var/obj/item/stack/stax
@@ -426,7 +426,7 @@
 	else
 		qdel(I)
 
-/mob/living/simple_animal/cow/proc/handle_following()
+/mob/living/danimal/cow/proc/handle_following()
 	if(stat == DEAD)
 		return
 	if(health <= 0)
@@ -437,7 +437,7 @@
 		else if(CHECK_MOBILITY(src, MOBILITY_MOVE) && isturf(loc))
 			step_to(src, owner)
 
-/mob/living/simple_animal/cow/CtrlShiftClick(mob/user)
+/mob/living/danimal/cow/CtrlShiftClick(mob/user)
 	if(get_dist(user, src) > 1)
 		return
 
@@ -474,16 +474,16 @@
 
 
 //a cow that produces a random reagent in its udder
-/mob/living/simple_animal/cow/random
+/mob/living/danimal/cow/random
 	name = "strange cow"
 	desc = "Something seems off about the milk this cow is producing."
 
-/mob/living/simple_animal/cow/random/Initialize()
+/mob/living/danimal/cow/random/Initialize()
 	milk_reagent = get_random_reagent_id() //this has a blacklist so don't worry about romerol cows, etc
 	..()
 
 //Wisdom cow, speaks and bestows great wisdoms
-/mob/living/simple_animal/cow/wisdom
+/mob/living/danimal/cow/wisdom
 	name = "wisdom cow"
 	desc = "Known for its wisdom, shares it with all"
 	guaranteed_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab/wisdomcow = 1) //truly the best meat
@@ -491,7 +491,7 @@
 	speak_chance = 10 //the cow is eager to share its wisdom! //but is wise enough to not lag  the server too bad
 	milk_reagent = /datum/reagent/medicine/liquid_wisdom
 
-/mob/living/simple_animal/cow/wisdom/Initialize()
+/mob/living/danimal/cow/wisdom/Initialize()
 	. = ..()
 	speak = GLOB.wisdoms //Done here so it's setup properly
 
@@ -500,7 +500,7 @@
 // CHICKEN //
 /////////////
 
-/mob/living/simple_animal/chick
+/mob/living/danimal/chick
 	name = "chick"
 	desc = "Adorable! They make such a racket though."
 	icon = 'icons/fallout/mobs/animals/farmanimals.dmi'
@@ -536,26 +536,26 @@
 
 	footstep_type = FOOTSTEP_MOB_CLAW
 
-/mob/living/simple_animal/chick/Initialize()
+/mob/living/danimal/chick/Initialize()
 	. = ..()
 	pixel_x = rand(-6, 6)
 	pixel_y = rand(0, 10)
 
-/mob/living/simple_animal/chick/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/chick/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if(!stat && !ckey)
 		amount_grown += rand(1,2)
 		if(amount_grown >= 100)
-			new /mob/living/simple_animal/chicken(src.loc)
+			new /mob/living/danimal/chicken(src.loc)
 			qdel(src)
 
-/mob/living/simple_animal/chick/holo/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/chick/holo/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	amount_grown = 0
 
-/mob/living/simple_animal/chicken
+/mob/living/danimal/chicken
 	name = "chicken"
 	desc = "Hopefully the eggs are good this season."
 	gender = FEMALE
@@ -606,7 +606,7 @@
 
 	footstep_type = FOOTSTEP_MOB_CLAW
 
-/mob/living/simple_animal/chicken/Initialize()
+/mob/living/danimal/chicken/Initialize()
 	. = ..()
 	if(!body_color)
 		body_color = pick(validColors)
@@ -617,11 +617,11 @@
 	pixel_y = rand(0, 10)
 	++chicken_count
 
-/mob/living/simple_animal/chicken/Destroy()
+/mob/living/danimal/chicken/Destroy()
 	--chicken_count
 	return ..()
 
-/mob/living/simple_animal/chicken/attackby(obj/item/O, mob/user, params)
+/mob/living/danimal/chicken/attackby(obj/item/O, mob/user, params)
 	if(istype(O, food_type)) //feedin' dem chickens
 		if(!stat && eggsleft < 8)
 			var/feedmsg = "[user] feeds [O] to [name]! [pick(feedMessages)]"
@@ -633,7 +633,7 @@
 	else
 		..()
 
-/mob/living/simple_animal/chicken/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/chicken/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if((!stat && prob(3) && eggsleft > 0) && egg_type)
@@ -652,7 +652,7 @@
 		amount_grown += rand(1,2)
 		if(amount_grown >= 100)
 			visible_message("[src] hatches with a quiet cracking sound.")
-			new /mob/living/simple_animal/chick(get_turf(src))
+			new /mob/living/danimal/chick(get_turf(src))
 			STOP_PROCESSING(SSobj, src)
 			qdel(src)
 	else
@@ -691,7 +691,7 @@
 // BRAHMIN //
 /////////////
 
-/mob/living/simple_animal/cow/brahmin
+/mob/living/danimal/cow/brahmin
 	name = "brahmin"
 	desc = "Brahmin or brahma are mutated cattle with two heads and looking udderly ridiculous.<br>Known for their milk, just don't tip them over."
 	icon = 'icons/fallout/mobs/animals/farmanimals.dmi'
@@ -726,7 +726,7 @@
 		'sound/creatures/cow/cow3.ogg',
 		'sound/creatures/cow/cow4.ogg',
 		)
-	young_type = /mob/living/simple_animal/cow/brahmin/calf
+	young_type = /mob/living/danimal/cow/brahmin/calf
 	var/obj/item/inventory_back
 	footstep_type = FOOTSTEP_MOB_HOOF
 	guaranteed_butcher_results = list(
@@ -738,7 +738,7 @@
 		)
 	butcher_difficulty = 1
 
-/mob/living/simple_animal/cow/brahmin/molerat
+/mob/living/danimal/cow/brahmin/molerat
 	name = "tamed molerat"
 	desc = "That's a big ol' molerat, seems to be able to take a saddle!"
 	icon = 'modular_coyote/icons/mob/horse.dmi'
@@ -781,7 +781,7 @@
 		)
 	butcher_difficulty = 1
 
-/mob/living/simple_animal/cow/brahmin/molerat/trike
+/mob/living/danimal/cow/brahmin/molerat/trike
 	name = "tamed triceratops"
 	desc = "That's a big something! With three horns this beast looks quite intimadating. Apart from the saddle somehow strapped to it's back."
 	icon = 'modular_coyote/icons/mob/dinosaurs68x45.dmi'
@@ -821,7 +821,7 @@
 		)
 	butcher_difficulty = 1
 
-/mob/living/simple_animal/cow/brahmin/horse/honse //wuzzle
+/mob/living/danimal/cow/brahmin/horse/honse //wuzzle
 	name = "honse"
 	desc = "That's a honse, it's the morst but it sure is snorst." //Someone please set a better description later ~TK
 	icon = 'modular_coyote/icons/mob/horse.dmi'
@@ -852,7 +852,7 @@
 	waddle_side_time = 2
 	attack_sound = 'sound/weapons/punch1.ogg'
 	idlesound = list()
-	young_type = /mob/living/simple_animal/cow/brahmin/horse
+	young_type = /mob/living/danimal/cow/brahmin/horse
 	footstep_type = FOOTSTEP_MOB_HOOF
 	guaranteed_butcher_results = list(
 		/obj/item/reagent_containers/food/snacks/meat/slab = 8,
@@ -867,7 +867,7 @@
 
 //Motorbike?
 
-/mob/living/simple_animal/cow/brahmin/motorbike //fast as fuck boiii-- costs welding fuel
+/mob/living/danimal/cow/brahmin/motorbike //fast as fuck boiii-- costs welding fuel
 	name = "motorbike"
 	desc = "Wow, a small, working motorcycle. How cool!" //I don't care. ~gob
 	icon = 'modular_coyote/icons/mob/motorbike.dmi'
@@ -899,7 +899,7 @@
 	attack_sound = 'sound/weapons/punch1.ogg'
 	idlesound = list()
 	food_types = list(/obj/item/reagent_containers/food/snacks/welding_fuel)
-	young_type = /mob/living/simple_animal/cow/brahmin/motorbike
+	young_type = /mob/living/danimal/cow/brahmin/motorbike
 	milk_reagent = /datum/reagent/fuel
 	footstep_type = FOOTSTEP_MOB_HOOF
 	guaranteed_butcher_results = list(
@@ -909,7 +909,7 @@
 		)
 	butcher_difficulty = 5
 
-/mob/living/simple_animal/cow/brahmin/motorbike/tractor //fast as fuck boiii-- costs welding fuel
+/mob/living/danimal/cow/brahmin/motorbike/tractor //fast as fuck boiii-- costs welding fuel
 	name = "tractor"
 	desc = "A tractor! Is it a John Deer? Or a Kubota?" //I don't care. ~gob
 	icon = 'modular_coyote/icons/mob/tractor.dmi'
@@ -919,7 +919,7 @@
 
 //Horse
 
-/mob/living/simple_animal/cow/brahmin/horse //faster than a brahmin, but much less tanky
+/mob/living/danimal/cow/brahmin/horse //faster than a brahmin, but much less tanky
 	name = "horse"
 	desc = "That's a horse, it's not the morst but it sure is snorst." //Someone please set a better description later ~TK
 	icon = 'modular_coyote/icons/mob/horse.dmi'
@@ -950,7 +950,7 @@
 	waddle_side_time = 2
 	attack_sound = 'sound/weapons/punch1.ogg'
 	idlesound = list()
-	young_type = /mob/living/simple_animal/cow/brahmin/horse
+	young_type = /mob/living/danimal/cow/brahmin/horse
 	footstep_type = FOOTSTEP_MOB_HOOF
 	guaranteed_butcher_results = list(
 		/obj/item/reagent_containers/food/snacks/meat/slab = 6,
@@ -963,7 +963,7 @@
 //Ridable Nightstalker
 //not hormse
 //smelly
-/mob/living/simple_animal/cow/brahmin/nightstalker //faster than a brahmin, but slower than a horse, mid ground tanky
+/mob/living/danimal/cow/brahmin/nightstalker //faster than a brahmin, but slower than a horse, mid ground tanky
 	name = "tamed nightstalker"
 	desc = "A crazed genetic hybrid of rattlesnake and coyote DNA. This one seems a bit less crazed, at least."
 	icon = 'icons/fallout/mobs/animals/nightstalker.dmi'
@@ -994,7 +994,7 @@
 	waddle_side_time = 2
 	attack_sound = 'sound/weapons/punch1.ogg'
 	idlesound = list()
-	young_type = /mob/living/simple_animal/cow/brahmin/nightstalker
+	young_type = /mob/living/danimal/cow/brahmin/nightstalker
 	food_types = list(
 		/obj/item/reagent_containers/food/snacks/meat/slab/gecko,
 		/obj/item/reagent_containers/food/snacks/f13/canned/dog
@@ -1016,7 +1016,7 @@
 	butcher_difficulty = 1
 
 
-/mob/living/simple_animal/cow/brahmin/nightstalker/hunterspider
+/mob/living/danimal/cow/brahmin/nightstalker/hunterspider
 	name = "tamed spider"
 	desc = "SOMEONE TAMED A FUCKING GIANT SPIDER?"
 	icon = 'icons/fallout/mobs/animals/nightstalker.dmi'
@@ -1048,7 +1048,7 @@
 	waddle_side_time = 2
 	attack_sound = 'sound/weapons/punch1.ogg'
 	idlesound = list()
-	young_type = /mob/living/simple_animal/cow/brahmin/nightstalker
+	young_type = /mob/living/danimal/cow/brahmin/nightstalker
 	food_types = list(
 		/obj/item/reagent_containers/food/snacks/meat/slab/gecko,
 		/obj/item/reagent_containers/food/snacks/f13/canned/dog
@@ -1069,7 +1069,7 @@
 		)
 	butcher_difficulty = 1
 //Bear
-/mob/living/simple_animal/cow/brahmin/nightstalker/yaoguai
+/mob/living/danimal/cow/brahmin/nightstalker/yaoguai
 	name = "tamed yaoguai"
 	desc = "Is that...a yaoguai with a saddle on it's back?"
 	icon = 'icons/fallout/mobs/animals/yaoguai.dmi'
@@ -1100,7 +1100,7 @@
 	waddle_side_time = 2
 	attack_sound = 'sound/weapons/punch1.ogg'
 	idlesound = list()
-	young_type = /mob/living/simple_animal/cow/brahmin/nightstalker
+	young_type = /mob/living/danimal/cow/brahmin/nightstalker
 	food_types = list(
 		/obj/item/reagent_containers/food/snacks/meat/slab/gecko,
 		/obj/item/reagent_containers/food/snacks/f13/canned/dog
@@ -1123,7 +1123,7 @@
 
 
 //Ridable Fennec
-/mob/living/simple_animal/cow/brahmin/horse/fennec //faster than a brahmin, but much less tanky
+/mob/living/danimal/cow/brahmin/horse/fennec //faster than a brahmin, but much less tanky
 	name = "fennec"
 	desc = "That's a fennec, screm."
 	icon = 'modular_coyote/icons/mob/horse.dmi'
@@ -1165,7 +1165,7 @@
 	waddle_side_time = 3
 	attack_sound = 'sound/weapons/punch1.ogg'
 	idlesound = list()
-	young_type = /mob/living/simple_animal/cow/brahmin/horse
+	young_type = /mob/living/danimal/cow/brahmin/horse
 	footstep_type = FOOTSTEP_MOB_HOOF
 	food_types = list(
 		/obj/item/reagent_containers/food/snacks/meat/slab/gecko,
@@ -1194,7 +1194,7 @@
 
 //Thrumbo from Citadel RP
 
-/mob/living/simple_animal/cow/brahmin/thrumbo
+/mob/living/danimal/cow/brahmin/thrumbo
 	name = "thrumbo"
 	desc = "An intimidatingly large white-furred creature with a single massive horn on its forehead"
 	icon = 'modular_coyote/icons/mob/thrumbo.dmi'
@@ -1237,7 +1237,7 @@
 		)
 	butcher_difficulty = 1
 
-/mob/living/simple_animal/cow/brahmin/horse/choco
+/mob/living/danimal/cow/brahmin/horse/choco
 	name = "yellow snipe"
 	desc = "A very large chicken. Has a saddle!" //Someone please set a better description later ~TK
 	icon = 'modular_coyote/icons/mob/raptor.dmi'
@@ -1268,7 +1268,7 @@
 	waddle_side_time = 2
 	attack_sound = 'sound/weapons/punch1.ogg'
 	idlesound = list()
-	young_type = /mob/living/simple_animal/cow/brahmin/horse/choco
+	young_type = /mob/living/danimal/cow/brahmin/horse/choco
 	footstep_type = FOOTSTEP_MOB_HOOF
 	guaranteed_butcher_results = list(
 		/obj/item/reagent_containers/food/snacks/meat/slab = 8,
@@ -1284,7 +1284,7 @@
 		)
 
 
-/mob/living/simple_animal/cow/brahmin/horse/choco/black
+/mob/living/danimal/cow/brahmin/horse/choco/black
 	name = "black snipe"
 	desc = "A very large chicken. Has a saddle!" //Someone please set a better description later ~TK
 	icon = 'modular_coyote/icons/mob/raptor.dmi'
@@ -1292,7 +1292,7 @@
 	icon_living = "raptorblack"
 	icon_dead = "raptorblack_dead"
 
-/mob/living/simple_animal/cow/brahmin/horse/choco/blue
+/mob/living/danimal/cow/brahmin/horse/choco/blue
 	name = "blue snipe"
 	desc = "A very large chicken. Has a saddle!" //Someone please set a better description later ~TK
 	icon = 'modular_coyote/icons/mob/raptor.dmi'
@@ -1300,7 +1300,7 @@
 	icon_living = "raptorblue"
 	icon_dead = "raptorblue_dead"
 
-/mob/living/simple_animal/cow/brahmin/horse/choco/white
+/mob/living/danimal/cow/brahmin/horse/choco/white
 	name = "white snipe"
 	desc = "A very large chicken. Has a saddle!" //Someone please set a better description later ~TK
 	icon = 'modular_coyote/icons/mob/raptor.dmi'
@@ -1308,7 +1308,7 @@
 	icon_living = "raptorwhite"
 	icon_dead = "raptorwhite_dead"
 
-/mob/living/simple_animal/cow/brahmin/horse/choco/purple
+/mob/living/danimal/cow/brahmin/horse/choco/purple
 	name = "purple snipe"
 	desc = "A very large chicken. Has a saddle!" //Someone please set a better description later ~TK
 	icon = 'modular_coyote/icons/mob/raptor.dmi'
@@ -1316,7 +1316,7 @@
 	icon_living = "raptorpurple"
 	icon_dead = "raptorpurple_dead"
 
-/mob/living/simple_animal/cow/brahmin/horse/choco/red
+/mob/living/danimal/cow/brahmin/horse/choco/red
 	name = "red snipe"
 	desc = "A very large chicken. Has a saddle!" //Someone please set a better description later ~TK
 	icon = 'modular_coyote/icons/mob/raptor.dmi'
@@ -1324,7 +1324,7 @@
 	icon_living = "raptorred"
 	icon_dead = "raptorred_dead"
 
-/mob/living/simple_animal/cow/brahmin/horse/choco/green
+/mob/living/danimal/cow/brahmin/horse/choco/green
 	name = "green snipe"
 	desc = "A very large chicken. Has a saddle!" //Someone please set a better description later ~TK
 	icon = 'modular_coyote/icons/mob/raptor.dmi'
@@ -1433,16 +1433,16 @@
 */
 
 
-/mob/living/simple_animal/cow/brahmin/calf
+/mob/living/danimal/cow/brahmin/calf
 	name = "brahmin calf"
 	is_calf = 1
 
-/mob/living/simple_animal/cow/brahmin/calf/Initialize()
+/mob/living/danimal/cow/brahmin/calf/Initialize()
 	. = ..()
 	resize = 0.7
 	update_transform()
 
-/mob/living/simple_animal/cow/brahmin/sgtsillyhorn
+/mob/living/danimal/cow/brahmin/sgtsillyhorn
 	name = "Sergeant Sillyhorn"
 	desc = "A distinguished war veteran alongside his junior enlisted sidekick, Corporal McCattle. The two of them wear a set of golden rings, smelted from captured Centurions."
 	emote_see = list("shakes its head.","swishes its tail eagerly.")
@@ -1450,7 +1450,7 @@
 
 
 
-/mob/living/simple_animal/cow/brahmin/proc/update_brahmin_fluff() //none of this should do anything for now, but it may be used for updating sprites later
+/mob/living/danimal/cow/brahmin/proc/update_brahmin_fluff() //none of this should do anything for now, but it may be used for updating sprites later
 	// First, change back to defaults
 	name = real_name
 	desc = initial(desc)
@@ -1466,7 +1466,7 @@
 // RADSTAG //
 /////////////
 
-/mob/living/simple_animal/radstag
+/mob/living/danimal/radstag
 	name = "deer"
 	desc = "a deer that will run at the first sight of danger."
 	icon = 'modular_coyote/icons/mob/deer.dmi'
@@ -1493,7 +1493,7 @@
 	faction = list("neutral")
 
 //Special Radstag
-/mob/living/simple_animal/radstag/rudostag
+/mob/living/danimal/radstag/rudostag
 	name = "Rudo the Rednosed Stag"
 	desc = "An almost normal looking radstag. Apart from both of it's noses was a bright, glowing red."
 	icon_state = "rudostag"
@@ -1504,7 +1504,7 @@
 // BIGHORNER //
 ///////////////
 
-/mob/living/simple_animal/hostile/retaliate/goat/bighorn
+/mob/living/danimal/hostile/retaliate/goat/bighorn
 	name = "bighorner"
 	desc = "Mutated bighorn sheep that are often found in mountains, and are known for being foul-tempered even at the best of times."
 	icon = 'icons/fallout/mobs/animals/farmanimals.dmi'
@@ -1537,9 +1537,9 @@
 	var/is_calf = 0
 	var/food_type = /obj/item/reagent_containers/food/snacks/grown/wheat
 	var/has_calf = 0
-	var/young_type = /mob/living/simple_animal/hostile/retaliate/goat/bighorn/calf
+	var/young_type = /mob/living/danimal/hostile/retaliate/goat/bighorn/calf
 
-/mob/living/simple_animal/hostile/retaliate/goat/bighorn/attackby(obj/item/O, mob/user, params)
+/mob/living/danimal/hostile/retaliate/goat/bighorn/attackby(obj/item/O, mob/user, params)
 	if(stat == CONSCIOUS && istype(O, /obj/item/reagent_containers/glass)) // Should probably be bound into a proc at this point.
 		udder.milkAnimal(O, user)
 		return 1
@@ -1557,7 +1557,7 @@
 	else
 		return ..()
 
-/mob/living/simple_animal/hostile/retaliate/goat/bighorn/Life()
+/mob/living/danimal/hostile/retaliate/goat/bighorn/Life()
 	. = ..()
 	if(stat == CONSCIOUS)
 		if((prob(3) && has_calf))
@@ -1580,16 +1580,16 @@
 			udder?.generateMilk(milk_reagent)
 
 // BIGHORNER CALF
-/mob/living/simple_animal/hostile/retaliate/goat/bighorn/calf
+/mob/living/danimal/hostile/retaliate/goat/bighorn/calf
 	name = "bighoner calf"
 	resize = 0.7
 
-/mob/living/simple_animal/hostile/retaliate/goat/bighorn/calf/Initialize() //calfs should not be a separate critter, they should just be a normal whatever with these vars
+/mob/living/danimal/hostile/retaliate/goat/bighorn/calf/Initialize() //calfs should not be a separate critter, they should just be a normal whatever with these vars
 	. = ..()
 	resize = 0.7
 	update_transform()
 
-/mob/living/simple_animal/cow/brahmin/cow //return to bovine
+/mob/living/danimal/cow/brahmin/cow //return to bovine
 	name = "Cow"
 	desc = "A black and white cow!"
 	icon = 'modular_coyote/icons/mob/cow.dmi'
@@ -1598,12 +1598,12 @@
 	icon_dead = "cow_dead"
 	icon_gib = "brahmin_gib"
 
-/mob/living/simple_animal/cow/brahmin/cow/Initialize()
+/mob/living/danimal/cow/brahmin/cow/Initialize()
 	.=..()
 	resize = 0.7
 	update_transform()
 
-/mob/living/simple_animal/cow/brahmin/cow/tan
+/mob/living/danimal/cow/brahmin/cow/tan
 	name = "Tan Cow"
 	desc = "A tan cow!"
 	icon = 'modular_coyote/icons/mob/cow.dmi'
@@ -1616,7 +1616,7 @@
 	if(inventory_back && inventory_back.brahmin_fashion)
 		var/datum/brahmin_fashion/BF = new inventory_back.brahmin_fashion(src)
 		BF.apply(src)
-/mob/living/simple_animal/cow/brahmin/regenerate_icons()
+/mob/living/danimal/cow/brahmin/regenerate_icons()
 	..()
 	if(inventory_back)
 		var/image/back_icon
@@ -1635,7 +1635,7 @@
 			back_icon = BF.get_overlay()
 		add_overlay(back_icon)
 	return
-/mob/living/simple_animal/cow/brahmin/show_inv(mob/user)
+/mob/living/danimal/cow/brahmin/show_inv(mob/user)
 	user.set_machine(src)
 	if(user.stat)
 		return

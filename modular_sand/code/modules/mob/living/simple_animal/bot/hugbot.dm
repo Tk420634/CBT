@@ -12,7 +12,7 @@
 
 #define HUG_BOT 			(1<<7)
 
-/mob/living/simple_animal/bot/hugbot
+/mob/living/danimal/bot/hugbot
 	name = "\improper Hugbot"
 	desc = "A little cudly robot. He looks excited."
 	icon = 'modular_sand/icons/mob/aibots.dmi'
@@ -50,7 +50,7 @@
 	var/tipper_name //The name we got when we were tipped
 	var/last_tipping_action_voice = 0 //The last time we were tipped/righted and said a voice line, to avoid spam
 
-/mob/living/simple_animal/bot/hugbot/update_icon()
+/mob/living/danimal/bot/hugbot/update_icon()
 	cut_overlays()
 	if(!on)
 		icon_state = "hugbot0"
@@ -64,28 +64,28 @@
 	else
 		icon_state = "hugbot[stationary_mode+1]"
 
-/mob/living/simple_animal/bot/medbot/Initialize(mapload)
+/mob/living/danimal/bot/medbot/Initialize(mapload)
 	. = ..()
 	update_icon()
 
-/mob/living/simple_animal/bot/hugbot/bot_reset()
+/mob/living/danimal/bot/hugbot/bot_reset()
 	..()
 	update_icon()
 
-/mob/living/simple_animal/bot/hugbot/proc/soft_reset() //Allows the medibot to still actively perform its medical duties without being completely halted as a hard reset does.
+/mob/living/danimal/bot/hugbot/proc/soft_reset() //Allows the medibot to still actively perform its medical duties without being completely halted as a hard reset does.
 	path = list()
 	patient = null
 	mode = BOT_IDLE
 	last_found = world.time
 	update_icon()
 
-/mob/living/simple_animal/bot/hugbot/set_custom_texts()
+/mob/living/danimal/bot/hugbot/set_custom_texts()
 	text_hack = "You bypass [name]'s manipulator pressure sensors."
 	text_dehack = "You rewire [name]'s manipulator pressure sensors."
 	text_dehack_fail = "[name] seems damaged and does not respond to reprogramming!"
 
 // Variables sent to TGUI
-/mob/living/simple_animal/bot/hugbot/ui_data(mob/user)
+/mob/living/danimal/bot/hugbot/ui_data(mob/user)
 	var/list/data = ..()
 	if(!locked || issilicon(user) || IsAdminGhost(user))
 		data["custom_controls"]["maximum_sanity"] = max_sanity
@@ -103,7 +103,7 @@
 	return data
 
 // Actions received from TGUI
-/mob/living/simple_animal/bot/hugbot/ui_act(action, params)
+/mob/living/danimal/bot/hugbot/ui_act(action, params)
 	. = ..()
 	if(. || !hasSiliconAccessInArea(usr) && !IsAdminGhost(usr) && !(bot_core.allowed(usr) || !locked))
 		return TRUE
@@ -134,16 +134,16 @@
 			update_appearance()
 	return
 
-/mob/living/simple_animal/bot/hugbot/attackby(obj/item/W as obj, mob/user as mob, params)
+/mob/living/danimal/bot/hugbot/attackby(obj/item/W as obj, mob/user as mob, params)
 	var/current_health = health
 	..()
 	if(health < current_health) //if medbot took some damage
 		step_to(src, (get_step_away(src,user)))
 
-/mob/living/simple_animal/bot/medbot/attack_paw(mob/user)
+/mob/living/danimal/bot/medbot/attack_paw(mob/user)
 	return attack_hand(user)
 
-/mob/living/simple_animal/bot/hugbot/attack_hand(mob/living/carbon/human/H)
+/mob/living/danimal/bot/hugbot/attack_hand(mob/living/carbon/human/H)
 	if(H.a_intent == INTENT_DISARM && mode != BOT_TIPPED)
 		H.visible_message(span_danger("[H] begins tipping over [src]."), span_warning("You begin tipping over [src]..."))
 		//balloon_alert(H, "tipping over")
@@ -166,7 +166,7 @@
 	else
 		..()
 
-/mob/living/simple_animal/bot/hugbot/emag_act(mob/user)
+/mob/living/danimal/bot/hugbot/emag_act(mob/user)
 	..()
 	if(emagged == 2)
 		if(user)
@@ -176,7 +176,7 @@
 		playsound(src, "sparks", 75, 1)
 
 
-/mob/living/simple_animal/bot/hugbot/proc/assess_patient(mob/living/carbon/human/H)
+/mob/living/danimal/bot/hugbot/proc/assess_patient(mob/living/carbon/human/H)
 	//Time to see if they need medical help!
 	if(H.stat == DEAD || (HAS_TRAIT(H, TRAIT_FAKEDEATH)))
 		return FALSE	//welp too late for them!
@@ -205,7 +205,7 @@
 
 	return FALSE
 
-/mob/living/simple_animal/bot/hugbot/process_scan(mob/living/carbon/human/H)
+/mob/living/danimal/bot/hugbot/process_scan(mob/living/carbon/human/H)
 	if(H.stat == DEAD)
 		return
 
@@ -218,7 +218,7 @@
 	else
 		return
 
-/mob/living/simple_animal/bot/hugbot/handle_automated_action()
+/mob/living/danimal/bot/hugbot/handle_automated_action()
 	if(!..())
 		return
 
@@ -319,7 +319,7 @@
 
 	return
 
-/mob/living/simple_animal/bot/hugbot/UnarmedAttack(atom/A)
+/mob/living/danimal/bot/hugbot/UnarmedAttack(atom/A)
 	if(iscarbon(A))
 		var/mob/living/carbon/human/H = A
 		patient = H
@@ -330,7 +330,7 @@
 	else
 		..()
 
-/mob/living/simple_animal/bot/hugbot/proc/medicate_patient(mob/living/carbon/human/H)
+/mob/living/danimal/bot/hugbot/proc/medicate_patient(mob/living/carbon/human/H)
 	if(!on)
 		return
 
@@ -388,7 +388,7 @@
 			soft_reset()
 	return
 
-/mob/living/simple_animal/bot/hugbot/explode()
+/mob/living/danimal/bot/hugbot/explode()
 	on = FALSE
 	visible_message(span_boldannounce("[src] blows apart!"))
 	do_sparks(3, TRUE, src)
@@ -413,7 +413,7 @@
 	if(istype(W, /obj/item/assembly/prox_sensor))
 		if(!can_finish_build(W, user))
 			return
-		var/mob/living/simple_animal/bot/hugbot/A = new(drop_location())
+		var/mob/living/danimal/bot/hugbot/A = new(drop_location())
 		A.name = created_name
 		A.robot_arm = W.type
 		to_chat(user, span_notice("You add [W] to [src]. Beep boop!"))
@@ -436,7 +436,7 @@
 		return ..()
 
 // Skyrat exclusive: Tipping over hugbots. Because fuck medbots.
-/mob/living/simple_animal/bot/hugbot/proc/tip_over(mob/user)
+/mob/living/danimal/bot/hugbot/proc/tip_over(mob/user)
 	mobility_flags &= ~MOBILITY_MOVE
 	user.visible_message(span_danger("[user] tips over [src]!"), span_danger("You tip [src] over!"))
 	//balloon_alert(user, "tipped over")
@@ -445,7 +445,7 @@
 	var/matrix/mat = transform
 	transform = mat.Turn(180)
 
-/mob/living/simple_animal/bot/hugbot/proc/set_right(mob/user)
+/mob/living/danimal/bot/hugbot/proc/set_right(mob/user)
 	mobility_flags &= MOBILITY_MOVE
 	var/list/messagevoice
 	if(user)
@@ -470,7 +470,7 @@
 	transform = matrix()
 
 // if someone tipped us over, check whether we should ask for help or just right ourselves eventually
-/mob/living/simple_animal/bot/hugbot/proc/handle_panic()
+/mob/living/danimal/bot/hugbot/proc/handle_panic()
 	tipped_status++
 	var/list/messagevoice
 	switch(tipped_status)

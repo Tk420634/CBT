@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/asteroid/hivelord/ComponentInitialize()
+/mob/living/danimal/hostile/asteroid/hivelord/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("rips out skulls from the legion, one by one, until it's mangled carcass finally disappears!", "punches the shit out of the legion, making it scream until it finally gives out!", "punches their hand inside the gut of the legion, ripping off his regenerative core!"), \

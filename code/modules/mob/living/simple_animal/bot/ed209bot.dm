@@ -1,4 +1,4 @@
-/mob/living/simple_animal/bot/ed209
+/mob/living/danimal/bot/ed209
 	name = "\improper ED-209 Security Robot"
 	desc = "A security robot.  He looks less than thrilled."
 	icon = 'icons/mob/aibots.dmi'
@@ -45,7 +45,7 @@
 	var/vest_type = /obj/item/clothing/suit/armor/medium/vest
 
 
-/mob/living/simple_animal/bot/ed209/Initialize(mapload,created_name,created_lasercolor)
+/mob/living/danimal/bot/ed209/Initialize(mapload,created_name,created_lasercolor)
 	. = ..()
 	if(created_name)
 		name = created_name
@@ -73,16 +73,16 @@
 	var/datum/atom_hud/secsensor = GLOB.huds[DATA_HUD_SECURITY_ADVANCED]
 	secsensor.add_hud_to(src)
 
-/mob/living/simple_animal/bot/ed209/turn_on()
+/mob/living/danimal/bot/ed209/turn_on()
 	. = ..()
 	icon_state = "[lasercolor]ed209[on]"
 	mode = BOT_IDLE
 
-/mob/living/simple_animal/bot/ed209/turn_off()
+/mob/living/danimal/bot/ed209/turn_off()
 	..()
 	icon_state = "[lasercolor]ed209[on]"
 
-/mob/living/simple_animal/bot/ed209/bot_reset()
+/mob/living/danimal/bot/ed209/bot_reset()
 	..()
 	target = null
 	oldtarget_name = null
@@ -91,12 +91,12 @@
 	last_found = world.time
 	set_weapon()
 
-/mob/living/simple_animal/bot/ed209/set_custom_texts()
+/mob/living/danimal/bot/ed209/set_custom_texts()
 	text_hack = "You disable [name]'s combat inhibitor."
 	text_dehack = "You restore [name]'s combat inhibitor."
 	text_dehack_fail = "[name] ignores your attempts to restrict him!"
 
-/mob/living/simple_animal/bot/ed209/get_controls(mob/user)
+/mob/living/danimal/bot/ed209/get_controls(mob/user)
 	var/dat
 	dat += hack(user)
 	dat += showpai(user)
@@ -128,7 +128,7 @@ Auto Patrol[]"},
 
 	return dat
 
-/mob/living/simple_animal/bot/ed209/Topic(href, href_list)
+/mob/living/danimal/bot/ed209/Topic(href, href_list)
 	if(lasercolor && ishuman(usr))
 		var/mob/living/carbon/human/H = usr
 		if((lasercolor == "b") && (istype(H.wear_suit, /obj/item/clothing/suit/redtag)))//Opposing team cannot operate it
@@ -155,7 +155,7 @@ Auto Patrol[]"},
 			declare_arrests = !declare_arrests
 			update_controls()
 
-/mob/living/simple_animal/bot/ed209/proc/judgement_criteria()
+/mob/living/danimal/bot/ed209/proc/judgement_criteria()
 	var/final = FALSE
 	if(idcheck)
 		final = final|JUDGE_IDCHECK
@@ -169,7 +169,7 @@ Auto Patrol[]"},
 	final = final|JUDGE_IGNOREMONKEYS
 	return final
 
-/mob/living/simple_animal/bot/ed209/proc/retaliate(mob/living/carbon/human/H)
+/mob/living/danimal/bot/ed209/proc/retaliate(mob/living/carbon/human/H)
 	var/judgement_criteria = judgement_criteria()
 	threatlevel = H.assess_threat(judgement_criteria, weaponcheck=CALLBACK(src,PROC_REF(check_for_weapons)))
 	threatlevel += 6
@@ -177,12 +177,12 @@ Auto Patrol[]"},
 		target = H
 		mode = BOT_HUNT
 
-/mob/living/simple_animal/bot/ed209/on_attack_hand(mob/living/carbon/human/H)
+/mob/living/danimal/bot/ed209/on_attack_hand(mob/living/carbon/human/H)
 	if(H.a_intent == INTENT_HARM)
 		retaliate(H)
 	return ..()
 
-/mob/living/simple_animal/bot/ed209/attackby(obj/item/W, mob/user, params)
+/mob/living/danimal/bot/ed209/attackby(obj/item/W, mob/user, params)
 	..()
 	if(istype(W, /obj/item/weldingtool) && user.a_intent != INTENT_HARM) // Any intent but harm will heal, so we shouldn't get angry.
 		return
@@ -192,7 +192,7 @@ Auto Patrol[]"},
 			if(lasercolor)//To make up for the fact that lasertag bots don't hunt
 				shootAt(user)
 
-/mob/living/simple_animal/bot/ed209/emag_act(mob/user)
+/mob/living/danimal/bot/ed209/emag_act(mob/user)
 	. = ..()
 	if(emagged == 2)
 		if(user)
@@ -203,14 +203,14 @@ Auto Patrol[]"},
 		icon_state = "[lasercolor]ed209[on]"
 		set_weapon()
 
-/mob/living/simple_animal/bot/ed209/bullet_act(obj/item/projectile/Proj)
+/mob/living/danimal/bot/ed209/bullet_act(obj/item/projectile/Proj)
 	if(istype(Proj , /obj/item/projectile/beam/laser)||istype(Proj, /obj/item/projectile/bullet))
 		if((Proj.damage_type == BURN) || (Proj.damage_type == BRUTE))
 			if(!Proj.nodamage && Proj.damage < src.health && ishuman(Proj.firer))
 				retaliate(Proj.firer)
 	return ..()
 
-/mob/living/simple_animal/bot/ed209/handle_automated_action()
+/mob/living/danimal/bot/ed209/handle_automated_action()
 	if(!..())
 		return
 
@@ -319,7 +319,7 @@ Auto Patrol[]"},
 
 	return
 
-/mob/living/simple_animal/bot/ed209/proc/back_to_idle()
+/mob/living/danimal/bot/ed209/proc/back_to_idle()
 	anchored = FALSE
 	mode = BOT_IDLE
 	target = null
@@ -327,7 +327,7 @@ Auto Patrol[]"},
 	frustration = 0
 	INVOKE_ASYNC(src,PROC_REF(handle_automated_action)) //ensure bot quickly responds
 
-/mob/living/simple_animal/bot/ed209/proc/back_to_hunt()
+/mob/living/danimal/bot/ed209/proc/back_to_hunt()
 	anchored = FALSE
 	frustration = 0
 	mode = BOT_HUNT
@@ -335,7 +335,7 @@ Auto Patrol[]"},
 
 // look for a criminal in view of the bot
 
-/mob/living/simple_animal/bot/ed209/proc/look_for_perp()
+/mob/living/danimal/bot/ed209/proc/look_for_perp()
 	if(disabled)
 		return
 	anchored = FALSE
@@ -366,12 +366,12 @@ Auto Patrol[]"},
 		else
 			continue
 
-/mob/living/simple_animal/bot/ed209/proc/check_for_weapons(obj/item/slot_item)
+/mob/living/danimal/bot/ed209/proc/check_for_weapons(obj/item/slot_item)
 	if(slot_item && (slot_item.item_flags & NEEDS_PERMIT))
 		return 1
 	return 0
 
-/mob/living/simple_animal/bot/ed209/explode()
+/mob/living/danimal/bot/ed209/explode()
 	walk_to(src,0)
 	visible_message(span_boldannounce("[src] blows apart!"))
 	var/atom/Tsec = drop_location()
@@ -416,7 +416,7 @@ Auto Patrol[]"},
 	new /obj/effect/decal/cleanable/oil(loc)
 	..()
 
-/mob/living/simple_animal/bot/ed209/proc/set_weapon()  //used to update the projectile type and firing sound
+/mob/living/danimal/bot/ed209/proc/set_weapon()  //used to update the projectile type and firing sound
 	shoot_sound = 'sound/weapons/laser.ogg'
 	if(emagged == 2)
 		if(lasercolor)
@@ -432,7 +432,7 @@ Auto Patrol[]"},
 		else if(lasercolor == "r")
 			projectile = /obj/item/projectile/beam/lasertag/redtag
 
-/mob/living/simple_animal/bot/ed209/proc/shootAt(mob/target)
+/mob/living/danimal/bot/ed209/proc/shootAt(mob/target)
 	if(lastfired && world.time - lastfired < shot_delay)
 		return
 	lastfired = world.time
@@ -451,14 +451,14 @@ Auto Patrol[]"},
 	A.preparePixelProjectile(target, src)
 	A.fire()
 
-/mob/living/simple_animal/bot/ed209/attack_alien(mob/living/carbon/alien/user)
+/mob/living/danimal/bot/ed209/attack_alien(mob/living/carbon/alien/user)
 	..()
 	if(!isalien(target))
 		target = user
 		mode = BOT_HUNT
 
 
-/mob/living/simple_animal/bot/ed209/emp_act(severity)
+/mob/living/danimal/bot/ed209/emp_act(severity)
 	. = ..()
 	if(. & EMP_PROTECT_SELF)
 		return
@@ -490,7 +490,7 @@ Auto Patrol[]"},
 						mode = BOT_HUNT
 
 
-/mob/living/simple_animal/bot/ed209/bullet_act(obj/item/projectile/Proj)
+/mob/living/danimal/bot/ed209/bullet_act(obj/item/projectile/Proj)
 	if(!disabled)
 		var/lasertag_check = 0
 		if((lasercolor == "b"))
@@ -510,13 +510,13 @@ Auto Patrol[]"},
 		return ..()
 	return ..()
 
-/mob/living/simple_animal/bot/ed209/bluetag
+/mob/living/danimal/bot/ed209/bluetag
 	lasercolor = "b"
 
-/mob/living/simple_animal/bot/ed209/redtag
+/mob/living/danimal/bot/ed209/redtag
 	lasercolor = "r"
 
-/mob/living/simple_animal/bot/ed209/UnarmedAttack(atom/A, proximity, intent = a_intent, flags = NONE)
+/mob/living/danimal/bot/ed209/UnarmedAttack(atom/A, proximity, intent = a_intent, flags = NONE)
 	if(!on)
 		return
 	if(iscarbon(A))
@@ -528,14 +528,14 @@ Auto Patrol[]"},
 	else
 		..()
 
-/mob/living/simple_animal/bot/ed209/RangedAttack(atom/A)
+/mob/living/danimal/bot/ed209/RangedAttack(atom/A)
 	if(!on)
 		return ..()
 	shootAt(A)
 	DelayNextAction()
 	return TRUE
 
-/mob/living/simple_animal/bot/ed209/proc/stun_attack(mob/living/carbon/C)
+/mob/living/danimal/bot/ed209/proc/stun_attack(mob/living/carbon/C)
 	playsound(src, 'sound/weapons/egloves.ogg', 50, TRUE, -1)
 	icon_state = "[lasercolor]ed209-c"
 	spawn(2)
@@ -554,7 +554,7 @@ Auto Patrol[]"},
 	C.visible_message(span_danger("[src] has stunned [C]!"),\
 							span_userdanger("[src] has stunned you!"))
 
-/mob/living/simple_animal/bot/ed209/proc/cuff(mob/living/carbon/C)
+/mob/living/danimal/bot/ed209/proc/cuff(mob/living/carbon/C)
 	mode = BOT_ARREST
 	playsound(src, 'sound/weapons/cablecuff.ogg', 30, TRUE, -2)
 	C.visible_message(span_danger("[src] is trying to put zipties on [C]!"),\

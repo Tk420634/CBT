@@ -636,7 +636,7 @@
 		var/spawntype = GLOB.creature_spawnpoints["[spawn_selection]"]
 		//Create the new mob
 		var/creature_type = GLOB.creature_selectable["[P.creature_species]"]
-		var/mob/living/simple_animal/C = new creature_type(src)
+		var/mob/living/danimal/C = new creature_type(src)
 		//Log their arrival
 		log_and_message_admins("[ADMIN_PP(src)] joined as \a [P.creature_species] named [P.creature_name] and spawned at [spawn_selection].")
 		//Set up their HUD, hands, and intents.

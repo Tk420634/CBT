@@ -183,7 +183,7 @@ Regenerative extracts:
 /obj/item/slimecross/regenerative/green/core_effect(mob/living/target, mob/user)
 	if(isslime(target))
 		target.visible_message(span_warning("The [target] suddenly changes color!"))
-		var/mob/living/simple_animal/slime/S = target
+		var/mob/living/danimal/slime/S = target
 		S.random_colour()
 	/* Fortuna edit: disabled slime mutation toxin
 	if(isjellyperson(target))

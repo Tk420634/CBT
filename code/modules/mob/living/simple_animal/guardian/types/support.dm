@@ -1,5 +1,5 @@
 //Healer
-/mob/living/simple_animal/hostile/guardian/healer
+/mob/living/danimal/hostile/guardian/healer
 	a_intent = INTENT_HARM
 	friendly_verb_continuous = "heals"
 	friendly_verb_simple = "heal"
@@ -13,17 +13,17 @@
 	var/beacon_cooldown = 0
 	var/toggle = FALSE
 
-/mob/living/simple_animal/hostile/guardian/healer/Initialize()
+/mob/living/danimal/hostile/guardian/healer/Initialize()
 	. = ..()
 	var/datum/atom_hud/medsensor = GLOB.huds[DATA_HUD_MEDICAL_ADVANCED]
 	medsensor.add_hud_to(src)
 
-/mob/living/simple_animal/hostile/guardian/healer/get_status_tab_items()
+/mob/living/danimal/hostile/guardian/healer/get_status_tab_items()
 	. = ..()
 	if(beacon_cooldown >= world.time)
 		. += "Beacon Cooldown Remaining: [DisplayTimeText(beacon_cooldown - world.time)]"
 
-/mob/living/simple_animal/hostile/guardian/healer/AttackingTarget()
+/mob/living/danimal/hostile/guardian/healer/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!is_deployed() || !toggle || !iscarbon(my_target))
@@ -40,7 +40,7 @@
 			med_hud_set_health()
 			med_hud_set_status()
 
-/mob/living/simple_animal/hostile/guardian/healer/ToggleMode()
+/mob/living/danimal/hostile/guardian/healer/ToggleMode()
 	if(src.loc == summoner)
 		if(toggle)
 			a_intent = INTENT_HARM
@@ -62,7 +62,7 @@
 		to_chat(src, "<span class='danger'><B>You have to be recalled to toggle modes!</span></B>")
 
 
-/mob/living/simple_animal/hostile/guardian/healer/verb/Beacon()
+/mob/living/danimal/hostile/guardian/healer/verb/Beacon()
 	set name = "Place Bluespace Beacon"
 	set category = "Guardian"
 	set desc = "Mark a floor as your beacon point, allowing you to warp targets to it. Your beacon will not work at extreme distances."
@@ -104,7 +104,7 @@
 	visible_message("[src] vanishes!")
 	qdel(src)
 
-/mob/living/simple_animal/hostile/guardian/healer/AltClickOn(atom/movable/A)
+/mob/living/danimal/hostile/guardian/healer/AltClickOn(atom/movable/A)
 	if(!istype(A))
 		AltClickNoInteract(src, A)
 		return
