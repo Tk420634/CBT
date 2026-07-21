@@ -457,7 +457,7 @@
 		playsound(P, spawn_sound, 30, 1)
 	COOLDOWN_START(src, spawner_cooldown, spawn_time)
 
-/datum/component/spawner/proc/remove_mob_from_nest(datum/source, mob/living/simple_animal/removed_animal)
+/datum/component/spawner/proc/remove_mob_from_nest(datum/source, mob/living/danimal/removed_animal)
 	for(var/datum/weakref/maybe_them in spawned_mobs)
 		if(GET_WEAKREF(maybe_them) == removed_animal)
 			spawned_mobs -= maybe_them
@@ -958,7 +958,7 @@
 	return TRUE
 
 /// Is passed a mob via the signal, and will attempt to despawn the mob and store it in the spawner.
-/datum/component/spawner/proc/unbirth_mob(datum/source, mob/living/simple_animal/despawn_me)
+/datum/component/spawner/proc/unbirth_mob(datum/source, mob/living/danimal/despawn_me)
 	if(QDELETED(parent))
 		return
 	if(!istype(despawn_me))
@@ -1009,7 +1009,7 @@
 	var/mobtag
 
 /// A proc that takes a mob datum and records all the vars that are different from the initial vars, for later use.
-/datum/special_mob_datum/proc/record_special_vars(mob/living/simple_animal/hostile/cool_mob)
+/datum/special_mob_datum/proc/record_special_vars(mob/living/danimal/hostile/cool_mob)
 	if(!istype(cool_mob))
 		return FALSE
 	mob_type = cool_mob.type

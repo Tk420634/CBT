@@ -72,7 +72,7 @@
 // 	user.put_in_hands(holder)
 // 	return TRUE
 
-/datum/element/mob_holder/proc/drone_worn_icon(mob/living/simple_animal/drone/D, obj/item/clothing/head/mob_holder/holder, mob/user)
+/datum/element/mob_holder/proc/drone_worn_icon(mob/living/danimal/drone/D, obj/item/clothing/head/mob_holder/holder, mob/user)
 	var/new_state = "[D.visualAppearence]_hat"
 	holder.inhand_icon_state = new_state
 	holder.icon_state = new_state

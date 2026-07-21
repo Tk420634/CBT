@@ -36,7 +36,7 @@
 	icon_living = "corgi"
 	icon_dead = "corgi_dead"
 	guaranteed_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab/corgi = 3, /obj/item/stack/sheet/animalhide/corgi = 1)
-	childtype = list(/mob/living/danimal/pet/dog/corgi/puppy = 95, /mob/living/danimal/pet/dog/corgi/puppy/void = 5)
+	offspring_type = list(/mob/living/danimal/pet/dog/corgi/puppy = 95, /mob/living/danimal/pet/dog/corgi/puppy/void = 5)
 	animal_species = /mob/living/danimal/pet/dog
 	gold_core_spawnable = FRIENDLY_SPAWN
 	collar_type = "corgi"

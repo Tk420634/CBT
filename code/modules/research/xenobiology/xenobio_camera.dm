@@ -387,7 +387,7 @@
 	..()
 
 // Scans slime
-/obj/machinery/computer/camera_advanced/xenobio/proc/XenoSlimeClickCtrl(mob/living/user, mob/living/simple_animal/slime/S)
+/obj/machinery/computer/camera_advanced/xenobio/proc/XenoSlimeClickCtrl(mob/living/user, mob/living/danimal/slime/S)
 	if(!GLOB.cameranet.checkTurfVis(S.loc))
 		to_chat(user, span_warning("Target is not near a camera. Cannot proceed."))
 		return
@@ -398,7 +398,7 @@
 		slime_scan(S, C)
 
 //Feeds a potion to slime
-/obj/machinery/computer/camera_advanced/xenobio/proc/XenoSlimeClickAlt(mob/living/user, mob/living/simple_animal/slime/S)
+/obj/machinery/computer/camera_advanced/xenobio/proc/XenoSlimeClickAlt(mob/living/user, mob/living/danimal/slime/S)
 	if(!(upgradetier & XENOBIO_UPGRADE_SLIMEADV)) //CIT CHANGE - makes slime-related actions require XENOBIO_UPGRADE_SLIMEADV
 		to_chat(user, span_warning("This console does not have the advanced slime upgrade."))
 		return
@@ -416,7 +416,7 @@
 		X.current_potion.attack(S, C)
 
 //Picks up slime
-/obj/machinery/computer/camera_advanced/xenobio/proc/XenoSlimeClickShift(mob/living/user, mob/living/simple_animal/slime/S)
+/obj/machinery/computer/camera_advanced/xenobio/proc/XenoSlimeClickShift(mob/living/user, mob/living/danimal/slime/S)
 	if(!(upgradetier & XENOBIO_UPGRADE_SLIMEBASIC)) //CIT CHANGE - makes slime-related actions require XENOBIO_UPGRADE_SLIMEBASIC
 		to_chat(user, span_warning("This console does not have the basic slime upgrade."))
 		return

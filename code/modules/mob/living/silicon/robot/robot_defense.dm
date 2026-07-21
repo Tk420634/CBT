@@ -45,7 +45,7 @@
 					span_danger("You have forced back [src]!"))
 			playsound(loc, 'sound/weapons/pierce.ogg', 50, 1, -1)
 
-/mob/living/silicon/robot/attack_slime(mob/living/simple_animal/slime/M)
+/mob/living/silicon/robot/attack_slime(mob/living/danimal/slime/M)
 	. = ..()
 	if(!.) //unsuccessful slime shock
 		return

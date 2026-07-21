@@ -23,7 +23,7 @@
 	a_intent = INTENT_HARM
 	stop_wandering = 1
 	wander = 0
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 0
 	//maxbodytemp = 350
 	layer = BELOW_MOB_LAYER
@@ -77,7 +77,7 @@
 	spawn_time = 150
 	mob_types = list(/mob/living/danimal/hostile/skeleton)
 	spawn_text = "climbs out of"
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	faction = list("skeleton")
 
 /mob/living/danimal/hostile/spawner/ghoul
@@ -143,7 +143,7 @@
 	icon = 'icons/mob/nest.dmi'
 	spawn_text = "crawls out of"
 	mob_types = list(/mob/living/danimal/hostile/asteroid/goldgrub, /mob/living/danimal/hostile/asteroid/goliath, /mob/living/danimal/hostile/asteroid/hivelord, /mob/living/danimal/hostile/asteroid/basilisk, /mob/living/danimal/hostile/asteroid/fugu)
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	faction = list("mining")
 
 /mob/living/danimal/hostile/spawner/mining/goldgrub

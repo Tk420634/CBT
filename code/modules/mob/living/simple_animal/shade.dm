@@ -26,7 +26,7 @@
 	attack_verb_simple = "metaphysically strike"
 	//minbodytemp = 0
 	//maxbodytemp = INFINITY
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	stop_wandering = 1
 	faction = list("cult")
 	status_flags = CANPUSH
@@ -41,7 +41,7 @@
 	deathmessage = "lets out a contented sigh as [p_their()] form unwinds."
 	..()
 
-/mob/living/danimal/shade/attack_animal(mob/living/simple_animal/M)
+/mob/living/danimal/shade/attack_animal(mob/living/danimal/M)
 	if(isconstruct(M))
 		var/mob/living/danimal/hostile/construct/C = M
 		if(!C.can_repair_constructs)

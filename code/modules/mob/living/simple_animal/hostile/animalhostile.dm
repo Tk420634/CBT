@@ -42,7 +42,7 @@ to produce smoke or slow down victims? Stuff like that added to a couple would b
 	melee_damage_upper = 20
 	attack_verb_simple = "claw"
 	attack_sound = 'sound/hallucinations/growl1.ogg'
-	atmos_requirements = list("min_oxy" = 5, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 1, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 5, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 1, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
 	unsuitable_atmos_damage = 20
 	gold_core_spawnable = HOSTILE_SPAWN
 	faction = list("ghoul")
@@ -112,7 +112,7 @@ to produce smoke or slow down victims? Stuff like that added to a couple would b
 	attack_verb_simple = "bites"
 	attack_sound = 'sound/creatures/nightstalker_bite.ogg'
 	speak_emote = list("growls")
-	atmos_requirements = list("min_oxy" = 5, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 1, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 5, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 1, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
 	faction = list("gecko")
 	gold_core_spawnable = HOSTILE_SPAWN
 	a_intent = INTENT_HARM
@@ -184,7 +184,7 @@ to produce smoke or slow down victims? Stuff like that added to a couple would b
 	attack_verb_simple = "bites"
 	attack_sound = 'sound/creatures/nightstalker_bite.ogg'
 	speak_emote = list("growls")
-	atmos_requirements = list("min_oxy" = 5, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 1, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 5, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 1, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
 	faction = list("gecko")
 	gold_core_spawnable = HOSTILE_SPAWN
 	a_intent = INTENT_HARM

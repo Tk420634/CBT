@@ -55,7 +55,7 @@ Difficulty: Insanely Hard
 	aggroed_vision_range = 18
 	// robust_searching = TRUE
 	move_to_delay = 3
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	var/stun_chance = 5 //chance per attack to Weaken target
 	crusher_loot = list(/obj/item/crusher_trophy/king_goat)
@@ -133,7 +133,7 @@ Difficulty: Insanely Hard
 	maxHealth = 125
 	minbodytemp = 0
 	maxbodytemp = INFINITY
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	armour_penetration = 10
 	melee_damage_lower = 10
 	melee_damage_upper = 15

@@ -106,7 +106,7 @@ SUBSYSTEM_DEF(npcpool)
 		target_y = T.y
 		target_z = T.z
 
-/datum/wander_attractor/proc/SetOwner(mob/living/simple_animal/SA)
+/datum/wander_attractor/proc/SetOwner(mob/living/danimal/SA)
 	owner = GET_WEAKREF(SA)
 
 /datum/wander_attractor/proc/SetupIntensity(atom/listener, intensity, max_distance)

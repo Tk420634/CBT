@@ -51,7 +51,7 @@
 
 /*no crossbreeding till it gets overhauled for wasteland balance
 //Core-crossing: Feeding adult slimes extracts to obtain a much more powerful, single extract.
-/obj/item/slime_extract/attack(mob/living/simple_animal/slime/M, mob/user)
+/obj/item/slime_extract/attack(mob/living/danimal/slime/M, mob/user)
 	if(!isslime(M))
 		return ..()
 	if(M.stat)
@@ -623,7 +623,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "potsilver"
 
-/obj/item/slimepotion/slime/docility/attack(mob/living/simple_animal/slime/M, mob/user)
+/obj/item/slimepotion/slime/docility/attack(mob/living/danimal/slime/M, mob/user)
 	if(!isslime(M))
 		to_chat(user, span_warning("The potion only works on slimes!"))
 		return ..()
@@ -694,14 +694,14 @@
 		being_used = FALSE
 		..()
 
-/obj/item/slimepotion/slime/sentience/proc/after_success(mob/living/user, mob/living/simple_animal/SM)
+/obj/item/slimepotion/slime/sentience/proc/after_success(mob/living/user, mob/living/danimal/SM)
 	return
 
 /obj/item/slimepotion/slime/sentience/nuclear
 	name = "syndicate intelligence potion"
 	desc = "A miraculous chemical mix that grants human like intelligence to living beings. It has been modified with Syndicate technology to also grant an internal radio implant to the target and authenticate with identification systems."
 
-/obj/item/slimepotion/slime/sentience/nuclear/after_success(mob/living/user, mob/living/simple_animal/SM)
+/obj/item/slimepotion/slime/sentience/nuclear/after_success(mob/living/user, mob/living/danimal/SM)
 	if(SM.can_be_implanted())
 		var/obj/item/implant/radio/syndicate/imp = new
 		imp.implant(SM, user)
@@ -761,7 +761,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "potred"
 
-/obj/item/slimepotion/slime/steroid/attack(mob/living/simple_animal/slime/M, mob/user)
+/obj/item/slimepotion/slime/steroid/attack(mob/living/danimal/slime/M, mob/user)
 	if(!isslime(M))//If target is not a slime.
 		to_chat(user, span_warning("The steroid only works on baby slimes!"))
 		return ..()
@@ -791,7 +791,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "potcyan"
 
-/obj/item/slimepotion/slime/stabilizer/attack(mob/living/simple_animal/slime/M, mob/user)
+/obj/item/slimepotion/slime/stabilizer/attack(mob/living/danimal/slime/M, mob/user)
 	if(!isslime(M))
 		to_chat(user, span_warning("The stabilizer only works on slimes!"))
 		return ..()
@@ -812,7 +812,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "potgreen"
 
-/obj/item/slimepotion/slime/mutator/attack(mob/living/simple_animal/slime/M, mob/user)
+/obj/item/slimepotion/slime/mutator/attack(mob/living/danimal/slime/M, mob/user)
 	if(!isslime(M))
 		to_chat(user, span_warning("The mutator only works on slimes!"))
 		return ..()

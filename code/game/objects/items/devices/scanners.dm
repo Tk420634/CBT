@@ -924,7 +924,7 @@ GENETICS SCANNER
 	var/mob/living/danimal/slime/T = M
 	slime_scan(T, user)
 
-/proc/slime_scan(mob/living/simple_animal/slime/T, mob/living/user)
+/proc/slime_scan(mob/living/danimal/slime/T, mob/living/user)
 	to_chat(user, "========================")
 	to_chat(user, "<b>Slime scan results:</b>")
 	to_chat(user, span_notice("[T.colour] [T.is_adult ? "adult" : "baby"] slime"))

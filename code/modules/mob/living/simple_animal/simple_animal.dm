@@ -208,28 +208,17 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	///When set to 1 this stops the animal from moving when someone is pulling it.
 	var/stop_wandering_when_pulled = 1
 
-
-
-
 	/* UNUSED VARS */
 	///Temperature effect.
 	var/minbodytemp = 250
 	var/maxbodytemp = 350
 	///Atmos effect - Yes, you can make creatures that require plasma or co2 to survive. N2O is a trace gas and handled separately, hence why it isn't here. It'd be hard to add it. Hard and me don't mix (Yes, yes make all the dick jokes you want with that.) - Errorage
-	var/list/atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0) //Leaving something at 0 means it's off - has no maximum
+	// var/list/atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0) //Leaving something at 0 means it's off - has no maximum
 	///This damage is taken when atmos doesn't fit all the requirements above.
 	var/unsuitable_atmos_damage = 2
 
-
-
-
-	///LETS SEE IF I CAN SET SPEEDS FOR SIMPLE MOBS WITHOUT DESTROYING EVERYTHING. Higher speed is slower, negative speed is faster.
-	/// Breaks everything, makes player controlled mobs wayyyyy tooo slow - didn't ask teehee
-	var/speed = 1
-
-
 	///Hot simple_animal baby making vars.
-	var/list/childtype = null
+	var/list/offspring_type = null
 	var/next_scan_time = 0
 	///Sorry, no spider+corgi buttbabies.
 	var/animal_species
@@ -247,7 +236,11 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	///Sentience type, for slime potions.
 	var/sentience_type = SENTIENCE_ORGANIC
 
-
+	///LETS SEE IF I CAN SET SPEEDS FOR SIMPLE MOBS WITHOUT DESTROYING EVERYTHING. Higher speed is slower, negative speed is faster.
+	/// Breaks everything, makes player controlled mobs wayyyyy tooo slow - didn't ask teehee
+	/// dont use this, it doesnt change the mob's speed, it only works when a player is inside, and even then, its awful
+	var/speed = 1
+	/// The deciseconds between each step of movement. Lower is faster
 	var/move_to_delay = 4
 	var/minimum_distance = 0
 
@@ -846,7 +839,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	else
 		return ..()
 
-/mob/living/danimal/proc/infight_check(mob/living/simple_animal/H)
+/mob/living/danimal/proc/infight_check(mob/living/danimal/H)
 	if(SSmobs.can_attack_npc(src, H))
 		return
 	if(H.client || client || player_character || H.player_character)
@@ -1064,16 +1057,8 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 /* *********************************
  * Main AI loop for hostile mobs. This is where the mob decides what to do each tick.
  * Kinda important
- * Notes:
- * order of ops:
- * if off, shut down if needed, clear everything and such, and cease
- * check if the last tick was in the middle of something, and if so, continue it if possible
- * plan this tick's actions
- * - find target if none
- * setup movement vars
- * perform movement
- * setup combat vars if in combat
- * perform combat if in combat
+ * Performed every mob AI tick (currently 0.5 seconds) to try and update what it should be doing
+ * 
  */
 /mob/living/danimal/proc/handle_automated_action()
 	set waitfor = FALSE
@@ -1090,6 +1075,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	// update everything needing updating, record stuff
 	// sets flags for what we can and probably should do this tick
 	ClearTickBB()
+
 	UpdateRTS()
 	UpdateAIStatusPreTick()
 	UpdateTarget()
@@ -1144,15 +1130,20 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 		return // being on is important, going idle less so
 	//todo: has-target checks, time-since-target-lost checks, frustration, etc
 
+/* ********************************************************** *
+ * Target acquisition and retention
+ * Most AI stuff needs a target to do anything
+ * Targets dont have to be mobs... but they almost always are
+ * ********************************************************** */
 /// gives target if we didnt
 /mob/living/danimal/proc/UpdateTarget(list/bb)
-	if(!islist(bb))
-		bb = blackboard_tick
-	var/targ_retention_return = TryRetainTarget()
-	if(CHECK_BITFIELD(targ_retention_return, MTEV_CAN_RETAIN_TARGET))
+	bb = bb || blackboard_tick
+	var/list/targ_retention_return = TryRetainTarget()
+	if(targ_retention_return[MTEV_CAN_RETAIN_TARGET])
+		set_target_eval(targ_retention_return)
 		bb[MBB_HAS_TARGET_FROM_LAST_TICK] = TRUE
-		bb[MBB_HAS_TARGET] = TRUE
-		bb[MBB_TARGET_EVAL] = targ_retention_return
+		bb[MBB_HAS_TARGET]                = TRUE
+		bb[MBB_TARGET_EVAL]               = targ_retention_return
 		return // target retained, job's done
 	// possible_targets is a reference and modifies the caller's list
 	// the closest this code gets to an out parameter
@@ -1160,76 +1151,27 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	bb[MBB_HAS_TARGET] = !!FindATarget()
 
 /mob/living/danimal/proc/TryRetainTarget()
-	. = NONE
+	. = list()
 	if(!target_retention_allowed)
 		return
 	var/atom/my_target = get_or_remove_target()
 	if(!my_target)
 		return
-	. = EvalTarget(my_target)
-	if(!CHECK_BITFIELD(. , MTEV_BE_TARGETED))
+	. |= EvalTarget(my_target)
+	if(.[MTEV_CAN_BE_TARGETED] != TRUE)
 		return // hard no longer valid
 	if(get_dist(get_origin(), my_target) <= SSmobs.always_retain_target_range)
-		. |= MTEV_CAN_RETAIN_TARGET
+		.[MTEV_CAN_RETAIN_TARGET] = TRUE
 		return // too far away
 	if(CanSee(my_target, target_retention_understands_lockers))
-		. |= MTEV_CAN_RETAIN_TARGET
+		.[MTEV_CAN_RETAIN_TARGET] = TRUE
 		return
 	// have target, can't see it, but it's close enough to retain. timer time!
 	if(target_retention_finish_time == 0)
 		target_retention_finish_time = world.time + target_retention_duration
 	if(world.time < target_retention_finish_time)
-		. |= MTEV_CAN_RETAIN_TARGET
+		.[MTEV_CAN_RETAIN_TARGET] = TRUE
 		return
-
-/// checks line of sight, but not range unless specifically asked
-/// 
-/mob/living/danimal/proc/CanSee(atom/looking_at, understands_lockers)
-	if(!looking_at)
-		return FALSE
-	var/atom/my_origin = get_turf(get_origin())
-	if(!my_origin)
-		return FALSE
-	var/atom/target_origin = looking_at
-	if(understands_lockers)
-		target_origin = get_turf(looking_at)
-	else
-		if(istype(looking_at.loc, /obj))
-			return
-	if(SSmobs.use_view_for_close_range_los)
-		if(target_origin in view(SSmobs.max_view_range, my_origin))
-			return TRUE
-	return CheckLine(target_origin, MLF_OPAQUE)
-
-/// checks direct-ish accessibility, factoring in optional stuff like opacity, density, and livingness
-/// doesnt care about range //todo: widen the trace, maybe two more, one to each side, offset by a tile
-/mob/living/danimal/proc/CheckLine(atom/target_origin, checkflags = MLF_DEFAULT)
-	var/opaque      = CHECK_BITFIELD(checkflags, MLF_OPAQUE)
-	var/dense       = CHECK_BITFIELD(checkflags, MLF_DENSE)
-	var/living      = CHECK_BITFIELD(checkflags, MLF_LIVING)
-	var/friendlies  = CHECK_BITFIELD(checkflags, MLF_FRIENDLIES)
-	if(!opaque && !dense && !living && !friendlies)
-		return TRUE // ezclap
-	var/list/linesight = getline(get_origin(), target_origin)
-	if(!LAZYLEN(linesight))
-		return FALSE
-	linesight.Cut(1,2) // remove our turf, we're something
-	linesight.len-- // remove their turf, they're something
-	. = TRUE
-	for(var/turf/T as anything in linesight)
-		for(var/atom/movable/am as anything in T.contents)
-			if(opaque && am.opacity)
-				return FALSE
-			if(dense && am.density)
-				return FALSE
-			if(living || friendlies)
-				if(isliving(am))
-					if(living)
-						return FALSE
-					var/mob/living/L = am
-					if(friendlies)
-						if(mob_faction_is_friendly_to_target(L))
-							return FALSE
 
 /mob/living/danimal/proc/UpdateAttraction()
 	return
@@ -1456,26 +1398,26 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	perform_move_action()
 	variate_retreat_distance()
 
-		if(winding_up_melee)
-			return 0
-		var/target_distance = get_dist(origin,my_target)
-		if(ranged && target_distance <= max_tracking_range) //We ranged? Shoot at em
-			if(!my_target.Adjacent(origin) && ranged_cooldown <= world.time) //But make sure they're not in range for a melee attack and our range attack is off cooldown
-				OpenFire(my_target)
-		if(retreat_distance != null && !winding_up_melee) //If we have a retreat distance and aren't winding up an attack, check if we need to run from our targette
-			if(target_distance <= retreat_distance && CHECK_BITFIELD(mobility_flags, MOBILITY_MOVE)) //If targette's closer than our retreat distance, run
-				set_glide_size(DELAY_TO_GLIDE_SIZE(move_to_delay))
-				walk_away(src,my_target,retreat_distance,move_to_delay)
-			else
-				perform_move_action(my_target,move_to_delay,minimum_distance) //Otherwise, get to our minimum distance so we chase them
-		else
-			perform_move_action(my_target,move_to_delay,minimum_distance)
-		/// roll to randomize this thing... if its an option
-		variate_retreat_distance()
-		if(my_target)
-			if(MeleeActionIfPossible(FALSE, my_target))
-				return 1
+	if(winding_up_melee)
 		return 0
+	var/target_distance = get_dist(origin,my_target)
+	if(ranged && target_distance <= max_tracking_range) //We ranged? Shoot at em
+		if(!my_target.Adjacent(origin) && ranged_cooldown <= world.time) //But make sure they're not in range for a melee attack and our range attack is off cooldown
+			OpenFire(my_target)
+	if(retreat_distance != null && !winding_up_melee) //If we have a retreat distance and aren't winding up an attack, check if we need to run from our targette
+		if(target_distance <= retreat_distance && CHECK_BITFIELD(mobility_flags, MOBILITY_MOVE)) //If targette's closer than our retreat distance, run
+			set_glide_size(DELAY_TO_GLIDE_SIZE(move_to_delay))
+			walk_away(src,my_target,retreat_distance,move_to_delay)
+		else
+			perform_move_action(my_target,move_to_delay,minimum_distance) //Otherwise, get to our minimum distance so we chase them
+	else
+		perform_move_action(my_target,move_to_delay,minimum_distance)
+	/// roll to randomize this thing... if its an option
+	variate_retreat_distance()
+	if(my_target)
+		if(MeleeActionIfPossible(FALSE, my_target))
+			return 1
+	return 0
 
 	if((environment_smash & ENVIRONMENT_SMASH_WALLS) || (environment_smash & ENVIRONMENT_SMASH_RWALLS) || robuster_searching || SSmobs.debug_everyone_has_robuster_searching) //If we're capable of smashing through walls, forget about vision completely after finding our targette
 		perform_move_action(my_target,move_to_delay,minimum_distance)
@@ -1537,19 +1479,19 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	else
 		return variate_move_to_delay()
 
-/mob/living/danimal/proc/get_target_standoff_distance(minimum_distance, atom/move_target)
-	if(minimum_distance)
-		return minimum_distance
-	if(movement_mode == MOB_MOVE_AWAY_FROM_TARGET)
-		return 0 // we want to move to the target, yeah
-	if(movement_mode == MOB_MOVE_TOWARDS_TARGET) // now we're getting somewhere
-		if(approach_distance)
-			return approach_distance
+// /mob/living/danimal/proc/get_target_standoff_distance(minimum_distance, atom/move_target)
+// 	if(minimum_distance)
+// 		return minimum_distance
+// 	if(movement_mode == MOB_MOVE_AWAY_FROM_TARGET)
+// 		return 0 // we want to move to the target, yeah
+// 	if(movement_mode == MOB_MOVE_TOWARDS_TARGET) // now we're getting somewhere
+// 		if(approach_distance)
+// 			return approach_distance
 		
-	else
-		var/dist = get_dist(src, move_target)
-		if(dist <= melee_queue_distance)
-		return variate_minimum_distance()
+// 	else
+// 		var/dist = get_dist(src, move_target)
+// 		if(dist <= melee_queue_distance)
+// 		return variate_minimum_distance()
 
 /// **
 /// RETREAT STUFF
@@ -2019,7 +1961,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 		if(Found(A))//Just in case people want to override targetting
 			targout[MT_TOP_PRIORITY][A] = eval_return
 			break
-		if(!eval_return[MTEV_BE_TARGETED])
+		if(!eval_return[MTEV_CAN_BE_TARGETED])
 			targout[MT_ALL] -= A
 			continue
 		if(eval_return[MTEV_IS_FOE])
@@ -2078,7 +2020,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 			.[MTEV_IS_MECHA] = TRUE
 			if (M.occupant)
 				return
-		.[MTEV_BE_TARGETED] = TRUE
+		.[MTEV_CAN_BE_TARGETED] = TRUE
 	else
 	. = list()
 	if(!the_target || the_target.type == /atom/movable/lighting_object || isturf(the_target)) // bail out on invalids
@@ -2093,7 +2035,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	var/am_player = isplayer(the_target)
 	var/datum/weakref/target_ref = WEAKREF(the_target)
 	if(target_ref in foes)
-		.[MTEV_BE_TARGETED]  = TRUE
+		.[MTEV_CAN_BE_TARGETED]  = TRUE
 		.[MTEV_IS_FOE]      = TRUE
 		.[MTEV_IS_HOSTILE]  = TRUE
 		.[MTEV_IS_LIVING]   = TRUE
@@ -2101,7 +2043,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 			.[MTEV_IS_PLAYER] = TRUE
 		return
 	if(target_ref in friends)
-		.[MTEV_BE_TARGETED] = TRUE
+		.[MTEV_CAN_BE_TARGETED] = TRUE
 		.[MTEV_IS_LIVING] = TRUE
 		.[MTEV_IS_FRIEND] = TRUE
 		if(am_player)
@@ -2110,21 +2052,21 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 
 	if(isobj(the_target))
 		if(attack_all_objects || is_type_in_typecache(the_target, wanted_objects))
-			.[MTEV_BE_TARGETED] = TRUE
+			.[MTEV_CAN_BE_TARGETED] = TRUE
 			.[MTEV_IS_OBJECT] = TRUE
 			return
 
 		if(istype(the_target, /obj/item/electronic_assembly))
 			var/obj/item/electronic_assembly/O = the_target
 			if(O.combat_circuits)
-				.[MTEV_BE_TARGETED] = TRUE
+				.[MTEV_CAN_BE_TARGETED] = TRUE
 				.[MTEV_IS_OBJECT] = TRUE
 				.[MTEV_IS_ASSEMBLY] = TRUE
 				.[MTEV_IS_HOSTILE] = TRUE
 				return
 
-		if(ismecha(the_target))https://en.wikipedia.org/wiki/Soviet_Union
-			var/obj/mecha/M = the_target
+		if(ismecha(the_target)) // https://en.wikipedia.org/wiki/Soviet_Union
+			var/obj/mecha/M = the_target // fenny how did this get here, wtf
 			.[MTEV_IS_MECHA] = TRUE
 			return EvalTarget(M.occupant)
 
@@ -2134,7 +2076,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 				return
 			if(P.stat & BROKEN) //Or turrets that are already broken
 				return
-			.[MTEV_BE_TARGETED] = TRUE
+			.[MTEV_CAN_BE_TARGETED] = TRUE
 			.[MTEV_IS_OBJECT] = TRUE
 			.[MTEV_IS_TURRET] = TRUE
 			.[MTEV_IS_HOSTILE] = TRUE
@@ -2173,7 +2115,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 			if(!L.attackable_in_crit())
 				.[MTEV_IS_CRIT] = TRUE
 				return
-		.[MTEV_BE_TARGETED]  = TRUE
+		.[MTEV_CAN_BE_TARGETED]  = TRUE
 		.[MTEV_IS_HOSTILE]  = TRUE
 
 		if(am_player)
@@ -2682,6 +2624,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 /// TARGETTING PROCS
 /// *************************
 
+/// Just checks if anything is in range for the purpose of waking up the AI for some reason
 /mob/living/danimal/proc/ListTargetsLazy(_Z)//Step 1, find out what we can see
 	var/static/hostile_machines = typecacheof(list(/obj/machinery/porta_turret, /obj/mecha))
 	. = list()
@@ -2691,8 +2634,10 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 		if (get_dist(M, src) < v_range)
 			if (isturf(M.loc))
 				. += M
+				return
 			else if (M.loc.type in hostile_machines)
 				. += M.loc
+				return
 
 /mob/living/danimal/proc/handle_target_del(datum/source)
 	SIGNAL_HANDLER
@@ -2719,9 +2664,12 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	if(!new_target)
 		return
 	target_data.set_target(new_target)
-	target_data.set_target_eval(new_target_eval)
+	set_target_eval(new_target_eval)
 	RegisterSignal(new_target, COMSIG_PARENT_QDELETING,PROC_REF(handle_target_del), TRUE)
 	return TRUE
+
+/mob/living/danimal/proc/set_target_eval(new_target_eval)
+	target_data.set_target_eval(new_target_eval)
 
 /// dont call this directly, use GiveTarget() instead, it handles all the other stuff
 /// does the stuff needed to unset our current targette, and unregister the signal for when it gets deleted
@@ -2794,7 +2742,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	if(old_target == new_target)
 		return FALSE
 
-	if(new_target && !force_acquire && !new_target_eval[MTEV_BE_TARGETED])
+	if(new_target && !force_acquire && !new_target_eval[MTEV_CAN_BE_TARGETED])
 		return FALSE
 
 	// had a target, and the new target isnt that one
@@ -2815,6 +2763,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	var/atom/my_target = get_target()
 	return is_valid_atom_to_target(my_target)
 
+/// Basic check to see if the target atom is still a valid atom. nothing else rly
 /mob/living/danimal/proc/is_valid_atom_to_target(atom/target_check)
 	if(!target_check)
 		return FALSE
@@ -2823,6 +2772,58 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	if(!get_turf(target_check))
 		return FALSE
 	return TRUE
+
+/* ************************************************* *
+ * Line of sight / line-based accessibility checks.  *
+ * ************************************************* */
+/// checks line of sight, but not range unless specifically asked
+/// 
+/mob/living/danimal/proc/CanSee(atom/looking_at, understands_lockers)
+	if(!looking_at)
+		return FALSE
+	var/atom/my_origin = get_turf(get_origin())
+	if(!my_origin)
+		return FALSE
+	var/atom/target_origin = looking_at
+	if(understands_lockers)
+		target_origin = get_turf(looking_at)
+	else
+		if(!isturf(target_origin.loc))
+			return FALSE
+	if(SSmobs.use_view_for_close_range_los)
+		if(target_origin in view(SSmobs.max_view_range, my_origin))
+			return TRUE
+	return CheckLine(target_origin, MLF_OPAQUE)
+
+/// checks direct-ish accessibility, factoring in optional stuff like opacity, density, and livingness
+/// doesnt care about range //todo: widen the trace, maybe two more, one to each side, offset by a tile
+/mob/living/danimal/proc/CheckLine(atom/target_origin, checkflags = MLF_DEFAULT)
+	var/opaque      = CHECK_BITFIELD(checkflags, MLF_OPAQUE)
+	var/dense       = CHECK_BITFIELD(checkflags, MLF_DENSE)
+	var/living      = CHECK_BITFIELD(checkflags, MLF_LIVING)
+	var/friendlies  = CHECK_BITFIELD(checkflags, MLF_FRIENDLIES)
+	if(!opaque && !dense && !living && !friendlies)
+		return TRUE // ezclap
+	var/list/linesight = getline(get_origin(), target_origin)
+	if(!LAZYLEN(linesight))
+		return FALSE
+	linesight.Cut(1,2) // remove our turf, we're something
+	linesight.len-- // remove their turf, they're something
+	. = TRUE
+	for(var/turf/T as anything in linesight)
+		for(var/atom/movable/am as anything in T.contents)
+			if(opaque && am.opacity)
+				return FALSE
+			if(dense && am.density)
+				return FALSE
+			if(living || friendlies)
+				if(isliving(am))
+					if(living)
+						return FALSE
+					var/mob/living/L = am
+					if(friendlies)
+						if(mob_faction_is_friendly_to_target(L))
+							return FALSE
 
 
 /// ************************
@@ -3050,7 +3051,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 		setMovetype(initial(movement_type))
 
 /mob/living/danimal/proc/make_babies() // <3 <3 <3
-	if(gender != FEMALE || stat || next_scan_time > world.time || !childtype || !animal_species || !SSticker.IsRoundInProgress())
+	if(gender != FEMALE || stat || next_scan_time > world.time || !offspring_type || !animal_species || !SSticker.IsRoundInProgress())
 		return
 	next_scan_time = world.time + 400
 	var/alone = 1
@@ -3059,19 +3060,19 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	for(var/mob/M in view(7, src))
 		if(M.stat != CONSCIOUS) //Check if it's conscious FIRST.
 			continue
-		else if(istype(M, childtype)) //Check for children SECOND.
+		else if(istype(M, offspring_type)) //Check for children SECOND.
 			children++
 		else if(istype(M, animal_species))
 			if(M.ckey)
 				continue
-			else if(!istype(M, childtype) && M.gender == MALE) //Better safe than sorry ;_;
+			else if(!istype(M, offspring_type) && M.gender == MALE) //Better safe than sorry ;_;
 				partner = M
 
 		else if(isliving(M) && !mob_faction_is_friendly_to_target(M)) //shyness check. we're not shy in front of things that share a faction with us.
 			return //we never mate when not alone, so just abort early
 
 	if(alone && partner && children < 3)
-		var/childspawn = pickweight(childtype)
+		var/childspawn = pickweight(offspring_type)
 		var/turf/target = get_turf(loc)
 		if(target)
 			return new childspawn(target)
@@ -3305,11 +3306,12 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 
 /mob/living/danimal/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	. = ..()
+	var/amount_did = amount
 	if(!ckey && !stat)//Not unconscious
 		if(AIStatus == AI_IDLE)
 			toggle_ai(AI_ON)
 	update_health_hud()
-	on_health_changed(.)
+	INVOKE_ASYNC(src,PROC_REF(on_health_changed), amount_did)
 
 /mob/living/danimal/proc/on_health_changed(amount)
 	if(ckey)
@@ -3320,19 +3322,18 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 		return
 	if(amount <= 0)
 		return
-	if(!ckey && !stat && search_objects < 3 && . > 0)//Not unconscious, and we don't ignore mobs
-		if(amount > 0)
-			try_tactical_retreat()
-		if(peaceful == TRUE)
-			peaceful = FALSE
-		if(search_objects)//Turn off item searching and ignore whatever item we were looking at, we're more concerned with fight or flight
-			DropTarget()
-			LoseSearchObjects()
-		if(AIStatus != AI_ON && AIStatus != AI_OFF)
-			toggle_ai(AI_ON)
-			FindATarget()
-		else if(get_target() != null && prob(40))//No more pulling a mob forever and having a second player attack it, it can switch targets now if it finds a more suitable one
-			FindATarget()
+	//Not unconscious, and we don't ignore mobs
+	try_tactical_retreat()
+	if(peaceful == TRUE)
+		peaceful = FALSE
+	if(search_objects)//Turn off item searching and ignore whatever item we were looking at, we're more concerned with fight or flight
+		DropTarget()
+		LoseSearchObjects()
+	if(AIStatus != AI_ON && AIStatus != AI_OFF)
+		toggle_ai(AI_ON)
+		FindATarget()
+	else if(get_target() != null && prob(40))//No more pulling a mob forever and having a second player attack it, it can switch targets now if it finds a more suitable one
+		FindATarget()
 
 /mob/living/danimal/proc/AttackingTarget(atom/target_override)
 	if(!can_melee_attack)

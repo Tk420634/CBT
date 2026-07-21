@@ -73,7 +73,7 @@
 	wander = 0
 	//minbodytemp = 0
 	//maxbodytemp = 500
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	unsuitable_atmos_damage = 0
 	melee_damage_lower = 15
 	melee_damage_upper = 15
@@ -167,11 +167,11 @@
 	DelayNextAction()
 	A.swarmer_act(src)
 
-/atom/proc/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/atom/proc/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	S.DisIntegrate(src)
 	return TRUE //return TRUE/FALSE whether or not an AI swarmer should try this swarmer_act() again, NOT whether it succeeded.
 
-/obj/effect/mob_spawn/swarmer/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/effect/mob_spawn/swarmer/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	S.Integrate(src)
 	return FALSE //would logically be TRUE, but we don't want AI swarmers eating player spawn chances.
 
@@ -181,7 +181,7 @@
 /turf/closed/indestructible/swarmer_act()
 	return FALSE
 
-/obj/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	if(resistance_flags & INDESTRUCTIBLE)
 		return FALSE
 	for(var/mob/living/L in GetAllContents())
@@ -190,7 +190,7 @@
 			return FALSE
 	return ..()
 
-/obj/item/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/item/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	return S.Integrate(src)
 
 /atom/movable/proc/IntegrateAmount()
@@ -228,7 +228,7 @@
 /obj/structure/lattice/catwalk/swarmer_catwalk/swarmer_act()
 	return FALSE
 
-/obj/structure/swarmer/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/structure/swarmer/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	if(S.AIStatus == AI_ON)
 		return FALSE
 	else
@@ -237,7 +237,7 @@
 /obj/effect/swarmer_act()
 	return FALSE
 
-/obj/effect/decal/cleanable/robot_debris/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/effect/decal/cleanable/robot_debris/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	S.DisIntegrate(src)
 	qdel(src)
 	return TRUE
@@ -256,15 +256,15 @@
 /obj/structure/disposalpipe/swarmer_act()
 	return FALSE
 
-/obj/machinery/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	S.DismantleMachine(src)
 	return TRUE
 
-/obj/machinery/light/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/light/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	S.DisIntegrate(src)
 	return TRUE
 
-/obj/machinery/door/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/door/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	var/isonshuttle = istype(get_area(src), /area/shuttle)
 	for(var/turf/T in range(1, src))
 		var/area/A = get_area(T)
@@ -279,73 +279,73 @@
 	S.DisIntegrate(src)
 	return TRUE
 
-/obj/machinery/camera/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/camera/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	S.DisIntegrate(src)
 	if(!QDELETED(S)) //If it got blown up no need to turn it off.
 		toggle_cam(S, 0)
 	return TRUE
 
-/obj/machinery/particle_accelerator/control_box/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/particle_accelerator/control_box/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	S.DisIntegrate(src)
 	return TRUE
 
-/obj/machinery/field/generator/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/field/generator/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	S.DisIntegrate(src)
 	return TRUE
 
-/obj/machinery/gravity_generator/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/gravity_generator/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	S.DisIntegrate(src)
 	return TRUE
 
-/obj/machinery/vending/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)//It's more visually interesting than dismantling the machine
+/obj/machinery/vending/swarmer_act(mob/living/danimal/hostile/swarmer/S)//It's more visually interesting than dismantling the machine
 	S.DisIntegrate(src)
 	return TRUE
 
-/obj/machinery/turretid/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/turretid/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	S.DisIntegrate(src)
 	return TRUE
 
-/obj/machinery/chem_dispenser/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/chem_dispenser/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("The volatile chemicals in this machine would destroy us. Aborting."))
 	return FALSE
 
-/obj/machinery/nuclearbomb/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/nuclearbomb/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("This device's destruction would result in the extermination of everything in the area. Aborting."))
 	return FALSE
 
-/obj/effect/rune/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/effect/rune/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("Searching... sensor malfunction! Target lost. Aborting."))
 	return FALSE
 
-/obj/structure/reagent_dispensers/fueltank/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/structure/reagent_dispensers/fueltank/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("Destroying this object would cause a chain reaction. Aborting."))
 	return FALSE
 
-/obj/structure/cable/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/structure/cable/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("Disrupting the power grid would bring no benefit to us. Aborting."))
 	return FALSE
 
-/obj/machinery/portable_atmospherics/canister/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/portable_atmospherics/canister/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("An inhospitable area may be created as a result of destroying this object. Aborting."))
 	return FALSE
 
-/obj/machinery/telecomms/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/telecomms/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("This communications relay should be preserved, it will be a useful resource to our masters in the future. Aborting."))
 	return FALSE
 
-/obj/machinery/deepfryer/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/deepfryer/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("This kitchen appliance should be preserved, it will make delicious unhealthy snacks for our masters in the future. Aborting."))
 	return FALSE
 
-/obj/machinery/power/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/power/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("Disrupting the power grid would bring no benefit to us. Aborting."))
 	return FALSE
 
-/obj/machinery/gateway/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/gateway/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("This bluespace source will be important to us later. Aborting."))
 	return FALSE
 
-/turf/closed/wall/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/turf/closed/wall/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	var/isonshuttle = istype(loc, /area/shuttle)
 	for(var/turf/T in range(1, src))
 		var/area/A = get_area(T)
@@ -359,7 +359,7 @@
 			return TRUE
 	return ..()
 
-/obj/structure/window/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/structure/window/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	var/isonshuttle = istype(get_area(src), /area/shuttle)
 	for(var/turf/T in range(1, src))
 		var/area/A = get_area(T)
@@ -373,35 +373,35 @@
 			return TRUE
 	return ..()
 
-/obj/item/stack/cable_coil/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)//Wiring would be too effective as a resource
+/obj/item/stack/cable_coil/swarmer_act(mob/living/danimal/hostile/swarmer/S)//Wiring would be too effective as a resource
 	to_chat(S, span_warning("This object does not contain enough materials to work with."))
 	return FALSE
 
-/obj/machinery/porta_turret/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/porta_turret/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("Attempting to dismantle this machine would result in an immediate counterattack. Aborting."))
 	return FALSE
 
-/obj/machinery/porta_turret_cover/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/porta_turret_cover/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("Attempting to dismantle this machine would result in an immediate counterattack. Aborting."))
 	return FALSE
 
-/mob/living/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/mob/living/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	S.DisperseTarget(src)
 	return TRUE
 
-/mob/living/danimal/slime/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/mob/living/danimal/slime/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("This biological resource is somehow resisting our bluespace transceiver. Aborting."))
 	return FALSE
 
-/obj/machinery/droneDispenser/swarmer/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/droneDispenser/swarmer/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("This object is receiving unactivated swarmer shells to help us. Aborting."))
 	return FALSE
 
-/obj/structure/destructible/clockwork/massive/celestial_gateway/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/structure/destructible/clockwork/massive/celestial_gateway/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("This object is multiplying existing resources. Aborting."))
 	return FALSE
 
-/obj/structure/lattice/catwalk/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/structure/lattice/catwalk/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	var/turf/here = get_turf(src)
 	for(var/A in here.contents)
 		var/obj/structure/cable/C = A
@@ -413,62 +413,62 @@
 /obj/item/deactivated_swarmer/IntegrateAmount()
 	return 50
 
-/obj/machinery/hydroponics/soil/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/hydroponics/soil/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("This object does not contain enough materials to work with."))
 	return FALSE
 
-/obj/machinery/field/generator/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/field/generator/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("Destroying this object would cause a catastrophic chain reaction. Aborting."))
 	return FALSE
 
-/obj/machinery/ore_silo/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/ore_silo/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("Destroying this object, however tempting it's, will disrupt the research development that may serve for our masters in the future. Aborting."))
 	return FALSE
 
-/obj/machinery/rnd/server/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/rnd/server/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("Destroying this object, will disrupt the research development that may serve for our masters in the future. Aborting."))
 	return FALSE
 
-/obj/machinery/pool/swarmer_act(mob/living/simple_animal/hostile/swarmer/S) //pool's closed, but not.
+/obj/machinery/pool/swarmer_act(mob/living/danimal/hostile/swarmer/S) //pool's closed, but not.
 	to_chat(S, span_warning("The pool must not be closed, it will provide healthy fun for our masters in the future. Aborting."))
 	return FALSE
 
-/obj/structure/pool/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/structure/pool/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("The pool must not be closed, it will provide healthy fun for our masters in the future. Aborting."))
 	return FALSE
 
-/obj/structure/holosign/barrier/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/structure/holosign/barrier/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	var/static/list/lazy_typecache = typecacheof(list(/obj/structure/holosign/barrier/engineering, /obj/structure/holosign/barrier/firelock, /obj/structure/holosign/barrier/atmos, /obj/structure/holosign/barrier/combifan))
 	if(lazy_typecache[type])
 		to_chat(S, span_warning("Destroying this holographic barrier may not benefit us. Aborting."))
 		return FALSE
 	return ..()
 
-/obj/machinery/dominator/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/dominator/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("This advanced piece of technology may be of use for our masters in the future. Aborting."))
 	return FALSE
 
-/obj/machinery/computer/bsa_control/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/computer/bsa_control/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("This advanced piece of technology may be of use for our masters in the future. Aborting."))
 	return FALSE
 
-/obj/machinery/bsa/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/bsa/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("This advanced piece of technology may be of use for our masters in the future. Aborting."))
 	return FALSE
 
-/obj/machinery/dna_vault/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/dna_vault/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("This advanced piece of technology may be of use for our masters in the future. Aborting."))
 	return FALSE
 
-/obj/structure/filler/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/structure/filler/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("This advanced piece of technology may be of use for our masters in the future. Aborting."))
 	return FALSE
 
-/obj/machinery/computer/sat_control/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/computer/sat_control/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("Destroying this object will lower the station shielding against space debris. Aborting."))
 	return FALSE
 
-/obj/machinery/satellite/meteor_shield/swarmer_act(mob/living/simple_animal/hostile/swarmer/S)
+/obj/machinery/satellite/meteor_shield/swarmer_act(mob/living/danimal/hostile/swarmer/S)
 	to_chat(S, span_warning("Destroying this object will lower the station shielding against space debris. Aborting."))
 	return FALSE
 

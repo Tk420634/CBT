@@ -28,7 +28,7 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 	stop_wandering = 1
 	movement_type = FLYING // Immunity to chasms and landmines, etc.
 	attack_sound = 'sound/weapons/punch1.ogg'
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 0
 	//maxbodytemp = INFINITY
 	attack_verb_continuous = "punches"
@@ -493,7 +493,7 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 		if(G.summoner == src)
 			. += G
 
-/mob/living/danimal/hostile/guardian/proc/hasmatchingsummoner(mob/living/simple_animal/hostile/guardian/G) //returns 1 if the summoner matches the target's summoner
+/mob/living/danimal/hostile/guardian/proc/hasmatchingsummoner(mob/living/danimal/hostile/guardian/G) //returns 1 if the summoner matches the target's summoner
 	return (istype(G) && G.summoner == summoner)
 
 

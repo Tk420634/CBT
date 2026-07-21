@@ -211,7 +211,7 @@
 				to_chat(user, "<span class='userdanger'>Creation failed!</span>: The soul stone is empty! Go kill someone!")
 
 
-/proc/makeNewConstruct(mob/living/simple_animal/hostile/construct/ctype, mob/target, mob/stoner = null, cultoverride = 0, loc_override = null)
+/proc/makeNewConstruct(mob/living/danimal/hostile/construct/ctype, mob/target, mob/stoner = null, cultoverride = 0, loc_override = null)
 	var/mob/living/danimal/hostile/construct/newstruct = new ctype((loc_override) ? (loc_override) : (get_turf(target)))
 	if(stoner)
 		newstruct.faction |= "[REF(stoner)]"

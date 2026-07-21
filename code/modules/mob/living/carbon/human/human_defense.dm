@@ -222,7 +222,7 @@
 		apply_damage(damage, BRUTE, affecting, armor_block)
 
 
-/mob/living/carbon/human/attack_animal(mob/living/simple_animal/M)
+/mob/living/carbon/human/attack_animal(mob/living/danimal/M)
 	. = ..()
 	if(.)
 		var/damage = .
@@ -236,7 +236,7 @@
 		var/dt = max(run_armor_check(affecting, "damage_threshold") - M.damage_threshold_penetration_mob, 0)
 		apply_damage(damage, M.melee_damage_type, affecting, armor, wound_bonus = M.wound_bonus, bare_wound_bonus = M.bare_wound_bonus, sharpness = M.sharpness, damage_threshold = dt)
 
-/mob/living/carbon/human/attack_slime(mob/living/simple_animal/slime/M)
+/mob/living/carbon/human/attack_slime(mob/living/danimal/slime/M)
 	. = ..()
 	if(!.) //unsuccessful slime attack
 		return

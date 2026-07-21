@@ -8,7 +8,7 @@
 	maxHealth = 1
 	seconds_per_wander = 5
 	loot = list(/obj/effect/decal/cleanable/insectguts)
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 270
 	//maxbodytemp = INFINITY
 	pass_flags = PASSTABLE | PASSGRILLE | PASSMOB

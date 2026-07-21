@@ -17,7 +17,7 @@
 	name = replacetext(name, "REAL_NAME", M.real_name)
 	desc = replacetext(desc, "NAME", name)
 
-/datum/brahmin_fashion/proc/apply(mob/living/simple_animal/cow/brahmin/D) //none of this currently seems to work, but the backpacks go on so I'm content for now
+/datum/brahmin_fashion/proc/apply(mob/living/danimal/cow/brahmin/D) //none of this currently seems to work, but the backpacks go on so I'm content for now
 	if(name)
 		D.name = name
 	if(desc)

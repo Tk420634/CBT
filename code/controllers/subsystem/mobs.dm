@@ -141,7 +141,7 @@ SUBSYSTEM_DEF(mobs)
 // 	/// destination coords for retreating, considered "there" if the mob is "there"
 // 	var/retreat_dest = null
 
-// /datum/mob_ai_thinkholder/New(mob/living/simple_animal/hostile/mob)
+// /datum/mob_ai_thinkholder/New(mob/living/danimal/hostile/mob)
 // 	melee_smash_cooldown = world.time
 // 	melee_attack_cooldown = world.time
 // 	sight_shoot_delay = world.time

@@ -385,7 +385,7 @@
 #define COMSIG_ROBOT_UPDATE_ICONS "robot_update_icons"			//from base of robot/update_icons(): ()
 
 // /mob/living/danimal/hostile signals
-#define COMSIG_HOSTILE_CHECK_FACTION "hostile_check_faction"	//from base of mob/living/simple_animal/hostile/check_faction(): (mob/living/simple_animal/hostile/target, mob/living/simple_animal/hostile/attacker)
+#define COMSIG_HOSTILE_CHECK_FACTION "hostile_check_faction"	//from base of mob/living/danimal/hostile/check_faction(): (mob/living/danimal/hostile/target, mob/living/danimal/hostile/attacker)
 	#define COMPONENT_HOSTILE_NO_ATTACK 1
 #define COMSIG_HOSTILE_ATTACKINGTARGET "hostile_attackingtarget"
 

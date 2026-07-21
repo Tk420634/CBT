@@ -321,7 +321,7 @@
 		..()
 	return FALSE
 
-/mob/living/attack_slime(mob/living/simple_animal/slime/M)
+/mob/living/attack_slime(mob/living/danimal/slime/M)
 	if(!SSticker.HasRoundStarted())
 		to_chat(M, "You cannot attack people before the game has started.")
 		return
@@ -351,7 +351,7 @@
 				M, span_danger("You glomp [src]!"))
 		return TRUE
 
-/mob/living/attack_animal(mob/living/simple_animal/M)
+/mob/living/attack_animal(mob/living/danimal/M)
 	M.face_atom(src)
 	if(!M.CheckActionCooldown(CLICK_CD_MELEE))
 		return

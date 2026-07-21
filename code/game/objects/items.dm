@@ -946,7 +946,7 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 /obj/item/attack_hulk(mob/living/carbon/human/user)
 	return 0
 
-/obj/item/attack_animal(mob/living/simple_animal/M)
+/obj/item/attack_animal(mob/living/danimal/M)
 	if (obj_flags & CAN_BE_HIT)
 		return ..()
 	return 0

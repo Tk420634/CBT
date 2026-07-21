@@ -301,7 +301,7 @@
 	return attack_hand(M)
 
 //Simple animals
-/mob/living/danimal/parrot/attack_animal(mob/living/simple_animal/M)
+/mob/living/danimal/parrot/attack_animal(mob/living/danimal/M)
 	. = ..() //goodbye immortal parrots
 
 	if(client)

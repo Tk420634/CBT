@@ -123,13 +123,13 @@
 		if(.)
 			L.amount_grown = min(L.amount_grown + damage, L.max_grown)
 
-/mob/living/danimal/attack_animal(mob/living/simple_animal/M)
+/mob/living/danimal/attack_animal(mob/living/danimal/M)
 	. = ..()
 	if(.)
 		var/damage = .
 		return attack_threshold_check(damage, M.melee_damage_type, "melee")
 
-/mob/living/danimal/attack_slime(mob/living/simple_animal/slime/M)
+/mob/living/danimal/attack_slime(mob/living/danimal/slime/M)
 	. = ..()
 	if(.) //successful slime shock
 		var/damage = rand(15, 25)
@@ -137,7 +137,7 @@
 			damage = rand(20, 35)
 		return attack_threshold_check(damage, BRUTE, "melee")
 
-/mob/living/danimal/attack_drone(mob/living/simple_animal/drone/M)
+/mob/living/danimal/attack_drone(mob/living/danimal/drone/M)
 	if(M.a_intent == INTENT_HARM) //No kicking dogs even as a rogue drone. Use a weapon.
 		return
 	return ..()

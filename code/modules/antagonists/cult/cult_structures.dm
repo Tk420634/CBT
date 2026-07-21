@@ -41,7 +41,7 @@
 		return "<span class='cult'>[t_It] [t_is] at <b>[round(obj_integrity * 100 / max_integrity)]%</b> stability.</span>"
 	return ..()
 
-/obj/structure/destructible/cult/attack_animal(mob/living/simple_animal/M)
+/obj/structure/destructible/cult/attack_animal(mob/living/danimal/M)
 	if(istype(M, /mob/living/danimal/hostile/construct/builder))
 		if(obj_integrity < max_integrity)
 			M.DelayNextAction(CLICK_CD_MELEE)

@@ -6,7 +6,7 @@
 //How the world interacts with drones
 
 
-/mob/living/danimal/drone/attack_drone(mob/living/simple_animal/drone/D)
+/mob/living/danimal/drone/attack_drone(mob/living/danimal/drone/D)
 	if(D != src && stat == DEAD)
 		var/d_input = alert(D,"Perform which action?","Drone Interaction","Reactivate","Cannibalize","Nothing")
 		if(d_input)

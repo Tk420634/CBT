@@ -692,7 +692,7 @@
 #define MBB_TARGET_EVAL                 "target_eval"
 
 /* Mob Target Evaluation Flags */
-#define MTEV_BE_TARGETED            "be_targeted"
+#define MTEV_CAN_BE_TARGETED            "be_targeted"
 #define MTEV_CAN_RETAIN_TARGET      "can_retain_target"
 #define MTEV_INVALID_STAT           "invalid_stat"
 #define MTEV_IS_ASSEMBLY            "is_assembly"
@@ -718,11 +718,10 @@
 #define MLF_OPAQUE      (1 << 4)
 
 /* Mob Movement and Windup States */
-#define MOB_MOVE_AWAY_FROM_TARGET   "move_away_from_target"
 #define MOB_MOVE_IDLE               "move_idle"
-#define MOB_MOVE_UNSET              "mob_move_unset"
-#define MOB_MOVE_TOWARDS_TARGET     "mob_move_towards_target"
-#define MOB_MOVE_AWAY_FROM_TARGET   "mob_move_away_from_target"
+#define MOB_MOVE_UNSET              "move_unset"
+#define MOB_MOVE_TOWARDS_TARGET     "move_towards_target"
+#define MOB_MOVE_AWAY_FROM_TARGET   "move_away_from_target"
 #define MOB_MOVE_DODGE              "move_dodge"
 #define MOB_WINDUP_NONE             "windup_none"
 #define MOB_WINDUP_READY            "windup_ready"

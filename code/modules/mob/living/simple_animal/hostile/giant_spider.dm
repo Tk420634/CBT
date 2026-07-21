@@ -273,7 +273,7 @@
 
 /mob/living/danimal/hostile/poison/giant_spider/ice //spiders dont usually like tempatures of 140 kelvin who knew
 	name = "giant ice radspider"
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 0
 	//maxbodytemp = 1500
 	poison_type = /datum/reagent/consumable/frostoil
@@ -282,7 +282,7 @@
 
 /mob/living/danimal/hostile/poison/giant_spider/nurse/ice
 	name = "giant ice radspider"
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 0
 	//maxbodytemp = 1500
 	poison_type = /datum/reagent/consumable/frostoil
@@ -291,7 +291,7 @@
 
 /mob/living/danimal/hostile/poison/giant_spider/hunter/ice
 	name = "giant ice radspider"
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 0
 	//maxbodytemp = 1500
 	poison_type = /datum/reagent/consumable/frostoil
@@ -459,7 +459,7 @@
 	action.button_icon_state = "wrap_[active]"
 	action.UpdateButtonIcon()
 
-/obj/effect/proc_holder/wrap/Trigger(mob/living/simple_animal/hostile/poison/giant_spider/nurse/user)
+/obj/effect/proc_holder/wrap/Trigger(mob/living/danimal/hostile/poison/giant_spider/nurse/user)
 	if(!istype(user))
 		return TRUE
 	activate(user)

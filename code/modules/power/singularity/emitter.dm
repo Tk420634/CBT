@@ -147,7 +147,7 @@
 		to_chat(user, span_warning("[src] needs to be firmly secured to the floor first!"))
 		return TRUE
 
-/obj/machinery/power/emitter/attack_animal(mob/living/simple_animal/M)
+/obj/machinery/power/emitter/attack_animal(mob/living/danimal/M)
 	if(ismegafauna(M) && anchored)
 		state = EMITTER_UNWRENCHED
 		anchored = FALSE

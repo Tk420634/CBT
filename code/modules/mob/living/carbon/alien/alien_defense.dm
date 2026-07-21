@@ -74,7 +74,7 @@ In all, this is a lot like the monkey code. /N
 		var/obj/item/bodypart/affecting = get_bodypart(ran_zone(M.zone_selected))
 		apply_damage(rand(1, 3), BRUTE, affecting)
 
-/mob/living/carbon/alien/attack_animal(mob/living/simple_animal/M)
+/mob/living/carbon/alien/attack_animal(mob/living/danimal/M)
 	. = ..()
 	if(.)
 		var/damage = rand(M.melee_damage_lower, M.melee_damage_upper)
@@ -92,7 +92,7 @@ In all, this is a lot like the monkey code. /N
 			if(STAMINA)
 				adjustStaminaLoss(damage)
 
-/mob/living/carbon/alien/attack_slime(mob/living/simple_animal/slime/M)
+/mob/living/carbon/alien/attack_slime(mob/living/danimal/slime/M)
 	. = ..()
 	if(!.) //unsuccessful slime attack
 		return

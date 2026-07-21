@@ -1,5 +1,5 @@
 
-/datum/hud/guardian/New(mob/living/simple_animal/hostile/guardian/owner)
+/datum/hud/guardian/New(mob/living/danimal/hostile/guardian/owner)
 	..()
 	var/atom/movable/screen/using
 
@@ -32,7 +32,7 @@
 	using.hud = src
 	static_inventory += using
 
-/datum/hud/dextrous/guardian/New(mob/living/simple_animal/hostile/guardian/owner) //for a dextrous guardian
+/datum/hud/dextrous/guardian/New(mob/living/danimal/hostile/guardian/owner) //for a dextrous guardian
 	..()
 	var/atom/movable/screen/using
 	if(istype(owner, /mob/living/danimal/hostile/guardian/dextrous))

@@ -160,10 +160,10 @@ SUBSYSTEM_DEF(monster_wave)
 /datum/controller/subsystem/monster_wave/proc/unregister_nest_seed(datum/nest_box/NB)
 	spawner_tickets -= NB
 
-/datum/controller/subsystem/monster_wave/proc/register_hole(mob/living/simple_animal/nest_spawn_hole_guy/NSHG)
+/datum/controller/subsystem/monster_wave/proc/register_hole(mob/living/danimal/nest_spawn_hole_guy/NSHG)
 	spawner_lads |= NSHG
 
-/datum/controller/subsystem/monster_wave/proc/unregister_hole(mob/living/simple_animal/nest_spawn_hole_guy/NSHG)
+/datum/controller/subsystem/monster_wave/proc/unregister_hole(mob/living/danimal/nest_spawn_hole_guy/NSHG)
 	spawner_lads -= NSHG
 
 
@@ -326,7 +326,7 @@ SUBSYSTEM_DEF(monster_wave)
 	do_sparks(1, FALSE, src, /datum/effect_system/spark_spread/quantum)
 
 /// we're bout to ruin this guy's day
-/obj/structure/respawner_blocker/proc/killmeplease(mob/living/simple_animal/nest_spawn_hole_guy/NSHG)
+/obj/structure/respawner_blocker/proc/killmeplease(mob/living/danimal/nest_spawn_hole_guy/NSHG)
 	if(killing_something) // we're already killing something
 		return
 	killing_something = NSHG

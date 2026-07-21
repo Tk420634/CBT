@@ -366,7 +366,7 @@
 		return
 	return ..()
 
-/mob/living/danimal/hostile/clockwork/marauder/guardian/attack_animal(mob/living/simple_animal/M)
+/mob/living/danimal/hostile/clockwork/marauder/guardian/attack_animal(mob/living/danimal/M)
 	if(istype(M, /mob/living/danimal/hostile/clockwork/marauder/guardian) || !blockOrCounter(M, M)) //we don't want infinite blockcounter loops if fighting another guardian
 		return ..()
 
@@ -378,7 +378,7 @@
 	if(!blockOrCounter(M, M))
 		return ..()
 
-/mob/living/danimal/hostile/clockwork/marauder/guardian/attack_slime(mob/living/simple_animal/slime/M)
+/mob/living/danimal/hostile/clockwork/marauder/guardian/attack_slime(mob/living/danimal/slime/M)
 	if(!blockOrCounter(M, M))
 		return ..()
 

@@ -23,7 +23,7 @@
 	bubble_icon = "slime"
 	initial_language_holder = /datum/language_holder/slime
 
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 
 	maxHealth = 150
 	health = 150
@@ -262,7 +262,7 @@
 /mob/living/danimal/slime/attack_ui(slot)
 	return
 
-/mob/living/danimal/slime/attack_slime(mob/living/simple_animal/slime/M)
+/mob/living/danimal/slime/attack_slime(mob/living/danimal/slime/M)
 	. = ..()
 	if(!. || M == src) //unsuccessful slime shock
 		return
@@ -278,7 +278,7 @@
 		M.adjustBruteLoss(-10 + (-10 * M.is_adult))
 		M.updatehealth()
 
-/mob/living/danimal/slime/attack_animal(mob/living/simple_animal/M)
+/mob/living/danimal/slime/attack_animal(mob/living/danimal/M)
 	. = ..()
 	if(.)
 		attacked += 10

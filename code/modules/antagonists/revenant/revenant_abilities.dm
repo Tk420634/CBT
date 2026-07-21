@@ -136,7 +136,7 @@
 	else
 		name = "[initial(name)] ([cast_amount]E)"
 
-/obj/effect/proc_holder/spell/aoe_turf/revenant/can_cast(mob/living/simple_animal/revenant/user = usr, skipcharge = FALSE, silent = FALSE)
+/obj/effect/proc_holder/spell/aoe_turf/revenant/can_cast(mob/living/danimal/revenant/user = usr, skipcharge = FALSE, silent = FALSE)
 	if(charge_counter < charge_max)
 		return FALSE
 	if(!istype(user)) //Badmins, no. Badmins, don't do it.
@@ -150,7 +150,7 @@
 		return FALSE
 	return TRUE
 
-/obj/effect/proc_holder/spell/aoe_turf/revenant/proc/attempt_cast(mob/living/simple_animal/revenant/user = usr)
+/obj/effect/proc_holder/spell/aoe_turf/revenant/proc/attempt_cast(mob/living/danimal/revenant/user = usr)
 	if(!istype(user)) //If you're not a revenant, it works. Please, please, please don't give this to a non-revenant.
 		name = "[initial(name)]"
 		if(locked)
@@ -189,7 +189,7 @@
 	var/shock_damage = 15
 	action_icon_state = "overload_lights"
 
-/obj/effect/proc_holder/spell/aoe_turf/revenant/overload/cast(list/targets, mob/living/simple_animal/revenant/user = usr)
+/obj/effect/proc_holder/spell/aoe_turf/revenant/overload/cast(list/targets, mob/living/danimal/revenant/user = usr)
 	if(attempt_cast(user))
 		for(var/turf/T in targets)
 			INVOKE_ASYNC(src,PROC_REF(overload), T, user)
@@ -230,7 +230,7 @@
 	cast_amount = 30
 	action_icon_state = "defile"
 
-/obj/effect/proc_holder/spell/aoe_turf/revenant/defile/cast(list/targets, mob/living/simple_animal/revenant/user = usr)
+/obj/effect/proc_holder/spell/aoe_turf/revenant/defile/cast(list/targets, mob/living/danimal/revenant/user = usr)
 	if(attempt_cast(user))
 		for(var/turf/T in targets)
 			INVOKE_ASYNC(src,PROC_REF(defile), T)
@@ -281,7 +281,7 @@
 	action_icon_state = "malfunction"
 
 //A note to future coders: do not replace this with an EMP because it will wreck malf AIs and everyone will hate you.
-/obj/effect/proc_holder/spell/aoe_turf/revenant/malfunction/cast(list/targets, mob/living/simple_animal/revenant/user = usr)
+/obj/effect/proc_holder/spell/aoe_turf/revenant/malfunction/cast(list/targets, mob/living/danimal/revenant/user = usr)
 	if(attempt_cast(user))
 		for(var/turf/T in targets)
 			INVOKE_ASYNC(src,PROC_REF(malfunction), T, user)
@@ -327,7 +327,7 @@
 	unlock_amount = 200
 	action_icon_state = "blight"
 
-/obj/effect/proc_holder/spell/aoe_turf/revenant/blight/cast(list/targets, mob/living/simple_animal/revenant/user = usr)
+/obj/effect/proc_holder/spell/aoe_turf/revenant/blight/cast(list/targets, mob/living/danimal/revenant/user = usr)
 	if(attempt_cast(user))
 		for(var/turf/T in targets)
 			INVOKE_ASYNC(src,PROC_REF(blight), T, user)

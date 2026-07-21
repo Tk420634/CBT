@@ -3,7 +3,7 @@
 	var/atom/movable/screen/blockchance
 	var/atom/movable/screen/counterchance
 
-/datum/hud/marauder/New(mob/living/simple_animal/hostile/clockwork/marauder/guardian/owner)
+/datum/hud/marauder/New(mob/living/danimal/hostile/clockwork/marauder/guardian/owner)
 	..()
 	var/atom/movable/screen/using
 

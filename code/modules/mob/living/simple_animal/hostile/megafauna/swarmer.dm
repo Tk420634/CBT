@@ -188,7 +188,7 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/danimal/hostile/swarmer/a
 	if(is_type_in_typecache(the_target, sharedIgnore)) //always ignore
 		return
 	if(is_type_in_typecache(the_target, sharedWanted)) //always eat
-		return list(MTF_CAN_TARGET)
+		return list(MTEV_CAN_BE_TARGETED)
 
 	return ..()	//else, have a nibble, see if it's food
 

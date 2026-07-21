@@ -59,12 +59,12 @@ SUBSYSTEM_DEF(idlenpcpool)
 		if(MC_TICK_CHECK)
 			return
 
-/datum/controller/subsystem/idlenpcpool/proc/add_to_culling(mob/living/simple_animal/hostile/simp)
+/datum/controller/subsystem/idlenpcpool/proc/add_to_culling(mob/living/danimal/hostile/simp)
 	if(!simp)
 		return
 	mobs_to_cull |= WEAKREF(simp)
 
-/datum/controller/subsystem/idlenpcpool/proc/remove_from_culling(mob/living/simple_animal/hostile/simp)
+/datum/controller/subsystem/idlenpcpool/proc/remove_from_culling(mob/living/danimal/hostile/simp)
 	if(!simp)
 		return
 	mobs_to_cull -= WEAKREF(simp)

@@ -255,7 +255,7 @@
 	. += "<b>Health:</b> <span class='notice'>[obj_integrity]/[max_integrity]</span>"
 	. += "<b>Effects:</b> <span class='notice'>[scannerreport()]</span>"
 
-/obj/structure/blob/attack_animal(mob/living/simple_animal/M)
+/obj/structure/blob/attack_animal(mob/living/danimal/M)
 	if(ROLE_BLOB in M.faction) //sorry, but you can't kill the blob as a blobbernaut
 		return
 	..()

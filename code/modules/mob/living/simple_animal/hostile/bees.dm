@@ -50,7 +50,7 @@
 	override_ignore_other_mobs = TRUE
 
 	//Spaceborn beings don't get hurt by space
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 0
 	del_on_death = 1
 
@@ -256,7 +256,7 @@
 	return
 
 
-/mob/living/danimal/hostile/poison/bees/proc/reagent_incompatible(mob/living/simple_animal/hostile/poison/bees/B)
+/mob/living/danimal/hostile/poison/bees/proc/reagent_incompatible(mob/living/danimal/hostile/poison/bees/B)
 	if(!B)
 		return FALSE
 	if(B.beegent && beegent && B.beegent.type != beegent.type || B.beegent && !beegent || !B.beegent && beegent)

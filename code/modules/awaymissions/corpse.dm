@@ -285,7 +285,7 @@
 	icon = 'icons/mob/slimes.dmi'
 	icon_state = "grey baby slime" //sets the icon in the map editor
 
-/obj/effect/mob_spawn/slime/equip(mob/living/simple_animal/slime/S)
+/obj/effect/mob_spawn/slime/equip(mob/living/danimal/slime/S)
 	S.colour = mobcolour
 
 /obj/effect/mob_spawn/human/facehugger/create(ckey, name) //Creates a squashed facehugger

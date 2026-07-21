@@ -65,7 +65,7 @@
 	var/move_state = RTS_MOVE_STATE_NORMAL
 	var/target_mode = RTS_TARGET_MODE_NONE
 
-/datum/rts_mob_order_handler/New(mob/living/simple_animal/my_mob)
+/datum/rts_mob_order_handler/New(mob/living/danimal/my_mob)
 	if(!my_mob)
 		qdel(src)
 		CRASH("rts_mob_order_handler.New() called with no mob. Whyyyyy")

@@ -31,7 +31,7 @@ PROCESSING_SUBSYSTEM_DEF(spawners)
 // 	spawners["[spwner.z]"] -= spwner
 
 // /// Finds the spawner closest to the mob
-// /datum/controller/subsystem/spawners/proc/nearest_spawner(mob/living/simple_animal/hostile/unbirthme)
+// /datum/controller/subsystem/spawners/proc/nearest_spawner(mob/living/danimal/hostile/unbirthme)
 // 	if(!unbirthme)
 // 		return
 // 	var/list/nearest_spawners = list()

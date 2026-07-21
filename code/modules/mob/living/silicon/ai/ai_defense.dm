@@ -5,7 +5,7 @@
 	if(I.force && I.damtype != STAMINA && stat != DEAD) //only sparks if real damage is dealt.
 		spark_system.start()
 
-/mob/living/silicon/ai/attack_slime(mob/living/simple_animal/slime/user)
+/mob/living/silicon/ai/attack_slime(mob/living/danimal/slime/user)
 	return //immune to slimes
 
 /mob/living/silicon/ai/blob_act(obj/structure/blob/B)

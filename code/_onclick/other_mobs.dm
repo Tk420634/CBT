@@ -224,7 +224,7 @@
 /mob/living/danimal/drone/UnarmedAttack(atom/A, proximity, intent = a_intent, flags = NONE)
 	A.attack_drone(src, intent, flags)
 
-/atom/proc/attack_drone(mob/living/simple_animal/drone/user)
+/atom/proc/attack_drone(mob/living/danimal/drone/user)
 	attack_hand(user) //defaults to attack_hand. Override it when you don't want drones to do same stuff as humans.
 
 /mob/living/danimal/slime/RestrainedClickOn(atom/A)
