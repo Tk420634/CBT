@@ -7,7 +7,7 @@
 	if(client?.click_intercept)
 		return
 
-	// Things you might plausibly want to follow
+	// Things you might plausibly want to follow, Ted
 	if(ismovable(A))
 		ManualFollow(A)
 
