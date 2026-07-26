@@ -32,7 +32,7 @@
 	throw_range = 10												// range of throw
 	block_parry_data = /datum/block_parry_data/bokken				// parrying properties
 // handling vars
-	w_class = WEAPON_CLASS_SMALL									// item size
+	w_class = WEIGHT_CLASS_SMALL									// item size
 	slot_flags = INV_SLOTBIT_BELT | INV_SLOTBIT_BACK				// INV_SLOTBIT_BELT | INV_SLOTBIT_BACK to fit in belt and/or back
 	draw_time = GUN_DRAW_QUICK										// time between drawing and readying the gun
 	slowdown = GUN_SLOWDOWN_PISTOL_LIGHT							// move speed penalty when drawn

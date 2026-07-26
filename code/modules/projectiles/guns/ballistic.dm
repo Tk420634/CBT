@@ -718,6 +718,8 @@ GLOBAL_LIST_EMPTY(gun_accepted_casings)
 		to_chat(user, span_alert("You can't seem to fit \the [mag_to_check] into \the [src]."))
 
 /obj/item/gun/ballistic/proc/eject_magazine(mob/living/user, put_it_in_their_hand, makesound, maketext)
+	if(!istype(magazine))
+		return FALSE
 	if(magazine.fixed_mag)
 		return FALSE
 	if(!remove_magazine_delay(user))
