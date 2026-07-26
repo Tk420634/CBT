@@ -1,5 +1,5 @@
 // Winchester 1873 is baseline
-obj/item/gun/ballistic/rifle/repeating_carbine
+/obj/item/gun/ballistic/rifle/repeating_carbine
 	name = "repeating carbine template"								// use a simple common name. do NOT go overly esoteric or extravagant
 	desc = "should not be here, bugreport."							// use the format "A submachine gun chambered in caliber. Optional flavor text goes here."
 // cosmetic vars

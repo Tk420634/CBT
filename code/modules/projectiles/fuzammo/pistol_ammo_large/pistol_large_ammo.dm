@@ -239,7 +239,7 @@
 	icon_state = "wood_ammobox"
 	w_class = WEIGHT_CLASS_HUGE // don't you dare make this any smaller!
 	multiple_sprites = 4
-	max_ammo = 120 // don't change this for new calibers
+	max_ammo = 300 // don't change this for new calibers
 	load_behavior = AMMOB_CRATE
 
 /obj/item/ammo_box/a357/crate/q2
