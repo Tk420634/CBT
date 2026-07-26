@@ -1,6 +1,6 @@
 /atom/movable/screen/buildmode
 	icon = 'icons/misc/buildmode.dmi'
-	var/datum/buildmode/bd
+	var/datum/click_interceptor/buildmode/bd
 	// If we don't do this, we get occluded by item action buttons
 	layer = ABOVE_HUD_LAYER
 
@@ -54,7 +54,7 @@
 
 // used to switch between modes
 /atom/movable/screen/buildmode/modeswitch
-	var/datum/buildmode_mode/modetype
+	var/datum/click_interceptor/buildmode_mode/modetype
 
 /atom/movable/screen/buildmode/modeswitch/New(bld, mt)
 	modetype = mt

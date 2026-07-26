@@ -30,14 +30,14 @@
  *  */
 
 /datum/rts_selection_manager
-	var/datum/rts_commander/parent
+	var/datum/click_interceptor/rts_commander/parent
 	var/ckey
 	var/list/selected_mobs = list()
 	var/list/preview_mobs = list()
 	var/list/plumbobs = list()
 	var/is_preview = FALSE
 
-/datum/rts_selection_manager/New(datum/rts_commander/parent)
+/datum/rts_selection_manager/New(datum/click_interceptor/rts_commander/parent)
 	src.parent = parent
 
 /datum/rts_selection_manager/Destroy()

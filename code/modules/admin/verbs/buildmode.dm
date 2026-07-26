@@ -11,7 +11,7 @@
 
 /atom/movable/screen/buildmode
 	icon = 'icons/misc/buildmode.dmi'
-	var/datum/buildmode/bd
+	var/datum/click_interceptor/buildmode/bd
 
 /atom/movable/screen/buildmode/New(bd)
 	..()
@@ -74,7 +74,7 @@
 	update_icon()
 	return 1
 
-/datum/buildmode
+/datum/click_interceptor/buildmode
 	var/mode = BASIC_BUILDMODE
 	var/client/holder = null
 	var/list/atom/movable/screen/buttons = list()
@@ -89,14 +89,14 @@
 	var/atom/movable/stored = null
 	var/list/preview = list()
 
-/datum/buildmode/New(client/c)
+/datum/click_interceptor/buildmode/New(client/c)
 	create_buttons()
 	holder = c
 	holder.click_intercept = src
 	holder.show_popup_menus = 0
 	holder.screen += buttons
 
-/datum/buildmode/proc/quit()
+/datum/click_interceptor/buildmode/proc/quit()
 	holder.screen -= buttons
 	holder.click_intercept = null
 	holder.show_popup_menus = 1
@@ -105,7 +105,7 @@
 	qdel(src)
 	return
 
-/datum/buildmode/Destroy()
+/datum/click_interceptor/buildmode/Destroy()
 	stored = null
 	QDEL_LIST(buttons)
 	throw_atom = null
@@ -115,18 +115,18 @@
 	cornerB = null
 	return ..()
 
-/datum/buildmode/proc/create_buttons()
+/datum/click_interceptor/buildmode/proc/create_buttons()
 	buttons += new /atom/movable/screen/buildmode/mode(src)
 	buttons += new /atom/movable/screen/buildmode/help(src)
 	buttons += new /atom/movable/screen/buildmode/bdir(src)
 	buttons += new /atom/movable/screen/buildmode/quit(src)
 
-/datum/buildmode/proc/toggle_modes()
+/datum/click_interceptor/buildmode/proc/toggle_modes()
 	mode = (mode % NUM_BUILDMODES) +1
 	Reset()
 	return
 
-/datum/buildmode/proc/show_help(mob/user)
+/datum/click_interceptor/buildmode/proc/show_help(mob/user)
 	var/list/dat = list()
 	switch(mode)
 		if(BASIC_BUILDMODE)
@@ -173,7 +173,7 @@
 			dat += "***********************************************************"
 	to_chat(user, "<font color='blue'>[dat.Join("\n")]</font>")
 
-/datum/buildmode/proc/change_settings(mob/user)
+/datum/click_interceptor/buildmode/proc/change_settings(mob/user)
 	switch(mode)
 		if(BASIC_BUILDMODE)
 			return 1
@@ -222,7 +222,7 @@
 			cornerA = null
 			cornerB = null
 
-/datum/buildmode/proc/change_dir()
+/datum/click_interceptor/buildmode/proc/change_dir()
 	switch(build_dir)
 		if(NORTH)
 			build_dir = EAST
@@ -236,7 +236,7 @@
 			build_dir = NORTH
 	return 1
 
-/datum/buildmode/proc/Reset()//Reset temporary variables
+/datum/click_interceptor/buildmode/proc/Reset()//Reset temporary variables
 	cornerA = null
 	cornerB = null
 
@@ -244,17 +244,17 @@
 	set name = "Toggle Build Mode"
 	set category = "Special Verbs"
 	if(M.client)
-		if(istype(M.client.click_intercept, /datum/buildmode))
-			var/datum/buildmode/B = M.client.click_intercept
+		if(istype(M.client.click_intercept, /datum/click_interceptor/buildmode))
+			var/datum/click_interceptor/buildmode/B = M.client.click_intercept
 			B.quit()
 			log_admin("[key_name(usr)] has left build mode.")
 		else
-			new/datum/buildmode(M.client)
+			new/datum/click_interceptor/buildmode(M.client)
 			message_admins("[key_name(usr)] has entered build mode.")
 			log_admin("[key_name(usr)] has entered build mode.")
 
 
-/datum/buildmode/proc/InterceptClickOn(user,params,atom/object) //Click Intercept
+/datum/click_interceptor/buildmode/proc/InterceptClickOn(user,params,atom/object) //Click Intercept
 	var/list/pa = params2list(params)
 	var/right_click = pa.Find("right")
 	var/left_click = pa.Find("left")

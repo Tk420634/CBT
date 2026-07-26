@@ -29,9 +29,9 @@ SUBSYSTEM_DEF(rts)
 	var/datum/preferences/P = extract_prefs(cmdr)
 	if(!P)
 		return
-	var/datum/rts_commander/rts_dat = LAZYACCESS(commanders, P.quester_uid)
+	var/datum/click_interceptor/rts_commander/rts_dat = LAZYACCESS(commanders, P.quester_uid)
 	if(!rts_dat)
-		rts_dat = new /datum/rts_commander(cmdr)
+		rts_dat = new /datum/click_interceptor/rts_commander(cmdr)
 		commanders[P.quester_uid] = rts_dat
 	return rts_dat
 
@@ -40,7 +40,7 @@ SUBSYSTEM_DEF(rts)
 		to_chat(cmdr, span_alert("You're not able to exert your will over the battlefield!"))
 		UpdateButtons(cmdr)
 		return
-	var/datum/rts_commander/rts_dat = GetCommander(cmdr)
+	var/datum/click_interceptor/rts_commander/rts_dat = GetCommander(cmdr)
 	var/client/C = rts_dat.GetCommanderClient()
 	if(rts_dat)
 		if(C.click_intercept == rts_dat)
@@ -53,12 +53,12 @@ SUBSYSTEM_DEF(rts)
 
 
 /datum/controller/subsystem/rts/proc/ActivateInputInterceptor(mob/user)
-	var/datum/rts_commander/rts_dat = GetCommander(user)
+	var/datum/click_interceptor/rts_commander/rts_dat = GetCommander(user)
 	if(rts_dat)
 		return rts_dat.ActivateInputInterceptor(user)
 
 /datum/controller/subsystem/rts/proc/DeactivateInputInterceptor(mob/user)
-	var/datum/rts_commander/rts_dat = GetCommander(user)
+	var/datum/click_interceptor/rts_commander/rts_dat = GetCommander(user)
 	if(rts_dat)
 		return rts_dat.DeactivateInputInterceptor()
 
@@ -103,7 +103,7 @@ SUBSYSTEM_DEF(rts)
 
 /datum/controller/subsystem/rts/proc/UpdateButtons(someone)
 	var/mob/user = extract_mob(someone)
-	var/datum/rts_commander/rts_dat = GetCommander(user)
+	var/datum/click_interceptor/rts_commander/rts_dat = GetCommander(user)
 	if(rts_dat)
 		rts_dat.UpdateButtons()
 

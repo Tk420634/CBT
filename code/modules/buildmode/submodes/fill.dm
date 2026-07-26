@@ -1,17 +1,17 @@
-/datum/buildmode_mode/fill
+/datum/click_interceptor/buildmode_mode/fill
 	key = "fill"
 	
 	use_corner_selection = TRUE
 	var/objholder = null
 
-/datum/buildmode_mode/fill/show_help(client/c)
+/datum/click_interceptor/buildmode_mode/fill/show_help(client/c)
 	to_chat(c, span_notice("***********************************************************"))
 	to_chat(c, span_notice("Left Mouse Button on turf/obj/mob      = Select corner"))
 	to_chat(c, span_notice("Left Mouse Button + Alt on turf/obj/mob = Delete region"))
 	to_chat(c, span_notice("Right Mouse Button on buildmode button = Select object type"))
 	to_chat(c, span_notice("***********************************************************"))
 
-/datum/buildmode_mode/fill/change_settings(client/c)
+/datum/click_interceptor/buildmode_mode/fill/change_settings(client/c)
 	var/target_path = input(c, "Enter typepath:" ,"Typepath","/obj/structure/closet")
 	objholder = text2path(target_path)
 	if(!ispath(objholder))
@@ -25,14 +25,14 @@
 			return
 	deselect_region()
 
-/datum/buildmode_mode/fill/handle_click(client/c, params, obj/object)
+/datum/click_interceptor/buildmode_mode/fill/handle_click(client/c, params, obj/object)
 	if(isnull(objholder))
 		to_chat(c, span_warning("Select an object type first."))
 		deselect_region()
 		return
 	..()
 
-/datum/buildmode_mode/fill/handle_selected_area(client/c, params)
+/datum/click_interceptor/buildmode_mode/fill/handle_selected_area(client/c, params)
 	var/list/pa = params2list(params)
 	var/left_click = pa.Find("left")
 	var/alt_click = pa.Find("alt")

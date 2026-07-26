@@ -1,7 +1,7 @@
-/datum/buildmode_mode/basic
+/datum/click_interceptor/buildmode_mode/basic
 	key = "basic"
 
-/datum/buildmode_mode/basic/show_help(client/c)
+/datum/click_interceptor/buildmode_mode/basic/show_help(client/c)
 	to_chat(c, span_notice("***********************************************************"))
 	to_chat(c, span_notice("Left Mouse Button        = Construct / Upgrade"))
 	to_chat(c, span_notice("Right Mouse Button       = Deconstruct / Delete / Downgrade"))
@@ -12,7 +12,7 @@
 	to_chat(c, span_notice("change the direction of built objects."))
 	to_chat(c, span_notice("***********************************************************"))
 
-/datum/buildmode_mode/basic/handle_click(client/c, params, obj/object)
+/datum/click_interceptor/buildmode_mode/basic/handle_click(client/c, params, obj/object)
 	var/list/pa = params2list(params)
 	var/left_click = pa.Find("left")
 	var/right_click = pa.Find("right")

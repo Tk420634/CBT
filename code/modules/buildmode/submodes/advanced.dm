@@ -1,11 +1,11 @@
-/datum/buildmode_mode/advanced
+/datum/click_interceptor/buildmode_mode/advanced
 	key = "advanced"
 	var/objholder = null
 
 // FIXME: add logic which adds a button displaying the icon
 // of the currently selected path
 
-/datum/buildmode_mode/advanced/show_help(client/c)
+/datum/click_interceptor/buildmode_mode/advanced/show_help(client/c)
 	to_chat(c, span_notice("***********************************************************"))
 	to_chat(c, span_notice("Right Mouse Button on buildmode button = Set object type"))
 	to_chat(c, "<span class='notice'>Left Mouse Button + alt on turf/obj    = Copy object type")
@@ -16,7 +16,7 @@
 	to_chat(c, span_notice("change the direction of built objects."))
 	to_chat(c, span_notice("***********************************************************"))
 
-/datum/buildmode_mode/advanced/change_settings(client/c)
+/datum/click_interceptor/buildmode_mode/advanced/change_settings(client/c)
 	var/target_path = input(c, "Enter typepath:", "Typepath", "/obj/structure/closet")
 	objholder = text2path(target_path)
 	if(!ispath(objholder))
@@ -29,7 +29,7 @@
 			alert("That path is not allowed.")
 			return
 
-/datum/buildmode_mode/advanced/handle_click(client/c, params, obj/object)
+/datum/click_interceptor/buildmode_mode/advanced/handle_click(client/c, params, obj/object)
 	var/list/pa = params2list(params)
 	var/left_click = pa.Find("left")
 	var/right_click = pa.Find("right")

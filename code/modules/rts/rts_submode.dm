@@ -1,6 +1,6 @@
 /datum/rts_mode
 	var/name = "Oops"
-	var/datum/rts_commander/parent
+	var/datum/click_interceptor/rts_commander/parent
 
 	var/left_is_down = FALSE
 	var/right_is_down = FALSE
@@ -11,7 +11,7 @@
 	var/turf/cornerA
 	var/turf/cornerB
 
-/datum/rts_mode/New(datum/rts_commander/cmdr)
+/datum/rts_mode/New(datum/click_interceptor/rts_commander/cmdr)
 	parent = cmdr
 	return ..()
 
