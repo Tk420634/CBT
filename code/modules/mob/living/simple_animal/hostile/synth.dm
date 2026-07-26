@@ -13,7 +13,7 @@
 	response_disarm_simple = "shoves"
 	response_harm_simple = "hits"
 	move_to_delay = 3
-	robust_searching = 1
+	robust_searching = TRUE
 	maxHealth = 150
 	health = 150
 
@@ -34,7 +34,7 @@
 	vision_range = 12
 	aggroed_vision_range = 15
 
-	ranged = 1
+	can_ranged_attack = TRUE
 	projectiletype = /obj/item/projectile/beam
 	projectilesound = 'sound/f13weapons/laser_pistol.ogg'
 	projectile_sound_properties = list(

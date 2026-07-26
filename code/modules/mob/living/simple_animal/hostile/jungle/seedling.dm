@@ -23,8 +23,8 @@
 	move_to_delay = 20
 	vision_range = 9
 	aggroed_vision_range = 9
-	ranged = TRUE
-	ranged_cooldown_time = 10
+	can_ranged_attack = TRUE
+	ranged_cooldown_duration = 10
 	projectiletype = /obj/item/projectile/seedling
 	projectilesound = 'sound/weapons/pierce.ogg'
 	// robust_searching = TRUE
@@ -111,7 +111,7 @@
 /mob/living/danimal/hostile/jungle/seedling/AttackingTarget()
 	var/atom/my_target = get_target()
 	if(isliving(my_target))
-		if(ranged_cooldown <= world.time && combatant_state == SEEDLING_STATE_NEUTRAL)
+		if(ranged_attack_delay <= world.time && combatant_state == SEEDLING_STATE_NEUTRAL)
 			OpenFire(my_target)
 		return
 	return ..()
@@ -199,7 +199,7 @@
 		return
 	combatant_state = SEEDLING_STATE_RECOVERY
 	update_icons()
-	ranged_cooldown = world.time + ranged_cooldown_time
+	ranged_attack_delay = world.time + ranged_cooldown_duration
 	if(my_target)
 		face_atom(my_target)
 	addtimer(CALLBACK(src,PROC_REF(ResetNeutral)), 10)

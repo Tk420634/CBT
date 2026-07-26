@@ -29,7 +29,7 @@
 	icon_living = "magicarp"
 	icon_dead = "magicarp_dead"
 	icon_gib = "magicarp_gib"
-	ranged = 1
+	can_ranged_attack = TRUE
 	retreat_distance = 2
 	minimum_distance = 0 //Between shots they can and will close in to nash
 	projectiletype = /obj/item/projectile/magic

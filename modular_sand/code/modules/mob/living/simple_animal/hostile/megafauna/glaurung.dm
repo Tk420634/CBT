@@ -46,7 +46,7 @@ Difficulty: Medium
 	melee_damage_upper = 40
 	speed = 1
 	move_to_delay = 4
-	ranged = 1
+	can_ranged_attack = TRUE
 	pixel_x = -16
 	crusher_loot = list(/obj/structure/closet/crate/necropolis/glaurung/crusher)
 	loot = list(/obj/structure/closet/crate/necropolis/glaurung)
@@ -91,7 +91,7 @@ Difficulty: Medium
 /mob/living/danimal/hostile/megafauna/dragon/glaurung/OpenFire()
 	if(swooping)
 		return
-	ranged_cooldown = world.time + ranged_cooldown_time
+	ranged_attack_delay = world.time + ranged_cooldown_duration
 	fire_stream()
 
 /mob/living/danimal/hostile/megafauna/dragon/glaurung/triple_swoop()

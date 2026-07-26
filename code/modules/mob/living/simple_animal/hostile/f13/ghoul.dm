@@ -17,7 +17,7 @@
 	armor_list = ARMOR_VALUE_GHOUL_NAKED
 	maxHealth = 100
 	health = 100
-	robust_searching = 0
+	robust_searching = FALSE
 	move_to_delay = 12
 	seconds_per_wander = 5
 	waddle_amount = 2
@@ -172,12 +172,12 @@
 	armor_list = ARMOR_VALUE_GHOUL_REAVER
 	maxHealth = 100
 	health = 100
-	rapid_melee = 2
+	melee_attacks_per_turn = 2
 	retreat_distance = 2
 	minimum_distance = 1
-	ranged = FALSE
+	can_ranged_attack = FALSE
 	// ranged_message = "throws a rock"
-	// ranged_cooldown_time = 3 SECONDS
+	// ranged_cooldown_duration = 3 SECONDS
 	// projectiletype = /obj/item/projectile/bullet/ghoul_rock
 	// projectilesound = 'sound/weapons/punchmiss.ogg'
 	melee_damage_lower = 10
@@ -314,7 +314,7 @@
 	retreat_distance = 4
 	minimum_distance = 4
 	// ranged_message = "emits radiation"
-	// ranged = TRUE
+	// can_ranged_attack = TRUE
 	// projectiletype = /obj/item/projectile/radiation_thing
 	// projectilesound = 'sound/weapons/etherealhit.ogg'
 	melee_damage_lower = 10
@@ -460,8 +460,8 @@
 // 	response_disarm_simple = "pushes aside"
 // 	response_harm_simple = "ow"
 // 	move_to_delay = 5
-// 	ranged = TRUE
-// 	ranged_cooldown_time = 200
+// 	can_ranged_attack = TRUE
+// 	ranged_cooldown_duration = 200
 // 	projectiletype = /obj/item/projectile/bullet/c9mm/simple
 // 	projectilesound = 'sound/f13weapons/hunting_rifle.ogg'
 // 	faction = list("scorched", "hostile")
@@ -491,7 +491,7 @@
 // 	icon_dead = "wyomingghost_dead"
 // 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 // 	armor_list = ARMOR_VALUE_GHOUL_PA
-// 	robust_searching = 1
+// 	robust_searching = TRUE
 // 	seconds_per_wander = 5
 // 	speak_emote = list("wheezes")
 // 	// emote_see = list("stares")

@@ -42,8 +42,8 @@ Difficulty: Hard
 	melee_damage_upper = 40
 	speed = 1
 	move_to_delay = 10
-	ranged_cooldown_time = 10
-	ranged = 1
+	ranged_cooldown_duration = 10
+	can_ranged_attack = TRUE
 	pixel_x = -32
 	gender = MALE
 	del_on_death = 1
@@ -72,7 +72,7 @@ Difficulty: Hard
 	anger_modifier = clamp(((maxHealth - health)/50),0,20)
 	if(charging)
 		return
-	ranged_cooldown = world.time + ranged_cooldown_time
+	ranged_attack_delay = world.time + ranged_cooldown_duration
 
 	blood_warp()
 

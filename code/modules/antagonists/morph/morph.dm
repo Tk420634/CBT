@@ -189,10 +189,19 @@
 		return FALSE
 	return ..()
 
-/mob/living/danimal/hostile/morph/AttackingTarget()
+/mob/living/danimal/hostile/morph/PreMeleeAttackCheck()
 	if(morphed && !melee_damage_disguised)
 		to_chat(src, span_warning("You can not attack while disguised!"))
-		return
+		return MPMAC_FORCE_DENY
+	return ..()
+
+/mob/living/danimal/hostile/morph/PreRangedAttackCondition()
+	if(morphed && !melee_damage_disguised)
+		to_chat(src, span_warning("You can not attack while disguised!"))
+		return MPMAC_FORCE_DENY
+	return ..()
+
+/mob/living/danimal/hostile/morph/PostMeleeAttack()
 	var/atom/my_target = get_target()
 	if(isliving(my_target)) //Eat Corpses to regen health
 		var/mob/living/L = my_target

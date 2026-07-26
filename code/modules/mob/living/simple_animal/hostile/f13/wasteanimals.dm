@@ -242,7 +242,7 @@
 	a_intent = INTENT_HARM
 	gold_core_spawnable = HOSTILE_SPAWN
 	footstep_type = FOOTSTEP_MOB_CLAW
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	check_friendly_fire = TRUE
 	projectiletype = /obj/item/projectile/geckofire
 	projectilesound = 'sound/magic/fireball.ogg'
@@ -344,7 +344,7 @@
 	a_intent = INTENT_HARM
 	gold_core_spawnable = HOSTILE_SPAWN
 	footstep_type = FOOTSTEP_MOB_CLAW
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	check_friendly_fire = TRUE
 	projectiletype = /obj/item/projectile/radiation_thing/neurothing
 	projectilesound = 'sound/weapons/etherealhit.ogg'
@@ -1024,7 +1024,7 @@
 	minimum_distance = 7
 	aggroed_vision_range = 7
 	vision_range = 9
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	can_glow_revive = FALSE
 	variation_list = list(
 		MOB_COLOR_VARIATION(245, 215, 0, 255, 220, 5), //Rmin, Gmin, Bmin, Rmax, Gmax, Bmax

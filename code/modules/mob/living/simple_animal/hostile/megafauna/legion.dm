@@ -33,11 +33,11 @@ Difficulty: Medium
 	melee_damage_upper = 25
 	speed = 1
 	move_to_delay = 2
-	ranged = 1
+	can_ranged_attack = TRUE
 	del_on_death = 1
 	retreat_distance = 5
 	minimum_distance = 5
-	ranged_cooldown_time = 10
+	ranged_cooldown_duration = 10
 	var/size = 5
 	var/charging = 0
 	medal_type = BOSS_MEDAL_LEGION
@@ -76,17 +76,17 @@ Difficulty: Medium
 			A.infest(L)
 
 /mob/living/danimal/hostile/megafauna/legion/OpenFire(the_target)
-	if(world.time >= ranged_cooldown && !charging)
+	if(world.time >= ranged_attack_delay && !charging)
 		if(prob(75))
 			var/mob/living/danimal/hostile/asteroid/hivelordbrood/legion/A = new(loc)
 			A.GiveTarget(get_target())
 			A.friends = friends.Copy()
 			A.faction = faction.Copy()
-			ranged_cooldown = world.time + ranged_cooldown_time
+			ranged_attack_delay = world.time + ranged_cooldown_duration
 		else
 			visible_message(span_warning("<b>[src] charges!</b>"))
 			SpinAnimation(speed = 20, loops = 5)
-			ranged = 0
+			can_ranged_attack = FALSE
 			retreat_distance = 0
 			minimum_distance = 0
 			speed = 0
@@ -95,7 +95,7 @@ Difficulty: Medium
 			addtimer(CALLBACK(src,PROC_REF(reset_charge)), 50)
 
 /mob/living/danimal/hostile/megafauna/legion/proc/reset_charge()
-	ranged = 1
+	can_ranged_attack = TRUE
 	retreat_distance = 5
 	minimum_distance = 5
 	speed = 1

@@ -12,7 +12,7 @@
 	faction = list("mining", "boss")
 	weather_immunities = list("lava","ash")
 	movement_type = FLYING
-	robust_searching = 1
+	robust_searching = TRUE
 	ranged_ignores_vision = TRUE
 	stat_attack = UNCONSCIOUS
 	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
@@ -120,7 +120,7 @@
 	if(. && isliving(my_target))
 		var/mob/living/L = my_target
 		if(L.stat != DEAD)
-			if(!client && ranged && ranged_cooldown <= world.time)
+			if(!client && ranged && ranged_attack_delay <= world.time)
 				OpenFire()
 /*
 		else
@@ -150,7 +150,7 @@
 
 /mob/living/danimal/hostile/megafauna/proc/SetRecoveryTime(buffer_time)
 	recovery_time = world.time + buffer_time
-	ranged_cooldown = max(ranged_cooldown, world.time + buffer_time)		// CITADEL BANDAID FIX FOR MEGAFAUNA NOT RESPECTING RECOVERY TIME.
+	ranged_attack_delay = max(ranged_attack_delay, world.time + buffer_time)		// CITADEL BANDAID FIX FOR MEGAFAUNA NOT RESPECTING RECOVERY TIME.
 
 /mob/living/danimal/hostile/megafauna/proc/grant_achievement(medaltype, scoretype, crusher_kill)
 	if(!medal_type || (flags_1 & ADMIN_SPAWNED_1)) //Don't award medals if the medal type isn't set

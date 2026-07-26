@@ -13,13 +13,13 @@
 	maxHealth = 300
 	health = 300
 	speed = 1
-	ranged = 1
+	can_ranged_attack = TRUE
 	pixel_x = -16
 	move_to_delay = 10
 	aggroed_vision_range = 9
 	speak_emote = list("chitters")
 	attack_sound = 'sound/weapons/bladeslice.ogg'
-	ranged_cooldown_time = 60
+	ranged_cooldown_duration = 60
 	projectiletype = /obj/item/projectile/mega_arachnid
 	projectilesound = 'sound/weapons/pierce.ogg'
 	alpha = 50
@@ -30,7 +30,7 @@
 	if(!(. = ..()))
 		return
 	var/atom/my_target = get_target()
-	if(my_target && ranged_cooldown > world.time && iscarbon(my_target))
+	if(my_target && ranged_attack_delay > world.time && iscarbon(my_target))
 		var/mob/living/carbon/C = my_target
 		if(!C.legcuffed && C.health < 50)
 			retreat_distance = 9

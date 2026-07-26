@@ -72,7 +72,7 @@
 	maxHealth = 150
 	melee_damage_lower = 15
 	melee_damage_upper = 15
-	ranged = 1
+	can_ranged_attack = TRUE
 	retreat_distance = 5
 	minimum_distance = 5
 	projectiletype = /obj/item/projectile/neurotox
@@ -89,7 +89,7 @@
 	maxHealth = 250
 	melee_damage_lower = 15
 	melee_damage_upper = 15
-	ranged = 1
+	can_ranged_attack = TRUE
 	retreat_distance = 5
 	minimum_distance = 5
 	move_to_delay = 4

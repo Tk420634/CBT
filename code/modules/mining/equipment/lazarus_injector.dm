@@ -33,7 +33,7 @@
 					var/mob/living/danimal/hostile/H = M
 					if(malfunctioning)
 						H.faction |= list("lazarus", "[REF(user)]")
-						H.robust_searching = 1
+						H.robust_searching = TRUE
 						H.friends[WEAKREF(user)] = TRUE
 						H.attack_same = 1
 						log_game("[key_name(user)] has revived hostile mob [key_name(target)] with a malfunctioning lazarus injector")

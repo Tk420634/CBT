@@ -20,7 +20,7 @@
 	maxHealth = 80
 	health = 80
 	spacewalk = TRUE
-	robust_searching = 1
+	robust_searching = TRUE
 	blood_volume = 0
 
 	obj_damage = 50

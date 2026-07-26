@@ -38,7 +38,7 @@
 	icon_state = "russianranged"
 	icon_living = "russianranged"
 	loot = /obj/item/gun/ballistic/rifle/mosin
-	ranged = 1
+	can_ranged_attack = TRUE
 	retreat_distance = 5
 	minimum_distance = 5
 	projectilesound = 'sound/weapons/gunshot.ogg'
@@ -63,7 +63,7 @@
 	icon_living = "russianofficer"
 	maxHealth = 65
 	health = 65
-	rapid = 3
+	ranged_attack_burst_count =  3
 	casingtype = /obj/item/ammo_casing/c9mm
 	loot = /obj/item/gun/ballistic/rifle/mosin
 

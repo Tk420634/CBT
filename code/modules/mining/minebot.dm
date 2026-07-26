@@ -68,7 +68,7 @@
 
 /mob/living/danimal/hostile/mining_drone/sentience_act()
 	..()
-	check_friendly_fire = 0
+	check_friendly_fire = FALSE
 
 /mob/living/danimal/hostile/mining_drone/examine(mob/user)
 	. = ..()
@@ -150,7 +150,7 @@
 	vision_range = 9
 	search_objects = 2
 	wander = TRUE
-	ranged = FALSE
+	can_ranged_attack = FALSE
 	minimum_distance = 1
 	retreat_distance = null
 	icon_state = "mining_drone"
@@ -161,14 +161,13 @@
 	vision_range = 7
 	search_objects = 0
 	wander = FALSE
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	retreat_distance = 2
 	minimum_distance = 1
 	icon_state = "mining_drone_offense"
 	to_chat(src, span_info("You are set to attack mode. You can now attack from range."))
 
-/mob/living/danimal/hostile/mining_drone/AttackingTarget()
-	var/atom/my_target = get_target()
+/mob/living/danimal/hostile/mining_drone/PostMeleeAttack(list/bb, atom/my_target)
 	if(istype(my_target, /obj/item/stack/ore) && mode == MINEDRONE_COLLECT)
 		CollectOre()
 		return

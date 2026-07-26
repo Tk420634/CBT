@@ -53,7 +53,7 @@
 	icon_living = "lasershark"
 	icon_dead = "lasershark_dead"
 	icon_gib = "carp_gib"
-	ranged = 1
+	can_ranged_attack = TRUE
 	retreat_distance = 3
 	minimum_distance = 0 //Between shots they can and will close in to nash
 	projectiletype = /obj/item/projectile/beam/laser/heavylaser

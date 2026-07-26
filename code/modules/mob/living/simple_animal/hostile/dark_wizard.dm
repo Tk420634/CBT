@@ -7,9 +7,9 @@
 	move_to_delay = 10
 	projectiletype = /obj/item/projectile/temp/earth_bolt
 	projectilesound = 'sound/magic/ethereal_enter.ogg'
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	ranged_message = "earth bolts"
-	ranged_cooldown_time = 20
+	ranged_cooldown_duration = 20
 	maxHealth = 50
 	health = 50
 	obj_damage = 20

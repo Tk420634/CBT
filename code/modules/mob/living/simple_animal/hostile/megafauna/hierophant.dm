@@ -54,8 +54,8 @@ Difficulty: Normal
 	blood_volume = 0
 	speed = 1
 	move_to_delay = 11
-	ranged = 1
-	ranged_cooldown_time = 40
+	can_ranged_attack = TRUE
+	ranged_cooldown_duration = 40
 	aggroed_vision_range = 21 //so it can see to one side of the arena to the other
 	loot = list(/obj/item/hierophant_club)
 	crusher_loot = list(/obj/item/hierophant_club)
@@ -158,9 +158,9 @@ Difficulty: Normal
 		if(my_target && isliving(my_target))
 			var/mob/living/L = my_target
 			if(L.stat != DEAD)
-				if(ranged_cooldown <= world.time)
+				if(ranged_attack_delay <= world.time)
 					calculate_rage()
-					ranged_cooldown = world.time + max(5, ranged_cooldown_time - anger_modifier * 0.75)
+					ranged_attack_delay = world.time + max(5, ranged_cooldown_duration - anger_modifier * 0.75)
 					INVOKE_ASYNC(src,PROC_REF(burst), get_turf(src))
 				else
 					burst_range = 3
@@ -215,7 +215,7 @@ Difficulty: Normal
 	chaser_speed = max(1, (2 - anger_modifier * 0.04) + ((target_slowness - 1) * 0.5))
 
 	arena_trap(my_target)
-	ranged_cooldown = world.time + max(5, ranged_cooldown_time - anger_modifier * 0.75) //scale cooldown lower with high anger.
+	ranged_attack_delay = world.time + max(5, ranged_cooldown_duration - anger_modifier * 0.75) //scale cooldown lower with high anger.
 
 	if(prob(anger_modifier * 0.75)) //major ranged attack
 		var/list/possibilities = list()
@@ -230,7 +230,7 @@ Difficulty: Normal
 			else
 				possibilities += "chaser_swarm"
 		if(possibilities.len)
-			ranged_cooldown = world.time + max(5, major_attack_cooldown - anger_modifier * 0.75) //we didn't cancel out of an attack, use the higher cooldown
+			ranged_attack_delay = world.time + max(5, major_attack_cooldown - anger_modifier * 0.75) //we didn't cancel out of an attack, use the higher cooldown
 			var/blink_counter = 1 + round(anger_modifier * 0.08)
 			switch(pick(possibilities))
 				if("blink_spam") //blink either once or multiple times.

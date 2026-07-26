@@ -20,10 +20,10 @@
 	aggroed_vision_range = 15
 	speed = 1
 	move_to_delay = 8
-	ranged_cooldown_time = 10
-	rapid_melee = 1
-	melee_queue_distance = 20 // as far as possible really, need this because of charging
-	ranged = 1
+	ranged_cooldown_duration = 10
+	melee_attacks_per_turn = 1
+	windup_start_distance = 20 // as far as possible really, need this because of charging
+	can_ranged_attack = TRUE
 	pixel_x = -16
 	waddle_amount = 10
 	waddle_up_time = 1
@@ -47,11 +47,11 @@
 	anger_modifier = clamp(((maxHealth - health)/50),0,20)
 	if(charging)
 		return
-	ranged_cooldown = world.time + ranged_cooldown_time
+	ranged_attack_delay = world.time + ranged_cooldown_duration
 
 	if(prob(15))
 		visible_message("<span class='colossus'>\"<b>AH, THE SUGAR SWEET KISS OF HEAVY ARTILLERY!</b>\"</span>")
-		ranged_cooldown = world.time + 10
+		ranged_attack_delay = world.time + 10
 		blast()
 	else if(prob(3+anger_modifier/2))
 		visible_message("<span class='colossus'>\"<b>I HAVE SOME FRIENDS I'D LIKE YOU TO MEET!</b>\"</span>")

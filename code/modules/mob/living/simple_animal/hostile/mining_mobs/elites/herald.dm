@@ -138,7 +138,7 @@
 	H.fire(set_angle)
 
 /mob/living/danimal/hostile/asteroid/elite/herald/proc/herald_trishot(target)
-	ranged_cooldown = world.time + 30
+	ranged_attack_delay = world.time + 30
 	playsound(get_turf(src), 'sound/magic/clockwork/invoke_general.ogg', 20, TRUE)
 	var/target_turf = get_turf(target)
 	var/angle_to_target = Get_Angle(src, target_turf)
@@ -162,7 +162,7 @@
 	icon_state = "herald"
 
 /mob/living/danimal/hostile/asteroid/elite/herald/proc/herald_directionalshot()
-	ranged_cooldown = world.time + 50
+	ranged_attack_delay = world.time + 50
 	if(!is_mirror)
 		icon_state = "herald_enraged"
 	playsound(get_turf(src), 'sound/magic/clockwork/invoke_general.ogg', 20, TRUE)
@@ -173,14 +173,14 @@
 	addtimer(CALLBACK(src,PROC_REF(unenrage)), 20)
 
 /mob/living/danimal/hostile/asteroid/elite/herald/proc/herald_teleshot(target)
-	ranged_cooldown = world.time + 30
+	ranged_attack_delay = world.time + 30
 	playsound(get_turf(src), 'sound/magic/clockwork/invoke_general.ogg', 20, TRUE)
 	var/target_turf = get_turf(target)
 	var/angle_to_target = Get_Angle(src, target_turf)
 	shoot_projectile(target_turf, angle_to_target, TRUE)
 
 /mob/living/danimal/hostile/asteroid/elite/herald/proc/herald_mirror()
-	ranged_cooldown = world.time + 40
+	ranged_attack_delay = world.time + 40
 	playsound(get_turf(src), 'sound/magic/clockwork/invoke_general.ogg', 20, TRUE)
 	if(my_mirror != null)
 		qdel(my_mirror)

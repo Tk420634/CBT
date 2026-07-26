@@ -199,26 +199,41 @@
 	var/crit_refund = 50 //5 seconds when putting a targette into critical
 	var/kill_refund = 250 //full refund on kills
 
-/mob/living/danimal/hostile/construct/wraith/AttackingTarget() //refund jaunt cooldown when attacking living targets
-	var/prev_stat
-	var/atom/my_target = get_target()
+/mob/living/danimal/hostile/construct/wraith/PreMeleeAttackAction(list/bb, atom/my_target) //refund jaunt cooldown when attacking living targets
+	if(!islist(bb))
+		bb = list()
 	if(isliving(my_target) && !iscultist(my_target))
 		var/mob/living/L = my_target
-		prev_stat = L.stat
-
+		bb["prev_stat"] = L.stat
+		bb["target_is_living"] = TRUE
+		bb["target_is_not_cultist"] = TRUE
 	. = ..()
 
-	if(. && isnum(prev_stat))
-		var/mob/living/L = my_target
-		var/refund = 0
-		if(QDELETED(L) || (L.stat == DEAD && prev_stat != DEAD)) //they're dead, you killed them
-			refund += kill_refund
-		else if(L.InCritical() && prev_stat == CONSCIOUS) //you knocked them into critical
-			refund += crit_refund
-		if(L.stat != DEAD && prev_stat != DEAD)
-			refund += attack_refund
-		for(var/obj/effect/proc_holder/spell/targeted/ethereal_jaunt/shift/S in mob_spell_list)
-			S.charge_counter = min(S.charge_counter + refund, S.charge_max)
+/mob/living/danimal/hostile/construct/wraith/PostMeleeAttack(list/bb, atom/my_target)
+	if(!islist(bb))
+		return
+	. = ..()
+	if(!.)
+		return
+	if(!isnum(bb["prev_stat"]))
+		return
+	if(!bb["target_is_living"] || !bb["target_is_not_cultist"])
+		return
+	var/prev_stat = bb["prev_stat"]
+	var/curr_stat = my_target.stat
+	
+	var/mob/living/L = my_target
+	var/refund = 0
+	if(QDELETED(L)) //you killed them
+		refund += kill_refund
+	else if(prev_stat != DEAD && curr_stat == DEAD) //you killed them
+		refund += kill_refund
+	else if(prev_stat == CONSCIOUS && curr_stat != CONSCIOUS) //you un-conscioused them
+		refund += crit_refund
+	if(prev_stat != curr_stat) //you damaged them I guess
+		refund += attack_refund
+	for(var/obj/effect/proc_holder/spell/targeted/ethereal_jaunt/shift/S in mob_spell_list)
+		S.charge_counter = min(S.charge_counter + refund, S.charge_max)
 
 /mob/living/danimal/hostile/construct/wraith/hostile //actually hostile, will move around, hit things
 	AIStatus = AI_ON
@@ -344,10 +359,11 @@
 		if(stored_pulling)
 			start_pulling(stored_pulling, supress_message = TRUE) //drag anything we're pulling through the wall with us by magic
 
-/mob/living/danimal/hostile/construct/harvester/AttackingTarget()
-	var/atom/my_target = get_target()
-	if(!iscarbon(my_target))
-		return ..()
+/mob/living/danimal/hostile/construct/harvester/PreMeleeAttackAction(list/bb, atom/my_target)
+	if(!islist(bb))
+		bb = list()
+	if(iscarbon(my_target))
+		bb["target_is_carbon"] = TRUE
 	var/mob/living/carbon/C = my_target
 	if(HAS_TRAIT(C, TRAIT_NODISMEMBER))
 		return ..()		//ATTACK!

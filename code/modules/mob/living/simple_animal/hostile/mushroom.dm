@@ -28,7 +28,7 @@
 	mouse_opacity = MOUSE_OPACITY_ICON
 	speed = 1
 	ventcrawler = VENTCRAWLER_ALWAYS
-	robust_searching = 1
+	robust_searching = TRUE
 	unique_name = 1
 	speak_emote = list("squeaks")
 	deathmessage = "fainted."

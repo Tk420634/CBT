@@ -121,7 +121,7 @@
 	environment_smash = ENVIRONMENT_SMASH_RWALLS
 	sight = SEE_MOBS
 	spells_to_add = list(/obj/effect/proc_holder/spell/targeted/worm_contract)
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	///Previous segment in the chain
 	var/mob/living/danimal/hostile/eldritch/armsy/back
 	///Next segment in the chain
@@ -242,25 +242,26 @@
 	adjustFireLoss(-maxHealth * 0.5 ,FALSE)
 
 
-/mob/living/danimal/hostile/eldritch/armsy/Shoot(atom/targeted_atom)
-	GiveTarget(targeted_atom)
-	AttackingTarget()
+// /mob/living/danimal/hostile/eldritch/armsy/Shoot(atom/targeted_atom)
+// 	GiveTarget(targeted_atom)
+// 	AttackingTarget()
 
 
-/mob/living/danimal/hostile/eldritch/armsy/AttackingTarget()
-	var/atom/my_target = get_target()
-	if(istype(my_target,/obj/item/bodypart/r_arm) || istype(my_target,/obj/item/bodypart/l_arm))
-		qdel(my_target)
-		heal()
-		return
-	if(my_target == back || my_target == front)
-		return
-	if(back)
-		back.GiveTarget(my_target)
-		back.AttackingTarget()
-	if(!Adjacent(my_target))
-		return
-	do_attack_animation(my_target)
+// todo: make work this
+// /mob/living/danimal/hostile/eldritch/armsy/PostMeleeAttack(list/bb, atom/my_target)
+	// var/atom/my_target = get_target()
+	// if(istype(my_target,/obj/item/bodypart/r_arm) || istype(my_target,/obj/item/bodypart/l_arm))
+	// 	qdel(my_target)
+	// 	heal()
+	// 	return
+	// if(my_target == back || my_target == front)
+	// 	return
+	// if(back)
+	// 	back.GiveTarget(my_target)
+	// 	back.AttackingTarget()
+	// if(!Adjacent(my_target))
+	// 	return
+	// do_attack_animation(my_target)
 	//have fun
 	//if(istype(my_target,/turf/closed/wall))
 		//var/turf/closed/wall = my_target

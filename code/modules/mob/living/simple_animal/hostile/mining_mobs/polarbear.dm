@@ -34,13 +34,13 @@
 /mob/living/danimal/hostile/asteroid/polarbear/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	. = ..()
 	if(health > maxHealth*0.5)
-		rapid_melee = initial(rapid_melee)
+		melee_attacks_per_turn = initial(melee_attacks_per_turn)
 		return
 	var/atom/my_target = get_target()
 	if(!aggressive_message_said && my_target)
 		visible_message(span_danger("The [name] gets an enraged look at [my_target]!"))
 		aggressive_message_said = TRUE
-	rapid_melee = 2
+	melee_attacks_per_turn = 2
 
 /mob/living/danimal/hostile/asteroid/polarbear/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))

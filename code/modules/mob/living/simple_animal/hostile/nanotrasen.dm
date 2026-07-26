@@ -10,7 +10,7 @@
 	speak_chance = 12
 	seconds_per_wander = 5
 	speed = 0
-	robust_searching = 1
+	robust_searching = TRUE
 	maxHealth = 100
 	health = 100
 	melee_damage_lower = 10
@@ -37,7 +37,7 @@
 /mob/living/danimal/hostile/nanotrasen/ranged
 	icon_state = "nanotrasenranged"
 	icon_living = "nanotrasenranged"
-	ranged = 1
+	can_ranged_attack = TRUE
 	retreat_distance = 3
 	minimum_distance = 5
 	casingtype = /obj/item/ammo_casing/c45
@@ -48,7 +48,7 @@
 /mob/living/danimal/hostile/nanotrasen/ranged/smg
 	icon_state = "nanotrasenrangedsmg"
 	icon_living = "nanotrasenrangedsmg"
-	rapid = 3
+	ranged_attack_burst_count =  3
 	casingtype = /obj/item/ammo_casing/c46x30mm
 	projectilesound = 'sound/weapons/gunshot_smg.ogg'
 	loot = list()

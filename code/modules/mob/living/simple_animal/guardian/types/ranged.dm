@@ -13,9 +13,9 @@
 	melee_damage_upper = 10
 	damage_coeff = list(BRUTE = 0.9, BURN = 0.9, TOX = 0.9, CLONE = 0.9, STAMINA = 0, OXY = 0.9)
 	projectiletype = /obj/item/projectile/guardian
-	ranged_cooldown_time = 1 //fast!
+	ranged_cooldown_duration = 1 //fast!
 	projectilesound = 'sound/effects/hit_on_shattered_glass.ogg'
-	ranged = 1
+	can_ranged_attack = TRUE
 	playstyle_string = "<span class='holoparasite'>As a <b>ranged</b> type, you have 10% damage reduction, but are capable of spraying shards of crystal at incredibly high speed. You can also deploy surveillance snares to monitor enemy movement. Finally, you can switch to scout mode, in which you can't attack, but can move without limit.</span>"
 	magic_fluff_string = span_holoparasite("..And draw the Sentinel, an alien master of ranged combat.")
 	tech_fluff_string = span_holoparasite("Boot sequence complete. Ranged combat modules active. Holoparasite swarm online.")
@@ -39,7 +39,7 @@
 			to_chat(src, "<span class='danger'><B>You switch to combat mode.</span></B>")
 			toggle = FALSE
 		else
-			ranged = 0
+			can_ranged_attack = FALSE
 			melee_damage_lower = 0
 			melee_damage_upper = 0
 			obj_damage = 0

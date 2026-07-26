@@ -8,7 +8,7 @@
 	del_on_death = TRUE
 	icon = 'icons/mob/simple_human.dmi'
 	icon_state = "paperwizard"
-	ranged = 1
+	can_ranged_attack = TRUE
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	minimum_distance = 3
 	retreat_distance = 3
@@ -127,7 +127,7 @@
 	melee_damage_upper = 5
 	minimum_distance = 0
 	retreat_distance = 0
-	ranged = 0
+	can_ranged_attack = FALSE
 	loot = list()
 	var/mob/living/danimal/hostile/boss/paper_wizard/original
 

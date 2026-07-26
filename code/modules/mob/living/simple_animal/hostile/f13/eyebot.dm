@@ -17,7 +17,7 @@
 	response_disarm_simple = "shoves"
 	response_harm_simple = "hits"
 	move_to_delay = 4
-	robust_searching = 1
+	robust_searching = TRUE
 	armor_list = ARMOR_VALUE_ROBOT_CIVILIAN
 	maxHealth = 40
 	health = 40
@@ -53,7 +53,7 @@
 	tastes = list("metal" = 1, "glass" = 1)
 	vision_range = 7 //reduced from 13 to 7 because who needs that kind of shit in their life
 	aggroed_vision_range = 7 //as above
-	ranged = 1
+	can_ranged_attack = TRUE
 	projectiletype = /obj/item/projectile/beam/laser/pistol/wastebot
 	projectilesound = 'sound/weapons/resonator_fire.ogg'
 	emote_taunt_sound = list('sound/f13npc/eyebot/aggro.ogg')
@@ -89,7 +89,7 @@
 	. = ..()
 
 /mob/living/danimal/hostile/eyebot/playable
-	ranged = FALSE
+	can_ranged_attack = FALSE
 	health = 30
 	maxHealth = 30
 	attack_verb_simple = "zaps"
@@ -198,7 +198,7 @@
 	health = 100
 	faction = list("raider", "wastebot")
 	extra_projectiles = 1
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_SLOWER
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_SLOWER
 	melee_damage_lower = 5
 	melee_damage_upper = 10
 	minimum_distance = 4
@@ -215,12 +215,12 @@
 /mob/living/danimal/hostile/eyebot/playable/hivebot
 	name = "Cheap Ranged Hivebot"
 	desc = "A friendly hivebot with a basic, constant beam, useful for chewing through the weakest of the wasteland."
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	can_ghost_into = TRUE
 	projectiletype = /obj/item/projectile/beam/cranklasergun/tg/spamlaser/shocker
 	projectilesound = 'sound/weapons/taser2.ogg'
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_SLOW
-	ranged_cooldown_time = 30
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_SLOW
+	ranged_cooldown_duration = 30
 	extra_projectiles = 2
 	ranged_extra_spread_per_shot = 2
 	ranged_max_spread = 21
@@ -345,9 +345,9 @@
 	icon_dead = "rangedarm_hivebot_dead"
 	projectiletype = /obj/item/projectile/beam/laser/cranklasergun/tg
 	projectilesound = 'sound/weapons/magpistol.ogg'
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_SLOW
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_SLOW
 	armor_list = ARMOR_VALUE_LIGHT
-	ranged_cooldown_time = 30
+	ranged_cooldown_duration = 30
 	extra_projectiles = 5
 	ranged_extra_spread_per_shot = 2
 	ranged_max_spread = 5
@@ -367,9 +367,9 @@
 	icon_dead = "hunter_hivebot_dead"
 	projectiletype = /obj/item/projectile/beam/cranklasergun/tg/rifle/heavy
 	projectilesound = 'sound/weapons/magrifle.ogg'
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_SLOWER
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_SLOWER
 	armor_list = ARMOR_VALUE_LIGHT
-	ranged_cooldown_time = 30
+	ranged_cooldown_duration = 30
 	extra_projectiles = 2
 	ranged_extra_spread_per_shot = 1
 	ranged_max_spread = 5
@@ -387,14 +387,14 @@
 /mob/living/danimal/hostile/eyebot/playable/hivebot/melee
 	name = "Cheap Melee Hivebot"
 	desc = "A friendly hivebot that cuts down foes ruthlessly in melee without a care for itself."
-	ranged = FALSE
+	can_ranged_attack = FALSE
 	icon_state = "smallarm_hivebot"
 	icon_living = "smallarm_hivebot"
 	icon_dead = "smallarm_hivebot_dead"
 	move_to_delay = 0.2
 	retreat_distance = 0
 	minimum_distance = 0
-	rapid_melee = 2
+	melee_attacks_per_turn = 2
 	health = 50
 	maxHealth = 50
 	armor_list = ARMOR_VALUE_LIGHT
@@ -410,7 +410,7 @@
 /mob/living/danimal/hostile/eyebot/playable/hivebot/melee/tier2
 	name = "Melee Hivebot"
 	desc = "A friendly hivebot that cuts down foes ruthlessly in melee without a care for itself."
-	ranged = FALSE
+	can_ranged_attack = FALSE
 	icon_state = "medium_hivebot"
 	icon_living = "medium_hivebot"
 	icon_dead = "medium_hivebot_dead"
@@ -431,7 +431,7 @@
 /mob/living/danimal/hostile/eyebot/playable/hivebot/melee/tier3
 	name = "Advanced Melee Hivebot"
 	desc = "A friendly hivebot that cuts down foes ruthlessly in melee without a care for itself."
-	ranged = FALSE
+	can_ranged_attack = FALSE
 	icon_state = "keeper_hivebot"
 	icon_living = "keeper_hivebot"
 	icon_dead = "keeper_hivebot_dead"
@@ -456,8 +456,8 @@
 	desc = "A flying fortress armed with laser miniguns, a danger to all."
 	projectiletype = /obj/item/projectile/beam/laser/cranklasergun/tg
 	projectilesound = 'sound/weapons/magburst.ogg'
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
-	ranged_cooldown_time = 30
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_NORMAL
+	ranged_cooldown_duration = 30
 	extra_projectiles = 30
 	ranged_extra_spread_per_shot = 1
 	ranged_max_spread = 30

@@ -106,25 +106,25 @@
 
 //Drakeling actions
 /mob/living/danimal/hostile/asteroid/elite/drakeling/proc/lava_moat()
-	ranged_cooldown = world.time + 25
+	ranged_attack_delay = world.time + 25
 	visible_message(span_boldwarning("[src] spews lava around themselves! Get back!"))
 	for(var/turf/T in oview(1, src))
 		new /obj/effect/temp_visual/lava_warning/drakeling(T, 40)
 
 /mob/living/danimal/hostile/asteroid/elite/drakeling/proc/lava_around()
-	ranged_cooldown = world.time + 50
+	ranged_attack_delay = world.time + 50
 	for(var/d in GLOB.cardinals)
 		INVOKE_ASYNC(src,PROC_REF(lava_wall), d, 5)
 
 /mob/living/danimal/hostile/asteroid/elite/drakeling/proc/fire_spew()
-	ranged_cooldown = world.time + 25
+	ranged_attack_delay = world.time + 25
 	visible_message(span_boldwarning("[src] spews fire!"))
 	playsound(src,'sound/magic/Fireball.ogg', 200, 1)
 	sleep(5)
 	fire_wall(src.dir, 10)
 
 /mob/living/danimal/hostile/asteroid/elite/drakeling/proc/fire_moat()
-	ranged_cooldown = world.time + 100
+	ranged_attack_delay = world.time + 100
 	playsound(src,'sound/magic/Fireball.ogg', 200, 1)
 	visible_message(span_boldwarning("[src] violently puffs smoke!They're going to make a fire moat!"))
 	sleep(5)

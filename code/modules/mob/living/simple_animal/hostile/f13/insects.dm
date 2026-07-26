@@ -115,7 +115,7 @@
 	loot_drop_amount = 1
 	loot_amount_random = TRUE
 	extra_projectiles = 3
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	projectiletype = /obj/item/projectile/magic/kelpmagic/magmaspray/weak
 	projectilesound = 'sound/weapons/fire03.ogg'
 
@@ -159,7 +159,7 @@
 	speed = 5
 	maxHealth = 560
 	health = 560
-	ranged = 1
+	can_ranged_attack = TRUE
 	obj_damage = 20
 	melee_damage_lower = 15
 	melee_damage_upper = 15
@@ -352,7 +352,7 @@
 
 	vision_range = 8
 	//tiles within they start making noise, does count the mobs tile
-	rapid_melee = 2
+	melee_attacks_per_turn = 2
 
 	guaranteed_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab/cazador_meat = 2, /obj/item/stack/sheet/sinew = 2, /obj/item/stack/sheet/animalhide/chitin = 2)
 	butcher_difficulty = 1.5
@@ -471,7 +471,7 @@
 	icon_living = "bloatfly"
 	icon_dead = "bloatfly_dead"
 	icon_gib = null
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	move_to_delay = 4.5
 	speed = 1
 	maxHealth = 20
@@ -515,8 +515,8 @@
 	//sound_after_shooting = 'sound/f13npc/bloatfly/afterfire1.ogg'
 	//sound_after_shooting_delay = 1 SECONDS
 	extra_projectiles = 1
-	auto_fire_delay = GUN_BURSTFIRE_DELAY_NORMAL
-	ranged_cooldown_time = 3 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_BURSTFIRE_DELAY_NORMAL
+	ranged_cooldown_duration = 3 SECONDS
 	variation_list = list(
 		MOB_COLOR_VARIATION(200, 200, 200, 255, 255, 255),
 		MOB_CASING_LIST(\
@@ -690,7 +690,7 @@
 	melee_damage_upper = 30
 	aggroed_vision_range = 4
 	vision_range = 4
-	ranged = FALSE
+	can_ranged_attack = FALSE
 	can_glow_revive = FALSE
 	variation_list = list(
 		MOB_COLOR_VARIATION(245, 215, 0, 255, 220, 5), //Rmin, Gmin, Bmin, Rmax, Gmax, Bmax

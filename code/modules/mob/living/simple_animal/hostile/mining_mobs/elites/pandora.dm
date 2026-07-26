@@ -107,7 +107,7 @@
 		cooldown_time = 10
 
 /mob/living/danimal/hostile/asteroid/elite/pandora/proc/singular_shot(target)
-	ranged_cooldown = world.time + (cooldown_time * 0.5)
+	ranged_attack_delay = world.time + (cooldown_time * 0.5)
 	var/dir_to_target = get_dir(get_turf(src), get_turf(target))
 	var/turf/T = get_step(get_turf(src), dir_to_target)
 	singular_shot_line(sing_shot_length, dir_to_target, T)
@@ -121,14 +121,14 @@
 	addtimer(CALLBACK(src,PROC_REF(singular_shot_line), procsleft, angleused, T), 2)
 
 /mob/living/danimal/hostile/asteroid/elite/pandora/proc/magic_box(target)
-	ranged_cooldown = world.time + cooldown_time
+	ranged_attack_delay = world.time + cooldown_time
 	var/turf/T = get_turf(target)
 	for(var/t in spiral_range_turfs(3, T))
 		if(get_dist(t, T) > 1)
 			new /obj/effect/temp_visual/hierophant/blast/pandora(t, src, null, null, list(owner))
 
 /mob/living/danimal/hostile/asteroid/elite/pandora/proc/pandora_teleport(target)
-	ranged_cooldown = world.time + cooldown_time
+	ranged_attack_delay = world.time + cooldown_time
 	var/turf/T = get_turf(target)
 	var/turf/source = get_turf(src)
 	new /obj/effect/temp_visual/hierophant/telegraph(T, src)
@@ -155,7 +155,7 @@
 	visible_message(span_hierophant_warning("[src] fades in!"))
 
 /mob/living/danimal/hostile/asteroid/elite/pandora/proc/aoe_squares(target)
-	ranged_cooldown = world.time + cooldown_time
+	ranged_attack_delay = world.time + cooldown_time
 	var/turf/T = get_turf(target)
 	new /obj/effect/temp_visual/hierophant/blast/pandora(T, src, null, null, list(owner))
 	var/max_size = 2

@@ -11,8 +11,8 @@
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	mouse_opacity = MOUSE_OPACITY_OPAQUE
 	move_to_delay = 10
-	ranged = 1
-	ranged_cooldown_time = 60
+	can_ranged_attack = TRUE
+	ranged_cooldown_duration = 60
 	friendly_verb_continuous = "wails at"
 	friendly_verb_simple = "wail at"
 	speak_emote = list("bellows")
@@ -43,7 +43,7 @@
 	handle_preattack()
 
 /mob/living/danimal/hostile/asteroid/goliath/proc/handle_preattack()
-	if(ranged_cooldown <= world.time + ranged_cooldown_time*0.25 && !pre_attack)
+	if(ranged_attack_delay <= world.time + ranged_cooldown_duration*0.25 && !pre_attack)
 		pre_attack++
 	if(!pre_attack || stat || AIStatus == AI_IDLE)
 		return
@@ -68,12 +68,12 @@
 	if(get_dist(src, my_target) <= 7)//Screen range check, so you can't get tentacle'd offscreen
 		visible_message(span_warning("[src] digs its tentacles under [my_target]!"))
 		new /obj/effect/temp_visual/goliath_tentacle/original(tturf, src)
-		ranged_cooldown = world.time + ranged_cooldown_time
+		ranged_attack_delay = world.time + ranged_cooldown_duration
 		icon_state = icon_aggro
 		pre_attack = 0
 
 /mob/living/danimal/hostile/asteroid/goliath/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
-	ranged_cooldown -= 5
+	ranged_attack_delay -= 5
 	handle_preattack()
 	. = ..()
 
@@ -97,7 +97,7 @@
 	crusher_loot = /obj/item/crusher_trophy/goliath_tentacle
 	guaranteed_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab/goliath = 2, /obj/item/stack/sheet/bone = 2, /obj/item/stack/sheet/animalhide/goliath_hide = 1)
 	loot = list()
-	robust_searching = 1
+	robust_searching = TRUE
 
 /mob/living/danimal/hostile/asteroid/goliath/beast/random/Initialize()
 	. = ..()
@@ -115,7 +115,7 @@
 	maxHealth = 400
 	health = 400
 	speed = 4
-	ranged_cooldown_time = 80
+	ranged_cooldown_duration = 80
 	pre_attack_icon = "Goliath_preattack"
 	throw_message = "does nothing to the rocky hide of the"
 	loot = list(/obj/item/stack/sheet/animalhide/goliath_hide) //A throwback to the asteroid days

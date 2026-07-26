@@ -127,11 +127,11 @@ SUBSYSTEM_DEF(mobs)
 // 	/// next time mob can do a melee attack, if they have one
 // 	var/melee_attack_cooldown = 0
 // 	/// set to current time + sight_shoot_delay_duration when a mob sees a target, to delay it shooting for a moment
-// 	var/sight_shoot_delay = 0
+// 	var/sight_shoot_delay_cooldown = 0
 // 	/// next time mob can throw something, if they can
 // 	var/throw_cooldown = 0
 // 	/// next time mob can do a ranged attack, if they have one
-// 	var/ranged_cooldown = 0
+// 	var/ranged_attack_delay = 0
 // 	/// frustration timer stuff
 // 	var/frustration_start_time = 0
 // 	var/frustration_duration = 0
@@ -144,6 +144,6 @@ SUBSYSTEM_DEF(mobs)
 // /datum/mob_ai_thinkholder/New(mob/living/danimal/hostile/mob)
 // 	melee_smash_cooldown = world.time
 // 	melee_attack_cooldown = world.time
-// 	sight_shoot_delay = world.time
+// 	sight_shoot_delay_cooldown = world.time
 // 	throw_cooldown = world.time
-// 	ranged_cooldown = world.time
+// 	ranged_attack_delay = world.time

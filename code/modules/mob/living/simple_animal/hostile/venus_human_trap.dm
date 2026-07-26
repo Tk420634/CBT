@@ -81,7 +81,7 @@
 	melee_damage_upper = 25
 
 	layer = SPACEVINE_MOB_LAYER
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	a_intent = INTENT_HARM
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
@@ -129,7 +129,7 @@
 	for(var/datum/beam/B in vines)
 		if(B.target == the_target)
 			pull_vines()
-			ranged_cooldown = world.time + (ranged_cooldown_time * 0.5)
+			ranged_attack_delay = world.time + (ranged_cooldown_duration * 0.5)
 			return
 	if(get_dist(src,the_target) > vine_grab_distance || vines.len == max_vines)
 		return
@@ -146,7 +146,7 @@
 	if(isliving(the_target))
 		var/mob/living/L = the_target
 		L.Paralyze(20)
-	ranged_cooldown = world.time + ranged_cooldown_time
+	ranged_attack_delay = world.time + ranged_cooldown_duration
 
 /mob/living/danimal/hostile/venus_human_trap/Login()
 	. = ..()

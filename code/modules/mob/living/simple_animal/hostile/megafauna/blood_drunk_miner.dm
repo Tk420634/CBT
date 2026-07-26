@@ -37,8 +37,8 @@ Difficulty: Medium
 	move_to_delay = 2
 	projectiletype = /obj/item/projectile/kinetic/miner
 	projectilesound = 'sound/weapons/kenetic_accel.ogg'
-	ranged = 1
-	ranged_cooldown_time = 16
+	can_ranged_attack = TRUE
+	ranged_cooldown_duration = 16
 	pixel_x = -16
 	crusher_loot = list(/obj/item/melee/transforming/cleaving_saw, /obj/item/gun/energy/kinetic_accelerator/premiumka, /obj/item/crusher_trophy/miner_eye)
 	loot = list()
@@ -161,8 +161,8 @@ Difficulty: Medium
 
 /mob/living/danimal/hostile/megafauna/blood_drunk_miner/proc/shoot_ka()
 	var/atom/my_target = get_target()
-	if(ranged_cooldown <= world.time && get_dist(src, my_target) <= MINER_DASH_RANGE && !Adjacent(my_target))
-		ranged_cooldown = world.time + ranged_cooldown_time
+	if(ranged_attack_delay <= world.time && get_dist(src, my_target) <= MINER_DASH_RANGE && !Adjacent(my_target))
+		ranged_attack_delay = world.time + ranged_cooldown_duration
 		visible_message(span_danger("[src] fires the proto-kinetic accelerator!"))
 		face_atom(my_target)
 		new /obj/effect/temp_visual/dir_setting/firing_effect(loc, dir)
@@ -278,7 +278,7 @@ Difficulty: Medium
 	desc = "A miner destined to hop across dimensions for all eternity, hunting anomalous creatures."
 	speed = 8
 	move_to_delay = 8
-	ranged_cooldown_time = 8
+	ranged_cooldown_duration = 8
 	dash_cooldown = 8
 
 #undef MINER_DASH_RANGE

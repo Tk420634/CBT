@@ -30,7 +30,7 @@ to produce smoke or slow down victims? Stuff like that added to a couple would b
 	icon_living = "ghoulrotter"
 	icon_dead = "ghoulrotter_dead"
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
-	robust_searching = 1
+	robust_searching = TRUE
 	seconds_per_wander = 5
 	speak_emote = list("growls")
 	emote_see = list("screeches")

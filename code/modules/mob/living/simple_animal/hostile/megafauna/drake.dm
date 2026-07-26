@@ -55,11 +55,11 @@ Difficulty: Medium
 	melee_damage_upper = 100
 	speed = 1
 	move_to_delay = 3
-	ranged = 1
+	can_ranged_attack = TRUE
 	projectilesound = 'sound/weapons/mmlbuster.ogg'
 	projectiletype = /obj/item/projectile/f13plasma/scatter/dragon
 	extra_projectiles = 1
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	pixel_x = -16
 	crusher_loot = list(/obj/structure/closet/crate/necropolis/dragon/crusher)
 	loot = list(/obj/structure/closet/crate/necropolis/dragon, /obj/effect/spawner/lootdrop/f13/rare)
@@ -117,7 +117,7 @@ Difficulty: Medium
 	if(swooping)
 		return
 	anger_modifier = clamp(((maxHealth - health)/50),0,20)
-	ranged_cooldown = world.time + ranged_cooldown_time
+	ranged_attack_delay = world.time + ranged_cooldown_duration
 	if(client)
 		return
 	if(prob(15 + anger_modifier))

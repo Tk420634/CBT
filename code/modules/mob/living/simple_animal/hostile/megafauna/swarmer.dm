@@ -259,7 +259,7 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/danimal/hostile/swarmer/a
 	icon_living = "swarmer_melee"
 	health = 60
 	maxHealth = 60
-	ranged = FALSE
+	can_ranged_attack = FALSE
 
 /mob/living/danimal/hostile/swarmer/ai/melee_combat/Aggro()
 	..()

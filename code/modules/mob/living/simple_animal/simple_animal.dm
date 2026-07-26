@@ -28,6 +28,23 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	status_flags = CANPUSH
 	rotate_on_lying = TRUE
 
+	/// Mob Tick Rate, in deciseconds. Lower is faster, but more CPU intensive
+	/// autoset in init
+	var/mob_tick_rate
+	/// Overrides the mob's tick rate, if set
+	var/mob_tick_rate_override
+	/// The initial offset for the mob's tick, in deciseconds
+	/// Autoset in init, to a random value between 0 and mob_tick_rate
+	var/mob_tick_initial_offset
+	/// Toggle to use the initial offset
+	var/use_mob_tick_initial_offset = TRUE
+	/// The last time this mob ticked, in deciseconds
+	/// Autoset by system
+	var/last_mob_tick = 0
+	/// The next time this mob will tick, in deciseconds
+	/// Autoset by system
+	var/next_mob_tick = 0
+
 	/* **************** *
 	 * Appearance stuff *
 	 * **************** */
@@ -144,6 +161,8 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	var/melee_damage_upper = 0
 	///Damage type of a simple mob's melee attack, should it do damage.
 	var/melee_damage_type = BRUTE
+	/// Melee range, in tiles (euclidean distance... kinda)
+	var/melee_range = 1
 	///How much damage this simple animal does to /obj, if any.
 	var/obj_damage = 0
 	///How much armour they ignore, as a flat reduction from the targets armour value.
@@ -332,9 +351,6 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	/// from hostile, now here!
 	/// data relating to a mob's target, or something
 	var/datum/mob_target_data/target_data
-	var/ranged = FALSE
-	var/rapid = 0 //How many shots per volley.
-	var/rapid_fire_delay = 2 //Time between rapid fire shots
 
 	var/can_dodge_in_melee = FALSE
 	var/approaching_target = FALSE //We should dodge now
@@ -344,7 +360,6 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 
 	var/extra_projectiles = 0 //how many projectiles above 1?
 	/// How long to wait between shots?
-	var/auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
 	var/projectiletype	//set ONLY it and NULLIFY casingtype var, if we have ONLY projectile
 
 	var/casingtype		//set ONLY it and NULLIFY projectiletype, if we have projectile IN CASING
@@ -359,10 +374,13 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	/// Smoke!
 	var/datum/effect_system/smoke_spread/bad/smoke
 
-	var/rapid_melee = 1			 //Number of melee attacks between each npc pool tick. Spread evenly.
-	var/melee_queue_distance = 4 //If target is close enough start preparing to hit them if we have rapid_melee enabled
-
 	var/can_melee_attack = TRUE
+	/// number of attacks that can be performed before the mob has to wait for a cooldown
+	/// 1 is normal, 2+ means the mob uses a separate cooldown for each attack
+	var/melee_attacks_per_turn = 1
+	var/melee_attacks_left = 0
+	var/melee_extra_attack_delay_duration = 0.3 SECONDS
+	COOLDOWN_DECLARE(melee_extra_attack_cooldown)
 
 	var/melee_smash_cooldown_duration = 1 SECONDS
 	COOLDOWN_DECLARE(melee_smash_cooldown)
@@ -371,7 +389,8 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	COOLDOWN_DECLARE(melee_attack_cooldown)
 
 	var/sight_shoot_delay_duration = 0.7 SECONDS
-	COOLDOWN_DECLARE(sight_shoot_delay)
+	COOLDOWN_DECLARE(sight_shoot_delay_cooldown)
+	//todo: integrate variation into the cooldowns, either number or list or SD or whatever
 
 	/// The base random spread of the mob's ranged attacks.
 	var/ranged_base_spread = 7
@@ -380,18 +399,23 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	/// the max spread this mob can accumulate
 	var/ranged_max_spread = 45
 	var/ranged_message = "fires" //Fluff text for ranged mobs
-	var/ranged_cooldown = 0 //What the current cooldown on ranged attacks is, generally world.time + ranged_cooldown_time
-	var/ranged_cooldown_time = 3 SECONDS //How long, in deciseconds, the cooldown of ranged attacks is
+	var/ranged_attack_delay = 0 //What the current cooldown on ranged attacks is, generally world.time + ranged_cooldown_duration
+	var/ranged_cooldown_duration = 3 SECONDS //How long, in deciseconds, the cooldown of ranged attacks is
+	var/ranged_cooldown_duration_variation = 0 //How much the ranged cooldown can vary, +-this value, in deciseconds
 	var/ranged_ignores_vision = FALSE //if it'll fire ranged attacks even if it lacks vision on its target, only works with environment smash
-	var/check_friendly_fire = 0 // Should the ranged mob check for friendlies when shooting
+	var/check_friendly_fire = FALSE // Should the ranged mob check for friendlies when shooting
 	var/should_factionize_shots = TRUE
 
+	var/can_ranged_attack = FALSE
+	var/ranged_attack_burst_count =  0 //How many shots per volley.
+	var/ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_NORMAL //Time between rapid fire shots
+	COOLDOWN_DECLARE(ranged_attack_burst_per_shot_cooldown)
 
 	var/decompose = TRUE //Does this mob decompose over time when dead?
 	//var/decomposition_time = 5 MINUTES
 	//COOLDOWN_DECLARE(decomposition_schedule)
 
-//These vars are related to how mobs locate and target
+	//These vars are related to how mobs locate and target
 	/// doesnt do anything important, all mobs have this as true
 	/// previously made the target evaluation check more conditions, which would make it use more CPU
 	/// but we arent playing on our grandpa's 386 anymore, we can have our mobs do cool things!
@@ -525,6 +549,8 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	// vars relating to the winding up phase of windups
 	/// Mob uses the windup system
 	var/windup_enabled = TRUE
+	/// If the target is within this distance, start preparing to hit them if we have melee_attacks_per_turn enabled
+	var/windup_start_distance = 4
 	/// Time when the mob is fully wound up and ready to check if it can hit the target
 	var/windup_delay_complete = 0
 	/// Time it takes for a mob to complete its windup, after which it will be allowed to attack
@@ -532,7 +558,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	/// The time when the mob will stop being wound up and reset its windup state, if it hasn't attacked yet
 	var/windup_ready_timeout = 0
 	/// How long the mob will stay wound up before the windup is cancelled and reset
-	var/windup_ready_duration = 1 SECONDS
+	var/windup_ready_duration = 3 SECONDS
 	
 	/// This plays when the mob's attack windup starts. It requires windup_delay_duration to be set.
 	var/windup_sound_start = 'sound/effects/flip.ogg'
@@ -548,14 +574,12 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	/// TRUE while a mob is winding up a melee attack, otherwise FALSE.
 	var/winding_up_melee = FALSE // unused now
 
-	/// melee attack stuff
-	/// Number of rapid melee attacks left for this tick
-	var/melee_rapid_attacks_left = 0
-	/// currently rapid attacking
-	var/melee_rapid_attacking = FALSE
-
 	/// data stored for intra-tick processing, so we dont have to pass around a million args
 	var/list/blackboard_tick = list()
+	/// task-based blackboard for inter-tick processing
+	/// not cleared between ticks, and only used through custom procs
+	/// could do like, your target has a gun? switch to ranged mode and stay there or something
+	var/list/blackboard_task = list()
 
 	/// if the mob should use the advanced target priority selection system
 	/// Only set TRUE if you have at least one of the other two set
@@ -607,6 +631,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 
 
 /mob/living/danimal/Initialize(mapload, nest_spawned)
+	InitializeTick()
 	. = ..()
 	GLOB.simple_animals[AIStatus] += src
 	if(gender == PLURAL)
@@ -671,6 +696,8 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	foes = null
 	blackboard_tick.Cut()
 	blackboard_tick = null
+	blackboard_task.Cut()
+	blackboard_task = null
 	GiveTarget(null)
 	if(!went_to_sleep)
 		SSmobs.mob_despawned(src)
@@ -703,6 +730,25 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	QDEL_NULL(access_card)
 
 	return ..()
+
+/mob/living/danimal/proc/InitializeTick()
+	if(mob_tick_rate_override)
+		mob_tick_rate = mob_tick_rate_override
+	else
+		mob_tick_rate = SSnpcpool.wait
+	mob_next_tick = world.time + mob_tick_rate
+	mob_last_tick = world.time
+	if(use_mob_tick_initial_offset)
+		var/offset = rand(0, mob_tick_rate)
+		mob_next_tick += offset
+		mob_last_tick += offset
+
+/mob/living/danimal/proc/PreTick()
+	return mob_next_tick <= world.time
+
+/mob/living/danimal/proc/PostTick()
+	mob_last_tick = world.time
+	mob_next_tick = world.time + mob_tick_rate
 
 /mob/living/danimal/attack_ghost(mob/user, latejoinercalling)
 	. = ..()
@@ -850,10 +896,15 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 		return
 	return (H.ignore_other_mobs || ignore_other_mobs)
 
-
-
+/* 
+ * Used when the mob is controlled by a player, and they click something
+ * outside of melee range, and the click system judges it as a ranged attack
+ * Is not used for AI controlled mobs, they use a different system
+ * Keep this updated if you mess with how mobs do ranged attacks
+ * //todo: that thing in the previous line, ^^^
+ *  */
 /mob/living/danimal/hostile/RangedAttack(atom/A, params) //Player firing
-	if(ranged && ranged_cooldown <= world.time)
+	if(ranged && ranged_attack_delay <= world.time)
 		GiveTarget(A)
 		OpenFire(A)
 		DelayNextAction()
@@ -893,8 +944,8 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 		//Cosmetic hat - provides no function other than looks
 		if(head && !(head.item_flags & ABSTRACT))
 			dat += "[p_they(TRUE)] [p_are()] wearing [head.get_examine_string(user)] on [p_their()] head."
-		if(flavortext)
-			dat += "[print_flavor_text()]"
+		// if(flavortext)
+		// 	dat += "[print_flavor_text()]"
 		if(oocnotes)
 			dat += "<span class = 'deptradio'>OOC Notes:</span> <a href='?src=\ref[src];oocnotes=1'>\[View\]</a>"
 		if(src.getBruteLoss())
@@ -952,7 +1003,6 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	GLOB.playmob_cooldowns[key][ghost_mob_id] = world.time + ghost_cooldown_time	
 
 /// Health and Life and Suigh
-
 /mob/living/danimal/BiologicalLife(seconds, times_fired)
 	if(!CHECK_BITFIELD(mobility_flags, MOBILITY_MOVE))
 		walk(src, 0)
@@ -1020,7 +1070,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 /// oh no it failed a tick, by runtiming or something, shut down the mob and highlight it or something
 /mob/living/danimal/proc/Failed()
 	ShutDownEverything()
-	color = "#FF00FF"
+	color = "#FF00FF" // he is pink because he is happy
 
 /mob/living/danimal/handle_status_effects()
 	..()
@@ -1075,28 +1125,29 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	// update everything needing updating, record stuff
 	// sets flags for what we can and probably should do this tick
 	ClearTickBB()
-
 	UpdateRTS()
-	UpdateAIStatusPreTick()
+	UpdateTaskPreTick()
 	UpdateTarget()
-	UpdateWindup() // set
-	UpdateMeleeAttack()
-	UpdateRangedAttack()
+	UpdateTaskPostTarget()
+	CacheLineFlags()
 	UpdateSmash()
 	UpdateAttraction()
 	UpdateMovementTarget()
 	UpdateDodging()
 
 	// perform actions
-	PerformMovement()
-	PerformCombat()
-	PerformOtherActions() // smash stuff, etc
+	UpdateTaskPreAction()
+	TryPerformMovement()
+	TryPerformMeleeAttack()
+	TryPerformRangedAttack()
+	TryPerformOtherActions() // smash stuff, etc
+	UpdateTaskPostAction()
 
 	// clean up
-	CleanupTick()
+	CleanupPostTick()
 	UpdateAIStatusPostTick() // in case our actions have made us want to change states
 	consider_despawning()
-	ClearTickBB() // clear the blackboard for the next tick, so we dont have stale data
+	UpdateTaskPostTick()
 
 	return TRUE
 
@@ -1113,6 +1164,9 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	// 		if(AIShouldSleep(possible_targets))	// we try to acquire a new one
 	// 			toggle_ai(AI_IDLE)			// otherwise we go idle
 	// return 1
+
+/mob/living/danimal/proc/CleanupPostTick()
+	blackboard_tick.Cut()
 
 /mob/living/danimal/proc/UpdateRTS()
 	// todo: this
@@ -1136,19 +1190,30 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
  * Targets dont have to be mobs... but they almost always are
  * ********************************************************** */
 /// gives target if we didnt
-/mob/living/danimal/proc/UpdateTarget(list/bb)
+/mob/living/danimal/proc/UpdateTarget(list/bb, atom/override)
+	if(blackboard_task[MBB_TARGET_HANDLED])
+		return TRUE
 	bb = bb || blackboard_tick
-	var/list/targ_retention_return = TryRetainTarget()
-	if(targ_retention_return[MTEV_CAN_RETAIN_TARGET])
-		set_target_eval(targ_retention_return)
-		bb[MBB_HAS_TARGET_FROM_LAST_TICK] = TRUE
-		bb[MBB_HAS_TARGET]                = TRUE
-		bb[MBB_TARGET_EVAL]               = targ_retention_return
-		return // target retained, job's done
-	// possible_targets is a reference and modifies the caller's list
-	// the closest this code gets to an out parameter
-	//if we don't have a target, we try to find one
-	bb[MBB_HAS_TARGET] = !!FindATarget()
+	var/atom/last_target = get_or_remove_target()
+	var/atom/my_target = GET_WEAKREF(blackboard_task[MBB_SET_TARGET]) || override || last_target
+	var/is_same_target = last_target && my_target && last_target == my_target
+	if(is_same_target)
+		// re-evaluate the target, and if its good, record that its still good
+		var/list/targ_retention_return = TryRetainTarget()
+		if(targ_retention_return[MTEV_CAN_RETAIN_TARGET])
+			set_target_eval(targ_retention_return)
+			bb[MBB_HAS_TARGET_FROM_LAST_TICK] = TRUE
+	var/atom/my_target = get_or_remove_target()
+	if(!my_target)
+		FindATarget()
+		my_target = get_or_remove_target()
+	if(my_target)
+		bb[MBB_TARGET_LINE_CACHE] = CheckLine(my_target)
+		var/atom/targ_loc = target.loc
+		if(istype(targ_loc, /obj))
+			bb[MBB_TARGET_LOC_IS_OBJ] = TRUE
+		else if(istype(targ_loc, /mob))
+			bb[MBB_TARGET_LOC_IS_MOB] = TRUE
 
 /mob/living/danimal/proc/TryRetainTarget()
 	. = list()
@@ -1158,12 +1223,13 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	if(!my_target)
 		return
 	. |= EvalTarget(my_target)
-	if(.[MTEV_CAN_BE_TARGETED] != TRUE)
-		return // hard no longer valid
+	if(.[MTEV_CAN_BE_TARGETED])
+		.[MTEV_CAN_RETAIN_TARGET] = TRUE
+		return // still valid!
 	if(get_dist(get_origin(), my_target) <= SSmobs.always_retain_target_range)
 		.[MTEV_CAN_RETAIN_TARGET] = TRUE
 		return // too far away
-	if(CanSee(my_target, target_retention_understands_lockers))
+	if(CanSee(my_target))
 		.[MTEV_CAN_RETAIN_TARGET] = TRUE
 		return
 	// have target, can't see it, but it's close enough to retain. timer time!
@@ -1178,8 +1244,160 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	// todo: full rewrite of attraction, and also merging hostile into simple_animal
 	// todo: continue driving these tack nails into my nuts
 
-/// Check if we are able to do a melee to our target
-/// Updates flags if so
+/mob/living/danimal/proc/TryPerformMeleeAttack(list/bb)
+	UpdateMeleeAttack(bb)
+	PerformMeleeAttack(bb)
+
+/* ********************************************************** *
+ * Updates mob's whether or not they can attack this tick     *
+ * Doesnt do the attack, just sets the blackboard if or not   *
+ * ********************************************************** */
+// melee update
+/// checks if we can *initiate* a melee this tick, and sets some vars accordingly
+/// Note, can be called from main update tick, or from a rapid melee attack proc
+/mob/living/danimal/proc/UpdateMeleeAttack(list/bb)
+	bb = bb || blackboard_tick // default to main tick's blackboard, or use the passed one for like, rapid attacks and such
+	bb[MBB_MELEE_ATTACK_ALLOWED] = FALSE
+	bb[MBB_MELEE_ATTACK_CD_READY] = FALSE
+	bb[MBB_MELEE_ATTACK_WINDUP_READY] = FALSE
+	bb[MBB_MELEE_ATTACK_TARGET_IN_RANGE] = FALSE
+	bb[MBB_MELEE_ATTACK_PRE_CHECK] = NONE
+	if(blackboard_task[MBT_MELEE_ATTACK_STOP])
+		return
+	var/is_rapid = melee_attacks_left <= 0
+	var/atom/my_target = get_or_remove_target()
+	if(!my_target)
+		return
+	if(!can_melee_attack)
+		return
+	// per-mob melee attack checks, for custom overrides
+	// 0 or NONE or FALSE means no special checks, just do the normal checks
+	bb[MBB_MELEE_ATTACK_PRE_CHECK] = NONE | PreMeleeAttackCheck(my_target, bb)
+	if(CHECK_BITFIELD(bb[MBB_MELEE_ATTACK_PRE_CHECK], MPMAC_FORCE_ALLOW)) // allow takes precedence over deny
+		bb[MBB_MELEE_ATTACK_FORCE_ALLOW]      = TRUE
+		bb[MBB_MELEE_ATTACK_CD_READY]         = TRUE
+		bb[MBB_MELEE_ATTACK_WINDUP_READY]     = TRUE
+		bb[MBB_MELEE_ATTACK_ALLOWED]          = TRUE
+		bb[MBB_MELEE_ATTACK_TARGET_IN_RANGE]  = TRUE
+		return
+	if(CHECK_BITFIELD(bb[MBB_MELEE_ATTACK_PRE_CHECK], MPMAC_FORCE_DENY))
+		bb[MBB_MELEE_ATTACK_FORCE_DENY] = TRUE
+		return
+	
+	if(is_rapid)
+		bb[MBB_MELEE_ATTACK_CD_READY] = TRUE
+		bb[MBB_MELEE_ATTACK_WINDUP_READY] = TRUE
+	else
+		UpdateWindup()
+		if(melee_attack_cooldown > world.time)
+			return
+		bb[MBB_MELEE_ATTACK_CD_READY] = TRUE
+		if(windup_enabled && windup_state != MOB_WINDUP_READY)
+			return
+		bb[MBB_MELEE_ATTACK_WINDUP_READY] = TRUE
+	// range!
+	if(!IsInMeleeRange(my_target))
+		bb[MBB_MELEE_ATTACK_TARGET_IN_RANGE] = FALSE
+		return
+	bb[MBB_MELEE_ATTACK_TARGET_IN_RANGE] = TRUE
+	bb[MBB_MELEE_ATTACK_ALLOWED] = TRUE
+
+/* ************************************************************ *
+ * Performs a melee attack on the target if plossible           *
+ * Relies on bb having correct data for stuff like range and    *
+ * whether or not we can. If it isnt accurate... whoops!        *
+ * ************************************************************ */
+/mob/living/danimal/proc/PerformMeleeAttack(list/bb)
+	if(blackboard_task[MBT_MELEE_ATTACK_STOP])
+		return
+	bb = bb || blackboard_tick
+	var/atom/my_target = get_or_remove_target()
+	if(!my_target)
+		return
+	if(!CHECK_BITFIELD(bb[MBB_MELEE_ATTACK_PRE_CHECK], MPMAC_FORCE_ALLOW))
+		if(!bb[MBB_MELEE_ATTACK_ALLOWED])
+			if(bb[MBB_MELEE_ATTACK_CD_READY])
+				if(bb[MBB_MELEE_ATTACK_WINDUP_READY])
+					if(!bb[MBB_MELEE_ATTACK_TARGET_IN_RANGE])
+						ReadyMeleeAttack()
+			return
+		if(CHECK_BITFIELD(bb[MBB_MELEE_ATTACK_PRE_CHECK], MPMAC_FORCE_DENY))
+			return
+	// ok we can probably maybe melee attack, lets do it
+	if(PreMeleeAttackAction(my_target, bb)) // its my code, I can do conditional pyramids if I want to
+		bb[MBB_MELEE_ATTACK_PRE_ACTION_SUCCESS] = TRUE
+		if(DoMeleeAttack(my_target, bb))
+			bb[MBB_MELEE_ATTACK_SUCCESS] = TRUE
+			if(PostMeleeAttackAction(my_target, bb))
+				bb[MBB_MELEE_ATTACK_POST_ACTION_SUCCESS] = TRUE
+			else
+				bb[MBB_MELEE_ATTACK_POST_ACTION_SUCCESS] = FALSE
+		else
+			bb[MBB_MELEE_ATTACK_SUCCESS] = FALSE
+	else
+		bb[MBB_MELEE_ATTACK_PRE_ACTION_SUCCESS] = FALSE
+	HandleMeleeAttackCooldown()
+	HandleRapidMeleeAttack()
+
+/mob/living/danimal/proc/HandleMeleeAttackCooldown(list/bb)
+	bb = bb || blackboard_tick
+	if(bb[MBB_MELEE_ATTACK_SUCCESS])
+		melee_attack_cooldown = world.time + melee_attack_cooldown_duration
+		WindupKill()
+
+
+/mob/living/danimal/proc/HandleRapidMeleeAttack(list/bb)
+	if(melee_attacks_per_turn <= 1)
+		return
+	bb = bb || blackboard_tick
+	if(bb[MBB_MELEE_ATTACK_SUCCESS])
+		if(melee_attacks_left > 0)
+			melee_attacks_left -= 1
+		else
+			melee_attacks_left = melee_rapid_attack_count
+
+/mob/living/danimal/proc/DoMeleeAttack(atom/my_target, list/bb)
+	SEND_SIGNAL(src, COMSIG_HOSTILE_ATTACKINGTARGET, my_target)
+	if(prob(alternate_attack_prob) && AlternateAttackingTarget(my_target))
+		bb[MBB_MELEE_ATTACK_WAS_ALTERNATE] = TRUE
+		return TRUE
+	bb[MBB_MELEE_ATTACK_DAMAGE_DEALT] = my_target.attack_animal(src)
+	return TRUE
+
+/// An extra check to see if we should be allowed to melee attack this tick
+/mob/living/danimal/proc/PreMeleeAttackCheck(atom/my_target, list/bb)
+	return TRUE
+
+/// Perform some kind of action before the melee attack
+/mob/living/danimal/proc/PreMeleeAttackAction(atom/my_target, list/bb)
+	return TRUE
+
+/// Perform some kind of action after the melee attack
+/mob/living/danimal/proc/PostMeleeAttackAction(atom/my_target, list/bb)
+	return TRUE
+
+/mob/living/danimal/proc/AlternateAttackingTarget(atom/my_target)
+	return FALSE
+
+/// todo: make this make it so the mob attacks as soon as its in melee range
+/// todo: probably just increase tick rate so it spams checks for a few seconds, then resets it back to normal
+/mob/living/danimal/proc/ReadyMeleeAttack()
+	return FALSE
+
+/// checks if my_target is in melee range, cus stuff uses it a lot i fugess
+/mob/living/danimal/proc/IsInMeleeRange()
+	var/atom/my_target = get_or_remove_target()
+	if(!my_target)
+		return FALSE
+	var/atom/my_origin = get_origin()
+	var/atom/target_origin = get_turf(my_target)
+	if(!my_origin || !target_origin)
+		return FALSE
+	return src.can_reach(my_origin, reach = melee_range)
+
+/* ********************************************************** *
+ * Handles melee windup handling and such                     *
+ * ********************************************************** */
 /// todo: init check to auto-set to not use windup if someone bungled the vars
 /mob/living/danimal/proc/UpdateWindup()
 	if(!windup_enabled)
@@ -1203,14 +1421,14 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 			return
 
 /// Checks if we can windup and attack our target, and if so, gets everything ready for th ewwindup
-/mob/living/danimal/proc/WindupStart()
-	var/atom/my_target = get_or_remove_target()
+/mob/living/danimal/proc/WindupStart(atom/my_target)
 	if(!my_target)
 		WindupKill()
 		return
 	if(windup_state != MOB_WINDUP_NONE)
 		return
-	if(!IsInMeleeRange(my_target))
+	var/distance = get_dist(get_origin(), get_turf(my_target))
+	if(distance > windup_start_distance)
 		return
 	// ok we're in range, lets start this bad bingus up
 	windup_state = MOB_WINDUP_WINDING_UP
@@ -1228,8 +1446,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	// next ticks will go through waiting through the charging state and such
 
 /// handles calculating when the mob is done charging and ready to attack, and if so, sets the state to ready
-/mob/living/danimal/proc/WindupCharging()
-	var/atom/my_target = get_or_remove_target()
+/mob/living/danimal/proc/WindupCharging(atom/my_target)
 	if(!my_target)
 		WindupKill()
 		return
@@ -1249,8 +1466,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	// if we are ready, we will check if we can attack in the next tick
 
 /// handles calculating when the mob has been wound up too long, and resets it if that so is to be of the case
-/mob/living/danimal/proc/WindupReady()
-	var/atom/my_target = get_or_remove_target()
+/mob/living/danimal/proc/WindupReady(atom/my_target)
 	if(!my_target)
 		WindupKill()
 		return
@@ -1284,56 +1500,118 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	windup_ready_timeout = 0
 	windup_enabled = FALSE
 
-// melee update
-/// checks if we can *initiate* a melee this tick, and sets some vars accordingly
-/mob/living/danimal/proc/UpdateMeleeAttack(list/bb)
-	if(!islist(bb)) // choose your own boardventure
-		bb = blackboard_tick // default to main tick's blackboard, or use the passed one for like, rapid attacks and such
-	bb[MBB_MELEE_ATTACK_ALLOWED] = FALSE
-	bb[MBB_MELEE_ATTACK_CD_READY] = FALSE
-	bb[MBB_MELEE_ATTACK_WINDUP_READY] = FALSE
-	var/atom/my_target = get_or_remove_target()
-	if(!my_target)
-		return
-	if(!can_melee_attack)
-		return
-	if(melee_attack_cooldown > world.time)
-		return
-	bb[MBB_MELEE_ATTACK_CD_READY] = TRUE
-	if(windup_enabled && windup_state != MOB_WINDUP_READY)
-		return
-	bb[MBB_MELEE_ATTACK_WINDUP_READY] = TRUE
-	if(!IsInMeleeRange(my_target))
-		return
-	bb[MBB_MELEE_ATTACK_ALLOWED] = TRUE
 
-/// checks if my_target is in melee range, cus stuff uses it a lot i fugess
-/mob/living/danimal/proc/IsInMeleeRange()
-	var/atom/my_target = get_or_remove_target()
-	if(!my_target)
-		return FALSE
-	var/atom/my_origin = get_origin()
-	var/atom/target_origin = get_turf(my_target)
-	if(!my_origin || !target_origin)
-		return FALSE
-	return src.can_reach(my_origin, reach = melee_range)
+/* ********************************************************** *
+ * Ranged Attack processing                                   *
+ * ********************************************************** */
 
-/// Checks if we can *initiate* a ranged attack this tick, and sets some vars accordingly
+/mob/living/danimal/proc/TryPerformRangedAttack(list/bb)
+	UpdateRangedAttack(bb)
+	PerformRangedAttack(bb)
+
 /mob/living/danimal/proc/UpdateRangedAttack(list/bb)
-	if(!islist(bb)) // choose your own boardventure
-		bb = blackboard_tick // default to main tick's blackboard, or use the passed one for like, rapid attacks and such
+	if(!ranged)
+		return
+	if(!can_ranged_attack)
+		return
+	bb = bb || blackboard_tick
+	bb[MBB_RANGED_ATTACK_ALLOWED] = FALSE
+	bb[MBB_RANGED_ATTACK_CD_READY] = FALSE
+	bb[MBB_RANGED_ATTACK_PRE_CHECK] = NONE
+	var/is_part_of_a_burst = ranged_attacks_left > 0
+	bb[MBB_RANGED_ATTACK_BURST_FIRING] = is_part_of_a_burst
+	var/atom/my_target = get_or_remove_target()
+	if(!my_target)
+		return
+	if(!can_ranged_attack)
+		return
+	// per-mob melee attack checks, for custom overrides
+	// 0 or NONE or FALSE means no special checks, just do the normal checks
+	bb[MBB_RANGED_ATTACK_PRE_CHECK] = NONE | PreRangedAttackCheck(my_target, bb)
+	if(CHECK_BITFIELD(bb[MBB_RANGED_ATTACK_PRE_CHECK], MPMAC_FORCE_ALLOW)) // allow takes precedence over deny
+		bb[MBB_RANGED_ATTACK_FORCE_ALLOW]      = TRUE
+		bb[MBB_RANGED_ATTACK_CD_READY]         = TRUE
+		bb[MBB_RANGED_ATTACK_WINDUP_READY]     = TRUE
+		bb[MBB_RANGED_ATTACK_ALLOWED]          = TRUE
+		bb[MBB_RANGED_ATTACK_TARGET_IN_RANGE]  = TRUE
+		return
+	if(CHECK_BITFIELD(bb[MBB_RANGED_ATTACK_PRE_CHECK], MPMAC_FORCE_DENY))
+		bb[MBB_RANGED_ATTACK_FORCE_DENY] = TRUE
+		return
+
+	if(RangedCooldownReady(is_part_of_a_burst))
+		bb[MBB_RANGED_ATTACK_CD_READY] = TRUE
+	else
+		return
+	bb[MBB_RANGED_ATTACK_ALLOWED] = TRUE
+
+
+
+/mob/living/danimal/proc/RangedCooldownReady(is_part_of_a_burst)
+	if(sight_shoot_delay_cooldown > world.time)
+		return
+	if(is_part_of_a_burst)
+		if(ranged_attack_burst_per_shot_cooldown > world.time)
+			return FALSE
+		else
+			return TRUE
+	else
+		if(ranged_attack_delay > world.time)
+			return FALSE
+		else
+			return TRUE
+
+
+
+
+
+
+
+
 
 	bb[MBB_RANGED_ATTACK_ALLOWED] = FALSE
 	bb[MBB_RANGED_ATTACK_CD_READY] = FALSE
 	var/atom/my_target = get_or_remove_target()
 	if(!my_target)
 		return
-	if(ranged_cooldown > world.time)
+	
+	if(sight_shoot_delay_cooldown > world.time)
 		return
-	bb[MBB_RANGED_ATTACK_CD_READY] = TRUE
-	if(!CheckLine(my_target, MLF_OPAQUE))
+
+	if(CheckFriendlyFire(my_target, lineflags))
+		bb[MBB_RANGED_ATTACK_FRIENDLY_FIRE] = TRUE
 		return
 	bb[MBB_RANGED_ATTACK_ALLOWED] = TRUE
+
+/mob/living/danimal/proc/PerformRangedAttack(list/bb)
+	bb = bb || blackboard_tick
+	var/atom/my_target = get_or_remove_target()
+	if(!my_target)
+		return
+	if(!bb[MBB_RANGED_ATTACK_ALLOWED])
+		return
+	if(!bb[MBB_RANGED_ATTACK_CD_READY])
+		return
+	OpenFire(my_target)
+	ranged_attack_delay = world.time + ranged_cooldown_duration
+
+
+
+
+
+
+
+
+
+/* ********** *
+ * TASK STUFF *
+ * ********** */
+
+/mob/living/danimal/proc/UpdateTaskPreTick()
+/mob/living/danimal/proc/UpdateTaskPostTarget()
+/mob/living/danimal/proc/UpdateTaskPreAction()
+/mob/living/danimal/proc/UpdateTaskPostAction()
+/mob/living/danimal/proc/UpdateTaskPostTick()
 
 /mob/living/danimal/proc/MeleeActionIfPossible(patience = TRUE, atom/target_override = null)
 	if(COOLDOWN_TIMELEFT(src, melee_attack_cooldown))
@@ -1344,7 +1622,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	if(!winding_up_melee && origin && isturf(origin.loc) && my_target.Adjacent(origin)) //If they're next to us, attack
 		MeleeAction(TRUE, target_override)
 	else
-		if(!winding_up_melee && rapid_melee > 1 && get_dist(src, my_target) <= melee_queue_distance)
+		if(!winding_up_melee && melee_attacks_per_turn > 1 && get_dist(src, my_target) <= windup_start_distance)
 			MeleeAction(FALSE, target_override)
 		in_melee = FALSE //If we're just preparing to strike do not enter sidestep mode
 	return TRUE
@@ -1353,10 +1631,10 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 /mob/living/danimal/proc/MeleeAction(patience = TRUE, atom/target_override = null)
 	if(ismob(target_override) && mob_faction_is_friendly_to_target(target_override))
 		return
-	if(rapid_melee > 1)
+	if(melee_attacks_per_turn > 1)
 		var/datum/callback/cb = CALLBACK(src,PROC_REF(CheckAndAttack))
-		var/delay = SSnpcpool.wait / rapid_melee
-		for(var/i in 1 to rapid_melee)
+		var/delay = SSnpcpool.wait / melee_attacks_per_turn
+		for(var/i in 1 to melee_attacks_per_turn)
 			addtimer(cb, (i - 1)*delay)
 	else
 		AttackingTarget(target_override)
@@ -1402,7 +1680,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 		return 0
 	var/target_distance = get_dist(origin,my_target)
 	if(ranged && target_distance <= max_tracking_range) //We ranged? Shoot at em
-		if(!my_target.Adjacent(origin) && ranged_cooldown <= world.time) //But make sure they're not in range for a melee attack and our range attack is off cooldown
+		if(!my_target.Adjacent(origin) && ranged_attack_delay <= world.time) //But make sure they're not in range for a melee attack and our range attack is off cooldown
 			OpenFire(my_target)
 	if(retreat_distance != null && !winding_up_melee) //If we have a retreat distance and aren't winding up an attack, check if we need to run from our targette
 		if(target_distance <= retreat_distance && CHECK_BITFIELD(mobility_flags, MOBILITY_MOVE)) //If targette's closer than our retreat distance, run
@@ -1422,7 +1700,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	if((environment_smash & ENVIRONMENT_SMASH_WALLS) || (environment_smash & ENVIRONMENT_SMASH_RWALLS) || robuster_searching || SSmobs.debug_everyone_has_robuster_searching) //If we're capable of smashing through walls, forget about vision completely after finding our targette
 		perform_move_action(my_target,move_to_delay,minimum_distance)
 		if(my_target.loc != null && get_dist(origin, my_target.loc) <= get_vision_range()) //We can't see our targette, but he's in our vision range still
-			if(ranged_ignores_vision && ranged_cooldown <= world.time) //we can't see our targette... but we can fire at them!
+			if(ranged_ignores_vision && ranged_attack_delay <= world.time) //we can't see our targette... but we can fire at them!
 				OpenFire(my_target)
 		else
 			if(FindHidden())
@@ -1490,7 +1768,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 		
 // 	else
 // 		var/dist = get_dist(src, move_target)
-// 		if(dist <= melee_queue_distance)
+// 		if(dist <= windup_start_distance)
 // 		return variate_minimum_distance()
 
 /// **
@@ -1671,7 +1949,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 		return minimum_distance
 	else
 		var/dist = get_dist(src, move_target)
-		if(dist <= melee_queue_distance)
+		if(dist <= windup_start_distance)
 			return variate_minimum_distance()
 		else
 			return 1 // if we're not in melee range, we might as well try and get as close as possible
@@ -1915,9 +2193,9 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	return vrange
 
 
-/*****************************************
- * MOB TARGETTING                        *
- *****************************************/
+/********************************
+ * Target Search and Evaluation *
+ ********************************/
 
 /// gets a list of all possible targets in range, regardless of if we can attack them or not
 /mob/living/danimal/proc/ListTargets()//Step 1, find out what we can see
@@ -2183,7 +2461,6 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	. = 0
 	if(!use_distance_priority)
 		return
-	. += priority_bonus
 	var/dist_pen = get_dist(origin, A) * 10
 	. -= dist_pen
 
@@ -2197,68 +2474,6 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	var/health_bonus = 100 - ((L.health / L.maxHealth) * 100)
 	. += health_bonus
 
-
-
-/*
-/mob/living/danimal/proc/environment_is_safe(datum/gas_mixture/environment, check_temp = FALSE)
-	. = TRUE
-
-	if(pulledby && pulledby.grab_state >= GRAB_KILL && atmos_requirements["min_oxy"])
-		. = FALSE //getting choked
-
-	if(isturf(src.loc) && isopenturf(src.loc))
-		var/turf/open/ST = src.loc
-		if(ST.air)
-
-			var/tox = ST.air.get_moles(GAS_PLASMA)
-			var/oxy = ST.air.get_moles(GAS_O2)
-			var/n2  = ST.air.get_moles(GAS_N2)
-			var/co2 = ST.air.get_moles(GAS_CO2)
-
-			if(atmos_requirements["min_oxy"] && oxy < atmos_requirements["min_oxy"])
-				. = FALSE
-			else if(atmos_requirements["max_oxy"] && oxy > atmos_requirements["max_oxy"])
-				. = FALSE
-			else if(atmos_requirements["min_tox"] && tox < atmos_requirements["min_tox"])
-				. = FALSE
-			else if(atmos_requirements["max_tox"] && tox > atmos_requirements["max_tox"])
-				. = FALSE
-			else if(atmos_requirements["min_n2"] && n2 < atmos_requirements["min_n2"])
-				. = FALSE
-			else if(atmos_requirements["max_n2"] && n2 > atmos_requirements["max_n2"])
-				. = FALSE
-			else if(atmos_requirements["min_co2"] && co2 < atmos_requirements["min_co2"])
-				. = FALSE
-			else if(atmos_requirements["max_co2"] && co2 > atmos_requirements["max_co2"])
-				. = FALSE
-		else
-			if(atmos_requirements["min_oxy"] || atmos_requirements["min_tox"] || atmos_requirements["min_n2"] || atmos_requirements["min_co2"])
-				. = FALSE
-
-	if(check_temp)
-		var/areatemp = get_temperature(environment)
-		if((areatemp < minbodytemp) || (areatemp > maxbodytemp))
-			. = FALSE
-
-
-/mob/living/danimal/handle_environment(datum/gas_mixture/environment)
-	var/atom/A = src.loc
-	if(isturf(A))
-		var/areatemp = get_temperature(environment)
-		if( abs(areatemp - bodytemperature) > 5)
-			var/diff = areatemp - bodytemperature
-			diff = diff / 5
-			adjust_bodytemperature(diff)
-
-	if(!environment_is_safe(environment))
-		adjustHealth(unsuitable_atmos_damage)
-
-	handle_temperature_damage()
-
-/mob/living/danimal/proc/handle_temperature_damage()
-	if((bodytemperature < minbodytemp) || (bodytemperature > maxbodytemp))
-		adjustHealth(unsuitable_atmos_damage)
-*/
 
 /mob/living/danimal/proc/can_butcher()
 	return !already_butchered
@@ -2342,10 +2557,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 /mob/living/danimal/emote(act, m_type=1, message = null, intentional = FALSE, only_overhead)
 	if(stat)
 		return
-	// if(act == "scream")
-	// 	message = "makes a loud and pained whimper." //ugly hack to stop animals screaming when crushed :P
-	// 	act = "me"
-	..(act, m_type, message)
+	. = ..()
 
 /mob/living/danimal/proc/set_varspeed(var_value)
 	speed = var_value
@@ -2374,10 +2586,12 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 			continue
 		M.perform_move_action(src,M.move_to_delay,M.minimum_distance)
 
-/mob/living/danimal/proc/CheckFriendlyFire(atom/A)
+/mob/living/danimal/proc/CheckFriendlyFire(atom/A, flag_quick)
 	if(!check_friendly_fire || ckey || should_factionize_shots || attack_same)
 		return FALSE
-	return CheckLine(src, A, MLF_FRIENDLIES)
+	if(!isnull(flag_quick))
+		return CHECK_BITFIELD(flag_quick, MLF_FRIENDLIES)
+	return CheckLine(A)
 
 /mob/living/danimal/proc/OpenFire(atom/A, rts)
 	if(CheckFriendlyFire(A))
@@ -2386,14 +2600,14 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	var/spreadgun = ranged_base_spread
 	if(rapid > 1)
 		for(var/i in 1 to rapid)
-			addtimer(CALLBACK(src,PROC_REF(Shoot), A, spreadgun), (i - 1)*rapid_fire_delay)
+			addtimer(CALLBACK(src,PROC_REF(Shoot), A, spreadgun), (i - 1)*ranged_attack_burst_delay_per_shot)
 			spreadgun += ranged_extra_spread_per_shot
 	else
 		Shoot(A, spreadgun)
 		for(var/i in 1 to extra_projectiles)
-			addtimer(CALLBACK(src,PROC_REF(Shoot), A, spreadgun), i * auto_fire_delay)
+			addtimer(CALLBACK(src,PROC_REF(Shoot), A, spreadgun), i * ranged_attack_burst_delay_per_shot)
 			spreadgun += ranged_extra_spread_per_shot
-	ranged_cooldown = world.time + ranged_cooldown_time + rand(0,30)
+	ranged_attack_delay = world.time + ranged_cooldown_duration + rand(0,30)
 	if(sound_after_shooting)
 		addtimer(CALLBACK(usr, GLOBAL_PROC_REF(playsound), src, sound_after_shooting, 100, 0, 0), sound_after_shooting_delay, TIMER_STOPPABLE)
 	variate_projectile_type(TRUE)
@@ -2603,8 +2817,11 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 		value = initial(search_objects)
 	search_objects = value
 
-/mob/living/danimal/hostile/consider_wakeup()
-	..()
+/mob/living/danimal/proc/consider_wakeup()
+	if (pulledby || shouldwakeup)
+		toggle_ai(AI_ON)
+		return
+
 	var/list/tlist
 	var/turf/T = get_turf(src)
 
@@ -2620,10 +2837,6 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	if(AIStatus == AI_IDLE && tlist.len)
 		toggle_ai(AI_ON)
 
-/// *************************
-/// TARGETTING PROCS
-/// *************************
-
 /// Just checks if anything is in range for the purpose of waking up the AI for some reason
 /mob/living/danimal/proc/ListTargetsLazy(_Z)//Step 1, find out what we can see
 	var/static/hostile_machines = typecacheof(list(/obj/machinery/porta_turret, /obj/mecha))
@@ -2638,6 +2851,10 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 			else if (M.loc.type in hostile_machines)
 				. += M.loc
 				return
+
+/// *************************
+/// Target Acquisition and Handling
+/// *************************
 
 /mob/living/danimal/proc/handle_target_del(datum/source)
 	SIGNAL_HANDLER
@@ -2704,7 +2921,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 		walk(src, 0)
 	StartPatience()
 	Aggro()
-	COOLDOWN_START(src, sight_shoot_delay, sight_shoot_delay_duration)
+	COOLDOWN_START(src, sight_shoot_delay_cooldown, sight_shoot_delay_duration)
 
 /// shortcut to lose our current targette
 /mob/living/danimal/proc/DropTarget()
@@ -2778,14 +2995,14 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
  * ************************************************* */
 /// checks line of sight, but not range unless specifically asked
 /// 
-/mob/living/danimal/proc/CanSee(atom/looking_at, understands_lockers)
+/mob/living/danimal/proc/CanSee(atom/looking_at, quickflags)
 	if(!looking_at)
 		return FALSE
 	var/atom/my_origin = get_turf(get_origin())
 	if(!my_origin)
 		return FALSE
 	var/atom/target_origin = looking_at
-	if(understands_lockers)
+	if(target_retention_understands_lockers)
 		target_origin = get_turf(looking_at)
 	else
 		if(!isturf(target_origin.loc))
@@ -2793,38 +3010,40 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	if(SSmobs.use_view_for_close_range_los)
 		if(target_origin in view(SSmobs.max_view_range, my_origin))
 			return TRUE
-	return CheckLine(target_origin, MLF_OPAQUE)
+	if(quickflags)
+		return CHECK_BITFIELD(quickflags, MLF_OPAQUE)
+	else
+		return CHECK_BITFIELD(CheckLine(target_origin), MLF_OPAQUE)
 
 /// checks direct-ish accessibility, factoring in optional stuff like opacity, density, and livingness
 /// doesnt care about range //todo: widen the trace, maybe two more, one to each side, offset by a tile
-/mob/living/danimal/proc/CheckLine(atom/target_origin, checkflags = MLF_DEFAULT)
-	var/opaque      = CHECK_BITFIELD(checkflags, MLF_OPAQUE)
-	var/dense       = CHECK_BITFIELD(checkflags, MLF_DENSE)
-	var/living      = CHECK_BITFIELD(checkflags, MLF_LIVING)
-	var/friendlies  = CHECK_BITFIELD(checkflags, MLF_FRIENDLIES)
-	if(!opaque && !dense && !living && !friendlies)
-		return TRUE // ezclap
-	var/list/linesight = getline(get_origin(), target_origin)
-	if(!LAZYLEN(linesight))
-		return FALSE
+/// Returns a bitfield of stuff we encountered, NONE (0, or FALSE) if nothing was encountered
+/mob/living/danimal/proc/CheckLine(atom/target_origin)
+	. = NONE
+	var/turf/orig = get_turf(get_origin())
+	var/turf/targ = get_turf(target_origin)
+	if(!orig || !targ)
+		return
+	var/list/linesight = getline(orig, targ) || list()
 	linesight.Cut(1,2) // remove our turf, we're something
 	linesight.len-- // remove their turf, they're something
-	. = TRUE
+	if(!LAZYLEN(linesight))
+		return
+	var/allofem = MLF_OPAQUE | MLF_DENSE | MLF_LIVING | MLF_FRIENDLIES
 	for(var/turf/T as anything in linesight)
+		// if(LAZYLEN(T.contents) > 30)
+		// 	continue
 		for(var/atom/movable/am as anything in T.contents)
-			if(opaque && am.opacity)
-				return FALSE
-			if(dense && am.density)
-				return FALSE
-			if(living || friendlies)
-				if(isliving(am))
-					if(living)
-						return FALSE
-					var/mob/living/L = am
-					if(friendlies)
-						if(mob_faction_is_friendly_to_target(L))
-							return FALSE
-
+			if(am.opacity)
+				. |= MLF_OPAQUE
+			if(am.density)
+				. |= MLF_DENSE
+			if(isliving(am))
+				.|= MLF_LIVING
+				if(mob_faction_is_friendly_to_target(am))
+					.|= MLF_FRIENDLIES
+		if(. == allofem)
+			return //
 
 /// ************************
 /// NEST UNBIRTH PROCS
@@ -3264,10 +3483,6 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 			stack_trace("Something attempted to set simple animals AI to an invalid state: [togglestatus]")
 	queue_naptime()
 
-/mob/living/danimal/proc/consider_wakeup()
-	if (pulledby || shouldwakeup)
-		toggle_ai(AI_ON)
-
 /mob/living/danimal/proc/queue_naptime()
 	var/go2bed = consider_despawning()
 	if(go2bed)
@@ -3533,8 +3748,8 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 
 /// Makes mobs shoot stuff!
 /mob/living/danimal/proc/rts_shoot(atom/towards)
-	if((ranged || projectiletype || casingtype) && world.time >= ranged_cooldown)
-		ranged_cooldown = world.time + ranged_cooldown_time
+	if((ranged || projectiletype || casingtype) && world.time >= ranged_attack_delay)
+		ranged_attack_delay = world.time + ranged_cooldown_duration
 		OpenFire(towards)
 
 /// <summary>
@@ -3781,9 +3996,9 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	if(!intensity)
 		return FALSE
 	move_to_delay = rand(move_to_delay * 0.5, move_to_delay * 2)
-	auto_fire_delay = rand(auto_fire_delay * 0.8, auto_fire_delay * 1.5)
+	ranged_attack_burst_delay_per_shot = rand(ranged_attack_burst_delay_per_shot * 0.8, ranged_attack_burst_delay_per_shot * 1.5)
 	extra_projectiles = rand(extra_projectiles - 1, extra_projectiles + 1)
-	ranged_cooldown_time = rand(ranged_cooldown_time * 0.5, ranged_cooldown_time * 2)
+	ranged_cooldown_duration = rand(ranged_cooldown_duration * 0.5, ranged_cooldown_duration * 2)
 	retreat_distance = rand(0, 10)
 	minimum_distance = rand(0, 10)
 	DropTarget()

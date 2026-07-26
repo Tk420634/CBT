@@ -30,7 +30,7 @@
 		MOB_EMP_SCRAMBLE
 		)
 	healable = FALSE
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_SLOWER
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_SLOWER
 	melee_damage_lower = 12
 	melee_damage_upper = 24
 	// robust_searching = TRUE
@@ -94,7 +94,7 @@
 	del_on_death = FALSE
 	dextrous = TRUE
 	possible_a_intents = list(INTENT_HELP, INTENT_HARM)
-	ranged = FALSE
+	can_ranged_attack = FALSE
 
 /mob/living/danimal/hostile/handy/Initialize()
 	. = ..()
@@ -125,7 +125,7 @@
 	projectilesound = 'sound/weapons/laser.ogg'
 	projectiletype = /obj/item/projectile/f13plasma/scatter
 	extra_projectiles = 1
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	retreat_distance = 4
 	minimum_distance = 4
 	check_friendly_fire = TRUE
@@ -190,7 +190,7 @@
 	del_on_death = FALSE
 	possible_a_intents = list(INTENT_HELP, INTENT_HARM)
 	dextrous = TRUE
-	ranged = FALSE
+	can_ranged_attack = FALSE
 
 /mob/living/danimal/hostile/handy/gutsy/nsb //NSB + Raider Bunker specific
 	name = "mr. gutsy"
@@ -216,7 +216,7 @@
 	projectilesound = 'sound/weapons/laser.ogg'
 	projectiletype = /obj/item/projectile/beam/laser/pistol
 	extra_projectiles = 1
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	retreat_distance = 2
 	minimum_distance = 2
 	check_friendly_fire = TRUE
@@ -269,7 +269,7 @@
 	projectilesound = 'sound/weapons/laser.ogg'
 	projectiletype = /obj/item/projectile/beam/laser
 	extra_projectiles = 1
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	retreat_distance = 2
 	minimum_distance = 2
 	check_friendly_fire = TRUE
@@ -325,7 +325,7 @@
 	melee_damage_lower = 5 //severely reduced melee damage here because its silly to have a ranged mob also be a cqc master
 	melee_damage_upper = 10
 	extra_projectiles = 0 //removed extra projectiles to make these easier to deal with on super lowpop
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	move_to_delay = 9 //WAY slower than average,
 	// m2d 3 = standard, less is fast, more is slower.
 
@@ -404,7 +404,7 @@
 	desc_short = "A clunky hunk of junk with a laser."
 
 /mob/living/danimal/hostile/handy/protectron/playable
-	ranged = FALSE
+	can_ranged_attack = FALSE
 	melee_damage_lower = 25
 	melee_damage_upper = 38
 	health = 100
@@ -550,7 +550,7 @@
 	name = "red eye assaultron"
 	desc = "A modified assaultron. It's eye has been outfitted with a deadly laser."
 	color = "#B85C00"
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	retreat_distance = null
 	minimum_distance = 1
 	projectilesound = 'sound/weapons/laser.ogg'

@@ -12,8 +12,8 @@
 	speak_emote = list("roars")
 	speed = 30
 	move_to_delay = 30
-	ranged = TRUE
-	ranged_cooldown_time = 40
+	can_ranged_attack = TRUE
+	ranged_cooldown_duration = 40
 	maxHealth = 350
 	health = 350
 	obj_damage = 40

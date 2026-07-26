@@ -55,7 +55,7 @@
 	melee_damage_lower = 5
 	melee_damage_upper = 10
 	extra_projectiles = 1
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_SLOW
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_SLOW
 	ranged_ignores_vision = TRUE
 	attack_verb_simple = "punches"
 	attack_sound = "punch"
@@ -64,7 +64,7 @@
 	projectilesound = 'sound/f13weapons/varmint_rifle.ogg'
 	emote_taunt = list("readies its arm gun")
 	check_friendly_fire = TRUE
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	move_resist = MOVE_FORCE_OVERPOWERING
 	projectile_sound_properties = list(
 		SP_VARY(FALSE),
@@ -157,7 +157,7 @@
 	melee_damage_lower = 24
 	melee_damage_upper = 55
 	extra_projectiles = 2 
-	ranged_cooldown_time = 40 //brrrrrrrrrrrrt
+	ranged_cooldown_duration = 40 //brrrrrrrrrrrrt
 	retreat_distance = 5
 	minimum_distance = 5 // SENTRY bot, not run up to your face and magdump you bot
 	attack_verb_simple = "pulverizes"
@@ -274,7 +274,7 @@
 	emote_taunt = null
 	emote_taunt_sound = null
 	idlesound = null
-	ranged = FALSE
+	can_ranged_attack = FALSE
 	see_in_dark = 8
 	environment_smash = 2 //can smash walls
 	wander = 0

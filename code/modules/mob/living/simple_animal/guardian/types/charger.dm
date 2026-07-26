@@ -1,8 +1,8 @@
 //Charger
 /mob/living/danimal/hostile/guardian/charger
-	ranged = 1 //technically
+	can_ranged_attack = TRUE //technically
 	ranged_message = "charges"
-	ranged_cooldown_time = 20
+	ranged_cooldown_duration = 20
 	damage_coeff = list(BRUTE = 0.2, BURN = 0.5, TOX = 0.5, CLONE = 0.5, STAMINA = 0, OXY = 0.5)
 	playstyle_string = "<span class='holoparasite'>As a <b>charger</b> type you do medium damage, take half damage, have near immunity to brute damage, move very fast, and can charge at a location, damaging any target hit and forcing them to drop any items they are holding.</span>"
 	magic_fluff_string = span_holoparasite("..And draw the Hunter, an alien master of rapid assault.")
@@ -14,7 +14,7 @@
 /mob/living/danimal/hostile/guardian/charger/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
-	if(ranged_cooldown <= world.time)
+	if(ranged_attack_delay <= world.time)
 		if(!chargealert)
 			chargealert = throw_alert("charge", /atom/movable/screen/alert/cancharge)
 	else
@@ -24,7 +24,7 @@
 /mob/living/danimal/hostile/guardian/charger/OpenFire(atom/A)
 	if(!charging)
 		visible_message(span_danger("<b>[src]</b> [ranged_message] at [A]!"))
-		ranged_cooldown = world.time + ranged_cooldown_time
+		ranged_attack_delay = world.time + ranged_cooldown_duration
 		clear_alert("charge")
 		chargealert = null
 		Shoot(A)

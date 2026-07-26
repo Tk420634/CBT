@@ -93,9 +93,9 @@
 	pass_flags = PASSTABLE
 	mob_size = MOB_SIZE_TINY
 	ventcrawler = VENTCRAWLER_ALWAYS
-	ranged = 1
+	can_ranged_attack = TRUE
 	projectiletype = /obj/item/projectile/beam/disabler
-	ranged_cooldown_time = 20
+	ranged_cooldown_duration = 20
 	projectilesound = 'sound/weapons/taser2.ogg'
 	loot = list(/obj/effect/decal/cleanable/robot_debris, /obj/item/stack/ore/bluespace_crystal)
 	del_on_death = 1
@@ -149,10 +149,10 @@
 	..()
 
 ////CTRL CLICK FOR SWARMERS AND SWARMER_ACT()'S////
-/mob/living/danimal/hostile/swarmer/AttackingTarget()
-	var/atom/my_target = get_target()
+/mob/living/danimal/hostile/swarmer/PreMeleeAttackCheck(list/bb, atom/my_target)
 	if(my_target && !isliving(my_target))
-		return my_target.swarmer_act(src)
+		if(!my_target.swarmer_act(src))
+			return MPMAC_FORCE_DENY
 	else
 		return ..()
 

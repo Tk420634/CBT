@@ -84,10 +84,10 @@ Featuring:
 			break
 	if(do_ranged)
 		minimum_distance = 5
-		ranged = 1
+		can_ranged_attack = TRUE
 	else
 		minimum_distance = 1
-		ranged = 0
+		can_ranged_attack = FALSE
 	wanted_objects = list()
 	search_objects = 0
 	if(mecha && mecha.lights_action) //an AI mecha is an EVIL EVIL thing, so let's not hide them in the dark
@@ -111,7 +111,7 @@ Featuring:
 			search_aggressiveness = 3 //We can see a mech? RUN FOR IT, IGNORE MOBS!
 			break
 	search_objects = search_aggressiveness
-	ranged = 0
+	can_ranged_attack = FALSE
 	minimum_distance = 1
 
 	walk(M,0)//end any lingering movement loops, to prevent the haunted mecha bug
@@ -207,7 +207,7 @@ Featuring:
 				if(is_valid_mecha(C))
 					GiveTarget(C) //Let's nab it!
 					minimum_distance = 1
-					ranged = 0
+					can_ranged_attack = FALSE
 					break
 		if(mecha)
 			var/list/L = GetPossibleTargets()

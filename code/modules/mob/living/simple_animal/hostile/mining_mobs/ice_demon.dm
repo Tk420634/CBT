@@ -13,9 +13,9 @@
 	move_to_delay = 2
 	projectiletype = /obj/item/projectile/temp/basilisk/ice
 	projectilesound = 'sound/weapons/pierce.ogg'
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	ranged_message = "manifests ice"
-	ranged_cooldown_time = 30
+	ranged_cooldown_duration = 30
 	minimum_distance = 3
 	retreat_distance = 3
 	maxHealth = 150

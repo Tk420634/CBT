@@ -21,10 +21,10 @@ Difficulty: Extremely Hard
 	melee_damage_lower = 10
 	melee_damage_upper = 10
 	aggroed_vision_range = 18 // large vision range so combat doesn't abruptly end when someone runs a bit away
-	rapid_melee = 4
+	melee_attacks_per_turn = 4
 	speed = 20
 	move_to_delay = 20
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	crusher_loot = list(/obj/effect/decal/remains/plasma, /obj/item/crusher_trophy/ice_block_talisman)
 	loot = list(/obj/effect/decal/remains/plasma)
 	wander = FALSE

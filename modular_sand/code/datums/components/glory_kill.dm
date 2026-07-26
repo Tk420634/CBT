@@ -73,10 +73,10 @@
 	if(istype(owner, /mob/living/danimal/hostile))
 		var/mob/living/danimal/hostile/hostile = owner
 		if(hostile.ranged)
-			if(hostile.ranged_cooldown >= world.time)
-				hostile.ranged_cooldown += 10
+			if(hostile.ranged_attack_delay >= world.time)
+				hostile.ranged_attack_delay += 10
 			else
-				hostile.ranged_cooldown = 10 + world.time
+				hostile.ranged_attack_delay = 10 + world.time
 	if(do_mob(slayer, owner, 1 SECONDS) && (owner.stat != DEAD))
 		var/message
 		if(!slayer.get_active_held_item() || (!istype(slayer.get_active_held_item(), /obj/item/kinetic_crusher) && !istype(slayer.get_active_held_item(), /obj/item/gun/energy/kinetic_accelerator)))

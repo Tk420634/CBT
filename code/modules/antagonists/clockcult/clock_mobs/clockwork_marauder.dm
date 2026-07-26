@@ -351,9 +351,14 @@
 
 //ATTACKING, BLOCKING, and COUNTERING
 
-/mob/living/danimal/hostile/clockwork/marauder/guardian/AttackingTarget()
+/mob/living/danimal/hostile/clockwork/marauder/guardian/PreMeleeAttackCheck()
 	if(is_in_host())
-		return FALSE
+		return MPMAC_FORCE_DENY
+	return ..()
+
+/mob/living/danimal/hostile/clockwork/marauder/guardian/ranged_extra_conditions()
+	if(is_in_host())
+		return MPMAC_FORCE_DENY
 	return ..()
 
 /mob/living/danimal/hostile/clockwork/marauder/guardian/bullet_act(obj/item/projectile/Proj)

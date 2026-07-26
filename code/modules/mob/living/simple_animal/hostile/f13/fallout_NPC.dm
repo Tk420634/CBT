@@ -16,7 +16,7 @@
 	response_harm_simple = "hits"
 	speed = 1
 	stat_attack = 1
-	robust_searching = 1
+	robust_searching = TRUE
 	maxHealth = 100
 	health = 100
 	melee_damage_lower = 5
@@ -26,7 +26,7 @@
 	a_intent = INTENT_HARM
 	unsuitable_atmos_damage = 15
 	faction = list("vault", "city")
-	check_friendly_fire = 1
+	check_friendly_fire = FALSE
 	status_flags = CANPUSH
 	speak_chance = 1
 	despawns_when_lonely = FALSE
@@ -95,7 +95,7 @@
 	retreat_distance = 5
 	minimum_distance = 5
 	healable = 1
-	ranged = 1
+	can_ranged_attack = TRUE
 	projectiletype = /obj/item/projectile/beam
 	projectilesound = 'sound/weapons/resonator_fire.ogg'
 	speak_chance = 1
@@ -145,10 +145,10 @@
 	retreat_distance = 6
 	minimum_distance = 6
 	speed = 4
-	ranged_cooldown_time = 22
+	ranged_cooldown_duration = 22
 	extra_projectiles = 2
 	stat_attack = 1
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	// robust_searching = TRUE
 	healable = TRUE
 	maxHealth = 200
@@ -168,7 +168,7 @@
 	a_intent = INTENT_HARM
 	unsuitable_atmos_damage = 15
 	faction = list("enclave")
-	check_friendly_fire = 1
+	check_friendly_fire = FALSE
 	status_flags = CANPUSH
 	//speak = list("For the Enclave!", "Stars and Stripes!", "Liberty or death!")
 	speak_emote = list("pulls out a weapon", "shouts")
@@ -200,7 +200,7 @@
 	environment_smash = 0
 	melee_damage_lower = 5
 	melee_damage_upper = 15
-	ranged_cooldown_time = 30
+	ranged_cooldown_duration = 30
 	projectiletype = /obj/item/projectile/f13plasma/pistol/adam/simple
 	projectilesound = 'sound/weapons/wave.ogg'
 	extra_projectiles = 1
@@ -240,7 +240,7 @@
 	extra_projectiles = 2
 	retreat_distance = 3
 	minimum_distance = 5
-	ranged_cooldown_time = 12
+	ranged_cooldown_duration = 12
 	healable = 1
 	attack_verb_simple = "power-fists"
 	loot = list(/obj/effect/gibspawner/human)
@@ -305,7 +305,7 @@
 	response_harm_simple = "hits"
 	speed = 4
 	stat_attack = 1
-	robust_searching = 1
+	robust_searching = TRUE
 	maxHealth = 200
 	health = 200
 	melee_damage_lower = 7
@@ -314,7 +314,7 @@
 	attack_sound = 'sound/weapons/punch1.ogg'
 	a_intent = INTENT_HARM
 	unsuitable_atmos_damage = 15
-	check_friendly_fire = 1
+	check_friendly_fire = FALSE
 	status_flags = CANPUSH
 	//speak = list("Semper Invicta!")
 	speak_emote = list("rushes")
@@ -345,7 +345,7 @@
 	retreat_distance = 5
 	minimum_distance = 5
 	healable = 1
-	ranged = 1
+	can_ranged_attack = TRUE
 	loot = list(/obj/effect/gibspawner/human)
 	loot_drop_amount = 2
 	loot_amount_random = TRUE
@@ -374,7 +374,7 @@
 	maxHealth = 480
 	health = 480
 	healable = 1
-	ranged = 1
+	can_ranged_attack = TRUE
 	loot = list(/obj/effect/gibspawner/human)
 	loot_drop_amount = 5
 	loot_amount_random = TRUE
@@ -422,7 +422,7 @@
 	response_harm_simple = "hits"
 	speed = 4
 	stat_attack = 1
-	robust_searching = 1
+	robust_searching = TRUE
 	maxHealth = 120
 	health = 120
 	melee_damage_lower = 8
@@ -432,7 +432,7 @@
 	a_intent = INTENT_HARM
 	loot = list()
 	unsuitable_atmos_damage = 15
-	check_friendly_fire = 1
+	check_friendly_fire = FALSE
 	status_flags = CANPUSH
 	//speak = list("Patrolling the Mojave almost makes you wish for a nuclear winter.", "When I got this assignment I was hoping there would be more gambling.", "It's been a long tour, all I can think about now is going back home.", "You know, if you were serving, you'd probably be halfway to general by now.", "You oughtta think about enlisting. We need you here.")
 	speak_emote = list("says")
@@ -458,7 +458,7 @@
 	minimum_distance = 5
 	loot = list()
 	healable = 1
-	ranged = 1
+	can_ranged_attack = TRUE
 	projectiletype = /obj/item/projectile/bullet/a556/simple
 	projectilesound = 'sound/f13weapons/varmint_rifle.ogg'
 	casingtype = /obj/item/ammo_casing/a556
@@ -486,7 +486,7 @@
 	maxHealth = 160
 	health = 160
 	healable = 1
-	ranged = 1
+	can_ranged_attack = TRUE
 	projectiletype = /obj/item/projectile/bullet/m44/simple
 	projectilesound = 'sound/f13weapons/44mag.ogg'
 	casingtype = /obj/item/ammo_casing/m44
@@ -529,7 +529,7 @@
 	response_harm_simple = "hits"
 	speed = 1
 	stat_attack = 1
-	robust_searching = 1
+	robust_searching = TRUE
 	maxHealth = 120
 	health = 120
 	melee_damage_lower = 8
@@ -539,7 +539,7 @@
 	a_intent = INTENT_HARM
 	loot = list()
 	unsuitable_atmos_damage = 15
-	check_friendly_fire = 1
+	check_friendly_fire = FALSE
 	status_flags = CANPUSH
 	//speak = list("Ave, true to Caesar.", "True to Caesar.", "Ave, Amicus.", "The new slave girls are quite beautiful.", "Give me cause, Profligate.", "Degenerates like you belong on a cross.")
 	speak_emote = list("says")
@@ -565,7 +565,7 @@
 	minimum_distance = 5
 	loot = list()
 	healable = 1
-	ranged = 1
+	can_ranged_attack = TRUE
 	projectiletype = /obj/item/projectile/bullet/a308/improvised/simple
 	projectilesound = 'sound/f13weapons/hunting_rifle.ogg'
 	casingtype = /obj/item/ammo_casing/a308
@@ -593,7 +593,7 @@
 	maxHealth = 180
 	health = 180
 	healable = 1
-	ranged = 1
+	can_ranged_attack = TRUE
 	projectiletype = /obj/item/projectile/bullet/a308/improvised/simple
 	projectilesound = 'sound/f13weapons/hunting_rifle.ogg'
 	casingtype = /obj/item/ammo_casing/a308
@@ -638,7 +638,7 @@
 	response_harm_simple = "hits"
 	speed = 1
 	stat_attack = 1
-	robust_searching = 1
+	robust_searching = TRUE
 	maxHealth = 160
 	health = 160
 	melee_damage_lower = 22

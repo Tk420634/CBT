@@ -365,7 +365,7 @@
 	a_intent = INTENT_HARM
 	gold_core_spawnable = HOSTILE_SPAWN
 	footstep_type = FOOTSTEP_MOB_CLAW
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	check_friendly_fire = TRUE
 	projectiletype = /obj/item/projectile/geckoarrow
 	projectilesound = 'sound/weapons/bowfire.wav'
@@ -497,7 +497,7 @@
 	a_intent = INTENT_HARM
 	gold_core_spawnable = HOSTILE_SPAWN
 	footstep_type = FOOTSTEP_MOB_CLAW
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	check_friendly_fire = TRUE
 	projectiletype = /obj/item/projectile/geckofire
 	projectilesound = 'sound/magic/fireball.ogg'
@@ -624,7 +624,7 @@
 	a_intent = INTENT_HARM
 	gold_core_spawnable = FALSE
 	footstep_type = FOOTSTEP_MOB_HEAVY
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	check_friendly_fire = TRUE
 	move_resist = MOVE_FORCE_OVERPOWERING
 	projectiletype = /obj/item/projectile/geckosummon
@@ -783,7 +783,7 @@
 	a_intent = INTENT_HARM
 	gold_core_spawnable = FALSE
 	footstep_type = FOOTSTEP_MOB_HEAVY
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	check_friendly_fire = TRUE
 	move_resist = MOVE_FORCE_OVERPOWERING
 	projectiletype = /obj/item/projectile/bola/fragile
@@ -944,7 +944,7 @@
 	a_intent = INTENT_HARM
 	gold_core_spawnable = FALSE
 	footstep_type = FOOTSTEP_MOB_HEAVY
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	check_friendly_fire = TRUE
 	move_resist = MOVE_FORCE_OVERPOWERING
 	idlesound = list(

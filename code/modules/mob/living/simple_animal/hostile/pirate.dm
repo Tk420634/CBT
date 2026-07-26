@@ -75,9 +75,9 @@
 	icon_living = "pirateranged"
 	icon_dead = "pirateranged_dead"
 	projectilesound = 'sound/weapons/laser.ogg'
-	ranged = 1
-	rapid = 2
-	rapid_fire_delay = 6
+	can_ranged_attack = TRUE
+	ranged_attack_burst_count =  2
+	ranged_attack_burst_delay_per_shot = 6
 	retreat_distance = 5
 	minimum_distance = 5
 	projectiletype = /obj/item/projectile/beam/laser

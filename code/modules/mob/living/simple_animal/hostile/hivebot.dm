@@ -22,7 +22,7 @@
 	projectilesound = 'sound/weapons/gunshot.ogg'
 	projectiletype = /obj/item/projectile/hivebotbullet
 	faction = list("hivebot")
-	check_friendly_fire = 1
+	check_friendly_fire = FALSE
 	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 0
 	speak_emote = list("states")
@@ -53,7 +53,7 @@
 	icon_state = "ranged"
 	icon_living = "ranged"
 	icon_dead = "hivedead"
-	ranged = 1
+	can_ranged_attack = TRUE
 	retreat_distance = 5
 	minimum_distance = 5
 
@@ -62,8 +62,8 @@
 	icon_state = "ranged"
 	icon_living = "ranged"
 	icon_dead = "hivedead"
-	ranged = 1
-	rapid = 3
+	can_ranged_attack = TRUE
+	ranged_attack_burst_count =  3
 	retreat_distance = 5
 	minimum_distance = 5
 
@@ -84,7 +84,7 @@
 	desc = "A heavily armed and armored robot that does not seem pleased to meet you."
 	health = 100
 	maxHealth = 100
-	ranged = 1
+	can_ranged_attack = TRUE
 
 /mob/living/danimal/hostile/hivebot/death(gibbed)
 	do_sparks(3, TRUE, src)

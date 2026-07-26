@@ -12,9 +12,9 @@
 	move_to_delay = 4
 	projectiletype = /obj/item/projectile/magic/impfireball
 	projectilesound = 'modular_sand/sound/misc/impranged.wav'
-	ranged = 1
+	can_ranged_attack = TRUE
 	ranged_message = "shoots a fireball"
-	ranged_cooldown_time = 70
+	ranged_cooldown_duration = 70
 	throw_message = "does nothing against the hardened skin of"
 	vision_range = 5
 	speed = 1

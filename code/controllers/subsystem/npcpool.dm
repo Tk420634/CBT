@@ -11,7 +11,7 @@ SUBSYSTEM_DEF(npcpool)
 	flags = SS_POST_FIRE_TIMING|SS_NO_INIT|SS_BACKGROUND
 	priority = FIRE_PRIORITY_NPC
 	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
-	wait = (0.5 SECONDS)
+	wait = (0.1 SECONDS) // ZOOOOOOOM *cpu dies x.x
 
 	var/list/currentrun = list()
 
@@ -28,7 +28,7 @@ SUBSYSTEM_DEF(npcpool)
 		var/list/activelist = GLOB.simple_animals[AI_ON]
 		src.currentrun = activelist.Copy()
 
-	//cache for sanic speed (lists are references anyways)
+	//cache for sanic speed (lists are references anyways) // this line appears 24 times in 19 files!
 	var/list/currentrun = src.currentrun
 
 	while(currentrun.len)
@@ -39,16 +39,18 @@ SUBSYSTEM_DEF(npcpool)
 			GLOB.simple_animals[AI_ON] -= SA
 			stack_trace("Found a null in simple_animals active list [SA.type]!")
 			continue
-
-		if(!SA.ckey && !SA.mob_transforming)
-			if(SA.stat != DEAD)
-				SA.handle_automated_movement()
-			if(SA.stat != DEAD)
-				var/retv = SA.handle_automated_action()
-				if(retv == "bad")
-					SA.Failed()
-			if(SA.stat != DEAD)
-				SA.handle_automated_speech()
+		if(SA.PreTick())
+			if(!SA.ckey && !SA.mob_transforming)
+				var/abort = FALSE
+				if(SA.stat != DEAD)
+					abort = SA.handle_automated_action() == "bad"
+					if(abort)
+						SA.Failed()
+				if(SA.stat != DEAD && !abort)
+					SA.handle_automated_movement()
+				if(SA.stat != DEAD && !abort)
+					SA.handle_automated_speech()
+			SA.PostTick()
 		if (MC_TICK_CHECK)
 			return
 	// for(var/ID in wander_attractors)

@@ -21,8 +21,8 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 36
 	pixel_y = -8
-	ranged = TRUE
-	ranged_cooldown_time = 10
+	can_ranged_attack = TRUE
+	ranged_cooldown_duration = 10
 	pass_flags = LETPASSTHROW
 	// robust_searching = TRUE
 	attack_sound = 'sound/weapons/rapierhit.ogg'
@@ -48,7 +48,7 @@
 	var/atom/my_target = get_target()
 	if(!isliving(my_target))
 		return ..()
-	if(ranged_cooldown <= world.time && attack_state == MOOK_ATTACK_NEUTRAL)
+	if(ranged_attack_delay <= world.time && attack_state == MOOK_ATTACK_NEUTRAL)
 		var/mob/living/L = my_target
 		if(L.incapacitated())
 			WarmupAttack(forced_slash_combo = TRUE)
@@ -150,7 +150,7 @@
 	if(attack_state != MOOK_ATTACK_RECOVERY)
 		return
 	attack_state = MOOK_ATTACK_NEUTRAL
-	ranged_cooldown = world.time + ranged_cooldown_time
+	ranged_attack_delay = world.time + ranged_cooldown_duration
 	update_icons()
 	var/atom/my_target = get_target()
 	if(my_target && !stat)

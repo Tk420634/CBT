@@ -13,14 +13,14 @@
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	maxHealth = 300
 	health = 300
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	projectiletype = /obj/item/projectile/leaper
 	projectilesound = 'sound/weapons/pierce.ogg'
-	ranged_cooldown_time = 30
+	ranged_cooldown_duration = 30
 	pixel_x = -16
 	layer = LARGE_MOB_LAYER
 	speed = 10
-	robust_searching = 1
+	robust_searching = TRUE
 	var/hopping = FALSE
 	var/hop_cooldown = 0 //Strictly for player controlled leapers
 	var/projectile_ready = FALSE //Stopping AI leapers from firing whenever they want, and only doing it after a hop has finished instead
@@ -180,13 +180,13 @@
 
 /mob/living/danimal/hostile/jungle/leaper/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	if(prob(33) && !ckey)
-		ranged_cooldown = 0 //Keeps em on their toes instead of a constant rotation
+		ranged_attack_delay = 0 //Keeps em on their toes instead of a constant rotation
 	..()
 
 /mob/living/danimal/hostile/jungle/leaper/OpenFire()
 	var/atom/my_target = get_target()
 	face_atom(my_target)
-	if(!ranged_cooldown <= world.time)
+	if(!ranged_attack_delay <= world.time)
 		return
 	if(ckey)
 		if(hopping)
@@ -213,7 +213,7 @@
 	if(player_hop)
 		new_turf = get_turf(my_target)
 		hop_cooldown = world.time + PLAYER_HOP_DELAY
-	if(AIStatus == AI_ON && ranged_cooldown <= world.time)
+	if(AIStatus == AI_ON && ranged_attack_delay <= world.time)
 		projectile_ready = TRUE
 		update_icons()
 	throw_at(new_turf, max(3,get_dist(src,new_turf)), 1, src, FALSE, callback = CALLBACK(src,PROC_REF(FinishHop)))
@@ -255,7 +255,7 @@
 			L.throw_at(throwtarget, 3, 1)
 			visible_message(span_warning("[L] is thrown clear of [src]!"))
 	if(ckey)//Lessens ability to chain stun as a player
-		ranged_cooldown = ranged_cooldown_time + world.time
+		ranged_attack_delay = ranged_cooldown_duration + world.time
 		update_icons()
 
 /mob/living/danimal/hostile/jungle/leaper/perform_move_action()
@@ -269,7 +269,7 @@
 	if(stat)
 		icon_state = "leaper_dead"
 		return
-	if(ranged_cooldown <= world.time)
+	if(ranged_attack_delay <= world.time)
 		if(AIStatus == AI_ON && projectile_ready || ckey)
 			icon_state = "leaper_alert"
 			return

@@ -24,7 +24,7 @@
 	icon_living = "duckbot"
 	icon_dead = "duckbot_dead"
 	can_be_targeted_by_mob_ai = TRUE // so mobs dont kill it on accident
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	environment_smash = NONE
 	armor_list = ARMOR_VALUE_RENEGADE_POWER_ARMOR // so we get the tombstone message for our duck
 	maxHealth = 40
@@ -33,7 +33,7 @@
 	move_to_delay = 1 SECONDS // slow duck
 	melee_damage_lower = 0
 	melee_damage_upper = 0
-	ranged_cooldown_time = 20 SECONDS
+	ranged_cooldown_duration = 20 SECONDS
 	pass_flags = LETPASSTHROW
 	// robust_searching = TRUE
 	death_sound = 'sound/machines/machinery_break_1.ogg'

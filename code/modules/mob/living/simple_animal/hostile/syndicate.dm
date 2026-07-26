@@ -26,7 +26,7 @@
 	speak_chance = 0
 	seconds_per_wander = 5
 	speed = 0
-	robust_searching = 1
+	robust_searching = TRUE
 	maxHealth = 100
 	health = 100
 	armor_list = ARMOR_VALUE_SYNDIE_VEST_MELEE
@@ -40,11 +40,11 @@
 	//atmos_requirements = list("min_oxy" = 5, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 1, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
 	//unsuitable_atmos_damage = 15
 	faction = list("raider")
-	check_friendly_fire = 1
+	check_friendly_fire = FALSE
 	status_flags = CANPUSH
 	del_on_death = FALSE
 	can_dodge_in_melee = TRUE
-	rapid_melee = 2
+	melee_attacks_per_turn = 2
 	retreat_health_percent = 0.2
 	max_heal_amount = 0.9
 	heal_per_life = 0.115
@@ -64,7 +64,7 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 30
 	wound_bonus = 10
-	rapid_melee = 2
+	melee_attacks_per_turn = 2
 	status_flags = 0
 
 /mob/living/danimal/hostile/renegade/syndicate/melee/sword
@@ -79,7 +79,7 @@
 	melee_damage_lower = 25
 	melee_damage_upper = 30
 	wound_bonus = 20
-	rapid_melee = 1
+	melee_attacks_per_turn = 1
 	light_color = LIGHT_COLOR_RED
 	status_flags = 0
 	light_system = MOVABLE_LIGHT
@@ -106,14 +106,14 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 25
 	wound_bonus = 20
-	rapid_melee = 1
-	ranged = 1
+	melee_attacks_per_turn = 1
+	can_ranged_attack = TRUE
 	retreat_distance = 6
 	minimum_distance = 6
 	casingtype = /obj/item/ammo_casing/c10mm
 	projectilesound = 'sound/weapons/gunshot.ogg'
 	can_dodge_in_melee = FALSE
-	rapid_melee = 1
+	melee_attacks_per_turn = 1
 
 /mob/living/danimal/hostile/renegade/syndicate/ranged/infiltrator //shuttle loan event
 	projectilesound = 'sound/weapons/gunshot_silenced.ogg'
@@ -127,11 +127,11 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 25
 	wound_bonus = 20
-	rapid_melee = 1
-	ranged = 1
+	melee_attacks_per_turn = 1
+	can_ranged_attack = TRUE
 	retreat_distance = 6
 	minimum_distance = 6
-	rapid = 5
+	ranged_attack_burst_count =  5
 	casingtype = /obj/item/ammo_casing/c45
 	projectilesound = 'sound/weapons/gunshot_smg.ogg'
 
@@ -144,12 +144,12 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 25
 	wound_bonus = 20
-	rapid_melee = 1
-	ranged = 1
+	melee_attacks_per_turn = 1
+	can_ranged_attack = TRUE
 	retreat_distance = 4
 	minimum_distance = 4
-	rapid = 2
-	rapid_fire_delay = 6
+	ranged_attack_burst_count =  2
+	ranged_attack_burst_delay_per_shot = 6
 	icon_state = "syndicate_shotgun"
 	icon_living = "syndicate_shotgun"
 	casingtype = /obj/item/ammo_casing/shotgun/buckshot //buckshot (up to 72.5 brute) fired in a two-round burst
@@ -192,7 +192,7 @@
 	melee_damage_lower = 25
 	melee_damage_upper = 45
 	wound_bonus = 10
-	rapid_melee = 2
+	melee_attacks_per_turn = 2
 	maxHealth = 170
 	health = 170
 	armor_list = ARMOR_VALUE_SYNDIE_REDSUIT
@@ -210,7 +210,7 @@
 	melee_damage_lower = 45
 	melee_damage_upper = 50
 	wound_bonus = 40
-	rapid_melee = 1
+	melee_attacks_per_turn = 1
 	maxHealth = 170
 	health = 170
 	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
@@ -313,7 +313,7 @@
 	melee_damage_lower = 50
 	melee_damage_upper = 55
 	wound_bonus = 40
-	rapid_melee = 1
+	melee_attacks_per_turn = 1
 	maxHealth = 250
 	health = 250
 

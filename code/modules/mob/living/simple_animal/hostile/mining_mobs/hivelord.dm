@@ -10,7 +10,7 @@
 	mob_biotypes = MOB_ORGANIC
 	mouse_opacity = MOUSE_OPACITY_OPAQUE
 	move_to_delay = 14
-	ranged = 1
+	can_ranged_attack = TRUE
 	vision_range = 4
 	aggroed_vision_range = 7
 	speed = 3
@@ -23,8 +23,8 @@
 	speak_emote = list("telepathically cries")
 	attack_sound = 'sound/weapons/pierce.ogg'
 	throw_message = "falls right through the strange body of the"
-	ranged_cooldown = 0
-	ranged_cooldown_time = 15
+	ranged_attack_delay = 0
+	ranged_cooldown_duration = 15
 	obj_damage = 0
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	retreat_distance = 3
@@ -34,14 +34,14 @@
 	var/brood_type = /mob/living/danimal/hostile/asteroid/hivelordbrood
 
 /mob/living/danimal/hostile/asteroid/hivelord/OpenFire(the_target)
-	if(world.time >= ranged_cooldown)
+	if(world.time >= ranged_attack_delay)
 		var/mob/living/danimal/hostile/asteroid/hivelordbrood/A = new brood_type(src.loc)
 
 		A.flags_1 |= (flags_1 & ADMIN_SPAWNED_1)
 		A.GiveTarget(get_target())
 		A.friends = friends.Copy()
 		A.faction = faction.Copy()
-		ranged_cooldown = world.time + ranged_cooldown_time
+		ranged_attack_delay = world.time + ranged_cooldown_duration
 
 /mob/living/danimal/hostile/asteroid/hivelord/AttackingTarget()
 	OpenFire()
@@ -116,7 +116,7 @@
 	loot = list(/obj/item/organ/regenerative_core/legion)
 	brood_type = /mob/living/danimal/hostile/asteroid/hivelordbrood/legion
 	del_on_death = 1
-	robust_searching = 1
+	robust_searching = TRUE
 	var/dwarf_mob = FALSE
 	var/mob/living/carbon/human/stored_mob
 
@@ -201,7 +201,7 @@
 	attack_sound = 'sound/weapons/pierce.ogg'
 	throw_message = "is shrugged off by"
 	del_on_death = TRUE
-	robust_searching = 1
+	robust_searching = TRUE
 	swarming = TRUE
 	var/can_infest_dead = FALSE
 

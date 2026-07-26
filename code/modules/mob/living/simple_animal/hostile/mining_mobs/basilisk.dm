@@ -12,9 +12,9 @@
 	move_to_delay = 20
 	projectiletype = /obj/item/projectile/temp/basilisk
 	projectilesound = 'sound/weapons/pierce.ogg'
-	ranged = 1
+	can_ranged_attack = TRUE
 	ranged_message = "stares"
-	ranged_cooldown_time = 30
+	ranged_cooldown_duration = 30
 	throw_message = "does nothing against the hard shell of"
 	vision_range = 2
 	speed = 3
@@ -47,7 +47,7 @@
 	if(!..()) //we have a target
 		return
 	var/atom/my_target = get_target()
-	if(isliving(my_target) && !my_target.Adjacent(get_origin()) && ranged_cooldown <= world.time)//No more being shot at point blank or spammed with RNG beams
+	if(isliving(my_target) && !my_target.Adjacent(get_origin()) && ranged_attack_delay <= world.time)//No more being shot at point blank or spammed with RNG beams
 		OpenFire(my_target)
 
 /mob/living/danimal/hostile/asteroid/basilisk/ex_act(severity, target)
@@ -78,7 +78,7 @@
 	speak_emote = list("telepathically cries")
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	movement_type = FLYING
-	robust_searching = 1
+	robust_searching = TRUE
 	crusher_loot = /obj/item/crusher_trophy/watcher_wing
 	loot = list()
 	guaranteed_butcher_results = list(/obj/item/stack/ore/diamond = 2, /obj/item/stack/sheet/sinew = 2, /obj/item/stack/sheet/bone = 1)

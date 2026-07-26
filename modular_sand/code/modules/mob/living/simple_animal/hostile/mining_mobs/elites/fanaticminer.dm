@@ -107,7 +107,7 @@
 
 // priest actions
 /mob/living/danimal/hostile/asteroid/elite/minerpriest/proc/axe_slam(target)
-	ranged_cooldown = world.time + 30
+	ranged_attack_delay = world.time + 30
 	var/dir_to_target = get_dir(get_turf(src), get_turf(target))
 	var/turf/T = get_step(get_turf(src), dir_to_target)
 	for(var/i in 1 to 3)
@@ -131,7 +131,7 @@
 		T = get_step(T, dir_to_target)
 
 /mob/living/danimal/hostile/asteroid/elite/minerpriest/proc/summon_shambler(target)
-	ranged_cooldown = world.time + 150
+	ranged_attack_delay = world.time + 150
 	visible_message(span_boldwarning("[src] summons a minion!"))
 	playsound(src,'sound/magic/CastSummon.ogg', 200, 1)
 	var/list/turfs = list()
@@ -144,7 +144,7 @@
 	m1.GiveTarget(target)
 
 /mob/living/danimal/hostile/asteroid/elite/minerpriest/proc/dash(atom/dash_target)
-	ranged_cooldown = world.time + 20
+	ranged_attack_delay = world.time + 20
 	visible_message(span_boldwarning("[src] dashes into the air!"))
 	playsound(src,'sound/magic/blink.ogg', 200, 1)
 	var/list/accessable_turfs = list()
@@ -184,7 +184,7 @@
 
 
 /mob/living/danimal/hostile/asteroid/elite/minerpriest/proc/axe_throw(target)
-	ranged_cooldown = world.time + 20
+	ranged_attack_delay = world.time + 20
 	visible_message(span_boldwarning("[src] prepares to throw his axe!"))
 	var/turf/targetturf = get_turf(target)
 	playsound(src,'sound/weapons/fwoosh.wav', 200, 1)

@@ -96,7 +96,7 @@
 			spew_smoke()
 
 /mob/living/danimal/hostile/asteroid/elite/legionnaire/proc/legionnaire_charge(target)
-	ranged_cooldown = world.time + 50
+	ranged_attack_delay = world.time + 50
 	var/dir_to_target = get_dir(get_turf(src), get_turf(target))
 	var/turf/T = get_step(get_turf(src), dir_to_target)
 	for(var/i in 1 to 4)
@@ -136,7 +136,7 @@
 	addtimer(CALLBACK(src,PROC_REF(legionnaire_charge_2), move_dir, (times_ran + 1)), 2)
 
 /mob/living/danimal/hostile/asteroid/elite/legionnaire/proc/head_detach(target)
-	ranged_cooldown = world.time + 10
+	ranged_attack_delay = world.time + 10
 	if(myhead != null)
 		myhead.adjustBruteLoss(600)
 		return
@@ -173,7 +173,7 @@
 	visible_message(span_boldwarning("The top of [src]'s spine leaks a black liquid, forming into a skull!"))
 
 /mob/living/danimal/hostile/asteroid/elite/legionnaire/proc/bonfire_teleport()
-	ranged_cooldown = world.time + 5
+	ranged_attack_delay = world.time + 5
 	if(mypile == null)
 		var/obj/structure/legionnaire_bonfire/newpile = new /obj/structure/legionnaire_bonfire(loc)
 		mypile = newpile
@@ -196,7 +196,7 @@
 		mypile.forceMove(legionturf)
 
 /mob/living/danimal/hostile/asteroid/elite/legionnaire/proc/spew_smoke()
-	ranged_cooldown = world.time + 60
+	ranged_attack_delay = world.time + 60
 	var/turf/T = null
 	if(myhead != null)
 		T = get_turf(myhead)
@@ -234,7 +234,7 @@
 	del_on_death = 1
 	deathmessage = "crumbles away!"
 	faction = list()
-	ranged = FALSE
+	can_ranged_attack = FALSE
 	var/mob/living/danimal/hostile/asteroid/elite/legionnaire/body = null
 
 /mob/living/danimal/hostile/asteroid/elite/legionnairehead/death()

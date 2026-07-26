@@ -110,7 +110,7 @@
 			new /obj/effect/temp_visual/goliath_tentacle/broodmother(t, src)
 
 /mob/living/danimal/hostile/asteroid/elite/broodmother/proc/tentacle_patch(target)
-	ranged_cooldown = world.time + 15
+	ranged_attack_delay = world.time + 15
 	var/tturf = get_turf(target)
 	if(!isturf(tturf))
 		return
@@ -118,7 +118,7 @@
 	new /obj/effect/temp_visual/goliath_tentacle/broodmother/patch(tturf, src)
 
 /mob/living/danimal/hostile/asteroid/elite/broodmother/proc/spawn_children(target)
-	ranged_cooldown = world.time + 40
+	ranged_attack_delay = world.time + 40
 	visible_message(span_boldwarning("The ground churns behind [src]!"))
 	for(var/i in 1 to 2)
 		if(children_list.len >= 8)
@@ -131,7 +131,7 @@
 		children_list += newchild
 
 /mob/living/danimal/hostile/asteroid/elite/broodmother/proc/rage()
-	ranged_cooldown = world.time + 70
+	ranged_attack_delay = world.time + 70
 	playsound(src,'sound/spookoween/insane_low_laugh.ogg', 200, 1)
 	visible_message(span_warning("[src] starts picking up speed!"))
 	color = "#FF0000"
@@ -145,7 +145,7 @@
 	move_to_delay = 5
 
 /mob/living/danimal/hostile/asteroid/elite/broodmother/proc/call_children()
-	ranged_cooldown = world.time + 60
+	ranged_attack_delay = world.time + 60
 	visible_message(span_warning("The ground shakes near [src]!"))
 	var/list/directions = GLOB.cardinals.Copy() + GLOB.diagonals.Copy()
 	for(var/mob/child in children_list)
@@ -183,7 +183,7 @@
 	var/mob/living/danimal/hostile/asteroid/elite/broodmother/mother = null
 
 /mob/living/danimal/hostile/asteroid/elite/broodmother_child/OpenFire(target)
-	ranged_cooldown = world.time + 40
+	ranged_attack_delay = world.time + 40
 	var/tturf = get_turf(target)
 	if(!isturf(tturf))
 		return

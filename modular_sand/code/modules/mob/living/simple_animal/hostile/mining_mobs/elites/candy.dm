@@ -107,7 +107,7 @@
 
 // Candy actions
 /mob/living/danimal/hostile/asteroid/elite/candy/proc/bloodcharge(target)
-	ranged_cooldown = world.time + 50
+	ranged_attack_delay = world.time + 50
 	var/dir_to_target = get_dir(get_turf(src), get_turf(target))
 	var/turf/T = get_turf(src)
 	playsound(src,'sound/magic/demon_attack1.ogg', 200, 1)
@@ -125,7 +125,7 @@
 	var/list/bline = getline(T, target.loc)
 	if(bline.len > 6)
 		return FALSE
-	ranged_cooldown = world.time + 100
+	ranged_attack_delay = world.time + 100
 	visible_message(span_boldwarning("[src] traps [target]!"))
 	for(var/turf/J in view(1, target) - get_turf(target))
 		new /obj/effect/temp_visual/bloodwall(J, src)
@@ -144,7 +144,7 @@
 	qdel(chosen)
 
 /mob/living/danimal/hostile/asteroid/elite/candy/proc/meatshield()
-	ranged_cooldown = world.time + 25
+	ranged_attack_delay = world.time + 25
 	playsound(src,'sound/magic/Blind.ogg', 200, 1)
 	visible_message(span_boldwarning("[src] raises a wall!"))
 	var/turf/T = get_turf(get_step(src, src.dir))
@@ -176,7 +176,7 @@
 		new /obj/effect/temp_visual/bloodwall(otherT, src)
 
 /mob/living/danimal/hostile/asteroid/elite/candy/proc/knockdown()
-	ranged_cooldown = world.time + 100
+	ranged_attack_delay = world.time + 100
 	playsound(src,'sound/misc/crunch.ogg', 200, 1)
 	visible_message(span_boldwarning("[src] clenches his fists and smashes the ground!"))
 	var/list/hit_things = list()

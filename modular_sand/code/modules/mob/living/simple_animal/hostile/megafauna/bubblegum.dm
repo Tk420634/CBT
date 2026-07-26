@@ -32,7 +32,7 @@ Removes slaughterlings (because they are bullshit), instead replacing them with 
 	anger_modifier = clamp(((maxHealth - health)/50),0,20)
 	if(charging)
 		return
-	ranged_cooldown = world.time + ranged_cooldown_time
+	ranged_attack_delay = world.time + ranged_cooldown_duration
 	blood_warp()
 	bloodsmacks()
 	if(prob(25))

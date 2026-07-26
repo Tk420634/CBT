@@ -23,16 +23,16 @@ They deal 35 brute (armor is considered).
 	attack_sound = 'modular_sand/sound/weapons/zweihanderslice.ogg'
 	death_sound = 'modular_sand/sound/effects/gladiatordeathsound.ogg'
 	deathmessage = "gets discombobulated and fucking dies."
-	rapid_melee = 1
-	melee_queue_distance = 2
+	melee_attacks_per_turn = 1
+	windup_start_distance = 2
 	melee_damage_lower = 35
 	melee_damage_upper = 35
 	speed = 1
 	move_to_delay = 2.25
 	wander = FALSE
 	var/block_chance = 50
-	ranged = 1
-	ranged_cooldown_time = 30
+	can_ranged_attack = TRUE
+	ranged_cooldown_duration = 30
 	minimum_distance = 1
 	health = 1500
 	maxHealth = 1500
@@ -208,21 +208,21 @@ They deal 35 brute (armor is considered).
 	switch(healthpercentage)
 		if(75 to 100)
 			phase = 1
-			rapid_melee = initial(rapid_melee)
+			melee_attacks_per_turn = initial(melee_attacks_per_turn)
 			move_to_delay = initial(move_to_delay)
 			melee_damage_upper = initial(melee_damage_upper)
 			melee_damage_lower = initial(melee_damage_lower)
 		if(30 to 75)
 			phase = 2
 			icon_state = "gladiator2"
-			rapid_melee = 2
+			melee_attacks_per_turn = 2
 			move_to_delay = 2
 			melee_damage_upper = 30
 			melee_damage_lower = 30
 		if(0 to 30)
 			phase = 3
 			icon_state = "gladiator3"
-			rapid_melee = 4
+			melee_attacks_per_turn = 4
 			melee_damage_upper = 25
 			melee_damage_lower = 25
 			move_to_delay = 1.7
@@ -344,41 +344,41 @@ They deal 35 brute (armor is considered).
 	QDEL_IN(boned, 30)
 
 /mob/living/danimal/hostile/megafauna/gladiator/OpenFire()
-	if(world.time < ranged_cooldown)
+	if(world.time < ranged_attack_delay)
 		return FALSE
 	if(speen || stunned || charging)
 		return FALSE
-	ranged_cooldown = world.time
+	ranged_attack_delay = world.time
 	switch(phase)
 		if(1)
 			if(prob(25) && (get_dist(src, target) <= 4))
 				zweispin()
-				ranged_cooldown += 70
+				ranged_attack_delay += 70
 			else
 				if(prob(66))
 					chargeattack(target, 21)
-					ranged_cooldown += 40
+					ranged_attack_delay += 40
 				else
 					teleport(target)
-					ranged_cooldown += 35
+					ranged_attack_delay += 35
 		if(2)
 			if(prob(40) && (get_dist(src, target) <= 4))
 				zweispin()
-				ranged_cooldown += 55
+				ranged_attack_delay += 55
 			else
 				if(prob(40))
 					boneappletea(target)
-					ranged_cooldown += 35
+					ranged_attack_delay += 35
 				else
 					teleport(target)
-					ranged_cooldown += 30
+					ranged_attack_delay += 30
 		if(3)
 			if(prob(35))
 				boneappletea(target)
-				ranged_cooldown += 30
+				ranged_attack_delay += 30
 			else
 				teleport(target)
-				ranged_cooldown += 20
+				ranged_attack_delay += 20
 
 //Aggression helpers
 /obj/effect/step_trigger/gladiator

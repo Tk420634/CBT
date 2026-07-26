@@ -16,8 +16,8 @@
 	aggroed_vision_range = 18
 	speed = 8
 	move_to_delay = 8
-	melee_queue_distance = 20 // as far as possible really, need this because of charging
-	ranged = TRUE
+	windup_start_distance = 20 // as far as possible really, need this because of charging
+	can_ranged_attack = TRUE
 	pixel_x = -16
 	wander = FALSE
 	movement_type = GROUND

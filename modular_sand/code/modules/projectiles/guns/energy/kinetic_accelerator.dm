@@ -368,7 +368,7 @@
 	throw_message = "is shrugged off by"
 	pass_flags = PASSTABLE
 	del_on_death = TRUE
-	robust_searching = 1
+	robust_searching = TRUE
 	var/can_infest_dead = FALSE
 	faction = list("explosive")
 

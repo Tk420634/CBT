@@ -45,7 +45,7 @@
 	response_harm_continuous = "hits"
 	response_harm_simple = "hit"
 	speed = 0
-	robust_searching = 1
+	robust_searching = TRUE
 	vision_range = 3
 	maxHealth = 100
 	health = 100
@@ -71,8 +71,8 @@
 	icon_state = "nanotrasenrangedsmg"
 	icon_living = "nanotrasenrangedsmg"
 	vision_range = 9
-	rapid = 3
-	ranged = 1
+	ranged_attack_burst_count =  3
+	can_ranged_attack = TRUE
 	retreat_distance = 3
 	minimum_distance = 5
 	casingtype = /obj/item/ammo_casing/c46x30mm

@@ -216,7 +216,7 @@ GLOBAL_LIST_INIT(protected_objects, list(/obj/structure/table, /obj/structure/ca
 		emote_see = list("aims menacingly")
 		obj_damage = 0
 		environment_smash = ENVIRONMENT_SMASH_NONE //needed? seems weird for them to do so
-		ranged = 1
+		can_ranged_attack = TRUE
 		retreat_distance = 1 //just enough to shoot
 		minimum_distance = 6
 		var/obj/item/gun/G = O
@@ -271,7 +271,7 @@ GLOBAL_LIST_INIT(protected_objects, list(/obj/structure/table, /obj/structure/ca
 			Pewgun.chambered.forceMove(Pewgun)
 			visible_message(span_danger("The <b>[src]</b> cocks itself!"))
 	else
-		ranged = 0 //BANZAIIII
+		can_ranged_attack = FALSE //BANZAIIII
 		retreat_distance = 0
 		minimum_distance = 1
 		return

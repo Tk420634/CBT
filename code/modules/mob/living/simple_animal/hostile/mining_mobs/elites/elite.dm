@@ -10,7 +10,7 @@
 	faction = list("boss")
 	// robust_searching = TRUE
 	ranged_ignores_vision = TRUE
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	obj_damage = 5
 	vision_range = 6
 	aggroed_vision_range = 18

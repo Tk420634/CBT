@@ -106,14 +106,23 @@
 		return ..()
 
 
-/mob/living/danimal/hostile/retaliate/goat/AttackingTarget()
+/mob/living/danimal/hostile/retaliate/goat/PreAttackingTargetAction(list/bb, atom/my_target)
+	if(!islist(bb))
+		return
 	. = ..()
-	var/atom/my_target = get_target()
-	if(!. || !ishuman(my_target))
+	if(!.)
+		return
+	if(!ishuman(my_target))
 		return
 	var/mob/living/carbon/human/H = my_target
 	if(!istype(H.dna.species, /datum/species/pod))
 		return
+	bb["goat_chomp_them"] = TRUE
+
+/mob/living/danimal/hostile/retaliate/goat/PostMeleeAttack(list/bb, atom/my_target)
+	if(!islist(bb) || !bb["goat_chomp_them"])
+		return
+	var/mob/living/carbon/human/H = my_target
 	var/obj/item/bodypart/NB = pick(H.bodyparts)
 	H.visible_message(span_warning("[src] takes a big chomp out of [H]!"), \
 							span_userdanger("[src] takes a big chomp out of your [NB]!"))

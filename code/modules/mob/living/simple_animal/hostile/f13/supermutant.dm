@@ -26,7 +26,7 @@
 		"yells"
 		)
 	move_to_delay = 5
-	robust_searching = 1
+	robust_searching = TRUE
 	environment_smash = ENVIRONMENT_SMASH_WALLS
 	emote_taunt_sound = list(
 		'sound/f13npc/supermutant/attack1.ogg',
@@ -174,7 +174,7 @@
 	icon_living = "hulk_ranged_s"
 	icon_dead = "hulk_ranged_s"
 	color = "#3344BE"
-	ranged = 1
+	can_ranged_attack = TRUE
 	armor_list = ARMOR_VALUE_SUPERMUTANT_RANGER
 	maxHealth = 130 
 	health = 130
@@ -186,8 +186,8 @@
 	sound_after_shooting = 'sound/weapons/shotguninsert.ogg'
 	sound_after_shooting_delay = 1 SECONDS
 	extra_projectiles = 1
-	auto_fire_delay = GUN_BURSTFIRE_DELAY_FAST
-	ranged_cooldown_time = 4 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_BURSTFIRE_DELAY_FAST
+	ranged_cooldown_duration = 4 SECONDS
 	loot = list(
 		/obj/item/ammo_box/shotgun/improvised,
 		/obj/item/gun/ballistic/revolver/widowmaker,
@@ -218,7 +218,7 @@
 	extra_projectiles = 0
 	retreat_distance = 3
 	minimum_distance = 3
-	ranged_cooldown_time = 2 SECONDS
+	ranged_cooldown_duration = 2 SECONDS
 	loot = list(
 		/obj/item/gun/ballistic/automatic/varmint,
 		/obj/effect/gibspawner/generic/animal
@@ -295,7 +295,7 @@
 	armor_list = ARMOR_VALUE_SUPERMUTANT_RANGER
 	maxHealth = 140 
 	health = 140
-	ranged = 1
+	can_ranged_attack = TRUE
 	alpha = 80
 	melee_damage_lower = 25
 	melee_damage_upper = 37
@@ -338,7 +338,7 @@
 	icon_state = "night_boss_s"
 	icon_living = "night_boss_s"
 	icon_dead = "night_boss_s"
-	ranged = 1
+	can_ranged_attack = TRUE
 	armor_list = ARMOR_VALUE_SUPERMUTANT_LEGEND
 	maxHealth = 130 
 	health = 130

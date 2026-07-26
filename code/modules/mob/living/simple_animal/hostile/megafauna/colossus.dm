@@ -40,7 +40,7 @@ Difficulty: Very Hard
 	melee_damage_upper = 40
 	speed = 1
 	move_to_delay = 10
-	ranged = 1
+	can_ranged_attack = TRUE
 	pixel_x = -32
 	del_on_death = 1
 	medal_type = BOSS_MEDAL_COLOSSUS
@@ -59,12 +59,12 @@ Difficulty: Very Hard
 
 /mob/living/danimal/hostile/megafauna/colossus/OpenFire()
 	anger_modifier = clamp(((maxHealth - health)/50),0,20)
-	ranged_cooldown = world.time + 120
+	ranged_attack_delay = world.time + 120
 
 	if(enrage(get_target()))
 		if(move_to_delay == initial(move_to_delay))
 			visible_message("<span class='colossus'>\"<b>You can't dodge.</b>\"</span>")
-		ranged_cooldown = world.time + 30
+		ranged_attack_delay = world.time + 30
 		telegraph()
 		dir_shots(GLOB.alldirs)
 		move_to_delay = 3
@@ -82,14 +82,14 @@ Difficulty: Very Hard
 			INVOKE_ASYNC(src,PROC_REF(spiral_shoot), pick(TRUE, FALSE))
 
 	else if(prob(20))
-		ranged_cooldown = world.time + 2
+		ranged_attack_delay = world.time + 2
 		random_shots()
 	else
 		if(prob(70))
-			ranged_cooldown = world.time + 10
+			ranged_attack_delay = world.time + 10
 			blast()
 		else
-			ranged_cooldown = world.time + 20
+			ranged_attack_delay = world.time + 20
 			INVOKE_ASYNC(src,PROC_REF(alternating_dir_shots))
 
 

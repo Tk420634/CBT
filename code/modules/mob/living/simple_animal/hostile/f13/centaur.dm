@@ -18,7 +18,7 @@
 	speed = 2
 	melee_damage_lower = 4 // damage range is punch min, average is 15 when in melee
 	melee_damage_upper = 20
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	wound_bonus = 0
 	footstep_type = FOOTSTEP_MOB_CRAWL
 	loot = list(/obj/effect/spawner/lootdrop/f13/uncommon)

@@ -19,8 +19,8 @@
 	melee_damage_upper = 30
 	speed = 1
 	move_to_delay = 10
-	ranged_cooldown_time = 80
-	ranged = 1
+	ranged_cooldown_duration = 80
+	can_ranged_attack = TRUE
 	del_on_death = 0
 	crusher_loot = list(/obj/structure/closet/crate/necropolis/rogue/crusher)
 	loot = list(/obj/structure/closet/crate/necropolis/rogue)
@@ -64,7 +64,7 @@
 /mob/living/danimal/hostile/megafauna/rogueprocess/OpenFire(target)
 	if(special)
 		return FALSE
-	ranged_cooldown = world.time + max((ranged_cooldown_time - anger_modifier), 30)
+	ranged_attack_delay = world.time + max((ranged_cooldown_duration - anger_modifier), 30)
 	switch(anger_modifier)
 		if(0 to 25)
 			if(prob(50))

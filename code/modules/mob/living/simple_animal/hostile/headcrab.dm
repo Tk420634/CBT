@@ -15,7 +15,7 @@
 	attack_verb_simple = "chomp"
 	attack_sound = 'sound/weapons/bite.ogg'
 	faction = list("creature")
-	robust_searching = 1
+	robust_searching = TRUE
 	stat_attack = DEAD
 	obj_damage = 0
 	environment_smash = ENVIRONMENT_SMASH_NONE

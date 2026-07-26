@@ -22,9 +22,9 @@ Difficulty: Hard
 	aggroed_vision_range = 18 // man-eating for a reason
 	speed = 8
 	move_to_delay = 8
-	rapid_melee = 16 // every 1/8 second
-	melee_queue_distance = 20 // as far as possible really, need this because of charging and teleports
-	ranged = TRUE
+	melee_attacks_per_turn = 16 // every 1/8 second
+	windup_start_distance = 20 // as far as possible really, need this because of charging and teleports
+	can_ranged_attack = TRUE
 	pixel_x = -16
 	loot = list(/obj/item/wendigo_blood)
 	crusher_loot = list(/obj/item/wendigo_blood, /obj/item/crusher_trophy/demon_claws)
