@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/retaliate/frog
+/mob/living/danimal/hostile/retaliate/frog
 	name = "frog"
 	desc = "It seems a little sad."
 	icon_state = "frog"
@@ -49,12 +49,12 @@
 	variation_list = list(
 		MOB_COLOR_VARIATION(50, 50, 50, 255, 255, 255))
 
-/mob/living/simple_animal/hostile/retaliate/frog/Initialize()
+/mob/living/danimal/hostile/retaliate/frog/Initialize()
 	.=..()
 	resize = 0.5
 	update_transform()
 
-/mob/living/simple_animal/hostile/retaliate/frog/Initialize()
+/mob/living/danimal/hostile/retaliate/frog/Initialize()
 	. = ..()
 	if(prob(1))
 		name = "rare frog"
@@ -62,9 +62,9 @@
 		icon_state = "rare_frog"
 		icon_living = "rare_frog"
 		icon_dead = "rare_frog_dead"
-		guaranteed_butcher_results = list(/mob/living/simple_animal/hostile/retaliate/frog = 5)
+		guaranteed_butcher_results = list(/mob/living/danimal/hostile/retaliate/frog = 5)
 
-/mob/living/simple_animal/hostile/retaliate/frog/on_entered(AM as mob|obj)
+/mob/living/danimal/hostile/retaliate/frog/on_entered(AM as mob|obj)
 	..()
 	if(!stat && isliving(AM))
 		var/mob/living/L = AM
@@ -72,7 +72,7 @@
 			playsound(src, stepped_sound, 50, 1)
 
 
-/mob/living/simple_animal/hostile/retaliate/frog/red
+/mob/living/danimal/hostile/retaliate/frog/red
 	name = "red frog"
 	desc = "It seems a little mad."
 	icon_state = "frog2"

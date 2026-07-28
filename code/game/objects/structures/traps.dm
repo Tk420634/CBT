@@ -158,8 +158,8 @@
 	to_chat(L, span_danger("<B>With a crack, the hostile constructs come out of hiding, stunning you!</B>"))
 	L.electrocute_act(10, src, flags = SHOCK_NOGLOVES) // electrocute act does a message.
 	L.DefaultCombatKnockdown(20)
-	new /mob/living/simple_animal/hostile/construct/proteon/hostile(loc)
-	new /mob/living/simple_animal/hostile/construct/proteon/hostile(loc)
+	new /mob/living/danimal/hostile/construct/proteon/hostile(loc)
+	new /mob/living/danimal/hostile/construct/proteon/hostile(loc)
 	QDEL_IN(src, 30)
 
 //fugitive traps

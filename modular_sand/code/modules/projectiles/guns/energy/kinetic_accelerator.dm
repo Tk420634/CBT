@@ -279,7 +279,7 @@
 
 /obj/item/borg/upgrade/modkit/knockback/projectile_strike(obj/item/projectile/kinetic/K, turf/target_turf, atom/target, obj/item/gun/energy/kinetic_accelerator/KA)
 	..()
-	var/mob/living/simple_animal/T = target
+	var/mob/living/danimal/T = target
 	if(T.stat != DEAD)
 		playsound(T, 'sound/magic/fireball.ogg', 20, 1)
 		new /obj/effect/temp_visual/fire(T.loc)
@@ -303,7 +303,7 @@
 		new /obj/effect/temp_visual/hierophant/squares(T)
 	if(istype(target, /mob/living))
 		new /obj/effect/temp_visual/hierophant/telegraph/teleport(target.loc)
-	if(istype(target, /mob/living/simple_animal) && ( world.time > cooldown))
+	if(istype(target, /mob/living/danimal) && ( world.time > cooldown))
 		var/mob/living/F = K.firer
 		var/dir_to_target = get_dir(F, target)
 		var/turf/T = get_step(get_turf(F), dir_to_target)
@@ -345,7 +345,7 @@
 		KA.attempt_reload(KA.overheat_time * src.modifier)
 
 //legion
-/mob/living/simple_animal/hostile/asteroid/hivelordbrood/explosivelegion
+/mob/living/danimal/hostile/asteroid/hivelordbrood/explosivelegion
 	name = "explosive legion skull"
 	desc = "Oh no."
 	icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
@@ -359,7 +359,6 @@
 	vision_range = 10
 	maxHealth = 5
 	health = 5
-	harm_intent_damage = 20
 	melee_damage_lower = 20
 	melee_damage_upper = 20
 	attack_verb_continuous = "bites"
@@ -369,11 +368,11 @@
 	throw_message = "is shrugged off by"
 	pass_flags = PASSTABLE
 	del_on_death = TRUE
-	robust_searching = 1
+	robust_searching = TRUE
 	var/can_infest_dead = FALSE
 	faction = list("explosive")
 
-/mob/living/simple_animal/hostile/asteroid/hivelordbrood/explosivelegion/death()
+/mob/living/danimal/hostile/asteroid/hivelordbrood/explosivelegion/death()
 	explosion(src.loc, 0, 0, 1, 2, 0, FALSE, 2)
 	src.visible_message(span_danger("The [src] explodes!"))
 	..()
@@ -386,8 +385,8 @@
 /obj/item/borg/upgrade/modkit/skull/projectile_strike(obj/item/projectile/kinetic/K, turf/target_turf, atom/target, obj/item/gun/energy/kinetic_accelerator/KA)
 	..()
 	if(isliving(target))
-		if(istype(target, /mob/living/simple_animal))
-			var/mob/living/simple_animal/hostile/asteroid/hivelordbrood/explosivelegion/L = new(get_step(target, target.dir))
+		if(istype(target, /mob/living/danimal))
+			var/mob/living/danimal/hostile/asteroid/hivelordbrood/explosivelegion/L = new(get_step(target, target.dir))
 			L.GiveTarget(target)
 
 //blood drunk miner

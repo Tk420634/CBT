@@ -273,8 +273,8 @@
 	var/turf/T
 	for(var/atom/movable/M in range(7, invoker))
 		if(isliving(M))
-			if(isclockmob(M) || istype(M, /mob/living/simple_animal/drone/cogscarab))
-				var/mob/living/simple_animal/S = M
+			if(isclockmob(M) || istype(M, /mob/living/danimal/drone/cogscarab))
+				var/mob/living/danimal/S = M
 				if(S.health == S.maxHealth || S.stat == DEAD)
 					continue
 				T = get_turf(M)

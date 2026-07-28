@@ -46,12 +46,12 @@ PROCESSING_SUBSYSTEM_DEF(vore)
 
 /datum/controller/subsystem/processing/vore/proc/build_list_of_mobtypes_that_should_vore()
 	approved_vore_mobtypes |= typecacheof(/mob/living/carbon/human)
-	approved_vore_mobtypes |= typecacheof(/mob/living/simple_animal)
+	approved_vore_mobtypes |= typecacheof(/mob/living/danimal)
 
 /datum/controller/subsystem/processing/vore/proc/build_list_of_items_that_can_be_vored()
 	approved_vore_paths |= typecacheof(list(
 		/obj/item/reagent_containers/food,
-		/mob/living/simple_animal,
+		/mob/living/danimal,
 		/obj/item/organ,
 		/obj/item/clothing/head/mob_holder,
 		/obj/item/trash,

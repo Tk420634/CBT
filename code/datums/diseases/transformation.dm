@@ -229,7 +229,7 @@
 	stage3	= list(span_danger("Your appendages are melting away."), span_danger("Your limbs begin to lose their shape."))
 	stage4	= list(span_danger("You are turning into a slime."))
 	stage5	= list(span_danger("You have become a slime."))
-	new_form = /mob/living/simple_animal/slime/random
+	new_form = /mob/living/danimal/slime/random
 
 /datum/disease/transformation/slime/stage_act()
 	..()
@@ -257,7 +257,7 @@
 	stage3	= list(span_danger("Must... eat... chocolate...."), span_danger("YAP"))
 	stage4	= list(span_danger("Visions of washing machines assail your mind!"))
 	stage5	= list(span_danger("AUUUUUU!!!"))
-	new_form = /mob/living/simple_animal/pet/dog/corgi
+	new_form = /mob/living/danimal/pet/dog/corgi
 
 /datum/disease/transformation/corgi/stage_act()
 	..()
@@ -283,5 +283,5 @@
 	stage3	= list(span_danger("Your appendages are melting away."), span_danger("Your limbs begin to lose their shape."))
 	stage4	= list(span_danger("You're ravenous."))
 	stage5	= list(span_danger("You have become a morph."))
-	new_form = /mob/living/simple_animal/hostile/morph
+	new_form = /mob/living/danimal/hostile/morph
 	infectable_biotypes = MOB_ORGANIC|MOB_MINERAL|MOB_UNDEAD //magic!

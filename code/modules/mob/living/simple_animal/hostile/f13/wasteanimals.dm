@@ -2,7 +2,7 @@
 // GECKO //
 ///////////
 
-/mob/living/simple_animal/hostile/gecko
+/mob/living/danimal/hostile/gecko
 	bounty = 5
 	name = "gecko"
 	desc = "A large mutated reptile with sharp teeth."
@@ -28,7 +28,6 @@
 	maxHealth = 60
 	health = 60
 	low_health_threshold = 0.5
-	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 4
 	melee_damage_upper = 12
@@ -115,18 +114,18 @@
 		MOB_MINIMUM_DISTANCE_CHANGE_PER_TURN_CHANCE(100),
 	)
 
-/mob/living/simple_animal/hostile/gecko/become_the_mob(mob/user)
+/mob/living/danimal/hostile/gecko/become_the_mob(mob/user)
 	make_a_nest = /obj/effect/proc_holder/mob_common/make_nest/gecko
 	call_backup = /obj/effect/proc_holder/mob_common/summon_backup/small_critter
 	send_mobs = /obj/effect/proc_holder/mob_common/direct_mobs/small_critter
 	. = ..()
 
-/mob/living/simple_animal/hostile/gecko/Aggro()
+/mob/living/danimal/hostile/gecko/Aggro()
 	..()
 	summon_backup(15)
 
 
-/mob/living/simple_animal/hostile/gecko/summon //untameable
+/mob/living/danimal/hostile/gecko/summon //untameable
 	faction = list("gecko")
 	can_ghost_into = FALSE
 	guaranteed_butcher_results = list()
@@ -135,18 +134,18 @@
 	var/die_at_this_time = 0
 	var/lifetime = 1 MINUTES
 
-/mob/living/simple_animal/hostile/gecko/summon/Initialize()
+/mob/living/danimal/hostile/gecko/summon/Initialize()
 	die_at_this_time = world.time + lifetime
 	. = ..()
 
-/mob/living/simple_animal/hostile/gecko/summon/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/gecko/summon/BiologicalLife(seconds, times_fired)
 	. = ..()
 	if(world.time >= die_at_this_time)
 		if(prob(5))
 			explosion(get_turf(src), -1, -1, 2, 0, FALSE, FALSE, 2, FALSE, TRUE) // why do we explode dood
 		dust()
 
-/mob/living/simple_animal/hostile/gecko/make_low_health()
+/mob/living/danimal/hostile/gecko/make_low_health()
 	melee_damage_lower *= 0.5
 	melee_damage_upper *= 0.7
 	see_in_dark += 8
@@ -158,7 +157,7 @@
 	minimum_distance = 10
 
 /// Override this with what should happen when going from low health to high health
-/mob/living/simple_animal/hostile/gecko/make_high_health()
+/mob/living/danimal/hostile/gecko/make_high_health()
 	melee_damage_lower = initial(melee_damage_lower)
 	melee_damage_upper = initial(melee_damage_upper)
 	see_in_dark = initial(see_in_dark)
@@ -171,7 +170,7 @@
 
 //Fire Geckos//
 
-/mob/living/simple_animal/hostile/gecko/fire
+/mob/living/danimal/hostile/gecko/fire
 	bounty = 9
 	name = "fire spitter gecko"
 	desc = "A large mutated reptile with sharp teeth and a warm disposition. Sorta smells like sulphur."
@@ -190,7 +189,6 @@
 	speed = 0
 	maxHealth = 55
 	health = 55
-	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 4
 	melee_damage_upper = 12
@@ -244,7 +242,7 @@
 	a_intent = INTENT_HARM
 	gold_core_spawnable = HOSTILE_SPAWN
 	footstep_type = FOOTSTEP_MOB_CLAW
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	check_friendly_fire = TRUE
 	projectiletype = /obj/item/projectile/geckofire
 	projectilesound = 'sound/magic/fireball.ogg'
@@ -270,14 +268,14 @@
 		MOB_MINIMUM_DISTANCE_CHANGE_PER_TURN_CHANCE(100),
 	)
 
-/mob/living/simple_animal/hostile/gecko/fire/Initialize()
+/mob/living/danimal/hostile/gecko/fire/Initialize()
 	.=..()
 	resize = 0.8
 	update_transform()
 
 //rad Geckos//
 
-/mob/living/simple_animal/hostile/gecko/fire/rads
+/mob/living/danimal/hostile/gecko/fire/rads
 	bounty = 8
 	name = "rad spitting gecko"
 	desc = "A large mutated reptile with sharp teeth and a warm disposition. Sorta smells like ozone."
@@ -294,7 +292,6 @@
 	response_harm_simple = "hits"
 	taunt_chance = 30
 	speed = 0
-	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 4
 	melee_damage_upper = 12
@@ -347,7 +344,7 @@
 	a_intent = INTENT_HARM
 	gold_core_spawnable = HOSTILE_SPAWN
 	footstep_type = FOOTSTEP_MOB_CLAW
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	check_friendly_fire = TRUE
 	projectiletype = /obj/item/projectile/radiation_thing/neurothing
 	projectilesound = 'sound/weapons/etherealhit.ogg'
@@ -373,7 +370,7 @@
 		MOB_MINIMUM_DISTANCE_CHANGE_PER_TURN_CHANCE(100),
 	)
 
-/mob/living/simple_animal/hostile/gecko/fire/Initialize()
+/mob/living/danimal/hostile/gecko/fire/Initialize()
 	.=..()
 	resize = 0.8
 	update_transform()
@@ -421,7 +418,7 @@
 //Smaller Legacy Geckos//
 //Faster and more aggressive than normal geckos, but also easier even squishier.
 
-/mob/living/simple_animal/hostile/gecko/legacy
+/mob/living/danimal/hostile/gecko/legacy
 	bounty = 6
 	name = "newt"
 	desc = "A large dog sized amphibious biped with an oddly large mouth for its size. Probably related to geckos in some way."
@@ -443,7 +440,6 @@
 	speed = 0
 	maxHealth = 40
 	health = 40
-	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 7
 	melee_damage_upper = 18
@@ -512,7 +508,7 @@
 	desc_important = "Still in development! Report wierdness on the discord!"
 
 
-/mob/living/simple_animal/hostile/gecko/legacy/alpha
+/mob/living/danimal/hostile/gecko/legacy/alpha
 	bounty = 10
 	name = "alpha newt"
 	desc = "A large dog sized amphibious biped with an oddly large mouth for its size. Probably related to geckos in some way. This one's drooling a lot and looks sort of tired."
@@ -531,7 +527,6 @@
 	speed = 0
 	maxHealth = 45
 	health = 45
-	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 7
 	melee_damage_upper = 18
@@ -566,7 +561,7 @@
 		MOB_MINIMUM_DISTANCE_CHANGE_PER_TURN_CHANCE(50),
 		)
 
-/mob/living/simple_animal/hostile/gecko/legacy/alpha/AttackingTarget()
+/mob/living/danimal/hostile/gecko/legacy/alpha/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!. || !ishuman(my_target))
@@ -574,7 +569,7 @@
 	var/mob/living/carbon/human/H = my_target
 	H.reagents.add_reagent(/datum/reagent/toxin/staminatoxin, 1)
 
-/mob/living/simple_animal/hostile/gecko/big
+/mob/living/danimal/hostile/gecko/big
 	bounty = 18
 	name = "big gecko"
 	name = "big gecko"
@@ -594,7 +589,6 @@
 	speed = 0
 	maxHealth = 120
 	health = 120
-	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 12
 	melee_damage_upper = 24
@@ -633,12 +627,12 @@
 		MOB_MINIMUM_DISTANCE_CHANGE_PER_TURN_CHANCE(50),
 	)
 
-/mob/living/simple_animal/hostile/gecko/big/Initialize()
+/mob/living/danimal/hostile/gecko/big/Initialize()
 	.=..()
 	resize = 1.5
 	update_transform()
 
-/mob/living/simple_animal/hostile/gecko/playable
+/mob/living/danimal/hostile/gecko/playable
 	health = 40
 	maxHealth = 40
 	speed = 0
@@ -654,7 +648,7 @@
 	footstep_type = FOOTSTEP_MOB_CLAW
 
 /// Testing its randomness
-/mob/living/simple_animal/hostile/gecko/debug
+/mob/living/danimal/hostile/gecko/debug
 	sound_pitch = 100
 	vary_pitches = list(-200, 200)
 	variation_list = list(
@@ -672,7 +666,7 @@
 	)
 
 /// Testing its randomness
-/mob/living/simple_animal/hostile/gecko/debug/stamcrit
+/mob/living/danimal/hostile/gecko/debug/stamcrit
 	variation_list = list(
 		MOB_NAME_FROM_GLOBAL_LIST(MOB_RANDOM_NAME(MOB_NAME_RANDOM_LIZARD_FEMALE, 1)),
 		MOB_HEALTH_LIST(50),
@@ -683,11 +677,11 @@
 	)
 
 /// Testing its randomness
-/mob/living/simple_animal/hostile/gecko/debug/stamcrit/Initialize()
+/mob/living/danimal/hostile/gecko/debug/stamcrit/Initialize()
 	. = ..()
 	new /obj/item/gun/energy/disabler/debug(get_turf(src))
 
-/mob/living/simple_animal/hostile/gecko/Aggro()
+/mob/living/danimal/hostile/gecko/Aggro()
 	. = ..()
 	if(.)
 		return
@@ -697,7 +691,7 @@
 // NIGHTSTALKERS & PELT //
 //////////////////////////
 
-/mob/living/simple_animal/hostile/stalker
+/mob/living/danimal/hostile/stalker
 	bounty = 25
 	name = "greater hellhound"
 	desc = "A hellhound is a fierce, supernatural canine often associated with the underworld, known for its fiery eyes and ominous presence."
@@ -738,7 +732,6 @@
 	speed = 1
 	maxHealth = 80
 	health = 80
-	harm_intent_damage = 8
 	obj_damage = 15
 	melee_damage_lower = 4
 	melee_damage_upper = 12
@@ -753,11 +746,11 @@
 	waddle_up_time = 1
 	waddle_side_time = 1
 
-/mob/living/simple_animal/hostile/stalker/Initialize()
+/mob/living/danimal/hostile/stalker/Initialize()
 	. = ..()
 	recenter_wide_sprite()
 
-/mob/living/simple_animal/hostile/stalker/playable
+/mob/living/danimal/hostile/stalker/playable
 	health = 80
 	maxHealth = 80
 	emote_taunt_sound = null
@@ -770,7 +763,7 @@
 	melee_damage_lower = 10
 	melee_damage_upper = 15
 
-/mob/living/simple_animal/hostile/stalker/AttackingTarget()
+/mob/living/danimal/hostile/stalker/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!. || !ishuman(my_target))
@@ -778,14 +771,14 @@
 	var/mob/living/carbon/human/H = my_target
 	H.reagents.add_reagent(/datum/reagent/toxin/rattler_venom, 5)
 
-/mob/living/simple_animal/hostile/stalker/playable/legion
+/mob/living/danimal/hostile/stalker/playable/legion
 	name = "legionstalker"
 	desc = "A nightstalker bred specifically for the legion under the use of combat and companionship. legionstalkers have the body and loyalty of a canine but the agility and deadlyness of rattlesnake."
 	icon_state = "nightstalker-legion"
 	icon_living = "nightstalker-legion"
 	icon_dead = "nightstalker-legion-dead"
 
-/mob/living/simple_animal/hostile/stalkeryoung
+/mob/living/danimal/hostile/stalkeryoung
 	bounty = 50
 	name = "hellhound"
 	desc = "A hellhound is a fierce, supernatural canine often associated with the underworld, known for its fiery eyes and ominous presence."
@@ -810,7 +803,6 @@
 	speed = 1
 	maxHealth = 50
 	health = 50
-	harm_intent_damage = 8
 	obj_damage = 15
 	melee_damage_lower = 5
 	melee_damage_upper = 10
@@ -831,7 +823,7 @@
 	waddle_up_time = 1
 	waddle_side_time = 2
 
-/mob/living/simple_animal/hostile/stalkeryoung/playable
+/mob/living/danimal/hostile/stalkeryoung/playable
 	health = 80
 	maxHealth = 80
 	emote_taunt_sound = null
@@ -845,7 +837,7 @@
 	melee_damage_upper = 10
 	footstep_type = FOOTSTEP_MOB_CLAW
 
-/mob/living/simple_animal/hostile/stalker/AttackingTarget()
+/mob/living/danimal/hostile/stalker/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!. || !ishuman(my_target))
@@ -925,7 +917,7 @@
 // MOLERAT //  It's time ~TK
 /////////////
 
-/mob/living/simple_animal/hostile/molerat
+/mob/living/danimal/hostile/molerat
 	bounty = 4
 	name = "giant rat"
 	desc = "A large mutated rat that finds its way everywhere. Common in caves and underground areas."
@@ -950,7 +942,6 @@
 	speed = 2
 	maxHealth = 25
 	health = 25
-	harm_intent_damage = 8
 	obj_damage = 15
 	melee_damage_lower = 4
 	melee_damage_upper = 10
@@ -983,23 +974,23 @@
 		MOB_MINIMUM_DISTANCE_CHANGE_PER_TURN_CHANCE(5),
 	)
 
-/mob/living/simple_animal/hostile/molerat/Initialize()
+/mob/living/danimal/hostile/molerat/Initialize()
 	. = ..()
 	recenter_wide_sprite()
 
-/mob/living/simple_animal/hostile/molerat/become_the_mob(mob/user)
+/mob/living/danimal/hostile/molerat/become_the_mob(mob/user)
 	call_backup = /obj/effect/proc_holder/mob_common/summon_backup/small_critter
 	send_mobs = /obj/effect/proc_holder/mob_common/direct_mobs/small_critter
 	make_a_nest = /obj/effect/proc_holder/mob_common/make_nest/molerat
 	. = ..()
 
-/mob/living/simple_animal/hostile/molerat/Initialize()
+/mob/living/danimal/hostile/molerat/Initialize()
 	.=..()
 	resize = 0.8
 	update_transform()
 
 
-/mob/living/simple_animal/hostile/molerat/micro
+/mob/living/danimal/hostile/molerat/micro
 	bounty = 2
 	name = "Swarmling"
 	maxHealth = 10
@@ -1017,12 +1008,12 @@
 		MOB_MINIMUM_DISTANCE_CHANGE_PER_TURN_CHANCE(50),
 	) //same as a newt for how they attack
 
-/mob/living/simple_animal/hostile/molerat/micro/Initialize()
+/mob/living/danimal/hostile/molerat/micro/Initialize()
 	.=..()
 	resize = 0.75
 	update_transform()
 
-/mob/living/simple_animal/hostile/molerat/leader
+/mob/living/danimal/hostile/molerat/leader
 	bounty = 10
 	name = "Giant Rat Broodmother"
 	maxHealth = 40
@@ -1033,7 +1024,7 @@
 	minimum_distance = 7
 	aggroed_vision_range = 7
 	vision_range = 9
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	can_glow_revive = FALSE
 	variation_list = list(
 		MOB_COLOR_VARIATION(245, 215, 0, 255, 220, 5), //Rmin, Gmin, Bmin, Rmax, Gmax, Bmax
@@ -1045,7 +1036,7 @@
 		MOB_MINIMUM_DISTANCE_CHANGE_PER_TURN_CHANCE(50),
 	) //same as a newt for how they attack
 
-/mob/living/simple_animal/hostile/molerat/leader/Initialize()
+/mob/living/danimal/hostile/molerat/leader/Initialize()
 	.=..()
 	resize = 2.0
 	pixel_y = 10
@@ -1054,9 +1045,9 @@
 
 
 
-/mob/living/simple_animal/hostile/molerat/leader/Initialize(mapload)
+/mob/living/danimal/hostile/molerat/leader/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/glow_heal, chosen_targets = /mob/living/simple_animal/hostile/molerat, allow_revival = FALSE, restrict_faction = null, type_healing = BRUTELOSS)
+	AddComponent(/datum/component/glow_heal, chosen_targets = /mob/living/danimal/hostile/molerat, allow_revival = FALSE, restrict_faction = null, type_healing = BRUTELOSS)
 
 /obj/item/projectile/giantratsummon
 	name = "giant rat summoning"
@@ -1081,25 +1072,25 @@
 
 /obj/item/projectile/moleratsummon/on_hit(atom/target, blocked = FALSE)
 	..()
-	spawn_and_random_walk(/mob/living/simple_animal/hostile/molerat/micro/summon, target, 10, walk_chance = 100, max_walk = 10, admin_spawn = FALSE)
+	spawn_and_random_walk(/mob/living/danimal/hostile/molerat/micro/summon, target, 10, walk_chance = 100, max_walk = 10, admin_spawn = FALSE)
 	//		break
 	return BULLET_ACT_HIT
 
-/mob/living/simple_animal/hostile/molerat/micro/summon //untameable
+/mob/living/danimal/hostile/molerat/micro/summon //untameable
 	can_ghost_into = FALSE
 	guaranteed_butcher_results = list()
 	butcher_results = list()
 	del_on_death = TRUE
 
-/mob/living/simple_animal/hostile/molerat/leader/Initialize(mapload)
+/mob/living/danimal/hostile/molerat/leader/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/glow_heal, chosen_targets = /mob/living/simple_animal/hostile/molerat, allow_revival = TRUE, restrict_faction = null, type_healing = BRUTELOSS)
+	AddComponent(/datum/component/glow_heal, chosen_targets = /mob/living/danimal/hostile/molerat, allow_revival = TRUE, restrict_faction = null, type_healing = BRUTELOSS)
 
 
 
 //GELCUBE
 
-/mob/living/simple_animal/hostile/gelcube
+/mob/living/danimal/hostile/gelcube
 	bounty = 100
 	name = "gelatinous cube"
 	desc = "A big green radioactive cube creature, it jiggles with menacing wiggles and is making some sort of goofy face at you."
@@ -1127,7 +1118,6 @@
 	speed = 12
 	maxHealth = 850
 	health = 850
-	harm_intent_damage = 30
 	obj_damage = 15
 	melee_damage_lower = 35
 	melee_damage_upper = 45
@@ -1149,7 +1139,7 @@
 	waddle_side_time = 2
 	desc_short = "Big, squishy, and gelatinous."
 
-/mob/living/simple_animal/hostile/gelcube/Initialize()
+/mob/living/danimal/hostile/gelcube/Initialize()
 	. = ..()
 	if(random_trash_loot)
 		loot = GLOB.trash_ammo + GLOB.trash_chem + GLOB.trash_clothing + GLOB.trash_craft + GLOB.trash_gun + GLOB.trash_misc + GLOB.trash_money + GLOB.trash_mob + GLOB.trash_part + GLOB.trash_tool
@@ -1159,7 +1149,7 @@
 //T-Birds//
 //////////
 
-/mob/living/simple_animal/hostile/bloodbird
+/mob/living/danimal/hostile/bloodbird
 	bounty = 25
 	name = "Blood Bird"
 	desc = "A large mutated turkey vulture."
@@ -1182,7 +1172,6 @@
 	speed = 0
 	maxHealth = 100
 	health = 100
-	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 25
 	melee_damage_upper = 35

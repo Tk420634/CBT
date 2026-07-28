@@ -415,7 +415,7 @@ GLOBAL_LIST_INIT(blood_loss_messages, list(
 /mob/proc/get_blood_id()
 	return
 
-/mob/living/simple_animal/get_blood_id()
+/mob/living/danimal/get_blood_id()
 	if(blood_volume)
 		return /datum/reagent/blood
 

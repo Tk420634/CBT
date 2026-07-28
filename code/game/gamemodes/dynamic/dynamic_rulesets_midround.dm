@@ -562,7 +562,7 @@
 	// var/datum/mind/player_mind = new /datum/mind(applicant.key)
 	// player_mind.active = TRUE
 
-	// var/mob/living/simple_animal/hostile/space_dragon/S = new (pick(spawn_locs))
+	// var/mob/living/danimal/hostile/space_dragon/S = new (pick(spawn_locs))
 	// player_mind.transfer_to(S)
 	// player_mind.assigned_role = "Space Dragon"
 	// player_mind.special_role = ROLE_SPACE_DRAGON
@@ -733,7 +733,7 @@
 	. = ..()
 
 /datum/dynamic_ruleset/midround/from_ghosts/revenant/generate_ruleset_body(mob/applicant)
-	var/mob/living/simple_animal/revenant/revenant = new(pick(spawn_locs))
+	var/mob/living/danimal/revenant/revenant = new(pick(spawn_locs))
 	revenant.key = applicant.key
 	message_admins("[ADMIN_LOOKUPFLW(revenant)] has been made into a revenant by the midround ruleset.")
 	log_game("[key_name(revenant)] was spawned as a revenant by the midround ruleset.")

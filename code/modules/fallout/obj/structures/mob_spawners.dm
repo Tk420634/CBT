@@ -15,7 +15,7 @@ GLOBAL_LIST_EMPTY(player_made_nests)
 	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	anchored = TRUE
 	layer = BELOW_OBJ_LAYER
-	var/list/mob_types = list(/mob/living/simple_animal/hostile/carp)
+	var/list/mob_types = list(/mob/living/danimal/hostile/carp)
 	/// Time between spawns
 	var/spawn_time = 20 MINUTES
 	/// Can be boarded up
@@ -190,92 +190,92 @@ GLOBAL_LIST_EMPTY(player_made_nests)
 	name = "ghoul nest"
 	max_mobs = 3
 	swarm_size = 2
-	mob_types = list(/mob/living/simple_animal/hostile/ghoul = 5,
-					/mob/living/simple_animal/hostile/ghoul/reaver = 2,
-					/mob/living/simple_animal/hostile/ghoul/glowing = 1)
+	mob_types = list(/mob/living/danimal/hostile/ghoul = 5,
+					/mob/living/danimal/hostile/ghoul/reaver = 2,
+					/mob/living/danimal/hostile/ghoul/glowing = 1)
 
 /obj/structure/nest/lesserspider
 	name = "spider nest"
 	max_mobs = 2
-	mob_types = list(/mob/living/simple_animal/hostile/poison/giant_spider/nurse = 5,
-					/mob/living/simple_animal/hostile/poison/giant_spider/hunter = 3,
-					/mob/living/simple_animal/hostile/poison/giant_spider/hunter/viper = 3,
-					/mob/living/simple_animal/hostile/poison/giant_spider/tarantula = 3)
+	mob_types = list(/mob/living/danimal/hostile/poison/giant_spider/nurse = 5,
+					/mob/living/danimal/hostile/poison/giant_spider/hunter = 3,
+					/mob/living/danimal/hostile/poison/giant_spider/hunter/viper = 3,
+					/mob/living/danimal/hostile/poison/giant_spider/tarantula = 3)
 
 // /obj/structure/nest/greaterspider
 // 	name = "empress nest"
 // 	max_mobs = 1
 // 	spawn_time = 20 SECONDS
-// 	mob_types = list(/mob/living/simple_animal/hostile/poison/giant_spider/queen = 2,
-// 					/mob/living/simple_animal/hostile/poison/giant_spider/empress = 1)
+// 	mob_types = list(/mob/living/danimal/hostile/poison/giant_spider/queen = 2,
+// 					/mob/living/danimal/hostile/poison/giant_spider/empress = 1)
 
 // /obj/structure/nest/omegaspider
 // 	name = "emperor nest"
 // 	max_mobs = 1
 // 	spawn_time = 25 SECONDS
-// 	mob_types = list(/mob/living/simple_animal/hostile/poison/giant_spider/emperor = 2)
+// 	mob_types = list(/mob/living/danimal/hostile/poison/giant_spider/emperor = 2)
 
 /obj/structure/nest/mook
 	name = "mook den"
 	max_mobs = 2
-	mob_types = list(/mob/living/simple_animal/hostile/jungle/mook = 2)
+	mob_types = list(/mob/living/danimal/hostile/jungle/mook = 2)
 
 /obj/structure/nest/hivebot
 	name = "hivebot datacreator"
 	max_mobs = 3
-	mob_types = list(/mob/living/simple_animal/hostile/hivebot = 3,
-					/mob/living/simple_animal/hostile/hivebot/range = 3,
-					/mob/living/simple_animal/hostile/hivebot/rapid = 3,
-					/mob/living/simple_animal/hostile/hivebot/strong = 3)
+	mob_types = list(/mob/living/danimal/hostile/hivebot = 3,
+					/mob/living/danimal/hostile/hivebot/range = 3,
+					/mob/living/danimal/hostile/hivebot/rapid = 3,
+					/mob/living/danimal/hostile/hivebot/strong = 3)
 
 /obj/structure/nest/pirate
 	name = "pirate hideout"
 	max_mobs = 2
-	mob_types = list(/mob/living/simple_animal/hostile/raider/pirate/melee = 2,
-					/mob/living/simple_animal/hostile/raider/pirate/ranged = 2)
+	mob_types = list(/mob/living/danimal/hostile/raider/pirate/melee = 2,
+					/mob/living/danimal/hostile/raider/pirate/ranged = 2)
 
 /obj/structure/nest/russian
 	name = "russian hideout"
 	max_mobs = 2
-	mob_types = list(/mob/living/simple_animal/hostile/russian/ranged = 2,
-					/mob/living/simple_animal/hostile/russian/ranged/mosin = 2,
-					/mob/living/simple_animal/hostile/russian/ranged/trooper = 2,
-					/mob/living/simple_animal/hostile/russian/ranged/officer = 2)
+	mob_types = list(/mob/living/danimal/hostile/russian/ranged = 2,
+					/mob/living/danimal/hostile/russian/ranged/mosin = 2,
+					/mob/living/danimal/hostile/russian/ranged/trooper = 2,
+					/mob/living/danimal/hostile/russian/ranged/officer = 2)
 
 // /obj/structure/nest/syndicate
 // 	name = "syndicate hideout"
 // 	max_mobs = 2
-// 	mob_types = list(/mob/living/simple_animal/hostile/renegade/syndicate/melee/sword/space = 2,
-// 					/mob/living/simple_animal/hostile/renegade/syndicate/melee/sword/space/stormtrooper = 2,
-// 					/mob/living/simple_animal/hostile/renegade/syndicate/ranged/smg/space = 2,
-// 					/mob/living/simple_animal/hostile/renegade/syndicate/ranged/smg/space/stormtrooper = 2,
-// 					/mob/living/simple_animal/hostile/renegade/syndicate/ranged/shotgun/space,
-// 					/mob/living/simple_animal/hostile/renegade/syndicate/ranged/shotgun/space/stormtrooper)
+// 	mob_types = list(/mob/living/danimal/hostile/renegade/syndicate/melee/sword/space = 2,
+// 					/mob/living/danimal/hostile/renegade/syndicate/melee/sword/space/stormtrooper = 2,
+// 					/mob/living/danimal/hostile/renegade/syndicate/ranged/smg/space = 2,
+// 					/mob/living/danimal/hostile/renegade/syndicate/ranged/smg/space/stormtrooper = 2,
+// 					/mob/living/danimal/hostile/renegade/syndicate/ranged/shotgun/space,
+// 					/mob/living/danimal/hostile/renegade/syndicate/ranged/shotgun/space/stormtrooper)
 
 /obj/structure/nest/aethergiest
 	name = "aethergiest nest"
 	max_mobs = 1
-	mob_types = list(/mob/living/simple_animal/hostile/aethergiest = 1)
+	mob_types = list(/mob/living/danimal/hostile/aethergiest = 1)
 
 /obj/structure/nest/aethergiest/mother
 	name = "mother aethergiest nest"
-	mob_types = list(/mob/living/simple_animal/hostile/aethergiest/mother = 1)
+	mob_types = list(/mob/living/danimal/hostile/aethergiest/mother = 1)
 
 /obj/structure/nest/scorpion
 	name = "scorpion nest"
 	max_mobs = 1
-	mob_types = list(/mob/living/simple_animal/hostile/radscorpion = 5,
-					/mob/living/simple_animal/hostile/radscorpion/black = 5)
+	mob_types = list(/mob/living/danimal/hostile/radscorpion = 5,
+					/mob/living/danimal/hostile/radscorpion/black = 5)
 
 /obj/structure/nest/radroach
 	name = "mutant pillbug nest"
 	max_mobs = 3
 	swarm_size = 3
-	mob_types = list(/mob/living/simple_animal/hostile/pillbug = 10,
-					/mob/living/simple_animal/hostile/pillbug/micro = 15,
-					/mob/living/simple_animal/hostile/pillbug/leader = 5,
-					/mob/living/simple_animal/hostile/pillbug/strongradroach = 10,
-					/mob/living/simple_animal/hostile/bloatfly = 2
+	mob_types = list(/mob/living/danimal/hostile/pillbug = 10,
+					/mob/living/danimal/hostile/pillbug/micro = 15,
+					/mob/living/danimal/hostile/pillbug/leader = 5,
+					/mob/living/danimal/hostile/pillbug/strongradroach = 10,
+					/mob/living/danimal/hostile/bloatfly = 2
 					)
 
 /obj/structure/nest/bloatfly
@@ -283,62 +283,62 @@ GLOBAL_LIST_EMPTY(player_made_nests)
 	max_mobs = 10
 	swarm_size = 2
 	mob_types = list(
-					/mob/living/simple_animal/hostile/bloatfly = 20
+					/mob/living/danimal/hostile/bloatfly = 20
 					)
 
 /obj/structure/nest/fireant
 	name = "fireant nest"
 	max_mobs = 2
-	mob_types = list(/mob/living/simple_animal/hostile/fireant = 3,
-					/mob/living/simple_animal/hostile/giantant = 6)
+	mob_types = list(/mob/living/danimal/hostile/fireant = 3,
+					/mob/living/danimal/hostile/giantant = 6)
 
 
 /obj/structure/nest/wanamingo
 	name = "wanamingo nest"
 
 	max_mobs = 1
-	mob_types = list(/mob/living/simple_animal/hostile/alien = 3)
+	mob_types = list(/mob/living/danimal/hostile/alien = 3)
 
 /obj/structure/nest/rattle
 	name = "rattling hole"
 
 	max_mobs = 2
-	mob_types = list(/mob/living/simple_animal/hostile/texas_rattler = 3)
+	mob_types = list(/mob/living/danimal/hostile/texas_rattler = 3)
 
 /obj/structure/nest/molerat
 	name = "molerat nest"
 	max_mobs = 2
-	mob_types = list(/mob/living/simple_animal/hostile/molerat = 20,
-						/mob/living/simple_animal/hostile/molerat/micro = 10,
-						/mob/living/simple_animal/hostile/molerat/leader = 1
+	mob_types = list(/mob/living/danimal/hostile/molerat = 20,
+						/mob/living/danimal/hostile/molerat/micro = 10,
+						/mob/living/danimal/hostile/molerat/leader = 1
 	)
 	
 
 /obj/structure/nest/mirelurk
 	name = "mirelurk nest"
 	max_mobs = 2
-	mob_types = list(/mob/living/simple_animal/hostile/mirelurk = 2,
-					/mob/living/simple_animal/hostile/mirelurk/hunter = 1,
-					/mob/living/simple_animal/hostile/mirelurk/baby = 8)
+	mob_types = list(/mob/living/danimal/hostile/mirelurk = 2,
+					/mob/living/danimal/hostile/mirelurk/hunter = 1,
+					/mob/living/danimal/hostile/mirelurk/baby = 8)
 	
 /obj/structure/nest/rat
 	name = "rat nest"
 	max_mobs = 6
-	mob_types = list(/mob/living/simple_animal/hostile/rat = 30)
+	mob_types = list(/mob/living/danimal/hostile/rat = 30)
 
 /obj/structure/nest/rat/tame
 	name = "imprinted rat nest"
 	desc = "An artifical-looking nest full of less-than-evil squeakers."
 	color = "#91fdac"
 	mob_types = list(
-		/mob/living/simple_animal/hostile/rat/frien = 9,
-		/mob/living/simple_animal/hostile/rat/skitter/curious = 1
+		/mob/living/danimal/hostile/rat/frien = 9,
+		/mob/living/danimal/hostile/rat/skitter/curious = 1
 	)
 
 /obj/structure/nest/mouse
 	name = "mouse nest"
 	max_mobs = 6
-	mob_types = list(/mob/living/simple_animal/hostile/rat/skitter = 30)
+	mob_types = list(/mob/living/danimal/hostile/rat/skitter = 30)
 
 /obj/structure/nest/raider
 	name = "narrow tunnel"
@@ -346,61 +346,61 @@ GLOBAL_LIST_EMPTY(player_made_nests)
 	max_mobs = 2
 	icon_state = "ventblue"
 	spawnsound = 'sound/effects/bin_close.ogg'
-	mob_types = list(/mob/living/simple_animal/hostile/raider = 5,
-					/mob/living/simple_animal/hostile/raider/firefighter = 2,
-					/mob/living/simple_animal/hostile/raider/baseball = 5,
-					/mob/living/simple_animal/hostile/raider/ranged = 2,
-					/mob/living/simple_animal/hostile/raider/ranged/sulphiteranged = 1,
-					/mob/living/simple_animal/hostile/raider/ranged/biker = 1,
-					/mob/living/simple_animal/hostile/raider/tribal = 1,
-					/mob/living/simple_animal/hostile/renegade/grunt/emp = 2)
+	mob_types = list(/mob/living/danimal/hostile/raider = 5,
+					/mob/living/danimal/hostile/raider/firefighter = 2,
+					/mob/living/danimal/hostile/raider/baseball = 5,
+					/mob/living/danimal/hostile/raider/ranged = 2,
+					/mob/living/danimal/hostile/raider/ranged/sulphiteranged = 1,
+					/mob/living/danimal/hostile/raider/ranged/biker = 1,
+					/mob/living/danimal/hostile/raider/tribal = 1,
+					/mob/living/danimal/hostile/renegade/grunt/emp = 2)
 
 /obj/structure/nest/raider/melee
-	mob_types = list(/mob/living/simple_animal/hostile/raider = 5,
-					/mob/living/simple_animal/hostile/raider/firefighter = 2,
-					/mob/living/simple_animal/hostile/raider/baseball = 5,
-					/mob/living/simple_animal/hostile/raider/tribal = 1)
+	mob_types = list(/mob/living/danimal/hostile/raider = 5,
+					/mob/living/danimal/hostile/raider/firefighter = 2,
+					/mob/living/danimal/hostile/raider/baseball = 5,
+					/mob/living/danimal/hostile/raider/tribal = 1)
 
 /obj/structure/nest/raider/ranged
 	max_mobs = 1
-	mob_types = list(/mob/living/simple_animal/hostile/raider/ranged = 4,
-					/mob/living/simple_animal/hostile/raider/ranged/sulphiteranged = 2,
-					/mob/living/simple_animal/hostile/raider/ranged/biker = 2)
+	mob_types = list(/mob/living/danimal/hostile/raider/ranged = 4,
+					/mob/living/danimal/hostile/raider/ranged/sulphiteranged = 2,
+					/mob/living/danimal/hostile/raider/ranged/biker = 2)
 
 /obj/structure/nest/raider/boss
 	max_mobs = 1
-	mob_types = list(/mob/living/simple_animal/hostile/raider/ranged/boss = 1)
+	mob_types = list(/mob/living/danimal/hostile/raider/ranged/boss = 1)
 
 /obj/structure/nest/raider/legendary
 	max_mobs = 1
-	mob_types = list(/mob/living/simple_animal/hostile/raider/legendary = 1)
+	mob_types = list(/mob/living/danimal/hostile/raider/legendary = 1)
 
 /obj/structure/nest/protectron
 	name = "protectron pod"
 	desc = "An old robot storage system. This one looks like it is connected to space underground."
 	max_mobs = 2
 	icon_state = "scanner_modified"
-	mob_types = list(/mob/living/simple_animal/hostile/handy/protectron = 5)
+	mob_types = list(/mob/living/danimal/hostile/handy/protectron = 5)
 
 /obj/structure/nest/securitron
 	name = "securitron pod"
 	desc = "An old securitron containment pod system. This one looks like it is connected to a storage system underground."
 	max_mobs = 1
 	icon_state = "scanner_modified"
-	mob_types = list(/mob/living/simple_animal/hostile/securitron = 2)
+	mob_types = list(/mob/living/danimal/hostile/securitron = 2)
 
 /obj/structure/nest/assaultron
 	name = "assaultron pod"
 	desc = "An old assaultron containment pod system. This one looks like it is connected to a storage system underground."
 	max_mobs = 1
 	icon_state = "scanner_modified"
-	mob_types = list(/mob/living/simple_animal/hostile/handy/assaultron = 2)
+	mob_types = list(/mob/living/danimal/hostile/handy/assaultron = 2)
 
 /obj/structure/nest/cazador
 	name = "cazador nest"
 	max_mobs = 1
-	mob_types = list(/mob/living/simple_animal/hostile/cazador = 5,
-					/mob/living/simple_animal/hostile/cazador/young = 3)
+	mob_types = list(/mob/living/danimal/hostile/cazador = 5,
+					/mob/living/danimal/hostile/cazador/young = 3)
 
 
 /obj/structure/nest/gecko
@@ -411,23 +411,23 @@ GLOBAL_LIST_EMPTY(player_made_nests)
 	max_mobs = 2
 	spawnsound = 'sound/misc/crack.ogg'
 	mob_types = list(
-		/mob/living/simple_animal/hostile/gecko/big          	= 2,
-		/mob/living/simple_animal/hostile/gecko/tribal          = 3,
-		/mob/living/simple_animal/hostile/gecko/tribal/warrior  = 3,
-		/mob/living/simple_animal/hostile/gecko/tribal/hunter   = 3,
+		/mob/living/danimal/hostile/gecko/big          	= 2,
+		/mob/living/danimal/hostile/gecko/tribal          = 3,
+		/mob/living/danimal/hostile/gecko/tribal/warrior  = 3,
+		/mob/living/danimal/hostile/gecko/tribal/hunter   = 3,
 		)
 	
 
 /obj/structure/nest/gecko/Initialize()
 	if(prob(10))
 		mob_types |= list(
-			/mob/living/simple_animal/hostile/gecko/tribal          = 3,
-			/mob/living/simple_animal/hostile/gecko/tribal/juvenile = 4,
-			/mob/living/simple_animal/hostile/gecko/tribal/warrior  = 3,
-			/mob/living/simple_animal/hostile/gecko/tribal/hunter   = 3,
+			/mob/living/danimal/hostile/gecko/tribal          = 3,
+			/mob/living/danimal/hostile/gecko/tribal/juvenile = 4,
+			/mob/living/danimal/hostile/gecko/tribal/warrior  = 3,
+			/mob/living/danimal/hostile/gecko/tribal/hunter   = 3,
 		)
 		if(prob(1))
-			mob_types |= list(/mob/living/simple_animal/hostile/gecko/tribal/head_shaman/small_shaman = 1)
+			mob_types |= list(/mob/living/danimal/hostile/gecko/tribal/head_shaman/small_shaman = 1)
 	. = ..()
 
 /obj/structure/nest/gecko/boss
@@ -438,17 +438,17 @@ GLOBAL_LIST_EMPTY(player_made_nests)
 	max_mobs = 3
 	spawnsound = 'sound/misc/crack.ogg'
 	mob_types = list(
-		/mob/living/simple_animal/hostile/gecko = 4,
-		/mob/living/simple_animal/hostile/gecko/tribal/warrior = 2,
-		/mob/living/simple_animal/hostile/gecko/tribal/hunter = 2,
-		/mob/living/simple_animal/hostile/gecko/fire = 1,
-		/mob/living/simple_animal/hostile/gecko/legacy = 3,
-		/mob/living/simple_animal/hostile/gecko/legacy/alpha = 3,
-		/mob/living/simple_animal/hostile/gecko/big = 2,
-		/mob/living/simple_animal/hostile/gecko/tribal/juvenile =  4,
-		/mob/living/simple_animal/hostile/gecko/tribal/warrior =  3,
-		/mob/living/simple_animal/hostile/gecko/tribal/hunter =  3,
-		/mob/living/simple_animal/hostile/gecko/tribal/head_shaman/small_shaman =  2,
+		/mob/living/danimal/hostile/gecko = 4,
+		/mob/living/danimal/hostile/gecko/tribal/warrior = 2,
+		/mob/living/danimal/hostile/gecko/tribal/hunter = 2,
+		/mob/living/danimal/hostile/gecko/fire = 1,
+		/mob/living/danimal/hostile/gecko/legacy = 3,
+		/mob/living/danimal/hostile/gecko/legacy/alpha = 3,
+		/mob/living/danimal/hostile/gecko/big = 2,
+		/mob/living/danimal/hostile/gecko/tribal/juvenile =  4,
+		/mob/living/danimal/hostile/gecko/tribal/warrior =  3,
+		/mob/living/danimal/hostile/gecko/tribal/hunter =  3,
+		/mob/living/danimal/hostile/gecko/tribal/head_shaman/small_shaman =  2,
 		)
 
 /obj/structure/nest/gecko/tribal
@@ -458,11 +458,11 @@ GLOBAL_LIST_EMPTY(player_made_nests)
 	desc = "A surprisingly well put together campsite for sleepy geckos."
 	spawnsound = 'sound/f13npc/gecko/geckocall5.ogg'
 	mob_types = list(
-		/mob/living/simple_animal/hostile/gecko/tribal = 8,
-		/mob/living/simple_animal/hostile/gecko/tribal/juvenile = 4,
-		/mob/living/simple_animal/hostile/gecko/tribal/warrior = 2,
-		/mob/living/simple_animal/hostile/gecko/tribal/hunter = 3,
-		/mob/living/simple_animal/hostile/gecko/tribal/shaman = 1
+		/mob/living/danimal/hostile/gecko/tribal = 8,
+		/mob/living/danimal/hostile/gecko/tribal/juvenile = 4,
+		/mob/living/danimal/hostile/gecko/tribal/warrior = 2,
+		/mob/living/danimal/hostile/gecko/tribal/hunter = 3,
+		/mob/living/danimal/hostile/gecko/tribal/shaman = 1
 	)
 
 /obj/structure/nest/gecko/tribal/hunting
@@ -472,8 +472,8 @@ GLOBAL_LIST_EMPTY(player_made_nests)
 	desc = "A surprisingly well put together campsite for sleepy geckos in the field."
 	spawnsound = 'sound/f13npc/gecko/geckocall5.ogg'
 	mob_types = list(
-		/mob/living/simple_animal/hostile/gecko/tribal/warrior = 6,
-		/mob/living/simple_animal/hostile/gecko/tribal/hunter = 12
+		/mob/living/danimal/hostile/gecko/tribal/warrior = 6,
+		/mob/living/danimal/hostile/gecko/tribal/hunter = 12
 	)
 
 /obj/structure/nest/gecko/tribal/guard
@@ -483,8 +483,8 @@ GLOBAL_LIST_EMPTY(player_made_nests)
 	desc = "A surprisingly well put together campsite for sleepy geckos protecting their home."
 	spawnsound = 'sound/f13npc/gecko/geckocall5.ogg'
 	mob_types = list(
-		/mob/living/simple_animal/hostile/gecko/tribal/warrior = 12,
-		/mob/living/simple_animal/hostile/gecko/tribal/hunter = 6
+		/mob/living/danimal/hostile/gecko/tribal/warrior = 12,
+		/mob/living/danimal/hostile/gecko/tribal/hunter = 6
 	)
 
 
@@ -494,7 +494,7 @@ GLOBAL_LIST_EMPTY(player_made_nests)
 
 	max_mobs = 1
 	icon_state = "ventblue"
-	mob_types = list(/mob/living/simple_animal/hostile/gelcube = 10)
+	mob_types = list(/mob/living/danimal/hostile/gelcube = 10)
 
 /obj/structure/nest/gelcube/debug
 	name = "horrible debug hole"
@@ -502,36 +502,36 @@ GLOBAL_LIST_EMPTY(player_made_nests)
 	spawn_time = 2 SECONDS
 	max_mobs = 1
 	icon_state = "ventblue"
-	mob_types = list(/mob/living/simple_animal/hostile/gelcube = 100)
+	mob_types = list(/mob/living/danimal/hostile/gelcube = 100)
 
 /obj/structure/nest/wolf
 	name = "wolf den"
 	max_mobs = 2
-	mob_types = list(/mob/living/simple_animal/hostile/wolf = 5)
+	mob_types = list(/mob/living/danimal/hostile/wolf = 5)
 
 
 /obj/structure/nest/supermutant
 	name = "supermutant den"
 	max_mobs = 1
-	mob_types = list(/mob/living/simple_animal/hostile/supermutant/meleemutant = 5,
-					/mob/living/simple_animal/hostile/supermutant/rangedmutant = 2)
+	mob_types = list(/mob/living/danimal/hostile/supermutant/meleemutant = 5,
+					/mob/living/danimal/hostile/supermutant/rangedmutant = 2)
 
 /obj/structure/nest/supermutant/melee
-	mob_types = list(/mob/living/simple_animal/hostile/supermutant/meleemutant = 5)
+	mob_types = list(/mob/living/danimal/hostile/supermutant/meleemutant = 5)
 
 /obj/structure/nest/supermutant/ranged
-	mob_types = list(/mob/living/simple_animal/hostile/supermutant/rangedmutant = 5)
+	mob_types = list(/mob/living/danimal/hostile/supermutant/rangedmutant = 5)
 
 /obj/structure/nest/supermutant/nightkin
-	mob_types = list(/mob/living/simple_animal/hostile/supermutant/nightkin = 5,
-					/mob/living/simple_animal/hostile/supermutant/nightkin/rangedmutant = 2,
-					/mob/living/simple_animal/hostile/supermutant/nightkin/elitemutant = 1)
+	mob_types = list(/mob/living/danimal/hostile/supermutant/nightkin = 5,
+					/mob/living/danimal/hostile/supermutant/nightkin/rangedmutant = 2,
+					/mob/living/danimal/hostile/supermutant/nightkin/elitemutant = 1)
 
 /obj/structure/nest/nightstalker
 	name = "hellhound nest"
 	max_mobs = 2
-	mob_types = list(/mob/living/simple_animal/hostile/stalker = 5,
-					/mob/living/simple_animal/hostile/stalkeryoung = 5)
+	mob_types = list(/mob/living/danimal/hostile/stalker = 5,
+					/mob/living/danimal/hostile/stalkeryoung = 5)
 
 // Nests for mobs that are special and/or dont have any nearby nests to unbirth into
 /obj/structure/nest/special
@@ -553,15 +553,15 @@ GLOBAL_LIST_EMPTY(player_made_nests)
 // 	name = "ravenous ghoul nest"
 // 	max_mobs = 5
 // 	mob_types = list(
-// 					 /mob/living/simple_animal/hostile/ghoul/zombie = 5,
-// 					/mob/living/simple_animal/hostile/ghoul/zombie/reaver = 3,
-// 					/mob/living/simple_animal/hostile/ghoul/zombie/glowing = 1)
+// 					 /mob/living/danimal/hostile/ghoul/zombie = 5,
+// 					/mob/living/danimal/hostile/ghoul/zombie/reaver = 3,
+// 					/mob/living/danimal/hostile/ghoul/zombie/glowing = 1)
 
 /obj/structure/nest/tunneler
 	name = "tunneler tunnel"
 	desc = "A tunnel which leads to an underground network of even more tunnels, made by the dangerous tunnelers."
 	max_mobs = 2
-	mob_types = list(/mob/living/simple_animal/hostile/trog/tunneler = 10)
+	mob_types = list(/mob/living/danimal/hostile/trog/tunneler = 10)
 
 /obj/structure/nest/randomized
 	name = "Gross uninitialized carp spawner thing"
@@ -619,8 +619,8 @@ GLOBAL_LIST_EMPTY(player_made_nests)
 	max_mobs = 2
 	spawnsound = 'sound/f13effects/sunsetsounds/frogwarcry.ogg'
 	mob_types = list(
-		/mob/living/simple_animal/hostile/retaliate/frog = 10,
-		/mob/living/simple_animal/hostile/retaliate/frog/red = 2
+		/mob/living/danimal/hostile/retaliate/frog = 10,
+		/mob/living/danimal/hostile/retaliate/frog/red = 2
 	)
 
 /*
@@ -636,8 +636,8 @@ GLOBAL_LIST_EMPTY(player_made_nests)
 		'sound/f13ambience/crow_2.ogg',
 	)
 	mob_types = list(
-	/mob/living/simple_animal/bird/crow,
-	/mob/living/simple_animal/bird/commonblackbird
+	/mob/living/danimal/bird/crow,
+	/mob/living/danimal/bird/commonblackbird
 	)
 */
 

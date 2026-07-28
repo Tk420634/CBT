@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/skeleton
+/mob/living/danimal/hostile/skeleton
 	name = "reanimated skeleton"
 	desc = "A real bonefied skeleton, doesn't seem like it wants to socialize."
 	icon = 'icons/mob/simple_human.dmi'
@@ -17,7 +17,6 @@
 	blood_volume = 0
 	health = 40
 	speed = 1
-	harm_intent_damage = 5
 	melee_damage_lower = 15
 	melee_damage_upper = 15
 	//minbodytemp = 0
@@ -26,9 +25,9 @@
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
 	attack_sound = 'sound/hallucinations/growl1.ogg'
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	unsuitable_atmos_damage = 10
-	robust_searching = 1
+	robust_searching = TRUE
 	gold_core_spawnable = HOSTILE_SPAWN
 	faction = list("skeleton")
 	see_in_dark = 8
@@ -38,7 +37,7 @@
 	loot = list(/obj/effect/decal/remains/human)
 	footstep_type = FOOTSTEP_MOB_SHOE
 
-/mob/living/simple_animal/hostile/skeleton/eskimo
+/mob/living/danimal/hostile/skeleton/eskimo
 	name = "undead eskimo"
 	desc = "The reanimated remains of some poor traveler."
 	icon_state = "eskimo"
@@ -57,7 +56,7 @@
 				/obj/item/clothing/suit/hooded/wintercoat)
 
 
-/mob/living/simple_animal/hostile/skeleton/templar
+/mob/living/danimal/hostile/skeleton/templar
 	name = "undead templar"
 	desc = "The reanimated remains of a holy templar knight."
 	icon_state = "templar"
@@ -70,7 +69,6 @@
 	gold_core_spawnable = NO_SPAWN
 	speak_chance = 1
 	//speak = list("THE GODS WILL IT!","DEUS VULT!","REMOVE KABAB!")
-	force_threshold = 10 //trying to simulate actually having armor
 	obj_damage = 50
 	melee_damage_lower = 25
 	melee_damage_upper = 30
@@ -80,7 +78,7 @@
 				/obj/item/clothing/head/helmet/chaplain,
 				/obj/item/claymore/weak{name = "holy sword"})
 
-/mob/living/simple_animal/hostile/skeleton/ice
+/mob/living/danimal/hostile/skeleton/ice
 	name = "ice skeleton"
 	desc = "A reanimated skeleton protected by a thick sheet of natural ice armor. Looks slow, though."
 	speed = 5
@@ -90,7 +88,7 @@
 	color = rgb(114,228,250)
 	loot = list(/obj/effect/decal/remains/human{color = rgb(114,228,250)})
 
-/mob/living/simple_animal/hostile/skeleton/plasmaminer
+/mob/living/danimal/hostile/skeleton/plasmaminer
 	name = "shambling miner"
 	desc = "A plasma-soaked miner, their exposed limbs turned into a grossly incandescent bone seemingly made of plasma."
 	icon_state = "plasma_miner"
@@ -98,7 +96,6 @@
 	icon_dead = "plasma_miner"
 	maxHealth = 150
 	health = 150
-	harm_intent_damage = 10
 	melee_damage_lower = 15
 	melee_damage_upper = 20
 	light_color = LIGHT_COLOR_PURPLE
@@ -110,14 +107,13 @@
 	light_system = MOVABLE_LIGHT
 	light_range = 2
 
-/mob/living/simple_animal/hostile/skeleton/plasmaminer/jackhammer
+/mob/living/danimal/hostile/skeleton/plasmaminer/jackhammer
 	desc = "A plasma-soaked miner, their exposed limbs turned into a grossly incandescent bone seemingly made of plasma. They seem to still have their mining tool in their hand, gripping tightly."
 	icon_state = "plasma_miner_tool"
 	icon_living = "plasma_miner_tool"
 	icon_dead = "plasma_miner_tool"
 	maxHealth = 185
 	health = 185
-	harm_intent_damage = 15
 	melee_damage_lower = 20
 	melee_damage_upper = 25
 	attack_verb_continuous = "blasts"

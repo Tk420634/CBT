@@ -676,7 +676,7 @@ GLOBAL_VAR_INIT(vendor_cash, 0)
 		new /datum/data/wasteland_equipment("Defibrillator",				/obj/item/defibrillator,											175),
 		new /datum/data/wasteland_equipment("Chest reviver Implant",			/obj/item/organ/cyberimp/chest/reviver,								250),
 		new /datum/data/wasteland_equipment("Upgraded Prosthetic Limbs",	/obj/item/storage/box/sparelimbs,									300),
-		new /datum/data/wasteland_equipment("Cat",							/mob/living/simple_animal/pet/cat/Runtime,							2000),
+		new /datum/data/wasteland_equipment("Cat",							/mob/living/danimal/pet/cat/Runtime,							2000),
 		new /datum/data/wasteland_equipment("Portable Cell Charger",						/obj/item/storage/battery_box,							50),
 		)
 
@@ -695,7 +695,7 @@ GLOBAL_VAR_INIT(vendor_cash, 0)
 		new /datum/data/wasteland_equipment("Defibrillator",				/obj/item/defibrillator,											175),
 		new /datum/data/wasteland_equipment("Chest reviver Implant",		/obj/item/organ/cyberimp/chest/reviver,								250),
 		new /datum/data/wasteland_equipment("Upgraded Prosthetic Limbs",	/obj/item/storage/box/sparelimbs,									300),
-		new /datum/data/wasteland_equipment("Cat",							/mob/living/simple_animal/pet/cat/Runtime,							2000),
+		new /datum/data/wasteland_equipment("Cat",							/mob/living/danimal/pet/cat/Runtime,							2000),
 		)
 
 /obj/machinery/mineral/wasteland_vendor/weapons

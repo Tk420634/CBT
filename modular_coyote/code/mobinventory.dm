@@ -5,7 +5,7 @@
 //Mob inventory
 //Mob hands
 
-/mob/living/simple_animal
+/mob/living/danimal
 	///Holds one item, like a backpack or something so that some mobs have an inventory to pull from.
 	var/obj/item/internal_storage = null
 	///Head inventory slot that some mobs use for hats and the likes. (ie catslugs & drones)
@@ -17,18 +17,18 @@
 	///The pixel difference between the top of the head for this mob and a human. Helps to generate hats for certain mobs like catslugs.
 	var/head_offset = null
 
-/mob/living/simple_animal/proc/update_inv_internal_storage()
+/mob/living/danimal/proc/update_inv_internal_storage()
 	if(internal_storage && client && hud_used && hud_used.hud_shown)
 		internal_storage.screen_loc = ui_drone_storage
 		client.screen += internal_storage
 
-/mob/living/simple_animal/update_inv_head()
+/mob/living/danimal/update_inv_head()
 	if(head)
 		if(client && hud_used && hud_used.hud_shown)
 			head.screen_loc = ui_drone_head
 			client.screen += head
 
-/mob/living/simple_animal/doUnEquip(obj/item/I, force, newloc, no_move, invdrop = TRUE)
+/mob/living/danimal/doUnEquip(obj/item/I, force, newloc, no_move, invdrop = TRUE)
 	if(..())
 		update_inv_hands()
 		if(I == head)
@@ -41,7 +41,7 @@
 	return 0
 
 
-/mob/living/simple_animal/can_equip(obj/item/I, slot, disable_warning = FALSE, bypass_equip_delay_self = FALSE, clothing_check = FALSE, list/return_warning)
+/mob/living/danimal/can_equip(obj/item/I, slot, disable_warning = FALSE, bypass_equip_delay_self = FALSE, clothing_check = FALSE, list/return_warning)
 	switch(slot)
 		if(SLOT_HEAD)//Anything that can be worn on a head, worn as a mask, held in a mouth, or worn around a neck.
 			if(head)
@@ -56,7 +56,7 @@
 	..()
 
 
-/mob/living/simple_animal/get_item_by_slot(slot_id)
+/mob/living/danimal/get_item_by_slot(slot_id)
 	switch(slot_id)
 		if(SLOT_HEAD)
 			return head
@@ -65,7 +65,7 @@
 	return ..()
 
 
-/mob/living/simple_animal/equip_to_slot(obj/item/I, slot)
+/mob/living/danimal/equip_to_slot(obj/item/I, slot)
 	if(!slot)
 		return
 	if(!istype(I))
@@ -98,8 +98,8 @@
 	//Call back for item being equipped to pokemon
 	I.equipped(src, slot)
 
-/mob/living/simple_animal/getBackSlot()
+/mob/living/danimal/getBackSlot()
 	return SLOT_GENERIC_DEXTROUS_STORAGE
 
-/mob/living/simple_animal/getBeltSlot()
+/mob/living/danimal/getBeltSlot()
 	return SLOT_GENERIC_DEXTROUS_STORAGE

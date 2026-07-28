@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/megafauna/behemoth
+/mob/living/danimal/hostile/megafauna/behemoth
 	name = "supermutant behemoth"
 	desc = "A super mutant who has grown to an incredible size, it's skin is pulled tight! This one wields two lamposts that have had car doors tied to the ends creating deadly axes."
 	icon = 'icons/fallout/mobs/behemoth.dmi'
@@ -16,8 +16,8 @@
 	aggroed_vision_range = 18
 	speed = 8
 	move_to_delay = 8
-	melee_queue_distance = 20 // as far as possible really, need this because of charging
-	ranged = TRUE
+	windup_start_distance = 20 // as far as possible really, need this because of charging
+	can_ranged_attack = TRUE
 	pixel_x = -16
 	wander = FALSE
 	movement_type = GROUND
@@ -57,11 +57,11 @@
 	chosen_message = span_colossus("You are now screeching, disorienting targets around you.")
 	chosen_attack_num = 3
 
-/mob/living/simple_animal/hostile/megafauna/behemoth/Initialize()
+/mob/living/danimal/hostile/megafauna/behemoth/Initialize()
 	. = ..()
 	starting = get_turf(src)
 
-/mob/living/simple_animal/hostile/megafauna/behemoth/OpenFire()
+/mob/living/danimal/hostile/megafauna/behemoth/OpenFire()
 	SetRecoveryTime(0, 100)
 	if(health <= maxHealth*0.5)
 		stomp_range = 2
@@ -87,20 +87,20 @@
 		if(2)
 			disorienting_scream()
 
-/mob/living/simple_animal/hostile/megafauna/behemoth/Move(atom/newloc, direct)
+/mob/living/danimal/hostile/megafauna/behemoth/Move(atom/newloc, direct)
 	if(!can_move)
 		return
 	stored_move_dirs |= direct
 	return ..()
 
-/mob/living/simple_animal/hostile/megafauna/behemoth/Moved(atom/oldloc, direct)
+/mob/living/danimal/hostile/megafauna/behemoth/Moved(atom/oldloc, direct)
 	. = ..()
 	stored_move_dirs &= ~direct
 	if(!stored_move_dirs)
 		INVOKE_ASYNC(src,PROC_REF(ground_slam), stomp_range, 1, FALSE)
 
 /// Slams the ground around the behemoth throwing back enemies caught nearby
-/mob/living/simple_animal/hostile/megafauna/behemoth/proc/ground_slam(range, delay, do_damage)
+/mob/living/danimal/hostile/megafauna/behemoth/proc/ground_slam(range, delay, do_damage)
 	var/turf/orgin = get_turf(src)
 	var/list/all_turfs = RANGE_TURFS(range, orgin)
 	for(var/i = 0 to range)
@@ -125,7 +125,7 @@
 
 
 /// Larger but slower ground stomp
-/mob/living/simple_animal/hostile/megafauna/behemoth/proc/heavy_stomp()
+/mob/living/danimal/hostile/megafauna/behemoth/proc/heavy_stomp()
 	can_move = FALSE
 	ground_slam(5, 2, TRUE)
 	SetRecoveryTime(0, 0)
@@ -133,7 +133,7 @@
 
 
 /// Shakes all nearby enemies screens and animates the behemoth shaking up and down
-/mob/living/simple_animal/hostile/megafauna/behemoth/proc/disorienting_scream()
+/mob/living/danimal/hostile/megafauna/behemoth/proc/disorienting_scream()
 	can_move = FALSE
 	playsound(src, 'sound/magic/demon_dies.ogg', 600, FALSE, 10)
 	animate(src, pixel_z = rand(5, 15), time = 1, loop = 6)

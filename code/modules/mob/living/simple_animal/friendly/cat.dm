@@ -1,5 +1,5 @@
 //Cat
-/mob/living/simple_animal/pet/cat
+/mob/living/danimal/pet/cat
 	name = "cat"
 	desc = "Kitty!!"
 	icon = 'icons/mob/pets.dmi'
@@ -22,8 +22,8 @@
 	//minbodytemp = 200
 	//maxbodytemp = 400
 	unsuitable_atmos_damage = 1
-	animal_species = /mob/living/simple_animal/pet/cat
-	childtype = list(/mob/living/simple_animal/pet/cat/kitten)
+	animal_species = /mob/living/danimal/pet/cat
+	offspring_type = list(/mob/living/danimal/pet/cat/kitten)
 	guaranteed_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab = 2, /obj/item/organ/ears/cat = 1, /obj/item/organ/tail/cat = 1)
 	response_help_continuous = "pets"
 	response_help_simple = "pet"
@@ -32,22 +32,22 @@
 	response_harm_continuous = "kicks"
 	response_harm_simple = "kick"
 	var/turns_since_scan = 0
-	var/mob/living/simple_animal/mouse/movement_target
+	var/mob/living/danimal/mouse/movement_target
 	gold_core_spawnable = FRIENDLY_SPAWN
 	collar_type = "cat"
 	var/held_icon = "cat2"
 	footstep_type = FOOTSTEP_MOB_CLAW
 
-/mob/living/simple_animal/pet/cat/Initialize()
+/mob/living/danimal/pet/cat/Initialize()
 	. = ..()
 	add_verb(src, /mob/living/proc/lay_down)
 
-/mob/living/simple_animal/pet/cat/ComponentInitialize()
+/mob/living/danimal/pet/cat/ComponentInitialize()
 	. = ..()
 	AddElement(/datum/element/wuv, "purrs!", EMOTE_AUDIBLE, /datum/mood_event/pet_animal, "hisses!", EMOTE_AUDIBLE)
 	AddElement(/datum/element/mob_holder, held_icon)
 
-/mob/living/simple_animal/pet/cat/update_mobility()
+/mob/living/danimal/pet/cat/update_mobility()
 	. = ..()
 	if(client && stat != DEAD)
 		if(!CHECK_MOBILITY(src, MOBILITY_STAND))
@@ -59,7 +59,7 @@
 	regenerate_icons()
 
 
-/mob/living/simple_animal/pet/cat/space
+/mob/living/danimal/pet/cat/space
 	name = "space cat"
 	desc = "It's a cat... in space!"
 	icon_state = "spacecat"
@@ -70,7 +70,7 @@
 	//minbodytemp = TCMB
 	//maxbodytemp = T0C + 40
 
-/mob/living/simple_animal/pet/cat/original
+/mob/living/danimal/pet/cat/original
 	name = "Batsy"
 	desc = "The product of alien DNA and bored geneticists."
 	gender = FEMALE
@@ -81,7 +81,7 @@
 	collar_type = null
 	unique_pet = TRUE
 
-/mob/living/simple_animal/pet/cat/kitten
+/mob/living/danimal/pet/cat/kitten
 	name = "kitten"
 	desc = "D'aaawwww."
 	icon_state = "kitten"
@@ -93,7 +93,7 @@
 	collar_type = "kitten"
 
 //RUNTIME IS ALIVE! SQUEEEEEEEE~
-/mob/living/simple_animal/pet/cat/Runtime
+/mob/living/danimal/pet/cat/Runtime
 	name = "Runtime"
 	desc = "GCAT"
 	icon_state = "cat"
@@ -108,7 +108,7 @@
 	var/cats_deployed = 0
 	var/memory_saved = FALSE
 
-/mob/living/simple_animal/pet/cat/Runtime/Initialize()
+/mob/living/danimal/pet/cat/Runtime/Initialize()
 	if(prob(5))
 		icon_state = "original"
 		icon_living = "original"
@@ -116,7 +116,7 @@
 	Read_Memory()
 	. = ..()
 
-/mob/living/simple_animal/pet/cat/Runtime/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/pet/cat/Runtime/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if(!cats_deployed && SSticker.current_state >= GAME_STATE_SETTING_UP)
@@ -125,18 +125,18 @@
 		Write_Memory()
 		memory_saved = TRUE
 
-/mob/living/simple_animal/pet/cat/Runtime/make_babies()
+/mob/living/danimal/pet/cat/Runtime/make_babies()
 	var/mob/baby = ..()
 	if(baby)
 		children += baby
 		return baby
 
-/mob/living/simple_animal/pet/cat/Runtime/death()
+/mob/living/danimal/pet/cat/Runtime/death()
 	if(!memory_saved)
 		Write_Memory(TRUE)
 	..()
 
-/mob/living/simple_animal/pet/cat/Runtime/proc/Read_Memory()
+/mob/living/danimal/pet/cat/Runtime/proc/Read_Memory()
 	if(fexists("data/npc_saves/Runtime.sav")) //legacy compatability to convert old format to new
 		var/savefile/S = new /savefile("data/npc_saves/Runtime.sav")
 		S["family"] >> family
@@ -150,12 +150,12 @@
 	if(isnull(family))
 		family = list()
 
-/mob/living/simple_animal/pet/cat/Runtime/proc/Write_Memory(dead)
+/mob/living/danimal/pet/cat/Runtime/proc/Write_Memory(dead)
 	var/json_file = file("data/npc_saves/Runtime.json")
 	var/list/file_data = list()
 	family = list()
 	if(!dead)
-		for(var/mob/living/simple_animal/pet/cat/kitten/C in children)
+		for(var/mob/living/danimal/pet/cat/kitten/C in children)
 			if(istype(C,type) || C.stat || !C.z || !C.butcher_results) //That last one is a work around for hologram cats
 				continue
 			if(C.type in family)
@@ -166,20 +166,20 @@
 	fdel(json_file)
 	WRITE_FILE(json_file, json_encode(file_data))
 
-/mob/living/simple_animal/pet/cat/Runtime/proc/Deploy_The_Cats()
+/mob/living/danimal/pet/cat/Runtime/proc/Deploy_The_Cats()
 	cats_deployed = 1
 	for(var/cat_type in family)
 		if(family[cat_type] > 0)
 			for(var/i in 1 to min(family[cat_type],100)) //Limits to about 500 cats, you wouldn't think this would be needed (BUT IT IS)
 				new cat_type(loc)
 
-/mob/living/simple_animal/pet/cat/Proc
+/mob/living/danimal/pet/cat/Proc
 	name = "Proc"
 	gender = MALE
 	gold_core_spawnable = NO_SPAWN
 	unique_pet = TRUE
 
-/mob/living/simple_animal/pet/cat/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/pet/cat/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if(!stat && !buckled && !client)
@@ -205,12 +205,12 @@
 	//MICE!
 	if((src.loc) && isturf(src.loc))
 		if(!stat && CHECK_MULTIPLE_BITFIELDS(mobility_flags, MOBILITY_STAND|MOBILITY_MOVE) && !buckled)
-			for(var/mob/living/simple_animal/mouse/M in view(1,src))
+			for(var/mob/living/danimal/mouse/M in view(1,src))
 				if(!M.stat && Adjacent(M))
 					emote("me", EMOTE_VISIBLE, "splats \the [M]!")
 					M.splat()
 					movement_target = null
-					stop_automated_movement = 0
+					stop_wandering = 0
 					break
 			for(var/obj/item/toy/cattoy/T in view(1,src))
 				if (T.cooldown < (world.time - 400))
@@ -228,19 +228,19 @@
 			turns_since_scan = 0
 			if((movement_target) && !(isturf(movement_target.loc) || ishuman(movement_target.loc) ))
 				movement_target = null
-				stop_automated_movement = 0
+				stop_wandering = 0
 			if( !movement_target || !(movement_target.loc in oview(src, 3)) )
 				movement_target = null
-				stop_automated_movement = 0
-				for(var/mob/living/simple_animal/mouse/snack in oview(src,3))
+				stop_wandering = 0
+				for(var/mob/living/danimal/mouse/snack in oview(src,3))
 					if(isturf(snack.loc) && !snack.stat)
 						movement_target = snack
 						break
 			if(movement_target)
-				stop_automated_movement = 1
+				stop_wandering = 1
 				walk_to(src,movement_target,0,3)
 
-/mob/living/simple_animal/pet/cat/cak //I told you I'd do it, Remie
+/mob/living/danimal/pet/cat/cak //I told you I'd do it, Remie
 	name = "Keeki"
 	desc = "It's a cat made out of cake."
 	icon_state = "cak"
@@ -249,7 +249,6 @@
 	health = 50
 	maxHealth = 50
 	gender = FEMALE
-	harm_intent_damage = 8
 	guaranteed_butcher_results = list(/obj/item/organ/brain = 1, /obj/item/organ/heart = 1, /obj/item/reagent_containers/food/snacks/cakeslice/birthday = 3,  \
 	/obj/item/reagent_containers/food/snacks/meat/slab = 2)
 	response_harm_continuous = "takes a bite out of"
@@ -259,7 +258,7 @@
 	death_sound = "bodyfall"
 	held_icon = "cak"
 
-/mob/living/simple_animal/pet/cat/cak/CheckParts(list/parts)
+/mob/living/danimal/pet/cat/cak/CheckParts(list/parts)
 	..()
 	var/obj/item/organ/brain/B = locate(/obj/item/organ/brain) in contents
 	if(!B || !B.brainmob || !B.brainmob.mind)
@@ -273,7 +272,7 @@
 		to_chat(src, span_notice("Your name is now <b>\"new_name\"</b>!"))
 		name = new_name
 
-/mob/living/simple_animal/pet/cat/cak/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/pet/cat/cak/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if(stat)
@@ -284,7 +283,7 @@
 		if(!D.is_decorated)
 			D.decorate_donut()
 
-/mob/living/simple_animal/pet/cat/cak/on_attack_hand(mob/living/L)
+/mob/living/danimal/pet/cat/cak/on_attack_hand(mob/living/L)
 	. = ..()
 	if(.) //the attack was blocked
 		return
@@ -293,7 +292,7 @@
 		L.reagents.add_reagent(/datum/reagent/consumable/nutriment/vitamin, 0.4)
 
 //Cat made
-/mob/living/simple_animal/pet/cat/custom_cat
+/mob/living/danimal/pet/cat/custom_cat
 	name = "White cat" //Incase it somehow gets spawned without an ID
 	desc = "A cute white catto!"
 	icon_state = "custom_cat"
@@ -310,7 +309,7 @@
 	var/pseudo_death = FALSE
 	var/mob/living/carbon/human/origin
 
-/mob/living/simple_animal/pet/cat/custom_cat/death()
+/mob/living/danimal/pet/cat/custom_cat/death()
 	if (pseudo_death == TRUE) //secret cat chem
 		icon_state = "custom_cat_dead"
 		Stun(1000)
@@ -318,7 +317,7 @@
 	else
 		..()
 
-/mob/living/simple_animal/pet/cat/pancake
+/mob/living/danimal/pet/cat/pancake
 	name = "pancake"
 	desc = "Mrowl. A orange and white cat!"
 	icon_state = "pancake"

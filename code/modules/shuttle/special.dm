@@ -133,7 +133,7 @@
 // Bar staff, GODMODE mobs that just want to make sure people have drinks
 // and a good time.
 
-/mob/living/simple_animal/drone/snowflake/bardrone
+/mob/living/danimal/drone/snowflake/bardrone
 	name = "Bardrone"
 	desc = "A barkeeping drone, an indestructible robot built to tend bars."
 	hacked = TRUE
@@ -144,11 +144,11 @@
 	unique_name = FALSE // disables the (123) number suffix
 	initial_language_holder = /datum/language_holder/universal
 
-/mob/living/simple_animal/drone/snowflake/bardrone/Initialize()
+/mob/living/danimal/drone/snowflake/bardrone/Initialize()
 	. = ..()
 	access_card.access |= ACCESS_CENT_BAR
 
-/mob/living/simple_animal/hostile/alien/maid/barmaid
+/mob/living/danimal/hostile/alien/maid/barmaid
 	gold_core_spawnable = NO_SPAWN
 	name = "Barmaid"
 	desc = "A barmaid, a maiden found in a bar."
@@ -156,10 +156,10 @@
 	status_flags = GODMODE
 	unique_name = FALSE
 	AIStatus = AI_OFF
-	stop_automated_movement = TRUE
+	stop_wandering = TRUE
 	initial_language_holder = /datum/language_holder/universal
 
-/mob/living/simple_animal/hostile/alien/maid/barmaid/Initialize()
+/mob/living/danimal/hostile/alien/maid/barmaid/Initialize()
 	. = ..()
 	access_card = new /obj/item/card/id(src)
 	var/datum/job/captain/C = new /datum/job/captain
@@ -274,7 +274,7 @@
 		to_chat(AM, span_warning("You don't have enough money to enter the main shuttle. You'll have to fly coach."))
 		return ..()
 
-/mob/living/simple_animal/hostile/bear/fightpit
+/mob/living/danimal/hostile/bear/fightpit
 	name = "fight pit bear"
 	desc = "This bear's trained through ancient Russian secrets to fear the walls of its glass prison."
 	environment_smash = ENVIRONMENT_SMASH_NONE

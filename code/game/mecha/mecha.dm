@@ -88,7 +88,7 @@
 	var/turnsound = 'sound/mecha/mechturn.ogg'
 	var/attacksound = 'sound/weapons/punch4.ogg'
 
-	var/melee_cooldown = 10
+	var/melee_attack_cooldown = 10
 	var/melee_can_hit = 1
 	var/attack_knockdown = 0 // For how much time it will knockdown a target in melee
 
@@ -424,7 +424,7 @@
 			return
 		target.mech_melee_attack(src)
 		melee_can_hit = 0
-		spawn(melee_cooldown)
+		spawn(melee_attack_cooldown)
 			melee_can_hit = 1
 
 
@@ -709,7 +709,7 @@
 
 
 //An actual AI (simple_animal mecha pilot) entering the mech
-/obj/mecha/proc/aimob_enter_mech(mob/living/simple_animal/hostile/renegade/syndicate/mecha_pilot/pilot_mob)
+/obj/mecha/proc/aimob_enter_mech(mob/living/danimal/hostile/renegade/syndicate/mecha_pilot/pilot_mob)
 	if(pilot_mob && pilot_mob.Adjacent(src))
 		if(occupant)
 			return
@@ -719,7 +719,7 @@
 		pilot_mob.forceMove(src)
 		GrantActions(pilot_mob)//needed for checks, and incase a badmin puts somebody in the mob
 
-/obj/mecha/proc/aimob_exit_mech(mob/living/simple_animal/hostile/renegade/syndicate/mecha_pilot/pilot_mob)
+/obj/mecha/proc/aimob_exit_mech(mob/living/danimal/hostile/renegade/syndicate/mecha_pilot/pilot_mob)
 	if(occupant == pilot_mob)
 		occupant = null
 	if(pilot_mob.mecha == src)

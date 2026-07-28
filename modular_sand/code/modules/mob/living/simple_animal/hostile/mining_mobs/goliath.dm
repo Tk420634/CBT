@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/asteroid/goliath/ComponentInitialize()
+/mob/living/danimal/hostile/asteroid/goliath/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("punches violently into the goliath's skull, ripping out what could be described as their brain!", "rips off one of the goliath's tentacles bare-handed, then whips them with it until they die in humiliation!", "stomps their boot hard down on the goliath's jaw, ripping one of its fangs off with their hand and stabbing it in the eye"), \

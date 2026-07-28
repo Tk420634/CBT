@@ -1,5 +1,5 @@
 // AI (i.e. game AI, not the AI player) controlled bots
-/mob/living/simple_animal/bot
+/mob/living/danimal/bot
 	icon = 'icons/mob/aibots.dmi'
 	layer = MOB_LAYER
 	gender = NEUTER
@@ -9,7 +9,7 @@
 	light_power = 0.9
 	light_color = "#CDDDFF"
 	light_on = FALSE
-	stop_automated_movement = 1
+	stop_wandering = 1
 	wander = 0
 	healable = 0
 	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 0, CLONE = 0, STAMINA = 0, OXY = 0)
@@ -107,7 +107,7 @@
 	var/patrol_emote = "Engaging patrol mode."
 	var/patrol_fail_emote = "Unable to start patrol."
 
-/mob/living/simple_animal/bot/proc/get_mode()
+/mob/living/danimal/bot/proc/get_mode()
 	if(client) //Player bots do not have modes, thus the override. Also an easy way for PDA users/AI to know when a bot is a player.
 		if(paicard)
 			return "<b>pAI Controlled</b>"
@@ -123,7 +123,7 @@
 /**
  * Returns a status string about the bot's current status, if it's moving, manually controlled, or idle.
  */
-/mob/living/simple_animal/bot/proc/get_mode_ui()
+/mob/living/danimal/bot/proc/get_mode_ui()
 	if(client) //Player bots do not have modes, thus the override. Also an easy way for PDA users/AI to know when a bot is a player.
 		return paicard ? "pAI Controlled" : "Autonomous"
 	else if(!on)
@@ -133,7 +133,7 @@
 	else
 		return "[mode_name[mode]]"
 
-/mob/living/simple_animal/bot/proc/turn_on()
+/mob/living/danimal/bot/proc/turn_on()
 	if(stat)
 		return FALSE
 	on = TRUE
@@ -143,14 +143,14 @@
 	diag_hud_set_botstat()
 	return TRUE
 
-/mob/living/simple_animal/bot/proc/turn_off()
+/mob/living/danimal/bot/proc/turn_off()
 	on = FALSE
 	update_mobility()
 	set_light_on(FALSE)
 	bot_reset() //Resets an AI's call, should it exist.
 	update_icon()
 
-/mob/living/simple_animal/bot/Initialize()
+/mob/living/danimal/bot/Initialize()
 	. = ..()
 	GLOB.bots_list += src
 	access_card = new /obj/item/card/id(src)
@@ -182,13 +182,13 @@
 		path_hud.add_to_hud(src)
 		path_hud.add_hud_to(src)
 
-/mob/living/simple_animal/bot/update_mobility()
+/mob/living/danimal/bot/update_mobility()
 	. = ..()
 	if(!on)
 		. = NONE
 		mobility_flags = .
 
-/mob/living/simple_animal/bot/Destroy()
+/mob/living/danimal/bot/Destroy()
 	if(path_hud)
 		QDEL_NULL(path_hud)
 		path_hud = null
@@ -200,24 +200,24 @@
 	QDEL_NULL(bot_core)
 	return ..()
 
-/mob/living/simple_animal/bot/bee_friendly()
+/mob/living/danimal/bot/bee_friendly()
 	return TRUE
 
-/mob/living/simple_animal/bot/death(gibbed)
+/mob/living/danimal/bot/death(gibbed)
 	. = ..()
 	if(!gibbed)
 		explode()
 
-/mob/living/simple_animal/bot/proc/explode()
+/mob/living/danimal/bot/proc/explode()
 	qdel(src)
 
-/mob/living/simple_animal/bot/ComponentInitialize()
+/mob/living/danimal/bot/ComponentInitialize()
 	RegisterSignal(src, COMSIG_HOSTILE_CHECK_FACTION,PROC_REF(stop_killing_bots), TRUE)
 
-/mob/living/simple_animal/bot/proc/stop_killing_bots()
+/mob/living/danimal/bot/proc/stop_killing_bots()
 	return TRUE
 
-/mob/living/simple_animal/bot/emag_act(mob/user)
+/mob/living/danimal/bot/emag_act(mob/user)
 	. = ..()
 	if(locked) //First emag application unlocks the bot's interface. Apply a screwdriver to use the emag again.
 		locked = FALSE
@@ -239,7 +239,7 @@
 		log_combat(user, src, "emagged")
 	return TRUE
 
-/mob/living/simple_animal/bot/examine(mob/user)
+/mob/living/danimal/bot/examine(mob/user)
 	. = ..()
 	if(health < maxHealth)
 		if(health > maxHealth/3)
@@ -249,22 +249,22 @@
 	else
 		. += "[src] is in pristine condition."
 
-/mob/living/simple_animal/bot/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/danimal/bot/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	. = ..()
 	if(. && prob(10))
 		new oil_spill_type(loc)
 
-/mob/living/simple_animal/bot/updatehealth()
+/mob/living/danimal/bot/updatehealth()
 	..()
 	diag_hud_set_bothealth()
 
-/mob/living/simple_animal/bot/med_hud_set_health()
+/mob/living/danimal/bot/med_hud_set_health()
 	return //we use a different hud
 
-/mob/living/simple_animal/bot/med_hud_set_status()
+/mob/living/danimal/bot/med_hud_set_status()
 	return //we use a different hud
 
-/mob/living/simple_animal/bot/handle_automated_action() //Master process which handles code common across most bots.
+/mob/living/danimal/bot/handle_automated_action() //Master process which handles code common across most bots.
 	diag_hud_set_botmode()
 
 	if (ignorelistcleanuptimer % 300 == 0) // Every 300 actions, clean up the ignore list from old junk
@@ -280,7 +280,7 @@
 		return
 
 	if(!commissioned && can_salute)
-		for(var/mob/living/simple_animal/bot/B in get_hearers_in_view(5, get_turf(src)))
+		for(var/mob/living/danimal/bot/B in get_hearers_in_view(5, get_turf(src)))
 			if(B.commissioned)
 				visible_message("<b>[src]</b> performs an elaborate salute for [B]!")
 				can_salute = FALSE
@@ -297,22 +297,22 @@
 	return TRUE //Successful completion. Used to prevent child process() continuing if this one is ended early.
 
 
-/mob/living/simple_animal/bot/on_attack_hand(mob/living/carbon/human/H)
+/mob/living/danimal/bot/on_attack_hand(mob/living/carbon/human/H)
 	if(H.a_intent == INTENT_HELP)
 		interact(H)
 	else
 		return ..()
 
-/mob/living/simple_animal/bot/attack_ai(mob/user)
+/mob/living/danimal/bot/attack_ai(mob/user)
 	if(!topic_denied(user))
 		interact(user)
 	else
 		to_chat(user, span_warning("[src]'s interface is not responding!"))
 
-/mob/living/simple_animal/bot/interact(mob/user)
+/mob/living/danimal/bot/interact(mob/user)
 	show_controls(user)
 
-/mob/living/simple_animal/bot/attackby(obj/item/W, mob/user, params)
+/mob/living/danimal/bot/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/screwdriver))
 		if(!locked)
 			open = !open
@@ -358,13 +358,13 @@
 				do_sparks(5, TRUE, src)
 			..()
 
-/mob/living/simple_animal/bot/bullet_act(obj/item/projectile/Proj)
+/mob/living/danimal/bot/bullet_act(obj/item/projectile/Proj)
 	if(Proj && (Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		if(prob(75) && Proj.damage > 0)
 			do_sparks(5, TRUE, src)
 	return ..()
 
-/mob/living/simple_animal/bot/emp_act(severity)
+/mob/living/danimal/bot/emp_act(severity)
 	. = ..()
 	if(. & EMP_PROTECT_SELF)
 		return
@@ -382,12 +382,12 @@
 		if(was_on)
 			turn_on()
 
-/mob/living/simple_animal/bot/proc/set_custom_texts() //Superclass for setting hack texts. Appears only if a set is not given to a bot locally.
+/mob/living/danimal/bot/proc/set_custom_texts() //Superclass for setting hack texts. Appears only if a set is not given to a bot locally.
 	text_hack = "You hack [name]."
 	text_dehack = "You reset [name]."
 	text_dehack_fail = "You fail to reset [name]."
 
-/mob/living/simple_animal/bot/proc/speak(message,channel) //Pass a message to have the bot say() it. Pass a frequency to say it on the radio.
+/mob/living/danimal/bot/proc/speak(message,channel) //Pass a message to have the bot say() it. Pass a frequency to say it on the radio.
 	if((!on) || (!message))
 		return
 	if(channel && Radio.channels[channel])// Use radio if we have channel key
@@ -395,7 +395,7 @@
 	else
 		say(message)
 
-/mob/living/simple_animal/bot/radio(message, message_mode, list/spans, language)
+/mob/living/danimal/bot/radio(message, message_mode, list/spans, language)
 	. = ..()
 	if(. != 0)
 		return
@@ -413,7 +413,7 @@
 		Radio.talk_into(src, message, message_mode, spans, language)
 		return REDUCE_RANGE
 
-/mob/living/simple_animal/bot/proc/drop_part(obj/item/drop_item, dropzone)
+/mob/living/danimal/bot/proc/drop_part(obj/item/drop_item, dropzone)
 	var/dropped_item = new drop_item(dropzone)
 	drop_item = null
 
@@ -443,7 +443,7 @@ Example usage: patient = scan(/mob/living/carbon/human, oldpatient, 1)
 The proc would return a human next to the bot to be set to the patient var.
 Pass the desired type path itself, declaring a temporary var beforehand is not required.
 */
-/mob/living/simple_animal/bot/proc/scan(scan_type, old_target, scan_range = DEFAULT_SCAN_RANGE)
+/mob/living/danimal/bot/proc/scan(scan_type, old_target, scan_range = DEFAULT_SCAN_RANGE)
 	var/turf/T = get_turf(src)
 	if(!T)
 		return
@@ -469,7 +469,7 @@ Pass the desired type path itself, declaring a temporary var beforehand is not r
 		if(final_result)
 			return final_result
 
-/mob/living/simple_animal/bot/proc/checkscan(scan, scan_type, old_target)
+/mob/living/danimal/bot/proc/checkscan(scan, scan_type, old_target)
 	if(!istype(scan, scan_type)) //Check that the thing we found is the type we want!
 		return FALSE //If not, keep searching!
 	if( (REF(scan) in ignore_list) || (scan == old_target) ) //Filter for blacklisted elements, usually unreachable or previously processed oness
@@ -481,7 +481,7 @@ Pass the desired type path itself, declaring a temporary var beforehand is not r
 	else
 		return FALSE //The current element failed assessment, move on to the next.
 
-/mob/living/simple_animal/bot/proc/check_bot(targ)
+/mob/living/danimal/bot/proc/check_bot(targ)
 	var/turf/T = get_turf(targ)
 	if(T)
 		for(var/C in T.contents)
@@ -489,11 +489,11 @@ Pass the desired type path itself, declaring a temporary var beforehand is not r
 				return TRUE	//Let's abort if we find a bot so we dont have to keep rechecking
 
 //When the scan finds a target, run bot specific processing to select it for the next step. Empty by default.
-/mob/living/simple_animal/bot/proc/process_scan(scan_target)
+/mob/living/danimal/bot/proc/process_scan(scan_target)
 	return scan_target
 
 
-/mob/living/simple_animal/bot/proc/add_to_ignore(subject)
+/mob/living/danimal/bot/proc/add_to_ignore(subject)
 	if(ignore_list.len < 50) //This will help keep track of them, so the bot is always trying to reach a blocked spot.
 		ignore_list += REF(subject)
 	else  //If the list is full, insert newest, delete oldest.
@@ -504,7 +504,7 @@ Pass the desired type path itself, declaring a temporary var beforehand is not r
 Movement proc for stepping a bot through a path generated through A-star.
 Pass a positive integer as an argument to override a bot's default speed.
 */
-/mob/living/simple_animal/bot/proc/bot_move(dest, move_speed)
+/mob/living/danimal/bot/proc/bot_move(dest, move_speed)
 	if(!dest || !path || path.len == 0) //A-star failed or a path/destination was not set.
 		set_path(null)
 		return FALSE
@@ -526,7 +526,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 	return TRUE
 
 
-/mob/living/simple_animal/bot/proc/bot_step(dest) //Step,increase tries if failed
+/mob/living/danimal/bot/proc/bot_step(dest) //Step,increase tries if failed
 	if(!path)
 		return FALSE
 	if(path.len > 1)
@@ -543,11 +543,11 @@ Pass a positive integer as an argument to override a bot's default speed.
 	return TRUE
 
 
-/mob/living/simple_animal/bot/proc/check_bot_access()
+/mob/living/danimal/bot/proc/check_bot_access()
 	if(mode != BOT_SUMMON && mode != BOT_RESPONDING)
 		access_card.access = prev_access
 
-/mob/living/simple_animal/bot/proc/call_bot(the_one_who_called, turf/waypoint, message=TRUE)
+/mob/living/danimal/bot/proc/call_bot(the_one_who_called, turf/waypoint, message=TRUE)
 	bot_reset() //Reset a bot before setting it to call mode.
 
 	//For giving the bot temporary all-access.
@@ -578,7 +578,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 		calling_ai = null
 		set_path(null)
 
-/mob/living/simple_animal/bot/proc/call_mode() //Handles preparing a bot for a call, as well as calling the move proc.
+/mob/living/danimal/bot/proc/call_mode() //Handles preparing a bot for a call, as well as calling the move proc.
 //Handles the bot's movement during a call.
 	var/success = bot_move(ai_waypoint, 3)
 	if(!success)
@@ -587,7 +587,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 			calling_ai = null
 		bot_reset()
 
-/mob/living/simple_animal/bot/proc/bot_reset()
+/mob/living/danimal/bot/proc/bot_reset()
 	if(calling_ai) //Simple notification to the AI if it called a bot. It will not know the cause or identity of the bot.
 		to_chat(calling_ai, span_danger("Call command to a bot has been reset."))
 		calling_ai = null
@@ -610,14 +610,14 @@ Pass a positive integer as an argument to override a bot's default speed.
 //Patrol and summon code!
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-/mob/living/simple_animal/bot/proc/bot_patrol()
+/mob/living/danimal/bot/proc/bot_patrol()
 	patrol_step()
 	spawn(5)
 		if(mode == BOT_PATROL)
 			patrol_step()
 	return
 
-/mob/living/simple_animal/bot/proc/start_patrol()
+/mob/living/danimal/bot/proc/start_patrol()
 
 	if(tries >= BOT_STEP_MAX_RETRIES) //Bot is trapped, so stop trying to patrol.
 		auto_patrol = 0
@@ -645,7 +645,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 
 // perform a single patrol step
 
-/mob/living/simple_animal/bot/proc/patrol_step()
+/mob/living/danimal/bot/proc/patrol_step()
 
 	if(client)		// In use by player, don't actually move.
 		return
@@ -674,7 +674,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 		mode = BOT_START_PATROL
 
 // finds the nearest beacon to self
-/mob/living/simple_animal/bot/proc/find_patrol_target()
+/mob/living/danimal/bot/proc/find_patrol_target()
 	nearest_beacon = null
 	new_destination = null
 	find_nearest_beacon()
@@ -686,7 +686,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 		mode = BOT_IDLE
 		speak("Disengaging patrol mode.")
 
-/mob/living/simple_animal/bot/proc/get_next_patrol_target()
+/mob/living/danimal/bot/proc/get_next_patrol_target()
 	// search the beacon list for the next target in the list.
 	for(var/obj/machinery/navbeacon/NB in GLOB.navbeacons["[z]"])
 		if(NB.location == next_destination) //Does the Beacon location text match the destination?
@@ -695,7 +695,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 			next_destination = NB.codes["next_patrol"] //Also get the name of the next beacon in line.
 			return TRUE
 
-/mob/living/simple_animal/bot/proc/find_nearest_beacon()
+/mob/living/danimal/bot/proc/find_nearest_beacon()
 	for(var/obj/machinery/navbeacon/NB in GLOB.navbeacons["[z]"])
 		var/dist = get_dist(src, NB)
 		if(nearest_beacon) //Loop though the beacon net to find the true closest beacon.
@@ -713,7 +713,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 	destination = nearest_beacon
 
 //PDA control. Some bots, especially MULEs, may have more parameters.
-/mob/living/simple_animal/bot/proc/bot_control(command, mob/user, list/user_access = list())
+/mob/living/danimal/bot/proc/bot_control(command, mob/user, list/user_access = list())
 	if(!on || emagged == 2 || remote_disabled) //Emagged bots do not respect anyone's authority! Bots with their remote controls off cannot get commands.
 		return TRUE //ACCESS DENIED
 	if(client)
@@ -742,7 +742,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 	return
 
 //
-/mob/living/simple_animal/bot/proc/bot_control_message(command, user)
+/mob/living/danimal/bot/proc/bot_control_message(command, user)
 	switch(command)
 		if("patroloff")
 			to_chat(src, "<span class='warning big'>STOP PATROL</span>")
@@ -763,16 +763,16 @@ Pass a positive integer as an argument to override a bot's default speed.
 		else
 			to_chat(src, span_warning("Unidentified control sequence received:[command]"))
 
-/mob/living/simple_animal/bot/proc/bot_summon() // summoned to PDA
+/mob/living/danimal/bot/proc/bot_summon() // summoned to PDA
 	summon_step()
 
 // calculates a path to the current destination
 // given an optional turf to avoid
-/mob/living/simple_animal/bot/proc/calc_path(turf/avoid)
+/mob/living/danimal/bot/proc/calc_path(turf/avoid)
 	check_bot_access()
 	set_path(get_path_to(src, patrol_target, 120, id=access_card, exclude=avoid))
 
-/mob/living/simple_animal/bot/proc/calc_summon_path(turf/avoid)
+/mob/living/danimal/bot/proc/calc_summon_path(turf/avoid)
 	check_bot_access()
 	spawn()
 		set_path(get_path_to(src, summon_target, 150, id=access_card, exclude=avoid))
@@ -780,7 +780,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 			speak("Summon command failed, destination unreachable.",radio_channel)
 			bot_reset()
 
-/mob/living/simple_animal/bot/proc/summon_step()
+/mob/living/danimal/bot/proc/summon_step()
 
 	if(client)		// In use by player, don't actually move.
 		return
@@ -803,7 +803,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 	else	// no path, so calculate new one
 		calc_summon_path()
 
-/mob/living/simple_animal/bot/Bump(M as mob|obj) //Leave no door unopened!
+/mob/living/danimal/bot/Bump(M as mob|obj) //Leave no door unopened!
 	. = ..()
 	if((istype(M, /obj/machinery/door/airlock) ||  istype(M, /obj/machinery/door/window)) && (!isnull(access_card)))
 		var/obj/machinery/door/D = M
@@ -811,7 +811,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 			D.open()
 			frustration = 0
 
-/mob/living/simple_animal/bot/proc/show_controls(mob/M)
+/mob/living/danimal/bot/proc/show_controls(mob/M)
 	users |= M
 	var/dat = ""
 	dat = get_controls(M)
@@ -821,14 +821,14 @@ Pass a positive integer as an argument to override a bot's default speed.
 	onclose(M,window_id,ref=src)
 	return
 
-/mob/living/simple_animal/bot/proc/update_controls()
+/mob/living/danimal/bot/proc/update_controls()
 	for(var/mob/M in users)
 		show_controls(M)
 
-/mob/living/simple_animal/bot/proc/get_controls(mob/M)
+/mob/living/danimal/bot/proc/get_controls(mob/M)
 	return "PROTOBOT - NOT FOR USE"
 
-/mob/living/simple_animal/bot/Topic(href, href_list)
+/mob/living/danimal/bot/Topic(href, href_list)
 	//No ..() to prevent strip panel showing up - Todo: make that saner
 	if(href_list["close"])// HUE HUE
 		if(usr in users)
@@ -879,14 +879,14 @@ Pass a positive integer as an argument to override a bot's default speed.
 				ejectpai(usr)
 	update_controls()
 
-/mob/living/simple_animal/bot/update_icon_state()
+/mob/living/danimal/bot/update_icon_state()
 	icon_state = "[initial(icon_state)][on]"
 
 // Machinery to simplify topic and access calls
 /obj/machinery/bot_core
 	use_power = NO_POWER_USE
 	anchored = FALSE
-	var/mob/living/simple_animal/bot/owner = null
+	var/mob/living/danimal/bot/owner = null
 
 /obj/machinery/bot_core/Initialize()
 	. = ..()
@@ -894,7 +894,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 	if(!istype(owner))
 		return INITIALIZE_HINT_QDEL
 
-/mob/living/simple_animal/bot/proc/topic_denied(mob/user) //Access check proc for bot topics! Remember to place in a bot's individual Topic if desired.
+/mob/living/danimal/bot/proc/topic_denied(mob/user) //Access check proc for bot topics! Remember to place in a bot's individual Topic if desired.
 	if(!user.canUseTopic(src))
 		return TRUE
 	// 0 for access, 1 for denied.
@@ -905,7 +905,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 			return TRUE
 	return FALSE
 
-/mob/living/simple_animal/bot/proc/hack(mob/user)
+/mob/living/danimal/bot/proc/hack(mob/user)
 	var/hack
 	if(hasSiliconAccessInArea(user) || IsAdminGhost(user)) //Allows silicons or admins to toggle the emag status of a bot.
 		hack += "[emagged == 2 ? "Software compromised! Unit may exhibit dangerous or erratic behavior." : "Unit operating normally. Release safety lock?"]<BR>"
@@ -914,7 +914,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 		hack += "Remote network control radio: <A href='?src=[REF(src)];operation=remote'>[remote_disabled ? "Disconnected" : "Connected"]</A><BR>"
 	return hack
 
-/mob/living/simple_animal/bot/proc/showpai(mob/user)
+/mob/living/danimal/bot/proc/showpai(mob/user)
 	var/eject = ""
 	if((!locked || hasSiliconAccessInArea(usr) || IsAdminGhost(usr)))
 		if(paicard || allow_pai)
@@ -932,7 +932,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 		eject += "<BR>"
 	return eject
 
-/mob/living/simple_animal/bot/proc/insertpai(mob/user, obj/item/paicard/card)
+/mob/living/danimal/bot/proc/insertpai(mob/user, obj/item/paicard/card)
 	if(paicard)
 		to_chat(user, span_warning("A [paicard] is already inserted!"))
 	else if(allow_pai && !key)
@@ -956,7 +956,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 	else
 		to_chat(user, span_warning("[src] is not compatible with [card]"))
 
-/mob/living/simple_animal/bot/proc/ejectpai(mob/user = null, announce = 1)
+/mob/living/danimal/bot/proc/ejectpai(mob/user = null, announce = 1)
 	if(paicard)
 		if(mind && paicard.pai)
 			mind.transfer_to(paicard.pai)
@@ -976,35 +976,35 @@ Pass a positive integer as an argument to override a bot's default speed.
 		name = bot_name
 		faction = initial(faction)
 
-/mob/living/simple_animal/bot/proc/ejectpairemote(mob/user)
+/mob/living/danimal/bot/proc/ejectpairemote(mob/user)
 	if(bot_core.allowed(user) && paicard)
 		speak("Ejecting personality chip.", radio_channel)
 		ejectpai(user)
 
-/mob/living/simple_animal/bot/Login()
+/mob/living/danimal/bot/Login()
 	. = ..()
 	access_card.access += player_access
 	diag_hud_set_botmode()
 
-/mob/living/simple_animal/bot/Logout()
+/mob/living/danimal/bot/Logout()
 	. = ..()
 	bot_reset()
 
-/mob/living/simple_animal/bot/revive(full_heal = 0, admin_revive = 0)
+/mob/living/danimal/bot/revive(full_heal = 0, admin_revive = 0)
 	if(..())
 		update_icon()
 		. = 1
 
-/mob/living/simple_animal/bot/ghost()
+/mob/living/danimal/bot/ghost()
 	if(stat != DEAD) // Only ghost if we're doing this while alive, the pAI probably isn't dead yet.
 		..()
 	if(paicard && (!client || stat == DEAD))
 		ejectpai(0)
 
-/mob/living/simple_animal/bot/sentience_act()
+/mob/living/danimal/bot/sentience_act()
 	faction -= "silicon"
 
-/mob/living/simple_animal/bot/proc/set_path(list/newpath)
+/mob/living/danimal/bot/proc/set_path(list/newpath)
 	path = newpath ? newpath : list()
 	if(!path_hud)
 		return
@@ -1059,7 +1059,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 		H.add_to_hud(src)
 
 
-/mob/living/simple_animal/bot/proc/increment_path()
+/mob/living/danimal/bot/proc/increment_path()
 	if(!path || !path.len)
 		return
 	var/image/I = path[path[1]]

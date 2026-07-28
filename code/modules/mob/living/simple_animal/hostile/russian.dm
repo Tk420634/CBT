@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/russian
+/mob/living/danimal/hostile/russian
 	name = "Russian"
 	desc = "For the Motherland!"
 	icon = 'icons/mob/simple_human.dmi'
@@ -12,7 +12,6 @@
 	speed = 0
 	maxHealth = 100
 	health = 100
-	harm_intent_damage = 5
 	melee_damage_lower = 15
 	melee_damage_upper = 15
 	attack_verb_continuous = "punches"
@@ -35,22 +34,22 @@
 	loot_amount_random = TRUE
 
 
-/mob/living/simple_animal/hostile/russian/ranged
+/mob/living/danimal/hostile/russian/ranged
 	icon_state = "russianranged"
 	icon_living = "russianranged"
 	loot = /obj/item/gun/ballistic/rifle/mosin
-	ranged = 1
+	can_ranged_attack = TRUE
 	retreat_distance = 5
 	minimum_distance = 5
 	projectilesound = 'sound/weapons/gunshot.ogg'
 	casingtype = /obj/item/ammo_casing/a357
 
 
-/mob/living/simple_animal/hostile/russian/ranged/mosin
+/mob/living/danimal/hostile/russian/ranged/mosin
 	loot = /obj/item/gun/ballistic/rifle/mosin
 	casingtype = /obj/item/ammo_casing/a308
 
-/mob/living/simple_animal/hostile/russian/ranged/trooper
+/mob/living/danimal/hostile/russian/ranged/trooper
 	icon_state = "russianrangedelite"
 	icon_living = "russianrangedelite"
 	maxHealth = 150
@@ -58,17 +57,17 @@
 	casingtype = /obj/item/ammo_casing/shotgun/buckshot
 	loot = /obj/item/gun/ballistic/rifle/mosin
 
-/mob/living/simple_animal/hostile/russian/ranged/officer
+/mob/living/danimal/hostile/russian/ranged/officer
 	name = "Russian Officer"
 	icon_state = "russianofficer"
 	icon_living = "russianofficer"
 	maxHealth = 65
 	health = 65
-	rapid = 3
+	ranged_attack_burst_count =  3
 	casingtype = /obj/item/ammo_casing/c9mm
 	loot = /obj/item/gun/ballistic/rifle/mosin
 
-/mob/living/simple_animal/hostile/russian/ranged/officer/Aggro()
+/mob/living/danimal/hostile/russian/ranged/officer/Aggro()
 	..()
 	summon_backup(15)
 	say("V BOJ!!", only_overhead = TRUE)

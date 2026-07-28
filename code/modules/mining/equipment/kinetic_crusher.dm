@@ -338,12 +338,12 @@
 
 /obj/item/crusher_trophy/watcher_wing/on_mark_detonation(mob/living/target, mob/living/user)
 	if(ishostile(target))
-		var/mob/living/simple_animal/hostile/H = target
+		var/mob/living/danimal/hostile/H = target
 		if(H.ranged) //briefly delay ranged attacks
-			if(H.ranged_cooldown >= world.time)
-				H.ranged_cooldown += bonus_value
+			if(H.ranged_attack_delay >= world.time)
+				H.ranged_attack_delay += bonus_value
 			else
-				H.ranged_cooldown = bonus_value + world.time
+				H.ranged_attack_delay = bonus_value + world.time
 
 //magmawing watcher
 /obj/item/crusher_trophy/blaster_tubes/magma_wing

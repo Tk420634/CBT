@@ -5,7 +5,7 @@
 ///////////////////
 
 // BASIC MELEE RAIDER
-/mob/living/simple_animal/hostile/raider
+/mob/living/danimal/hostile/raider
 	bounty = 20
 	name = "Raider"
 	desc = "Another murderer churned out by the wastes."
@@ -30,8 +30,8 @@
 	/// slots in a list of trash loot
 	var/random_trash_loot = TRUE
 	footstep_type = FOOTSTEP_MOB_SHOE
-	rapid_melee = 2
-	melee_queue_distance = 5
+	melee_attacks_per_turn = 2
+	windup_start_distance = 5
 	move_to_delay = 3.1
 	waddle_amount = 2
 	waddle_up_time = 1
@@ -52,7 +52,7 @@
 	loot_drop_amount = 2
 	loot_amount_random = TRUE
 
-/mob/living/simple_animal/hostile/raider/Initialize() // I dont, but, you can
+/mob/living/danimal/hostile/raider/Initialize() // I dont, but, you can
 	. = ..()
 	if(random_trash_loot)
 		loot = GLOB.trash_ammo + GLOB.trash_chem + GLOB.trash_clothing + GLOB.trash_craft + GLOB.trash_gun + GLOB.trash_misc + GLOB.trash_money + GLOB.trash_mob + GLOB.trash_part + GLOB.trash_tool
@@ -66,13 +66,13 @@
 	head = /obj/item/clothing/head/helmet/f13/firefighter
 
 // THIEF RAIDER - nabs stuff and runs
-/mob/living/simple_animal/hostile/raider/thief
+/mob/living/danimal/hostile/raider/thief
 	desc = "Another murderer churned out by the wastes. This one looks like they have sticky fingers..."
 
-/mob/living/simple_animal/hostile/raider/thief/movement_delay()
+/mob/living/danimal/hostile/raider/thief/movement_delay()
 	return -2
 
-/mob/living/simple_animal/hostile/raider/thief/AttackingTarget()
+/mob/living/danimal/hostile/raider/thief/AttackingTarget()
 	var/atom/my_target = get_target()
 	if(!ishuman(my_target))
 		return
@@ -94,29 +94,29 @@
 	retreat_distance = 50
 
 
-/mob/living/simple_animal/hostile/raider/thief/death(gibbed)
+/mob/living/danimal/hostile/raider/thief/death(gibbed)
 	for(var/obj/I in contents)
 		src.dropItemToGround(I)
 	. = ..()
 
 // BASIC RANGED RAIDER
-/mob/living/simple_animal/hostile/raider/ranged
+/mob/living/danimal/hostile/raider/ranged
 	bounty = 22
 	icon_state = "raider_ranged"
 	icon_living = "raider_ranged"
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	armor_list = ARMOR_VALUE_RAIDER_LEATHER_JACKET
 	maxHealth = 80
 	health = 80
-	rapid_melee = 2
-	melee_queue_distance = 5
+	melee_attacks_per_turn = 2
+	windup_start_distance = 5
 	move_to_delay = 2.8 //faster than average, but not a lot
 	retreat_distance = 1 //mob retreats 1 tile when in min distance
 	minimum_distance = 1 //Mob pushes up to melee, then backs off to avoid player attack?
 	aggroed_vision_range = 6 //mob waits to attack if the player chooses to close distance, or if the player attacks first.
 	vision_range = 8 //will see the player at max view range, and communicate that they've been seen but won't aggro unless they get closer.
-	ranged_cooldown_time = 2 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
+	ranged_cooldown_duration = 2 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_NORMAL
 	speed = 4.5
 	projectiletype = /obj/item/projectile/bullet/c9mm/simple
 	projectilesound = 'sound/f13weapons/ninemil.ogg'
@@ -140,7 +140,7 @@
 	speed = 10 // added to make his dumbass hold still - Jaeger
 
 // LEGENDARY MELEE RAIDER
-/mob/living/simple_animal/hostile/raider/legendary
+/mob/living/danimal/hostile/raider/legendary
 	bounty = 50
 	name = "Legendary Raider"
 	desc = "Another murderer churned out by the wastes - this one seems a bit faster than the average..."
@@ -150,7 +150,7 @@
 	health = 300
 	speed = 2
 	obj_damage = 300
-	rapid_melee = 1
+	melee_attacks_per_turn = 1
 	loot = list()
 	loot_drop_amount = MOB_LOOT_ALL
 	loot_amount_random = FALSE
@@ -161,7 +161,7 @@
 	loot_amount_random = TRUE
 
 // LEGENDARY RANGED RAIDER
-/mob/living/simple_animal/hostile/raider/ranged/legendary
+/mob/living/danimal/hostile/raider/ranged/legendary
 	name = "Legendary Raider"
 	desc = "Another murderer churned out by the wastes, wielding a decent pistol and looking very strong"
 	color = "#FFFF00"
@@ -170,10 +170,10 @@
 	health = 240
 	retreat_distance = 1
 	minimum_distance = 2
-	rapid_melee = 1
-	ranged_cooldown_time = 2 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
-	sight_shoot_delay_time = 0 SECONDS
+	melee_attacks_per_turn = 1
+	ranged_cooldown_duration = 2 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_NORMAL
+	sight_shoot_delay_duration = 0 SECONDS
 	speed = 3.5
 	projectiletype = /obj/item/projectile/bullet/m44/simple
 	projectilesound = 'sound/f13weapons/44mag.ogg'
@@ -203,7 +203,7 @@
 	loot_amount_random = TRUE
 
 // RAIDER BOSS
-/mob/living/simple_animal/hostile/raider/ranged/boss
+/mob/living/danimal/hostile/raider/ranged/boss
 	bounty = 50
 	name = "Machinegun Martha"
 	gender = FEMALE
@@ -214,12 +214,12 @@
 	maxHealth = 150
 	health = 150
 	extra_projectiles = 2
-	rapid_melee = 1
+	melee_attacks_per_turn = 1
 	waddle_amount = 4
 	waddle_up_time = 2
 	waddle_side_time = 1
-	ranged_cooldown_time = 2 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_FAST
+	ranged_cooldown_duration = 2 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_FAST
 	speed = 3.5
 	projectiletype = /obj/item/projectile/bullet/c10mm/improvised/simple
 	loot = list()
@@ -258,7 +258,7 @@
 		MOB_MINIMUM_DISTANCE_CHANGE_PER_TURN_CHANCE(40),
 	)
 
-/mob/living/simple_animal/hostile/raider/ranged/boss/Aggro()
+/mob/living/danimal/hostile/raider/ranged/boss/Aggro()
 	. = ..()
 	if(.)
 		return
@@ -266,7 +266,7 @@
 	if(!ckey)
 		say("KILL 'EM, FELLAS!", only_overhead = TRUE)
 
-/mob/living/simple_animal/hostile/raider/ranged/boss/mangomatt
+/mob/living/danimal/hostile/raider/ranged/boss/mangomatt
 	bounty = 5000 //he's a wanted griminal
 	name = "Mango Mathew and his Merry Meth Madlads"
 	desc = "Hi, Mango Mathew and his Merry Meth Madlads."
@@ -277,9 +277,9 @@
 	maxHealth = 165
 	health = 165
 	extra_projectiles = 2
-	ranged_cooldown_time = 1 SECONDS
-	sight_shoot_delay_time = 0 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_FAST
+	ranged_cooldown_duration = 1 SECONDS
+	sight_shoot_delay_duration = 0 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_FAST
 	speak_emote = list(
 		"growls",
 		"murrs",
@@ -306,7 +306,7 @@
 		)
 	variation_list = list() // so he keeps his stupid name
 
-/mob/living/simple_animal/hostile/raider/ranged/boss/mangomatt/Aggro()
+/mob/living/danimal/hostile/raider/ranged/boss/mangomatt/Aggro()
 	..()
 	summon_backup(15)
 	say(pick(\
@@ -322,7 +322,7 @@
 	loot_drop_amount = 10
 	loot_amount_random = TRUE
 
-/mob/living/simple_animal/hostile/raider/ranged/boss/blueberrybates
+/mob/living/danimal/hostile/raider/ranged/boss/blueberrybates
 	bounty = 500 //small timer
 	name = "Blueberry Bates and his Bottom-Feeder Buys"
 	desc = "Hello, Blueberry Bates and his Bottom-Feeder Buys. Has a shotgun with APDS incendiary slugs and is ready to fucking kill you."
@@ -331,9 +331,9 @@
 	icon_dead = "blueberry_bates_dead"
 	armor_list = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_BOSS
 	move_to_delay = 4 //S L O W
-	sight_shoot_delay_time = 0 SECONDS
-	ranged_cooldown_time = 1 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
+	sight_shoot_delay_duration = 0 SECONDS
+	ranged_cooldown_duration = 1 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_NORMAL
 	projectiletype = /obj/item/projectile/bullet/incendiary/shotgun
 	projectilesound = 'sound/f13weapons/shotgun.ogg'
 	maxHealth = 200 //bit beefier since his arena is significantly shittier for him and he's more of an annoyance
@@ -369,7 +369,7 @@
 		)
 	variation_list = list() // so he keeps his stupid name
 
-/mob/living/simple_animal/hostile/raider/ranged/boss/blueberrybates/Aggro()
+/mob/living/danimal/hostile/raider/ranged/boss/blueberrybates/Aggro()
 	..()
 	summon_backup(15)
 	say(pick(\
@@ -383,16 +383,16 @@
 		), only_overhead = TRUE)
 
 // RANGED RAIDER WITH ARMOR
-/mob/living/simple_animal/hostile/raider/ranged/sulphiteranged
+/mob/living/danimal/hostile/raider/ranged/sulphiteranged
 	icon_state = "metal_raider"
 	icon_living = "metal_raider"
 	icon_dead = "metal_raider_dead"
 	armor_list = ARMOR_VALUE_RAIDER_METAL_ARMOR
 	maxHealth = 60
 	health = 60
-	rapid_melee = 1
-	ranged_cooldown_time = 2 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
+	melee_attacks_per_turn = 1
+	ranged_cooldown_duration = 2 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_NORMAL
 	speed = 4.5
 	projectiletype = /obj/item/projectile/bullet/c45/simple
 	projectilesound = 'sound/weapons/gunshot.ogg'
@@ -414,7 +414,7 @@
 	loot_amount_random = TRUE
 
 // FIREFIGHTER RAIDER
-/mob/living/simple_animal/hostile/raider/firefighter
+/mob/living/danimal/hostile/raider/firefighter
 	icon_state = "firefighter_raider"
 	icon_living = "firefighter_raider"
 	icon_dead = "firefighter_raider_dead"
@@ -424,13 +424,13 @@
 	loot = list()
 	loot_drop_amount = 3
 	footstep_type = FOOTSTEP_MOB_SHOE
-	rapid_melee = 1
+	melee_attacks_per_turn = 1
 	loot = list()
 	loot_drop_amount = 2
 	loot_amount_random = TRUE
 
 // BIKER RAIDER
-/mob/living/simple_animal/hostile/raider/ranged/biker
+/mob/living/danimal/hostile/raider/ranged/biker
 	icon_state = "biker_raider"
 	icon_living = "biker_raider"
 	icon_dead = "biker_raider_dead"
@@ -439,9 +439,9 @@
 	armor_list = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_RUSTY
 	maxHealth = 125
 	health = 125
-	rapid_melee = 1
-	ranged_cooldown_time = 2 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
+	melee_attacks_per_turn = 1
+	ranged_cooldown_duration = 2 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_NORMAL
 	speed = 4.5
 	retreat_distance = 2 //retreat this far
 	minimum_distance = 3 //if within this distance
@@ -475,7 +475,7 @@
 
 // YANKEE RAIDER
 
-/mob/living/simple_animal/hostile/raider/baseball
+/mob/living/danimal/hostile/raider/baseball
 	bounty = 20
 	icon_state = "baseball_raider"
 	icon_living = "baseball_raider"
@@ -487,7 +487,7 @@
 	armor_list = ARMOR_VALUE_RAIDER_ARMOR
 	maxHealth = 125
 	health = 125
-	rapid_melee = 1
+	melee_attacks_per_turn = 1
 	loot = list()
 	loot_drop_amount = 3
 	footstep_type = FOOTSTEP_MOB_SHOE
@@ -505,7 +505,7 @@
 
 // TRIBAL RAIDER
 
-/mob/living/simple_animal/hostile/raider/tribal
+/mob/living/danimal/hostile/raider/tribal
 	icon_state = "tribal_raider"
 	icon_living = "tribal_raider"
 	icon_dead = "tribal_raider_dead"
@@ -517,7 +517,7 @@
 	loot = list()
 	loot_drop_amount = 3
 	footstep_type = FOOTSTEP_MOB_SHOE
-	rapid_melee = 1
+	melee_attacks_per_turn = 1
 
 	loot_drop_amount = 2
 	loot_amount_random = TRUE
@@ -533,7 +533,7 @@
 // SULPHITE //
 //////////////
 
-/mob/living/simple_animal/hostile/raider/sulphite
+/mob/living/danimal/hostile/raider/sulphite
 	name = "Sulphite Brawler"
 	desc = "A raider with low military grade armor and a shishkebab"
 	icon_state = "sulphite"
@@ -542,7 +542,7 @@
 	armor_list = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_RUSTY
 	maxHealth = 135
 	health = 135
-	rapid_melee = 1
+	melee_attacks_per_turn = 1
 	melee_damage_lower = 15
 	melee_damage_upper = 37
 	loot = list()
@@ -553,7 +553,7 @@
 // JUNKERS //
 /////////////
 
-/mob/living/simple_animal/hostile/raider/junker
+/mob/living/danimal/hostile/raider/junker
 	bounty = 25
 	name = "Junker"
 	desc = "A raider from the Junker gang."
@@ -564,12 +564,12 @@
 	armor_list = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_RUSTY
 	maxHealth = 150
 	health = 150
-	rapid_melee = 1
+	melee_attacks_per_turn = 1
 	melee_damage_lower = 18
 	melee_damage_upper = 42
 	footstep_type = FOOTSTEP_MOB_SHOE
 
-/mob/living/simple_animal/hostile/raider/ranged/boss/junker
+/mob/living/danimal/hostile/raider/ranged/boss/junker
 	name = "Junker Footman"
 	desc = "A Junker raider, outfitted in reinforced combat raider armor with extra metal plates."
 	icon_state = "junker_scrapper"
@@ -580,13 +580,13 @@
 	maxHealth = 165
 	health = 165
 	damage_coeff = list(BRUTE = 1, BURN = 0.75, TOX = 0, CLONE = 0, STAMINA = 0, OXY = 0)
-	rapid_melee = 1
+	melee_attacks_per_turn = 1
 	melee_damage_lower = 20
 	melee_damage_upper = 38
 	footstep_type = FOOTSTEP_MOB_SHOE
 	loot_drop_amount = 5
 
-/mob/living/simple_animal/hostile/raider/junker/creator
+/mob/living/danimal/hostile/raider/junker/creator
 	name = "Junker Field Creator"
 	desc = "A Junker raider, specialized in spitting out eyebots on the fly with any scrap they can find."
 	icon_state = "junker"
@@ -595,43 +595,43 @@
 	armor_list = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_RUSTY
 	maxHealth = 150
 	health = 150
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	retreat_distance = 6
 	minimum_distance = 8
-	rapid_melee = 1
+	melee_attacks_per_turn = 1
 	speed = 4.5
-	ranged_cooldown_time = 2 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
+	ranged_cooldown_duration = 2 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_NORMAL
 	projectiletype = /obj/item/projectile/bullet/c45/improvised
 	projectilesound = 'sound/weapons/gunshot.ogg'
 	var/list/spawned_mobs = list()
 	var/max_mobs = 3
-	var/mob_types = list(/mob/living/simple_animal/hostile/eyebot/reinforced)
+	var/mob_types = list(/mob/living/danimal/hostile/eyebot/reinforced)
 	var/spawn_time = 15 SECONDS
 	//var/spawn_text = "flies from"
 	footstep_type = FOOTSTEP_MOB_SHOE
 	loot_drop_amount = 5
 
 
-/mob/living/simple_animal/hostile/raider/junker/creator/Initialize()
+/mob/living/danimal/hostile/raider/junker/creator/Initialize()
 	. = ..()
 	AddComponent(/datum/component/spawner, mob_types, spawn_time, faction, /*spawn_text,*/ max_mobs, _range = 7)
 
-/mob/living/simple_animal/hostile/raider/junker/creator/death()
+/mob/living/danimal/hostile/raider/junker/creator/death()
 	RemoveComponentByType(/datum/component/spawner)
 	. = ..()
 
-/mob/living/simple_animal/hostile/raider/junker/creator/Destroy()
+/mob/living/danimal/hostile/raider/junker/creator/Destroy()
 	RemoveComponentByType(/datum/component/spawner)
 	. = ..()
 
-/mob/living/simple_animal/hostile/raider/junker/creator/Aggro()
+/mob/living/danimal/hostile/raider/junker/creator/Aggro()
 	. = ..()
 	if(.)
 		return
 	summon_backup(10)
 
-/mob/living/simple_animal/hostile/raider/junker/boss
+/mob/living/danimal/hostile/raider/junker/boss
 	bounty = 300
 	name = "Junker Boss"
 	desc = "A Junker boss, clad in hotrod power armor, and wielding a deadly rapid-fire shrapnel cannon."
@@ -641,13 +641,13 @@
 	armor_list = ARMOR_VALUE_RAIDER_COMBAT_ARMOR_BOSS
 	maxHealth = 165
 	health = 165
-	ranged = TRUE
-	rapid_melee = 1
+	can_ranged_attack = TRUE
+	melee_attacks_per_turn = 1
 	retreat_distance = 4
 	minimum_distance = 6
 	extra_projectiles = 2
-	ranged_cooldown_time = 2 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
+	ranged_cooldown_duration = 2 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_NORMAL
 	projectiletype = /obj/item/projectile/bullet/shrapnel/simple
 	projectilesound = 'sound/f13weapons/auto5.ogg'
 	loot = list()
@@ -658,7 +658,7 @@
 
 // Cultist Stuff
 
-/mob/living/simple_animal/hostile/raider/cultist/melee
+/mob/living/danimal/hostile/raider/cultist/melee
 	name = "Cultist Shredder"
 	desc = "A nightmare in a robe. Now with 100% less conversion!"
 	icon = 'icons/fallout/mobs/humans/raider.dmi'
@@ -682,8 +682,8 @@
 	loot = list()
 	loot_drop_amount = 2
 	footstep_type = FOOTSTEP_MOB_SHOE
-	rapid_melee = 2
-	melee_queue_distance = 5
+	melee_attacks_per_turn = 2
+	windup_start_distance = 5
 	move_to_delay = 1.5
 	waddle_amount = 2
 	waddle_up_time = 1
@@ -693,27 +693,27 @@
 	aggroed_vision_range = 6 //mob waits to attack if the player chooses to close distance, or if the player attacks first.
 	vision_range = 8 //will see the player at max view range, and communicate that they've been seen but won't aggro unless they get closer.
 
-/mob/living/simple_animal/hostile/raider/cultist/ranged
+/mob/living/danimal/hostile/raider/cultist/ranged
 	name = "Cultist Gunner"
 	desc = "A nightmare in a robe. Now with 100% less conversion!"
 	icon = 'icons/fallout/mobs/humans/raider.dmi'
 	icon_state = "cultist_pistol"
 	icon_living = "cultist_pistol"
 	icon_dead = "cultist_pistol_dead"
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	armor_list = ARMOR_VALUE_RAIDER_LEATHER_JACKET
 	faction = list("raider", "hostile")
 	maxHealth = 85
 	health = 85
-	rapid_melee = 2
-	melee_queue_distance = 5
+	melee_attacks_per_turn = 2
+	windup_start_distance = 5
 	move_to_delay = 2.8 //faster than average, but not a lot
 	retreat_distance = 4 //mob retreats 1 tile when in min distance
 	minimum_distance = 2 //Mob pushes up to melee, then backs off to avoid player attack?
 	aggroed_vision_range = 6 //mob waits to attack if the player chooses to close distance, or if the player attacks first.
 	vision_range = 8 //will see the player at max view range, and communicate that they've been seen but won't aggro unless they get closer.
-	ranged_cooldown_time = 2 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
+	ranged_cooldown_duration = 2 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_NORMAL
 	projectiletype = /obj/item/projectile/bullet/c10mm/simple
 	projectilesound = 'sound/f13weapons/ninemil.ogg'
 	loot = list()
@@ -730,26 +730,26 @@
 		SP_DISTANT_RANGE(PISTOL_LIGHT_RANGE_DISTANT)
 	)
 
-/mob/living/simple_animal/hostile/raider/cultist/ranged/shotgun
+/mob/living/danimal/hostile/raider/cultist/ranged/shotgun
 	name = "Cultist Crowd Controller"
 	desc = "A nightmare in a robe. Now with 100% less conversion!"
 	icon = 'icons/fallout/mobs/humans/raider.dmi'
 	icon_state = "cultist_shotgun"
 	icon_living = "cultist_shotgun"
 	icon_dead = "cultist_shotgun_dead"
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	armor_list = ARMOR_VALUE_RAIDER_LEATHER_JACKET
 	maxHealth = 80
 	health = 80
-	rapid_melee = 2
-	melee_queue_distance = 5
+	melee_attacks_per_turn = 2
+	windup_start_distance = 5
 	move_to_delay = 2.8 //faster than average, but not a lot
 	retreat_distance = 4 //mob retreats 1 tile when in min distance
 	minimum_distance = 2 //Mob pushes up to melee, then backs off to avoid player attack?
 	aggroed_vision_range = 6 //mob waits to attack if the player chooses to close distance, or if the player attacks first.
 	vision_range = 8 //will see the player at max view range, and communicate that they've been seen but won't aggro unless they get closer.
-	ranged_cooldown_time = 4 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_SLOW
+	ranged_cooldown_duration = 4 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_SLOW
 	projectiletype = /obj/item/projectile/bullet/pellet/shotgun_buckshot
 	projectilesound = 'sound/f13weapons/shotgun.ogg'
 	sound_after_shooting = 'sound/weapons/shotguninsert.ogg'
@@ -768,7 +768,7 @@
 		SP_DISTANT_RANGE(SHOTGUN_RANGE_DISTANT)
 	)
 
-/mob/living/simple_animal/hostile/raider/cultist/ranged/smg
+/mob/living/danimal/hostile/raider/cultist/ranged/smg
 	bounty = 35
 	name = "Cultist Bulletmage"
 	desc = "A nightmare in a robe. Now with 100% less conversion!"
@@ -776,19 +776,19 @@
 	icon_state = "cultist2_smg"
 	icon_living = "cultist2_smg"
 	icon_dead = "cultist2_smg_dead"
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	armor_list = ARMOR_VALUE_RAIDER_LEATHER_JACKET
 	maxHealth = 80
 	health = 80
-	rapid_melee = 2
-	melee_queue_distance = 5
+	melee_attacks_per_turn = 2
+	windup_start_distance = 5
 	move_to_delay = 2.8 //faster than average, but not a lot
 	retreat_distance = 4 //mob retreats 1 tile when in min distance
 	minimum_distance = 2 //Mob pushes up to melee, then backs off to avoid player attack?
 	aggroed_vision_range = 6 //mob waits to attack if the player chooses to close distance, or if the player attacks first.
 	vision_range = 8 //will see the player at max view range, and communicate that they've been seen but won't aggro unless they get closer.
-	ranged_cooldown_time = 1 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_FAST
+	ranged_cooldown_duration = 1 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_FAST
 	projectiletype = /obj/item/projectile/bullet/c22
 	projectilesound = 'sound/f13weapons/assaultrifle_fire.ogg'
 	sound_after_shooting = 'sound/weapons/shotguninsert.ogg'
@@ -807,26 +807,26 @@
 		SP_DISTANT_RANGE(PISTOL_LIGHT_RANGE_DISTANT)
 	)
 
-/mob/living/simple_animal/hostile/raider/cultist/ranged/tesla
+/mob/living/danimal/hostile/raider/cultist/ranged/tesla
 	name = "Cultist Lasermage"
 	desc = "A nightmare in a robe. Now with 100% less conversion!"
 	icon = 'icons/fallout/mobs/humans/raider.dmi'
 	icon_state = "cultist3_tesla"
 	icon_living = "cultist3_tesla"
 	icon_dead = "cultist3_tesla_dead"
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	armor_list = ARMOR_VALUE_RAIDER_LEATHER_JACKET
 	maxHealth = 150
 	health = 150
-	rapid_melee = 2
-	melee_queue_distance = 5
+	melee_attacks_per_turn = 2
+	windup_start_distance = 5
 	move_to_delay = 2.8 //faster than average, but not a lot
 	retreat_distance = 4 //mob retreats 1 tile when in min distance
 	minimum_distance = 2 //Mob pushes up to melee, then backs off to avoid player attack?
 	aggroed_vision_range = 6 //mob waits to attack if the player chooses to close distance, or if the player attacks first.
 	vision_range = 8 //will see the player at max view range, and communicate that they've been seen but won't aggro unless they get closer.
-	ranged_cooldown_time = 2 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_FAST
+	ranged_cooldown_duration = 2 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_FAST
 	projectiletype = /obj/item/projectile/energy/teslacannon/oasis
 	projectilesound = 'sound/weapons/resonator_fire.ogg'
 	sound_after_shooting = 'sound/f13weapons/rcwfire.ogg'
@@ -845,26 +845,26 @@
 		SP_DISTANT_RANGE(PISTOL_LIGHT_RANGE_DISTANT)
 	)
 
-/mob/living/simple_animal/hostile/raider/cultist/ranged/radiation
+/mob/living/danimal/hostile/raider/cultist/ranged/radiation
 	name = "Cultist Converter"
 	desc = "A nightmare in a robe. Now with 69% more conversion!"
 	icon = 'icons/fallout/mobs/humans/raider.dmi'
 	icon_state = "cultist3_tesla"
 	icon_living = "cultist3_tesla"
 	icon_dead = "cultist3_tesla_dead"
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	armor_list = ARMOR_VALUE_RAIDER_LEATHER_JACKET
 	maxHealth = 150
 	health = 150
-	rapid_melee = 2
-	melee_queue_distance = 5
+	melee_attacks_per_turn = 2
+	windup_start_distance = 5
 	move_to_delay = 2.8 //faster than average, but not a lot
 	retreat_distance = 4 //mob retreats 1 tile when in min distance
 	minimum_distance = 2 //Mob pushes up to melee, then backs off to avoid player attack?
 	aggroed_vision_range = 6 //mob waits to attack if the player chooses to close distance, or if the player attacks first.
 	vision_range = 8 //will see the player at max view range, and communicate that they've been seen but won't aggro unless they get closer.
-	ranged_cooldown_time = 2 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_FAST
+	ranged_cooldown_duration = 2 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_FAST
 	projectiletype = /obj/item/projectile/energy/nuclear_particle/cultist
 	projectilesound = 'sound/weapons/resonator_fire.ogg'
 	sound_after_shooting = 'sound/f13weapons/rcwfire.ogg'

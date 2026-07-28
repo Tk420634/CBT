@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/retaliate/bat
+/mob/living/danimal/hostile/retaliate/bat
 	name = "Space Bat"
 	desc = "A rare breed of bat which roosts in spaceships, probably not vampiric."
 	icon_state = "bat"
@@ -19,7 +19,6 @@
 	health = 15
 	spacewalk = TRUE
 	see_in_dark = 10
-	harm_intent_damage = 6
 	melee_damage_lower = 6
 	melee_damage_upper = 5
 	attack_verb_continuous = "bites"
@@ -40,10 +39,10 @@
 
 
 	//Space bats need no air to fly in.
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 0
 
-/mob/living/simple_animal/hostile/retaliate/bat/secbat
+/mob/living/danimal/hostile/retaliate/bat/secbat
 	name = "Security Bat"
 	icon_state = "secbat"
 	icon_living = "secbat"

@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/zombie
+/mob/living/danimal/hostile/zombie
 	name = "Shambling Corpse"
 	desc = "When there is no more room in hell, the dead will walk in outer space."
 	icon = 'icons/mob/simple_human.dmi'
@@ -9,14 +9,13 @@
 	stat_attack = CONSCIOUS //braains
 	maxHealth = 100
 	health = 100
-	harm_intent_damage = 5
 	melee_damage_lower = 21
 	melee_damage_upper = 21
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
 	attack_sound = 'sound/hallucinations/growl1.ogg'
 	a_intent = INTENT_HARM
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 0
 	spacewalk = FALSE
 	status_flags = CANPUSH
@@ -25,11 +24,11 @@
 	var/infection_chance = 0
 	var/obj/effect/mob_spawn/human/corpse/delayed/corpse
 
-/mob/living/simple_animal/hostile/zombie/Initialize(mapload)
+/mob/living/danimal/hostile/zombie/Initialize(mapload)
 	. = ..()
 	INVOKE_ASYNC(src,PROC_REF(setup_visuals))
 
-/mob/living/simple_animal/hostile/zombie/proc/setup_visuals()
+/mob/living/danimal/hostile/zombie/proc/setup_visuals()
 	var/datum/preferences/dummy_prefs = new
 	dummy_prefs.pref_species = new /datum/species/zombie
 	dummy_prefs.be_random_body = TRUE
@@ -48,23 +47,23 @@
 	corpse.mob_species = /datum/species/zombie
 	corpse.mob_name = name
 
-/mob/living/simple_animal/hostile/zombie/Destroy()
+/mob/living/danimal/hostile/zombie/Destroy()
 	if(corpse)
 		QDEL_NULL(corpse)
 	. = ..()
 
-/mob/living/simple_animal/hostile/zombie/AttackingTarget()
+/mob/living/danimal/hostile/zombie/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(. && ishuman(my_target) && prob(infection_chance))
 		try_to_zombie_infect(my_target)
 
-/mob/living/simple_animal/hostile/zombie/drop_loot()
+/mob/living/danimal/hostile/zombie/drop_loot()
 	. = ..()
 	corpse.forceMove(drop_location())
 	corpse.create()
 
-/mob/living/simple_animal/hostile/unemployedclone
+/mob/living/danimal/hostile/unemployedclone
 	name = "Failed clone"
 	desc = "Somebody failed chemistry."
 	icon = 'icons/mob/human.dmi'
@@ -76,14 +75,13 @@
 	stat_attack = CONSCIOUS //braains
 	maxHealth = 100
 	health = 100
-	harm_intent_damage = 5
 	melee_damage_lower = 21
 	melee_damage_upper = 21
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
 	attack_sound = 'sound/hallucinations/growl1.ogg'
 	a_intent = INTENT_HARM
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 0
 	spacewalk = FALSE
 	status_flags = CANPUSH

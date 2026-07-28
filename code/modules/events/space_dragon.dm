@@ -34,7 +34,7 @@
 	var/datum/mind/player_mind = new /datum/mind(selected.key)
 	player_mind.active = TRUE
 
-	var/mob/living/simple_animal/hostile/space_dragon/S = new(pick(spawn_locs))
+	var/mob/living/danimal/hostile/space_dragon/S = new(pick(spawn_locs))
 	player_mind.transfer_to(S)
 	player_mind.assigned_role = "Space Dragon"
 	player_mind.special_role = "Space Dragon"

@@ -40,5 +40,5 @@
 	user.say(message_said, spans = span_list, sanitize = FALSE)
 	playsound(get_turf(user), speech_sound, 100, 1, 5)
 	for(var/mob/living/carbon/C in get_hearers_in_view(7, user))
-		if(!faction_check((user.faction - "neutral"), C.faction))
+		if(!factions_are_friendly((user.faction - "neutral"), C.faction))
 			C.jitteriness += 5 // Scary, oooooo

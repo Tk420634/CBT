@@ -41,8 +41,8 @@ GLOBAL_LIST_EMPTY(creature_selectable_icons)
 /proc/generate_selectable_creatures(clear = FALSE)
 	if(clear)
 		GLOB.creature_selectable = list()
-	for(var/I in subtypesof(/mob/living/simple_animal/advanced))
-		var/mob/living/simple_animal/advanced/P = I
+	for(var/I in subtypesof(/mob/living/danimal/advanced))
+		var/mob/living/danimal/advanced/P = I
 		if(initial(P.is_blacklisted))
 			continue
 		var/list/traits = initial(P.p_traits)
@@ -51,7 +51,7 @@ GLOBAL_LIST_EMPTY(creature_selectable_icons)
 			GLOB.creature_selectable_icons[capitalize("[initial(P.name)]")] = icon(initial(P.icon), initial(P.icon_living), frame = 1, moving = FALSE)
 		continue
 	for(var/T in GLOB.creature_whitelist)
-		var/mob/living/simple_animal/SA = T
+		var/mob/living/danimal/SA = T
 		GLOB.creature_selectable[capitalize(initial(SA.name))] = T
 		GLOB.creature_selectable_icons[capitalize("[initial(SA.name)]")] = icon(initial(SA.icon), initial(SA.icon_living), frame = 1, moving = FALSE)
 
@@ -66,8 +66,8 @@ GLOBAL_LIST_INIT(creature_spawnpoints, list(
 	))
 
 ///Creatures that should be added to the playable creature list.
-///DO NOT ADD MOBS HERE UNLESS THEY ARE SUBTYPES OF /mob/living/simple_animal/advanced. CATSLUGS CAN STAY BECAUSE THEY ARE BASICALLY ALREADY ADVANCED MOBS.
+///DO NOT ADD MOBS HERE UNLESS THEY ARE SUBTYPES OF /mob/living/danimal/advanced. CATSLUGS CAN STAY BECAUSE THEY ARE BASICALLY ALREADY ADVANCED MOBS.
 GLOBAL_LIST_INIT(creature_whitelist, list(
-	/mob/living/simple_animal/pet/catslug
+	/mob/living/danimal/pet/catslug
 	))
-///DO NOT ADD MOBS HERE UNLESS THEY ARE SUBTYPES OF /mob/living/simple_animal/advanced. CATSLUGS CAN STAY BECAUSE THEY ARE BASICALLY ALREADY ADVANCED MOBS.
+///DO NOT ADD MOBS HERE UNLESS THEY ARE SUBTYPES OF /mob/living/danimal/advanced. CATSLUGS CAN STAY BECAUSE THEY ARE BASICALLY ALREADY ADVANCED MOBS.

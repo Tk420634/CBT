@@ -1,5 +1,5 @@
 //Look Sir, free crabs!
-/mob/living/simple_animal/crab
+/mob/living/danimal/crab
 	name = "crab"
 	desc = "Free crabs!"
 	icon_state = "crab"
@@ -18,7 +18,7 @@
 	response_disarm_simple = "gently push aside"
 	response_harm_continuous = "stomps"
 	response_harm_simple = "stomp"
-	stop_automated_movement = 1
+	stop_wandering = 1
 	friendly_verb_continuous = "pinches"
 	friendly_verb_simple = "pinch"
 	ventcrawler = VENTCRAWLER_ALWAYS
@@ -27,21 +27,21 @@
 	var/obj/item/inventory_mask
 	gold_core_spawnable = FRIENDLY_SPAWN
 
-/mob/living/simple_animal/crab/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/crab/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	//CRAB movement
 	regenerate_icons()
 
 //COFFEE! SQUEEEEEEEEE!
-/mob/living/simple_animal/crab/Coffee
+/mob/living/danimal/crab/Coffee
 	name = "Coffee"
 	real_name = "Coffee"
 	desc = "It's Coffee, the other pet!"
 	gender = FEMALE
 	gold_core_spawnable = NO_SPAWN
 
-/mob/living/simple_animal/crab/evil
+/mob/living/danimal/crab/evil
 	name = "Evil Crab"
 	real_name = "Evil Crab"
 	desc = "Unnerving, isn't it? It has to be planning something nefarious..."
@@ -54,7 +54,7 @@
 	response_disarm_simple = "shove"
 	gold_core_spawnable = HOSTILE_SPAWN
 
-/mob/living/simple_animal/crab/kreb
+/mob/living/danimal/crab/kreb
 	name = "Kreb"
 	desc = "This is a real crab. The other crabs are simply gubbucks in disguise!"
 	real_name = "Kreb"
@@ -63,7 +63,7 @@
 	icon_dead = "kreb_dead"
 	gold_core_spawnable = NO_SPAWN
 
-/mob/living/simple_animal/crab/evil/kreb
+/mob/living/danimal/crab/evil/kreb
 	name = "Evil Kreb"
 	real_name = "Evil Kreb"
 	icon_state = "evilkreb"

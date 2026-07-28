@@ -89,7 +89,7 @@
 			return TRUE
 		else
 			to_chat(H, span_warning("You're repulsed by even looking at [src]. Only a pig could force themselves to go through it."))
-	if(istype(mover, /mob/living/simple_animal/hostile/morph))
+	if(istype(mover, /mob/living/danimal/hostile/morph))
 		return TRUE
 	else
 		return FALSE

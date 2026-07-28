@@ -465,10 +465,10 @@
 /datum/export/pirate/parrot
 	cost = 2000
 	unit_name = "alive parrot"
-	export_types = list(/mob/living/simple_animal/parrot)
+	export_types = list(/mob/living/danimal/parrot)
 
 /datum/export/pirate/parrot/find_loot()
-	for(var/mob/living/simple_animal/parrot/P in GLOB.alive_mob_list)
+	for(var/mob/living/danimal/parrot/P in GLOB.alive_mob_list)
 		var/turf/T = get_turf(P)
 		if(T && is_station_level(T.z))
 			return P

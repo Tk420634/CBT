@@ -57,7 +57,7 @@
 	stored_slimes = null
 	QDEL_NULL(current_potion)
 	for(var/i in contents)
-		var/mob/living/simple_animal/slime/S = i
+		var/mob/living/danimal/slime/S = i
 		if(istype(S))
 			S.forceMove(drop_location())
 	return ..()
@@ -187,7 +187,7 @@
 	var/obj/machinery/computer/camera_advanced/xenobio/X = target
 
 	if(GLOB.cameranet.checkTurfVis(remote_eye.loc))
-		for(var/mob/living/simple_animal/slime/S in X.stored_slimes)
+		for(var/mob/living/danimal/slime/S in X.stored_slimes)
 			S.forceMove(remote_eye.loc)
 			S.visible_message("[S] warps in!")
 			X.stored_slimes -= S
@@ -207,7 +207,7 @@
 	var/obj/machinery/computer/camera_advanced/xenobio/X = target
 
 	if(GLOB.cameranet.checkTurfVis(remote_eye.loc))
-		for(var/mob/living/simple_animal/slime/S in remote_eye.loc)
+		for(var/mob/living/danimal/slime/S in remote_eye.loc)
 			if(X.stored_slimes.len >= X.max_slimes)
 				break
 			if(!S.ckey)
@@ -278,7 +278,7 @@
 	var/mob/camera/aiEye/remote/xenobio/remote_eye = C.remote_control
 
 	if(GLOB.cameranet.checkTurfVis(remote_eye.loc))
-		for(var/mob/living/simple_animal/slime/S in remote_eye.loc)
+		for(var/mob/living/danimal/slime/S in remote_eye.loc)
 			slime_scan(S, C)
 	else
 		to_chat(owner, span_warning("Target is not near a camera. Cannot proceed."))
@@ -301,7 +301,7 @@
 		return
 
 	if(GLOB.cameranet.checkTurfVis(remote_eye.loc))
-		for(var/mob/living/simple_animal/slime/S in remote_eye.loc)
+		for(var/mob/living/danimal/slime/S in remote_eye.loc)
 			X.current_potion.attack(S, C)
 			break
 	else
@@ -357,17 +357,17 @@
 // Alternate clicks for slime, monkey and open turf if using a xenobio console
 
 // Scans slime
-/mob/living/simple_animal/slime/CtrlClick(mob/user)
+/mob/living/danimal/slime/CtrlClick(mob/user)
 	SEND_SIGNAL(user, COMSIG_XENO_SLIME_CLICK_CTRL, src)
 	..()
 
 //Feeds a potion to slime
-/mob/living/simple_animal/slime/AltClick(mob/user)
+/mob/living/danimal/slime/AltClick(mob/user)
 	SEND_SIGNAL(user, COMSIG_XENO_SLIME_CLICK_ALT, src)
 	..()
 
 //Picks up slime
-/mob/living/simple_animal/slime/ShiftClick(mob/user)
+/mob/living/danimal/slime/ShiftClick(mob/user)
 	SEND_SIGNAL(user, COMSIG_XENO_SLIME_CLICK_SHIFT, src)
 	..()
 
@@ -387,7 +387,7 @@
 	..()
 
 // Scans slime
-/obj/machinery/computer/camera_advanced/xenobio/proc/XenoSlimeClickCtrl(mob/living/user, mob/living/simple_animal/slime/S)
+/obj/machinery/computer/camera_advanced/xenobio/proc/XenoSlimeClickCtrl(mob/living/user, mob/living/danimal/slime/S)
 	if(!GLOB.cameranet.checkTurfVis(S.loc))
 		to_chat(user, span_warning("Target is not near a camera. Cannot proceed."))
 		return
@@ -398,7 +398,7 @@
 		slime_scan(S, C)
 
 //Feeds a potion to slime
-/obj/machinery/computer/camera_advanced/xenobio/proc/XenoSlimeClickAlt(mob/living/user, mob/living/simple_animal/slime/S)
+/obj/machinery/computer/camera_advanced/xenobio/proc/XenoSlimeClickAlt(mob/living/user, mob/living/danimal/slime/S)
 	if(!(upgradetier & XENOBIO_UPGRADE_SLIMEADV)) //CIT CHANGE - makes slime-related actions require XENOBIO_UPGRADE_SLIMEADV
 		to_chat(user, span_warning("This console does not have the advanced slime upgrade."))
 		return
@@ -416,7 +416,7 @@
 		X.current_potion.attack(S, C)
 
 //Picks up slime
-/obj/machinery/computer/camera_advanced/xenobio/proc/XenoSlimeClickShift(mob/living/user, mob/living/simple_animal/slime/S)
+/obj/machinery/computer/camera_advanced/xenobio/proc/XenoSlimeClickShift(mob/living/user, mob/living/danimal/slime/S)
 	if(!(upgradetier & XENOBIO_UPGRADE_SLIMEBASIC)) //CIT CHANGE - makes slime-related actions require XENOBIO_UPGRADE_SLIMEBASIC
 		to_chat(user, span_warning("This console does not have the basic slime upgrade."))
 		return
@@ -453,7 +453,7 @@
 	var/obj/machinery/computer/camera_advanced/xenobio/X = E.origin
 	var/area/turfarea = get_area(T)
 	if(turfarea.name == E.allowed_area || turfarea.xenobiology_compatible)
-		for(var/mob/living/simple_animal/slime/S in X.stored_slimes)
+		for(var/mob/living/danimal/slime/S in X.stored_slimes)
 			S.forceMove(T)
 			S.visible_message("[S] warps in!")
 			X.stored_slimes -= S

@@ -141,19 +141,19 @@
 		if(SCAVENGING_SPAWN_MOUSE)
 			var/nasty_rodent = pick("mouse", "rodent", "squeaky critter", "stupid pest", "annoying cable chewer", "nasty, ugly, evil, disease-ridden rodent")
 			to_chat(user, span_notice("You found something in [source]... no wait, that's just another [nasty_rodent]."))
-			new /mob/living/simple_animal/mouse(source.loc)
+			new /mob/living/danimal/mouse(source.loc)
 		if(SCAVENGING_SPAWN_MICE)
 			user.visible_message(span_notice("A small gang of mice emerges from [source]."), \
 				span_notice("You found something in [source]... no wait, that's just another- <b>no wait, that's a lot of damn mice.</b>"))
 			for(var/i in 1 to rand(4, 6))
-				new /mob/living/simple_animal/mouse(source.loc)
+				new /mob/living/danimal/mouse(source.loc)
 		if(SCAVENGING_SPAWN_TOM)
 			if(GLOB.tom_existed) //There can only be one.
 				to_chat(user, span_notice("You found nothing, better luck next time."))
 				free = TRUE
 			else
 				to_chat(user, span_notice("You found something in [source]... no wait, that's Tom, the mouse! What is he doing here?"))
-				new /mob/living/simple_animal/mouse/brown/Tom(source.loc)
+				new /mob/living/danimal/mouse/brown/Tom(source.loc)
 		else
 			special = FALSE
 

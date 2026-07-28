@@ -30,7 +30,7 @@
 							span_userdanger("[M] take a swipe at you!"), target = M, \
 							target_message = span_danger("You take a swipe at [src]!"))
 
-/mob/living/silicon/attack_animal(mob/living/simple_animal/M)
+/mob/living/silicon/attack_animal(mob/living/danimal/M)
 	. = ..()
 	if(.)
 		var/damage = .
@@ -88,7 +88,7 @@
 				span_warning("[M] punches you, but doesn't leave a dent."), null, COMBAT_MESSAGE_RANGE, null, M,
 				span_danger("You punch [src], but don't leave a dent."))
 
-/mob/living/silicon/attack_drone(mob/living/simple_animal/drone/M)
+/mob/living/silicon/attack_drone(mob/living/danimal/drone/M)
 	if(M.a_intent == INTENT_HARM)
 		return
 	return ..()

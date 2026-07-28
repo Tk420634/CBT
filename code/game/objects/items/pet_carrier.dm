@@ -110,7 +110,7 @@
 	if(user == target)
 		to_chat(user, span_warning("Why would you ever do that?"))
 		return
-	if((ishostile(target) && (!allows_hostiles || !istype(target, /mob/living/simple_animal/hostile/carp/cayenne))) || target.move_resist >= MOVE_FORCE_VERY_STRONG) //don't allow goliaths into pet carriers, but let cayenne in!
+	if((ishostile(target) && (!allows_hostiles || !istype(target, /mob/living/danimal/hostile/carp/cayenne))) || target.move_resist >= MOVE_FORCE_VERY_STRONG) //don't allow goliaths into pet carriers, but let cayenne in!
 		to_chat(user, span_warning("You have a feeling you shouldn't keep this as a pet."))
 		return
 	load_occupant(user, target)
@@ -306,7 +306,7 @@
 		occupant_gas_supply = new
 
 	if(isanimal(occupant))
-		var/mob/living/simple_animal/animal = occupant
+		var/mob/living/danimal/animal = occupant
 		var/list/occupant_gas_list = occupant_gas_supply
 		occupant_gas_list[GAS_O2] = 0.0064
 		occupant_gas_supply.set_temperature(animal.minbodytemp)

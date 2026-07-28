@@ -38,8 +38,8 @@
 
 /obj/structure/statue/petrified/Destroy()
 
-	if(istype(src.loc, /mob/living/simple_animal/hostile/statue))
-		var/mob/living/simple_animal/hostile/statue/S = src.loc
+	if(istype(src.loc, /mob/living/danimal/hostile/statue))
+		var/mob/living/danimal/hostile/statue/S = src.loc
 		forceMove(S.loc)
 		if(S.mind)
 			if(petrified_mob)
@@ -95,7 +95,7 @@
 	S.icon_state = "monkey"
 	return 1
 
-/mob/living/simple_animal/pet/dog/corgi/petrify(statue_timer)
+/mob/living/danimal/pet/dog/corgi/petrify(statue_timer)
 	if(!isturf(loc))
 		return 0
 	var/obj/structure/statue/petrified/S = new (loc, src, statue_timer)

@@ -54,7 +54,7 @@ The following runtime has occurred 15 time(s).
 runtime error: Simple animal being instantiated in nullspace
 proc name: stack trace (/proc/stack_trace)
   source file: unsorted.dm,1358
-  usr: the Securitron (/mob/living/simple_animal/bot/secbot)
+  usr: the Securitron (/mob/living/danimal/bot/secbot)
   src: null
 
 

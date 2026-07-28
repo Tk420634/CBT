@@ -138,7 +138,7 @@
 		log_combat(M, src, "disarmed", "[I ? " removing \the [I]" : ""]")
 		updatehealth()
 
-/mob/living/carbon/monkey/attack_animal(mob/living/simple_animal/M)
+/mob/living/carbon/monkey/attack_animal(mob/living/danimal/M)
 	. = ..()
 	if(.)
 		var/damage = .
@@ -150,7 +150,7 @@
 			affecting = get_bodypart(BODY_ZONE_CHEST)
 		apply_damage(damage, M.melee_damage_type, affecting)
 
-/mob/living/carbon/monkey/attack_slime(mob/living/simple_animal/slime/M)
+/mob/living/carbon/monkey/attack_slime(mob/living/danimal/slime/M)
 	. = ..()
 	if(!.) //unsuccessful slime attack
 		return

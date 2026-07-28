@@ -34,13 +34,13 @@
 		if(!silent)
 			to_chat(user, span_warning("[victim.p_their(TRUE)] mind is resisting your spell!"))
 		return FALSE
-	if(istype(victim, /mob/living/simple_animal/hostile/guardian))
-		var/mob/living/simple_animal/hostile/guardian/stand = victim
+	if(istype(victim, /mob/living/danimal/hostile/guardian))
+		var/mob/living/danimal/hostile/guardian/stand = victim
 		if(stand.summoner)
 			victim = stand.summoner
 
 	//You should not be able to enter one of the most powerful side-antags as a fucking wizard.
-	if(istype(victim,/mob/living/simple_animal/slaughter))
+	if(istype(victim,/mob/living/danimal/slaughter))
 		to_chat(user, span_warning("The devilish contract doesn't include the 'mind swappable' package, please try again another lifetime."))
 		return
 
@@ -89,8 +89,8 @@
 		if(!silent)
 			to_chat(user, span_warning("[t_He] appear[victim.p_s()] to be catatonic! Not even magic can affect [victim.p_their()] vacant mind."))
 		return FALSE
-	if(istype(victim, /mob/living/simple_animal/hostile/guardian))
-		var/mob/living/simple_animal/hostile/guardian/stand = victim
+	if(istype(victim, /mob/living/danimal/hostile/guardian))
+		var/mob/living/danimal/hostile/guardian/stand = victim
 		if(stand.summoner)
 			if(stand.summoner == user)
 				if(!silent)

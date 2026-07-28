@@ -85,7 +85,7 @@
 	else if(trapped == HOWLING_GHOST)
 		visible_message(span_userdanger("<font size='5'>[pick("OooOOooooOOOoOoOOooooOOOOO", "BooOOooOooooOOOO", "BOO!", "WoOOoOoooOooo")]</font>"))
 		playsound(loc, 'sound/spookoween/ghosty_wind.ogg', 300, 1)
-		new /mob/living/simple_animal/shade/howling_ghost(loc)
+		new /mob/living/danimal/shade/howling_ghost(loc)
 		trapped = 0
 
 	else if(trapped == SCARY_BATS)
@@ -93,14 +93,14 @@
 		playsound(loc, 'sound/spookoween/bats.ogg', 300, 1)
 		var/number = rand(1,3)
 		for(var/i=0,i < number,i++)
-			new /mob/living/simple_animal/hostile/retaliate/bat(loc)
+			new /mob/living/danimal/hostile/retaliate/bat(loc)
 		trapped = 0
 
 	else if(trapped == ANGRY_FAITHLESS)
 		visible_message(span_userdanger("The closet bursts open!"))
 		visible_message(span_userdanger("<font size='5'>THIS BEING RADIATES PURE EVIL! YOU BETTER RUN!!!</font>"))
 		playsound(loc, 'sound/hallucinations/wail.ogg', 300, 1)
-		var/mob/living/simple_animal/hostile/faithless/F = new(loc)
+		var/mob/living/danimal/hostile/faithless/F = new(loc)
 		trapped = 0
 		QDEL_IN(F, 120)
 
@@ -116,7 +116,7 @@
 //Spookoween Ghost//
 ////////////////////
 
-/mob/living/simple_animal/shade/howling_ghost
+/mob/living/danimal/shade/howling_ghost
 	name = "ghost"
 	real_name = "ghost"
 	icon = 'icons/mob/mob.dmi'
@@ -130,13 +130,13 @@
 	layer = 4
 	var/timer = 0
 
-/mob/living/simple_animal/shade/howling_ghost/Initialize()
+/mob/living/danimal/shade/howling_ghost/Initialize()
 	. = ..()
 	icon_state = pick("ghost","ghostian","ghostian2","ghostking","ghost1","ghost2")
 	icon_living = icon_state
 	timer = rand(1,15)
 
-/mob/living/simple_animal/shade/howling_ghost/Life()
+/mob/living/danimal/shade/howling_ghost/Life()
 	..()
 	timer--
 	if(prob(20))
@@ -145,16 +145,16 @@
 		spooky_ghosty()
 		timer = rand(1,15)
 
-/mob/living/simple_animal/shade/howling_ghost/proc/EtherealMove(direction)
+/mob/living/danimal/shade/howling_ghost/proc/EtherealMove(direction)
 	forceMove(get_step(src, direction))
 	setDir(direction)
 
-/mob/living/simple_animal/shade/howling_ghost/proc/roam()
+/mob/living/danimal/shade/howling_ghost/proc/roam()
 	if(prob(80))
 		var/direction = pick(NORTH,SOUTH,EAST,WEST,NORTHEAST,NORTHWEST,SOUTHEAST,SOUTHWEST)
 		EtherealMove(direction)
 
-/mob/living/simple_animal/shade/howling_ghost/proc/spooky_ghosty()
+/mob/living/danimal/shade/howling_ghost/proc/spooky_ghosty()
 	if(prob(20)) //haunt
 		playsound(loc, pick('sound/spookoween/ghosty_wind.ogg','sound/spookoween/ghost_whisper.ogg','sound/spookoween/chain_rattling.ogg'), 300, 1)
 	if(prob(10)) //flickers
@@ -168,7 +168,7 @@
 			step(I,direction)
 		return
 
-/mob/living/simple_animal/shade/howling_ghost/CanAllowThrough(atom/movable/mover, border_dir)
+/mob/living/danimal/shade/howling_ghost/CanAllowThrough(atom/movable/mover, border_dir)
 	..()
 	return 1
 

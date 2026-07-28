@@ -1,27 +1,27 @@
 /obj/structure/elite_tumor
-	potentialspawns = list(/mob/living/simple_animal/hostile/asteroid/elite/broodmother,
-								/mob/living/simple_animal/hostile/asteroid/elite/pandora,
-								/mob/living/simple_animal/hostile/asteroid/elite/legionnaire,
-								/mob/living/simple_animal/hostile/asteroid/elite/herald,
-								/mob/living/simple_animal/hostile/asteroid/elite/drakeling,
-								/mob/living/simple_animal/hostile/asteroid/elite/candy,
-								/mob/living/simple_animal/hostile/asteroid/elite/minerpriest)
+	potentialspawns = list(/mob/living/danimal/hostile/asteroid/elite/broodmother,
+								/mob/living/danimal/hostile/asteroid/elite/pandora,
+								/mob/living/danimal/hostile/asteroid/elite/legionnaire,
+								/mob/living/danimal/hostile/asteroid/elite/herald,
+								/mob/living/danimal/hostile/asteroid/elite/drakeling,
+								/mob/living/danimal/hostile/asteroid/elite/candy,
+								/mob/living/danimal/hostile/asteroid/elite/minerpriest)
 
 /obj/structure/elite_tumor/priest
-	potentialspawns = list(/mob/living/simple_animal/hostile/asteroid/elite/minerpriest)
+	potentialspawns = list(/mob/living/danimal/hostile/asteroid/elite/minerpriest)
 
-/mob/living/simple_animal/hostile/asteroid/elite
+/mob/living/danimal/hostile/asteroid/elite
 	can_talk = TRUE
 	speak_emote = list("growls")
 
-/mob/living/simple_animal/hostile/asteroid/elite/death(gibbed)
+/mob/living/danimal/hostile/asteroid/elite/death(gibbed)
 	gibbed = FALSE
 	..(gibbed)
 
 /obj/item/tumor_shard/afterattack(atom/target, mob/user, proximity_flag)
 	. = ..()
-	if(istype(target, /mob/living/simple_animal/hostile/asteroid/elite) && proximity_flag)
-		var/mob/living/simple_animal/hostile/asteroid/elite/E = target
+	if(istype(target, /mob/living/danimal/hostile/asteroid/elite) && proximity_flag)
+		var/mob/living/danimal/hostile/asteroid/elite/E = target
 		if(E.stat != DEAD || E.sentience_type != SENTIENCE_BOSS || !E.key)
 			user.visible_message(span_notice("It appears [E] is unable to be revived right now.  Perhaps try again later."))
 			return

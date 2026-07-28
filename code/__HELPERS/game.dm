@@ -377,7 +377,7 @@ GLOBAL_LIST_EMPTY(chat_chuds)
 	var/close_range = momchat.close_message_range
 	var/long_range = momchat.far_message_range
 	var/cheapo = FALSE
-	if(!isplayer(source) && !istype(source, /mob/living/simple_animal/debug_chatterboy))
+	if(!isplayer(source) && !istype(source, /mob/living/danimal/debug_chatterboy))
 		long_range = min(long_range, 7)
 		close_range = min(close_range, 7) // raiders screamed so hard the server lagged
 		cheapo = TRUE

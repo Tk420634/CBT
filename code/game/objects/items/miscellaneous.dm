@@ -163,14 +163,14 @@
 	name = "pet beacon"
 	desc = "Straight from the outerspace pet shop to your feet."
 	var/list/pets = list(
-"Brahmin" = /mob/living/simple_animal/cow/brahmin,
-"Chicken" = /mob/living/simple_animal/chicken,
-"Corgi" = /mob/living/simple_animal/pet/dog/corgi,
-"Pug" = /mob/living/simple_animal/pet/dog/pug,
-"Fox" = /mob/living/simple_animal/pet/fox,
-"Red Panda" = /mob/living/simple_animal/pet/redpanda,
-"Mouse" = /mob/living/simple_animal/mouse,
-"Cat" = /mob/living/simple_animal/pet/cat
+"Brahmin" = /mob/living/danimal/cow/brahmin,
+"Chicken" = /mob/living/danimal/chicken,
+"Corgi" = /mob/living/danimal/pet/dog/corgi,
+"Pug" = /mob/living/danimal/pet/dog/pug,
+"Fox" = /mob/living/danimal/pet/fox,
+"Red Panda" = /mob/living/danimal/pet/redpanda,
+"Mouse" = /mob/living/danimal/mouse,
+"Cat" = /mob/living/danimal/pet/cat
 )
 	var/pet_name
 
@@ -178,7 +178,7 @@
 	return pets
 
 /obj/item/choice_beacon/pet/create_choice_atom(atom/choice, mob/owner)
-	var/mob/living/simple_animal/new_choice = new choice()
+	var/mob/living/danimal/new_choice = new choice()
 	new_choice.butcher_results = null //please don't eat your pet, chef
 	var/obj/item/pet_carrier/donator/carrier = new() //a donator pet carrier is just a carrier that can't be shoved in an autolathe for metal
 	carrier.add_occupant(new_choice)
@@ -233,25 +233,25 @@
 	name = "mount beacon"
 	desc = "Straight from the outerspace mount shop to your feet."
 	pets = list(
-		"Brahmin" = /mob/living/simple_animal/cow/brahmin,
-		"Molerat" = /mob/living/simple_animal/cow/brahmin/molerat,
-		"Horse" = /mob/living/simple_animal/cow/brahmin/horse,
-		"Honse" = /mob/living/simple_animal/cow/brahmin/horse/honse,
-		"Motorbike?" = /mob/living/simple_animal/cow/brahmin/motorbike,
-		"Fennec" = /mob/living/simple_animal/cow/brahmin/horse/fennec,
-		"Nightstalker" = /mob/living/simple_animal/cow/brahmin/nightstalker,
-		"Hunter Spider" = /mob/living/simple_animal/cow/brahmin/nightstalker/hunterspider,
-		"Yellow Snipe" = /mob/living/simple_animal/cow/brahmin/horse/choco,
-		"Black Snipe" = /mob/living/simple_animal/cow/brahmin/horse/choco/black,
-		"Blue Snipe" = /mob/living/simple_animal/cow/brahmin/horse/choco/blue,
-		"White Snipe" = /mob/living/simple_animal/cow/brahmin/horse/choco/white,
-		"Purple Snipe" = /mob/living/simple_animal/cow/brahmin/horse/choco/purple,
-		"Red Snipe" = /mob/living/simple_animal/cow/brahmin/horse/choco/red,
-		"Green Snipe" = /mob/living/simple_animal/cow/brahmin/horse/choco/green,
-		"thrumbo" = /mob/living/simple_animal/cow/brahmin/thrumbo,
-		"tamed triceratops" = /mob/living/simple_animal/cow/brahmin/molerat/trike,
-		"tamed yaoguai" = /mob/living/simple_animal/cow/brahmin/nightstalker/yaoguai,
-		"tractor" = /mob/living/simple_animal/cow/brahmin/motorbike/tractor
+		"Brahmin" = /mob/living/danimal/cow/brahmin,
+		"Molerat" = /mob/living/danimal/cow/brahmin/molerat,
+		"Horse" = /mob/living/danimal/cow/brahmin/horse,
+		"Honse" = /mob/living/danimal/cow/brahmin/horse/honse,
+		"Motorbike?" = /mob/living/danimal/cow/brahmin/motorbike,
+		"Fennec" = /mob/living/danimal/cow/brahmin/horse/fennec,
+		"Nightstalker" = /mob/living/danimal/cow/brahmin/nightstalker,
+		"Hunter Spider" = /mob/living/danimal/cow/brahmin/nightstalker/hunterspider,
+		"Yellow Snipe" = /mob/living/danimal/cow/brahmin/horse/choco,
+		"Black Snipe" = /mob/living/danimal/cow/brahmin/horse/choco/black,
+		"Blue Snipe" = /mob/living/danimal/cow/brahmin/horse/choco/blue,
+		"White Snipe" = /mob/living/danimal/cow/brahmin/horse/choco/white,
+		"Purple Snipe" = /mob/living/danimal/cow/brahmin/horse/choco/purple,
+		"Red Snipe" = /mob/living/danimal/cow/brahmin/horse/choco/red,
+		"Green Snipe" = /mob/living/danimal/cow/brahmin/horse/choco/green,
+		"thrumbo" = /mob/living/danimal/cow/brahmin/thrumbo,
+		"tamed triceratops" = /mob/living/danimal/cow/brahmin/molerat/trike,
+		"tamed yaoguai" = /mob/living/danimal/cow/brahmin/nightstalker/yaoguai,
+		"tractor" = /mob/living/danimal/cow/brahmin/motorbike/tractor
 	)
 
 /obj/item/choice_beacon/box/carpet //donator carpet beacon

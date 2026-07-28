@@ -69,11 +69,11 @@
 				if(A.opacity)
 					return FALSE
 	/// quit stealing peoples' mounts!
-	if(istype(L, /mob/living/simple_animal))
-		var/mob/living/simple_animal/mount = L
+	if(istype(L, /mob/living/danimal))
+		var/mob/living/danimal/mount = L
 		if(mount.quit_stealing_my_bike)
 			return FALSE
-	if(istype(L, /mob/living/simple_animal/bot))
+	if(istype(L, /mob/living/danimal/bot))
 		return FALSE // it... just doesnt work
 	return TRUE
 

@@ -32,8 +32,8 @@
 		this["refs"] = list()
 		var/num_available = LAZYLEN(GLOB.mob_spawners[spawner])
 		for(var/spawner_obj in GLOB.mob_spawners[spawner])
-			if(istype(spawner_obj, /mob/living/simple_animal))
-				var/mob/living/simple_animal/this_thing = spawner_obj
+			if(istype(spawner_obj, /mob/living/danimal))
+				var/mob/living/danimal/this_thing = spawner_obj
 				if(!(this_thing.z in COMMON_Z_LEVELS))
 					num_available--
 					continue
@@ -47,8 +47,8 @@
 					this["short_desc"] = MS.short_desc
 					this["flavor_text"] = MS.flavour_text
 					this["important_info"] = MS.important_info
-				else if(istype(spawner_obj, /mob/living/simple_animal))
-					var/mob/living/simple_animal/aminol = spawner_obj
+				else if(istype(spawner_obj, /mob/living/danimal))
+					var/mob/living/danimal/aminol = spawner_obj
 					this["short_desc"] = aminol.desc_short
 					this["desc"] = aminol.desc
 					this["flavor_text"] = aminol.desc
@@ -88,7 +88,7 @@
 				. = TRUE
 		if("spawn")
 			// first check if there's a ghostable mob on your turf, and try and insert urself into it
-			var/mob/living/simple_animal/SA = locate(/mob/living/simple_animal) in get_turf(owner)
+			var/mob/living/danimal/SA = locate(/mob/living/danimal) in get_turf(owner)
 			if(istype(SA))
 				owner.forceMove(get_turf(SA))
 				SA.attack_ghost(owner)

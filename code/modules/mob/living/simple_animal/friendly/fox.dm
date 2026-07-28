@@ -1,5 +1,5 @@
 //Foxxy
-/mob/living/simple_animal/pet/fox
+/mob/living/danimal/pet/fox
 	name = "fox"
 	desc = "It's a fox."
 	icon = 'icons/mob/pets.dmi'
@@ -23,12 +23,12 @@
 	gold_core_spawnable = FRIENDLY_SPAWN
 	footstep_type = FOOTSTEP_MOB_CLAW
 
-/mob/living/simple_animal/pet/fox/ComponentInitialize()
+/mob/living/danimal/pet/fox/ComponentInitialize()
 	. = ..()
 	AddElement(/datum/element/mob_holder, "fox")
 
 //Captain fox
-/mob/living/simple_animal/pet/fox/Renault
+/mob/living/danimal/pet/fox/Renault
 	name = "Renault"
 	desc = "Renault, the Captain's trustworthy fox."
 	gender = FEMALE
@@ -36,7 +36,7 @@
 	unique_pet = TRUE
 
 //Paws!
-/mob/living/simple_animal/pet/fox/paws
+/mob/living/danimal/pet/fox/paws
 	name = "Paws"
 	desc = "It's Paws!"
 	unique_pet = TRUE

@@ -132,7 +132,7 @@
 	if(amount_to_spawn <= 0)
 		amount_to_spawn = 1
 	for(var/i in 1 to amount_to_spawn)
-		var/mob/living/simple_animal/slime/S = new(T,"pyrite")
+		var/mob/living/danimal/slime/S = new(T,"pyrite")
 		S.damage_coeff = list(BRUTE = 0.9 , BURN = 2, TOX = 1, CLONE = 1, STAMINA = 0, OXY = 1)
 		S.name = "Living teratoma"
 		S.real_name = "Living teratoma"

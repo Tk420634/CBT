@@ -8,13 +8,13 @@ Removes slaughterlings (because they are bullshit), instead replacing them with 
 
 */
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum
+/mob/living/danimal/hostile/megafauna/bubblegum
 	death_sound = 'modular_sand/sound/misc/gorenest.ogg' //fuck it
 	var/movesound = 'sound/effects/meteorimpact.ogg'
 	footstep_type = FOOTSTEP_MOB_HEAVY
 	var/dont_move = TRUE //impedes bubbles from moving while using the blood jaunt
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/ComponentInitialize()
+/mob/living/danimal/hostile/megafauna/bubblegum/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("grabs bubblegum by the leg, and pulls them down! While downed, they climb on their torso and punch through it, smashing their demonic heart!", "goes around bubblegum and climbs them by their back, once on top of their head they punch right through the demon's skull, ripping out brain matter and killing it as it limply falls on the ground!"), \
@@ -22,17 +22,17 @@ Removes slaughterlings (because they are bullshit), instead replacing them with 
 		messages_pka = list("shoots the weakened demon in the chest, opening a hole and exposing their inner core! With another blast, the demon's heart explodes, and they fall dead and limp on the ground!", "shoots the weakened demon's head, stunning them and revealing their brain! Another PKA blast finishes off what little brainmatter they had!"), \
 		messages_pka_bayonet = list("shoots the weakened demon in the chest, opening a hole and exposing their inner core! They run onto the now exposed heart and stab it repeatedly with their bayonet, killing the demon off!"))
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/Move()
+/mob/living/danimal/hostile/megafauna/bubblegum/Move()
 	. = ..()
 	if(dont_move)
 		return FALSE
 	playsound(src, movesound, 200, TRUE, 2, TRUE)
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/OpenFire()
+/mob/living/danimal/hostile/megafauna/bubblegum/OpenFire()
 	anger_modifier = clamp(((maxHealth - health)/50),0,20)
 	if(charging)
 		return
-	ranged_cooldown = world.time + ranged_cooldown_time
+	ranged_attack_delay = world.time + ranged_cooldown_duration
 	blood_warp()
 	bloodsmacks()
 	if(prob(25))
@@ -44,7 +44,7 @@ Removes slaughterlings (because they are bullshit), instead replacing them with 
 		else
 			INVOKE_ASYNC(src,PROC_REF(triple_charge))
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/charge()
+/mob/living/danimal/hostile/megafauna/bubblegum/charge()
 	bloodsmacks()
 	var/turf/T = get_turf(target)
 	if(!T || T == loc)
@@ -59,10 +59,10 @@ Removes slaughterlings (because they are bullshit), instead replacing them with 
 	sleep(5)
 	throw_at(T, get_dist(src, T), 1, src, 0)
 	charging = 0
-	Goto(target, move_to_delay, minimum_distance)
+	perform_move_action(target, move_to_delay, minimum_distance)
 	bloodsmacks()
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/proc/bloodsmacks()
+/mob/living/danimal/hostile/megafauna/bubblegum/proc/bloodsmacks()
 	for(var/obj/effect/decal/cleanable/blood/B in view(7, src))
 		var/turf/T = get_turf(B)
 		var/mobcount = 0
@@ -73,21 +73,21 @@ Removes slaughterlings (because they are bullshit), instead replacing them with 
 			var/hand = rand(0,1)
 			INVOKE_ASYNC(src,PROC_REF(bloodsmack), T, hand)
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/proc/bloodsmack(turf/T, handedness)
+/mob/living/danimal/hostile/megafauna/bubblegum/proc/bloodsmack(turf/T, handedness)
 	if(handedness)
 		new /obj/effect/temp_visual/bubblegum_hands/rightsmack(T)
 	else
 		new /obj/effect/temp_visual/bubblegum_hands/leftsmack(T)
 	sleep(5)
 	for(var/mob/living/L in T)
-		if(!faction_check_mob(L))
+		if(!mob_faction_is_friendly_to_target(L))
 			to_chat(L, "<span class='userdanger'>[src] rends you!</span>")
 			playsound(T, attack_sound, 100, TRUE, -1)
 			var/limb_to_hit = L.get_bodypart(pick(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG))
 			L.apply_damage(30, BRUTE, limb_to_hit, L.run_armor_check(limb_to_hit, "melee"), 0, 0, CANT_WOUND) // You really, really, really better not stand in blood!
 	sleep(3)
 
-/mob/living/simple_animal/hostile/megafauna/bubblegum/blood_warp()
+/mob/living/danimal/hostile/megafauna/bubblegum/blood_warp()
 	var/obj/effect/decal/cleanable/blood/found_bloodpool
 	var/list/pools = list()
 	var/can_jaunt = FALSE

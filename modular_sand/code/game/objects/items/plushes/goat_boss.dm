@@ -21,7 +21,7 @@
 	if (prob(25) && !target)
 		var/list/targets_to_pick_from = list()
 		for(var/mob/living/carbon/C in view(7, src))
-			if(considered_alive(C.mind) && !faction_check(list("goat"), C.faction, FALSE))
+			if(considered_alive(C.mind) && !factions_are_friendly(list("goat"), C.faction, FALSE))
 				targets_to_pick_from += C
 		if (!targets_to_pick_from.len)
 			return
@@ -31,7 +31,7 @@
 		ram()
 
 /obj/item/toy/plush/goatplushie/angry/proc/ram()
-	if(prob((obj_flags & EMAGGED) ? 98:90) && isturf(loc) && considered_alive(target.mind) && !faction_check(list("goat"), target.faction, FALSE))
+	if(prob((obj_flags & EMAGGED) ? 98:90) && isturf(loc) && considered_alive(target.mind) && !factions_are_friendly(list("goat"), target.faction, FALSE))
 		throw_at(target, 10, 10)
 		visible_message(span_danger("[src] rams [target]!"))
 		cooldown = world.time + cooldown_modifier

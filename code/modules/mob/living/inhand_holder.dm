@@ -77,7 +77,7 @@
 	desc = "This drone is scared and has curled up into a ball!"
 
 /obj/item/clothing/head/mob_holder/drone/update_visuals(mob/living/L)
-	var/mob/living/simple_animal/drone/D = L
+	var/mob/living/danimal/drone/D = L
 	if(!D)
 		return ..()
 	icon = 'icons/mob/drone.dmi'

@@ -1,7 +1,7 @@
 //Fallout 13 canine directory
 
 // Feral dog - visually some sort of mutt, at some point a coyote style dog can be made from the previous dog sprite, saved as coyote
-/mob/living/simple_animal/hostile/wolf
+/mob/living/danimal/hostile/wolf
 	name = "feral dog"
 	desc = "The dogs that survived the Great War are a larger, and tougher breed, size of a wolf.<br>This one seems to be severely malnourished and its eyes are bloody red."
 	icon = 'icons/fallout/mobs/animals/dogs.dmi'
@@ -43,7 +43,7 @@
 	bounty = 15
 	death_sound = 'sound/f13npc/centaur/centaur_death.ogg'
 
-/mob/living/simple_animal/hostile/wolf/playable
+/mob/living/danimal/hostile/wolf/playable
 	health = 150
 	maxHealth = 150
 	emote_taunt_sound = null
@@ -57,7 +57,7 @@
 	footstep_type = FOOTSTEP_MOB_BAREFOOT
 
 // Alpha dog
-/mob/living/simple_animal/hostile/wolf/alpha
+/mob/living/danimal/hostile/wolf/alpha
 	name = "alpha feral dog"
 	desc = "The dogs that survived the Great War are a larger, and tougher breed, size of a wolf.<br>Wait... This one's a wolf!"
 	icon_state = "dog_alpha"
@@ -69,7 +69,7 @@
 	melee_damage_lower = 12
 	melee_damage_upper = 28
 	footstep_type = FOOTSTEP_MOB_BAREFOOT
-/mob/living/simple_animal/hostile/wolf/alpha/playable
+/mob/living/danimal/hostile/wolf/alpha/playable
 	health = 70
 	maxHealth = 70
 	emote_taunt_sound = null
@@ -82,7 +82,7 @@
 	possible_a_intents = list(INTENT_HELP, INTENT_HARM)
 	footstep_type = FOOTSTEP_MOB_BAREFOOT
 // The first proper wolf, got to love just relabels without repathing.
-/mob/living/simple_animal/hostile/wolf/cold
+/mob/living/danimal/hostile/wolf/cold
 	name = "wolf"
 	desc = "A mangy wolf."
 	icon_state = "wolf"
@@ -99,19 +99,19 @@
 //Unique Dogs - Guerilla for Khans is a Rottweiler, Brutus and Lupa german shepherds, Sniffs-the-Earth a sheepdog.
 //Feel free to move or add code for different behaviours like sleep, some unused sprites prepped for that sort of thing.
 
-/mob/living/simple_animal/hostile/wolf/playable/rottweiler
+/mob/living/danimal/hostile/wolf/playable/rottweiler
 	icon_state = "rottweiler"
 	icon_living = "rottweiler"
 	icon_dead = "rottweiler_dead"
 	icon_gib = "gib"
 
-/mob/living/simple_animal/hostile/wolf/playable/sheepdog
+/mob/living/danimal/hostile/wolf/playable/sheepdog
 	icon_state = "tippen"
 	icon_living = "tippen"
 	icon_dead = "tippen_dead"
 	icon_gib = "gib"
 
-/mob/living/simple_animal/hostile/wolf/playable/shepherd
+/mob/living/danimal/hostile/wolf/playable/shepherd
 	icon_state = "shepherd"
 	icon_living = "shepherd"
 	icon_dead = "shepherd_dead"

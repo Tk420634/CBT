@@ -151,7 +151,7 @@
 			H.visible_message(span_notice("[H] stares at the light"),"<span class = 'warning'> You stare at the light... </span>")
 
 	//cats!
-	for(var/mob/living/simple_animal/pet/cat/C in viewers)
+	for(var/mob/living/danimal/pet/cat/C in viewers)
 		if(prob(50))
 			C.visible_message(span_notice("[C] pounces on the light!"),span_warning("LIGHT!"))
 			C.Move(targloc)

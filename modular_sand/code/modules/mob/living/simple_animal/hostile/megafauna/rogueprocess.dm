@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/megafauna/rogueprocess
+/mob/living/danimal/hostile/megafauna/rogueprocess
 	name = "Rogue Process"
 	desc = "Once an experimental mecha carrying an advanced mining AI, now it's out for blood."
 	health = 2500
@@ -19,8 +19,8 @@
 	melee_damage_upper = 30
 	speed = 1
 	move_to_delay = 10
-	ranged_cooldown_time = 80
-	ranged = 1
+	ranged_cooldown_duration = 80
+	can_ranged_attack = TRUE
 	del_on_death = 0
 	crusher_loot = list(/obj/structure/closet/crate/necropolis/rogue/crusher)
 	loot = list(/obj/structure/closet/crate/necropolis/rogue)
@@ -49,11 +49,11 @@
 	range = 21
 	color = "#FF0000"
 
-/mob/living/simple_animal/hostile/megafauna/rogueprocess/Initialize(mapload)
+/mob/living/danimal/hostile/megafauna/rogueprocess/Initialize(mapload)
 	. = ..()
 	internal = new /obj/item/gps/internal/rogueprocess(src)
 
-/mob/living/simple_animal/hostile/megafauna/rogueprocess/adjustHealth(amount, updating_health, forced)
+/mob/living/danimal/hostile/megafauna/rogueprocess/adjustHealth(amount, updating_health, forced)
 	. = ..()
 	if(.)
 		anger_modifier = round(clamp(((maxHealth - health) / 42),0,60))
@@ -61,10 +61,10 @@
 		wander = FALSE
 		do_sparks(rand(min_sparks,max_sparks), FALSE, src)
 
-/mob/living/simple_animal/hostile/megafauna/rogueprocess/OpenFire(target)
+/mob/living/danimal/hostile/megafauna/rogueprocess/OpenFire(target)
 	if(special)
 		return FALSE
-	ranged_cooldown = world.time + max((ranged_cooldown_time - anger_modifier), 30)
+	ranged_attack_delay = world.time + max((ranged_cooldown_duration - anger_modifier), 30)
 	switch(anger_modifier)
 		if(0 to 25)
 			if(prob(50))
@@ -152,19 +152,19 @@
 				sleep(10)
 				special = FALSE
 
-/mob/living/simple_animal/hostile/megafauna/rogueprocess/Move()
+/mob/living/danimal/hostile/megafauna/rogueprocess/Move()
 	. = ..()
 	if(special)
 		return FALSE
 	playsound(src.loc, 'sound/mecha/mechmove01.ogg', 200, 1, 2, 1)
 
-/mob/living/simple_animal/hostile/megafauna/rogueprocess/Bump(atom/A)
+/mob/living/danimal/hostile/megafauna/rogueprocess/Bump(atom/A)
 	. = ..()
 	if(isturf(A) || isobj(A) && A.density)
 		A.ex_act(EXPLODE_HEAVY)
 		DestroySurroundings()
 
-/mob/living/simple_animal/hostile/megafauna/rogueprocess/proc/plasmashot(atom/target)
+/mob/living/danimal/hostile/megafauna/rogueprocess/proc/plasmashot(atom/target)
 	var/path = get_dist(src, target)
 	if(path > 2)
 		if(!target)
@@ -180,7 +180,7 @@
 		var/set_angle = Get_Angle(src, target)
 		P.fire(set_angle)
 
-/mob/living/simple_animal/hostile/megafauna/rogueprocess/proc/plasmaburst(atom/target)
+/mob/living/danimal/hostile/megafauna/rogueprocess/proc/plasmaburst(atom/target)
 	var/list/theline = get_dist(src, target)
 	if(theline > 2)
 		if(!target)
@@ -210,7 +210,7 @@
 		Y.original = target
 		Y.fire(otherangle2)
 
-/mob/living/simple_animal/hostile/megafauna/rogueprocess/proc/knockdown(range = 2)
+/mob/living/danimal/hostile/megafauna/rogueprocess/proc/knockdown(range = 2)
 	visible_message(span_boldwarning("[src] smashes into the ground!"))
 	playsound(src,'sound/misc/crunch.ogg', 200, 1)
 	var/list/hit_things = list()
@@ -221,7 +221,7 @@
 		new /obj/effect/temp_visual/small_smoke/halfsecond(T)
 		for(var/mob/living/L in T.contents)
 			if(L != src && !(L in hit_things))
-				if(!faction_check(faction, L.faction))
+				if(!factions_are_friendly(faction, L.faction))
 					var/throwtarget = get_edge_target_turf(src, get_dir(src, L))
 					L.safe_throw_at(throwtarget, 10, 1, src)
 					L.Stun(20)
@@ -229,7 +229,7 @@
 					hit_things += L
 	sleep(3)
 
-/mob/living/simple_animal/hostile/megafauna/rogueprocess/proc/shockwave(direction, range, wave_duration = 1.5)
+/mob/living/danimal/hostile/megafauna/rogueprocess/proc/shockwave(direction, range, wave_duration = 1.5)
 	visible_message(span_boldwarning("[src] smashes the ground in a general direction!!"))
 	playsound(src,'sound/misc/crunch.ogg', 200, 1)
 	sleep(7)
@@ -270,7 +270,7 @@
 		otherT2 = get_step(otherT2, ogdir)
 		sleep(wave_duration)
 
-/mob/living/simple_animal/hostile/megafauna/rogueprocess/proc/ultishockwave(range, iteration_duration = 5)
+/mob/living/danimal/hostile/megafauna/rogueprocess/proc/ultishockwave(range, iteration_duration = 5)
 	visible_message(span_boldwarning("[src] smashes the ground around them!!"))
 	playsound(src,'sound/misc/crunch.ogg', 200, 1)
 	sleep(10)
@@ -281,7 +281,7 @@
 				return
 			new /obj/effect/temp_visual/small_smoke/halfsecond(T)
 			for(var/mob/living/L in T.contents)
-				if(L != src && !(L in hit_things) && !faction_check(L.faction, faction))
+				if(L != src && !(L in hit_things) && !factions_are_friendly(L.faction, faction))
 					var/throwtarget = get_edge_target_turf(T, get_dir(T, L))
 					L.safe_throw_at(throwtarget, 5, 1, src)
 					L.Stun(10)

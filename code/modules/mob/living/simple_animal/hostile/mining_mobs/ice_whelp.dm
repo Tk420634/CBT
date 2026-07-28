@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/asteroid/ice_whelp
+/mob/living/danimal/hostile/asteroid/ice_whelp
 	name = "ice whelp"
 	desc = "The offspring of an ice drake, weak in comparison but still terrifying."
 	icon = 'icons/mob/icemoon/icemoon_monsters.dmi'
@@ -12,8 +12,8 @@
 	speak_emote = list("roars")
 	speed = 30
 	move_to_delay = 30
-	ranged = TRUE
-	ranged_cooldown_time = 40
+	can_ranged_attack = TRUE
+	ranged_cooldown_duration = 40
 	maxHealth = 350
 	health = 350
 	obj_damage = 40
@@ -32,23 +32,23 @@
 	crusher_loot = /obj/item/crusher_trophy/tail_spike
 	deathmessage = "collapses on it's side."
 	deathsound = 'sound/magic/demon_dies.ogg'
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	/// How far the whelps fire can go
 	var/fire_range = 4
 
-/mob/living/simple_animal/hostile/asteroid/ice_whelp/OpenFire()
+/mob/living/danimal/hostile/asteroid/ice_whelp/OpenFire()
 	var/turf/T = get_ranged_target_turf_direct(src, get_target(), fire_range)
 	var/list/burn_turfs = getline(src, T) - get_turf(src)
 	dragon_fire_line(src, burn_turfs)
 
-/mob/living/simple_animal/hostile/asteroid/ice_whelp/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/asteroid/ice_whelp/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if(get_target())
 		return
 	adjustHealth(-maxHealth*0.025)
 
-/mob/living/simple_animal/hostile/asteroid/ice_whelp/death(gibbed)
+/mob/living/danimal/hostile/asteroid/ice_whelp/death(gibbed)
 	move_force = MOVE_FORCE_DEFAULT
 	move_resist = MOVE_RESIST_DEFAULT
 	pull_force = PULL_FORCE_DEFAULT

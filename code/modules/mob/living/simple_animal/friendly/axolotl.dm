@@ -1,4 +1,4 @@
-/mob/living/simple_animal/axolotl
+/mob/living/danimal/axolotl
 	name = "axolotl"
 	desc = "Quite the colorful amphibian!"
 	icon_state = "axolotl"

@@ -16,7 +16,7 @@
  * The broodmother is a fight revolving around stage control, as the activator has to manage the baby goliaths and the broodmother herself, along with all the tendrils.
  */
 
-/mob/living/simple_animal/hostile/asteroid/elite/broodmother
+/mob/living/danimal/hostile/asteroid/elite/broodmother
 	name = "goliath broodmother"
 	desc = "An example of sexual dimorphism, this female goliath looks much different than the males of her species.  She is, however, just as dangerous, if not more."
 	gender = FEMALE
@@ -47,7 +47,7 @@
 								/datum/action/innate/elite_attack/call_children)
 
 	var/rand_tent = 0
-	var/list/mob/living/simple_animal/hostile/asteroid/elite/broodmother_child/children_list = list()
+	var/list/mob/living/danimal/hostile/asteroid/elite/broodmother_child/children_list = list()
 
 /datum/action/innate/elite_attack/tentacle_patch
 	name = "Tentacle Patch"
@@ -73,7 +73,7 @@
 	chosen_message = span_boldwarning("You will summon your children to your location.")
 	chosen_attack_num = CALL_CHILDREN
 
-/mob/living/simple_animal/hostile/asteroid/elite/broodmother/OpenFire()
+/mob/living/danimal/hostile/asteroid/elite/broodmother/OpenFire()
 	if(client)
 		switch(chosen_attack)
 			if(TENTACLE_PATCH)
@@ -96,7 +96,7 @@
 		if(CALL_CHILDREN)
 			call_children()
 
-/mob/living/simple_animal/hostile/asteroid/elite/broodmother/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/asteroid/elite/broodmother/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if(health < maxHealth * 0.5 && rand_tent < world.time)
@@ -109,29 +109,29 @@
 			var/turf/t = pick_n_take(tentacle_loc)
 			new /obj/effect/temp_visual/goliath_tentacle/broodmother(t, src)
 
-/mob/living/simple_animal/hostile/asteroid/elite/broodmother/proc/tentacle_patch(target)
-	ranged_cooldown = world.time + 15
+/mob/living/danimal/hostile/asteroid/elite/broodmother/proc/tentacle_patch(target)
+	ranged_attack_delay = world.time + 15
 	var/tturf = get_turf(target)
 	if(!isturf(tturf))
 		return
 	visible_message(span_warning("[src] digs its tentacles under [target]!"))
 	new /obj/effect/temp_visual/goliath_tentacle/broodmother/patch(tturf, src)
 
-/mob/living/simple_animal/hostile/asteroid/elite/broodmother/proc/spawn_children(target)
-	ranged_cooldown = world.time + 40
+/mob/living/danimal/hostile/asteroid/elite/broodmother/proc/spawn_children(target)
+	ranged_attack_delay = world.time + 40
 	visible_message(span_boldwarning("The ground churns behind [src]!"))
 	for(var/i in 1 to 2)
 		if(children_list.len >= 8)
 			return
-		var/mob/living/simple_animal/hostile/asteroid/elite/broodmother_child/newchild = new /mob/living/simple_animal/hostile/asteroid/elite/broodmother_child(loc)
+		var/mob/living/danimal/hostile/asteroid/elite/broodmother_child/newchild = new /mob/living/danimal/hostile/asteroid/elite/broodmother_child(loc)
 		newchild.GiveTarget(target)
 		newchild.faction = faction.Copy()
 		visible_message(span_boldwarning("[newchild] appears below [src]!"))
 		newchild.mother = src
 		children_list += newchild
 
-/mob/living/simple_animal/hostile/asteroid/elite/broodmother/proc/rage()
-	ranged_cooldown = world.time + 70
+/mob/living/danimal/hostile/asteroid/elite/broodmother/proc/rage()
+	ranged_attack_delay = world.time + 70
 	playsound(src,'sound/spookoween/insane_low_laugh.ogg', 200, 1)
 	visible_message(span_warning("[src] starts picking up speed!"))
 	color = "#FF0000"
@@ -139,13 +139,13 @@
 	move_to_delay = 3
 	addtimer(CALLBACK(src,PROC_REF(reset_rage)), 65)
 
-/mob/living/simple_animal/hostile/asteroid/elite/broodmother/proc/reset_rage()
+/mob/living/danimal/hostile/asteroid/elite/broodmother/proc/reset_rage()
 	color = "#FFFFFF"
 	set_varspeed(2)
 	move_to_delay = 5
 
-/mob/living/simple_animal/hostile/asteroid/elite/broodmother/proc/call_children()
-	ranged_cooldown = world.time + 60
+/mob/living/danimal/hostile/asteroid/elite/broodmother/proc/call_children()
+	ranged_attack_delay = world.time + 60
 	visible_message(span_warning("The ground shakes near [src]!"))
 	var/list/directions = GLOB.cardinals.Copy() + GLOB.diagonals.Copy()
 	for(var/mob/child in children_list)
@@ -156,7 +156,7 @@
 			playsound(src, 'sound/effects/bamf.ogg', 100, 1)
 
 //The goliath's children.  Pretty weak, simple mobs which are able to put a single tentacle under their target when at range.
-/mob/living/simple_animal/hostile/asteroid/elite/broodmother_child
+/mob/living/danimal/hostile/asteroid/elite/broodmother_child
 	name = "baby goliath"
 	desc = "A young goliath recently born from its mother.  While they hatch from eggs, said eggs are incubated in the mother until they are ready to be born."
 	icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
@@ -180,10 +180,10 @@
 	guaranteed_butcher_results = list(/obj/item/stack/sheet/animalhide/goliath_hide = 1)
 	deathmessage = "falls to the ground."
 	status_flags = CANPUSH
-	var/mob/living/simple_animal/hostile/asteroid/elite/broodmother/mother = null
+	var/mob/living/danimal/hostile/asteroid/elite/broodmother/mother = null
 
-/mob/living/simple_animal/hostile/asteroid/elite/broodmother_child/OpenFire(target)
-	ranged_cooldown = world.time + 40
+/mob/living/danimal/hostile/asteroid/elite/broodmother_child/OpenFire(target)
+	ranged_attack_delay = world.time + 40
 	var/tturf = get_turf(target)
 	if(!isturf(tturf))
 		return
@@ -191,7 +191,7 @@
 		visible_message(span_warning("[src] digs one of its tentacles under [target]!"))
 		new /obj/effect/temp_visual/goliath_tentacle/broodmother(tturf, src)
 
-/mob/living/simple_animal/hostile/asteroid/elite/broodmother_child/death()
+/mob/living/danimal/hostile/asteroid/elite/broodmother_child/death()
 	. = ..()
 	if(mother != null)
 		mother.children_list -= src
@@ -203,7 +203,7 @@
 /obj/effect/temp_visual/goliath_tentacle/broodmother/trip()
 	var/latched = FALSE
 	for(var/mob/living/L in loc)
-		if(istype(L, /mob/living/simple_animal/hostile/asteroid))
+		if(istype(L, /mob/living/danimal/hostile/asteroid))
 			continue
 		visible_message(span_danger("[src] grabs hold of [L]!"))
 		L.Stun(10)

@@ -205,7 +205,7 @@
 				for(var/obj/effect/decal/cleanable/salt/S in stepTurf)
 					to_chat(L, span_warning("[S] bars your passage!"))
 					if(isrevenant(L))
-						var/mob/living/simple_animal/revenant/R = L
+						var/mob/living/danimal/revenant/R = L
 						R.reveal(20)
 						R.stun(20)
 					return

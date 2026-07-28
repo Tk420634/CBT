@@ -120,7 +120,7 @@
 	if(world.time < working + (10 SECONDS))
 		return
 	working = world.time
-	for(var/mob/living/simple_animal/L in parent.mysel.selected_mobs)
+	for(var/mob/living/danimal/L in parent.mysel.selected_mobs)
 		L.RTS_move_to_tile(AoI)
 		CHECK_TICK
 	working = FALSE
@@ -150,7 +150,7 @@
 	if(world.time < next_smash)
 		return
 	next_smash = world.time + (1.5 SECONDS)
-	for(var/mob/living/simple_animal/hostile/H in parent.mysel.selected_mobs)
+	for(var/mob/living/danimal/hostile/H in parent.mysel.selected_mobs)
 		var/direc = get_dir(H, AoI)
 		H.DestroyObjectsInDirection(direc)
 		H.DestroyObjectsInDirection(turn(direc, 45))
@@ -159,7 +159,7 @@
 
 /// Makes all selected mobs shoot stuff
 /datum/rts_order_processor/proc/MakeMobsShootStuff(atom/AoI)
-	for(var/mob/living/simple_animal/hostile/H in parent.mysel.selected_mobs)
+	for(var/mob/living/danimal/hostile/H in parent.mysel.selected_mobs)
 		H.RangedAttack(AoI)
 
 

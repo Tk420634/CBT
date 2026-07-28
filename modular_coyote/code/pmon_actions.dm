@@ -13,7 +13,7 @@
 	if(!..())
 		return FALSE
 	if(isadvancedmob(owner))
-		var/mob/living/simple_animal/advanced/O = owner
+		var/mob/living/danimal/advanced/O = owner
 		O.lay_down()
 		O.update_mobility()
 		return TRUE

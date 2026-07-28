@@ -5,7 +5,7 @@ using ant armor b/c it just kinda works here and i don't want it to be super bee
 */
 
 //Rattler
-/mob/living/simple_animal/hostile/texas_rattler
+/mob/living/danimal/hostile/texas_rattler
 	bounty = 40
 	name = "texas rattler"
 	desc = "Keratin gleams and articulates over its massive sixty-foot body. Distended venom glands behind its upper pterygoid shudder and pressure deadly venom into its victims. A coil of thick muscle allows it to pounce. In layman's terms: don't get bit."
@@ -44,7 +44,7 @@ using ant armor b/c it just kinda works here and i don't want it to be super bee
 
 
 
-/mob/living/simple_animal/hostile/texas_rattler/AttackingTarget()
+/mob/living/danimal/hostile/texas_rattler/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!. || !ishuman(my_target))

@@ -15,7 +15,7 @@
 #define REPAIRDRONE_HACKED "drone_repair_hacked"
 #define SCOUTDRONE_HACKED "drone_scout_hacked"
 
-/mob/living/simple_animal/drone
+/mob/living/danimal/drone
 	name = "Drone"
 	desc = "A maintenance drone, an expendable robot built to perform repairs. Stamped with a RobCo logo."
 	icon = 'icons/mob/drone.dmi'
@@ -78,7 +78,7 @@
 	"<span class='userdanger'>Abuse of drones will lead to them being rendered pacifists! Don't ruin it for everyone!</span>\n"+\
 	span_warning("<u>If you do not have the regular drone laws, follow your laws to the best of your ability.</u>")
 
-/mob/living/simple_animal/drone/Initialize()
+/mob/living/danimal/drone/Initialize()
 	. = ..()
 	GLOB.drones_list += src
 	access_card = new /obj/item/card/id(src)
@@ -99,19 +99,19 @@
 	for(var/datum/atom_hud/data/diagnostic/diag_hud in GLOB.huds)
 		diag_hud.add_to_hud(src)
 
-/mob/living/simple_animal/drone/ComponentInitialize()
+/mob/living/danimal/drone/ComponentInitialize()
 	. = ..()
 	if(can_be_held)
 		//icon/item state is defined in mob_holder/drone_worn_icon()
 		AddElement(/datum/element/mob_holder, null, 'icons/mob/clothing/head.dmi', 'icons/mob/inhands/clothing_righthand.dmi', 'icons/mob/inhands/clothing_lefthand.dmi', INV_SLOTBIT_HEAD, TYPE_PROC_REF(/datum/element/mob_holder,drone_worn_icon))
 
-/mob/living/simple_animal/drone/med_hud_set_health()
+/mob/living/danimal/drone/med_hud_set_health()
 	var/image/holder = hud_list[DIAG_HUD]
 	var/icon/I = icon(icon, icon_state, dir)
 	holder.pixel_y = I.Height() - world.icon_size
 	holder.icon_state = "huddiag[RoundDiagBar(health/maxHealth)]"
 
-/mob/living/simple_animal/drone/med_hud_set_status()
+/mob/living/danimal/drone/med_hud_set_status()
 	var/image/holder = hud_list[DIAG_STAT_HUD]
 	var/icon/I = icon(icon, icon_state, dir)
 	holder.pixel_y = I.Height() - world.icon_size
@@ -122,11 +122,11 @@
 	else
 		holder.icon_state = "hudstat"
 
-/mob/living/simple_animal/drone/Destroy()
+/mob/living/danimal/drone/Destroy()
 	GLOB.drones_list -= src
 	return ..()
 
-/mob/living/simple_animal/drone/Login()
+/mob/living/danimal/drone/Login()
 	..()
 	check_laws()
 
@@ -137,7 +137,7 @@
 		pickVisualAppearence()
 
 
-/mob/living/simple_animal/drone/death(gibbed)
+/mob/living/danimal/drone/death(gibbed)
 	..(gibbed)
 	if(internal_storage)
 		dropItemToGround(internal_storage)
@@ -147,10 +147,10 @@
 	alert_drones(DRONE_NET_DISCONNECT)
 
 
-/mob/living/simple_animal/drone/gib()
+/mob/living/danimal/drone/gib()
 	dust()
 
-/*/mob/living/simple_animal/drone/ratvar_act()
+/*/mob/living/danimal/drone/ratvar_act()
 	if(status_flags & GODMODE)
 		return
 
@@ -158,7 +158,7 @@
 		dropItemToGround(internal_storage)
 	if(head)
 		dropItemToGround(head)
-	var/mob/living/simple_animal/drone/cogscarab/ratvar/R = new /mob/living/simple_animal/drone/cogscarab/ratvar(loc)
+	var/mob/living/danimal/drone/cogscarab/ratvar/R = new /mob/living/danimal/drone/cogscarab/ratvar(loc)
 	R.setDir(dir)
 	if(mind)
 		mind.transfer_to(R, 1)
@@ -167,7 +167,7 @@
 	qdel(src)*/
 
 
-/mob/living/simple_animal/drone/examine(mob/user)
+/mob/living/danimal/drone/examine(mob/user)
 	. = list("<span class='info'>*---------*\nThis is [icon2html(src, user)] \a <b>[src]</b>!")
 
 	//Hands
@@ -207,11 +207,11 @@
 	. += "*---------*</span>"
 
 
-/mob/living/simple_animal/drone/assess_threat(judgement_criteria, lasercolor = "", datum/callback/weaponcheck=null) //Secbots won't hunt maintenance drones.
+/mob/living/danimal/drone/assess_threat(judgement_criteria, lasercolor = "", datum/callback/weaponcheck=null) //Secbots won't hunt maintenance drones.
 	return -10
 
 
-/mob/living/simple_animal/drone/emp_act(severity)
+/mob/living/danimal/drone/emp_act(severity)
 	. = ..()
 	if(. & EMP_PROTECT_SELF)
 		return
@@ -221,7 +221,7 @@
 		adjustBruteLoss(heavy_emp_damage)
 		to_chat(src, span_userdanger("HeAV% DA%^MMA+G TO I/O CIR!%UUT!"))
 
-/mob/living/simple_animal/drone/proc/triggerAlarm(class, area/A, O, obj/alarmsource)
+/mob/living/danimal/drone/proc/triggerAlarm(class, area/A, O, obj/alarmsource)
 	if(alarmsource.z != z)
 		return
 	if(stat != DEAD)
@@ -236,7 +236,7 @@
 		L[A.name] = list(A, list(alarmsource))
 		to_chat(src, "--- [class] alarm detected in [A.name]!")
 
-/mob/living/simple_animal/drone/proc/cancelAlarm(class, area/A, obj/origin)
+/mob/living/danimal/drone/proc/cancelAlarm(class, area/A, obj/origin)
 	if(stat != DEAD)
 		var/list/L = alarms[class]
 		var/cleared = 0
@@ -253,31 +253,31 @@
 			to_chat(src, "--- [class] alarm in [A.name] has been cleared.")
 
 /*
-/mob/living/simple_animal/drone/handle_temperature_damage()
+/mob/living/danimal/drone/handle_temperature_damage()
 	return
 */  //No. ~TK
 
-/mob/living/simple_animal/drone/flash_act(intensity = 1, override_blindness_check = 0, affect_silicon = 0)
+/mob/living/danimal/drone/flash_act(intensity = 1, override_blindness_check = 0, affect_silicon = 0)
 	if(affect_silicon)
 		return ..()
 
-/mob/living/simple_animal/drone/mob_negates_gravity()
+/mob/living/danimal/drone/mob_negates_gravity()
 	return 1
 
-/mob/living/simple_animal/drone/mob_has_gravity()
+/mob/living/danimal/drone/mob_has_gravity()
 	return ..() || mob_negates_gravity()
 
-/mob/living/simple_animal/drone/experience_pressure_difference(pressure_difference, direction)
+/mob/living/danimal/drone/experience_pressure_difference(pressure_difference, direction)
 	return
 
-/mob/living/simple_animal/drone/bee_friendly()
+/mob/living/danimal/drone/bee_friendly()
 	// Why would bees pay attention to drones?
 	return 1
 
-/mob/living/simple_animal/drone/electrocute_act(shock_damage, source, siemens_coeff = 1, flags = NONE)
+/mob/living/danimal/drone/electrocute_act(shock_damage, source, siemens_coeff = 1, flags = NONE)
 	return 0 //So they don't die trying to fix wiring
 
-/mob/living/simple_animal/drone/can_see_reagents()
+/mob/living/danimal/drone/can_see_reagents()
 	. = ..()
 	if(.)
 		return

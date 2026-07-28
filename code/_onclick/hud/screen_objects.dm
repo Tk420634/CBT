@@ -650,9 +650,8 @@
 	var/flicker_counter_max = 3
 	var/blink_counter = 200 
 	var/blink_counter_max = 200
-	var/reopen_counter = 2
-	var/reopen_counter_max = 200
-	var/update_counter = 5 // ticks before we auto-update
+	var/reopen_counter = 20
+	var/reopen_counter_max = 20
 
 /atom/movable/screen/healths/Initialize(mapload)
 	. = ..()
@@ -895,12 +894,9 @@
 
 
 /atom/movable/screen/healths/process()
-	update_counter--
-	if(update_counter <= 0)
-		update_counter = 5
-		var/mob/living/maybeowner = hud.mymob
-		if(maybeowner)
-			FormattifyHealthText(maybeowner)
+	var/mob/living/maybeowner = hud.mymob
+	if(maybeowner)
+		FormattifyHealthText(maybeowner)
 	flicker_counter--
 	if(flicker_counter <= 0)
 		flicker_counter = flicker_counter_max

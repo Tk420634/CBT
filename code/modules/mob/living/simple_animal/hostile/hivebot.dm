@@ -2,7 +2,7 @@
 	damage = 15
 	damage_type = BRUTE
 
-/mob/living/simple_animal/hostile/hivebot
+/mob/living/danimal/hostile/hivebot
 	name = "hivebot"
 	desc = "A strange robot that does not seem pleased to meet you."
 	icon = 'icons/mob/hivebot.dmi'
@@ -22,8 +22,8 @@
 	projectilesound = 'sound/weapons/gunshot.ogg'
 	projectiletype = /obj/item/projectile/hivebotbullet
 	faction = list("hivebot")
-	check_friendly_fire = 1
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	check_friendly_fire = FALSE
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 0
 	speak_emote = list("states")
 	gold_core_spawnable = HOSTILE_SPAWN
@@ -43,31 +43,31 @@
 		SP_DISTANT_RANGE(RIFLE_LIGHT_RANGE_DISTANT)
 	)
 
-/mob/living/simple_animal/hostile/hivebot/Initialize()
+/mob/living/danimal/hostile/hivebot/Initialize()
 	. = ..()
 	deathmessage = "[src] blows apart!"
 
-/mob/living/simple_animal/hostile/hivebot/range
+/mob/living/danimal/hostile/hivebot/range
 	name = "combat hivebot"
 	desc = "An armed robot that does not seem pleased to meet you."
 	icon_state = "ranged"
 	icon_living = "ranged"
 	icon_dead = "hivedead"
-	ranged = 1
+	can_ranged_attack = TRUE
 	retreat_distance = 5
 	minimum_distance = 5
 
-/mob/living/simple_animal/hostile/hivebot/rapid
+/mob/living/danimal/hostile/hivebot/rapid
 	name = "gunner hivebot"
 	icon_state = "ranged"
 	icon_living = "ranged"
 	icon_dead = "hivedead"
-	ranged = 1
-	rapid = 3
+	can_ranged_attack = TRUE
+	ranged_attack_burst_count =  3
 	retreat_distance = 5
 	minimum_distance = 5
 
-/mob/living/simple_animal/hostile/hivebot/engineering
+/mob/living/danimal/hostile/hivebot/engineering
 	name = "engineering hivebot"
 	icon_state = "EngBot"
 	icon_living = "EngBot"
@@ -76,7 +76,7 @@
 	health = 75
 	maxHealth = 75
 
-/mob/living/simple_animal/hostile/hivebot/strong
+/mob/living/danimal/hostile/hivebot/strong
 	name = "elite hivebot"
 	icon_state = "strong"
 	icon_living = "strong"
@@ -84,8 +84,8 @@
 	desc = "A heavily armed and armored robot that does not seem pleased to meet you."
 	health = 100
 	maxHealth = 100
-	ranged = 1
+	can_ranged_attack = TRUE
 
-/mob/living/simple_animal/hostile/hivebot/death(gibbed)
+/mob/living/danimal/hostile/hivebot/death(gibbed)
 	do_sparks(3, TRUE, src)
 	..(1)

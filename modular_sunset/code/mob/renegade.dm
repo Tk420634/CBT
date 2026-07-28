@@ -4,7 +4,7 @@
 
 
 // LIGHT MELEE VARIANT
-/mob/living/simple_animal/hostile/renegade
+/mob/living/danimal/hostile/renegade
 	name = "Renegade Prospect"
 	desc = "A raider recently inducted among the Renegades."
 	icon = 'modular_sunset/icons/mob/renegades/renegade.dmi'
@@ -39,35 +39,35 @@
 	loot_drop_amount = 2
 	loot_amount_random = TRUE
 
-/mob/living/simple_animal/hostile/renegade/Aggro()
+/mob/living/danimal/hostile/renegade/Aggro()
 	..()
 	summon_backup(10)
 	
 
 
 // LIGHT RANGED VARIANT
-/mob/living/simple_animal/hostile/renegade/grunt
+/mob/living/danimal/hostile/renegade/grunt
 	name = "Renegade Grunt"
 	desc = "The standard issue muscle employed among the Renegades."
 	icon_state = "renegade_grunt"
 	icon_living = "renegade_grunt"
 	icon_dead = "renegade_grunt-dead"
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	armor_list = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR
 	maxHealth = 100
 	health = 100
 	healable = 1
-	check_friendly_fire = 1
+	check_friendly_fire = FALSE
 	retreat_distance = 6
 	minimum_distance = 2
 	extra_projectiles = 2
-	ranged_cooldown_time = 2 SECONDS
-	sight_shoot_delay_time = 0.2 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
+	ranged_cooldown_duration = 2 SECONDS
+	sight_shoot_delay_duration = 0.2 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_NORMAL
 	projectiletype = /obj/item/projectile/bullet/c10mm/simple
 	projectilesound = 'sound/f13weapons/10mm_fire_01.ogg'
 	loot = list(/obj/item/gun/ballistic/automatic/pistol/m1911, /obj/effect/gibspawner/human)
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	//speak = list(
 		// "Come get some!",
 		// "Fuck off!",
@@ -90,27 +90,27 @@
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
 // LIGHT RANGED EMP VARIANT
-/mob/living/simple_animal/hostile/renegade/grunt/emp
+/mob/living/danimal/hostile/renegade/grunt/emp
 	name = "Renegade Grunt"
 	desc = "The standard issue muscle employed among the Renegades."
 	icon_state = "renegade_emper"
 	icon_living = "renegade_emper"
 	icon_dead = "renegade_prospect-dead"
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	armor_list = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR
 	maxHealth = 100
 	health = 100
 	healable = 1
-	check_friendly_fire = 1
+	check_friendly_fire = FALSE
 	retreat_distance = 6
 	minimum_distance = 3
 	extra_projectiles = 0
-	ranged_cooldown_time = 2 SECONDS
-	sight_shoot_delay_time = 0.2 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
+	ranged_cooldown_duration = 2 SECONDS
+	sight_shoot_delay_duration = 0.2 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_NORMAL
 	projectiletype = /obj/item/projectile/ion/renegade
 	projectilesound = 'sound/f13weapons/pulsepistolfire.ogg'
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	//speak = list(
 		// "Come get some!",
 		// "Fuck off!",
@@ -133,7 +133,7 @@
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
 // LIGHT SHOTGUN VARIANT
-/mob/living/simple_animal/hostile/renegade/engie
+/mob/living/danimal/hostile/renegade/engie
 	name = "Renegade Engie"
 	desc = "Demolitions and engineering expert of the Renegades."
 	icon_state = "renegade_engie"
@@ -144,16 +144,16 @@
 	health = 100
 	healable = 1
 	speed = 1.2
-	ranged = 1
-	check_friendly_fire = 1
+	can_ranged_attack = TRUE
+	check_friendly_fire = FALSE
 	obj_damage = 200
 	retreat_distance = 4
 	minimum_distance = 1
-	ranged_cooldown_time = 2 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
+	ranged_cooldown_duration = 2 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_NORMAL
 	projectilesound = 'sound/f13weapons/shotgun.ogg'
 	casingtype = /obj/item/ammo_casing/shotgun
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	//speak = list(
 		// "Come get some!",
 		// "Going to blow some shit to kingdom come!",
@@ -175,28 +175,28 @@
 	)
 
 // MEDIUM RANGED VARIANT
-/mob/living/simple_animal/hostile/renegade/soldier
+/mob/living/danimal/hostile/renegade/soldier
 	name = "Renegade Soldier"
 	desc = "The beefier side of the Renegade's muscle; with combat experience to back it."
 	icon_state = "renegade_soldier"
 	icon_living = "renegade_soldier"
 	icon_dead = "renegade_soldier-dead"
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	armor_list = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR_REINFORCED
 	maxHealth = 100
 	health = 100
 	healable = 1
 	speed = 1.1
-	check_friendly_fire = 1
+	check_friendly_fire = FALSE
 	retreat_distance = 7
 	minimum_distance = 3
 	extra_projectiles = 2
-	sight_shoot_delay_time = 0.2 SECONDS
-	ranged_cooldown_time = 2 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
+	sight_shoot_delay_duration = 0.2 SECONDS
+	ranged_cooldown_duration = 2 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_NORMAL
 	projectiletype = /obj/item/projectile/bullet/c10mm/simple
 	projectilesound = 'sound/f13weapons/combatrifle.ogg'
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	//speak = list(
 		// "Come get some!",
 		// "I like my odds, c'mere!",
@@ -222,26 +222,26 @@
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
 //MEDIUM MELEE VARIANT
-/mob/living/simple_animal/hostile/renegade/defender
+/mob/living/danimal/hostile/renegade/defender
 	name = "Renegade Defender"
 	desc = "The Renegade member who's sole purpose is to withstand punishment with layers of advanced combat armor."
 	icon_state = "renegade_defender"
 	icon_living = "renegade_defender"
 	icon_dead = "renegade_defender-dead"
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	armor_list = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR_SUPER
 	maxHealth = 130
 	health = 130
 	healable = 1
 	speed = 1
-	check_friendly_fire = 1
+	check_friendly_fire = FALSE
 	melee_damage_lower = 30
 	melee_damage_upper = 40
 	attack_verb_simple = "bashes"
 	attack_sound = 'sound/weapons/slam.ogg'
 	a_intent = INTENT_HARM
 	emote_taunt = list("bashes their shield with the mace")
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	//speak = list(
 		// "COME AND TRY ME, BITCH!",
 		// "I AM THE WALL!",
@@ -256,13 +256,13 @@
 	loot_amount_random = TRUE
 
 //HEAVY RANGED VARIANT
-/mob/living/simple_animal/hostile/renegade/drifter
+/mob/living/danimal/hostile/renegade/drifter
 	name = "Renegade Drifter"
 	desc = "A veteran of the Renegades, specializing in recon and long range engagements."
 	icon_state = "renegade_drifter"
 	icon_living = "renegade_drifter"
 	icon_dead = "renegade_drifter-dead"
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	armor_list = ARMOR_VALUE_RENEGADE_SNIPER_ARMOR
 	maxHealth = 100
 	health = 100
@@ -270,11 +270,11 @@
 	speed = 1.3
 	vision_range = 12
 	aggroed_vision_range = 15
-	check_friendly_fire = 1
+	check_friendly_fire = FALSE
 	retreat_distance = 10
 	minimum_distance = 6
-	ranged_cooldown_time = 2 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
+	ranged_cooldown_duration = 2 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_NORMAL
 	projectiletype = /obj/item/projectile/bullet/a308/improvised
 	projectilesound = 'sound/f13weapons/bozar_fire.ogg'
 	loot = list(
@@ -283,7 +283,7 @@
 		/obj/effect/spawner/lootdrop/f13/uncommon_armor,
 		/obj/effect/gibspawner/human
 		)
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	//speak = list(
 		// "Come get some!",
 		// "I am the shadow!",
@@ -309,28 +309,28 @@
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
 // HEAVY SHOTGUN VARIANT
-/mob/living/simple_animal/hostile/renegade/guardian
+/mob/living/danimal/hostile/renegade/guardian
 	name = "Renegade Guardian"
 	desc = "A veteran of the Renegades,specializing in close quarters and crowd control.. with an automatic shotgun."
 	icon_state = "renegade_guardian"
 	icon_living = "renegade_guardian"
 	icon_dead = "renegade_guardian-dead"
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	armor_list = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR_SUPER
 	maxHealth = 150
 	health = 150
 	healable = 1
 	speed = 1
-	check_friendly_fire = 1
+	check_friendly_fire = FALSE
 	minimum_distance = 2
-	ranged_cooldown_time = 3
+	ranged_cooldown_duration = 3
 	projectiletype = null
 	projectilesound = 'sound/f13weapons/auto5.ogg'
 	casingtype = /obj/item/ammo_casing/shotgun/buckshot
 	loot = list(/obj/effect/spawner/lootdrop/f13/uncommon, /obj/effect/gibspawner/human)
 	loot_drop_amount = 5
 	loot_amount_random = TRUE
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	//speak = list(
 		// "Come get some!",
 		// "ON THE GROUND!",
@@ -353,7 +353,7 @@
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
 // POWER ARMOR VARIANT
-/mob/living/simple_animal/hostile/renegade/meister
+/mob/living/danimal/hostile/renegade/meister
 	name = "Renegade Meister"
 	desc = "Is that a merc in power armor?!"
 	icon_state = "renegade_meister"
@@ -370,14 +370,14 @@
 	melee_damage_upper = 50
 	retreat_distance = 3
 	minimum_distance = 1
-	ranged = 1
+	can_ranged_attack = TRUE
 	sentience_type = SENTIENCE_BOSS
 	attack_verb_simple = "power-fists"
 	attack_sound = 'sound/weapons/slam.ogg'
 	extra_projectiles = 5
-	ranged_cooldown_time = 2 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
-	sight_shoot_delay_time = 0 SECONDS // he's a boss after all
+	ranged_cooldown_duration = 2 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_NORMAL
+	sight_shoot_delay_duration = 0 SECONDS // he's a boss after all
 	projectiletype = /obj/item/projectile/bullet/m5mm/simple
 	projectilesound = 'sound/f13weapons/automaticrifle_BAR.ogg'
 	loot = list(/obj/effect/spawner/lootdrop/f13/rare, /obj/effect/gibspawner/human)
@@ -404,11 +404,11 @@
 	)
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
-/mob/living/simple_animal/hostile/renegade/meister/movement_delay()
+/mob/living/danimal/hostile/renegade/meister/movement_delay()
 	return 6
 
 // POWER ARMOR VARIANT 2.0
-/mob/living/simple_animal/hostile/renegade/traitor //while good intentions were there for this mob, it's op. Nerfed it. - Blue
+/mob/living/danimal/hostile/renegade/traitor //while good intentions were there for this mob, it's op. Nerfed it. - Blue
 	name = "Brotherhood of Steel Traitor"
 	desc = "A former Brotherhood of Steel Paladin, now turn coat for the Renegades. You imagine this is who is responsible for the siege."
 	icon = 'icons/fallout/mobs/humans/ghouls.dmi'
@@ -423,15 +423,15 @@
 	melee_damage_upper = 60
 	retreat_distance = 4
 	minimum_distance = 2
-	ranged = 1
+	can_ranged_attack = TRUE
 	bossmob = TRUE
 	sentience_type = SENTIENCE_BOSS
 	attack_verb_simple = "power-fists"
 	attack_sound = 'sound/weapons/slam.ogg'
 	extra_projectiles = 3
-	ranged_cooldown_time = 3 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
-	sight_shoot_delay_time = 0 SECONDS // he's a boss after all
+	ranged_cooldown_duration = 3 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_NORMAL
+	sight_shoot_delay_duration = 0 SECONDS // he's a boss after all
 	projectiletype = /obj/item/projectile/beam/laser/laer/hitscan
 	projectilesound = 'sound/f13weapons/laerfire.ogg'
 	loot = list(/obj/effect/spawner/lootdrop/f13/rare, /obj/effect/gibspawner/human)
@@ -458,30 +458,30 @@
 	)
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
-/mob/living/simple_animal/hostile/renegade/meister/movement_delay()
+/mob/living/danimal/hostile/renegade/meister/movement_delay()
 	return 6
 
 // HEALER VARIANT
-/mob/living/simple_animal/hostile/renegade/doc
+/mob/living/danimal/hostile/renegade/doc
 	name = "Renegade Doc"
 	desc = "A veteran of the Renegades, this one specializing in field first aid."
 	icon_state = "renegade_doc"
 	icon_living = "renegade_doc"
 	icon_dead = "renegade_doc-dead"
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	armor_list = ARMOR_VALUE_RENEGADE_COMBAT_ARMOR
 	maxHealth = 150
 	health = 150
 	healable = 1
-	check_friendly_fire = 1
+	check_friendly_fire = FALSE
 	retreat_distance = 6
 	minimum_distance = 8
-	sight_shoot_delay_time = 0.2 SECONDS
-	ranged_cooldown_time = 1 SECONDS
-	auto_fire_delay = GUN_AUTOFIRE_DELAY_NORMAL
+	sight_shoot_delay_duration = 0.2 SECONDS
+	ranged_cooldown_duration = 1 SECONDS
+	ranged_attack_burst_delay_per_shot = GUN_AUTOFIRE_DELAY_NORMAL
 	projectiletype = /obj/item/projectile/bullet/m44/simple
 	projectilesound = 'sound/f13weapons/44mag.ogg'
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	//speak = list(
 		// "Running low on meds.",
 		// "Could do with extra combat chems.",
@@ -506,10 +506,10 @@
 	)
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
-/mob/living/simple_animal/hostile/renegade/doc/Initialize(mapload)
+/mob/living/danimal/hostile/renegade/doc/Initialize(mapload)
 	. = ..()
 	// we only heal BRUTELOSS because each type directly heals a simplemob's health
 	// therefore setting it to BRUTELOSS | FIRELOSS | TOXLOSS | OXYLOSS would mean healing 4x as much
 	// aka 40% of max life every tick, which is basically unkillable
 	// TODO: refactor this if simple_animals ever get damage types
-	AddComponent(/datum/component/glow_heal, chosen_targets = /mob/living/simple_animal/hostile/renegade, allow_revival = FALSE, restrict_faction = list("raider"), type_healing = BRUTELOSS)
+	AddComponent(/datum/component/glow_heal, chosen_targets = /mob/living/danimal/hostile/renegade, allow_revival = FALSE, restrict_faction = list("raider"), type_healing = BRUTELOSS)

@@ -14,12 +14,12 @@
 
 /obj/effect/mob_spawner/gecko
 	name = "geckos spawner"
-	mob_type = /mob/living/simple_animal/hostile/gecko
+	mob_type = /mob/living/danimal/hostile/gecko
 
 /obj/effect/mob_spawner/molerat
 	name = "giant rats spawner"
-	mob_type = /mob/living/simple_animal/hostile/molerat
+	mob_type = /mob/living/danimal/hostile/molerat
 
 /obj/effect/mob_spawner/cazador
 	name = "cazadors spawner"
-	mob_type = /mob/living/simple_animal/hostile/cazador
+	mob_type = /mob/living/danimal/hostile/cazador

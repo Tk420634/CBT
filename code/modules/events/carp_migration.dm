@@ -22,12 +22,12 @@
 		print_command_report("Unknown biological entities have been detected near [station_name()], you may wish to break out arms.", "Biological entities")
 
 /datum/round_event/carp_migration/start()
-	var/mob/living/simple_animal/hostile/carp/fish
+	var/mob/living/danimal/hostile/carp/fish
 	for(var/obj/effect/landmark/carpspawn/C in GLOB.landmarks_list)
 		if(prob(95))
 			fish = new (C.loc)
 		else
-			fish = new /mob/living/simple_animal/hostile/carp/megacarp(C.loc)
+			fish = new /mob/living/danimal/hostile/carp/megacarp(C.loc)
 			fishannounce(fish) //Prefer to announce the megacarps over the regular fishies
 	fishannounce(fish)
 
@@ -147,7 +147,7 @@ GLOBAL_LIST_EMPTY(fish_ponds) // actually spawners
 	// 	if(locate(/obj/structure/nest) in here)
 	// 		continue // already a nest here lol
 	// 	coords_to_spawn_at |= coordie
-	// 	var/mob/living/simple_animal/nest_spawn_hole_guy/hole = new /mob/living/simple_animal/nest_spawn_hole_guy(here)
+	// 	var/mob/living/danimal/nest_spawn_hole_guy/hole = new /mob/living/danimal/nest_spawn_hole_guy(here)
 	// 	hole.register_event(src)
 	// 	spawn_holes |= hole
 	// message_admins("Readied [LAZYLEN(coords_to_spawn_at)] nests. Firing soon-ish.")
@@ -172,10 +172,10 @@ GLOBAL_LIST_EMPTY(fish_ponds) // actually spawners
 				continue
 			if(locate(/obj/structure/nest) in here)
 				continue // already a nest here lol
-			if(!(locate(/mob/living/simple_animal/nest_spawn_hole_guy) in here))
+			if(!(locate(/mob/living/danimal/nest_spawn_hole_guy) in here))
 				continue // someone killed the hole
 			for(var/atom/A in here)
-				if(A.density && istype(A, /mob/living/simple_animal/nest_spawn_hole_guy))
+				if(A.density && istype(A, /mob/living/danimal/nest_spawn_hole_guy))
 					continue mainloop
 			for(var/client/clint in GLOB.clients)
 				if(!isliving(clint.mob))

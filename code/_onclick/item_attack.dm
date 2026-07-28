@@ -199,7 +199,7 @@
 	M.lastattacker = user.real_name
 	M.lastattackerckey = user.ckey
 	if(isanimal(M))
-		var/mob/living/simple_animal/SA = M
+		var/mob/living/danimal/SA = M
 		SA.give_credit(user)
 
 	user.do_attack_animation(M)
@@ -326,12 +326,6 @@
 				if(totitemdamage >= 10 && get_dist(user, src) <= 1)	//people with TK won't get smeared with blood
 					user.add_mob_blood(src)
 		return TRUE //successful attack
-
-/mob/living/simple_animal/attacked_by(obj/item/I, mob/living/user, attackchain_flags = NONE, damage_multiplier = 1, damage_addition, damage_override)
-	if(I.force < force_threshold || I.damtype == STAMINA)
-		playsound(src, 'sound/weapons/tap.ogg', I.get_clamped_volume(), 1, -1)
-	else
-		return ..()
 
 /mob/living/proc/pre_attacked_by(obj/item/I, mob/living/user)
 	. = I.force

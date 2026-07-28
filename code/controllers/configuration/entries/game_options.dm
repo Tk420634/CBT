@@ -223,7 +223,7 @@
 	key_mode = KEY_MODE_TYPE
 	value_mode = VALUE_MODE_NUM
 	config_entry_value = list(			//DEFAULTS
-	/mob/living/simple_animal = 1,
+	/mob/living/danimal = 1,
 	/mob/living/silicon/pai = 1,
 	/mob/living/carbon/alien/humanoid/sentinel = 0.25,
 	/mob/living/carbon/alien/humanoid/drone = 0.5,
@@ -310,9 +310,9 @@
 /datum/config_entry/number/outdated_movedelay/alien_delay
 	movedelay_type = /mob/living/carbon/alien
 /datum/config_entry/number/outdated_movedelay/slime_delay
-	movedelay_type = /mob/living/simple_animal/slime
+	movedelay_type = /mob/living/danimal/slime
 /datum/config_entry/number/outdated_movedelay/animal_delay
-	movedelay_type = /mob/living/simple_animal
+	movedelay_type = /mob/living/danimal
 /////////////////////////////////////////////////
 
 /datum/config_entry/flag/roundstart_away	//Will random away mission be loaded.

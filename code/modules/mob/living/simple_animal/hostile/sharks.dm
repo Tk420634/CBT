@@ -1,6 +1,6 @@
 //shameless copies of carps.
 
-/mob/living/simple_animal/hostile/shark
+/mob/living/danimal/hostile/shark
 	name = "Space Shark"
 	desc = "The best terror of the seas, next to the kraken."
 	icon_state = "shark"
@@ -21,7 +21,6 @@
 	speed = 0
 	maxHealth = 75
 	health = 75
-	harm_intent_damage = 18
 	melee_damage_lower = 24
 	melee_damage_upper = 48
 	attack_verb_continuous = "maims"
@@ -29,21 +28,16 @@
 	attack_sound = 'sound/weapons/bite.ogg'
 	gold_core_spawnable = 1
 	//Space shark aren't affected by cold.
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 0
 	//maxbodytemp = 1500
 
 	faction = list("shark")
 
-/mob/living/simple_animal/hostile/shark/Process_Spacemove(movement_dir = 0, continuous_move)
+/mob/living/danimal/hostile/shark/Process_Spacemove(movement_dir = 0, continuous_move)
 	return 1   //No drifting in space for space sharks....either!
 
-/mob/living/simple_animal/hostile/shark/FindTarget()
-	. = ..()
-	if(.)
-		emote("me", 1, "growls at [.]!")
-
-/mob/living/simple_animal/hostile/shark/AttackingTarget()
+/mob/living/danimal/hostile/shark/AttackingTarget()
 	. =..()
 	var/mob/living/carbon/L = .
 	if(istype(L))
@@ -52,14 +46,14 @@
 			L.visible_message(span_danger("\the [src] knocks down \the [L]!"))
 
 
-/mob/living/simple_animal/hostile/shark/laser
+/mob/living/danimal/hostile/shark/laser
 	name = "Laser-Shark"
 	desc = "NOW we've jumped the shark."
 	icon_state = "lasershark"
 	icon_living = "lasershark"
 	icon_dead = "lasershark_dead"
 	icon_gib = "carp_gib"
-	ranged = 1
+	can_ranged_attack = TRUE
 	retreat_distance = 3
 	minimum_distance = 0 //Between shots they can and will close in to nash
 	projectiletype = /obj/item/projectile/beam/laser/heavylaser
@@ -67,7 +61,7 @@
 	maxHealth = 50
 	health = 50
 
-/mob/living/simple_animal/hostile/shark/kawaii
+/mob/living/danimal/hostile/shark/kawaii
 	name = "Kawaii Shark"
 	desc = "Senpai~ Notice me.."
 	icon_state = "kawaiishark"
@@ -77,19 +71,18 @@
 	speak_emote = list("lovingly says","says")
 	speak_chance = 2
 	seconds_per_wander = 3
-	guaranteed_butcher_results = list(/mob/living/simple_animal/butterfly = 3)
+	guaranteed_butcher_results = list(/mob/living/danimal/butterfly = 3)
 	maxHealth = 50
 	health = 50
 	//maxbodytemp = INFINITY
 
-	harm_intent_damage = 0
 	melee_damage_lower = 5
 	melee_damage_upper = 15
 	attack_verb_continuous = "violently hugs"
 	attack_verb_simple = "violently hug"
 	vision_range = 0
 
-/mob/living/simple_animal/hostile/shark/kawaii/death()
+/mob/living/danimal/hostile/shark/kawaii/death()
 	say("Senpai, you noticed~!")
 	LoseAggro()
 	..()

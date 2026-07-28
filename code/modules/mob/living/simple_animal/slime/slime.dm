@@ -1,4 +1,4 @@
-/mob/living/simple_animal/slime
+/mob/living/danimal/slime
 	name = "grey baby slime (123)"
 	icon = 'icons/mob/slimes.dmi'
 	icon_state = "grey baby slime"
@@ -10,7 +10,6 @@
 	var/docile = 0
 	faction = list("slime","neutral")
 
-	harm_intent_damage = 5
 	icon_living = "grey baby slime"
 	icon_dead = "grey baby slime dead"
 	response_help_continuous  = "pets"
@@ -24,7 +23,7 @@
 	bubble_icon = "slime"
 	initial_language_holder = /datum/language_holder/slime
 
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 
 	maxHealth = 150
 	health = 150
@@ -86,7 +85,7 @@
 	var/applied = 0 //How many extracts of the modtype have been applied.
 
 
-/mob/living/simple_animal/slime/Initialize(mapload, new_colour="grey", new_is_adult=FALSE)
+/mob/living/danimal/slime/Initialize(mapload, new_colour="grey", new_is_adult=FALSE)
 	initialize_mutations()
 	var/datum/action/innate/slime/feed/F = new
 	F.Grant(src)
@@ -107,19 +106,19 @@
 	AddComponent(/datum/component/footstep, FOOTSTEP_MOB_SLIME, 1, 7)
 	set_nutrition(rand(650, 800))
 
-/mob/living/simple_animal/slime/Destroy()
+/mob/living/danimal/slime/Destroy()
 	for (var/A in actions)
 		var/datum/action/AC = A
 		AC.Remove(src)
 	return ..()
 
-/mob/living/simple_animal/slime/proc/initialize_mutations()
+/mob/living/danimal/slime/proc/initialize_mutations()
 	var/list/cached = color_mutation_cache[colour]
 	if(!cached)
 		cached = color_mutation_cache[colour] = mutation_table(colour)
 	slime_mutation = cached
 
-/mob/living/simple_animal/slime/proc/set_colour(new_colour)
+/mob/living/danimal/slime/proc/set_colour(new_colour)
 	colour = new_colour
 	update_name()
 	initialize_mutations()
@@ -127,16 +126,16 @@
 	coretype = text2path("/obj/item/slime_extract/[sanitizedcolour]")
 	regenerate_icons()
 
-/mob/living/simple_animal/slime/proc/update_name()
+/mob/living/danimal/slime/proc/update_name()
 	if(slime_name_regex.Find(name))
 		number = rand(1, 1000)
 		name = "[colour] [is_adult ? "adult" : "baby"] slime ([number])"
 		real_name = name
 
-/mob/living/simple_animal/slime/proc/random_colour()
+/mob/living/danimal/slime/proc/random_colour()
 	set_colour(pick(slime_colours))
 
-/mob/living/simple_animal/slime/regenerate_icons()
+/mob/living/danimal/slime/regenerate_icons()
 	cut_overlays()
 	var/icon_text = "[colour] [is_adult ? "adult" : "baby"] slime"
 	icon_dead = "[icon_text] dead"
@@ -148,7 +147,7 @@
 		icon_state = icon_dead
 	..()
 
-/mob/living/simple_animal/slime/on_reagent_change()
+/mob/living/danimal/slime/on_reagent_change()
 	. = ..()
 	remove_movespeed_modifier(/datum/movespeed_modifier/slime_reagentmod)
 	var/amount = 0
@@ -159,7 +158,7 @@
 	if(amount)
 		add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/slime_reagentmod, multiplicative_slowdown = amount)
 
-/mob/living/simple_animal/slime/updatehealth()
+/mob/living/danimal/slime/updatehealth()
 	. = ..()
 	remove_movespeed_modifier(/datum/movespeed_modifier/slime_healthmod)
 	var/mod = 0
@@ -171,7 +170,7 @@
 			mod += 2
 	add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/slime_healthmod, multiplicative_slowdown = mod)
 
-/mob/living/simple_animal/slime/adjust_bodytemperature()
+/mob/living/danimal/slime/adjust_bodytemperature()
 	. = ..()
 	var/mod = 0
 	if(bodytemperature >= 330.23) // 135 F or 57.08 C
@@ -180,7 +179,7 @@
 		mod = min(15, (283.222 - bodytemperature) / 10 * 1.75)
 	add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/slime_tempmod, multiplicative_slowdown = mod)
 
-/mob/living/simple_animal/slime/ObjBump(obj/O)
+/mob/living/danimal/slime/ObjBump(obj/O)
 	if(!client && powerlevel > 0)
 		var/probab = 10
 		switch(powerlevel)
@@ -205,10 +204,10 @@
 						spawn(45)
 							Atkcool = 0
 
-/mob/living/simple_animal/slime/Process_Spacemove(movement_dir = 0, continuous_move)
+/mob/living/danimal/slime/Process_Spacemove(movement_dir = 0, continuous_move)
 	return 2
 
-/mob/living/simple_animal/slime/get_status_tab_items()
+/mob/living/danimal/slime/get_status_tab_items()
 	. = ..()
 	if(!docile)
 		. += "Nutrition: [nutrition]/[get_max_nutrition()]"
@@ -224,12 +223,12 @@
 			. += "Power Level: [powerlevel]"
 
 
-/mob/living/simple_animal/slime/adjustFireLoss(amount, updating_health = TRUE, forced = FALSE, include_roboparts = TRUE)
+/mob/living/danimal/slime/adjustFireLoss(amount, updating_health = TRUE, forced = FALSE, include_roboparts = TRUE)
 	if(!forced)
 		amount = -abs(amount)
 	return ..() //Heals them
 
-/mob/living/simple_animal/slime/bullet_act(obj/item/projectile/Proj)
+/mob/living/danimal/slime/bullet_act(obj/item/projectile/Proj)
 	attacked += 10
 	if((Proj.damage_type == BURN))
 		adjustBruteLoss(-abs(Proj.damage)) //fire projectiles heals slimes.
@@ -241,29 +240,29 @@
 		return
 	return ..()
 
-/mob/living/simple_animal/slime/emp_act(severity)
+/mob/living/danimal/slime/emp_act(severity)
 	. = ..()
 	if(. & EMP_PROTECT_SELF)
 		return
 	powerlevel = 0 // oh no, the power!
 
-/mob/living/simple_animal/slime/MouseDrop(atom/movable/A as mob|obj)
+/mob/living/danimal/slime/MouseDrop(atom/movable/A as mob|obj)
 	if(isliving(A) && A != src && usr == src)
 		var/mob/living/Food = A
 		if(CanFeedon(Food))
 			Feedon(Food)
 	return ..()
 
-/mob/living/simple_animal/slime/doUnEquip(obj/item/W, force, newloc, no_move, invdrop = TRUE)
+/mob/living/danimal/slime/doUnEquip(obj/item/W, force, newloc, no_move, invdrop = TRUE)
 	return
 
-/mob/living/simple_animal/slime/start_pulling(atom/movable/AM, state, force = move_force, supress_message = FALSE)
+/mob/living/danimal/slime/start_pulling(atom/movable/AM, state, force = move_force, supress_message = FALSE)
 	return
 
-/mob/living/simple_animal/slime/attack_ui(slot)
+/mob/living/danimal/slime/attack_ui(slot)
 	return
 
-/mob/living/simple_animal/slime/attack_slime(mob/living/simple_animal/slime/M)
+/mob/living/danimal/slime/attack_slime(mob/living/danimal/slime/M)
 	. = ..()
 	if(!. || M == src) //unsuccessful slime shock
 		return
@@ -279,27 +278,27 @@
 		M.adjustBruteLoss(-10 + (-10 * M.is_adult))
 		M.updatehealth()
 
-/mob/living/simple_animal/slime/attack_animal(mob/living/simple_animal/M)
+/mob/living/danimal/slime/attack_animal(mob/living/danimal/M)
 	. = ..()
 	if(.)
 		attacked += 10
 
-/mob/living/simple_animal/slime/attack_paw(mob/living/carbon/monkey/M)
+/mob/living/danimal/slime/attack_paw(mob/living/carbon/monkey/M)
 	. = ..()
 	if(.)//successful monkey bite.
 		attacked += 10
 
-/mob/living/simple_animal/slime/attack_larva(mob/living/carbon/alien/larva/L)
+/mob/living/danimal/slime/attack_larva(mob/living/carbon/alien/larva/L)
 	. = ..()
 	if(.) //successful larva bite.
 		attacked += 10
 
-/mob/living/simple_animal/slime/attack_hulk(mob/living/carbon/human/user, does_attack_animation = 0)
+/mob/living/danimal/slime/attack_hulk(mob/living/carbon/human/user, does_attack_animation = 0)
 	if(user.a_intent == INTENT_HARM)
 		discipline_slime(user)
 		return ..()
 
-/mob/living/simple_animal/slime/on_attack_hand(mob/living/carbon/human/M)
+/mob/living/danimal/slime/on_attack_hand(mob/living/carbon/human/M)
 	if(buckled)
 		M.do_attack_animation(src, ATTACK_EFFECT_DISARM)
 		if(buckled == M)
@@ -332,7 +331,7 @@
 		if(..()) //successful attack
 			attacked += 10
 
-/mob/living/simple_animal/slime/attack_alien(mob/living/carbon/alien/humanoid/M)
+/mob/living/danimal/slime/attack_alien(mob/living/carbon/alien/humanoid/M)
 	. = ..()
 	if(!.) // the attack was blocked or was help/grab intent
 		return
@@ -340,7 +339,7 @@
 	discipline_slime(M)
 
 
-/mob/living/simple_animal/slime/attackby(obj/item/W, mob/living/user, params)
+/mob/living/danimal/slime/attackby(obj/item/W, mob/living/user, params)
 	if(stat == DEAD && surgeries.len)
 		if(user.a_intent == INTENT_HELP || user.a_intent == INTENT_DISARM)
 			for(var/datum/surgery/S in surgeries)
@@ -398,7 +397,7 @@
 		return
 	..()
 
-/mob/living/simple_animal/slime/proc/spawn_corecross()
+/mob/living/danimal/slime/proc/spawn_corecross()
 	var/static/list/crossbreeds = subtypesof(/obj/item/slimecross)
 	visible_message(span_danger("[src] shudders, its mutated core consuming the rest of its body!"))
 	playsound(src, 'sound/magic/smoke.ogg', 50, 1)
@@ -414,7 +413,7 @@
 		visible_message(span_warning("The mutated core shudders, and collapses into a puddle, unable to maintain its form."))
 	qdel(src)
 
-/mob/living/simple_animal/slime/proc/apply_water()
+/mob/living/danimal/slime/proc/apply_water()
 	adjustBruteLoss(rand(15,20))
 	if(!client)
 		if(Target) // Like cats
@@ -422,7 +421,7 @@
 			++Discipline
 	return
 
-/mob/living/simple_animal/slime/examine(mob/user)
+/mob/living/danimal/slime/examine(mob/user)
 	. = list("<span class='info'>*---------*\nThis is [icon2html(src, user)] \a <EM>[src]</EM>!")
 	if (src.stat == DEAD)
 		. += span_deadsay("It is limp and unresponsive.")
@@ -450,7 +449,7 @@
 
 	. += "*---------*</span>"
 
-/mob/living/simple_animal/slime/proc/discipline_slime(mob/user)
+/mob/living/danimal/slime/proc/discipline_slime(mob/user)
 	if(stat)
 		return
 
@@ -476,21 +475,21 @@
 			step_away(src,user,15)
 		update_mobility()
 
-/mob/living/simple_animal/slime/pet
+/mob/living/danimal/slime/pet
 	docile = 1
 
-/mob/living/simple_animal/slime/can_unbuckle()
+/mob/living/danimal/slime/can_unbuckle()
 	return 0
 
-/mob/living/simple_animal/slime/can_buckle()
+/mob/living/danimal/slime/can_buckle()
 	return 0
 
-/mob/living/simple_animal/slime/get_mob_buckling_height(mob/seat)
+/mob/living/danimal/slime/get_mob_buckling_height(mob/seat)
 	if(..())
 		return 3
 
-/mob/living/simple_animal/slime/can_be_implanted()
+/mob/living/danimal/slime/can_be_implanted()
 	return TRUE
 
-/mob/living/simple_animal/slime/random/Initialize(mapload, new_colour, new_is_adult)
+/mob/living/danimal/slime/random/Initialize(mapload, new_colour, new_is_adult)
 	. = ..(mapload, pick(slime_colours), prob(50))

@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/wizard
+/mob/living/danimal/hostile/wizard
 	name = "Space Wizard"
 	desc = "EI NATH?"
 	icon = 'icons/mob/simple_human.dmi'
@@ -11,14 +11,13 @@
 	speed = 0
 	maxHealth = 100
 	health = 100
-	harm_intent_damage = 5
 	melee_damage_lower = 5
 	melee_damage_upper = 5
 	attack_verb_continuous = "punches"
 	attack_verb_simple = "punch"
 	attack_sound = 'sound/weapons/punch1.ogg'
 	a_intent = INTENT_HARM
-	atmos_requirements = list("min_oxy" = 5, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 1, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 5, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 1, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
 	unsuitable_atmos_damage = 15
 	faction = list(ROLE_WIZARD)
 	status_flags = CANPUSH
@@ -37,7 +36,7 @@
 
 	footstep_type = FOOTSTEP_MOB_SHOE
 
-/mob/living/simple_animal/hostile/wizard/Initialize()
+/mob/living/danimal/hostile/wizard/Initialize()
 	. = ..()
 	fireball = new /obj/effect/proc_holder/spell/aimed/fireball
 	fireball.clothes_req = NONE
@@ -60,7 +59,7 @@
 	blink.outer_tele_radius = 3
 	AddSpell(blink)
 
-/mob/living/simple_animal/hostile/wizard/Destroy()
+/mob/living/danimal/hostile/wizard/Destroy()
 	if(fireball)
 		QDEL_NULL(fireball)
 	if(mm)
@@ -69,7 +68,7 @@
 		QDEL_NULL(blink)
 	. = ..()
 
-/mob/living/simple_animal/hostile/wizard/handle_automated_action()
+/mob/living/danimal/hostile/wizard/handle_automated_action()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(my_target && next_cast < world.time)

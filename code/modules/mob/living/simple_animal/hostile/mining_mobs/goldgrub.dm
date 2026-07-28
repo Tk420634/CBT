@@ -1,5 +1,5 @@
 //An ore-devouring but easily scared creature
-/mob/living/simple_animal/hostile/asteroid/goldgrub
+/mob/living/danimal/hostile/asteroid/goldgrub
 	name = "goldgrub"
 	desc = "A worm that grows fat from eating everything in its sight. Seems to enjoy precious metals and other shiny things, hence the name."
 	icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
@@ -17,7 +17,6 @@
 	maxHealth = 45
 	health = 45
 	gold_core_spawnable = HOSTILE_SPAWN
-	harm_intent_damage = 5
 	melee_damage_lower = 0
 	melee_damage_upper = 0
 	attack_verb_continuous = "barrels into"
@@ -35,15 +34,15 @@
 	var/chase_time = 100
 	var/will_burrow = TRUE
 
-/mob/living/simple_animal/hostile/asteroid/goldgrub/Initialize()
+/mob/living/danimal/hostile/asteroid/goldgrub/Initialize()
 	. = ..()
 	var/i = rand(1,3)
 	while(i)
 		loot += pick(/obj/item/stack/ore/silver, /obj/item/stack/ore/gold, /obj/item/stack/ore/uranium, /obj/item/stack/ore/diamond)
 		i--
 
-/mob/living/simple_animal/hostile/asteroid/goldgrub/GiveTarget(new_target)
-	add_target(new_target)
+/mob/living/danimal/hostile/asteroid/goldgrub/GiveTarget(new_target)
+	set_target(new_target)
 	var/atom/my_target = get_target()
 	if(my_target == null)
 		return
@@ -57,14 +56,14 @@
 		if(will_burrow)
 			addtimer(CALLBACK(src,PROC_REF(Burrow)), chase_time)
 
-/mob/living/simple_animal/hostile/asteroid/goldgrub/AttackingTarget()
+/mob/living/danimal/hostile/asteroid/goldgrub/AttackingTarget()
 	var/atom/my_target = get_target()
 	if(istype(my_target, /obj/item/stack/ore))
 		EatOre(my_target)
 		return
 	return ..()
 
-/mob/living/simple_animal/hostile/asteroid/goldgrub/proc/EatOre(atom/targeted_ore)
+/mob/living/danimal/hostile/asteroid/goldgrub/proc/EatOre(atom/targeted_ore)
 	for(var/obj/item/stack/ore/O in get_turf(targeted_ore))
 		if(length(loot) < 10)
 			var/using = min(10 - length(loot), O.amount)
@@ -73,15 +72,15 @@
 			O.use(using)
 	visible_message(span_notice("The ore was swallowed whole!"))
 
-/mob/living/simple_animal/hostile/asteroid/goldgrub/proc/Burrow()//Begin the chase to kill the goldgrub in time
+/mob/living/danimal/hostile/asteroid/goldgrub/proc/Burrow()//Begin the chase to kill the goldgrub in time
 	if(!stat)
 		visible_message(span_danger("The [name] buries into the ground, vanishing from sight!"))
 		qdel(src)
 
-/mob/living/simple_animal/hostile/asteroid/goldgrub/bullet_act(obj/item/projectile/P)
+/mob/living/danimal/hostile/asteroid/goldgrub/bullet_act(obj/item/projectile/P)
 	visible_message(span_danger("The [P.name] was repelled by [name]'s girth!"))
 	return BULLET_ACT_BLOCK
 
-/mob/living/simple_animal/hostile/asteroid/goldgrub/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/danimal/hostile/asteroid/goldgrub/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	vision_range = 9
 	. = ..()

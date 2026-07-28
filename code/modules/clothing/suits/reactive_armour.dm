@@ -145,10 +145,10 @@
 		if(world.time < reactivearmor_cooldown)
 			owner.visible_message(span_danger("The reactive stealth system on [owner] activates, but is still recharging its holographic emitters!"))
 			return
-		var/mob/living/simple_animal/hostile/illusion/escape/E = new(owner.loc)
+		var/mob/living/danimal/hostile/illusion/escape/E = new(owner.loc)
 		E.Copy_Parent(owner, 50)
 		E.GiveTarget(owner) //so it starts running right away
-		E.Goto(owner, E.move_to_delay, E.minimum_distance)
+		E.perform_move_action(owner, E.move_to_delay, E.minimum_distance)
 		owner.alpha = 30
 		owner.visible_message(span_danger("[owner] is hit by [attack_text] in the chest!")) //We pretend to be hit, since blocking it would stop the message otherwise
 		spawn(40)

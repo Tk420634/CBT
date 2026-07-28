@@ -22,7 +22,7 @@ Difficulty: Medium
 
 */
 
-/mob/living/simple_animal/hostile/megafauna/dragon/glaurung
+/mob/living/danimal/hostile/megafauna/dragon/glaurung
 	name = "Glaurung"
 	desc = "An ancient Ash Drake untouched except for age. It's eyes glow a soft blue color as opposed to a regular yellow. It carries itself with more strength than the standard drake, eyeing those who come near with caution. Perhaps it is smarter and capable of speech?"
 	health = 2000
@@ -46,7 +46,7 @@ Difficulty: Medium
 	melee_damage_upper = 40
 	speed = 1
 	move_to_delay = 4
-	ranged = 1
+	can_ranged_attack = TRUE
 	pixel_x = -16
 	crusher_loot = list(/obj/structure/closet/crate/necropolis/glaurung/crusher)
 	loot = list(/obj/structure/closet/crate/necropolis/glaurung)
@@ -58,13 +58,13 @@ Difficulty: Medium
 	move_resist = MOVE_FORCE_NORMAL
 	pull_force = MOVE_FORCE_NORMAL
 
-/mob/living/simple_animal/hostile/megafauna/dragon/glaurung/Initialize()
+/mob/living/danimal/hostile/megafauna/dragon/glaurung/Initialize()
 	smallsprite.Grant(src)
 	. = ..()
 	internal = new/obj/item/gps/internal/glaurung(src)
 
 
-/mob/living/simple_animal/hostile/megafauna/dragon/glaurung/proc/line_target(offset, range, atom/at = target)
+/mob/living/danimal/hostile/megafauna/dragon/glaurung/proc/line_target(offset, range, atom/at = target)
 	if(!at)
 		return
 	var/angle = ATAN2(at.x - src.x, at.y - src.y) + offset
@@ -76,11 +76,11 @@ Difficulty: Medium
 		T = check
 	return (getline(src, T) - get_turf(src))
 
-/mob/living/simple_animal/hostile/megafauna/dragon/glaurung/proc/fire_line(var/list/turfs)
+/mob/living/danimal/hostile/megafauna/dragon/glaurung/proc/fire_line(var/list/turfs)
 	sleep(0)
 	dragon_fire_line(src, turfs)
 
-/mob/living/simple_animal/hostile/megafauna/dragon/glaurung/proc/fire_stream(var/atom/at = target)
+/mob/living/danimal/hostile/megafauna/dragon/glaurung/proc/fire_stream(var/atom/at = target)
 	playsound(get_turf(src),'sound/magic/fireball.ogg', 200, TRUE)
 	sleep(0)
 	var/range = 20
@@ -88,19 +88,19 @@ Difficulty: Medium
 	turfs = line_target(0, range, at)
 	INVOKE_ASYNC(src,PROC_REF(fire_line), turfs)
 
-/mob/living/simple_animal/hostile/megafauna/dragon/glaurung/OpenFire()
+/mob/living/danimal/hostile/megafauna/dragon/glaurung/OpenFire()
 	if(swooping)
 		return
-	ranged_cooldown = world.time + ranged_cooldown_time
+	ranged_attack_delay = world.time + ranged_cooldown_duration
 	fire_stream()
 
-/mob/living/simple_animal/hostile/megafauna/dragon/glaurung/triple_swoop()
+/mob/living/danimal/hostile/megafauna/dragon/glaurung/triple_swoop()
 	return null
 
-/mob/living/simple_animal/hostile/megafauna/dragon/glaurung/swoop_attack(fire_rain, atom/movable/manual_target, swoop_duration = 40)
+/mob/living/danimal/hostile/megafauna/dragon/glaurung/swoop_attack(fire_rain, atom/movable/manual_target, swoop_duration = 40)
 	return null
 
-/mob/living/simple_animal/hostile/megafauna/dragon/glaurung/AltClickOn(atom/movable/A)
+/mob/living/danimal/hostile/megafauna/dragon/glaurung/AltClickOn(atom/movable/A)
 	if(!istype(A))
 		to_chat(src, span_warning("Your wings are too damaged for old swoop maneuvers."))
 		return

@@ -59,7 +59,7 @@
 			C.flash_act()
 
 		for(var/i in 1 to amount_to_spawn)
-			var/mob/living/simple_animal/S = create_random_mob(get_turf(holder.my_atom), mob_class)
+			var/mob/living/danimal/S = create_random_mob(get_turf(holder.my_atom), mob_class)
 			S.faction |= mob_faction
 			if(prob(50))
 				for(var/j = 1, j <= rand(1, 3), j++)

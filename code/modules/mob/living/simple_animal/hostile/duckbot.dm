@@ -16,16 +16,15 @@
  * Its an amusing duck toy
  * */
 
-/mob/living/simple_animal/hostile/amusing_duck // have you ever known a duck to *not* be hostile?
+/mob/living/danimal/hostile/amusing_duck // have you ever known a duck to *not* be hostile?
 	name = "Amusing Duck"
 	desc = "bump'n go action! Ages 3 and up. \n Looks like it has a port on its back that'd fit a multitool, neat!"
 	icon = 'icons/mob/amusing_duck.dmi'
 	icon_state = "duckbot"
 	icon_living = "duckbot"
 	icon_dead = "duckbot_dead"
-	ignore_faction = TRUE // so mobs dont kill it on accident
-	ranged = TRUE
-	melee_attacks = FALSE
+	can_be_targeted_by_mob_ai = TRUE // so mobs dont kill it on accident
+	can_ranged_attack = TRUE
 	environment_smash = NONE
 	armor_list = ARMOR_VALUE_RENEGADE_POWER_ARMOR // so we get the tombstone message for our duck
 	maxHealth = 40
@@ -34,9 +33,9 @@
 	move_to_delay = 1 SECONDS // slow duck
 	melee_damage_lower = 0
 	melee_damage_upper = 0
-	ranged_cooldown_time = 20 SECONDS
+	ranged_cooldown_duration = 20 SECONDS
 	pass_flags = LETPASSTHROW
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	death_sound = 'sound/machines/machinery_break_1.ogg'
 	aggroed_vision_range = 8 //A little more aggressive once in combat to balance out their really low HP
 	decompose = FALSE
@@ -69,12 +68,12 @@
 	can_ghost_into = TRUE
 	bounty = 40
 
-/mob/living/simple_animal/hostile/amusing_duck/ComponentInitialize()
+/mob/living/danimal/hostile/amusing_duck/ComponentInitialize()
 	. = ..()
 	AddElement(/datum/element/wuv, "quacks!", EMOTE_AUDIBLE, /datum/mood_event/pet_animal, "quacks!", EMOTE_AUDIBLE)
 	AddElement(/datum/element/mob_holder, "duck")
 
-/mob/living/simple_animal/hostile/amusing_duck/OpenFire(atom/target)
+/mob/living/danimal/hostile/amusing_duck/OpenFire(atom/target)
 	if(!client)
 		return
 	if(!COOLDOWN_FINISHED(src, egg_cooldown))
@@ -83,19 +82,19 @@
 		return
 	blast_an_egg_at_someone(target)
 
-/mob/living/simple_animal/hostile/amusing_duck/AttackingTarget()
+/mob/living/danimal/hostile/amusing_duck/AttackingTarget()
 	if(!client)
 		return
 	wakka_wakka(TRUE)
 
-/mob/living/simple_animal/hostile/amusing_duck/handle_automated_action()
+/mob/living/danimal/hostile/amusing_duck/handle_automated_action()
 	. = ..()
 	if(!. && !client)
 		return
 	wakka_wakka()
 	blast_an_egg_at_someone()
 
-/mob/living/simple_animal/hostile/amusing_duck/proc/wakka_wakka(playerdid)
+/mob/living/danimal/hostile/amusing_duck/proc/wakka_wakka(playerdid)
 	if(!loud_mode)
 		return
 	if(!COOLDOWN_FINISHED(src, wakka_cooldown))
@@ -106,7 +105,7 @@
 	if(prob(amusing_song_chance) || playerdid)
 		playsound(src, amusing_song, amusing_song_volume, awful_mode)
 
-/mob/living/simple_animal/hostile/amusing_duck/proc/blast_an_egg_at_someone(mob/targ)
+/mob/living/danimal/hostile/amusing_duck/proc/blast_an_egg_at_someone(mob/targ)
 	if(lay_egg_is == FALSE && !targ)
 		return
 	if(!COOLDOWN_FINISHED(src, egg_cooldown))
@@ -121,10 +120,10 @@
 		playsound(src, amusing_egg_drop, 75, awful_mode)
 	COOLDOWN_START(src, egg_cooldown, (client ? 20 SECONDS : 1 MINUTES))
 
-/mob/living/simple_animal/hostile/amusing_duck/multitool_act(mob/living/user, obj/item/I)
+/mob/living/danimal/hostile/amusing_duck/multitool_act(mob/living/user, obj/item/I)
 	openwindow(user)
 
-/mob/living/simple_animal/hostile/amusing_duck/proc/openwindow(mob/user)
+/mob/living/danimal/hostile/amusing_duck/proc/openwindow(mob/user)
 	. = TRUE
 	var/list/dat = list() // todo: make this have the old awful bright white IE6 style that our grandpappies robusted to
 	dat += "<TT><B>AMUSING DUCK</B></TT><BR>"
@@ -141,7 +140,7 @@
 	popup.open(FALSE)
 	onclose(user, "ducky", src)
 
-/mob/living/simple_animal/hostile/amusing_duck/Topic(href, href_list)
+/mob/living/danimal/hostile/amusing_duck/Topic(href, href_list)
 	. = ..()
 	var/refreshpls
 	var/mob/user = usr
@@ -170,7 +169,7 @@
 	if(refreshpls)
 		openwindow(user)
 
-/mob/living/simple_animal/hostile/amusing_duck/update_icon_state()
+/mob/living/danimal/hostile/amusing_duck/update_icon_state()
 	. = ..()
 	if(AIStatus == AI_OFF)
 		icon_state = "duckbot_off"
@@ -179,7 +178,7 @@
 		icon_state = "duckbot"
 		icon_living = "duckbot"
 
-/mob/living/simple_animal/hostile/amusing_duck/proc/toggle_awful_mode(mob/user)
+/mob/living/danimal/hostile/amusing_duck/proc/toggle_awful_mode(mob/user)
 	TOGGLE_VAR(awful_mode)
 	if(awful_mode == TRUE)
 		to_chat(user, "You turn on awful mode.")
@@ -191,7 +190,7 @@
 		amusing_song_chance = 20
 	playsound(src, 'sound/machines/switch_on.ogg', 75)
 
-/mob/living/simple_animal/hostile/amusing_duck/proc/toggle_lay_egg(mob/user)
+/mob/living/danimal/hostile/amusing_duck/proc/toggle_lay_egg(mob/user)
 	TOGGLE_VAR(lay_egg_is)
 	if(lay_egg_is == TRUE)
 		to_chat(user, "You flip the switch on the duck's back to TRUE.")
@@ -199,7 +198,7 @@
 		to_chat(user, "You flip the switch on the duck's back to FALSE.")
 	playsound(src, 'sound/machines/switch_on.ogg', 75)
 
-/mob/living/simple_animal/hostile/amusing_duck/proc/toggle_peaceful(mob/user)
+/mob/living/danimal/hostile/amusing_duck/proc/toggle_peaceful(mob/user)
 	TOGGLE_VAR(peaceful)
 	if(peaceful == TRUE)
 		to_chat(user, "You flip the switch on the duck's back to WANDERING.")
@@ -207,7 +206,7 @@
 		to_chat(user, "You flip the switch on the duck's back to ADVANCING.")
 	playsound(src, 'sound/machines/switch_on.ogg', 75)
 
-/mob/living/simple_animal/hostile/amusing_duck/proc/toggle_loud_mode(mob/user)
+/mob/living/danimal/hostile/amusing_duck/proc/toggle_loud_mode(mob/user)
 	TOGGLE_VAR(loud_mode)
 	if(loud_mode == TRUE)
 		to_chat(user, "You flip the switch on the duck's back to MUSIC.")
@@ -215,7 +214,7 @@
 		to_chat(user, "You flip the switch on the duck's back to SILENCE.")
 	playsound(src, 'sound/machines/switch_on.ogg', 75)
 
-/mob/living/simple_animal/hostile/amusing_duck/proc/toggle_lights(mob/user)
+/mob/living/danimal/hostile/amusing_duck/proc/toggle_lights(mob/user)
 	TOGGLE_VAR(lights)
 	set_light_on(lights)
 	if(lights == TRUE)
@@ -224,7 +223,7 @@
 		to_chat(user, "You flip the switch on the duck's back to DARKNESS.")
 	playsound(src, 'sound/machines/switch_on.ogg', 75)
 
-/mob/living/simple_animal/hostile/amusing_duck/proc/toggle_duck(mob/user)
+/mob/living/danimal/hostile/amusing_duck/proc/toggle_duck(mob/user)
 	if(AIStatus == AI_OFF)
 		toggle_ai(AI_ON)
 		to_chat(user, "You switch the duck on.")
@@ -233,7 +232,7 @@
 		to_chat(user, "You switch the duck off.")
 	playsound(src, 'sound/machines/switch_on.ogg', 75)
 
-/mob/living/simple_animal/hostile/amusing_duck/proc/pop()
+/mob/living/danimal/hostile/amusing_duck/proc/pop()
 	playsound(get_turf(src),death_sound, 200, ignore_walls = TRUE, vary = FALSE, frequency = SOUND_FREQ_NORMALIZED(sound_pitch, vary_pitches[1], vary_pitches[2]))
 	gib(src)
 

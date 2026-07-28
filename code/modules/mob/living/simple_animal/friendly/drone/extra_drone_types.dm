@@ -9,7 +9,7 @@
 
 
 //More types of drones
-/mob/living/simple_animal/drone/syndrone
+/mob/living/danimal/drone/syndrone
 	name = "Syndrone"
 	desc = "A modified maintenance drone. This one brings with it the feeling of terror."
 	icon_state = "drone_synd"
@@ -31,31 +31,31 @@
 	hacked = TRUE
 	flavortext = null
 
-/mob/living/simple_animal/drone/syndrone/Initialize()
+/mob/living/danimal/drone/syndrone/Initialize()
 	. = ..()
 	var/datum/component/uplink/hidden_uplink = internal_storage.GetComponent(/datum/component/uplink)
 	hidden_uplink.telecrystals = 10
 
-/mob/living/simple_animal/drone/syndrone/Login()
+/mob/living/danimal/drone/syndrone/Login()
 	..()
 	to_chat(src, span_notice("You can kill and eat other drones to increase your health!") )
 
-/mob/living/simple_animal/drone/syndrone/badass
+/mob/living/danimal/drone/syndrone/badass
 	name = "Badass Syndrone"
 	default_hatmask = /obj/item/clothing/head/helmet/space/hardsuit/syndi/elite
 	default_storage = /obj/item/uplink/nuclear
 
-/mob/living/simple_animal/drone/syndrone/badass/Initialize()
+/mob/living/danimal/drone/syndrone/badass/Initialize()
 	. = ..()
 	var/datum/component/uplink/hidden_uplink = internal_storage.GetComponent(/datum/component/uplink)
 	hidden_uplink.telecrystals = 30
 	var/obj/item/implant/weapons_auth/W = new
 	W.implant(src)
 
-/mob/living/simple_animal/drone/snowflake
+/mob/living/danimal/drone/snowflake
 	default_hatmask = /obj/item/clothing/head/chameleon/drone
 
-/mob/living/simple_animal/drone/snowflake/Initialize()
+/mob/living/danimal/drone/snowflake/Initialize()
 	. = ..()
 	desc += " This drone appears to have a complex holoprojector built on its 'head'."
 
@@ -63,23 +63,23 @@
 	name = "syndrone shell"
 	desc = "A shell of a syndrone, a modified maintenance drone designed to infiltrate and annihilate."
 	icon_state = "syndrone_item"
-	drone_type = /mob/living/simple_animal/drone/syndrone
+	drone_type = /mob/living/danimal/drone/syndrone
 
 /obj/item/drone_shell/syndrone/badass
 	name = "badass syndrone shell"
-	drone_type = /mob/living/simple_animal/drone/syndrone/badass
+	drone_type = /mob/living/danimal/drone/syndrone/badass
 
 /obj/item/drone_shell/snowflake
 	name = "snowflake drone shell"
 	desc = "A shell of a snowflake drone, a maintenance drone with a built in holographic projector to display hats and masks."
-	drone_type = /mob/living/simple_animal/drone/snowflake
+	drone_type = /mob/living/danimal/drone/snowflake
 
-/mob/living/simple_animal/drone/polymorphed
+/mob/living/danimal/drone/polymorphed
 	default_storage = null
 	default_hatmask = null
 	picked = TRUE
 
-/mob/living/simple_animal/drone/polymorphed/Initialize()
+/mob/living/danimal/drone/polymorphed/Initialize()
 	. = ..()
 	liberate()
 	visualAppearence = pick(MAINTDRONE, REPAIRDRONE, SCOUTDRONE)
@@ -95,13 +95,13 @@
 /obj/item/drone_shell/dusty
 	name = "derelict drone shell"
 	desc = "A long-forgotten drone shell. It seems kind of... Space Russian."
-	drone_type = /mob/living/simple_animal/drone/derelict
+	drone_type = /mob/living/danimal/drone/derelict
 
-/mob/living/simple_animal/drone/derelict
+/mob/living/danimal/drone/derelict
 	name = "derelict drone"
 	default_hatmask = /obj/item/clothing/head/ushanka
 
-/*/mob/living/simple_animal/drone/cogscarab
+/*/mob/living/danimal/drone/cogscarab
 	name = "cogscarab"
 	desc = "A strange, drone-like machine. It constantly emits the hum of gears."
 	icon_state = "drone_clock"
@@ -111,7 +111,6 @@
 	pass_flags = PASSTABLE
 	health = 50
 	maxHealth = 50
-	harm_intent_damage = 5
 	density = TRUE
 	speed = 1
 	ventcrawler = VENTCRAWLER_NONE
@@ -135,69 +134,69 @@
 	light_power = 0.5
 
 
-/mob/living/simple_animal/drone/cogscarab/ratvar //a subtype for spawning when ratvar is alive, has a slab that it can use and a normal fabricator
+/mob/living/danimal/drone/cogscarab/ratvar //a subtype for spawning when ratvar is alive, has a slab that it can use and a normal fabricator
 	default_storage = /obj/item/storage/toolbox/brass/prefilled/ratvar
 
-/mob/living/simple_animal/drone/cogscarab/admin //an admin-only subtype of cogscarab with a no-cost fabricator and slab in its box
+/mob/living/danimal/drone/cogscarab/admin //an admin-only subtype of cogscarab with a no-cost fabricator and slab in its box
 	default_storage = /obj/item/storage/toolbox/brass/prefilled/ratvar/admin
 
-/mob/living/simple_animal/drone/cogscarab/Initialize()
+/mob/living/danimal/drone/cogscarab/Initialize()
 	. = ..()
 	QDEL_NULL(access_card) //we don't have free access
-	remove_verb(src, /mob/living/simple_animal/drone/verb/check_laws)
-	remove_verb(src, /mob/living/simple_animal/drone/verb/drone_ping)
+	remove_verb(src, /mob/living/danimal/drone/verb/check_laws)
+	remove_verb(src, /mob/living/danimal/drone/verb/drone_ping)
 
-/mob/living/simple_animal/drone/cogscarab/Login()
+/mob/living/danimal/drone/cogscarab/Login()
 	..()
 	add_servant_of_ratvar(src, TRUE, GLOB.servants_active)
 	to_chat(src,"<b>You yourself are one of these servants, and will be able to utilize almost anything they can[GLOB.ratvar_awakens ? "":", <i>excluding a clockwork slab</i>"].</b>") // this can't go with flavortext because i'm assuming it requires them to be ratvar'd
 
-/mob/living/simple_animal/drone/cogscarab/binarycheck()
+/mob/living/danimal/drone/cogscarab/binarycheck()
 	return FALSE
 
-/mob/living/simple_animal/drone/cogscarab/alert_drones(msg, dead_can_hear = FALSE)
+/mob/living/danimal/drone/cogscarab/alert_drones(msg, dead_can_hear = FALSE)
 	if(msg == DRONE_NET_CONNECT)
 		msg = "<span class='brass'><i>Hierophant Network:</i> [name] activated.</span>"
 	else if(msg == DRONE_NET_DISCONNECT)
 		msg = "<span class='brass'><i>Hierophant Network:</i></span> <span class='alloy'>[name] disabled.</span>"
 	..()
 
-/mob/living/simple_animal/drone/attackby(obj/item/I, mob/user)
+/mob/living/danimal/drone/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/screwdriver) && stat == DEAD)
 		try_reactivate(user)
 	else
 		..()
 
-/mob/living/simple_animal/drone/cogscarab/try_reactivate(mob/living/user)
+/mob/living/danimal/drone/cogscarab/try_reactivate(mob/living/user)
 	if(!is_servant_of_ratvar(user))
 		to_chat(user, span_warning("You fiddle around with [src] to no avail."))
 	else
 		..()
 
-/mob/living/simple_animal/drone/cogscarab/can_use_guns(obj/item/G)
+/mob/living/danimal/drone/cogscarab/can_use_guns(obj/item/G)
 	return GLOB.ratvar_awakens
 
-/mob/living/simple_animal/drone/cogscarab/get_armor_effectiveness()
+/mob/living/danimal/drone/cogscarab/get_armor_effectiveness()
 	if(GLOB.ratvar_awakens)
 		return 1
 	return ..()
 
-/mob/living/simple_animal/drone/cogscarab/triggerAlarm(class, area/A, O, obj/alarmsource)
+/mob/living/danimal/drone/cogscarab/triggerAlarm(class, area/A, O, obj/alarmsource)
 	return
 
-/mob/living/simple_animal/drone/cogscarab/cancelAlarm(class, area/A, obj/origin)
+/mob/living/danimal/drone/cogscarab/cancelAlarm(class, area/A, obj/origin)
 	return
 
-/mob/living/simple_animal/drone/cogscarab/update_drone_hack()
+/mob/living/danimal/drone/cogscarab/update_drone_hack()
 	return //we don't get hacked or give a shit about it
 
-/mob/living/simple_animal/drone/cogscarab/drone_chat(msg)
+/mob/living/danimal/drone/cogscarab/drone_chat(msg)
 	titled_hierophant_message(src, msg, "nezbere", "brass", "Construct") //HIEROPHANT DRONES
 
-/mob/living/simple_animal/drone/cogscarab/ratvar_act()
+/mob/living/danimal/drone/cogscarab/ratvar_act()
 	fully_heal(TRUE)
 
-/mob/living/simple_animal/drone/cogscarab/update_icons()
+/mob/living/danimal/drone/cogscarab/update_icons()
 	if(stat != DEAD)
 		if(incapacitated())
 			icon_state = "[visualAppearence]_flipped"
@@ -206,16 +205,16 @@
 	else
 		icon_state = "[visualAppearence]_dead"
 
-/mob/living/simple_animal/drone/cogscarab/update_mobility()
+/mob/living/danimal/drone/cogscarab/update_mobility()
 	. = ..()
 	update_icons()
 */
 /obj/item/drone_shell/ancient //snowflake meme drone type for dungeon rewards
 	name = "ancient drone shell"
 	desc = "A shell of a maintenance drone, an expendable robot built to perform repairs. This one seems to have a RobCo logo stamped on it."
-	drone_type = /mob/living/simple_animal/drone/ancient
+	drone_type = /mob/living/danimal/drone/ancient
 
-/mob/living/simple_animal/drone/ancient
+/mob/living/danimal/drone/ancient
 	name = "RobCo Drone"
 	default_hatmask = /obj/item/clothing/head/helmet/f13/heavy/salvaged_pa/t45b/tribal
 

@@ -1,5 +1,5 @@
 //A slow, melee, crazy miner.
-/mob/living/simple_animal/hostile/asteroid/miner
+/mob/living/danimal/hostile/asteroid/miner
 	name = "shambling miner"
 	desc = "Consumed by the ash storm, this shell of a human being only seeks to harm those he once called coworkers."
 	icon = 'modular_sand/icons/mob/lavaland/lavaland_monsters.dmi'
@@ -10,7 +10,7 @@
 	icon_gib = "syndicate_gib"
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	mouse_opacity = MOUSE_OPACITY_OPAQUE
-	ranged = 0
+	can_ranged_attack = FALSE
 	friendly_verb_continuous = "hugs"
 	friendly_verb_simple = "hug"
 	speak_emote = list("moans")
@@ -37,7 +37,7 @@
 	footstep_type = FOOTSTEP_MOB_SHOE
 	minimum_distance = 1
 
-/mob/living/simple_animal/hostile/asteroid/miner/ComponentInitialize()
+/mob/living/danimal/hostile/asteroid/miner/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("grabs the miner's eyes and rips them out, shoving the bloody miner aside!", "grabs and crushes the miner's skull apart with their bare hands!", "rips the miner's head clean off with their bare hands!"), \
@@ -48,7 +48,7 @@
 		threshold = (maxHealth/10 * 1.5), \
 		crusher_drop_mod = 2)
 
-/mob/living/simple_animal/hostile/asteroid/miner/death(gibbed)
+/mob/living/danimal/hostile/asteroid/miner/death(gibbed)
 	. = ..()
 	move_force = MOVE_FORCE_DEFAULT
 	move_resist = MOVE_RESIST_DEFAULT

@@ -58,13 +58,13 @@
 	if(!possible_mobtypes)
 		// The base list of allowed mob/species types
 		possible_mobtypes = typecacheof(list(
-			/mob/living/simple_animal,
+			/mob/living/danimal,
 			/mob/living/carbon,
 			/datum/species,
 			))
 		// Some particular types to disallow if they're too broad/abstract
 		possible_mobtypes -= list(
-			/mob/living/simple_animal/hostile,
+			/mob/living/danimal/hostile,
 			)
 		// Some types to remove them and their subtypes
 		possible_mobtypes -= typecacheof(list(
@@ -90,18 +90,18 @@
 	if(!possible_mobtypes)
 		// The base list of allowed mob/species types
 		possible_mobtypes = typecacheof(list(
-			/mob/living/simple_animal,
+			/mob/living/danimal,
 			/mob/living/carbon,
 			/datum/species,
 			))
 		// Some particular types to disallow if they're too broad/abstract
 		possible_mobtypes -= list(
-			/mob/living/simple_animal/hostile,
+			/mob/living/danimal/hostile,
 			)
 		// Some types to remove them and their subtypes
 		possible_mobtypes -= typecacheof(list(
 			/mob/living/carbon/human/species,
-			/mob/living/simple_animal/hostile/megafauna,
+			/mob/living/danimal/hostile/megafauna,
 			))
 
 	var/mob/picked_mobtype = pick(possible_mobtypes)

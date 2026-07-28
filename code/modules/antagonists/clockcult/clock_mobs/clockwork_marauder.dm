@@ -4,14 +4,13 @@
 #define MARAUDER_SPACE_NEAR_DAMAGE 4			//amount of damage taking per Life() tick from being next to space.
 
 //Clockwork marauder: A well-rounded frontline construct. Only one can exist for every two human servants.
-/mob/living/simple_animal/hostile/clockwork/marauder
+/mob/living/danimal/hostile/clockwork/marauder
 	name = "clockwork marauder"
 	desc = "The stalwart apparition of a soldier, blazing with crimson flames. It's armed with a gladius and shield."
 	icon_state = "clockwork_marauder"
 	mob_biotypes = MOB_HUMANOID
 	health = 120
 	maxHealth = 120
-	force_threshold = 8
 	speed = 0
 	obj_damage = 40
 	melee_damage_lower = 12
@@ -35,11 +34,11 @@
 	var/shield_health = 3 //Amount of projectiles that can be deflected within
 	var/shield_health_regen = 0 //When world.time equals this, shield health will regenerate
 
-/mob/living/simple_animal/hostile/clockwork/marauder/examine_info()
+/mob/living/danimal/hostile/clockwork/marauder/examine_info()
 	if(!shield_health)
 		return span_warning("Its shield has been destroyed!")
 
-/mob/living/simple_animal/hostile/clockwork/marauder/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/clockwork/marauder/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	var/turf/T = get_turf(src)
@@ -63,7 +62,7 @@
 		playsound_local(src, "shatter", 75, TRUE, frequency = -1)
 		shield_health++
 
-/mob/living/simple_animal/hostile/clockwork/marauder/update_values()
+/mob/living/danimal/hostile/clockwork/marauder/update_values()
 	if(GLOB.ratvar_awakens) //Massive attack damage bonuses and health increase, because Ratvar
 		health = 300
 		maxHealth = 300
@@ -82,15 +81,15 @@
 		obj_damage = 50
 		max_shield_health = 4
 
-/mob/living/simple_animal/hostile/clockwork/marauder/death(gibbed)
+/mob/living/danimal/hostile/clockwork/marauder/death(gibbed)
 	visible_message(span_danger("[src]'s equipment clatters lifelessly to the ground as the red flames within dissipate."), \
 	span_userdanger("Dented and scratched, your armor falls away, and your fragile form breaks apart without its protection."))
 	. = ..()
 
-/mob/living/simple_animal/hostile/clockwork/marauder/Process_Spacemove(movement_dir = 0, continuous_move)
+/mob/living/danimal/hostile/clockwork/marauder/Process_Spacemove(movement_dir = 0, continuous_move)
 	return TRUE
 
-/mob/living/simple_animal/hostile/clockwork/marauder/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/danimal/hostile/clockwork/marauder/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	if(amount > 0)
 		for(var/mob/living/L in view(2, src))
 			if(L.is_holding_item_of_type(/obj/item/nullrod))
@@ -99,12 +98,12 @@
 				break
 	. = ..()
 
-/mob/living/simple_animal/hostile/clockwork/marauder/bullet_act(obj/item/projectile/P)
+/mob/living/danimal/hostile/clockwork/marauder/bullet_act(obj/item/projectile/P)
 	if(deflect_projectile(P))
 		return BULLET_ACT_BLOCK
 	return ..()
 
-/mob/living/simple_animal/hostile/clockwork/marauder/proc/deflect_projectile(obj/item/projectile/P)
+/mob/living/danimal/hostile/clockwork/marauder/proc/deflect_projectile(obj/item/projectile/P)
 	if(!shield_health)
 		return
 	var/energy_projectile = istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam)
@@ -125,7 +124,7 @@
 #undef MARAUDER_SHIELD_REGEN_TIME
 
 //Clockwork guardian: Slow but with high damage, resides inside of a servant. Created via the Memory Allocation scripture.
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian
+/mob/living/danimal/hostile/clockwork/marauder/guardian
 	name = "clockwork guardian"
 	desc = "A stalwart apparition of a soldier, blazing with crimson flames. It's armed with a gladius and shield and stands ready by its master."
 	icon_state = "clockwork_marauder"
@@ -161,11 +160,11 @@
 	Stay near your host to protect and heal them; being too far from your host will rapidly cause you massive damage. Recall to your host if you are too weak and believe you cannot continue \
 	fighting safely. As a final note, you should probably avoid harming any fellow servants of Ratvar.</span>"
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/Initialize()
+/mob/living/danimal/hostile/clockwork/marauder/guardian/Initialize()
 	. = ..()
 	true_name = pick(possible_true_names)
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/clockwork/marauder/guardian/BiologicalLife(seconds, times_fired)
 	..()
 	if(is_in_host())
 		if(!is_servant_of_ratvar(host))
@@ -221,14 +220,14 @@
 				adjustHealth(15)
 				to_chat(src, span_userdanger("You're too far from your host and rapidly taking damage!"))
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/death(gibbed)
+/mob/living/danimal/hostile/clockwork/marauder/guardian/death(gibbed)
 	emerge_from_host(FALSE, TRUE)
 	unbind_from_host()
 	visible_message(span_warning("[src]'s equipment clatters lifelessly to the ground as the red flames within dissipate."), \
 	span_userdanger("Your equipment falls away. You feel a moment of confusion before your fragile form is annihilated."))
 	. = ..()
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/Stat()
+/mob/living/danimal/hostile/clockwork/marauder/guardian/Stat()
 	..()
 	if(statpanel("Status"))
 		stat(null, "Current True Name: [true_name]")
@@ -247,10 +246,10 @@
 					stat(null, "You are [recovering ? "unable to deploy" : "able to deploy to protect your host"]!")
 		stat(null, "You do [melee_damage_upper] damage on melee attacks.")
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/Process_Spacemove(movement_dir = 0, continuous_move)
+/mob/living/danimal/hostile/clockwork/marauder/guardian/Process_Spacemove(movement_dir = 0, continuous_move)
 	return 1
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/proc/bind_to_host(mob/living/new_host)
+/mob/living/danimal/hostile/clockwork/marauder/guardian/proc/bind_to_host(mob/living/new_host)
 	if(!new_host)
 		return FALSE
 	host = new_host
@@ -262,7 +261,7 @@
 	LM.Grant(host)
 	return TRUE
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/proc/unbind_from_host()
+/mob/living/danimal/hostile/clockwork/marauder/guardian/proc/unbind_from_host()
 	if(host)
 		for(var/datum/action/innate/summon_guardian/SG in host.actions)
 			qdel(SG)
@@ -273,7 +272,7 @@
 	return FALSE
 
 //DAMAGE and FATIGUE
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/proc/heal_host()
+/mob/living/danimal/hostile/clockwork/marauder/guardian/proc/heal_host()
 	if(!host)
 		return
 	var/resulthealth = round((host.health / host.maxHealth) * 100, 0.5)
@@ -283,7 +282,7 @@
 		new /obj/effect/temp_visual/heal(host.loc, "#AF0AAF")
 		host.heal_ordered_damage(4, damage_heal_order)
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/danimal/hostile/clockwork/marauder/guardian/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	if(amount > 0)
 		for(var/mob/living/L in view(2, src))
 			if(L.is_holding_item_of_type(/obj/item/nullrod))
@@ -295,7 +294,7 @@
 		update_health_hud()
 		update_stats()
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/update_health_hud()
+/mob/living/danimal/hostile/clockwork/marauder/guardian/update_health_hud()
 	if(hud_used && hud_used.healths)
 		if(istype(hud_used, /datum/hud/marauder))
 			var/datum/hud/marauder/G = hud_used
@@ -310,7 +309,7 @@
 			G.hosthealth.maptext = "<div align='center' valign='middle' style='position:relative; top:0px; left:6px'><font color='#AF0AAF'>HOST<br>[resulthealth]</font></div>"
 		hud_used.healths.maptext = "<div align='center' valign='middle' style='position:relative; top:0px; left:6px'><font color='#AF0AAF'>[round((health / maxHealth) * 100, 0.5)]%</font>"
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/proc/update_stats()
+/mob/living/danimal/hostile/clockwork/marauder/guardian/proc/update_stats()
 	if(GLOB.ratvar_awakens)
 		speed = 0
 		melee_damage_lower = 20
@@ -352,46 +351,51 @@
 
 //ATTACKING, BLOCKING, and COUNTERING
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/AttackingTarget()
+/mob/living/danimal/hostile/clockwork/marauder/guardian/PreMeleeAttackCheck()
 	if(is_in_host())
-		return FALSE
+		return MPMAC_FORCE_DENY
 	return ..()
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/bullet_act(obj/item/projectile/Proj)
+/mob/living/danimal/hostile/clockwork/marauder/guardian/ranged_extra_conditions()
+	if(is_in_host())
+		return MPMAC_FORCE_DENY
+	return ..()
+
+/mob/living/danimal/hostile/clockwork/marauder/guardian/bullet_act(obj/item/projectile/Proj)
 	if(blockOrCounter(null, Proj))
 		return
 	return ..()
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/hitby(atom/movable/AM, skipcatch, hitpush, blocked, atom/movable/AM, datum/thrownthing/throwingdatum)
+/mob/living/danimal/hostile/clockwork/marauder/guardian/hitby(atom/movable/AM, skipcatch, hitpush, blocked, atom/movable/AM, datum/thrownthing/throwingdatum)
 	if(blockOrCounter(null, AM))
 		return
 	return ..()
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/attack_animal(mob/living/simple_animal/M)
-	if(istype(M, /mob/living/simple_animal/hostile/clockwork/marauder/guardian) || !blockOrCounter(M, M)) //we don't want infinite blockcounter loops if fighting another guardian
+/mob/living/danimal/hostile/clockwork/marauder/guardian/attack_animal(mob/living/danimal/M)
+	if(istype(M, /mob/living/danimal/hostile/clockwork/marauder/guardian) || !blockOrCounter(M, M)) //we don't want infinite blockcounter loops if fighting another guardian
 		return ..()
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/attack_paw(mob/living/carbon/monkey/M)
+/mob/living/danimal/hostile/clockwork/marauder/guardian/attack_paw(mob/living/carbon/monkey/M)
 	if(!blockOrCounter(M, M))
 		return ..()
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/attack_alien(mob/living/carbon/alien/humanoid/M)
+/mob/living/danimal/hostile/clockwork/marauder/guardian/attack_alien(mob/living/carbon/alien/humanoid/M)
 	if(!blockOrCounter(M, M))
 		return ..()
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/attack_slime(mob/living/simple_animal/slime/M)
+/mob/living/danimal/hostile/clockwork/marauder/guardian/attack_slime(mob/living/danimal/slime/M)
 	if(!blockOrCounter(M, M))
 		return ..()
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/attack_hand(mob/living/carbon/human/M)
+/mob/living/danimal/hostile/clockwork/marauder/guardian/attack_hand(mob/living/carbon/human/M)
 	if(!blockOrCounter(M, M))
 		return ..()
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/attackby(obj/item/I, mob/user, params)
+/mob/living/danimal/hostile/clockwork/marauder/guardian/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/nullrod) || !blockOrCounter(user, I))
 		return ..()
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/proc/blockOrCounter(mob/target, atom/textobject)
+/mob/living/danimal/hostile/clockwork/marauder/guardian/proc/blockOrCounter(mob/target, atom/textobject)
 	if(GLOB.ratvar_awakens) //if ratvar has woken, we block nearly everything at a very high chance
 		blockchance = 90
 		counterchance = 90
@@ -421,13 +425,13 @@
 
 //COMMUNICATION and EMERGENCE
 /*
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/handle_inherent_channels(message, message_mode)
+/mob/living/danimal/hostile/clockwork/marauder/guardian/handle_inherent_channels(message, message_mode)
 	if(host && (is_in_host() || message_mode == MODE_BINARY))
 		guardian_comms(message)
 		return TRUE
 	return ..()
 */
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/proc/guardian_comms(message)
+/mob/living/danimal/hostile/clockwork/marauder/guardian/proc/guardian_comms(message)
 	var/name_part = span_sevtug("[src] ([true_name])")
 	message = span_sevtug_small("\"[message]\"") //Processed output
 	to_chat(src, "[name_part]<span class='sevtug_small'>:</span> [message]")
@@ -438,7 +442,7 @@
 			to_chat(M, "[link] [name_part] <span class='sevtug_small'>(to</span> <span class='sevtug'>[findtextEx(host.name, host.real_name) ? "[host.name]" : "[host.real_name] (as [host.name])"]</span><span class='sevtug_small'>):</span> [message] ")
 	return TRUE
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/proc/return_to_host()
+/mob/living/danimal/hostile/clockwork/marauder/guardian/proc/return_to_host()
 	if(is_in_host())
 		return FALSE
 	if(!host)
@@ -456,7 +460,7 @@
 		to_chat(host, span_sevtug("[true_name] has weakened and will need to recover before manifesting again!"))
 	return TRUE
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/proc/try_emerge()
+/mob/living/danimal/hostile/clockwork/marauder/guardian/proc/try_emerge()
 	if(!host)
 		to_chat(src, span_warning("You don't have a host!"))
 		return FALSE
@@ -469,7 +473,7 @@
 			return FALSE
 	return emerge_from_host(FALSE)
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/proc/emerge_from_host(hostchosen, force) //Notice that this is a proc rather than a verb - guardians can NOT exit at will, but they CAN return
+/mob/living/danimal/hostile/clockwork/marauder/guardian/proc/emerge_from_host(hostchosen, force) //Notice that this is a proc rather than a verb - guardians can NOT exit at will, but they CAN return
 	if(!is_in_host())
 		return FALSE
 	if(!force && recovering)
@@ -488,10 +492,10 @@
 	visible_message(span_warning("[host]'s skin glows red as [name] emerges from their body!"), span_sevtug_small("You exit the safety of [host]'s body!"))
 	return TRUE
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/get_alt_name()
+/mob/living/danimal/hostile/clockwork/marauder/guardian/get_alt_name()
 	return " ([text2ratvar(true_name)])"
 
-/mob/living/simple_animal/hostile/clockwork/marauder/guardian/proc/is_in_host() //Checks if the guardian is inside of their host
+/mob/living/danimal/hostile/clockwork/marauder/guardian/proc/is_in_host() //Checks if the guardian is inside of their host
 	return host && loc == host
 
 //HOST ACTIONS
@@ -504,7 +508,7 @@
 	background_icon_state = "bg_clock"
 	check_flags = AB_CHECK_CONSCIOUS
 	buttontooltipstyle = "clockcult"
-	var/mob/living/simple_animal/hostile/clockwork/marauder/guardian/linked_guardian
+	var/mob/living/danimal/hostile/clockwork/marauder/guardian/linked_guardian
 	var/list/defend_phrases = list("Defend me", "Come forth", "Assist me", "Protect me", "Give aid", "Help me")
 	var/list/return_phrases = list("Return", "Return to me", "Your job is done", "You have served", "Come back", "Retreat")
 
@@ -534,7 +538,7 @@
 	background_icon_state = "bg_clock"
 	check_flags = AB_CHECK_CONSCIOUS
 	buttontooltipstyle = "clockcult"
-	var/mob/living/simple_animal/hostile/clockwork/marauder/guardian/linked_guardian
+	var/mob/living/danimal/hostile/clockwork/marauder/guardian/linked_guardian
 
 /datum/action/innate/linked_minds/IsAvailable()
 	if(!linked_guardian)

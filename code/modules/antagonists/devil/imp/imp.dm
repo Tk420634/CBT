@@ -1,6 +1,6 @@
 //////////////////The Monster
 
-/mob/living/simple_animal/imp
+/mob/living/danimal/imp
 	name = "imp"
 	real_name = "imp"
 	unique_name = TRUE
@@ -19,10 +19,10 @@
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	speed = 1
 	a_intent = INTENT_HARM
-	stop_automated_movement = 1
+	stop_wandering = 1
 	status_flags = CANPUSH
 	attack_sound = 'sound/magic/demon_attack1.ogg'
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 250 //Weak to cold
 	//maxbodytemp = INFINITY
 	faction = list("hell")
@@ -44,11 +44,11 @@
 							Though you are not obligated to help, perhaps by aiding a higher ranking devil, you might just get a promotion.  However, you are incapable	\
 							of intentionally harming a fellow devil.</B>"
 
-/mob/living/simple_animal/imp/Initialize()
+/mob/living/danimal/imp/Initialize()
 	..()
 	boost = world.time + 30
 
-/mob/living/simple_animal/imp/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/imp/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if(boost<world.time)
@@ -56,7 +56,7 @@
 	else
 		speed = 0
 
-/mob/living/simple_animal/imp/death()
+/mob/living/danimal/imp/death()
 	..(1)
 	playsound(get_turf(src),'sound/magic/demon_dies.ogg', 200, 1)
 	visible_message(span_danger("[src] screams in agony as it sublimates into a sulfurous smoke."))

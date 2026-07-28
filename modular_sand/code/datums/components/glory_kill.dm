@@ -70,13 +70,13 @@
 	if(!slayer.canUseTopic(owner, TRUE))
 		return
 	/// Let's give our slayer a chance (totally not abusable by spamming alt-click)
-	if(istype(owner, /mob/living/simple_animal/hostile))
-		var/mob/living/simple_animal/hostile/hostile = owner
+	if(istype(owner, /mob/living/danimal/hostile))
+		var/mob/living/danimal/hostile/hostile = owner
 		if(hostile.ranged)
-			if(hostile.ranged_cooldown >= world.time)
-				hostile.ranged_cooldown += 10
+			if(hostile.ranged_attack_delay >= world.time)
+				hostile.ranged_attack_delay += 10
 			else
-				hostile.ranged_cooldown = 10 + world.time
+				hostile.ranged_attack_delay = 10 + world.time
 	if(do_mob(slayer, owner, 1 SECONDS) && (owner.stat != DEAD))
 		var/message
 		if(!slayer.get_active_held_item() || (!istype(slayer.get_active_held_item(), /obj/item/kinetic_crusher) && !istype(slayer.get_active_held_item(), /obj/item/gun/energy/kinetic_accelerator)))
@@ -92,12 +92,12 @@
 			owner.visible_message(span_danger("<b>[slayer] [message]</b>"))
 		else
 			owner.visible_message(span_danger("<b>[slayer] does something generally considered brutal to [owner]... Whatever that may be!</b>"))
-		if(istype(owner, /mob/living/simple_animal/hostile/asteroid))
-			var/mob/living/simple_animal/hostile/asteroid/asteroid = owner
+		if(istype(owner, /mob/living/danimal/hostile/asteroid))
+			var/mob/living/danimal/hostile/asteroid/asteroid = owner
 			playsound(asteroid.loc, asteroid.death_sound, 150, TRUE, -1)
 			asteroid.crusher_drop_mod *= crusher_drop_mod
-		if(istype(owner, /mob/living/simple_animal))
-			var/mob/living/simple_animal/simple = owner
+		if(istype(owner, /mob/living/danimal))
+			var/mob/living/danimal/simple = owner
 			simple.adjustHealth(simple.maxHealth, TRUE, TRUE)
 		if(owner.mob_biotypes & MOB_ORGANIC)
 			new /obj/effect/gibspawner/generic(owner.loc)

@@ -9,7 +9,7 @@
 
 /datum/round_event/wisdomcow/start()
 	var/turf/targetloc = get_random_station_turf()
-	new /mob/living/simple_animal/cow/wisdom(targetloc)
+	new /mob/living/danimal/cow/wisdom(targetloc)
 	var/datum/effect_system/smoke_spread/smoke = new
 	smoke.set_up(1, targetloc)
 	smoke.start()

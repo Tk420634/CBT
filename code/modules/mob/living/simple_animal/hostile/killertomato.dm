@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/killertomato
+/mob/living/danimal/hostile/killertomato
 	name = "Killer Tomato"
 	desc = "It's a horrifyingly enormous beef tomato, and it's packing extra beef!"
 	icon_state = "tomato"
@@ -25,7 +25,7 @@
 	ventcrawler = VENTCRAWLER_ALWAYS
 	faction = list("plants")
 
-	atmos_requirements = list("min_oxy" = 5, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 5, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 150
 	//maxbodytemp = 500
 	gold_core_spawnable = HOSTILE_SPAWN

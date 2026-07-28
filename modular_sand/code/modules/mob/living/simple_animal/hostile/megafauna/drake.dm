@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/megafauna/dragon/ComponentInitialize()
+/mob/living/danimal/hostile/megafauna/dragon/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("climbs atop the drake's head as it dangles weakly near the ground, ripping its left horn off and jumping down before swinging it at the drake's face full force, cracking its maw!", "goes around the dragon and rips off their tail, using it's spiked end to beat the dragon's bloodied face until it cracks open and it dies!"), \
@@ -6,7 +6,7 @@
 		messages_pka = list("shoots at the dragon's wings with their PKA, exploding them into bizarre giblets! They then finish the poor creature off with a point-blank blast to the head, exploding it!"), \
 		messages_pka_bayonet = list("goes around the drake and chops off their tail's spike with their bayonet, then climbs onto their head and makes them eat it!"))
 
-/mob/living/simple_animal/hostile/megafauna/dragon/lesser/akatosh
+/mob/living/danimal/hostile/megafauna/dragon/lesser/akatosh
 	name = "Holy Dragon"
 	desc = "Destroyer of the gates."
 	icon = 'modular_sand/icons/mob/lavaland/drake_greyscale.dmi'
@@ -20,7 +20,7 @@
 	faction = list("neutral")
 	smallsprite = new /datum/action/small_sprite/drake/akatosh()
 
-/mob/living/simple_animal/hostile/megafauna/dragon/sand
+/mob/living/danimal/hostile/megafauna/dragon/sand
 	name = "Sand"
 	desc = "The ultimate form of lord Sand, if he is in this form, he is either saving someone from something, or killing some honkers"
 	maxHealth = 200000000000

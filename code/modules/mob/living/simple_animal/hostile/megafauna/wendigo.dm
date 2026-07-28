@@ -2,7 +2,7 @@
 Difficulty: Hard
 */
 
-/mob/living/simple_animal/hostile/megafauna/wendigo
+/mob/living/danimal/hostile/megafauna/wendigo
 	name = "wendigo"
 	desc = "A mythological man-eating legendary creature, you probably aren't going to survive this."
 	health = 2500
@@ -22,9 +22,9 @@ Difficulty: Hard
 	aggroed_vision_range = 18 // man-eating for a reason
 	speed = 8
 	move_to_delay = 8
-	rapid_melee = 16 // every 1/8 second
-	melee_queue_distance = 20 // as far as possible really, need this because of charging and teleports
-	ranged = TRUE
+	melee_attacks_per_turn = 16 // every 1/8 second
+	windup_start_distance = 20 // as far as possible really, need this because of charging and teleports
+	can_ranged_attack = TRUE
 	pixel_x = -16
 	loot = list(/obj/item/wendigo_blood)
 	crusher_loot = list(/obj/item/wendigo_blood, /obj/item/crusher_trophy/demon_claws)
@@ -66,11 +66,11 @@ Difficulty: Hard
 	chosen_message = span_colossus("You are now screeching, disorienting targets around you.")
 	chosen_attack_num = 3
 
-/mob/living/simple_animal/hostile/megafauna/wendigo/Initialize()
+/mob/living/danimal/hostile/megafauna/wendigo/Initialize()
 	. = ..()
 	starting = get_turf(src)
 
-/mob/living/simple_animal/hostile/megafauna/wendigo/OpenFire()
+/mob/living/danimal/hostile/megafauna/wendigo/OpenFire()
 	SetRecoveryTime(0, 100)
 	if(health <= maxHealth*0.5)
 		stomp_range = 2
@@ -100,20 +100,20 @@ Difficulty: Hard
 		if(3)
 			disorienting_scream()
 
-/mob/living/simple_animal/hostile/megafauna/wendigo/Move(atom/newloc, direct)
+/mob/living/danimal/hostile/megafauna/wendigo/Move(atom/newloc, direct)
 	if(!can_move)
 		return
 	stored_move_dirs |= direct
 	return ..()
 
-/mob/living/simple_animal/hostile/megafauna/wendigo/Moved(atom/oldloc, direct)
+/mob/living/danimal/hostile/megafauna/wendigo/Moved(atom/oldloc, direct)
 	. = ..()
 	stored_move_dirs &= ~direct
 	if(!stored_move_dirs)
 		INVOKE_ASYNC(src,PROC_REF(ground_slam), stomp_range, 1)
 
 /// Slams the ground around the wendigo throwing back enemies caught nearby
-/mob/living/simple_animal/hostile/megafauna/wendigo/proc/ground_slam(range, delay)
+/mob/living/danimal/hostile/megafauna/wendigo/proc/ground_slam(range, delay)
 	var/turf/orgin = get_turf(src)
 	var/list/all_turfs = RANGE_TURFS(range, orgin)
 	for(var/i = 0 to range)
@@ -134,14 +134,14 @@ Difficulty: Hard
 		sleep(delay)
 
 /// Larger but slower ground stomp
-/mob/living/simple_animal/hostile/megafauna/wendigo/proc/heavy_stomp()
+/mob/living/danimal/hostile/megafauna/wendigo/proc/heavy_stomp()
 	can_move = FALSE
 	ground_slam(5, 2)
 	SetRecoveryTime(0, 0)
 	can_move = TRUE
 
 /// Teleports to a location 4 turfs away from the enemy in view
-/mob/living/simple_animal/hostile/megafauna/wendigo/proc/teleport()
+/mob/living/danimal/hostile/megafauna/wendigo/proc/teleport()
 	var/list/possible_ends = list()
 	var/atom/my_target = get_target()
 	for(var/turf/T in view(4, my_target.loc) - view(3, my_target.loc))
@@ -153,7 +153,7 @@ Difficulty: Hard
 	SetRecoveryTime(20, 0)
 
 /// Shakes all nearby enemies screens and animates the wendigo shaking up and down
-/mob/living/simple_animal/hostile/megafauna/wendigo/proc/disorienting_scream()
+/mob/living/danimal/hostile/megafauna/wendigo/proc/disorienting_scream()
 	can_move = FALSE
 	playsound(src, 'sound/magic/demon_dies.ogg', 600, FALSE, 10)
 	animate(src, pixel_z = rand(5, 15), time = 1, loop = 6)
@@ -166,7 +166,7 @@ Difficulty: Hard
 	can_move = TRUE
 	return
 
-/mob/living/simple_animal/hostile/megafauna/wendigo/death(gibbed, list/force_grant)
+/mob/living/danimal/hostile/megafauna/wendigo/death(gibbed, list/force_grant)
 	if(health > 0)
 		return
 	var/obj/effect/portal/permanent/one_way/exit = new /obj/effect/portal/permanent/one_way(starting)
@@ -199,4 +199,4 @@ Difficulty: Hard
 	invocation = "RAAAAAAAAWR!"
 	convert_damage = FALSE
 
-	shapeshift_type = /mob/living/simple_animal/hostile/asteroid/polarbear
+	shapeshift_type = /mob/living/danimal/hostile/asteroid/polarbear

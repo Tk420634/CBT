@@ -75,7 +75,7 @@
 
 /obj/machinery/door/airlock/titanium/doomed/locked/Initialize(mapload)
 	. = ..()
-	for(var/mob/living/simple_animal/hostile/asteroid/elite/candy/C in view(15))
+	for(var/mob/living/danimal/hostile/asteroid/elite/candy/C in view(15))
 		candylist += C
 	if(candylist.len)
 		INVOKE_ASYNC(src, TYPE_PROC_REF(/obj/machinery/door/airlock/titanium/doomed/locked,close))
@@ -84,7 +84,7 @@
 /obj/machinery/door/airlock/titanium/doomed/locked/process()
 	. = ..()
 	candylist = list()
-	for(var/mob/living/simple_animal/hostile/asteroid/elite/candy/C in view(15))
+	for(var/mob/living/danimal/hostile/asteroid/elite/candy/C in view(15))
 		if(C.stat != DEAD)
 			candylist += C
 		return

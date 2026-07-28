@@ -16,11 +16,11 @@
 	stage4 = list()
 	stage5 = list(span_danger("You don't feel like yourself anymore!"))
 	viable_mobtypes = list(/mob/living/carbon/human)
-	new_form = /mob/living/simple_animal/hostile/centaur
+	new_form = /mob/living/danimal/hostile/centaur
 	var/list/possible_forms = list(\
-		/mob/living/simple_animal/hostile/centaur/strong = 4,
-		/mob/living/simple_animal/hostile/abomination/weak = 3,
-		// /mob/living/simple_animal/hostile/ghoul/glowing/strong = 2,
+		/mob/living/danimal/hostile/centaur/strong = 4,
+		/mob/living/danimal/hostile/abomination/weak = 3,
+		// /mob/living/danimal/hostile/ghoul/glowing/strong = 2,
 		)
 
 /datum/disease/transformation/mutant/do_disease_transformation(mob/living/affected_mob)

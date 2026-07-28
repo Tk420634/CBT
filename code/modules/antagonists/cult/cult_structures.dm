@@ -41,8 +41,8 @@
 		return "<span class='cult'>[t_It] [t_is] at <b>[round(obj_integrity * 100 / max_integrity)]%</b> stability.</span>"
 	return ..()
 
-/obj/structure/destructible/cult/attack_animal(mob/living/simple_animal/M)
-	if(istype(M, /mob/living/simple_animal/hostile/construct/builder))
+/obj/structure/destructible/cult/attack_animal(mob/living/danimal/M)
+	if(istype(M, /mob/living/danimal/hostile/construct/builder))
 		if(obj_integrity < max_integrity)
 			M.DelayNextAction(CLICK_CD_MELEE)
 			obj_integrity = min(max_integrity, obj_integrity + 5)
@@ -218,7 +218,7 @@
 						L.adjustFireLoss(-1, 0)
 						L.updatehealth()
 					if(isshade(L) || isconstruct(L))
-						var/mob/living/simple_animal/M = L
+						var/mob/living/danimal/M = L
 						if(M.health < M.maxHealth)
 							M.adjustHealth(-3)
 				if(ishuman(L) && L.blood_volume < (BLOOD_VOLUME_NORMAL * L.blood_ratio))

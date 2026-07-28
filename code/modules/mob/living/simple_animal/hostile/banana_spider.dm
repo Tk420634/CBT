@@ -1,4 +1,4 @@
-/mob/living/simple_animal/banana_spider
+/mob/living/danimal/banana_spider
 	name = "banana spider"
 	desc = "What the fuck is this abomination?"
 	icon_state = "bananaspider"
@@ -8,7 +8,7 @@
 	seconds_per_wander = 5			//this isn't player speed =|
 	speed = 2				//this is player speed
 	loot = list(/obj/item/reagent_containers/food/snacks/deadbanana_spider)
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 270
 	//maxbodytemp = INFINITY
 	pass_flags = PASSTABLE | PASSGRILLE | PASSMOB
@@ -31,13 +31,13 @@
 	var/projectile_density = TRUE		//griffons get shot
 	del_on_death = TRUE
 
-/mob/living/simple_animal/banana_spider/Initialize()
+/mob/living/danimal/banana_spider/Initialize()
 	. = ..()
 	var/area/A = get_area(src)
 	if(A)
 		notify_ghosts("A banana spider has been created in \the [A.name].", source = src, action=NOTIFY_ATTACK, flashwindow = FALSE, ignore_dnr_observers = TRUE)
 
-/mob/living/simple_animal/banana_spider/attack_ghost(mob/user)
+/mob/living/danimal/banana_spider/attack_ghost(mob/user)
 	if(key)			//please stop using src. without a good reason.
 		return
 	if(CONFIG_GET(flag/use_age_restriction_for_jobs))
@@ -60,11 +60,11 @@
 	user.transfer_ckey(src, FALSE)
 	density = TRUE
 
-/mob/living/simple_animal/banana_spider/ComponentInitialize()
+/mob/living/danimal/banana_spider/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/slippery, 40)
 
-/mob/living/simple_animal/banana_spider/on_entered(atom/movable/AM)		//no /var in proc headers
+/mob/living/danimal/banana_spider/on_entered(atom/movable/AM)		//no /var in proc headers
 	. = ..()
 	if(istype(AM, /obj/item/projectile) && projectile_density)		//forced projectile density
 		var/obj/item/projectile/P = AM
@@ -86,10 +86,10 @@
 			else
 				visible_message(span_notice("[src] avoids getting crushed."))
 
-/mob/living/simple_animal/banana_spider/ex_act()
+/mob/living/danimal/banana_spider/ex_act()
 	return
 
-/mob/living/simple_animal/banana_spider/start_pulling()
+/mob/living/danimal/banana_spider/start_pulling()
 	return FALSE			//No.
 
 /obj/item/reagent_containers/food/snacks/deadbanana_spider

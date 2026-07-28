@@ -76,7 +76,7 @@
 	construct_name = "clockwork marauder"
 	construct_desc = "<span class='neovgre_small'>It will become a <b>clockwork marauder,</b> a well-rounded frontline combatant.</span>"
 	creation_message = "<span class='neovgre_small bold'>Crimson fire begins to rage in the armor as it rises into the air with its armaments!</span>"
-	construct_type = /mob/living/simple_animal/hostile/clockwork/marauder
+	construct_type = /mob/living/danimal/hostile/clockwork/marauder
 
 
 //Cogscarab shell, used to create cogcarabs - fragile but zippy little drones that build and maintain the base.
@@ -87,7 +87,7 @@
 	construct_name = "cogscarab"
 	construct_desc = "<span class='alloy'>It will become a <b>cogscarab,</b> a small and fragile drone that builds, repairs, and maintains.</span>"
 	creation_message = "<span class='alloy bold'>The cogscarab clicks and whirrs as it hops up and springs to life!</span>"
-	construct_type = /mob/living/simple_animal/drone/cogscarab
+	construct_type = /mob/living/danimal/drone/cogscarab
 	w_class = WEIGHT_CLASS_SMALL
 	var/infinite_resources = FALSE //No.
 	var/static/obj/item/seasonal_hat //Share it with all other scarabs, since we're from the same cult!
@@ -100,7 +100,7 @@
 /obj/item/clockwork/construct_chassis/cogscarab/pre_spawn()
 	if(infinite_resources)
 		//During rounds where they can't interact with the station, let them experiment with builds, if an admin allows them to.
-		construct_type = /mob/living/simple_animal/drone/cogscarab/ratvar
+		construct_type = /mob/living/danimal/drone/cogscarab/ratvar
 	if(!seasonal_hat)
 		var/obj/item/drone_shell/D = locate() in GLOB.poi_list
 		if(D && D.possible_seasonal_hats.len)

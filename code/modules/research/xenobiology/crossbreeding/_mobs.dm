@@ -1,5 +1,5 @@
 //Slime corgi - Chilling Pink
-/mob/living/simple_animal/pet/dog/corgi/puppy/slime
+/mob/living/danimal/pet/dog/corgi/puppy/slime
 	name = "\improper slime corgi puppy"
 	real_name = "slime corgi puppy"
 	desc = "An unbearably cute pink slime corgi puppy."

@@ -81,8 +81,8 @@ Runes can either be invoked by one's self or with many different cultists. Each 
 		to_chat(user, span_danger("You need [req_cultists - invokers.len] more adjacent cultists to use this rune in such a manner."))
 		fail_invoke()
 
-/obj/effect/rune/attack_animal(mob/living/simple_animal/M)
-	if(istype(M, /mob/living/simple_animal/shade) || istype(M, /mob/living/simple_animal/hostile/construct))
+/obj/effect/rune/attack_animal(mob/living/danimal/M)
+	if(istype(M, /mob/living/danimal/shade) || istype(M, /mob/living/danimal/hostile/construct))
 		if(construct_invoke || !iscultist(M)) //if you're not a cult construct we want the normal fail message
 			attack_hand(M)
 		else

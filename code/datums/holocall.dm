@@ -347,7 +347,7 @@
 	outfit_type = /datum/outfit/nanotrasensoldiercorpse2
 
 /datum/preset_holoimage/gorilla
-	nonhuman_mobtype = /mob/living/simple_animal/hostile/gorilla
+	nonhuman_mobtype = /mob/living/danimal/hostile/gorilla
 
 /datum/preset_holoimage/corgi
-	nonhuman_mobtype = /mob/living/simple_animal/pet/dog/corgi
+	nonhuman_mobtype = /mob/living/danimal/pet/dog/corgi

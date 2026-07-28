@@ -402,11 +402,11 @@
 	return M.should_stop_playing(user)
 
 /datum/song/holoparasite
-	var/mob/living/simple_animal/hostile/guardian/stand
+	var/mob/living/danimal/hostile/guardian/stand
 
 /datum/song/holoparasite/New(atom/parent, list/instrument_ids)
 	. = ..()
-	stand = istype(parent, /mob/living/simple_animal/hostile/guardian) && parent
+	stand = istype(parent, /mob/living/danimal/hostile/guardian) && parent
 
 /datum/song/holoparasite/updateDialog()
 	stand.ui_interact(src)

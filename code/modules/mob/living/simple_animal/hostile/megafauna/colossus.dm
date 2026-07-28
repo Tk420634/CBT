@@ -21,7 +21,7 @@ Difficulty: Very Hard
 
 */
 
-/mob/living/simple_animal/hostile/megafauna/colossus
+/mob/living/danimal/hostile/megafauna/colossus
 	name = "colossus"
 	desc = "A monstrous creature protected by heavy shielding."
 	health = 2500
@@ -40,7 +40,7 @@ Difficulty: Very Hard
 	melee_damage_upper = 40
 	speed = 1
 	move_to_delay = 10
-	ranged = 1
+	can_ranged_attack = TRUE
 	pixel_x = -32
 	del_on_death = 1
 	medal_type = BOSS_MEDAL_COLOSSUS
@@ -52,19 +52,19 @@ Difficulty: Very Hard
 	death_sound = 'sound/magic/demon_dies.ogg'
 
 /*
-/mob/living/simple_animal/hostile/megafauna/colossus/devour(mob/living/L)
+/mob/living/danimal/hostile/megafauna/colossus/devour(mob/living/L)
 	visible_message(span_colossus("[src] disintegrates [L]!"))
 	L.dust()
 */
 
-/mob/living/simple_animal/hostile/megafauna/colossus/OpenFire()
+/mob/living/danimal/hostile/megafauna/colossus/OpenFire()
 	anger_modifier = clamp(((maxHealth - health)/50),0,20)
-	ranged_cooldown = world.time + 120
+	ranged_attack_delay = world.time + 120
 
 	if(enrage(get_target()))
 		if(move_to_delay == initial(move_to_delay))
 			visible_message("<span class='colossus'>\"<b>You can't dodge.</b>\"</span>")
-		ranged_cooldown = world.time + 30
+		ranged_attack_delay = world.time + 30
 		telegraph()
 		dir_shots(GLOB.alldirs)
 		move_to_delay = 3
@@ -82,18 +82,18 @@ Difficulty: Very Hard
 			INVOKE_ASYNC(src,PROC_REF(spiral_shoot), pick(TRUE, FALSE))
 
 	else if(prob(20))
-		ranged_cooldown = world.time + 2
+		ranged_attack_delay = world.time + 2
 		random_shots()
 	else
 		if(prob(70))
-			ranged_cooldown = world.time + 10
+			ranged_attack_delay = world.time + 10
 			blast()
 		else
-			ranged_cooldown = world.time + 20
+			ranged_attack_delay = world.time + 20
 			INVOKE_ASYNC(src,PROC_REF(alternating_dir_shots))
 
 
-/mob/living/simple_animal/hostile/megafauna/colossus/Initialize()
+/mob/living/danimal/hostile/megafauna/colossus/Initialize()
 	. = ..()
 	internal = new/obj/item/gps/internal/colossus(src)
 
@@ -112,7 +112,7 @@ Difficulty: Very Hard
 	target = new_target
 	INVOKE_ASYNC(src, /atom/movable/proc/orbit, target, 0, FALSE, 0, 0, FALSE, TRUE)
 
-/mob/living/simple_animal/hostile/megafauna/colossus/bullet_act(obj/item/projectile/P)
+/mob/living/danimal/hostile/megafauna/colossus/bullet_act(obj/item/projectile/P)
 	if(!stat)
 		var/obj/effect/temp_visual/at_shield/AT = new /obj/effect/temp_visual/at_shield(loc, src)
 		var/random_x = rand(-32, 32)
@@ -122,14 +122,14 @@ Difficulty: Very Hard
 		AT.pixel_y += random_y
 	return ..()
 
-/mob/living/simple_animal/hostile/megafauna/colossus/proc/enrage(mob/living/L)
+/mob/living/danimal/hostile/megafauna/colossus/proc/enrage(mob/living/L)
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
 		if(H.mind)
 			if(istype(H.mind.martial_art, /datum/martial_art/the_sleeping_carp) & istype(H.mind.martial_art, /datum/martial_art/the_rising_bass))
 				. = TRUE
 
-/mob/living/simple_animal/hostile/megafauna/colossus/proc/alternating_dir_shots()
+/mob/living/danimal/hostile/megafauna/colossus/proc/alternating_dir_shots()
 	dir_shots(GLOB.diagonals)
 	sleep(10)
 	dir_shots(GLOB.cardinals)
@@ -138,14 +138,14 @@ Difficulty: Very Hard
 	sleep(10)
 	dir_shots(GLOB.cardinals)
 
-/mob/living/simple_animal/hostile/megafauna/colossus/proc/double_spiral()
+/mob/living/danimal/hostile/megafauna/colossus/proc/double_spiral()
 	visible_message("<span class='colossus'>\"<b>Die.</b>\"</span>")
 
 	sleep(10)
 	INVOKE_ASYNC(src,PROC_REF(spiral_shoot))
 	INVOKE_ASYNC(src,PROC_REF(spiral_shoot), TRUE)
 
-/mob/living/simple_animal/hostile/megafauna/colossus/proc/spiral_shoot(negative = FALSE, counter_start = 8)
+/mob/living/danimal/hostile/megafauna/colossus/proc/spiral_shoot(negative = FALSE, counter_start = 8)
 	var/turf/start_turf = get_step(src, pick(GLOB.alldirs))
 	var/counter = counter_start
 	for(var/i in 1 to 80)
@@ -161,7 +161,7 @@ Difficulty: Very Hard
 		playsound(get_turf(src), 'sound/magic/clockwork/invoke_general.ogg', 20, 1)
 		sleep(1)
 
-/mob/living/simple_animal/hostile/megafauna/colossus/proc/shoot_projectile(turf/marker, set_angle)
+/mob/living/danimal/hostile/megafauna/colossus/proc/shoot_projectile(turf/marker, set_angle)
 	if(!isnum(set_angle) && (!marker || marker == loc))
 		return
 	var/turf/startloc = get_turf(src)
@@ -173,14 +173,14 @@ Difficulty: Very Hard
 		P.original = my_target
 	P.fire(set_angle)
 
-/mob/living/simple_animal/hostile/megafauna/colossus/proc/random_shots()
+/mob/living/danimal/hostile/megafauna/colossus/proc/random_shots()
 	var/turf/U = get_turf(src)
 	playsound(U, 'sound/magic/clockwork/invoke_general.ogg', 300, 1, 5)
 	for(var/T in RANGE_TURFS(12, U) - U)
 		if(prob(5))
 			shoot_projectile(T)
 
-/mob/living/simple_animal/hostile/megafauna/colossus/proc/blast(set_angle)
+/mob/living/danimal/hostile/megafauna/colossus/proc/blast(set_angle)
 	var/turf/target_turf = get_turf(get_target())
 	playsound(src, 'sound/magic/clockwork/invoke_general.ogg', 200, 1, 2)
 	newtonian_move(get_dir(target_turf, src))
@@ -191,7 +191,7 @@ Difficulty: Very Hard
 	for(var/i in colossus_shotgun_shot_angles)
 		shoot_projectile(target_turf, angle_to_target + i)
 
-/mob/living/simple_animal/hostile/megafauna/colossus/proc/dir_shots(list/dirs)
+/mob/living/danimal/hostile/megafauna/colossus/proc/dir_shots(list/dirs)
 	if(!islist(dirs))
 		dirs = GLOB.alldirs.Copy()
 	playsound(src, 'sound/magic/clockwork/invoke_general.ogg', 200, 1, 2)
@@ -199,7 +199,7 @@ Difficulty: Very Hard
 		var/turf/E = get_step(src, d)
 		shoot_projectile(E)
 
-/mob/living/simple_animal/hostile/megafauna/colossus/proc/telegraph()
+/mob/living/danimal/hostile/megafauna/colossus/proc/telegraph()
 	for(var/mob/M in range(10,src))
 		if(M.client)
 			flash_color(M.client, "#C80000", 1)
@@ -442,7 +442,7 @@ Difficulty: Very Hard
 		if("lavaland")//Depressurizes the place... and free cult metal, I guess.
 			NewTerrainFloors = /turf/open/floor/grass/snow/basalt
 			NewTerrainWalls = /turf/closed/wall/mineral/cult
-			NewFlora = list(/mob/living/simple_animal/hostile/asteroid/goldgrub)
+			NewFlora = list(/mob/living/danimal/hostile/asteroid/goldgrub)
 			florachance = 1
 		if("winter") //Snow terrain is slow to move in and cold! Get the assistants to shovel your driveway.
 			NewTerrainFloors = /turf/open/floor/grass/snow
@@ -571,7 +571,7 @@ Difficulty: Very Hard
 			return FALSE
 		var/be_helper = alert("Become a Lightgeist? (Warning, You can no longer be cloned!)",,"Yes","No")
 		if(be_helper == "Yes" && !QDELETED(src) && isobserver(user))
-			var/mob/living/simple_animal/hostile/lightgeist/W = new /mob/living/simple_animal/hostile/lightgeist(get_turf(loc))
+			var/mob/living/danimal/hostile/lightgeist/W = new /mob/living/danimal/hostile/lightgeist(get_turf(loc))
 			user.transfer_ckey(W, FALSE)
 
 
@@ -581,7 +581,7 @@ Difficulty: Very Hard
 		if(istype(ghost))
 			attack_ghost(ghost)
 
-/mob/living/simple_animal/hostile/lightgeist
+/mob/living/danimal/hostile/lightgeist
 	name = "lightgeist"
 	desc = "This small floating creature is a completely unknown form of life... being near it fills you with a sense of tranquility."
 	icon_state = "lightgeist"
@@ -597,7 +597,6 @@ Difficulty: Very Hard
 	speak_emote = list("oscillates")
 	maxHealth = 2
 	health = 2
-	harm_intent_damage = 1
 	friendly_verb_continuous = "mends"
 	friendly_verb_simple = "mend"
 	density = FALSE
@@ -621,17 +620,17 @@ Difficulty: Very Hard
 	obj_damage = 0
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	AIStatus = AI_OFF
-	stop_automated_movement = 1
+	stop_wandering = 1
 	var/heal_power = 5
 
-/mob/living/simple_animal/hostile/lightgeist/Initialize()
+/mob/living/danimal/hostile/lightgeist/Initialize()
 	. = ..()
 	remove_verb(src, /mob/living/verb/pulled)
 	remove_verb(src, /mob/verb/me_verb)
 	var/datum/atom_hud/medsensor = GLOB.huds[DATA_HUD_MEDICAL_ADVANCED]
 	medsensor.add_hud_to(src)
 
-/mob/living/simple_animal/hostile/lightgeist/AttackingTarget()
+/mob/living/danimal/hostile/lightgeist/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(isliving(my_target) && my_target != src)
@@ -640,7 +639,7 @@ Difficulty: Very Hard
 			L.heal_overall_damage(heal_power, heal_power)
 			new /obj/effect/temp_visual/heal(get_turf(my_target), "#80F5FF")
 
-/mob/living/simple_animal/hostile/lightgeist/ghostize(can_reenter_corpse = TRUE, special = FALSE, penalize = FALSE, voluntary = FALSE)
+/mob/living/danimal/hostile/lightgeist/ghostize(can_reenter_corpse = TRUE, special = FALSE, penalize = FALSE, voluntary = FALSE)
 	. = ..()
 	if(.)
 		death()
@@ -676,7 +675,7 @@ Difficulty: Very Hard
 	if(..())
 		if(ishuman(user))
 			var/mobcheck = 0
-			for(var/mob/living/simple_animal/A in range(1, src))
+			for(var/mob/living/danimal/A in range(1, src))
 				if(A.melee_damage_upper > 5 || A.mob_size >= MOB_SIZE_LARGE || A.ckey || A.stat)
 					break
 				var/obj/structure/closet/stasis/S = new /obj/structure/closet/stasis(A)
@@ -684,7 +683,7 @@ Difficulty: Very Hard
 				mobcheck = 1
 				break
 			if(!mobcheck)
-				new /mob/living/simple_animal/cockroach(get_step(src,dir)) //Just in case there aren't any animals on the station, this will leave you with a terrible option to possess if you feel like it
+				new /mob/living/danimal/cockroach(get_step(src,dir)) //Just in case there aren't any animals on the station, this will leave you with a terrible option to possess if you feel like it
 
 /obj/structure/closet/stasis
 	name = "quantum entanglement stasis warp field"
@@ -693,7 +692,7 @@ Difficulty: Very Hard
 	density = TRUE
 	anchored = TRUE
 	resistance_flags = FIRE_PROOF | ACID_PROOF | INDESTRUCTIBLE
-	var/mob/living/simple_animal/holder_animal
+	var/mob/living/danimal/holder_animal
 
 /obj/structure/closet/stasis/process()
 	if(holder_animal)

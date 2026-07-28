@@ -206,52 +206,52 @@
 	if((z in ABOVE_GROUND_Z_LEVELS) && prob(85))
 		items = alt_spawn
 		if(prob(15))
-			for(var/mob/living/simple_animal/hostile/rat/skitter/ratty in items)
+			for(var/mob/living/danimal/hostile/rat/skitter/ratty in items)
 				items -= ratty
-				items += /mob/living/simple_animal/hostile/rat/skitter/curious
+				items += /mob/living/danimal/hostile/rat/skitter/curious
 				break
 	..()
 
 /obj/effect/spawner/bundle/mobs/rat/one
 	name = "one rat spawner"
 	items = list(
-		/mob/living/simple_animal/hostile/rat
+		/mob/living/danimal/hostile/rat
 	)
 	alt_spawn = list(
-		/mob/living/simple_animal/hostile/rat/skitter
+		/mob/living/danimal/hostile/rat/skitter
 	)
 
 /obj/effect/spawner/bundle/mobs/rat/three
 	name = "three rat spawner"
 	items = list(
-		/mob/living/simple_animal/hostile/rat,
-		/mob/living/simple_animal/hostile/rat,
-		/mob/living/simple_animal/hostile/rat,
+		/mob/living/danimal/hostile/rat,
+		/mob/living/danimal/hostile/rat,
+		/mob/living/danimal/hostile/rat,
 	)
 	alt_spawn = list(
-		/mob/living/simple_animal/hostile/rat/skitter,
-		/mob/living/simple_animal/hostile/rat/skitter,
-		/mob/living/simple_animal/hostile/rat/skitter,
+		/mob/living/danimal/hostile/rat/skitter,
+		/mob/living/danimal/hostile/rat/skitter,
+		/mob/living/danimal/hostile/rat/skitter,
 	)
 
 /obj/effect/spawner/bundle/mobs/rat/five //"""five"""
 	name = "five rat spawner"
 	items = list(
-		/mob/living/simple_animal/hostile/rat,
-		/mob/living/simple_animal/hostile/rat,
-		/mob/living/simple_animal/hostile/rat,
+		/mob/living/danimal/hostile/rat,
+		/mob/living/danimal/hostile/rat,
+		/mob/living/danimal/hostile/rat,
 	)
 	alt_spawn = list(
-		/mob/living/simple_animal/hostile/rat/skitter,
-		/mob/living/simple_animal/hostile/rat/skitter,
-		/mob/living/simple_animal/hostile/rat/skitter,
+		/mob/living/danimal/hostile/rat/skitter,
+		/mob/living/danimal/hostile/rat/skitter,
+		/mob/living/danimal/hostile/rat/skitter,
 	)
 
 /obj/effect/spawner/bundle/mobs/rat/actually_a_aethergiest //hackjob at making a aethergiest spawn instead of rat
 	name = "one totally normal rat spawner"
 	items = list(
-		/mob/living/simple_animal/hostile/aethergiest
+		/mob/living/danimal/hostile/aethergiest
 	)
 	alt_spawn = list(
-		/mob/living/simple_animal/hostile/aethergiest
+		/mob/living/danimal/hostile/aethergiest
 	)

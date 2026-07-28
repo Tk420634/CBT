@@ -29,7 +29,7 @@
 
 /obj/item/katana/goldbrand/process()
 	ourmegafauna = list()
-	for(var/mob/living/simple_animal/hostile/megafauna/M in GLOB.mob_living_list)
+	for(var/mob/living/danimal/hostile/megafauna/M in GLOB.mob_living_list)
 		if(M.stat != DEAD)
 			ourmegafauna |= M
 	if(!length(ourmegafauna))
@@ -77,12 +77,12 @@
 
 /obj/effect/wrath/proc/updatemegalist()
 	megalist = list()
-	for(var/mob/living/simple_animal/hostile/megafauna/M in GLOB.mob_living_list)
+	for(var/mob/living/danimal/hostile/megafauna/M in GLOB.mob_living_list)
 		megalist += M.name
 
 /obj/effect/wrath/CanPass(atom/movable/mover, turf/target)
 	cmegalist = list() //clears the list to not cause problems.
-	for(var/mob/living/simple_animal/hostile/megafauna/M in GLOB.mob_living_list)
+	for(var/mob/living/danimal/hostile/megafauna/M in GLOB.mob_living_list)
 		cmegalist += M
 	if(ishuman(mover))
 		var/mob/living/carbon/human/H = mover

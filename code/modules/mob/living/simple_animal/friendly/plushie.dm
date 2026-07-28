@@ -1,5 +1,5 @@
 //simplemob plushie that can be controlled by players
-/mob/living/simple_animal/pet/plushie
+/mob/living/danimal/pet/plushie
 	name = "Plushie"
 	desc = "A living plushie!"
 	icon = 'icons/obj/plushes.dmi'
@@ -26,11 +26,11 @@
 	attack_verb_simple = "squeak"
 	deathmessage = "lets out a faint squeak as the glint in its eyes disappears"
 	footstep_type = FOOTSTEP_MOB_BAREFOOT
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 0
 	pressure_resistance = 200
 
-/mob/living/simple_animal/pet/plushie/ComponentInitialize()
+/mob/living/danimal/pet/plushie/ComponentInitialize()
 	. = ..()
 	AddElement(/datum/element/mob_holder, "plushie")
 
@@ -51,7 +51,7 @@
 		to_chat(user, span_userdanger("You hug the strange plushie. You fool."))
 
 		//setup the mob
-		var/mob/living/simple_animal/pet/plushie/new_plushie = new /mob/living/simple_animal/pet/plushie/(user.loc)
+		var/mob/living/danimal/pet/plushie/new_plushie = new /mob/living/danimal/pet/plushie/(user.loc)
 		new_plushie.icon = src.icon
 		new_plushie.icon_living = src.icon_state
 		new_plushie.icon_dead = src.icon_state
@@ -72,7 +72,7 @@
 		qdel(src)
 
 //low regen over time
-/mob/living/simple_animal/pet/plushie/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/pet/plushie/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if(health < maxHealth)

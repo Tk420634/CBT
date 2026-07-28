@@ -1,4 +1,4 @@
-/mob/living/simple_animal/sloth
+/mob/living/danimal/sloth
 	name = "sloth"
 	desc = "An adorable, sleepy creature."
 	icon = 'icons/mob/pets.dmi'
@@ -28,19 +28,19 @@
 	glide_size = 2
 	footstep_type = FOOTSTEP_MOB_CLAW
 
-/mob/living/simple_animal/pet/sloth/ComponentInitialize()
+/mob/living/danimal/pet/sloth/ComponentInitialize()
 	. = ..()
 	AddElement(/datum/element/mob_holder, "sloth") //finally oranges can be held
 
 //Cargo Sloth
-/mob/living/simple_animal/sloth/paperwork
+/mob/living/danimal/sloth/paperwork
 	name = "Paperwork"
 	desc = "Cargo's pet sloth. About as useful as the rest of the techs."
 	gold_core_spawnable = NO_SPAWN
 
 //Cargo Sloth 2
 
-/mob/living/simple_animal/sloth/citrus
+/mob/living/danimal/sloth/citrus
 	name = "Citrus"
 	desc = "Cargo's pet sloth. She's dressed in a horrible sweater."
 	icon_state = "cool_sloth"

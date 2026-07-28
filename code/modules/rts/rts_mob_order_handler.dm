@@ -33,11 +33,11 @@
  * 
  */
 #define MOB_MASTER \
-	var/mob/living/simple_animal/master = GET_WEAKREF(my_mob);\
+	var/mob/living/danimal/master = GET_WEAKREF(my_mob);\
 	if(!istype(master)){return}
 
 #define HOSTILE_MASTER \
-	var/mob/living/simple_animal/hostile/hosmaster = GET_WEAKREF(my_mob);\
+	var/mob/living/danimal/hostile/hosmaster = GET_WEAKREF(my_mob);\
 	if(!istype(hosmaster)){return}
 
 #define RTS_DISPOSITION_NORMAL 0
@@ -65,11 +65,11 @@
 	var/move_state = RTS_MOVE_STATE_NORMAL
 	var/target_mode = RTS_TARGET_MODE_NONE
 
-/datum/rts_mob_order_handler/New(mob/living/simple_animal/my_mob)
+/datum/rts_mob_order_handler/New(mob/living/danimal/my_mob)
 	if(!my_mob)
 		qdel(src)
 		CRASH("rts_mob_order_handler.New() called with no mob. Whyyyyy")
-	if(!istype(my_mob, /mob/living/simple_animal))
+	if(!istype(my_mob, /mob/living/danimal))
 		qdel(src)
 		CRASH("rts_mob_order_handler can't handle non-simple_animal mobs!")
 	src.my_mob = WEAKREF(my_mob)
@@ -80,7 +80,7 @@
 	SetMovementTarget(targettte)
 	SetTargetLockout()
 	StartMoveing()
-	ClearFrustration()
+	reset_frustration()
 
 /datum/rts_mob_order_handler/proc/SetMovementTarget(atom/movement_target)
 	movement_target = GET_WEAKREF(movement_target)
@@ -106,18 +106,18 @@
 /datum/rts_mob_order_handler/proc/IsLockedOut()
 	return world.time < ignore_simplemobs_until
 
-/datum/rts_mob_order_handler/proc/ClearFrustration()
+/datum/rts_mob_order_handler/proc/reset_frustration()
 	move_frustration = 0
 	last_move_frustration = world.time
 
 /datum/rts_mob_order_handler/proc/CheckFrustration()
 	if(!last_coords || !movement_target)
-		ClearFrustration()
+		reset_frustration()
 		return
 	MOB_MASTER
 	var/atom/dest = GET_WEAKREF(movement_target)
 	if(!dest)
-		ClearFrustration()
+		reset_frustration()
 		return
 	var/distance = get_dist(master, dest)
 	if(distance >= last_dist_to_target)
@@ -125,7 +125,7 @@
 		return
 	var/atom/last = coords2turf(last_coords)
 	if(!last)
-		ClearFrustration()
+		reset_frustration()
 		return
 	var/dist2 = get_dist(master, last)
 	if(dist2 <= 1)
@@ -164,7 +164,7 @@
 		// first check if we should still be frustrated
 		if(world.time >= frustration_end)
 			move_state = RTS_MOVE_STATE_NORMAL
-			ClearFrustration()
+			reset_frustration()
 			StartMoveing()
 
 /// handles openfiring on a target

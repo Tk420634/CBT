@@ -1,4 +1,4 @@
-/mob/living/simple_animal/bot/secbot
+/mob/living/danimal/bot/secbot
 	name = "\improper Securitron"
 	desc = "A little security robot.  He looks less than thrilled."
 	icon = 'icons/mob/aibots.dmi'
@@ -47,23 +47,23 @@
 	var/list/arrest_texts = list("Detaining", "Arresting")
 	var/arrest_emote = "ARREST_TYPE level THREAT_LEVEL scumbag CRIMINAL in LOCATION."
 
-/mob/living/simple_animal/bot/secbot/beepsky
+/mob/living/danimal/bot/secbot/beepsky
 	name = "Officer Beep O'sky"
 	desc = "It's Officer Beep O'sky! Powered by a potato and a shot of whiskey."
 	idcheck = FALSE
 	weaponscheck = FALSE
 	auto_patrol = TRUE
 
-/mob/living/simple_animal/bot/secbot/beepsky/jr
+/mob/living/danimal/bot/secbot/beepsky/jr
 	name = "Officer Pipsqueak"
 	desc = "It's Officer Beep O'sky's smaller, just-as aggressive cousin, Pipsqueak."
 
-/mob/living/simple_animal/bot/secbot/beepsky/jr/Initialize()
+/mob/living/danimal/bot/secbot/beepsky/jr/Initialize()
 	. = ..()
 	resize = 0.8
 	update_transform()
 
-/mob/living/simple_animal/bot/secbot/proc/process_emote(emote_type, atom/criminal, threat, arrest = -1, location)
+/mob/living/danimal/bot/secbot/proc/process_emote(emote_type, atom/criminal, threat, arrest = -1, location)
 	var/emote = "The continuity of space itself collapses around [src]. You should probably report that to someone higher up."
 	switch(emote_type)
 		if("DEATH")
@@ -98,7 +98,7 @@
 		emote = replacetext(emote, "LOCATION", location)
 	return emote
 
-/mob/living/simple_animal/bot/secbot/proc/apply_fashion(datum/beepsky_fashion/fashion)
+/mob/living/danimal/bot/secbot/proc/apply_fashion(datum/beepsky_fashion/fashion)
 	stored_fashion = new fashion
 	if(stored_fashion.name)
 		name = stored_fashion.name
@@ -141,7 +141,7 @@
 
 	regenerate_icons()
 
-/mob/living/simple_animal/bot/secbot/proc/reset_fashion()
+/mob/living/danimal/bot/secbot/proc/reset_fashion()
 	bot_accessory.forceMove(get_turf(src))
 	//reset all emotes/sounds and name/desc
 	name = initial(name)
@@ -161,7 +161,7 @@
 	bot_accessory = null
 	regenerate_icons()
 
-/mob/living/simple_animal/bot/secbot/beepsky/explode()
+/mob/living/danimal/bot/secbot/beepsky/explode()
 	var/atom/Tsec = drop_location()
 	new /obj/item/stock_parts/cell/potato(Tsec)
 	var/obj/item/reagent_containers/food/drinks/drinkingglass/shotglass/S = new(Tsec)
@@ -169,12 +169,12 @@
 	S.on_reagent_change(ADD_REAGENT)
 	..()
 
-/mob/living/simple_animal/bot/secbot/pingsky
+/mob/living/danimal/bot/secbot/pingsky
 	name = "Officer Pingsky"
 	desc = "It's Officer Pingsky! Delegated to satellite guard duty for harbouring anti-human sentiment."
 	radio_channel = RADIO_CHANNEL_AI_PRIVATE
 
-/mob/living/simple_animal/bot/secbot/Initialize()
+/mob/living/danimal/bot/secbot/Initialize()
 	. = ..()
 	update_icon()
 	var/datum/job/detective/J = new/datum/job/detective
@@ -185,17 +185,17 @@
 	var/datum/atom_hud/secsensor = GLOB.huds[DATA_HUD_SECURITY_ADVANCED]
 	secsensor.add_hud_to(src)
 
-/mob/living/simple_animal/bot/secbot/update_icon()
+/mob/living/danimal/bot/secbot/update_icon()
 	if(mode == BOT_HUNT)
 		icon_state = "[initial(icon_state)]-c"
 		return
 	..()
 
-/mob/living/simple_animal/bot/secbot/turn_off()
+/mob/living/danimal/bot/secbot/turn_off()
 	..()
 	mode = BOT_IDLE
 
-/mob/living/simple_animal/bot/secbot/bot_reset()
+/mob/living/danimal/bot/secbot/bot_reset()
 	..()
 	target = null
 	oldtarget_name = null
@@ -203,13 +203,13 @@
 	walk_to(src,0)
 	last_found = world.time
 
-/mob/living/simple_animal/bot/secbot/set_custom_texts()
+/mob/living/danimal/bot/secbot/set_custom_texts()
 
 	text_hack = "You overload [name]'s target identification system."
 	text_dehack = "You reboot [name] and restore the target identification."
 	text_dehack_fail = "[name] refuses to accept your authority!"
 
-/mob/living/simple_animal/bot/secbot/get_controls(mob/user)
+/mob/living/danimal/bot/secbot/get_controls(mob/user)
 	var/dat
 	dat += hack(user)
 	dat += showpai(user)
@@ -239,7 +239,7 @@ Auto Patrol: []"},
 
 	return	dat
 
-/mob/living/simple_animal/bot/secbot/Topic(href, href_list)
+/mob/living/danimal/bot/secbot/Topic(href, href_list)
 	if(..())
 		return 1
 	if(!hasSiliconAccessInArea(usr) && !IsAdminGhost(usr) && !(bot_core.allowed(usr) || !locked))
@@ -261,7 +261,7 @@ Auto Patrol: []"},
 			declare_arrests = !declare_arrests
 			update_controls()
 
-/mob/living/simple_animal/bot/secbot/proc/retaliate(mob/living/carbon/human/H)
+/mob/living/danimal/bot/secbot/proc/retaliate(mob/living/carbon/human/H)
 	var/judgement_criteria = judgement_criteria()
 	threatlevel = H.assess_threat(judgement_criteria, weaponcheck=CALLBACK(src,PROC_REF(check_for_weapons)))
 	threatlevel += 6
@@ -269,7 +269,7 @@ Auto Patrol: []"},
 		target = H
 		mode = BOT_HUNT
 
-/mob/living/simple_animal/bot/secbot/proc/judgement_criteria()
+/mob/living/danimal/bot/secbot/proc/judgement_criteria()
 	var/final = FALSE
 	if(idcheck)
 		final = final|JUDGE_IDCHECK
@@ -281,10 +281,10 @@ Auto Patrol: []"},
 		final = final|JUDGE_EMAGGED
 	return final
 
-/mob/living/simple_animal/bot/secbot/proc/special_retaliate_after_attack(mob/user) //allows special actions to take place after being attacked.
+/mob/living/danimal/bot/secbot/proc/special_retaliate_after_attack(mob/user) //allows special actions to take place after being attacked.
 	return
 
-/mob/living/simple_animal/bot/secbot/on_attack_hand(mob/living/carbon/human/H)
+/mob/living/danimal/bot/secbot/on_attack_hand(mob/living/carbon/human/H)
 	if((H.a_intent == INTENT_HARM) || (H.a_intent == INTENT_DISARM))
 		retaliate(H)
 		if(special_retaliate_after_attack(H))
@@ -297,7 +297,7 @@ Auto Patrol: []"},
 
 	return ..()
 
-/mob/living/simple_animal/bot/secbot/attackby(obj/item/W, mob/user, params)
+/mob/living/danimal/bot/secbot/attackby(obj/item/W, mob/user, params)
 	..()
 	if(istype(W, /obj/item/weldingtool) && user.a_intent != INTENT_HARM) // Any intent but harm will heal, so we shouldn't get angry.
 		return
@@ -309,7 +309,7 @@ Auto Patrol: []"},
 		if(special_retaliate_after_attack(user))
 			return
 
-/mob/living/simple_animal/bot/secbot/proc/attempt_place_on_head(mob/user, obj/item/clothing/head/H)
+/mob/living/danimal/bot/secbot/proc/attempt_place_on_head(mob/user, obj/item/clothing/head/H)
 	if(user && !user.temporarilyRemoveItemFromInventory(H))
 		to_chat(user, span_warning("\The [H] is stuck to your hand, you cannot put it on [src]'s head!"))
 		return
@@ -326,7 +326,7 @@ Auto Patrol: []"},
 		to_chat(user, span_warning("You set [H] on [src]'s head, but it falls off!"))
 		H.forceMove(drop_location())
 
-/mob/living/simple_animal/bot/secbot/regenerate_icons()
+/mob/living/danimal/bot/secbot/regenerate_icons()
 	..()
 	if(bot_accessory)
 		if(!stored_fashion)
@@ -343,7 +343,7 @@ Auto Patrol: []"},
 			cut_overlay(stored_fashion.get_overlay())
 			stored_fashion = null
 
-/mob/living/simple_animal/bot/secbot/emag_act(mob/user)
+/mob/living/danimal/bot/secbot/emag_act(mob/user)
 	. = ..()
 	if(emagged == 2)
 		if(user)
@@ -353,7 +353,7 @@ Auto Patrol: []"},
 		declare_arrests = FALSE
 		update_icon()
 
-/mob/living/simple_animal/bot/secbot/bullet_act(obj/item/projectile/Proj)
+/mob/living/danimal/bot/secbot/bullet_act(obj/item/projectile/Proj)
 	if(istype(Proj , /obj/item/projectile/beam)||istype(Proj, /obj/item/projectile/bullet))
 		if((Proj.damage_type == BURN) || (Proj.damage_type == BRUTE))
 			if(!Proj.nodamage && Proj.damage < src.health && ishuman(Proj.firer))
@@ -361,7 +361,7 @@ Auto Patrol: []"},
 	return ..()
 
 
-/mob/living/simple_animal/bot/secbot/UnarmedAttack(atom/A, proximity, intent = a_intent, flags = NONE)
+/mob/living/danimal/bot/secbot/UnarmedAttack(atom/A, proximity, intent = a_intent, flags = NONE)
 	if(!on)
 		return
 	if(iscarbon(A))
@@ -374,7 +374,7 @@ Auto Patrol: []"},
 		..()
 
 
-/mob/living/simple_animal/bot/secbot/hitby(atom/movable/AM, skipcatch = FALSE, hitpush = TRUE, blocked = FALSE, datum/thrownthing/throwingdatum)
+/mob/living/danimal/bot/secbot/hitby(atom/movable/AM, skipcatch = FALSE, hitpush = TRUE, blocked = FALSE, datum/thrownthing/throwingdatum)
 	if(istype(AM, /obj/item))
 		var/obj/item/I = AM
 		if(I.throwforce < src.health && I.thrownby && ishuman(I.thrownby))
@@ -383,7 +383,7 @@ Auto Patrol: []"},
 	..()
 
 
-/mob/living/simple_animal/bot/secbot/proc/cuff(mob/living/carbon/C)
+/mob/living/danimal/bot/secbot/proc/cuff(mob/living/carbon/C)
 	mode = BOT_ARREST
 	playsound(src, 'sound/weapons/cablecuff.ogg', 30, TRUE, -2)
 	C.visible_message(span_danger("[process_emote("CAPTURE_ONE", C)]"),\
@@ -391,7 +391,7 @@ Auto Patrol: []"},
 	if(do_after(src, 60, FALSE, C))
 		attempt_handcuff(C)
 
-/mob/living/simple_animal/bot/secbot/proc/attempt_handcuff(mob/living/carbon/C)
+/mob/living/danimal/bot/secbot/proc/attempt_handcuff(mob/living/carbon/C)
 	if (!on)
 		return
 	if(!C.handcuffed)
@@ -400,7 +400,7 @@ Auto Patrol: []"},
 		playsound(src, "law", 50, 0)
 		back_to_idle()
 
-/mob/living/simple_animal/bot/secbot/proc/stun_attack(mob/living/carbon/C)
+/mob/living/danimal/bot/secbot/proc/stun_attack(mob/living/carbon/C)
 	var/judgement_criteria = judgement_criteria()
 	icon_state = "secbot-c"
 	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom/,update_icon)), 2)
@@ -429,7 +429,7 @@ Auto Patrol: []"},
 	C.visible_message(span_danger("[process_emote("ATTACK_ONE", C)]"),\
 							span_userdanger("[process_emote("ATTACK_TWO", C)]"))
 
-/mob/living/simple_animal/bot/secbot/handle_automated_action()
+/mob/living/danimal/bot/secbot/handle_automated_action()
 	if(!..())
 		return
 
@@ -516,7 +516,7 @@ Auto Patrol: []"},
 
 	return
 
-/mob/living/simple_animal/bot/secbot/proc/back_to_idle()
+/mob/living/danimal/bot/secbot/proc/back_to_idle()
 	anchored = FALSE
 	mode = BOT_IDLE
 	target = null
@@ -524,14 +524,14 @@ Auto Patrol: []"},
 	frustration = 0
 	INVOKE_ASYNC(src,PROC_REF(handle_automated_action))
 
-/mob/living/simple_animal/bot/secbot/proc/back_to_hunt()
+/mob/living/danimal/bot/secbot/proc/back_to_hunt()
 	anchored = FALSE
 	frustration = 0
 	mode = BOT_HUNT
 	INVOKE_ASYNC(src,PROC_REF(handle_automated_action))
 // look for a criminal in view of the bot
 
-/mob/living/simple_animal/bot/secbot/proc/look_for_perp()
+/mob/living/danimal/bot/secbot/proc/look_for_perp()
 	anchored = FALSE
 	var/judgement_criteria = judgement_criteria()
 	for (var/mob/living/carbon/C in view(7,src)) //Let's find us a criminal
@@ -558,12 +558,12 @@ Auto Patrol: []"},
 		else
 			continue
 
-/mob/living/simple_animal/bot/secbot/proc/check_for_weapons(obj/item/slot_item)
+/mob/living/danimal/bot/secbot/proc/check_for_weapons(obj/item/slot_item)
 	if(slot_item && (slot_item.item_flags & NEEDS_PERMIT))
 		return TRUE
 	return FALSE
 
-/mob/living/simple_animal/bot/secbot/explode()
+/mob/living/danimal/bot/secbot/explode()
 
 	walk_to(src,0)
 	visible_message(span_boldannounce("[process_emote("DEATH")]"))
@@ -584,13 +584,13 @@ Auto Patrol: []"},
 	new /obj/effect/decal/cleanable/oil(loc)
 	..()
 
-/mob/living/simple_animal/bot/secbot/attack_alien(mob/living/carbon/alien/user as mob)
+/mob/living/danimal/bot/secbot/attack_alien(mob/living/carbon/alien/user as mob)
 	..()
 	if(!isalien(target))
 		target = user
 		mode = BOT_HUNT
 
-/mob/living/simple_animal/bot/secbot/on_entered(atom/movable/AM)
+/mob/living/danimal/bot/secbot/on_entered(atom/movable/AM)
 	..()
 	if(has_gravity() && ismob(AM) && target)
 		var/mob/living/carbon/C = AM

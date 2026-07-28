@@ -280,12 +280,12 @@
 	qdel(src)
 
 /obj/effect/mob_spawn/slime
-	mob_type = 	/mob/living/simple_animal/slime
+	mob_type = 	/mob/living/danimal/slime
 	var/mobcolour = "grey"
 	icon = 'icons/mob/slimes.dmi'
 	icon_state = "grey baby slime" //sets the icon in the map editor
 
-/obj/effect/mob_spawn/slime/equip(mob/living/simple_animal/slime/S)
+/obj/effect/mob_spawn/slime/equip(mob/living/danimal/slime/S)
 	S.colour = mobcolour
 
 /obj/effect/mob_spawn/human/facehugger/create(ckey, name) //Creates a squashed facehugger
@@ -296,7 +296,7 @@
 
 /obj/effect/mob_spawn/mouse
 	name = "sleeper"
-	mob_type = 	/mob/living/simple_animal/mouse
+	mob_type = 	/mob/living/danimal/mouse
 	death = FALSE
 	roundstart = FALSE
 	job_description = "Mouse"
@@ -305,7 +305,7 @@
 
 /obj/effect/mob_spawn/cow
 	name = "sleeper"
-	mob_type = 	/mob/living/simple_animal/cow
+	mob_type = 	/mob/living/danimal/cow
 	death = FALSE
 	roundstart = FALSE
 	job_description = "Cow"

@@ -370,7 +370,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 					a.triggerAlarm("Power", src, cameras, source)
 
 			for (var/item in GLOB.drones_list)
-				var/mob/living/simple_animal/drone/D = item
+				var/mob/living/danimal/drone/D = item
 				if(state == 1)
 					D.cancelAlarm("Power", src, source)
 				else
@@ -393,7 +393,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 				var/obj/machinery/computer/station_alert/a = item
 				a.triggerAlarm("Atmosphere", src, cameras, source)
 			for (var/item in GLOB.drones_list)
-				var/mob/living/simple_animal/drone/D = item
+				var/mob/living/danimal/drone/D = item
 				D.triggerAlarm("Atmosphere", src, cameras, source)
 			for(var/item in GLOB.alarmdisplay)
 				var/datum/computer_file/program/alarm_monitor/p = item
@@ -407,7 +407,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 				var/obj/machinery/computer/station_alert/a = item
 				a.cancelAlarm("Atmosphere", src, source)
 			for (var/item in GLOB.drones_list)
-				var/mob/living/simple_animal/drone/D = item
+				var/mob/living/danimal/drone/D = item
 				D.cancelAlarm("Atmosphere", src, source)
 			for(var/item in GLOB.alarmdisplay)
 				var/datum/computer_file/program/alarm_monitor/p = item
@@ -453,7 +453,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 		var/mob/living/silicon/aiPlayer = item
 		aiPlayer.triggerAlarm("Fire", src, cameras, source)
 	for (var/item in GLOB.drones_list)
-		var/mob/living/simple_animal/drone/D = item
+		var/mob/living/danimal/drone/D = item
 		D.triggerAlarm("Fire", src, cameras, source)
 	for(var/item in GLOB.alarmdisplay)
 		var/datum/computer_file/program/alarm_monitor/p = item
@@ -473,7 +473,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 		var/obj/machinery/computer/station_alert/a = item
 		a.cancelAlarm("Fire", src, source)
 	for (var/item in GLOB.drones_list)
-		var/mob/living/simple_animal/drone/D = item
+		var/mob/living/danimal/drone/D = item
 		D.cancelAlarm("Fire", src, source)
 	for(var/item in GLOB.alarmdisplay)
 		var/datum/computer_file/program/alarm_monitor/p = item

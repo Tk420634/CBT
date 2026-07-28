@@ -11,7 +11,7 @@ SUBSYSTEM_DEF(npcpool)
 	flags = SS_POST_FIRE_TIMING|SS_NO_INIT|SS_BACKGROUND
 	priority = FIRE_PRIORITY_NPC
 	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
-	wait = (0.5 SECONDS)
+	wait = (0.1 SECONDS) // ZOOOOOOOM *cpu dies x.x
 
 	var/list/currentrun = list()
 
@@ -28,25 +28,29 @@ SUBSYSTEM_DEF(npcpool)
 		var/list/activelist = GLOB.simple_animals[AI_ON]
 		src.currentrun = activelist.Copy()
 
-	//cache for sanic speed (lists are references anyways)
+	//cache for sanic speed (lists are references anyways) // this line appears 24 times in 19 files!
 	var/list/currentrun = src.currentrun
 
 	while(currentrun.len)
-		var/mob/living/simple_animal/SA = currentrun[currentrun.len]
+		var/mob/living/danimal/SA = currentrun[currentrun.len]
 		--currentrun.len
 
 		if (QDELETED(SA)) // Some issue causes nulls to get into this list some times. This keeps it running, but the bug is still there.
 			GLOB.simple_animals[AI_ON] -= SA
 			stack_trace("Found a null in simple_animals active list [SA.type]!")
 			continue
-
-		if(!SA.ckey && !SA.mob_transforming)
-			if(SA.stat != DEAD)
-				SA.handle_automated_movement()
-			if(SA.stat != DEAD)
-				SA.handle_automated_action()
-			if(SA.stat != DEAD)
-				SA.handle_automated_speech()
+		if(SA.PreTick())
+			if(!SA.ckey && !SA.mob_transforming)
+				var/abort = FALSE
+				if(SA.stat != DEAD)
+					abort = SA.handle_automated_action() == "bad"
+					if(abort)
+						SA.Failed()
+				if(SA.stat != DEAD && !abort)
+					SA.handle_automated_movement()
+				if(SA.stat != DEAD && !abort)
+					SA.handle_automated_speech()
+			SA.PostTick()
 		if (MC_TICK_CHECK)
 			return
 	// for(var/ID in wander_attractors)
@@ -71,7 +75,7 @@ SUBSYSTEM_DEF(npcpool)
 		return
 	if(max_range <= 0)
 		return
-	for(var/mob/living/simple_animal/M in GLOB.simple_animals[AI_ON])
+	for(var/mob/living/danimal/M in GLOB.simple_animals[AI_ON])
 		if(!M.attractable)
 			continue
 		if(GET_DIST_EUCLIDEAN(M, doer) > max_range)
@@ -90,7 +94,7 @@ SUBSYSTEM_DEF(npcpool)
 	. = ..()
 
 /datum/wander_attractor/Destroy()
-	var/mob/living/simple_animal/SA = GET_WEAKREF(owner)
+	var/mob/living/danimal/SA = GET_WEAKREF(owner)
 	if(SA)
 		SA.InterruptAttractionMovement()
 		SA.current_attraction = null
@@ -104,7 +108,7 @@ SUBSYSTEM_DEF(npcpool)
 		target_y = T.y
 		target_z = T.z
 
-/datum/wander_attractor/proc/SetOwner(mob/living/simple_animal/SA)
+/datum/wander_attractor/proc/SetOwner(mob/living/danimal/SA)
 	owner = GET_WEAKREF(SA)
 
 /datum/wander_attractor/proc/SetupIntensity(atom/listener, intensity, max_distance)

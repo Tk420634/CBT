@@ -1,4 +1,4 @@
-/mob/living/simple_animal/pet
+/mob/living/danimal/pet
 	icon = 'icons/mob/pets.dmi'
 	mob_size = MOB_SIZE_SMALL
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
@@ -9,12 +9,12 @@
 	var/collar_type //if the mob has collar sprites, define them.
 	density = 0
 
-/mob/living/simple_animal/pet/handle_atom_del(atom/A)
+/mob/living/danimal/pet/handle_atom_del(atom/A)
 	if(A == pcollar)
 		pcollar = null
 	return ..()
 
-/mob/living/simple_animal/pet/proc/add_collar(obj/item/clothing/neck/petcollar/P, mob/user)
+/mob/living/danimal/pet/proc/add_collar(obj/item/clothing/neck/petcollar/P, mob/user)
 	if(QDELETED(P) || pcollar)
 		return
 	if(!user.transferItemToLoc(P, src))
@@ -25,7 +25,7 @@
 	if(P.tagname && !unique_pet)
 		fully_replace_character_name(null, "\proper [P.tagname]")
 
-/mob/living/simple_animal/pet/attackby(obj/item/O, mob/user, params)
+/mob/living/danimal/pet/attackby(obj/item/O, mob/user, params)
 	if(istype(O, /obj/item/clothing/neck/petcollar) && !pcollar && collar_type)
 		add_collar(O, user)
 		return
@@ -40,36 +40,36 @@
 	else
 		..()
 
-/mob/living/simple_animal/pet/Initialize()
+/mob/living/danimal/pet/Initialize()
 	. = ..()
 	if(pcollar)
 		pcollar = new(src)
 		regenerate_icons()
 
-/mob/living/simple_animal/pet/Destroy()
+/mob/living/danimal/pet/Destroy()
 	QDEL_NULL(pcollar)
 	return ..()
 
-/mob/living/simple_animal/pet/revive(full_heal = 0, admin_revive = 0)
+/mob/living/danimal/pet/revive(full_heal = 0, admin_revive = 0)
 	. = ..()
 	if(.)
 		if(collar_type)
 			collar_type = "[initial(collar_type)]"
 		regenerate_icons()
 
-/mob/living/simple_animal/pet/death(gibbed)
+/mob/living/danimal/pet/death(gibbed)
 	..(gibbed)
 	if(collar_type)
 		collar_type = "[initial(collar_type)]_dead"
 	regenerate_icons()
 
-/mob/living/simple_animal/pet/gib()
+/mob/living/danimal/pet/gib()
 	if(pcollar)
 		pcollar.forceMove(drop_location())
 		pcollar = null
 	..()
 
-/mob/living/simple_animal/pet/regenerate_icons()
+/mob/living/danimal/pet/regenerate_icons()
 	cut_overlays()
 	if(pcollar && collar_type)
 		add_overlay("[collar_type]collar")

@@ -1,5 +1,5 @@
 /datum/emote/gorilla
-	mob_type_allowed_typecache = /mob/living/simple_animal/hostile/gorilla
+	mob_type_allowed_typecache = /mob/living/danimal/hostile/gorilla
 
 /datum/emote/gorilla/ooga
 	key = "ooga"

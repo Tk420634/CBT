@@ -285,7 +285,7 @@
 			C.chosen_sting.try_to_sting(src,A)
 			return
 
-/mob/living/simple_animal/drone/MiddleClickOn(atom/A)
+/mob/living/danimal/drone/MiddleClickOn(atom/A)
 	swap_hand()
 
 // In case of use break glass

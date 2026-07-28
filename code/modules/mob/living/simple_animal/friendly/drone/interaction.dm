@@ -6,7 +6,7 @@
 //How the world interacts with drones
 
 
-/mob/living/simple_animal/drone/attack_drone(mob/living/simple_animal/drone/D)
+/mob/living/danimal/drone/attack_drone(mob/living/danimal/drone/D)
 	if(D != src && stat == DEAD)
 		var/d_input = alert(D,"Perform which action?","Drone Interaction","Reactivate","Cannibalize","Nothing")
 		if(d_input)
@@ -29,7 +29,7 @@
 				if("Nothing")
 					return
 
-/mob/living/simple_animal/drone/proc/try_reactivate(mob/living/user)
+/mob/living/danimal/drone/proc/try_reactivate(mob/living/user)
 	var/mob/dead/observer/G = get_ghost()
 	if(!client && (!G || !G.client))
 		var/list/faux_gadgets = list("hypertext inflator","failsafe directory","DRM switch","stack initializer",\
@@ -54,7 +54,7 @@
 		to_chat(user, span_warning("You need to remain still to reactivate [src]!"))
 
 
-/mob/living/simple_animal/drone/attackby(obj/item/I, mob/user)
+/mob/living/danimal/drone/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/screwdriver) && stat != DEAD)
 		if(health < maxHealth)
 			to_chat(user, span_notice("You start to tighten loose screws on [src]..."))
@@ -77,17 +77,17 @@
 	else
 		..()
 
-/mob/living/simple_animal/drone/getarmor(def_zone, type)
+/mob/living/danimal/drone/getarmor(def_zone, type)
 	var/armorval = 0
 
 	if(head)
 		armorval = head.armor.getRating(type)
 	return (armorval * get_armor_effectiveness()) //armor is reduced for tiny fragile drones
 
-/mob/living/simple_animal/drone/proc/get_armor_effectiveness()
+/mob/living/danimal/drone/proc/get_armor_effectiveness()
 	return 0 //multiplier for whatever head armor you wear as a drone
 
-/mob/living/simple_animal/drone/proc/update_drone_hack(hack, clockwork)
+/mob/living/danimal/drone/proc/update_drone_hack(hack, clockwork)
 	if(!istype(src) || !mind)
 		return
 	if(hack)
@@ -132,12 +132,12 @@
 		message_admins("[src] ([src.key]), a hacked drone, was restored to factory defaults!")
 	update_drone_icon()
 
-/mob/living/simple_animal/drone/proc/liberate()
+/mob/living/danimal/drone/proc/liberate()
 	// F R E E D R O N E
 	laws = "1. You are a Free Drone."
 	to_chat(src, laws)
 
-/mob/living/simple_animal/drone/proc/update_drone_icon()
+/mob/living/danimal/drone/proc/update_drone_icon()
 	//Different icons for different hack states
 	if(!hacked)
 		if(visualAppearence == SCOUTDRONE_HACKED)

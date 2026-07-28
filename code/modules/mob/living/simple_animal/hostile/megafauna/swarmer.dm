@@ -17,13 +17,13 @@ Difficulty: Special
 
 GLOBAL_LIST_EMPTY(AISwarmers)
 GLOBAL_LIST_EMPTY(AISwarmersByType)//AISwarmersByType[.../resource] = list(1st, 2nd, nth), AISwarmersByType[../ranged] = list(1st, 2nd, nth) etc.
-GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swarmer/ai/resource = 30, /mob/living/simple_animal/hostile/swarmer/ai/ranged_combat = 20, /mob/living/simple_animal/hostile/swarmer/ai/melee_combat = 10))
+GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/danimal/hostile/swarmer/ai/resource = 30, /mob/living/danimal/hostile/swarmer/ai/ranged_combat = 20, /mob/living/danimal/hostile/swarmer/ai/melee_combat = 10))
 
 
 //returns a type of AI swarmer that is NOT at max cap
 //type order is shuffled, to prevent bias
 /proc/GetUncappedAISwarmerType()
-	var/static/list/swarmerTypes = subtypesof(/mob/living/simple_animal/hostile/swarmer/ai)
+	var/static/list/swarmerTypes = subtypesof(/mob/living/danimal/hostile/swarmer/ai)
 	LAZYINITLIST(GLOB.AISwarmersByType)
 	for(var/t in shuffle(swarmerTypes))
 		var/list/amount = GLOB.AISwarmersByType[t]
@@ -33,14 +33,14 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 
 //Total of all subtype caps
 /proc/GetTotalAISwarmerCap()
-	var/static/list/swarmerTypes = subtypesof(/mob/living/simple_animal/hostile/swarmer/ai)
+	var/static/list/swarmerTypes = subtypesof(/mob/living/danimal/hostile/swarmer/ai)
 	. = 0
 	LAZYINITLIST(GLOB.AISwarmersByType)
 	for(var/t in swarmerTypes)
 		. += GLOB.AISwarmerCapsByType[t]
 
 
-/mob/living/simple_animal/hostile/megafauna/swarmer_swarm_beacon
+/mob/living/danimal/hostile/megafauna/swarmer_swarm_beacon
 	name = "swarmer beacon"
 	desc = "That name is a bit of a mouthful, but stop paying attention to your mouth they're eating everything!"
 	icon = 'icons/mob/swarmer.dmi'
@@ -52,7 +52,7 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 	score_type = SWARMER_BEACON_SCORE
 	faction = list("mining", "boss", "swarmer")
 	weather_immunities = list("lava","ash")
-	stop_automated_movement = TRUE
+	stop_wandering = TRUE
 	wander = FALSE
 	layer = BELOW_MOB_LAYER
 	AIStatus = AI_OFF
@@ -63,17 +63,17 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 	var/static/list/swarmer_caps
 
 
-/mob/living/simple_animal/hostile/megafauna/swarmer_swarm_beacon/Initialize()
+/mob/living/danimal/hostile/megafauna/swarmer_swarm_beacon/Initialize()
 	. = ..()
 	swarmer_caps = GLOB.AISwarmerCapsByType //for admin-edits
 	internal = new/obj/item/gps/internal/swarmer_beacon(src)
 	for(var/ddir in GLOB.cardinals)
 		new /obj/structure/swarmer/blockade (get_step(src, ddir))
-		var/mob/living/simple_animal/hostile/swarmer/ai/resource/R = new(loc)
+		var/mob/living/danimal/hostile/swarmer/ai/resource/R = new(loc)
 		step(R, ddir) //Step the swarmers, instead of spawning them there, incase the turf is solid
 
 
-/mob/living/simple_animal/hostile/megafauna/swarmer_swarm_beacon/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/megafauna/swarmer_swarm_beacon/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	var/createtype = GetUncappedAISwarmerType()
@@ -81,7 +81,7 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 		swarmer_spawn_cooldown = world.time + swarmer_spawn_cooldown_amt
 		new createtype(loc)
 
-/mob/living/simple_animal/hostile/megafauna/swarmer_swarm_beacon/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/danimal/hostile/megafauna/swarmer_swarm_beacon/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	. = ..()
 	if(. > 0 && world.time > call_help_cooldown)
 		call_help_cooldown = world.time + call_help_cooldown_amt
@@ -97,13 +97,13 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 //SWARMER AI
 //AI versions of the swarmer mini-antag
 //This is an Abstract Base, it re-enables AI, but does not give the swarmer any goals/targets
-/mob/living/simple_animal/hostile/swarmer/ai
+/mob/living/danimal/hostile/swarmer/ai
 	wander = 1
 	faction = list("swarmer", "mining")
 	weather_immunities = list("ash") //wouldn't be fun otherwise
 	AIStatus = AI_ON
 
-/mob/living/simple_animal/hostile/swarmer/ai/Initialize()
+/mob/living/danimal/hostile/swarmer/ai/Initialize()
 	. = ..()
 	ToggleLight() //so you can see them eating you out of house and home/shooting you/stunlocking you for eternity
 	LAZYINITLIST(GLOB.AISwarmersByType[type])
@@ -111,27 +111,27 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 	GLOB.AISwarmersByType[type] += src
 
 
-/mob/living/simple_animal/hostile/swarmer/ai/Destroy()
+/mob/living/danimal/hostile/swarmer/ai/Destroy()
 	GLOB.AISwarmers -= src
 	GLOB.AISwarmersByType[type] -= src
 	return ..()
 
 
-/mob/living/simple_animal/hostile/swarmer/ai/SwarmerTypeToCreate()
+/mob/living/danimal/hostile/swarmer/ai/SwarmerTypeToCreate()
 	return GetUncappedAISwarmerType()
 
 
-/mob/living/simple_animal/hostile/swarmer/ai/resource/handle_automated_action()
+/mob/living/danimal/hostile/swarmer/ai/resource/handle_automated_action()
 	. = ..()
 	if(.)
-		if(!stop_automated_movement)
+		if(!stop_wandering)
 			if(health < maxHealth*0.25)
 				StartAction(100)
 				RepairSelf()
 				return
 
 
-/mob/living/simple_animal/hostile/swarmer/ai/Move(atom/newloc)
+/mob/living/danimal/hostile/swarmer/ai/Move(atom/newloc)
 	if(newloc)
 		if(newloc.z == z) //so these actions are Z-specific
 			if(islava(newloc))
@@ -148,14 +148,14 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 		return ..()
 
 
-/mob/living/simple_animal/hostile/swarmer/ai/proc/StartAction(deci = 0)
-	stop_automated_movement = TRUE
+/mob/living/danimal/hostile/swarmer/ai/proc/StartAction(deci = 0)
+	stop_wandering = TRUE
 	AIStatus = AI_OFF
 	addtimer(CALLBACK(src,PROC_REF(EndAction)), deci)
 
 
-/mob/living/simple_animal/hostile/swarmer/ai/proc/EndAction()
-	stop_automated_movement = FALSE
+/mob/living/danimal/hostile/swarmer/ai/proc/EndAction()
+	stop_wandering = FALSE
 	AIStatus = AI_ON
 
 
@@ -165,18 +165,17 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 //Similar to the original Player-Swarmers, these dismantle things to obtain the metal inside
 //They then use this medal to produce more swarmers or traps/barricades
 
-/mob/living/simple_animal/hostile/swarmer/ai/resource
+/mob/living/danimal/hostile/swarmer/ai/resource
 	search_objects = 1
 	attack_all_objects = TRUE //attempt to nibble everything
-	lose_patience_timeout = 150
 	var/static/list/sharedWanted = typecacheof(list(/turf/closed/mineral, /turf/closed/wall)) //eat rocks and walls
 	var/static/list/sharedIgnore = list()
 
 //This handles viable things to eat/attack
 //Place specific cases of AI derpiness here
-//Most can be left to the automatic Gain/LosePatience() system
-/mob/living/simple_animal/hostile/swarmer/ai/resource/CanAttack(atom/the_target)
-
+//Most can be left to the automatic Gain/ResetPatience() system
+/mob/living/danimal/hostile/swarmer/ai/resource/EvalTarget(atom/the_target)
+	. = list()
 	//SPECIFIC CASES:
 	//Smash fulltile windows before grilles
 	if(istype(the_target, /obj/structure/grille))
@@ -187,19 +186,19 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 
 	//GENERAL CASES:
 	if(is_type_in_typecache(the_target, sharedIgnore)) //always ignore
-		return FALSE
+		return
 	if(is_type_in_typecache(the_target, sharedWanted)) //always eat
-		return TRUE
+		return list(MTEV_CAN_BE_TARGETED)
 
 	return ..()	//else, have a nibble, see if it's food
 
 
-/mob/living/simple_animal/hostile/swarmer/ai/resource/OpenFire(atom/A)
+/mob/living/danimal/hostile/swarmer/ai/resource/OpenFire(atom/A)
 	if(isliving(A)) //don't shoot rocks, sillies.
 		..()
 
 
-/mob/living/simple_animal/hostile/swarmer/ai/resource/AttackingTarget()
+/mob/living/danimal/hostile/swarmer/ai/resource/AttackingTarget()
 	var/atom/my_target = get_target()
 	if(my_target.swarmer_act(src))
 		add_type_to_wanted(my_target.type)
@@ -209,10 +208,10 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 		return FALSE
 
 
-/mob/living/simple_animal/hostile/swarmer/ai/resource/handle_automated_action()
+/mob/living/danimal/hostile/swarmer/ai/resource/handle_automated_action()
 	. = ..()
 	if(.)
-		if(!stop_automated_movement)
+		if(!stop_wandering)
 			if(GLOB.AISwarmers.len < GetTotalAISwarmerCap() && resources >= 50)
 				StartAction(100) //so they'll actually sit still and use the verbs
 				CreateSwarmer()
@@ -229,18 +228,18 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 
 
 //So swarmers can learn what is and isn't food
-/mob/living/simple_animal/hostile/swarmer/ai/resource/proc/add_type_to_wanted(typepath)
+/mob/living/danimal/hostile/swarmer/ai/resource/proc/add_type_to_wanted(typepath)
 	if(!sharedWanted[typepath])// this and += is faster than |=
 		sharedWanted += typecacheof(typepath)
 
 
-/mob/living/simple_animal/hostile/swarmer/ai/resource/proc/add_type_to_ignore(typepath)
+/mob/living/danimal/hostile/swarmer/ai/resource/proc/add_type_to_ignore(typepath)
 	if(!sharedIgnore[typepath])
 		sharedIgnore += typecacheof(typepath)
 
 
 //RANGED SWARMER
-/mob/living/simple_animal/hostile/swarmer/ai/ranged_combat
+/mob/living/danimal/hostile/swarmer/ai/ranged_combat
 	icon_state = "swarmer_ranged"
 	icon_living = "swarmer_ranged"
 	projectiletype = /obj/item/projectile/beam/laser
@@ -249,25 +248,25 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 	retreat_distance = 3
 	minimum_distance = 3
 
-/mob/living/simple_animal/hostile/swarmer/ai/ranged_combat/Aggro()
+/mob/living/danimal/hostile/swarmer/ai/ranged_combat/Aggro()
 	..()
 	summon_backup(15, TRUE) //Exact matching, so that goliaths don't come to aid the swarmers, that'd be silly
 
 
 //MELEE SWARMER
-/mob/living/simple_animal/hostile/swarmer/ai/melee_combat
+/mob/living/danimal/hostile/swarmer/ai/melee_combat
 	icon_state = "swarmer_melee"
 	icon_living = "swarmer_melee"
 	health = 60
 	maxHealth = 60
-	ranged = FALSE
+	can_ranged_attack = FALSE
 
-/mob/living/simple_animal/hostile/swarmer/ai/melee_combat/Aggro()
+/mob/living/danimal/hostile/swarmer/ai/melee_combat/Aggro()
 	..()
 	summon_backup(15, TRUE)
 
 
-/mob/living/simple_animal/hostile/swarmer/ai/melee_combat/AttackingTarget()
+/mob/living/danimal/hostile/swarmer/ai/melee_combat/AttackingTarget()
 	var/atom/my_target = get_target()
 	if(isliving(my_target))
 		if(prob(35))

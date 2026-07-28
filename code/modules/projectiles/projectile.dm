@@ -624,7 +624,7 @@
 
 /obj/item/projectile/proc/process_hit(turf/T, atom/target, qdel_self, hit_something = FALSE)		//probably needs to be reworked entirely when pixel movement is done.
 	if(isliving(firer) && isanimal(target))
-		var/mob/living/simple_animal/SA = target
+		var/mob/living/danimal/SA = target
 		SA.give_credit(firer)
 	if(is_supereffective(target))
 		damage += supereffective_damage
@@ -634,7 +634,7 @@
 			qdel(src)
 		return hit_something
 	permutated |= target		//Make sure we're never hitting it again. If we ever run into weirdness with piercing projectiles needing to hit something multiple times.. well.. that's a to-do.
-	if(LAZYLEN(faction) && faction_check(target))
+	if(LAZYLEN(faction) && factions_are_friendly(target))
 		return process_hit(T, select_target(T), qdel_self, TRUE)		//Hit whatever else we can since we're piercing through but we're still on the same tile.
 	if(is_supereffective(target))
 		damage += (supereffective_damage * damage_mod)
@@ -656,7 +656,7 @@
 		qdel(src)
 	return hit_something
 
-/obj/item/projectile/proc/faction_check(atom/target)
+/obj/item/projectile/proc/factions_are_friendly(atom/target)
 	if(not_harmful)
 		return FALSE // its something that shouldnt be harmful
 	if(!(isliving(target) || istype(target, /obj/machinery/porta_turret)) || !LAZYLEN(faction))
@@ -685,15 +685,15 @@
 				return TRUE
 	if(supereffective_flags)
 		if(CHECK_BITFIELD(supereffective_flags, SE_NO_LAZARUS))
-			if(istype(target, /mob/living/simple_animal))
-				var/mob/living/simple_animal/sanimal = target
+			if(istype(target, /mob/living/danimal))
+				var/mob/living/danimal/sanimal = target
 				if(sanimal.lazarused)
 					return FALSE
 		if(CHECK_BITFIELD(supereffective_flags, SE_ALL_SIMPLEMOBS))
-			if(istype(target, /mob/living/simple_animal))
+			if(istype(target, /mob/living/danimal))
 				return TRUE
 		if(CHECK_BITFIELD(supereffective_flags, SE_HOSTILE_SIMPLEMOBS))
-			if(istype(target, /mob/living/simple_animal/hostile))
+			if(istype(target, /mob/living/danimal/hostile))
 				return TRUE
 		if(CHECK_BITFIELD(supereffective_flags, SE_ANIMALS))
 			if(issimpleanimalmob(target))
@@ -1275,7 +1275,7 @@
 	damage = 60
 
 
-/mob/living/simple_animal/hostile/rat/skitter/bullet_random_debug
+/mob/living/danimal/hostile/rat/skitter/bullet_random_debug
 	name = "debug rat"
 	desc = "Its a rat!"
 	melee_damage_lower = 0.01
@@ -1288,7 +1288,7 @@
 
 	variation_list = list()
 
-/mob/living/simple_animal/hostile/rat/skitter/bullet_random_debug/bullet_act(obj/item/projectile/P)
+/mob/living/danimal/hostile/rat/skitter/bullet_random_debug/bullet_act(obj/item/projectile/P)
 	. = ..()
 	if(world.time < next_say)
 		return

@@ -1,5 +1,5 @@
 //Fire
-/mob/living/simple_animal/hostile/guardian/fire
+/mob/living/danimal/hostile/guardian/fire
 	a_intent = INTENT_HELP
 	melee_damage_lower = 10
 	melee_damage_upper = 10
@@ -13,32 +13,32 @@
 	tech_fluff_string = span_holoparasite("Boot sequence complete. Crowd control modules activated. Holoparasite swarm online.")
 	carp_fluff_string = span_holoparasite("CARP CARP CARP! You caught one! OH GOD, EVERYTHING'S ON FIRE. Except you and the fish.")
 
-/mob/living/simple_animal/hostile/guardian/fire/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/guardian/fire/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if(summoner)
 		summoner.ExtinguishMob()
 		summoner.adjust_fire_stacks(-20)
 
-/mob/living/simple_animal/hostile/guardian/fire/AttackingTarget()
+/mob/living/danimal/hostile/guardian/fire/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(. && ishuman(my_target) && my_target != summoner)
 		new /datum/hallucination/delusion(my_target,TRUE,"custom",200,0, icon_state,icon)
 
-/mob/living/simple_animal/hostile/guardian/fire/on_entered(AM as mob|obj)
+/mob/living/danimal/hostile/guardian/fire/on_entered(AM as mob|obj)
 	..()
 	collision_ignite(AM)
 
-/mob/living/simple_animal/hostile/guardian/fire/Bumped(atom/movable/AM)
+/mob/living/danimal/hostile/guardian/fire/Bumped(atom/movable/AM)
 	..()
 	collision_ignite(AM)
 
-/mob/living/simple_animal/hostile/guardian/fire/Bump(AM as mob|obj)
+/mob/living/danimal/hostile/guardian/fire/Bump(AM as mob|obj)
 	..()
 	collision_ignite(AM)
 
-/mob/living/simple_animal/hostile/guardian/fire/proc/collision_ignite(AM as mob|obj)
+/mob/living/danimal/hostile/guardian/fire/proc/collision_ignite(AM as mob|obj)
 	if(isliving(AM))
 		var/mob/living/M = AM
 		if(!hasmatchingsummoner(M) && M != summoner && M.fire_stacks < 10)

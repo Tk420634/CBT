@@ -18,18 +18,18 @@
 /datum/round_event/wizard/magicarp/start()
 	for(var/obj/effect/landmark/carpspawn/C in GLOB.landmarks_list)
 		if(prob(5))
-			new /mob/living/simple_animal/hostile/carp/ranged/chaos(C.loc)
+			new /mob/living/danimal/hostile/carp/ranged/chaos(C.loc)
 		else
-			new /mob/living/simple_animal/hostile/carp/ranged(C.loc)
+			new /mob/living/danimal/hostile/carp/ranged(C.loc)
 
-/mob/living/simple_animal/hostile/carp/ranged
+/mob/living/danimal/hostile/carp/ranged
 	name = "magicarp"
 	desc = "50% magic, 50% carp, 100% horrible."
 	icon_state = "magicarp"
 	icon_living = "magicarp"
 	icon_dead = "magicarp_dead"
 	icon_gib = "magicarp_gib"
-	ranged = 1
+	can_ranged_attack = TRUE
 	retreat_distance = 2
 	minimum_distance = 0 //Between shots they can and will close in to nash
 	projectiletype = /obj/item/projectile/magic
@@ -41,17 +41,17 @@
 	/obj/item/projectile/magic/death, /obj/item/projectile/magic/teleport, /obj/item/projectile/magic/door, /obj/item/projectile/magic/aoe/fireball,
 	/obj/item/projectile/magic/spellblade, /obj/item/projectile/magic/arcane_barrage)
 
-/mob/living/simple_animal/hostile/carp/ranged/Initialize()
+/mob/living/danimal/hostile/carp/ranged/Initialize()
 	projectiletype = pick(allowed_projectile_types)
 	. = ..()
 
-/mob/living/simple_animal/hostile/carp/ranged/chaos
+/mob/living/danimal/hostile/carp/ranged/chaos
 	name = "chaos magicarp"
 	desc = "50% carp, 100% magic, 150% horrible."
 	color = "#00FFFF"
 	maxHealth = 75
 	health = 75
 
-/mob/living/simple_animal/hostile/carp/ranged/chaos/Shoot()
+/mob/living/danimal/hostile/carp/ranged/chaos/Shoot()
 	projectiletype = pick(allowed_projectile_types)
 	..()

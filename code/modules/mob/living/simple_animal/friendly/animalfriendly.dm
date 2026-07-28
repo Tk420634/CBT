@@ -1,14 +1,14 @@
 /*East Coast "Friendly" Animals
--	Pet Dog		/mob/living/simple_animal/pet/dog/kaiser	unique BoS pet
--	Pet Snake	/mob/living/simple_animal/pet/hognose		unique Enclave pet
--	Pet Skolf	/mob/living/simple_animal/pet/dog/skolf		unique Talon pet
+-	Pet Dog		/mob/living/danimal/pet/dog/kaiser	unique BoS pet
+-	Pet Snake	/mob/living/danimal/pet/hognose		unique Enclave pet
+-	Pet Skolf	/mob/living/danimal/pet/dog/skolf		unique Talon pet
 */
 
 /*Faction pets
 Kaiser for BoS East
 Skolf for Talon East
 Snek for Enclave East*/
-/mob/living/simple_animal/pet/dog/kaiser
+/mob/living/danimal/pet/dog/kaiser
 	name = "Kaiser"
 	desc = "A rare pure breed rottweiler, named Kaiser."
 	icon = 'icons/fallout/mobs/animals/dogs.dmi'
@@ -32,12 +32,12 @@ Snek for Enclave East*/
 	seconds_per_wander = 10
 	footstep_type = FOOTSTEP_MOB_CLAW
 
-/mob/living/simple_animal/pet/dog/ComponentInitialize()
+/mob/living/danimal/pet/dog/ComponentInitialize()
 	. = ..()
 	AddElement(/datum/element/wuv, "growls happily!", EMOTE_AUDIBLE, /datum/mood_event/pet_animal, "growls!", EMOTE_AUDIBLE)
 	AddElement(/datum/element/mob_holder, held_icon)
 
-/mob/living/simple_animal/pet/hognose
+/mob/living/danimal/pet/hognose
 	name = "Hognose snake"
 	desc = "A small pet snake."
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
@@ -59,13 +59,13 @@ Snek for Enclave East*/
 
 	footstep_type = FOOTSTEP_MOB_CLAW
 
-/mob/living/simple_animal/pet/dog/ComponentInitialize()
+/mob/living/danimal/pet/dog/ComponentInitialize()
 	. = ..()
 	AddElement(/datum/element/wuv, "growls happily!", EMOTE_AUDIBLE, /datum/mood_event/pet_animal, "growls!", EMOTE_AUDIBLE)
 	AddElement(/datum/element/mob_holder, held_icon)
 
 
-/mob/living/simple_animal/pet/dog/skolf
+/mob/living/danimal/pet/dog/skolf
 	name = "Placeholder"
 	desc = "Somehow, this Skolf has been tamed by the mercenaries. Kind of. Looks terrifying with its cranium exposed but it acts sort of like a dog."
 	icon_state = "skolf"
@@ -88,12 +88,12 @@ Snek for Enclave East*/
 	seconds_per_wander = 10
 	footstep_type = FOOTSTEP_MOB_CLAW
 
-/mob/living/simple_animal/pet/dog/ComponentInitialize()
+/mob/living/danimal/pet/dog/ComponentInitialize()
 	. = ..()
 	AddElement(/datum/element/wuv, "growls happily", EMOTE_AUDIBLE, /datum/mood_event/pet_animal, "growls!", EMOTE_AUDIBLE)
 	AddElement(/datum/element/mob_holder, held_icon)
 
-/mob/living/simple_animal/pet/dog/serdy
+/mob/living/danimal/pet/dog/serdy
 	name = "Serdy"
 	desc = "The bestest boy."
 	icon = 'icons/fallout/mobs/animals/dogs.dmi'
@@ -118,7 +118,7 @@ Snek for Enclave East*/
 	footstep_type = FOOTSTEP_MOB_CLAW
 	var/held_icon = "corgi"
 
-/mob/living/simple_animal/pet/dog/serdy/ComponentInitialize()
+/mob/living/danimal/pet/dog/serdy/ComponentInitialize()
 	. = ..()
 	AddElement(/datum/element/wuv, "woofs happily!", EMOTE_AUDIBLE, /datum/mood_event/pet_animal, "woof!", EMOTE_AUDIBLE)
 	AddElement(/datum/element/mob_holder, held_icon)

@@ -24,7 +24,7 @@
 		return
 	var/mob/living/living_owner = owner
 	if(isanimal(owner))
-		var/mob/living/simple_animal/simple_owner = owner
+		var/mob/living/danimal/simple_owner = owner
 		if(!simple_owner.dextrous)
 			to_chat(simple_owner, span_alert("You're not dextrous enough to use this!"))
 			return

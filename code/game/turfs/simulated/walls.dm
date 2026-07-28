@@ -143,7 +143,7 @@
 /turf/closed/wall/attack_paw(mob/living/user)
 	return attack_hand(user)
 
-/turf/closed/wall/attack_animal(mob/living/simple_animal/M)
+/turf/closed/wall/attack_animal(mob/living/danimal/M)
 	if(!M.CheckActionCooldown(CLICK_CD_MELEE))
 		return
 	M.DelayNextAction()

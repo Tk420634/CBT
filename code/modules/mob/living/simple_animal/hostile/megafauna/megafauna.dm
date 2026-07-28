@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/megafauna
+/mob/living/danimal/hostile/megafauna
 	name = "boss of this gym"
 	desc = "Attack the weak point for massive damage."
 	health = 1000
@@ -12,10 +12,10 @@
 	faction = list("mining", "boss")
 	weather_immunities = list("lava","ash")
 	movement_type = FLYING
-	robust_searching = 1
+	robust_searching = TRUE
 	ranged_ignores_vision = TRUE
 	stat_attack = UNCONSCIOUS
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	damage_coeff = list(BRUTE = 1, BURN = 0.5, TOX = 1, CLONE = 1, STAMINA = 0, OXY = 1)
 	//minbodytemp = 0
 	//maxbodytemp = INFINITY
@@ -51,7 +51,7 @@
 	ignore_other_mobs = TRUE // Their entire existance is to kill players
 	am_important = TRUE
 
-/mob/living/simple_animal/hostile/megafauna/Initialize(mapload)
+/mob/living/danimal/hostile/megafauna/Initialize(mapload)
 	. = ..()
 	apply_status_effect(STATUS_EFFECT_CRUSHERDAMAGETRACKING)
 	ADD_TRAIT(src, TRAIT_NO_TELEPORT, MEGAFAUNA_TRAIT)
@@ -63,11 +63,11 @@
 		small_action.Grant(src)
 	recenter_wide_sprite()
 
-/mob/living/simple_animal/hostile/megafauna/Destroy()
+/mob/living/danimal/hostile/megafauna/Destroy()
 	QDEL_NULL(internal)
 	. = ..()
 
-/mob/living/simple_animal/hostile/megafauna/Moved()
+/mob/living/danimal/hostile/megafauna/Moved()
 	if(istype(nest, /datum/component/spawner))
 		var/datum/component/spawner/this_nest = nest.resolve()
 		if(this_nest && this_nest.parent && get_dist(this_nest.parent, src) > nest_range)
@@ -75,11 +75,11 @@
 			for(var/i = 1 to nest_range)
 				closest = get_step(closest, get_dir(closest, src))
 			forceMove(closest) // someone teleported out probably and the megafauna kept chasing them
-			LoseTarget()
+			DropTarget()
 			return
 	return ..()
 
-/mob/living/simple_animal/hostile/megafauna/death(gibbed)
+/mob/living/danimal/hostile/megafauna/death(gibbed)
 	if(health > 0)
 		return
 	else
@@ -97,22 +97,22 @@
 				grant_achievement(medal_type, score_type, crusher_kill)
 		..()
 
-/mob/living/simple_animal/hostile/megafauna/proc/spawn_crusher_loot()
+/mob/living/danimal/hostile/megafauna/proc/spawn_crusher_loot()
 	loot = crusher_loot
 
-/mob/living/simple_animal/hostile/megafauna/gib()
+/mob/living/danimal/hostile/megafauna/gib()
 	if(health > 0)
 		return
 	else
 		..()
 
-/mob/living/simple_animal/hostile/megafauna/dust(just_ash, drop_items, force)
+/mob/living/danimal/hostile/megafauna/dust(just_ash, drop_items, force)
 	if(!force && health > 0)
 		return
 	else
 		..()
 
-/mob/living/simple_animal/hostile/megafauna/AttackingTarget()
+/mob/living/danimal/hostile/megafauna/AttackingTarget()
 	if(recovery_time >= world.time)
 		return
 	. = ..()
@@ -120,13 +120,13 @@
 	if(. && isliving(my_target))
 		var/mob/living/L = my_target
 		if(L.stat != DEAD)
-			if(!client && ranged && ranged_cooldown <= world.time)
+			if(!client && ranged && ranged_attack_delay <= world.time)
 				OpenFire()
 /*
 		else
 			devour(L)
 
-/mob/living/simple_animal/hostile/megafauna/proc/devour(mob/living/L)
+/mob/living/danimal/hostile/megafauna/proc/devour(mob/living/L)
 	if(!L)
 		return
 	visible_message(
@@ -137,7 +137,7 @@
 	L.gib()
 */
 
-/mob/living/simple_animal/hostile/megafauna/ex_act(severity, target)
+/mob/living/danimal/hostile/megafauna/ex_act(severity, target)
 	switch (severity)
 		if (EXPLODE_DEVASTATE)
 			adjustBruteLoss(250)
@@ -148,11 +148,11 @@
 		if(EXPLODE_LIGHT)
 			adjustBruteLoss(50)
 
-/mob/living/simple_animal/hostile/megafauna/proc/SetRecoveryTime(buffer_time)
+/mob/living/danimal/hostile/megafauna/proc/SetRecoveryTime(buffer_time)
 	recovery_time = world.time + buffer_time
-	ranged_cooldown = max(ranged_cooldown, world.time + buffer_time)		// CITADEL BANDAID FIX FOR MEGAFAUNA NOT RESPECTING RECOVERY TIME.
+	ranged_attack_delay = max(ranged_attack_delay, world.time + buffer_time)		// CITADEL BANDAID FIX FOR MEGAFAUNA NOT RESPECTING RECOVERY TIME.
 
-/mob/living/simple_animal/hostile/megafauna/proc/grant_achievement(medaltype, scoretype, crusher_kill)
+/mob/living/danimal/hostile/megafauna/proc/grant_achievement(medaltype, scoretype, crusher_kill)
 	if(!medal_type || (flags_1 & ADMIN_SPAWNED_1)) //Don't award medals if the medal type isn't set
 		return FALSE
 	if(!SSmedals.hub_enabled) // This allows subtypes to carry on other special rewards not tied with medals. (such as bubblegum's arena shuttle)
@@ -174,12 +174,12 @@
 	name = "Megafauna Attack"
 	icon_icon = 'icons/mob/actions/actions_animal.dmi'
 	button_icon_state = ""
-	var/mob/living/simple_animal/hostile/megafauna/M
+	var/mob/living/danimal/hostile/megafauna/M
 	var/chosen_message
 	var/chosen_attack_num = 0
 
 /datum/action/innate/megafauna_attack/Grant(mob/living/L)
-	if(istype(L, /mob/living/simple_animal/hostile/megafauna))
+	if(istype(L, /mob/living/danimal/hostile/megafauna))
 		M = L
 		return ..()
 	return FALSE

@@ -92,15 +92,15 @@
 
 /datum/saymode/binary/handle_message(mob/living/user, message, datum/language/language)
 	if(isswarmer(user))
-		var/mob/living/simple_animal/hostile/swarmer/S = user
+		var/mob/living/danimal/hostile/swarmer/S = user
 		S.swarmer_chat(message)
 		return FALSE
 	if(isblobmonster(user))
-		var/mob/living/simple_animal/hostile/blob/B = user
+		var/mob/living/danimal/hostile/blob/B = user
 		B.blob_chat(message)
 		return FALSE
 	if(isdrone(user))
-		var/mob/living/simple_animal/drone/D = user
+		var/mob/living/danimal/drone/D = user
 		D.drone_chat(message)
 		return FALSE
 	if(user.binarycheck())

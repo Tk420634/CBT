@@ -46,7 +46,7 @@
 	var/list/stored_data = list()
 	var/current_channel
 
-	var/mob/living/simple_animal/bot/active_bot
+	var/mob/living/danimal/bot/active_bot
 	var/list/botlist = list()
 
 /obj/item/cartridge/Initialize()
@@ -546,7 +546,7 @@ Code:
 				menu += "<h4>Located Cleanbots:</h4>"
 
 				ldat = null
-				for (var/mob/living/simple_animal/bot/cleanbot/B in GLOB.alive_mob_list)
+				for (var/mob/living/danimal/bot/cleanbot/B in GLOB.alive_mob_list)
 					var/turf/bl = get_turf(B)
 
 					if(bl)
@@ -767,7 +767,7 @@ Current Size: [usr.transform.a]<br><br>
 		playsound(src, 'sound/machines/terminal_select.ogg', 50, 1)
 
 	if(href_list["mule"]) //MULEbots are special snowflakes, and need different args due to how they work.
-		var/mob/living/simple_animal/bot/mulebot/mule = active_bot
+		var/mob/living/danimal/bot/mulebot/mule = active_bot
 		if (istype(mule))
 			active_bot.bot_control(href_list["mule"], usr, TRUE)
 
@@ -779,7 +779,7 @@ Current Size: [usr.transform.a]<br><br>
 /obj/item/cartridge/proc/bot_control()
 
 
-	var/mob/living/simple_animal/bot/Bot
+	var/mob/living/danimal/bot/Bot
 
 	if(active_bot)
 		menu += "<B>[active_bot]</B><BR> Status: (<A href='byond://?src=[REF(src)];op=control;bot=[REF(active_bot)]'>[PDAIMG(refresh)]<i>refresh</i></A>)<BR>"
@@ -797,7 +797,7 @@ Current Size: [usr.transform.a]<br><br>
 
 		//MULEs!
 		if(active_bot.bot_type == MULE_BOT)
-			var/mob/living/simple_animal/bot/mulebot/MULE = active_bot
+			var/mob/living/danimal/bot/mulebot/MULE = active_bot
 			var/atom/Load = MULE.load
 			menu += "<BR>Current Load: [ !Load ? "<i>none</i>" : "[Load.name] (<A href='byond://?src=[REF(src)];mule=unload'><i>unload</i></A>)" ]<BR>"
 			menu += "Destination: [MULE.destination ? MULE.destination : "<i>None</i>"] (<A href='byond://?src=[REF(src)];mule=destination'><i>set</i></A>)<BR>"

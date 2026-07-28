@@ -2,7 +2,7 @@
 // VAULT NPC //
 ///////////////
 
-/mob/living/simple_animal/hostile/vault
+/mob/living/danimal/hostile/vault
 	name = "Vault Dweller"
 	desc = "Just a Vault Dweller"
 	icon = 'icons/fallout/mobs/humans/fallout_npc.dmi'
@@ -16,10 +16,9 @@
 	response_harm_simple = "hits"
 	speed = 1
 	stat_attack = 1
-	robust_searching = 1
+	robust_searching = TRUE
 	maxHealth = 100
 	health = 100
-	harm_intent_damage = 8
 	melee_damage_lower = 5
 	melee_damage_upper = 10
 	attack_verb_simple = "punches"
@@ -27,7 +26,7 @@
 	a_intent = INTENT_HARM
 	unsuitable_atmos_damage = 15
 	faction = list("vault", "city")
-	check_friendly_fire = 1
+	check_friendly_fire = FALSE
 	status_flags = CANPUSH
 	speak_chance = 1
 	despawns_when_lonely = FALSE
@@ -49,43 +48,43 @@
 	uniform = /obj/item/clothing/under/f13/vault/v13
 	shoes = /obj/item/clothing/shoes/jackboots
 
-/mob/living/simple_animal/hostile/vault/dweller
+/mob/living/danimal/hostile/vault/dweller
 	minimum_distance = 10
 	retreat_distance = 10
 	obj_damage = 0
 	environment_smash = 0
 
-/mob/living/simple_animal/hostile/vault/dweller/Aggro()
+/mob/living/danimal/hostile/vault/dweller/Aggro()
 	..()
 	summon_backup(15)
 	say("HELP!!", only_overhead = TRUE)
 
-/mob/living/simple_animal/hostile/vault/dweller/dweller1
+/mob/living/danimal/hostile/vault/dweller/dweller1
 	icon_state = "vault_dweller1"
 	icon_living = "vault_dweller1"
 	icon_dead = "vault_dweller1_dead"
 
-/mob/living/simple_animal/hostile/vault/dweller/dweller2
+/mob/living/danimal/hostile/vault/dweller/dweller2
 	icon_state = "vault_dweller2"
 	icon_living = "vault_dweller2"
 	icon_dead = "vault_dweller2_dead"
 
-/mob/living/simple_animal/hostile/vault/dweller/dweller3
+/mob/living/danimal/hostile/vault/dweller/dweller3
 	icon_state = "vault_dweller3"
 	icon_living = "vault_dweller3"
 	icon_dead = "vault_dweller3_dead"
 
-/mob/living/simple_animal/hostile/vault/dweller/dweller4
+/mob/living/danimal/hostile/vault/dweller/dweller4
 	icon_state = "vault_dweller4"
 	icon_living = "vault_dweller4"
 	icon_dead = "vault_dweller4_dead"
 
-/mob/living/simple_animal/hostile/vault/dweller/dweller5
+/mob/living/danimal/hostile/vault/dweller/dweller5
 	icon_state = "vault_dweller5"
 	icon_living = "vault_dweller5"
 	icon_dead = "vault_dweller5_dead"
 
-/mob/living/simple_animal/hostile/vault/security
+/mob/living/danimal/hostile/vault/security
 	name = "Vault Security"
 	desc = "Just a Vault Security"
 	icon_state = "vault_dweller_sec"
@@ -96,7 +95,7 @@
 	retreat_distance = 5
 	minimum_distance = 5
 	healable = 1
-	ranged = 1
+	can_ranged_attack = TRUE
 	projectiletype = /obj/item/projectile/beam
 	projectilesound = 'sound/weapons/resonator_fire.ogg'
 	speak_chance = 1
@@ -112,7 +111,7 @@
 	)
 	speed = 10 // added to make his dumbass hold still - Jaeger
 
-/mob/living/simple_animal/hostile/vault/security/Aggro()
+/mob/living/danimal/hostile/vault/security/Aggro()
 	..()
 	summon_backup(15)
 
@@ -130,7 +129,7 @@
 /////////////////
 
 // Enclave specialist, basic fighter
-/mob/living/simple_animal/hostile/enclave
+/mob/living/danimal/hostile/enclave
 	name = "enclave specialist"
 	desc = "A Enclave soldier with combat armor and a G-11 rifle."
 	icon = 'icons/fallout/mobs/humans/fallout_npc.dmi'
@@ -146,17 +145,16 @@
 	retreat_distance = 6
 	minimum_distance = 6
 	speed = 4
-	ranged_cooldown_time = 22
+	ranged_cooldown_duration = 22
 	extra_projectiles = 2
 	stat_attack = 1
-	ranged = TRUE
-	robust_searching = TRUE
+	can_ranged_attack = TRUE
+	// robust_searching = TRUE
 	healable = TRUE
 	maxHealth = 200
 	health = 200
 	melee_damage_lower = 15
 	melee_damage_upper = 35
-	harm_intent_damage = 8
 	loot = list(/obj/effect/gibspawner/human)
 	loot_drop_amount = 2
 	loot_amount_random = TRUE
@@ -170,7 +168,7 @@
 	a_intent = INTENT_HARM
 	unsuitable_atmos_damage = 15
 	faction = list("enclave")
-	check_friendly_fire = 1
+	check_friendly_fire = FALSE
 	status_flags = CANPUSH
 	//speak = list("For the Enclave!", "Stars and Stripes!", "Liberty or death!")
 	speak_emote = list("pulls out a weapon", "shouts")
@@ -188,7 +186,7 @@
 	override_ignore_other_mobs = TRUE
 
 // Enclave Scientist
-/mob/living/simple_animal/hostile/enclave/scientist
+/mob/living/danimal/hostile/enclave/scientist
 	name = "enclave scientist"
 	desc = "An Enclave Scientist wearing an advanced radiation suit. While they may run from you, that does not exempt them from the evil they have committed."
 	icon_state = "enclave_scientist"
@@ -202,7 +200,7 @@
 	environment_smash = 0
 	melee_damage_lower = 5
 	melee_damage_upper = 15
-	ranged_cooldown_time = 30
+	ranged_cooldown_duration = 30
 	projectiletype = /obj/item/projectile/f13plasma/pistol/adam/simple
 	projectilesound = 'sound/weapons/wave.ogg'
 	extra_projectiles = 1
@@ -223,13 +221,13 @@
 	tactical_retreat = 10
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
-/mob/living/simple_animal/hostile/enclave/scientist/Aggro()
+/mob/living/danimal/hostile/enclave/scientist/Aggro()
 	..()
 	summon_backup(15)
 	say("Intruder!!", only_overhead = TRUE) 
 
 // Enclave Armored Infantry
-/mob/living/simple_animal/hostile/enclave/soldier
+/mob/living/danimal/hostile/enclave/soldier
 	name = "enclave armored infantry"
 	desc = "An Enclave Soldier wearing Advanced Power Armor and a plasma multi-caster. Play time's over, mutie."
 	icon_state = "enclave_armored"
@@ -242,7 +240,7 @@
 	extra_projectiles = 2
 	retreat_distance = 3
 	minimum_distance = 5
-	ranged_cooldown_time = 12
+	ranged_cooldown_duration = 12
 	healable = 1
 	attack_verb_simple = "power-fists"
 	loot = list(/obj/effect/gibspawner/human)
@@ -292,7 +290,7 @@
 // BROTHERHOOD NPC //
 /////////////////////
 
-/mob/living/simple_animal/hostile/bs
+/mob/living/danimal/hostile/bs
 	name = "Tech-Trooper"
 	desc = "The something another never fails."
 	icon = 'icons/fallout/mobs/humans/fallout_npc.dmi'
@@ -307,17 +305,16 @@
 	response_harm_simple = "hits"
 	speed = 4
 	stat_attack = 1
-	robust_searching = 1
+	robust_searching = TRUE
 	maxHealth = 200
 	health = 200
-	harm_intent_damage = 8
 	melee_damage_lower = 7
 	melee_damage_upper = 15
 	attack_verb_simple = "pistol-whips"
 	attack_sound = 'sound/weapons/punch1.ogg'
 	a_intent = INTENT_HARM
 	unsuitable_atmos_damage = 15
-	check_friendly_fire = 1
+	check_friendly_fire = FALSE
 	status_flags = CANPUSH
 	//speak = list("Semper Invicta!")
 	speak_emote = list("rushes")
@@ -339,7 +336,7 @@
 	mask = /obj/item/clothing/mask/gas/sechailer
 	head = /obj/item/clothing/head/helmet/f13/combat/brotherhood
 
-/mob/living/simple_animal/hostile/bs/knight
+/mob/living/danimal/hostile/bs/knight
 	name = "Tech-trooper Leftenant"
 	desc = "A loser wielding a laser pistol and older issue combat armor."
 	icon_state = "bs_knight"
@@ -348,7 +345,7 @@
 	retreat_distance = 5
 	minimum_distance = 5
 	healable = 1
-	ranged = 1
+	can_ranged_attack = TRUE
 	loot = list(/obj/effect/gibspawner/human)
 	loot_drop_amount = 2
 	loot_amount_random = TRUE
@@ -366,7 +363,7 @@
 	)
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
-/mob/living/simple_animal/hostile/bs/paladin
+/mob/living/danimal/hostile/bs/paladin
 	name = "Tech-Trooper Commander"
 	desc = "A dork equipped with an AER9 and T-51b power armor. The idiots have arrived."
 	icon_state = "bs_paladin"
@@ -377,7 +374,7 @@
 	maxHealth = 480
 	health = 480
 	healable = 1
-	ranged = 1
+	can_ranged_attack = TRUE
 	loot = list(/obj/effect/gibspawner/human)
 	loot_drop_amount = 5
 	loot_amount_random = TRUE
@@ -410,7 +407,7 @@
 // NCR = NPC //
 ///////////////
 
-/mob/living/simple_animal/hostile/ncr
+/mob/living/danimal/hostile/ncr
 	name = "NCR"
 	desc = "For the Republic!"
 	icon = 'icons/fallout/mobs/humans/fallout_npc.dmi'
@@ -425,10 +422,9 @@
 	response_harm_simple = "hits"
 	speed = 4
 	stat_attack = 1
-	robust_searching = 1
+	robust_searching = TRUE
 	maxHealth = 120
 	health = 120
-	harm_intent_damage = 8
 	melee_damage_lower = 8
 	melee_damage_upper = 15
 	attack_verb_simple = "áüåò"
@@ -436,7 +432,7 @@
 	a_intent = INTENT_HARM
 	loot = list()
 	unsuitable_atmos_damage = 15
-	check_friendly_fire = 1
+	check_friendly_fire = FALSE
 	status_flags = CANPUSH
 	//speak = list("Patrolling the Mojave almost makes you wish for a nuclear winter.", "When I got this assignment I was hoping there would be more gambling.", "It's been a long tour, all I can think about now is going back home.", "You know, if you were serving, you'd probably be halfway to general by now.", "You oughtta think about enlisting. We need you here.")
 	speak_emote = list("says")
@@ -452,7 +448,7 @@
 	shoes = /obj/item/clothing/shoes/f13/military/ncr
 	head = /obj/item/clothing/head/f13/ncr
 
-/mob/living/simple_animal/hostile/ncr/trooper
+/mob/living/danimal/hostile/ncr/trooper
 	name = "NCR Trooper"
 	desc = "A standard NCR Trooper wielding a service rifle and equipped with a patrol vest."
 	icon_state = "ncr_trooper"
@@ -462,7 +458,7 @@
 	minimum_distance = 5
 	loot = list()
 	healable = 1
-	ranged = 1
+	can_ranged_attack = TRUE
 	projectiletype = /obj/item/projectile/bullet/a556/simple
 	projectilesound = 'sound/f13weapons/varmint_rifle.ogg'
 	casingtype = /obj/item/ammo_casing/a556
@@ -478,7 +474,7 @@
 	)
 	speed = 10 // added to make his dumbass hold still - Jaeger
 
-/mob/living/simple_animal/hostile/ncr/ranger
+/mob/living/danimal/hostile/ncr/ranger
 	name = "NCR Ranger"
 	desc = "A Ranger of the NCRA, wielding a big iron on his hip and equipped with a ranger patrol vest."
 	icon_state = "ncr_sergeant"
@@ -490,7 +486,7 @@
 	maxHealth = 160
 	health = 160
 	healable = 1
-	ranged = 1
+	can_ranged_attack = TRUE
 	projectiletype = /obj/item/projectile/bullet/m44/simple
 	projectilesound = 'sound/f13weapons/44mag.ogg'
 	casingtype = /obj/item/ammo_casing/m44
@@ -518,7 +514,7 @@
 // LEGION NPC //
 ////////////////
 
-/mob/living/simple_animal/hostile/legion
+/mob/living/danimal/hostile/legion
 	name = "Legion"
 	desc = "True to Caesar."
 	icon = 'icons/fallout/mobs/humans/fallout_npc.dmi'
@@ -533,10 +529,9 @@
 	response_harm_simple = "hits"
 	speed = 1
 	stat_attack = 1
-	robust_searching = 1
+	robust_searching = TRUE
 	maxHealth = 120
 	health = 120
-	harm_intent_damage = 8
 	melee_damage_lower = 8
 	melee_damage_upper = 15
 	attack_verb_simple = "attacks"
@@ -544,7 +539,7 @@
 	a_intent = INTENT_HARM
 	loot = list()
 	unsuitable_atmos_damage = 15
-	check_friendly_fire = 1
+	check_friendly_fire = FALSE
 	status_flags = CANPUSH
 	//speak = list("Ave, true to Caesar.", "True to Caesar.", "Ave, Amicus.", "The new slave girls are quite beautiful.", "Give me cause, Profligate.", "Degenerates like you belong on a cross.")
 	speak_emote = list("says")
@@ -559,7 +554,7 @@
 	shoes = /obj/item/clothing/shoes/f13/military/legion
 	head = /obj/item/clothing/head/helmet/f13/legion/prime
 
-/mob/living/simple_animal/hostile/legion/prime
+/mob/living/danimal/hostile/legion/prime
 	name = "Legion Prime"
 	desc = "A Prime Legionary, equipped with a hunting rifle."
 	icon_state = "legion_prime"
@@ -570,7 +565,7 @@
 	minimum_distance = 5
 	loot = list()
 	healable = 1
-	ranged = 1
+	can_ranged_attack = TRUE
 	projectiletype = /obj/item/projectile/bullet/a308/improvised/simple
 	projectilesound = 'sound/f13weapons/hunting_rifle.ogg'
 	casingtype = /obj/item/ammo_casing/a308
@@ -586,7 +581,7 @@
 	)
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
-/mob/living/simple_animal/hostile/legion/decan
+/mob/living/danimal/hostile/legion/decan
 	name = "Legion Decanus"
 	desc = "A Prime Decanus, equipped with a hunting rifle."
 	icon_state = "legion_decan"
@@ -598,7 +593,7 @@
 	maxHealth = 180
 	health = 180
 	healable = 1
-	ranged = 1
+	can_ranged_attack = TRUE
 	projectiletype = /obj/item/projectile/bullet/a308/improvised/simple
 	projectilesound = 'sound/f13weapons/hunting_rifle.ogg'
 	casingtype = /obj/item/ammo_casing/a308
@@ -614,7 +609,7 @@
 	)
 	speed = 4 // added to make his dumbass hold still - Jaeger
 
-/mob/living/simple_animal/hostile/legion/decan
+/mob/living/danimal/hostile/legion/decan
 
 /obj/effect/mob_spawn/human/corpse/legion/decan
 	name = "Legion Decanus"
@@ -628,7 +623,7 @@
 // TRIBAL NPC //
 ////////////////
 
-/mob/living/simple_animal/hostile/tribe
+/mob/living/danimal/hostile/tribe
 	name = "Lost Ones Hunter"
 	desc = "A Lost ones hunter, once part of the Sulphur Bottom tribe these lunatics have fallen to canibalism and baser instincts."
 	icon = 'icons/fallout/mobs/humans/fallout_npc.dmi'
@@ -643,10 +638,9 @@
 	response_harm_simple = "hits"
 	speed = 1
 	stat_attack = 1
-	robust_searching = 1
+	robust_searching = TRUE
 	maxHealth = 160
 	health = 160
-	harm_intent_damage = 8
 	melee_damage_lower = 22
 	melee_damage_upper = 47
 	attack_verb_simple = "attacks"

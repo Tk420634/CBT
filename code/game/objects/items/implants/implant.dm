@@ -32,7 +32,7 @@
 /mob/living/silicon/can_be_implanted()
 	return FALSE
 
-/mob/living/simple_animal/can_be_implanted()
+/mob/living/danimal/can_be_implanted()
 	return healable //Applies to robots and most non-organics, exceptions can override.
 
 /obj/item/implant/proc/post_implant(mob/living/target, mob/living/user, silent = FALSE)

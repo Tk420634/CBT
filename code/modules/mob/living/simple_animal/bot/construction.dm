@@ -45,7 +45,7 @@
 	if(istype(W, /obj/item/bodypart/l_arm/robot) || istype(W, /obj/item/bodypart/r_arm/robot))
 		if(!can_finish_build(W, user))
 			return
-		var/mob/living/simple_animal/bot/cleanbot/A = new(drop_location())
+		var/mob/living/danimal/bot/cleanbot/A = new(drop_location())
 		A.name = created_name
 		A.robot_arm = W.type
 		to_chat(user, span_notice("You add [W] to [src]. Beep boop!"))
@@ -191,7 +191,7 @@
 			if(istype(W, /obj/item/stock_parts/cell))
 				if(!can_finish_build(W, user))
 					return
-				var/mob/living/simple_animal/bot/ed209/B = new(drop_location(),created_name,lasercolor)
+				var/mob/living/danimal/bot/ed209/B = new(drop_location(),created_name,lasercolor)
 				to_chat(user, span_notice("You complete the ED-209."))
 				B.cell_type = W.type
 				qdel(W)
@@ -258,7 +258,7 @@
 			if(istype(W, /obj/item/bodypart/l_arm/robot) || istype(W, /obj/item/bodypart/r_arm/robot))
 				if(!can_finish_build(W, user))
 					return
-				var/mob/living/simple_animal/bot/floorbot/A = new(drop_location())
+				var/mob/living/danimal/bot/floorbot/A = new(drop_location())
 				A.name = created_name
 				A.robot_arm = W.type
 				A.toolbox = toolbox
@@ -328,7 +328,7 @@
 				if(!can_finish_build(W, user))
 					return
 				qdel(W)
-				var/mob/living/simple_animal/bot/medbot/S = new(drop_location(), skin)
+				var/mob/living/danimal/bot/medbot/S = new(drop_location(), skin)
 				to_chat(user, span_notice("You complete the Medbot. Beep boop!"))
 				S.name = created_name
 				S.firstaid = firstaid
@@ -401,7 +401,7 @@
 				if(!can_finish_build(I, user))
 					return
 				to_chat(user, span_notice("You complete the Securitron! Beep boop."))
-				var/mob/living/simple_animal/bot/secbot/S = new(Tsec)
+				var/mob/living/danimal/bot/secbot/S = new(Tsec)
 				S.name = created_name
 				S.baton_type = I.type
 				S.robot_arm = robot_arm
@@ -425,7 +425,7 @@
 					if(!can_finish_build(I, user))
 						return
 					to_chat(user, span_notice("You complete the Securitron!...Something seems a bit wrong with it..?"))
-					var/mob/living/simple_animal/bot/secbot/grievous/toy/S = new(Tsec)
+					var/mob/living/danimal/bot/secbot/grievous/toy/S = new(Tsec)
 					S.name = created_name
 					S.robot_arm = robot_arm
 					qdel(I)
@@ -459,7 +459,7 @@
 					if(!can_finish_build(I, user))
 						return
 					to_chat(user, span_notice("You complete the Securitron!...Something seems a bit wrong with it..?"))
-					var/mob/living/simple_animal/bot/secbot/grievous/S = new(Tsec)
+					var/mob/living/danimal/bot/secbot/grievous/S = new(Tsec)
 					S.name = created_name
 					S.robot_arm = robot_arm
 					qdel(I)
@@ -497,7 +497,7 @@
 				if(!can_finish_build(I, user))
 					return
 				to_chat(user, span_notice("You add the [I] to [src]! Beep Boop!"))
-				var/mob/living/simple_animal/bot/firebot/F = new(drop_location())
+				var/mob/living/danimal/bot/firebot/F = new(drop_location())
 				F.name = created_name
 				qdel(I)
 				qdel(src)

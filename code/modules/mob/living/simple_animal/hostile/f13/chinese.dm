@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/chinese
+/mob/living/danimal/hostile/chinese
 	name = "chinese remnant soldier"
 	desc = "Chinese soldiers who survived the Great War via ghoulification, and now shoot anything that isn't their own on sight."
 	icon = 'icons/fallout/mobs/humans/ghouls.dmi'
@@ -17,17 +17,16 @@
 	speed = 1
 	maxHealth = 80
 	health = 80
-	harm_intent_damage = 8
 	melee_damage_lower = 20
 	melee_damage_upper = 38
 	attack_verb_simple = "punches"
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	a_intent = INTENT_HARM
 	loot = list()
-	atmos_requirements = list("min_oxy" = 5, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 1, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 5, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 1, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
 	unsuitable_atmos_damage = 15
 	faction = list("china")
-	check_friendly_fire = 1
+	check_friendly_fire = FALSE
 	status_flags = CANPUSH
 	tastes = list("people" = 1, "dust" = 2)
 	retreat_health_percent = 0.5
@@ -41,7 +40,7 @@
 	bounty = 25
 
 
-// /mob/living/simple_animal/hostile/chinese/Aggro()
+// /mob/living/danimal/hostile/chinese/Aggro()
 // 	. = ..()
 // 	if(.)
 // 		return
@@ -49,12 +48,12 @@
 // 	if(!ckey)
 // 		say(pick("操你祖宗十八代", "乡巴佬", "傻逼" , "妈你个", "操你大爷", "祝你生孩子没屁眼", "扯鸡巴蛋", "狗改不了吃屎", "爆你菊花" ))
 
-/mob/living/simple_animal/hostile/chinese/ranged
+/mob/living/danimal/hostile/chinese/ranged
 	icon_state = "chinesepistol"
 	icon_living = "chinesepistol"
 	icon_dead = "chinesepistol_dead"
 	loot = list()
-	ranged = 1
+	can_ranged_attack = TRUE
 	maxHealth = 110
 	health = 110
 	retreat_distance = 3
@@ -72,7 +71,7 @@
 		SP_DISTANT_RANGE(PISTOL_LIGHT_RANGE_DISTANT)
 	)
 
-/mob/living/simple_animal/hostile/chinese/ranged/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/danimal/hostile/chinese/ranged/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	. = ..()
 	if(stat == DEAD || health > maxHealth*0.5)
 		retreat_distance = initial(retreat_distance)
@@ -85,7 +84,7 @@
 
 
 
-/mob/living/simple_animal/hostile/chinese/ranged/assault
+/mob/living/danimal/hostile/chinese/ranged/assault
 	name = "chinese remnant assault soldier"
 	icon_state = "chineseassault"
 	icon_living = "chineseassault"
@@ -108,6 +107,6 @@
 		SP_DISTANT_RANGE(RIFLE_LIGHT_RANGE_DISTANT)
 	)
 
-/mob/living/simple_animal/hostile/chinese/ranged/assault/Aggro()
+/mob/living/danimal/hostile/chinese/ranged/assault/Aggro()
 	..()
 	summon_backup(15)

@@ -1,5 +1,5 @@
 //Paper Wizard Boss
-/mob/living/simple_animal/hostile/boss/paper_wizard
+/mob/living/danimal/hostile/boss/paper_wizard
 	name = "Mjor the Creative"
 	desc = "A wizard with a taste for the arts."
 	mob_biotypes = MOB_HUMANOID
@@ -8,7 +8,7 @@
 	del_on_death = TRUE
 	icon = 'icons/mob/simple_human.dmi'
 	icon_state = "paperwizard"
-	ranged = 1
+	can_ranged_attack = TRUE
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	minimum_distance = 3
 	retreat_distance = 3
@@ -34,7 +34,7 @@
 	button_icon_state = "art_summon"
 	usage_probability = 20
 	boss_cost = 30
-	boss_type = /mob/living/simple_animal/hostile/boss/paper_wizard
+	boss_type = /mob/living/danimal/hostile/boss/paper_wizard
 	needs_target = FALSE
 	req_statuses = list(AI_ON)
 	say_when_triggered = "Rise, my creations! Jump off your pages and into this realm!"
@@ -50,7 +50,7 @@
 	var/current_len = length(summoned_minions)
 	if(current_len > maximum_stickmen - stickmen_to_summon)
 		for(var/a in (maximum_stickmen - stickmen_to_summon) to current_len)
-			var/mob/living/simple_animal/hostile/stickman/S = popleft(summoned_minions)
+			var/mob/living/danimal/hostile/stickman/S = popleft(summoned_minions)
 			if(!S.client)
 				qdel(S)
 			else
@@ -60,14 +60,14 @@
 				to_summon--
 
 	var/static/list/minions = list(
-	/mob/living/simple_animal/hostile/stickman,
-	/mob/living/simple_animal/hostile/stickman/ranged,
-	/mob/living/simple_animal/hostile/stickman/dog)
+	/mob/living/danimal/hostile/stickman,
+	/mob/living/danimal/hostile/stickman/ranged,
+	/mob/living/danimal/hostile/stickman/dog)
 
 	var/list/directions = GLOB.cardinals.Copy()
 	for(var/i in 1 to to_summon)
 		var/minions_chosen = pick(minions)
-		var/mob/living/simple_animal/hostile/stickman/S = new minions_chosen (get_step(boss,pick_n_take(directions)), 1)
+		var/mob/living/danimal/hostile/stickman/S = new minions_chosen (get_step(boss,pick_n_take(directions)), 1)
 		S.faction = boss.faction
 		RegisterSignal(S, COMSIG_PARENT_QDELETING,PROC_REF(remove_from_list))
 		summoned_minions += S
@@ -85,7 +85,7 @@
 	button_icon_state = "mimic_summon"
 	usage_probability = 30
 	boss_cost = 40
-	boss_type = /mob/living/simple_animal/hostile/boss/paper_wizard
+	boss_type = /mob/living/danimal/hostile/boss/paper_wizard
 	req_statuses = list(AI_ON)
 	say_when_triggered = ""
 
@@ -96,17 +96,17 @@
 	var/mob/living/target
 	if(!boss.client) //AI's target
 		target = boss.get_target()
-	else //random mob
-		var/list/threats = boss.PossibleThreats()
-		if(threats.len)
-			target = pick(threats)
-		else
-			to_chat(owner, span_warning("There is no potential foe of different faction around to attack"))
+	// else //random mob
+	// 	var/list/threats = boss.PossibleThreats() //todo: fix
+	// 	if(threats.len)
+	// 		target = pick(threats)
+	// 	else
+	// 		to_chat(owner, span_warning("There is no potential foe of different faction around to attack"))
 	if(target)
-		var/mob/living/simple_animal/hostile/boss/paper_wizard/wiz = boss
+		var/mob/living/danimal/hostile/boss/paper_wizard/wiz = boss
 		var/directions = GLOB.cardinals.Copy()
 		for(var/i in 1 to 3)
-			var/mob/living/simple_animal/hostile/boss/paper_wizard/copy/C = new (get_step(target,pick_n_take(directions)))
+			var/mob/living/danimal/hostile/boss/paper_wizard/copy/C = new (get_step(target,pick_n_take(directions)))
 			wiz.copies += C
 			C.original = wiz
 			C.say("My craft defines me, you could even say it IS me!")
@@ -117,7 +117,7 @@
 	else
 		boss.atb.refund(boss_cost)
 
-/mob/living/simple_animal/hostile/boss/paper_wizard/copy
+/mob/living/danimal/hostile/boss/paper_wizard/copy
 	desc = "'Tis a ruse!"
 	health = 1
 	maxHealth = 1
@@ -127,12 +127,12 @@
 	melee_damage_upper = 5
 	minimum_distance = 0
 	retreat_distance = 0
-	ranged = 0
+	can_ranged_attack = FALSE
 	loot = list()
-	var/mob/living/simple_animal/hostile/boss/paper_wizard/original
+	var/mob/living/danimal/hostile/boss/paper_wizard/original
 
 //Hit a fake? eat pain!
-/mob/living/simple_animal/hostile/boss/paper_wizard/copy/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/danimal/hostile/boss/paper_wizard/copy/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	if(amount > 0) //damage
 		if(original)
 			original.minimum_distance = 3
@@ -149,7 +149,7 @@
 		. = ..()
 
 //Hit the real guy? copies go bai-bai
-/mob/living/simple_animal/hostile/boss/paper_wizard/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/danimal/hostile/boss/paper_wizard/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	. = ..()
 	if(. > 0)//damage
 		minimum_distance = 3
@@ -157,7 +157,7 @@
 		for(var/copy in copies)
 			qdel(copy)
 
-/mob/living/simple_animal/hostile/boss/paper_wizard/copy/examine(mob/user)
+/mob/living/danimal/hostile/boss/paper_wizard/copy/examine(mob/user)
 	. = ..()
 	qdel(src) //I see through your ruse!
 

@@ -29,7 +29,7 @@
 	for(var/mob/living/L in GLOB.player_list)
 		if(locate(/obj/effect/proc_holder/spell/aoe_turf/timestop) in L.mind.spell_list) //People who can stop time are immune to its effects
 			immune[L] = TRUE
-	for(var/mob/living/simple_animal/hostile/guardian/G in GLOB.parasites)
+	for(var/mob/living/danimal/hostile/guardian/G in GLOB.parasites)
 		if(G.summoner && locate(/obj/effect/proc_holder/spell/aoe_turf/timestop) in G.summoner.mind.spell_list) //It would only make sense that a person's stand would also be immune.
 			immune[G] = TRUE
 	if(start)
@@ -180,18 +180,18 @@
 	ADD_TRAIT(L, TRAIT_MUTE, TIMESTOP_TRAIT)
 	walk(L, 0) //stops them mid pathing even if they're stunimmune
 	if(isanimal(L))
-		var/mob/living/simple_animal/S = L
+		var/mob/living/danimal/S = L
 		S.toggle_ai(AI_OFF)
 		if(ishostile(L))
-			var/mob/living/simple_animal/hostile/H = L
-			H.LoseTarget()
+			var/mob/living/danimal/hostile/H = L
+			H.DropTarget()
 
 /datum/proximity_monitor/advanced/timestop/proc/unfreeze_mob(mob/living/L)
 	L.AdjustStun(-20, 1, 1)
 	REMOVE_TRAIT(L, TRAIT_MUTE, TIMESTOP_TRAIT)
 	frozen_mobs -= L
 	if(isanimal(L))
-		var/mob/living/simple_animal/S = L
+		var/mob/living/danimal/S = L
 		S.toggle_ai(initial(S.AIStatus))
 
 //you don't look quite right, is something the matter?

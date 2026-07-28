@@ -9,7 +9,7 @@
 #define MEDBOT_PANIC_ENDING	90
 #define MEDBOT_PANIC_END	100
 
-/mob/living/simple_animal/bot/medbot
+/mob/living/danimal/bot/medbot
 	name = "\improper Medibot"
 	desc = "A little medical robot. He looks somewhat underwhelmed."
 	icon = 'icons/mob/aibots.dmi'
@@ -77,7 +77,7 @@
 	//The last time we were tipped/righted and said a voice line, to avoid spam
 	var/last_tipping_action_voice = 0
 
-/mob/living/simple_animal/bot/medbot/mysterious
+/mob/living/danimal/bot/medbot/mysterious
 	name = "\improper Mysterious Medibot"
 	desc = "International Medibot of mystery."
 	skin = "bezerk"
@@ -85,7 +85,7 @@
 	treatment_fire = /datum/reagent/medicine/regen_jelly
 	treatment_tox = /datum/reagent/medicine/regen_jelly
 
-/mob/living/simple_animal/bot/medbot/derelict
+/mob/living/danimal/bot/medbot/derelict
 	name = "\improper Old Medibot"
 	desc = "Looks like it hasn't been modified since the late 2080s."
 	skin = "bezerk"
@@ -99,7 +99,7 @@
 	treatment_tox_avoid = null
 	treatment_tox = /datum/reagent/toxin/sodium_thiopental
 
-/mob/living/simple_animal/bot/medbot/update_icon()
+/mob/living/danimal/bot/medbot/update_icon()
 	cut_overlays()
 	if(skin)
 		add_overlay("medskin_[skin]")
@@ -117,7 +117,7 @@
 	else
 		icon_state = "medibot1"
 
-/mob/living/simple_animal/bot/medbot/Initialize(mapload, new_skin)
+/mob/living/danimal/bot/medbot/Initialize(mapload, new_skin)
 	. = ..()
 	var/datum/job/doctor/J = new /datum/job/doctor
 	access_card.access += J.get_access()
@@ -126,11 +126,11 @@
 	skin = new_skin
 	update_icon()
 
-/mob/living/simple_animal/bot/medbot/update_mobility()
+/mob/living/danimal/bot/medbot/update_mobility()
 	. = ..()
 	update_icon()
 
-/mob/living/simple_animal/bot/medbot/bot_reset()
+/mob/living/danimal/bot/medbot/bot_reset()
 	..()
 	patient = null
 	oldpatient = null
@@ -139,23 +139,23 @@
 	declare_cooldown = 0
 	update_icon()
 
-/mob/living/simple_animal/bot/medbot/proc/soft_reset() //Allows the medibot to still actively perform its medical duties without being completely halted as a hard reset does.
+/mob/living/danimal/bot/medbot/proc/soft_reset() //Allows the medibot to still actively perform its medical duties without being completely halted as a hard reset does.
 	path = list()
 	patient = null
 	mode = BOT_IDLE
 	last_found = world.time
 	update_icon()
 
-/mob/living/simple_animal/bot/medbot/set_custom_texts()
+/mob/living/danimal/bot/medbot/set_custom_texts()
 
 	text_hack = "You corrupt [name]'s reagent processor circuits."
 	text_dehack = "You reset [name]'s reagent processor circuits."
 	text_dehack_fail = "[name] seems damaged and does not respond to reprogramming!"
 
-/mob/living/simple_animal/bot/medbot/attack_paw(mob/user)
+/mob/living/danimal/bot/medbot/attack_paw(mob/user)
 	return attack_hand(user)
 
-/mob/living/simple_animal/bot/medbot/get_controls(mob/user)
+/mob/living/danimal/bot/medbot/get_controls(mob/user)
 	var/dat
 	dat += hack(user)
 	dat += showpai(user)
@@ -194,7 +194,7 @@
 
 	return dat
 
-/mob/living/simple_animal/bot/medbot/Topic(href, href_list)
+/mob/living/danimal/bot/medbot/Topic(href, href_list)
 	if(..())
 		return 1
 
@@ -238,7 +238,7 @@
 	update_controls()
 	return
 
-/mob/living/simple_animal/bot/medbot/attackby(obj/item/W as obj, mob/user as mob, params)
+/mob/living/danimal/bot/medbot/attackby(obj/item/W as obj, mob/user as mob, params)
 	if(istype(W, /obj/item/reagent_containers/glass))
 		if(locked)
 			to_chat(user, span_warning("You cannot insert a beaker because the panel is locked!"))
@@ -350,7 +350,7 @@
 		if(health < current_health) //if medbot took some damage
 			step_to(src, (get_step_away(src,user)))
 
-/mob/living/simple_animal/bot/medbot/emag_act(mob/user)
+/mob/living/danimal/bot/medbot/emag_act(mob/user)
 	. = ..()
 	if(emagged == 2)
 		declare_crit = 0
@@ -364,7 +364,7 @@
 		if(user)
 			oldpatient = user
 
-/mob/living/simple_animal/bot/medbot/process_scan(mob/living/carbon/human/H)
+/mob/living/danimal/bot/medbot/process_scan(mob/living/carbon/human/H)
 	if(H.stat == DEAD)
 		return
 
@@ -383,7 +383,7 @@
 	else
 		return
 
-/mob/living/simple_animal/bot/medbot/proc/tip_over(mob/user)
+/mob/living/danimal/bot/medbot/proc/tip_over(mob/user)
 	mobility_flags &= ~MOBILITY_MOVE
 	playsound(src, 'sound/machines/warning-buzzer.ogg', 50)
 	user.visible_message(span_danger("[user] tips over [src]!"), span_danger("You tip [src] over!"))
@@ -391,7 +391,7 @@
 	var/matrix/mat = transform
 	transform = mat.Turn(180)
 
-/mob/living/simple_animal/bot/medbot/proc/set_right(mob/user)
+/mob/living/danimal/bot/medbot/proc/set_right(mob/user)
 	mobility_flags &= MOBILITY_MOVE
 	var/list/messagevoice
 	if(user)
@@ -415,7 +415,7 @@
 	transform = matrix()
 
 // if someone tipped us over, check whether we should ask for help or just right ourselves eventually
-/mob/living/simple_animal/bot/medbot/proc/handle_panic()
+/mob/living/danimal/bot/medbot/proc/handle_panic()
 	tipped_status++
 	var/list/messagevoice
 	switch(tipped_status)
@@ -443,7 +443,7 @@
 	else if(prob(tipped_status * 0.2))
 		playsound(src, 'sound/machines/warning-buzzer.ogg', 30, extrarange=-2)
 
-/mob/living/simple_animal/bot/medbot/examine(mob/user)
+/mob/living/danimal/bot/medbot/examine(mob/user)
 	. = ..()
 	if(tipped_status == MEDBOT_PANIC_NONE)
 		return
@@ -460,7 +460,7 @@
 		if(MEDBOT_PANIC_FUCK to INFINITY)
 			. += span_warning("<b>They are freaking out from being tipped over!</b>")
 
-/mob/living/simple_animal/bot/medbot/handle_automated_action()
+/mob/living/danimal/bot/medbot/handle_automated_action()
 	if(!..())
 		return
 
@@ -539,7 +539,7 @@
 
 	return
 
-/mob/living/simple_animal/bot/medbot/proc/assess_patient(mob/living/carbon/C)
+/mob/living/danimal/bot/medbot/proc/assess_patient(mob/living/carbon/C)
 	//Time to see if they need medical help!
 	if(C.stat == DEAD || (HAS_TRAIT(C, TRAIT_FAKEDEATH)))
 		return FALSE	//welp too late for them!
@@ -592,13 +592,13 @@
 
 	return FALSE
 
-/mob/living/simple_animal/bot/medbot/proc/get_avoidchem_toxin(mob/M)
+/mob/living/danimal/bot/medbot/proc/get_avoidchem_toxin(mob/M)
 	return HAS_TRAIT(M, TRAIT_TOXINLOVER)? null : treatment_tox_avoid
 
-/mob/living/simple_animal/bot/medbot/proc/get_healchem_toxin(mob/M)
+/mob/living/danimal/bot/medbot/proc/get_healchem_toxin(mob/M)
 	return HAS_TRAIT(M, TRAIT_TOXINLOVER)? treatment_tox_toxlover : treatment_tox
 
-/mob/living/simple_animal/bot/medbot/on_attack_hand(mob/living/carbon/human/H)
+/mob/living/danimal/bot/medbot/on_attack_hand(mob/living/carbon/human/H)
 	if(H.a_intent == INTENT_DISARM && mode != BOT_TIPPED)
 		H.visible_message(span_danger("[H] begins tipping over [src]."), span_warning("You begin tipping over [src]..."))
 
@@ -619,7 +619,7 @@
 	else
 		..()
 
-/mob/living/simple_animal/bot/medbot/UnarmedAttack(atom/A, proximity, intent = a_intent, flags = NONE)
+/mob/living/danimal/bot/medbot/UnarmedAttack(atom/A, proximity, intent = a_intent, flags = NONE)
 	if(iscarbon(A))
 		var/mob/living/carbon/C = A
 		patient = C
@@ -630,12 +630,12 @@
 	else
 		..()
 
-/mob/living/simple_animal/bot/medbot/examinate(atom/A as mob|obj|turf in fov_view())
+/mob/living/danimal/bot/medbot/examinate(atom/A as mob|obj|turf in fov_view())
 	..()
 	if(!is_blind(src))
 		chemscan(src, A)
 
-/mob/living/simple_animal/bot/medbot/proc/medicate_patient(mob/living/carbon/C)
+/mob/living/danimal/bot/medbot/proc/medicate_patient(mob/living/carbon/C)
 	if(!on)
 		return
 
@@ -738,7 +738,7 @@
 		soft_reset()
 		return
 
-/mob/living/simple_animal/bot/medbot/proc/check_overdose(mob/living/carbon/patient,reagent_id,injection_amount)
+/mob/living/danimal/bot/medbot/proc/check_overdose(mob/living/carbon/patient,reagent_id,injection_amount)
 	var/datum/reagent/R  = GLOB.chemical_reagents_list[reagent_id]
 	if(!R.overdose_threshold) //Some chems do not have an OD threshold
 		return FALSE
@@ -747,7 +747,7 @@
 		return TRUE
 	return FALSE
 
-/mob/living/simple_animal/bot/medbot/explode()
+/mob/living/danimal/bot/medbot/explode()
 	on = FALSE
 	visible_message(span_boldannounce("[src] blows apart!"))
 	var/atom/Tsec = drop_location()
@@ -768,7 +768,7 @@
 	do_sparks(3, TRUE, src)
 	..()
 
-/mob/living/simple_animal/bot/medbot/proc/declare(crit_patient)
+/mob/living/danimal/bot/medbot/proc/declare(crit_patient)
 	if(declare_cooldown > world.time)
 		return
 	var/area/location = get_area(src)

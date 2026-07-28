@@ -72,7 +72,7 @@
 
 			if(ispath(mobtype, /mob/living/carbon/human) || ispath(mobtype, /mob/living/brain))
 				race = "Humanoid"
-			else if(ispath(mobtype, /mob/living/simple_animal/slime))
+			else if(ispath(mobtype, /mob/living/danimal/slime))
 				race = "Slime"	// NT knows a lot about slimes, but not aliens. Can identify slimes
 			else if(ispath(mobtype, /mob/living/carbon/monkey))
 				race = "Monkey"
@@ -80,7 +80,7 @@
 				race = "Artificial Life"	// sometimes M gets deleted prematurely for AIs... just check the job
 			else if(isobj(mobtype))
 				race = "Machinery"
-			else if(ispath(mobtype, /mob/living/simple_animal))
+			else if(ispath(mobtype, /mob/living/danimal))
 				race = "Domestic Animal"
 			else
 				race = "Unidentifiable"

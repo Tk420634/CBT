@@ -14,7 +14,7 @@
   * - Axe Throw - Throws an axe at the target
   */
 
-/mob/living/simple_animal/hostile/asteroid/elite/minerpriest
+/mob/living/danimal/hostile/asteroid/elite/minerpriest
 	name = "Necropolis Priest"
 	desc = "Once used to be a miner, now a worshipper of the necropolis."
 	icon = 'modular_sand/icons/mob/lavaland/lavaland_elites.dmi'
@@ -44,7 +44,7 @@
 								/datum/action/innate/elite_attack/dash,
 								/datum/action/innate/elite_attack/axe_throw)
 
-/mob/living/simple_animal/hostile/asteroid/elite/minerpriest/ComponentInitialize()
+/mob/living/danimal/hostile/asteroid/elite/minerpriest/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("grabs the priest's arm and breaks it, exposing sharp bone which is promptly shoved inside their skull!", "punches into the priest's guts, ripping off their stomach and whatever else was inside!"), \
@@ -82,7 +82,7 @@
 	chosen_message = span_boldwarning("You will attempt to throw your axe.")
 	chosen_attack_num = AXE_THROW
 
-/mob/living/simple_animal/hostile/asteroid/elite/minerpriest/OpenFire()
+/mob/living/danimal/hostile/asteroid/elite/minerpriest/OpenFire()
 	if(client)
 		switch(chosen_attack)
 			if(AXE_SLAM)
@@ -106,8 +106,8 @@
 			axe_throw(target)
 
 // priest actions
-/mob/living/simple_animal/hostile/asteroid/elite/minerpriest/proc/axe_slam(target)
-	ranged_cooldown = world.time + 30
+/mob/living/danimal/hostile/asteroid/elite/minerpriest/proc/axe_slam(target)
+	ranged_attack_delay = world.time + 30
 	var/dir_to_target = get_dir(get_turf(src), get_turf(target))
 	var/turf/T = get_step(get_turf(src), dir_to_target)
 	for(var/i in 1 to 3)
@@ -121,7 +121,7 @@
 	visible_message(span_boldwarning("[src] slams his axe!"))
 	for(var/i in 1 to 3)
 		for(var/mob/living/L in T.contents)
-			if(faction_check_mob(L))
+			if(mob_faction_is_friendly_to_target(L))
 				return
 			hit_things += L
 			visible_message(span_boldwarning("[src] slams his axe on [L]!"))
@@ -130,8 +130,8 @@
 			L.adjustBruteLoss(30)
 		T = get_step(T, dir_to_target)
 
-/mob/living/simple_animal/hostile/asteroid/elite/minerpriest/proc/summon_shambler(target)
-	ranged_cooldown = world.time + 150
+/mob/living/danimal/hostile/asteroid/elite/minerpriest/proc/summon_shambler(target)
+	ranged_attack_delay = world.time + 150
 	visible_message(span_boldwarning("[src] summons a minion!"))
 	playsound(src,'sound/magic/CastSummon.ogg', 200, 1)
 	var/list/turfs = list()
@@ -139,12 +139,12 @@
 		turfs += T
 	var/turf/pick1 = pick(turfs)
 	new /obj/effect/temp_visual/small_smoke/halfsecond(pick1)
-	var/mob/living/simple_animal/hostile/asteroid/miner/m1 = new /mob/living/simple_animal/hostile/asteroid/miner(pick1)
+	var/mob/living/danimal/hostile/asteroid/miner/m1 = new /mob/living/danimal/hostile/asteroid/miner(pick1)
 	m1.faction = faction.Copy()
 	m1.GiveTarget(target)
 
-/mob/living/simple_animal/hostile/asteroid/elite/minerpriest/proc/dash(atom/dash_target)
-	ranged_cooldown = world.time + 20
+/mob/living/danimal/hostile/asteroid/elite/minerpriest/proc/dash(atom/dash_target)
+	ranged_attack_delay = world.time + 20
 	visible_message(span_boldwarning("[src] dashes into the air!"))
 	playsound(src,'sound/magic/blink.ogg', 200, 1)
 	var/list/accessable_turfs = list()
@@ -183,15 +183,15 @@
 	return TRUE
 
 
-/mob/living/simple_animal/hostile/asteroid/elite/minerpriest/proc/axe_throw(target)
-	ranged_cooldown = world.time + 20
+/mob/living/danimal/hostile/asteroid/elite/minerpriest/proc/axe_throw(target)
+	ranged_attack_delay = world.time + 20
 	visible_message(span_boldwarning("[src] prepares to throw his axe!"))
 	var/turf/targetturf = get_turf(target)
 	playsound(src,'sound/weapons/fwoosh.wav', 200, 1)
 	Shoot(targetturf)
 	new /obj/item/melee/diamondaxe/priest(targetturf)
 
-/mob/living/simple_animal/hostile/asteroid/elite/minerpriest/drop_loot()
+/mob/living/danimal/hostile/asteroid/elite/minerpriest/drop_loot()
 	var/mob/living/carbon/human/H = new /mob/living/carbon/human(src.loc)
 	if(src.client)
 		H.client = src.client

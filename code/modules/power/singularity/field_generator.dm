@@ -141,7 +141,7 @@ field_generator power level display
 	return TRUE
 
 
-/obj/machinery/field/generator/attack_animal(mob/living/simple_animal/M)
+/obj/machinery/field/generator/attack_animal(mob/living/danimal/M)
 	if(M.environment_smash & ENVIRONMENT_SMASH_RWALLS && active == FG_OFFLINE && state != FG_UNSECURED)
 		state = FG_UNSECURED
 		anchored = FALSE

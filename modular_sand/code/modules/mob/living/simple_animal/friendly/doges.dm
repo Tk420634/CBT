@@ -5,7 +5,7 @@
 //note: will probably add hat and fluff functionality later
 //note 2: will probably get a better sprite later
 //note 3: ignore note 2 the sprite is actually good now
-/mob/living/simple_animal/pet/dog/cheems
+/mob/living/danimal/pet/dog/cheems
 	name = "\proper Cheems"
 	desc = "Cargo's overfed and slightly greasy disposal bin."
 	icon = 'modular_sand/icons/mob/doges.dmi'
@@ -15,10 +15,10 @@
 	//speak = list("Borf!", "Boof!", "Bork!")
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/burger/cheese = 1, /obj/item/reagent_containers/food/snacks/meat/slab = 2, /obj/item/trash/syndi_cakes = 1)
 	faction = list("dog", "doge")
-	animal_species = /mob/living/simple_animal/pet/dog
+	animal_species = /mob/living/danimal/pet/dog
 	gold_core_spawnable = FRIENDLY_SPAWN
 
-/mob/living/simple_animal/pet/dog/cheems/Move(atom/newloc, direct)
+/mob/living/danimal/pet/dog/cheems/Move(atom/newloc, direct)
 	. = ..()
 	if(.)
 		for(var/obj/item/reagent_containers/food/snacks/burger/burbger in view(1, src))
@@ -26,7 +26,7 @@
 			qdel(burbger)
 			revive(full_heal = 1)
 
-/mob/living/simple_animal/pet/dog/cheems/attacked_by(obj/item/I, mob/living/user)
+/mob/living/danimal/pet/dog/cheems/attacked_by(obj/item/I, mob/living/user)
 	. = ..()
 	if(.)
 		if(istype(I, /obj/item/reagent_containers/food/snacks/burger))
@@ -47,7 +47,7 @@
 		name = "supermatter-charged [initial(name)]"
 		consumedSupermatter = 1
 		set_light(10)
-	if(istype(A, /mob/living/simple_animal/pet/dog/cheems))
+	if(istype(A, /mob/living/danimal/pet/dog/cheems))
 		new /obj/singularity/cheemgularity(get_turf(src))
 		qdel(src)
 

@@ -1088,32 +1088,35 @@ GLOBAL_VAR_INIT(exploit_warn_spam_prevention, 0)
 /mob/proc/canUseStorage()
 	return FALSE
 
-/mob/proc/faction_check_mob(mob/target, exact_match, list/override)
-	if(exact_match) //if we need an exact match, we need to do some bullfuckery.
-		var/list/faction_src = faction.Copy()
-		var/list/faction_target = target.faction.Copy()
-		if(!("[REF(src)]" in faction_target)) //if they don't have our ref faction, remove it from our factions list.
-			faction_src -= "[REF(src)]" //if we don't do this, we'll never have an exact match.
-		if(!("[REF(target)]" in faction_src))
-			faction_target -= "[REF(target)]" //same thing here.
-		return faction_check(faction_src, faction_target, TRUE)
-	return faction_check(faction, target.faction, FALSE)
+/mob/proc/mob_faction_is_friendly_to_target(mob/target, exact_match)
+	if(!exact_match)
+		return factions_are_friendly(faction, target.faction, FALSE)
+	//if we need an exact match, we need to do some bullfuckery.
+	// just conditioning the input lists to remove any mob-specific references that arent shared between the two
+	// cus if we don't do this, we'll never have an exact match, even if they should have one!
+	var/list/faction_src = faction.Copy()
+	var/list/faction_target = target.faction.Copy()
+	var/myref = "[REF(src)]"
+	var/theirref = "[REF(target)]"
+	if(!(myref in faction_target)) //if they don't have our ref faction, remove it from our factions list.
+		faction_src -= myref //if we don't do this, we'll never have an exact match.
+	if(!(theirref in faction_src))
+		faction_target -= theirref //same thing here.
+	return factions_are_friendly(faction_src, faction_target, TRUE)
 
-/proc/faction_check(list/faction_A, list/faction_B, exact_match)
+// exact match is used in like one place, annoyingly enough
+/proc/factions_are_friendly(list/faction_A, list/faction_B, exact_match)
 	if(!islist(faction_A))
 		faction_A = list(faction_A)
 	if(!islist(faction_B))
 		faction_B = list(faction_B)
-	var/list/match_list
-	if(exact_match)
-		match_list = faction_A&faction_B //only items in both lists
-		var/length = LAZYLEN(match_list)
-		if(length)
-			return (length == LAZYLEN(faction_A)) //if they're not the same len(gth) or we don't have a len, then this isn't an exact match.
+	// number of factions in common between the two lists
+	var/list/match_list = faction_A & faction_B
+	var/match_len = LAZYLEN(match_list)
+	if(exact_match) // lists the same length? very likely to be identical
+		return (match_len == LAZYLEN(faction_A) && match_len == LAZYLEN(faction_B))
 	else
-		match_list = faction_A&faction_B
 		return LAZYLEN(match_list)
-	return FALSE
 
 
 //This will update a mob's name, real_name, mind.name, GLOB.data_core records, pda, id and traitor text

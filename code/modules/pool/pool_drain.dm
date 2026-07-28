@@ -149,12 +149,12 @@
 
 /obj/machinery/pool/filter/proc/spawn_shark()
 	if(prob(50))
-		new /mob/living/simple_animal/hostile/shark(loc)
+		new /mob/living/danimal/hostile/shark(loc)
 	else
 		if(prob(50))
-			new /mob/living/simple_animal/hostile/shark/kawaii(loc)
+			new /mob/living/danimal/hostile/shark/kawaii(loc)
 		else
-			new /mob/living/simple_animal/hostile/shark/laser(loc)
+			new /mob/living/danimal/hostile/shark/laser(loc)
 
 /obj/machinery/pool/filter/on_attack_hand(mob/user, act_intent = user.a_intent, unarmed_attack_flags)
 	to_chat(user, "You search the filter.")

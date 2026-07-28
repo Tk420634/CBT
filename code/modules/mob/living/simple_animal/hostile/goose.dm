@@ -1,6 +1,6 @@
 #define GOOSE_SATIATED 50
 
-/mob/living/simple_animal/hostile/retaliate/goose
+/mob/living/danimal/hostile/retaliate/goose
 	name = "goose"
 	desc = "It's loose"
 	icon_state = "goose" // sprites by cogwerks from goonstation, used with permission
@@ -21,7 +21,6 @@
 	speed = 0
 	maxHealth = 25
 	health = 25
-	harm_intent_damage = 5
 	melee_damage_lower = 5
 	melee_damage_upper = 5
 	attack_verb_continuous = "pecks"
@@ -33,13 +32,13 @@
 	gold_core_spawnable = HOSTILE_SPAWN
 	var/random_retaliate = TRUE
 
-/mob/living/simple_animal/hostile/retaliate/goose/handle_automated_movement()
+/mob/living/danimal/hostile/retaliate/goose/handle_automated_movement()
 	. = ..()
 	if(prob(5) && random_retaliate == TRUE)
 		Retaliate()
 
 
-/mob/living/simple_animal/hostile/goose
+/mob/living/danimal/hostile/goose
 	name = "angry goose"
 	desc = "It's loose"
 	icon_state = "goose"
@@ -60,7 +59,6 @@
 	speed = 0
 	maxHealth = 25
 	health = 25
-	harm_intent_damage = 5
 	melee_damage_lower = 5
 	melee_damage_upper = 15
 	attack_verb_continuous = "pecks"
@@ -75,7 +73,7 @@
 	death_sound = 'sound/effects/goose.ogg'
 	var/random_retaliate = TRUE
 
-/mob/living/simple_animal/hostile/goose/Initialize(mapload, nest_spawned)
+/mob/living/danimal/hostile/goose/Initialize(mapload, nest_spawned)
 	. = ..()
 	if(prob(3))
 		name = "angry bird"

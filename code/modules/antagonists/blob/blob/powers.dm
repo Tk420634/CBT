@@ -176,7 +176,7 @@
 		B.update_icon()
 		B.visible_message(span_warning("<b>The blobbernaut [pick("rips", "tears", "shreds")] its way out of the factory blob!</b>"))
 		playsound(B.loc, 'sound/effects/splat.ogg', 50, 1)
-		var/mob/living/simple_animal/hostile/blob/blobbernaut/blobber = new /mob/living/simple_animal/hostile/blob/blobbernaut(get_turf(B))
+		var/mob/living/danimal/hostile/blob/blobbernaut/blobber = new /mob/living/danimal/hostile/blob/blobbernaut(get_turf(B))
 		flick("blobbernaut_produce", blobber)
 		B.naut = blobber
 		blobber.factory = B
@@ -314,10 +314,10 @@
 	var/list/surrounding_turfs = block(locate(T.x - 1, T.y - 1, T.z), locate(T.x + 1, T.y + 1, T.z))
 	if(!surrounding_turfs.len)
 		return
-	for(var/mob/living/simple_animal/hostile/blob/blobspore/BS in blob_mobs)
+	for(var/mob/living/danimal/hostile/blob/blobspore/BS in blob_mobs)
 		if(isturf(BS.loc) && get_dist(BS, T) <= 35)
-			BS.LoseTarget()
-			BS.Goto(pick(surrounding_turfs), BS.move_to_delay)
+			BS.DropTarget()
+			BS.perform_move_action(pick(surrounding_turfs), BS.move_to_delay)
 
 /mob/camera/blob/verb/blob_broadcast()
 	set category = "Blob"
@@ -329,7 +329,7 @@
 	else
 		to_chat(src, "You broadcast with your minions, <B>[speak_text]</B>")
 	for(var/BLO in blob_mobs)
-		var/mob/living/simple_animal/hostile/blob/BM = BLO
+		var/mob/living/danimal/hostile/blob/BM = BLO
 		if(BM.stat == CONSCIOUS)
 			BM.say(speak_text)
 

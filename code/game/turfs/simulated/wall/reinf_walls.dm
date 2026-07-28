@@ -42,7 +42,7 @@
 	new sheet_type(src, sheet_amount)
 	new /obj/item/stack/sheet/metal(src, 2)
 
-/turf/closed/wall/r_wall/attack_animal(mob/living/simple_animal/M)
+/turf/closed/wall/r_wall/attack_animal(mob/living/danimal/M)
 	if(!M.CheckActionCooldown())
 		return
 	M.do_attack_animation(src)

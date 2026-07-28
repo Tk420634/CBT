@@ -437,14 +437,14 @@ superlagg says: cool story, oranges
 /obj/item/melee/flyswatter/Initialize()
 	. = ..()
 	strong_against = typecacheof(list(
-					/mob/living/simple_animal/hostile/poison/bees/,
-					/mob/living/simple_animal/butterfly,
-					/mob/living/simple_animal/cockroach,
+					/mob/living/danimal/hostile/poison/bees/,
+					/mob/living/danimal/butterfly,
+					/mob/living/danimal/cockroach,
 					/obj/item/queen_bee
 	))
 	spider_panic = typecacheof(list(
-					/mob/living/simple_animal/banana_spider,
-					/mob/living/simple_animal/hostile/poison/giant_spider,
+					/mob/living/danimal/banana_spider,
+					/mob/living/danimal/hostile/poison/giant_spider,
 	))
 
 /obj/item/melee/flyswatter/afterattack(atom/target, mob/user, proximity_flag)

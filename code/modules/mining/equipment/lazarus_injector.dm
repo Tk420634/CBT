@@ -21,7 +21,7 @@
 		return
 	if(isliving(target) && proximity_flag)
 		if(isanimal(target))
-			var/mob/living/simple_animal/M = target
+			var/mob/living/danimal/M = target
 			if(M.sentience_type != revive_type)
 				to_chat(user, span_info("[src] does not work on this sort of creature."))
 				return
@@ -30,11 +30,11 @@
 				M.revive(full_heal = 1, admin_revive = 1)
 				M.make_ghostable(user)
 				if(ishostile(target))
-					var/mob/living/simple_animal/hostile/H = M
+					var/mob/living/danimal/hostile/H = M
 					if(malfunctioning)
 						H.faction |= list("lazarus", "[REF(user)]")
-						H.robust_searching = 1
-						H.friends[user]++
+						H.robust_searching = TRUE
+						H.friends[WEAKREF(user)] = TRUE
 						H.attack_same = 1
 						log_game("[key_name(user)] has revived hostile mob [key_name(target)] with a malfunctioning lazarus injector")
 					else
@@ -96,7 +96,7 @@
 	. = ..()
 	if(isliving(target) && proximity_flag)
 		if(isanimal(target))
-			var/mob/living/simple_animal/M = target
+			var/mob/living/danimal/M = target
 			if(M.sentience_type != revive_type)
 				to_chat(user, span_info("[src] needs a good biofuel source to reanimate."))
 				return
@@ -135,7 +135,7 @@
 	. = ..()
 	if(isliving(target) && proximity_flag)
 		if(isanimal(target))
-			var/mob/living/simple_animal/M = target
+			var/mob/living/danimal/M = target
 			if(M.sentience_type != revive_type)
 				to_chat(user, span_info("[src] needs a good biofuel source to reanimate."))
 				return
@@ -238,7 +238,7 @@
 	. = ..()
 	if(isliving(target) && proximity_flag)
 		if(isanimal(target))
-			var/mob/living/simple_animal/M = target
+			var/mob/living/danimal/M = target
 			if(M.sentience_type != revive_type)
 				to_chat(user, span_info("[src] is too strong to reanimate with such a simple book."))
 				return

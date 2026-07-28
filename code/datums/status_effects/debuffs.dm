@@ -73,7 +73,7 @@
 	needs_update_stat = TRUE
 	var/mob/living/carbon/carbon_owner
 	var/mob/living/carbon/human/human_owner
-	var/mob/living/simple_animal/SA_owner
+	var/mob/living/danimal/SA_owner
 
 /datum/status_effect/incapacitating/sleeping/on_creation(mob/living/new_owner, set_duration, updating_canmove)
 	. = ..()
@@ -804,7 +804,7 @@
 				spawn_turf = locate(owner.x + pick(rand(10, 15), rand(-10, -15)), owner.y + pick(rand(10, 15), rand(-10, -15)), owner.z)
 				sanity--
 			if(spawn_turf)
-				var/mob/living/simple_animal/hostile/asteroid/curseblob/C = new (spawn_turf)
+				var/mob/living/danimal/hostile/asteroid/curseblob/C = new (spawn_turf)
 				C.set_target = owner
 				C.GiveTarget()
 		if(curse_flags & CURSE_GRASPING)

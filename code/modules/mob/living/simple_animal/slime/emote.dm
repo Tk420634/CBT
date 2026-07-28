@@ -1,5 +1,5 @@
 /datum/emote/slime
-	mob_type_allowed_typecache = /mob/living/simple_animal/slime
+	mob_type_allowed_typecache = /mob/living/danimal/slime
 
 /datum/emote/slime/bounce
 	key = "bounce"
@@ -27,7 +27,7 @@
 
 /datum/emote/slime/mood/run_emote(mob/user, params)
 	. = ..()
-	var/mob/living/simple_animal/slime/S = user
+	var/mob/living/danimal/slime/S = user
 	S.mood = mood
 	S.regenerate_icons()
 

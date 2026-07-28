@@ -103,7 +103,7 @@
 				// 		to_chat(user, "[killreward] materializes onto the floor.")
 				// 	user.action_cooldown_mod *= 0.8
 				// 	to_chat(user, "Things around you feel slightly slower!")
-				// 	var/mob/living/simple_animal/hostile/venus_human_trap/killwish = new /mob/living/simple_animal/hostile/venus_human_trap(loc)
+				// 	var/mob/living/danimal/hostile/venus_human_trap/killwish = new /mob/living/danimal/hostile/venus_human_trap(loc)
 				// 	killwish.maxHealth = 1500
 				// 	killwish.health = killwish.maxHealth
 				// 	killwish.vine_grab_distance = 6

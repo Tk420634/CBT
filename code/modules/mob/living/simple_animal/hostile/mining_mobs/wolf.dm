@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/asteroid/wolf
+/mob/living/danimal/hostile/asteroid/wolf
 	name = "white wolf"
 	desc = "A beast that survives by feasting on weaker opponents, they're much stronger with numbers."
 	icon = 'icons/mob/icemoon/icemoon_monsters.dmi'
@@ -17,8 +17,8 @@
 	obj_damage = 15
 	melee_damage_lower = 15
 	melee_damage_upper = 35
-	rapid_melee = 2 // every second attack
-	dodging = TRUE
+	melee_attacks_per_turn = 2 // every second attack
+	can_dodge_in_melee = TRUE
 	dodge_prob = 50
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
@@ -30,7 +30,7 @@
 	pull_force = MOVE_FORCE_WEAK
 	guaranteed_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab = 2, /obj/item/stack/sheet/sinew = 2, /obj/item/stack/sheet/bone = 2)
 	crusher_loot = /obj/item/crusher_trophy/watcher_wing
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	retreat_health_percent = 0.5
 	max_heal_amount = 0.9
 	heal_per_life = 0.115

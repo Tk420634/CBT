@@ -169,7 +169,7 @@
 	invocation_type = "shout"
 	range = 1
 
-	summon_type = list(/mob/living/simple_animal/hostile/carp)
+	summon_type = list(/mob/living/danimal/hostile/carp)
 	cast_sound = 'sound/magic/summon_karp.ogg'
 
 
@@ -202,7 +202,7 @@
 	summon_amt = 10
 	range = 3
 
-	summon_type = list(/mob/living/simple_animal/hostile/netherworld)
+	summon_type = list(/mob/living/danimal/hostile/netherworld)
 	cast_sound = 'sound/magic/summonitems_generic.ogg'
 
 /obj/effect/proc_holder/spell/aoe_turf/conjure/creature/cult

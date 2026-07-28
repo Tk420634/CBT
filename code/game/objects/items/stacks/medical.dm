@@ -400,7 +400,7 @@
 /obj/item/stack/medical/proc/heal_critter(mob/living/M, mob/living/user, just_check)
 	if(!isanimal(M))
 		return
-	var/mob/living/simple_animal/critter = M
+	var/mob/living/danimal/critter = M
 	if(M.stat == DEAD)
 		to_chat(user, span_notice("[M] is dead. You can not help [M.p_them()]!"))
 		return

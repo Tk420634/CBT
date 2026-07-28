@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/mimic
+/mob/living/danimal/hostile/mimic
 	name = "crate"
 	desc = "A rectangular steel crate."
 	icon = 'icons/obj/crates.dmi'
@@ -18,7 +18,6 @@
 	gender = NEUTER
 	mob_biotypes = NONE
 
-	harm_intent_damage = 5
 	melee_damage_lower = 8
 	melee_damage_upper = 12
 	attack_verb_continuous = "attacks"
@@ -28,7 +27,7 @@
 	speak_emote = list("creaks")
 	taunt_chance = 30
 
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 0
 
 	faction = list("mimic")
@@ -37,39 +36,38 @@
 	del_on_death = 1
 
 // Aggro when you try to open them. Will also pickup loot when spawns and drop it when dies.
-/mob/living/simple_animal/hostile/mimic/crate
+/mob/living/danimal/hostile/mimic/crate
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
 	speak_emote = list("clatters")
-	stop_automated_movement = 1
+	stop_wandering = 1
 	wander = 0
 	var/attempt_open = FALSE
 
 // Pickup loot
-/mob/living/simple_animal/hostile/mimic/crate/Initialize(mapload)
+/mob/living/danimal/hostile/mimic/crate/Initialize(mapload)
 	. = ..()
 	if(mapload)	//eat shit
 		for(var/obj/item/I in loc)
 			I.forceMove(src)
 
-/mob/living/simple_animal/hostile/mimic/crate/DestroyPathToTarget()
+/mob/living/danimal/hostile/mimic/crate/DestroyPathToTarget()
 	..()
 	if(prob(90))
 		icon_state = "[initial(icon_state)]open"
 	else
 		icon_state = initial(icon_state)
 
-/mob/living/simple_animal/hostile/mimic/crate/ListTargets()
+/mob/living/danimal/hostile/mimic/crate/ListTargets()
 	if(attempt_open)
 		return ..()
 	return ..(1)
 
-/mob/living/simple_animal/hostile/mimic/crate/FindTarget()
+/mob/living/danimal/hostile/mimic/crate/OnTargetGained()
 	. = ..()
-	if(.)
-		trigger()
+	trigger()
 
-/mob/living/simple_animal/hostile/mimic/crate/AttackingTarget()
+/mob/living/danimal/hostile/mimic/crate/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!.)
@@ -81,20 +79,20 @@
 		C.visible_message(span_danger("\The [src] knocks down \the [C]!"), \
 				span_userdanger("\The [src] knocks you down!"))
 
-/mob/living/simple_animal/hostile/mimic/crate/proc/trigger()
+/mob/living/danimal/hostile/mimic/crate/proc/trigger()
 	if(!attempt_open)
 		visible_message("<b>[src]</b> starts to move!")
 		attempt_open = TRUE
 
-/mob/living/simple_animal/hostile/mimic/crate/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/danimal/hostile/mimic/crate/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	trigger()
 	. = ..()
 
-/mob/living/simple_animal/hostile/mimic/crate/LoseTarget()
+/mob/living/danimal/hostile/mimic/crate/OnTargetLost()
 	..()
 	icon_state = initial(icon_state)
 
-/mob/living/simple_animal/hostile/mimic/crate/death()
+/mob/living/danimal/hostile/mimic/crate/death()
 	var/obj/structure/closet/crate/C = new(get_turf(src))
 	// Put loot in crate
 	for(var/obj/O in src)
@@ -103,7 +101,7 @@
 
 GLOBAL_LIST_INIT(protected_objects, list(/obj/structure/table, /obj/structure/cable, /obj/structure/window))
 
-/mob/living/simple_animal/hostile/mimic/copy
+/mob/living/danimal/hostile/mimic/copy
 	health = 100
 	maxHealth = 100
 	var/mob/living/creator = null // the creator
@@ -114,13 +112,13 @@ GLOBAL_LIST_INIT(protected_objects, list(/obj/structure/table, /obj/structure/ca
 	var/idledamage = TRUE
 	gold_core_spawnable = NO_SPAWN
 
-/mob/living/simple_animal/hostile/mimic/copy/Initialize(mapload, obj/copy, mob/living/creator, destroy_original = 0, no_googlies = FALSE)
+/mob/living/danimal/hostile/mimic/copy/Initialize(mapload, obj/copy, mob/living/creator, destroy_original = 0, no_googlies = FALSE)
 	. = ..()
 	if (no_googlies)
 		overlay_googly_eyes = FALSE
 	CopyObject(copy, creator, destroy_original)
 
-/mob/living/simple_animal/hostile/mimic/copy/BiologicalLife(seconds, times_fired)
+/mob/living/danimal/hostile/mimic/copy/BiologicalLife(seconds, times_fired)
 	if(!(. = ..()))
 		return
 	if(idledamage && !get_target() && !ckey) //Objects eventually revert to normal if no one is around to terrorize
@@ -128,27 +126,27 @@ GLOBAL_LIST_INIT(protected_objects, list(/obj/structure/table, /obj/structure/ca
 	for(var/mob/living/M in contents) //a fix for animated statues from the flesh to stone spell
 		death()
 
-/mob/living/simple_animal/hostile/mimic/copy/death()
+/mob/living/danimal/hostile/mimic/copy/death()
 	for(var/atom/movable/M in src)
 		M.forceMove(get_turf(src))
 	..()
 
-/mob/living/simple_animal/hostile/mimic/copy/ListTargets()
+/mob/living/danimal/hostile/mimic/copy/ListTargets()
 	. = ..()
 	return . - creator
 
-/mob/living/simple_animal/hostile/mimic/copy/proc/ChangeOwner(mob/owner)
+/mob/living/danimal/hostile/mimic/copy/proc/ChangeOwner(mob/owner)
 	if(owner != creator)
-		LoseTarget()
+		DropTarget()
 		creator = owner
 		faction |= "[REF(owner)]"
 
-/mob/living/simple_animal/hostile/mimic/copy/proc/CheckObject(obj/O)
+/mob/living/danimal/hostile/mimic/copy/proc/CheckObject(obj/O)
 	if((isitem(O) || isstructure(O)) && !is_type_in_list(O, GLOB.protected_objects))
 		return 1
 	return 0
 
-/mob/living/simple_animal/hostile/mimic/copy/proc/CopyObject(obj/O, mob/living/user, destroy_original = 0)
+/mob/living/danimal/hostile/mimic/copy/proc/CopyObject(obj/O, mob/living/user, destroy_original = 0)
 	if(destroy_original || CheckObject(O))
 		O.forceMove(src)
 		name = O.name
@@ -180,11 +178,11 @@ GLOBAL_LIST_INIT(protected_objects, list(/obj/structure/table, /obj/structure/ca
 			qdel(O)
 		return 1
 
-/mob/living/simple_animal/hostile/mimic/copy/DestroySurroundings()
+/mob/living/danimal/hostile/mimic/copy/DestroySurroundings()
 	if(destroy_objects)
 		..()
 
-/mob/living/simple_animal/hostile/mimic/copy/AttackingTarget()
+/mob/living/danimal/hostile/mimic/copy/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(knockdown_people && . && prob(15) && iscarbon(my_target))
@@ -193,12 +191,12 @@ GLOBAL_LIST_INIT(protected_objects, list(/obj/structure/table, /obj/structure/ca
 		C.visible_message(span_danger("\The [src] knocks down \the [C]!"), \
 				span_userdanger("\The [src] knocks you down!"))
 
-/mob/living/simple_animal/hostile/mimic/copy/machine
+/mob/living/danimal/hostile/mimic/copy/machine
 	//speak = list("HUMANS ARE IMPERFECT!", "YOU SHALL BE ASSIMILATED!", "YOU ARE HARMING YOURSELF", "You have been deemed hazardous. Will you comply?", 
 				//"My logic is undeniable.", "One of us.", "FLESH IS WEAK", "THIS ISN'T WAR, THIS IS EXTERMINATION!")
 	speak_chance = 7
 
-/mob/living/simple_animal/hostile/mimic/copy/machine/CanAttack(atom/the_target)
+/mob/living/danimal/hostile/mimic/copy/machine/EvalTarget(atom/the_target)
 	if(the_target == creator) // Don't attack our creator AI.
 		return 0
 	if(iscyborg(the_target))
@@ -207,18 +205,18 @@ GLOBAL_LIST_INIT(protected_objects, list(/obj/structure/table, /obj/structure/ca
 			return 0
 	return ..()
 
-/mob/living/simple_animal/hostile/mimic/copy/ranged
+/mob/living/danimal/hostile/mimic/copy/ranged
 	var/obj/item/gun/TrueGun = null
 	var/obj/item/gun/magic/Zapstick
 	var/obj/item/gun/ballistic/Pewgun
 	var/obj/item/gun/energy/Zapgun
 
-/mob/living/simple_animal/hostile/mimic/copy/ranged/CopyObject(obj/O, mob/living/creator, destroy_original = 0)
+/mob/living/danimal/hostile/mimic/copy/ranged/CopyObject(obj/O, mob/living/creator, destroy_original = 0)
 	if(..())
 		emote_see = list("aims menacingly")
 		obj_damage = 0
 		environment_smash = ENVIRONMENT_SMASH_NONE //needed? seems weird for them to do so
-		ranged = 1
+		can_ranged_attack = TRUE
 		retreat_distance = 1 //just enough to shoot
 		minimum_distance = 6
 		var/obj/item/gun/G = O
@@ -240,7 +238,7 @@ GLOBAL_LIST_INIT(protected_objects, list(/obj/structure/table, /obj/structure/ca
 			var/obj/item/ammo_casing/energy/E = Zapgun.ammo_type[Zapgun.current_firemode_index]
 			projectiletype = initial(E.projectile_type)
 
-/mob/living/simple_animal/hostile/mimic/copy/ranged/OpenFire(the_target)
+/mob/living/danimal/hostile/mimic/copy/ranged/OpenFire(the_target)
 	if(Zapgun)
 		if(Zapgun.cell)
 			var/obj/item/ammo_casing/energy/shot = Zapgun.ammo_type[Zapgun.current_firemode_index]
@@ -273,7 +271,7 @@ GLOBAL_LIST_INIT(protected_objects, list(/obj/structure/table, /obj/structure/ca
 			Pewgun.chambered.forceMove(Pewgun)
 			visible_message(span_danger("The <b>[src]</b> cocks itself!"))
 	else
-		ranged = 0 //BANZAIIII
+		can_ranged_attack = FALSE //BANZAIIII
 		retreat_distance = 0
 		minimum_distance = 1
 		return

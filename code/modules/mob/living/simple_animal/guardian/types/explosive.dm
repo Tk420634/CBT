@@ -1,5 +1,5 @@
 //Bomb
-/mob/living/simple_animal/hostile/guardian/bomb
+/mob/living/danimal/hostile/guardian/bomb
 	damage_coeff = list(BRUTE = 0.6, BURN = 0.6, TOX = 0.6, CLONE = 0.6, STAMINA = 0, OXY = 0.6)
 	playstyle_string = "<span class='holoparasite'>As an <b>explosive</b> type, you have moderate close combat abilities, take half damage, may explosively teleport targets on attack, and are capable of converting nearby items and objects into disguised bombs via alt click.</span>"
 	magic_fluff_string = span_holoparasite("..And draw the Scientist, master of explosive death.")
@@ -7,12 +7,12 @@
 	carp_fluff_string = span_holoparasite("CARP CARP CARP! Caught one! It's an explosive carp! Boom goes the fishy.")
 	var/bomb_cooldown = 0
 
-/mob/living/simple_animal/hostile/guardian/bomb/get_status_tab_items()
+/mob/living/danimal/hostile/guardian/bomb/get_status_tab_items()
 	. = ..()
 	if(bomb_cooldown >= world.time)
 		. += "Bomb Cooldown Remaining: [DisplayTimeText(bomb_cooldown - world.time)]"
 
-/mob/living/simple_animal/hostile/guardian/bomb/AttackingTarget()
+/mob/living/danimal/hostile/guardian/bomb/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!. || !prob(40) || !isliving(my_target))
@@ -29,7 +29,7 @@
 			L.apply_damage(15, BRUTE)
 	new /obj/effect/temp_visual/explosion(get_turf(M))
 
-/mob/living/simple_animal/hostile/guardian/bomb/AltClickOn(atom/movable/A)
+/mob/living/danimal/hostile/guardian/bomb/AltClickOn(atom/movable/A)
 	if(!istype(A))
 		AltClickNoInteract(src, A)
 		return
@@ -46,7 +46,7 @@
 		else
 			to_chat(src, "<span class='danger'><B>Your powers are on cooldown! You must wait 20 seconds between bombs.</span></B>")
 
-/mob/living/simple_animal/hostile/guardian/bomb/proc/on_explode(atom/bomb, atom/victim)
+/mob/living/danimal/hostile/guardian/bomb/proc/on_explode(atom/bomb, atom/victim)
 	if((victim == src) || (victim == summoner) || (hasmatchingsummoner(victim)))
 		to_chat(victim, "<span class='holoparasite'>[src] glows with a strange <font color=\"[guardiancolor]\">light</font>, and you don't touch it.</span>")
 		return FALSE
@@ -54,5 +54,5 @@
 	to_chat(victim, span_danger("[bomb] was boobytrapped!"))
 	return TRUE
 
-/mob/living/simple_animal/hostile/guardian/bomb/proc/on_failure(atom/bomb)
+/mob/living/danimal/hostile/guardian/bomb/proc/on_failure(atom/bomb)
 	to_chat(src, "<span class='danger'><b>Failure! Your trap didn't catch anyone this time.</span></B>")

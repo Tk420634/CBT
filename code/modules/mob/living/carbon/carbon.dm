@@ -1163,10 +1163,6 @@
 			hud_used.healths.icon_state = "health21"
 
 /mob/living/proc/attackable_in_crit()
-	if(!InCritical())
-		return TRUE
-	if(InFullCritical())
-		return FALSE
 	if(InCritical() && in_crit_HP_penalty > 0)
 		return TRUE
 

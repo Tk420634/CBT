@@ -11,7 +11,7 @@
 /obj/effect/overlay/typing_indicator/machine/dogborg
 	icon = 'modular_sand/icons/mob/talk.dmi'
 
-/mob/living/simple_animal/slime
+/mob/living/danimal/slime
 	typing_indicator_state = /obj/effect/overlay/typing_indicator/slime
 
 /obj/effect/overlay/typing_indicator/slime

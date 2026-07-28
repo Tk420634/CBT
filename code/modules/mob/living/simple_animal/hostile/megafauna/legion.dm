@@ -16,7 +16,7 @@ Difficulty: Medium
 
 */
 
-/mob/living/simple_animal/hostile/megafauna/legion
+/mob/living/danimal/hostile/megafauna/legion
 	name = "Legion"
 	health = 800
 	maxHealth = 800
@@ -33,11 +33,11 @@ Difficulty: Medium
 	melee_damage_upper = 25
 	speed = 1
 	move_to_delay = 2
-	ranged = 1
+	can_ranged_attack = TRUE
 	del_on_death = 1
 	retreat_distance = 5
 	minimum_distance = 5
-	ranged_cooldown_time = 10
+	ranged_cooldown_duration = 10
 	var/size = 5
 	var/charging = 0
 	medal_type = BOSS_MEDAL_LEGION
@@ -53,40 +53,40 @@ Difficulty: Medium
 	wound_bonus = -40
 	bare_wound_bonus = 20
 
-/mob/living/simple_animal/hostile/megafauna/legion/Initialize()
+/mob/living/danimal/hostile/megafauna/legion/Initialize()
 	. = ..()
 	internal = new/obj/item/gps/internal/legion(src)
 
-/mob/living/simple_animal/hostile/megafauna/legion/GiveTarget(new_target)
+/mob/living/danimal/hostile/megafauna/legion/GiveTarget(new_target)
 	. = ..()
 	if(get_target())
 		wander = TRUE
 
-/mob/living/simple_animal/hostile/megafauna/legion/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/danimal/hostile/megafauna/legion/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	if(GLOB.necropolis_gate)
 		GLOB.necropolis_gate.toggle_the_gate(null, TRUE) //very clever.
 	return ..()
 
-/mob/living/simple_animal/hostile/megafauna/legion/AttackingTarget()
+/mob/living/danimal/hostile/megafauna/legion/AttackingTarget()
 	. = ..()
-	if(. && ishuman(target))
-		var/mob/living/L = target
+	if(. && ishuman(get_target()))
+		var/mob/living/L = get_target()
 		if(L.stat == UNCONSCIOUS)
-			var/mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion/A = new(loc)
+			var/mob/living/danimal/hostile/asteroid/hivelordbrood/legion/A = new(loc)
 			A.infest(L)
 
-/mob/living/simple_animal/hostile/megafauna/legion/OpenFire(the_target)
-	if(world.time >= ranged_cooldown && !charging)
+/mob/living/danimal/hostile/megafauna/legion/OpenFire(the_target)
+	if(world.time >= ranged_attack_delay && !charging)
 		if(prob(75))
-			var/mob/living/simple_animal/hostile/asteroid/hivelordbrood/legion/A = new(loc)
-			A.GiveTarget(target)
-			A.friends = friends
-			A.faction = faction
-			ranged_cooldown = world.time + ranged_cooldown_time
+			var/mob/living/danimal/hostile/asteroid/hivelordbrood/legion/A = new(loc)
+			A.GiveTarget(get_target())
+			A.friends = friends.Copy()
+			A.faction = faction.Copy()
+			ranged_attack_delay = world.time + ranged_cooldown_duration
 		else
 			visible_message(span_warning("<b>[src] charges!</b>"))
 			SpinAnimation(speed = 20, loops = 5)
-			ranged = 0
+			can_ranged_attack = FALSE
 			retreat_distance = 0
 			minimum_distance = 0
 			speed = 0
@@ -94,20 +94,20 @@ Difficulty: Medium
 			charging = 1
 			addtimer(CALLBACK(src,PROC_REF(reset_charge)), 50)
 
-/mob/living/simple_animal/hostile/megafauna/legion/proc/reset_charge()
-	ranged = 1
+/mob/living/danimal/hostile/megafauna/legion/proc/reset_charge()
+	can_ranged_attack = TRUE
 	retreat_distance = 5
 	minimum_distance = 5
 	speed = 1
 	move_to_delay = 2
 	charging = 0
 
-/mob/living/simple_animal/hostile/megafauna/legion/death()
+/mob/living/danimal/hostile/megafauna/legion/death()
 	if(health > 0)
 		return
 	if(size > 1)
 		adjustHealth(-maxHealth) //heal ourself to full in prep for splitting
-		var/mob/living/simple_animal/hostile/megafauna/legion/L = new(loc)
+		var/mob/living/danimal/hostile/megafauna/legion/L = new(loc)
 
 		L.maxHealth = round(maxHealth * 0.6,DAMAGE_PRECISION)
 		maxHealth = L.maxHealth
@@ -127,12 +127,12 @@ Difficulty: Medium
 
 		L.faction = faction.Copy()
 
-		L.GiveTarget(target)
+		L.GiveTarget(get_target())
 
 		visible_message(span_boldannounce("[src] splits in twain!"))
 	else
 		var/last_legion = TRUE
-		for(var/mob/living/simple_animal/hostile/megafauna/legion/other in GLOB.mob_living_list)
+		for(var/mob/living/danimal/hostile/megafauna/legion/other in GLOB.mob_living_list)
 			if(other != src)
 				last_legion = FALSE
 				break

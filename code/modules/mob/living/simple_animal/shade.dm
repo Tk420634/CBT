@@ -1,4 +1,4 @@
-/mob/living/simple_animal/shade
+/mob/living/danimal/shade
 	name = "Shade"
 	real_name = "Shade"
 	desc = "A bound spirit."
@@ -26,8 +26,8 @@
 	attack_verb_simple = "metaphysically strike"
 	//minbodytemp = 0
 	//maxbodytemp = INFINITY
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
-	stop_automated_movement = 1
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	stop_wandering = 1
 	faction = list("cult")
 	status_flags = CANPUSH
 	movement_type = FLYING
@@ -37,13 +37,13 @@
 	blood_volume = 0
 	has_field_of_vision = FALSE //we are a spoopy ghost
 
-/mob/living/simple_animal/shade/death()
+/mob/living/danimal/shade/death()
 	deathmessage = "lets out a contented sigh as [p_their()] form unwinds."
 	..()
 
-/mob/living/simple_animal/shade/attack_animal(mob/living/simple_animal/M)
+/mob/living/danimal/shade/attack_animal(mob/living/danimal/M)
 	if(isconstruct(M))
-		var/mob/living/simple_animal/hostile/construct/C = M
+		var/mob/living/danimal/hostile/construct/C = M
 		if(!C.can_repair_constructs)
 			return
 		if(health < maxHealth)
@@ -56,7 +56,7 @@
 	else if(src != M)
 		return ..()
 
-/mob/living/simple_animal/shade/attackby(obj/item/O, mob/user, params)  //Marker -Agouri
+/mob/living/danimal/shade/attackby(obj/item/O, mob/user, params)  //Marker -Agouri
 	if(istype(O, /obj/item/soulstone))
 		var/obj/item/soulstone/SS = O
 		SS.transfer_soul("SHADE", src, user)

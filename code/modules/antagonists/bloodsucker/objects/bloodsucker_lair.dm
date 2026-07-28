@@ -66,7 +66,7 @@
 			var/mobMax = clamp(area_turfs.len / 25, 1, 4)
 			for (var/turf/T in area_turfs)
 				if(!T) continue
-				var/mob/living/simple_animal/SA = locate() in T
+				var/mob/living/danimal/SA = locate() in T
 				if(SA)
 					mobCount ++
 					if (mobCount >= mobMax) // Already at max
@@ -77,7 +77,7 @@
 				while(area_turfs.len > 0)
 					var/turf/T = pick(area_turfs) // We use while&pick instead of a for/loop so it's random, rather than from the top of the list.
 					if(T && !T.density)
-						var/mob/living/simple_animal/SA = /mob/living/simple_animal/mouse // pick(/mob/living/simple_animal/mouse,/mob/living/simple_animal/mouse,/mob/living/simple_animal/mouse, /mob/living/simple_animal/hostile/retaliate/bat) //prob(300) /mob/living/simple_animal/mouse,
+						var/mob/living/danimal/SA = /mob/living/danimal/mouse // pick(/mob/living/danimal/mouse,/mob/living/danimal/mouse,/mob/living/danimal/mouse, /mob/living/danimal/hostile/retaliate/bat) //prob(300) /mob/living/danimal/mouse,
 						new SA (T)
 						break
 					area_turfs -= T*/

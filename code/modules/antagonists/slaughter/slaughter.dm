@@ -1,6 +1,6 @@
 //////////////////The Monster
 
-/mob/living/simple_animal/slaughter
+/mob/living/danimal/slaughter
 	name = "slaughter demon"
 	real_name = "slaughter demon"
 	desc = "A large, menacing creature covered in armored black scales."
@@ -19,12 +19,12 @@
 	mob_size = MOB_SIZE_LARGE
 	speed = 1
 	a_intent = INTENT_HARM
-	stop_automated_movement = 1
+	stop_wandering = 1
 	status_flags = CANPUSH
 	attack_sound = 'sound/magic/demon_attack1.ogg'
 	var/feast_sound = 'sound/magic/demon_consume.ogg'
 	death_sound = 'sound/magic/demon_dies.ogg'
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 0
 	//maxbodytemp = INFINITY
 	faction = list("slaughter")
@@ -71,14 +71,14 @@
 	//buffs only happen when hearts are eaten, so this needs to be kept track separately
 	var/consumed_buff = 0
 
-/mob/living/simple_animal/slaughter/Initialize()
+/mob/living/danimal/slaughter/Initialize()
 	..()
 	var/obj/effect/proc_holder/spell/bloodcrawl/bloodspell = new
 	AddSpell(bloodspell)
 	if(istype(loc, /obj/effect/dummy/phased_mob/slaughter))
 		bloodspell.phased = TRUE
 
-/mob/living/simple_animal/slaughter/CtrlShiftClickOn(atom/A)
+/mob/living/danimal/slaughter/CtrlShiftClickOn(atom/A)
 	if(!isliving(A))
 		return ..()
 	if(slam_cooldown + slam_cooldown_time > world.time)
@@ -95,7 +95,7 @@
 	slam_cooldown = world.time
 	log_combat(src, victim, "slaughter slammed")
 
-/mob/living/simple_animal/slaughter/UnarmedAttack(atom/A, proximity)
+/mob/living/danimal/slaughter/UnarmedAttack(atom/A, proximity)
 	if(iscarbon(A))
 		var/mob/living/carbon/target = A
 		if(target.stat != DEAD && target.mind && current_hitstreak < wound_bonus_hitstreak_max)
@@ -113,17 +113,17 @@
 	icon_state = "innards"
 	random_icon_states = null
 
-/mob/living/simple_animal/slaughter/phasein()
+/mob/living/danimal/slaughter/phasein()
 	. = ..()
 	add_movespeed_modifier(/datum/movespeed_modifier/slaughter)
 	var/slowdown_time = 6 SECONDS + (0.5 * consumed_buff)
 	addtimer(CALLBACK(src,PROC_REF(remove_movespeed_modifier), /datum/movespeed_modifier/slaughter), slowdown_time, TIMER_UNIQUE | TIMER_OVERRIDE)
 
-/mob/living/simple_animal/slaughter/Destroy()
+/mob/living/danimal/slaughter/Destroy()
 	release_victims()
 	. = ..()
 
-/mob/living/simple_animal/slaughter/proc/release_victims()
+/mob/living/danimal/slaughter/proc/release_victims()
 	if(!consumed_mobs)
 		return
 
@@ -135,11 +135,11 @@
 			T = get_turf(src)
 		M.forceMove(T)
 
-/mob/living/simple_animal/slaughter/proc/refresh_consumed_buff()
+/mob/living/danimal/slaughter/proc/refresh_consumed_buff()
 	melee_damage_lower = 22.5 + (0.5 * consumed_buff)
 	melee_damage_upper = 22.5 + (1 * consumed_buff)
 
-/mob/living/simple_animal/slaughter/bloodcrawl_swallow(mob/living/victim)
+/mob/living/danimal/slaughter/bloodcrawl_swallow(mob/living/victim)
 	if(consumed_mobs)
 		// Keep their corpse so rescue is possible
 		consumed_mobs += victim
@@ -195,7 +195,7 @@
 /obj/item/organ/heart/demon/Stop()
 	return 0 // Always beating.
 
-/mob/living/simple_animal/slaughter/laughter
+/mob/living/danimal/slaughter/laughter
 	// The laughter demon! It's everyone's best friend! It just wants to hug
 	// them so much, it wants to hug everyone at once!
 	name = "laughter demon"
@@ -216,7 +216,7 @@
 	icon_living = "bowmon"
 	deathmessage = "fades out, as all of its friends are released from its \
 		prison of hugs."
-	loot = list(/mob/living/simple_animal/pet/cat/kitten{name = "Laughter"})
+	loot = list(/mob/living/danimal/pet/cat/kitten{name = "Laughter"})
 
 	playstyle_string = "<span class='big bold'>You are a laughter \
 	demon,</span><B> a wonderful creature from another realm. You have a single \
@@ -232,7 +232,7 @@
 	released and fully healed, because in the end it's just a jape, \
 	sibling!</B>"
 
-/mob/living/simple_animal/slaughter/laughter/ex_act(severity)
+/mob/living/danimal/slaughter/laughter/ex_act(severity)
 	switch(severity)
 		if(1)
 			death()
@@ -241,11 +241,11 @@
 		if(3)
 			adjustBruteLoss(30)
 
-/mob/living/simple_animal/slaughter/laughter/refresh_consumed_buff()
+/mob/living/danimal/slaughter/laughter/refresh_consumed_buff()
 	melee_damage_lower -= 0.5 // JAPES
 	melee_damage_upper += 1
 
-/mob/living/simple_animal/slaughter/laughter/bloodcrawl_swallow(mob/living/victim)
+/mob/living/danimal/slaughter/laughter/bloodcrawl_swallow(mob/living/victim)
 	if(consumed_mobs)
 		// Keep their corpse so rescue is possible
 		consumed_mobs += victim
@@ -256,7 +256,7 @@
 		victim.exit_blood_effect()
 		victim.visible_message("[victim] falls out of the air, covered in blood, looking highly confused. And dead.")
 
-/mob/living/simple_animal/slaughter/laughter/release_victims()
+/mob/living/danimal/slaughter/laughter/release_victims()
 	if(!consumed_mobs)
 		return
 

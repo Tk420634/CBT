@@ -200,7 +200,7 @@ GLOBAL_LIST_INIT(dye_registry, list(
 	new /obj/item/reagent_containers/food/snacks/meat/slab/corgi(loc)
 	qdel(src)
 
-/mob/living/simple_animal/pet/dog/corgi/machine_wash(obj/machinery/washing_machine/WM)
+/mob/living/danimal/pet/dog/corgi/machine_wash(obj/machinery/washing_machine/WM)
 	gib()
 
 /obj/item/machine_wash(obj/machinery/washing_machine/WM)

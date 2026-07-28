@@ -595,6 +595,11 @@
 /// Varied projectiles they can shoot, weighted chance to do the thing too
 #define MOB_PROJECTILE_ENTRY(proj, chance) proj = chance
 
+/// tells the mob to autoset variations for all this gung
+#define MOB_VARIATE_ALL "mob_variate_all"
+/// a list of all the variatiable things, for autosetting stuff
+#define DEFAULT_VARIATIONS list(MOB_VARIATE_ALL = TRUE)
+
 /// Mob EMP reaction flags
 /// For mobs that react to EMP to do something other than take a little damage
 
@@ -674,3 +679,80 @@
 #define PVP_NEUTRAL "pvp_neutral"
 #define PVP_YES     "pvp_yes"
 #define PVP_NO      "pvp_no"
+
+///
+/* Mob BlackBoard Keys */
+#define MBB_HAS_TARGET                        "has_target"
+#define MBB_HAS_TARGET_FROM_LAST_TICK         "has_target_from_last_tick"
+
+#define MBB_MELEE_ATTACK_ALLOWED              "melee_attack_allowed"
+#define MBB_MELEE_ATTACK_CD_READY             "melee_attack_cd_ready"
+#define MBB_MELEE_ATTACK_DAMAGE_DEALT         "melee_attack_damage_dealt"
+#define MBB_MELEE_ATTACK_FORCE_ALLOW          "melee_attack_force_allow"
+#define MBB_MELEE_ATTACK_FORCE_DENY           "melee_attack_force_deny"
+#define MBB_MELEE_ATTACK_POST_ACTION_SUCCESS  "melee_attack_post_action_success"
+#define MBB_MELEE_ATTACK_PRE_ACTION_SUCCESS   "melee_attack_pre_action_success"
+#define MBB_MELEE_ATTACK_PRE_CHECK            "melee_attack_pre_check"
+#define MBB_MELEE_ATTACK_SUCCESS              "melee_attack_success"
+#define MBB_MELEE_ATTACK_TARGET_IN_RANGE      "melee_attack_target_in_range"
+#define MBB_MELEE_ATTACK_WAS_ALTERNATE        "melee_attack_was_alternate"
+#define MBB_MELEE_ATTACK_WINDUP_READY         "melee_attack_windup_ready"
+
+#define MBB_RANGED_ATTACK_ALLOWED             "ranged_attack_allowed"
+#define MBB_RANGED_ATTACK_BURST_FIRING        "ranged_attack_burst_firing"
+#define MBB_RANGED_ATTACK_CD_READY            "ranged_attack_cd_ready"
+#define MBB_RANGED_ATTACK_FORCE_ALLOW         "ranged_attack_force_allow"
+#define MBB_RANGED_ATTACK_FORCE_DENY          "ranged_attack_force_deny"
+#define MBB_RANGED_ATTACK_FRIENDLY_FIRE       "ranged_attack_friendly_fire"
+#define MBB_RANGED_ATTACK_PRE_CHECK           "ranged_attack_pre_check"
+#define MBB_RANGED_ATTACK_TARGET_IN_RANGE     "ranged_attack_target_in_range"
+#define MBB_RANGED_ATTACK_WINDUP_READY        "ranged_attack_windup_ready"
+
+#define MBB_TARGET_EVAL                       "target_eval"
+#define MBB_TARGET_LINE_CACHE                 "target_line_cache"
+#define MBB_TARGET_LOC_IS_MOB                 "target_loc_is_mob"
+#define MBB_TARGET_LOC_IS_OBJ                 "target_loc_is_obj"
+
+/* Mob Task BlackBoard Keys mbbt */
+
+/* Mob Target Evaluation Flags */
+#define MTEV_CAN_BE_TARGETED      "be_targeted"
+#define MTEV_CAN_RETAIN_TARGET    "can_retain_target"
+#define MTEV_INVALID_STAT         "invalid_stat"
+#define MTEV_IS_ASSEMBLY          "is_assembly"
+#define MTEV_IS_CRIT              "is_crit"
+#define MTEV_IS_FOE               "is_foe"
+#define MTEV_IS_FRIEND            "is_friend"
+#define MTEV_IS_FRIENDLY_FACTION  "is_friendly_faction"
+#define MTEV_IS_HOSTILE           "is_hostile"
+#define MTEV_IS_INVISIBLE         "is_invisible"
+#define MTEV_IS_LIVING            "is_living"
+#define MTEV_IS_OBJECT            "is_object"
+#define MTEV_IS_PLAYER            "is_player"
+#define MTEV_IS_STAMCRIT          "is_stamcrit"
+#define MTEV_IS_TURRET            "is_turret"
+#define MTEV_IS_VISIBLE           "is_visible"
+#define MTEV_IS_MECHA             "is_mecha"
+
+/* Mob Lineofsight Flags */
+#define MLF_DEFAULT     (1 << 0)
+#define MLF_DENSE       (1 << 1)
+#define MLF_FRIENDLIES  (1 << 2)
+#define MLF_LIVING      (1 << 3)
+#define MLF_OPAQUE      (1 << 4)
+
+/* Mob Movement and Windup States */
+#define MOB_MOVE_IDLE               "move_idle"
+#define MOB_MOVE_UNSET              "move_unset"
+#define MOB_MOVE_TOWARDS_TARGET     "move_towards_target"
+#define MOB_MOVE_AWAY_FROM_TARGET   "move_away_from_target"
+#define MOB_MOVE_DODGE              "move_dodge"
+#define MOB_WINDUP_NONE             "windup_none"
+#define MOB_WINDUP_READY            "windup_ready"
+#define MOB_WINDUP_WINDING_UP       "windup_winding_up"
+
+/* Mob Target Priorities */
+#define MT_ALL           "mt_all"
+#define MT_PRIORITY      "mt_priority"
+#define MT_TOP_PRIORITY  "mt_top_priority"
+#define MT_VALID         "mt_valid"

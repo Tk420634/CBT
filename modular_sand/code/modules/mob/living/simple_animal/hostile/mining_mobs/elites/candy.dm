@@ -14,7 +14,7 @@
   * Knockdown - Deals damage and knockbacks all targets in a 2 tile radius.
   */
 
-/mob/living/simple_animal/hostile/asteroid/elite/candy
+/mob/living/danimal/hostile/asteroid/elite/candy
 	name = "Candy"
 	desc = "In what passes as a hierarchy for slaughter demons, this one is prince."
 	icon = 'modular_sand/icons/mob/lavaland/lavaland_elites.dmi'
@@ -43,7 +43,7 @@
 								/datum/action/innate/elite_attack/meat_shield,
 								/datum/action/innate/elite_attack/knockdown)
 
-/mob/living/simple_animal/hostile/asteroid/elite/candy/ComponentInitialize()
+/mob/living/danimal/hostile/asteroid/elite/candy/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/glory_kill, \
 		messages_unarmed = list("tries punching Candy's head, but they parry it and grab their hand! However, another hard punch comes through with the other arm, this time killing the demon swiftly and exploding their skull!", "grabs Candy by their neck, then pressures into until it explodes and it's head comes flying off!"), \
@@ -82,7 +82,7 @@
 	chosen_attack_num = KNOCKDOWN
 
 
-/mob/living/simple_animal/hostile/asteroid/elite/candy/OpenFire()
+/mob/living/danimal/hostile/asteroid/elite/candy/OpenFire()
 	if(client)
 		switch(chosen_attack)
 			if(BLOOD_CHARGE)
@@ -106,8 +106,8 @@
 			knockdown()
 
 // Candy actions
-/mob/living/simple_animal/hostile/asteroid/elite/candy/proc/bloodcharge(target)
-	ranged_cooldown = world.time + 50
+/mob/living/danimal/hostile/asteroid/elite/candy/proc/bloodcharge(target)
+	ranged_attack_delay = world.time + 50
 	var/dir_to_target = get_dir(get_turf(src), get_turf(target))
 	var/turf/T = get_turf(src)
 	playsound(src,'sound/magic/demon_attack1.ogg', 200, 1)
@@ -118,14 +118,14 @@
 		sleep(1)
 	addtimer(CALLBACK(src,PROC_REF(blood_charge_2), dir_to_target, 0), 5)
 
-/mob/living/simple_animal/hostile/asteroid/elite/candy/proc/bloodytrap(mob/target)
+/mob/living/danimal/hostile/asteroid/elite/candy/proc/bloodytrap(mob/target)
 	playsound(src,'sound/magic/Blind.ogg', 200, 1)
 	var/dir_to_target = get_dir(src, target)
 	var/turf/T = get_step(src, dir_to_target)
 	var/list/bline = getline(T, target.loc)
 	if(bline.len > 6)
 		return FALSE
-	ranged_cooldown = world.time + 100
+	ranged_attack_delay = world.time + 100
 	visible_message(span_boldwarning("[src] traps [target]!"))
 	for(var/turf/J in view(1, target) - get_turf(target))
 		new /obj/effect/temp_visual/bloodwall(J, src)
@@ -143,8 +143,8 @@
 	visible_message(span_boldwarning("One of the blood walls disappear!"))
 	qdel(chosen)
 
-/mob/living/simple_animal/hostile/asteroid/elite/candy/proc/meatshield()
-	ranged_cooldown = world.time + 25
+/mob/living/danimal/hostile/asteroid/elite/candy/proc/meatshield()
+	ranged_attack_delay = world.time + 25
 	playsound(src,'sound/magic/Blind.ogg', 200, 1)
 	visible_message(span_boldwarning("[src] raises a wall!"))
 	var/turf/T = get_turf(get_step(src, src.dir))
@@ -175,8 +175,8 @@
 	if(otherT)
 		new /obj/effect/temp_visual/bloodwall(otherT, src)
 
-/mob/living/simple_animal/hostile/asteroid/elite/candy/proc/knockdown()
-	ranged_cooldown = world.time + 100
+/mob/living/danimal/hostile/asteroid/elite/candy/proc/knockdown()
+	ranged_attack_delay = world.time + 100
 	playsound(src,'sound/misc/crunch.ogg', 200, 1)
 	visible_message(span_boldwarning("[src] clenches his fists and smashes the ground!"))
 	var/list/hit_things = list()
@@ -202,7 +202,7 @@
 
 // Candy helpers
 
-/mob/living/simple_animal/hostile/asteroid/elite/candy/proc/blood_charge_2(var/move_dir, var/times_ran)
+/mob/living/danimal/hostile/asteroid/elite/candy/proc/blood_charge_2(var/move_dir, var/times_ran)
 	if(times_ran >= 6)
 		return
 	var/turf/T = get_step(get_turf(src), move_dir)
@@ -220,7 +220,7 @@
 	var/list/hit_things = list()
 	var/throwtarget = get_edge_target_turf(src, move_dir)
 	for(var/mob/living/L in T.contents - hit_things - src)
-		if(faction_check_mob(L))
+		if(mob_faction_is_friendly_to_target(L))
 			return
 		hit_things += L
 		visible_message(span_boldwarning("[src] attacks [L] with much force!"))

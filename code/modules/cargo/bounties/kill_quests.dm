@@ -22,7 +22,7 @@
 /datum/bounty/kill/geckoes
 	name = "Slay some Geckoes"
 	description = "Lousy things are everywhere! I'll pay you to kill some of them."
-	flavor_focus = /mob/living/simple_animal/hostile/gecko
+	flavor_focus = /mob/living/danimal/hostile/gecko
 	weight = 1
 	request_mode = QUEST_FULFILL_ALL
 	init_wanteds = list(
@@ -37,7 +37,7 @@
 /datum/bounty_quota/gecko
 	name = "Kill some Geckoes"
 	paths = list(
-		/mob/living/simple_animal/hostile/gecko,
+		/mob/living/danimal/hostile/gecko,
 	)
 	needed_amount = 10
 	paths_get_subtypes = TRUE
@@ -70,7 +70,7 @@
 /datum/bounty/kill/rats
 	name = "Slay some Rats"
 	description = "Rats are everywhere! I'll pay you to kill some of them."
-	flavor_focus = /mob/living/simple_animal/hostile/rat
+	flavor_focus = /mob/living/danimal/hostile/rat
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/rat/easy,
@@ -84,8 +84,8 @@
 /datum/bounty_quota/rat
 	name = "Kill some Cute little mice"
 	paths = list(
-		/mob/living/simple_animal/hostile/rat,
-		/mob/living/simple_animal/mouse,
+		/mob/living/danimal/hostile/rat,
+		/mob/living/danimal/mouse,
 	)
 	needed_amount = 20
 	paths_get_subtypes = TRUE
@@ -118,7 +118,7 @@
 /datum/bounty/kill/nightstalkers
 	name = "Slay some Nightstalkers"
 	description = "Nightstalkers are everywhere! I'll pay you to kill some of them."
-	flavor_focus = /mob/living/simple_animal/hostile/stalker
+	flavor_focus = /mob/living/danimal/hostile/stalker
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/nightstalker/easy,
@@ -132,8 +132,8 @@
 /datum/bounty_quota/nightstalker
 	name = "Kill some Nightstalkers"
 	paths = list(
-		/mob/living/simple_animal/hostile/stalkeryoung,
-		/mob/living/simple_animal/hostile/stalker,
+		/mob/living/danimal/hostile/stalkeryoung,
+		/mob/living/danimal/hostile/stalker,
 	)
 	needed_amount = 5
 	paths_get_subtypes = TRUE
@@ -151,14 +151,14 @@
 /datum/bounty_quota/nightstalker/medium
 	needed_amount = 10
 	paths = list(
-		/mob/living/simple_animal/hostile/stalker,
+		/mob/living/danimal/hostile/stalker,
 	)
 	difficulty = QUEST_DIFFICULTY_MED
 
 /datum/bounty_quota/nightstalker/hard
 	needed_amount = 15
 	paths = list(
-		/mob/living/simple_animal/hostile/stalker,
+		/mob/living/danimal/hostile/stalker,
 	)
 	difficulty = QUEST_DIFFICULTY_HARD
 
@@ -172,7 +172,7 @@
 /datum/bounty/kill/molerats
 	name = "Slay some GIANT RATS!"
 	description = "GIANT RATS are everywhere! I'll pay you to kill some of them."
-	flavor_focus = /mob/living/simple_animal/hostile/molerat
+	flavor_focus = /mob/living/danimal/hostile/molerat
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/molerat/easy,
@@ -186,7 +186,7 @@
 /datum/bounty_quota/molerat
 	name = "Kill some GIANT RATS"
 	paths = list(
-		/mob/living/simple_animal/hostile/molerat,
+		/mob/living/danimal/hostile/molerat,
 	)
 	needed_amount = 15
 	paths_get_subtypes = TRUE
@@ -219,7 +219,7 @@
 /datum/bounty/kill/scorpins
 	name = "Slay some Scorpins"
 	description = "Scorpins are everywhere! I'll pay you to kill some of them."
-	flavor_focus = /mob/living/simple_animal/hostile/radscorpion
+	flavor_focus = /mob/living/danimal/hostile/radscorpion
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/scorpin/easy,
@@ -233,7 +233,7 @@
 /datum/bounty_quota/scorpin
 	name = "Kill some Scorpins" // spelling is intentional
 	paths = list(
-		/mob/living/simple_animal/hostile/radscorpion,
+		/mob/living/danimal/hostile/radscorpion,
 	)
 	needed_amount = 10
 	paths_get_subtypes = TRUE
@@ -251,14 +251,14 @@
 /datum/bounty_quota/scorpin/medium
 	needed_amount = 10
 	paths_exclude = list(
-		/mob/living/simple_animal/hostile/radscorpion/blue,
+		/mob/living/danimal/hostile/radscorpion/blue,
 	)
 	difficulty = QUEST_DIFFICULTY_MED
 
 /datum/bounty_quota/scorpin/hard
 	needed_amount = 15
 	paths = list(
-		/mob/living/simple_animal/hostile/radscorpion/black,
+		/mob/living/danimal/hostile/radscorpion/black,
 	)
 	difficulty = QUEST_DIFFICULTY_HARD
 
@@ -272,7 +272,7 @@
 /datum/bounty/kill/roachypillbugs
 	name = "Slay some Roachy Pillbugs"
 	description = "Roachy Pillbugs are everywhere! I'll pay you to kill some of them."
-	flavor_focus = /mob/living/simple_animal/hostile/pillbug
+	flavor_focus = /mob/living/danimal/hostile/pillbug
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/roachypillbug/easy,
@@ -286,7 +286,7 @@
 /datum/bounty_quota/roachypillbug
 	name = "Kill some Roachy Pillbugs"
 	paths = list(
-		/mob/living/simple_animal/hostile/pillbug,
+		/mob/living/danimal/hostile/pillbug,
 	)
 	needed_amount = 15
 	paths_get_subtypes = TRUE
@@ -319,7 +319,7 @@
 /datum/bounty/kill/ghouls
 	name = "Slay some Ghouls"
 	description = "Ghouls are everywhere! I'll pay you to kill some of them."
-	flavor_focus = /mob/living/simple_animal/hostile/ghoul
+	flavor_focus = /mob/living/danimal/hostile/ghoul
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/ghoul/easy,
@@ -333,7 +333,7 @@
 /datum/bounty_quota/ghoul
 	name = "Kill some Ghouls"
 	paths = list(
-		/mob/living/simple_animal/hostile/ghoul,
+		/mob/living/danimal/hostile/ghoul,
 	)
 	needed_amount = 10
 	paths_get_subtypes = TRUE
@@ -366,7 +366,7 @@
 /datum/bounty/kill/ants
 	name = "Slay some Ants"
 	description = "Ants are everywhere! I'll pay you to kill some of them."
-	flavor_focus = /mob/living/simple_animal/hostile/giantant
+	flavor_focus = /mob/living/danimal/hostile/giantant
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/ant/easy,
@@ -380,8 +380,8 @@
 /datum/bounty_quota/ant
 	name = "Kill some Ants"
 	paths = list(
-		/mob/living/simple_animal/hostile/giantant,
-		/mob/living/simple_animal/hostile/fireant,
+		/mob/living/danimal/hostile/giantant,
+		/mob/living/danimal/hostile/fireant,
 	)
 	needed_amount = 10
 	paths_get_subtypes = TRUE
@@ -414,7 +414,7 @@
 /datum/bounty/kill/supermutants
 	name = "Slay some Supermutants"
 	description = "Supermutants are everywhere! I'll pay you to kill some of them."
-	flavor_focus = /mob/living/simple_animal/hostile/supermutant
+	flavor_focus = /mob/living/danimal/hostile/supermutant
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/supermutant/easy,
@@ -428,8 +428,8 @@
 /datum/bounty_quota/supermutant
 	name = "Kill some Supermutants"
 	paths = list(
-		/mob/living/simple_animal/hostile/supermutant,
-		/mob/living/simple_animal/hostile/centaur,
+		/mob/living/danimal/hostile/supermutant,
+		/mob/living/danimal/hostile/centaur,
 	)
 	needed_amount = 10
 	paths_get_subtypes = TRUE
@@ -462,7 +462,7 @@
 /datum/bounty/kill/bloatflys
 	name = "Slay some Bloatflys"
 	description = "Bloatflys are everywhere! I'll pay you to kill some of them."
-	flavor_focus = /mob/living/simple_animal/hostile/bloatfly
+	flavor_focus = /mob/living/danimal/hostile/bloatfly
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/bloatfly/easy,
@@ -476,7 +476,7 @@
 /datum/bounty_quota/bloatfly
 	name = "Kill some Bloatflys"
 	paths = list(
-		/mob/living/simple_animal/hostile/bloatfly,
+		/mob/living/danimal/hostile/bloatfly,
 	)
 	needed_amount = 10
 	paths_get_subtypes = TRUE
@@ -509,7 +509,7 @@
 /datum/bounty/kill/hellpigs
 	name = "Slay some Hellpigs"
 	description = "Hellpigs are everywhere! I'll pay you to kill some of them."
-	flavor_focus = /mob/living/simple_animal/hostile/hellpig
+	flavor_focus = /mob/living/danimal/hostile/hellpig
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/hellpig/easy,
@@ -523,7 +523,7 @@
 /datum/bounty_quota/hellpig
 	name = "Kill some Hellpigs"
 	paths = list(
-		/mob/living/simple_animal/hostile/hellpig,
+		/mob/living/danimal/hostile/hellpig,
 	)
 	needed_amount = 1
 	paths_get_subtypes = TRUE
@@ -556,7 +556,7 @@
 /datum/bounty/kill/centaurs
 	name = "Slay some Centaurs"
 	description = "Centaurs are gross! I'll pay you to kill some of them."
-	flavor_focus = /mob/living/simple_animal/hostile/centaur
+	flavor_focus = /mob/living/danimal/hostile/centaur
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/centaur/easy,
@@ -570,7 +570,7 @@
 /datum/bounty_quota/centaur
 	name = "Kill some Centaurs"
 	paths = list(
-		/mob/living/simple_animal/hostile/centaur,
+		/mob/living/danimal/hostile/centaur,
 	)
 	needed_amount = 5
 	paths_get_subtypes = TRUE
@@ -603,7 +603,7 @@
 /datum/bounty/kill/raiders
 	name = "Slay some Raiders"
 	description = "Those lousy functionally immortal humans are making life miserable! I'll pay you to kill some of them. But not the super-duper ones, like Mango Matt, Blueberry Bates, or any of the other super-duper raiders. Just the regular ones."
-	flavor_focus = /mob/living/simple_animal/hostile/raider
+	flavor_focus = /mob/living/danimal/hostile/raider
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/raider/easy,
@@ -618,10 +618,10 @@
 	name = "Kill some Raiders"
 	flavor = "But not Mango Matt, Blueberry Bates, or any of the other super-duper raiders. Just the regular ones."
 	paths = list(
-		/mob/living/simple_animal/hostile/raider,
+		/mob/living/danimal/hostile/raider,
 	)
 	paths_exclude = list(
-		/mob/living/simple_animal/hostile/raider/ranged/boss,
+		/mob/living/danimal/hostile/raider/ranged/boss,
 	)
 	needed_amount = 5
 	paths_get_subtypes = TRUE
@@ -654,7 +654,7 @@
 /datum/bounty/kill/aethergiests
 	name = "Slay some Deathclaws"
 	description = "Deathclaws are scary and mean! (and honestly kinda tasty) I'll pay you to kill some of them."
-	flavor_focus = /mob/living/simple_animal/hostile/aethergiest
+	flavor_focus = /mob/living/danimal/hostile/aethergiest
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/aethergiest/easy,
@@ -668,7 +668,7 @@
 /datum/bounty_quota/aethergiest
 	name = "Kill some Deathclaws"
 	paths = list(
-		/mob/living/simple_animal/hostile/aethergiest,
+		/mob/living/danimal/hostile/aethergiest,
 	)
 	needed_amount = 2
 	paths_get_subtypes = TRUE
@@ -701,7 +701,7 @@
 /datum/bounty/kill/enclavehellions
 	name = "Slay some Enclavers"
 	description = "The Cyber-Enclave think they're so good with their plasma blasters and power armor! I'll pay you to kill some of them."
-	flavor_focus = /mob/living/simple_animal/hostile/enclave
+	flavor_focus = /mob/living/danimal/hostile/enclave
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/enclavehellion/cocknballtorture,
@@ -713,7 +713,7 @@
 	name = "Kill some Enclave Hellions"
 	flavor = "Fair warning, they're tough. They love their plasma weapons and power armor. And no, they won't share either with you, no matter how hard you try."
 	paths = list(
-		/mob/living/simple_animal/hostile/enclave,
+		/mob/living/danimal/hostile/enclave,
 	)
 	needed_amount = 20
 	paths_get_subtypes = TRUE
@@ -734,7 +734,7 @@
 /datum/bounty/kill/civilianrobots
 	name = "Scrap some Civilian Robots"
 	description = "Civilian robots are everywhere! I'll pay you to kill some of them."
-	flavor_focus = /mob/living/simple_animal/hostile/eyebot
+	flavor_focus = /mob/living/danimal/hostile/eyebot
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/civilianrobot/easy,
@@ -749,9 +749,9 @@
 	name = "Scrap some Civilian Robots"
 	flavor = "Not to be confused with the curvy furry lizard robot people around town, they're *our* civilian robots."
 	paths = list(
-		/mob/living/simple_animal/hostile/eyebot,
-		/mob/living/simple_animal/pet/dog/eyebot,
-		/mob/living/simple_animal/hostile/handy,
+		/mob/living/danimal/hostile/eyebot,
+		/mob/living/danimal/pet/dog/eyebot,
+		/mob/living/danimal/hostile/handy,
 	)
 	needed_amount = 10
 	paths_get_subtypes = TRUE
@@ -784,7 +784,7 @@
 /datum/bounty/kill/militaryrobots
 	name = "Scrap some Military Robots"
 	description = "Military robots are everywhere! I'll pay you to kill some of them."
-	flavor_focus = /mob/living/simple_animal/hostile/securitron
+	flavor_focus = /mob/living/danimal/hostile/securitron
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/militaryrobot/easy,
@@ -799,10 +799,10 @@
 	name = "Scrap some Military Robots"
 	flavor = "They're tougher than the civilian robots, but they're still just robots. They're not even furry."
 	paths = list(
-		/mob/living/simple_animal/hostile/hivebot,
-		/mob/living/simple_animal/hostile/securitron,
-		/mob/living/simple_animal/hostile/synth,
-		/mob/living/simple_animal/hostile/handy,
+		/mob/living/danimal/hostile/hivebot,
+		/mob/living/danimal/hostile/securitron,
+		/mob/living/danimal/hostile/synth,
+		/mob/living/danimal/hostile/handy,
 	)
 	needed_amount = 10
 	paths_get_subtypes = TRUE
@@ -835,7 +835,7 @@
 /datum/bounty/kill/cutelizards
 	name = "KILL CUTE LIZARDS"
 	description = "CUTE LIZARDS MUST DIE"
-	flavor_focus = /mob/living/simple_animal/hostile/lizard
+	flavor_focus = /mob/living/danimal/hostile/lizard
 	weight = 0.1
 	init_wanteds = list(
 		/datum/bounty_quota/cutelizard,
@@ -847,7 +847,7 @@
 	name = "KILL CUTE LIZARDS"
 	flavor = "CUTE LIZARDS MUST DIE"
 	paths = list(
-		/mob/living/simple_animal/hostile/lizard,
+		/mob/living/danimal/hostile/lizard,
 	)
 	needed_amount = 1
 	paths_get_subtypes = TRUE
@@ -860,7 +860,7 @@
 /datum/bounty/kill/crabs
 	name = "Slay some Crabs"
 	description = "Crabs are delicious! I'll pay you to kill some of them."
-	flavor_focus = /mob/living/simple_animal/hostile/mirelurk
+	flavor_focus = /mob/living/danimal/hostile/mirelurk
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/crab/easy,
@@ -875,7 +875,7 @@
 	name = "Kill some Crabs"
 	flavor = "No, yours don't count."
 	paths = list(
-		/mob/living/simple_animal/hostile/mirelurk,
+		/mob/living/danimal/hostile/mirelurk,
 	)
 	needed_amount = 10
 	paths_get_subtypes = TRUE
@@ -908,7 +908,7 @@
 /datum/bounty/kill/hugespider
 	name = "Squish some Huge Spiders"
 	description = "Huge Spiders are spiders! I'll pay you to kill some of them."
-	flavor_focus = /mob/living/simple_animal/hostile/poison/giant_spider
+	flavor_focus = /mob/living/danimal/hostile/poison/giant_spider
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/hugespider/easy,
@@ -923,7 +923,7 @@
 	name = "Kill some Huge Spiders"
 	flavor = "They're big, they're hairy, they're spiders. What more do you need to know?"
 	paths = list(
-		/mob/living/simple_animal/hostile/poison/giant_spider,
+		/mob/living/danimal/hostile/poison/giant_spider,
 	)
 	needed_amount = 5
 	paths_get_subtypes = TRUE
@@ -956,7 +956,7 @@
 /datum/bounty/kill/renegades
 	name = "Slay some Renegades"
 	description = "Renegades are dangerous! I'll pay you to kill some of them."
-	flavor_focus = /mob/living/simple_animal/hostile/renegade
+	flavor_focus = /mob/living/danimal/hostile/renegade
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/renegade/hard,
@@ -969,10 +969,10 @@
 	name = "Kill some Renegades"
 	flavor = "Careful. Be careful. They're dangerous, so be careful."
 	paths = list(
-		/mob/living/simple_animal/hostile/renegade,
+		/mob/living/danimal/hostile/renegade,
 	)
 	paths_exclude = list(
-		/mob/living/simple_animal/hostile/renegade/meister,
+		/mob/living/danimal/hostile/renegade/meister,
 	)
 	needed_amount = 5
 	paths_get_subtypes = TRUE
@@ -995,7 +995,7 @@
 /datum/bounty/kill/grabbag
 	name = "Kill some goats or frogs or snakes or something"
 	description = "I don't know, just kill some stuff."
-	flavor_focus = /mob/living/simple_animal/hostile
+	flavor_focus = /mob/living/danimal/hostile
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/grabbag/easy,
@@ -1010,7 +1010,7 @@
 	name = "Kill some random stuff"
 	flavor = "I don't know, just kill some stuff."
 	paths = list(
-		/mob/living/simple_animal/hostile/retaliate,
+		/mob/living/danimal/hostile/retaliate,
 	)
 	needed_amount = 10
 	paths_get_subtypes = TRUE
@@ -1043,7 +1043,7 @@
 /datum/bounty/kill/supergrabbag_easy
 	name = "Scavenger Hunt"
 	description = "Put your hunter skills to the test! Track down one specific creature and kill it."
-	flavor_focus = /mob/living/simple_animal/hostile
+	flavor_focus = /mob/living/danimal/hostile
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/supergrabbag,
@@ -1055,7 +1055,7 @@
 /datum/bounty/kill/supergrabbag_medium
 	name = "Super Scavenger Hunt"
 	description = "Put your hunter skills to the test! Track down two specific creatures and kill them."
-	flavor_focus = /mob/living/simple_animal/hostile
+	flavor_focus = /mob/living/danimal/hostile
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/supergrabbag,
@@ -1068,7 +1068,7 @@
 /datum/bounty/kill/supergrabbag_hard
 	name = "Ultra Scavenger Hunt"
 	description = "Put your hunter skills to the test! Track down four specific creatures and kill them."
-	flavor_focus = /mob/living/simple_animal/hostile
+	flavor_focus = /mob/living/danimal/hostile
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/supergrabbag,
@@ -1083,7 +1083,7 @@
 /datum/bounty/kill/supergrabbag_CBT
 	name = "Super Ultra Mega Impossible Scavenger Hunt"
 	description = "Put your hunter skills to the test! Track down TEN specific creatures and kill them. Not for the faint of heart.<br/><br/>Disclaimer: The following thing has been confirmed (somewhat) to exist in some killable form at the time of posting."
-	flavor_focus = /mob/living/simple_animal/hostile
+	flavor_focus = /mob/living/danimal/hostile
 	weight = 1
 	init_wanteds = list(
 		/datum/bounty_quota/supergrabbag,
@@ -1119,11 +1119,11 @@
 /datum/bounty_quota/supergrabbag/GetPaths()
 	if(is_copy)
 		return
-	var/list/potentials = SSmobs.get_existing_mob_paths(/mob/living/simple_animal/hostile)
+	var/list/potentials = SSmobs.get_existing_mob_paths(/mob/living/danimal/hostile)
 	if(!LAZYLEN(potentials)) // unlikely but hey
 		paths = list(/mob/living/carbon/human) // YOU
 		return
-	var/mob/living/simple_animal/hostile/thing = pick(potentials)
+	var/mob/living/danimal/hostile/thing = pick(potentials)
 	name = initial(thing.name)
 	paths = list(pick(thing)) // guaranteed fresh at time of baking
 

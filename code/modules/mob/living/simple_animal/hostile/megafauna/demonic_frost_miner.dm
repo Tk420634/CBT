@@ -2,7 +2,7 @@
 Difficulty: Extremely Hard
 */
 
-/mob/living/simple_animal/hostile/megafauna/demonic_frost_miner
+/mob/living/danimal/hostile/megafauna/demonic_frost_miner
 	name = "demonic-frost miner"
 	desc = "An extremely geared miner, driven crazy or possessed by the demonic forces here, either way a terrifying enemy."
 	health = 1500
@@ -21,10 +21,10 @@ Difficulty: Extremely Hard
 	melee_damage_lower = 10
 	melee_damage_upper = 10
 	aggroed_vision_range = 18 // large vision range so combat doesn't abruptly end when someone runs a bit away
-	rapid_melee = 4
+	melee_attacks_per_turn = 4
 	speed = 20
 	move_to_delay = 20
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	crusher_loot = list(/obj/effect/decal/remains/plasma, /obj/item/crusher_trophy/ice_block_talisman)
 	loot = list(/obj/effect/decal/remains/plasma)
 	wander = FALSE
@@ -42,7 +42,7 @@ Difficulty: Extremely Hard
 	/// If the demonic frost miner is currently transforming to its enraged state
 	var/enraging = FALSE
 
-/mob/living/simple_animal/hostile/megafauna/demonic_frost_miner/Initialize()
+/mob/living/danimal/hostile/megafauna/demonic_frost_miner/Initialize()
 	. = ..()
 	AddComponent(/datum/component/knockback, 7, FALSE, TRUE)
 	AddComponent(/datum/component/lifesteal, 50)
@@ -68,7 +68,7 @@ Difficulty: Extremely Hard
 	chosen_message = span_colossus("You are now firing shotgun ice blasts.")
 	chosen_attack_num = 3
 
-/mob/living/simple_animal/hostile/megafauna/demonic_frost_miner/OpenFire()
+/mob/living/danimal/hostile/megafauna/demonic_frost_miner/OpenFire()
 	check_enraged()
 	if(enraged)
 		projectile_speed_multiplier = 1.33
@@ -138,27 +138,27 @@ Difficulty: Extremely Hard
 	if(isturf(target) || isobj(target))
 		target.ex_act(EXPLODE_HEAVY)
 
-/mob/living/simple_animal/hostile/megafauna/demonic_frost_miner/ex_act(severity, target)
+/mob/living/danimal/hostile/megafauna/demonic_frost_miner/ex_act(severity, target)
 	adjustBruteLoss(30 * severity - 120)
 	visible_message(span_danger("[src] absorbs the explosion!"), span_userdanger("You absorb the explosion!"))
 
-/mob/living/simple_animal/hostile/megafauna/demonic_frost_miner/Goto(target, delay, minimum_distance)
+/mob/living/danimal/hostile/megafauna/demonic_frost_miner/perform_move_action(target, delay, minimum_distance)
 	if(enraging)
 		return
 	return ..()
 
-/mob/living/simple_animal/hostile/megafauna/demonic_frost_miner/MoveToTarget(list/possible_targets)
+/mob/living/danimal/hostile/megafauna/demonic_frost_miner/perform_automated_combat_move(list/possible_targets)
 	if(enraging)
 		return
 	return ..()
 
-/mob/living/simple_animal/hostile/megafauna/demonic_frost_miner/Move()
+/mob/living/danimal/hostile/megafauna/demonic_frost_miner/Move()
 	if(enraging)
 		return
 	return ..()
 
 /// Shoots out homing frost orbs that explode into ice blast projectiles after a couple seconds
-/mob/living/simple_animal/hostile/megafauna/demonic_frost_miner/proc/frost_orbs(added_delay = 10, shoot_times = 8)
+/mob/living/danimal/hostile/megafauna/demonic_frost_miner/proc/frost_orbs(added_delay = 10, shoot_times = 8)
 	var/atom/my_target = get_target()
 	for(var/i in 1 to shoot_times)
 		var/turf/startloc = get_turf(src)
@@ -194,7 +194,7 @@ Difficulty: Extremely Hard
 	qdel(src)
 
 /// Shoots out snowballs with a random spread
-/mob/living/simple_animal/hostile/megafauna/demonic_frost_miner/proc/snowball_machine_gun(shots = 60, spread = 45)
+/mob/living/danimal/hostile/megafauna/demonic_frost_miner/proc/snowball_machine_gun(shots = 60, spread = 45)
 	var/atom/my_target = get_target()
 	for(var/i in 1 to shots)
 		var/turf/startloc = get_turf(src)
@@ -212,7 +212,7 @@ Difficulty: Extremely Hard
 	SetRecoveryTime(15, 15)
 
 /// Shoots out ice blasts in a shotgun like pattern
-/mob/living/simple_animal/hostile/megafauna/demonic_frost_miner/proc/ice_shotgun(shots = 5, list/patterns = list(list(-40, -20, 0, 20, 40), list(-30, -10, 10, 30)))
+/mob/living/danimal/hostile/megafauna/demonic_frost_miner/proc/ice_shotgun(shots = 5, list/patterns = list(list(-40, -20, 0, 20, 40), list(-30, -10, 10, 30)))
 	var/atom/my_target = get_target()
 	for(var/i in 1 to shots)
 		var/list/pattern = patterns[i % length(patterns) + 1] // alternating patterns
@@ -232,7 +232,7 @@ Difficulty: Extremely Hard
 	SetRecoveryTime(15, 20)
 
 /// Checks if the demonic frost miner is ready to be enraged
-/mob/living/simple_animal/hostile/megafauna/demonic_frost_miner/proc/check_enraged()
+/mob/living/danimal/hostile/megafauna/demonic_frost_miner/proc/check_enraged()
 	if(enraged)
 		return
 	if(health > maxHealth*0.25)
@@ -256,7 +256,7 @@ Difficulty: Extremely Hard
 	enraging = FALSE
 	adjustHealth(-maxHealth)
 
-/mob/living/simple_animal/hostile/megafauna/demonic_frost_miner/death(gibbed, list/force_grant)
+/mob/living/danimal/hostile/megafauna/demonic_frost_miner/death(gibbed, list/force_grant)
 	if(health > 0)
 		return
 	var/turf/T = get_turf(src)

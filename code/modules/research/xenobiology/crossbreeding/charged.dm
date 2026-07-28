@@ -244,7 +244,7 @@ Charged extracts:
 /obj/item/slimecross/charged/rainbow/do_effect(mob/user)
 	user.visible_message(span_warning("[src] swells and splits into three new slimes!"))
 	for(var/i in 1 to 3)
-		var/mob/living/simple_animal/slime/S = new(get_turf(user))
+		var/mob/living/danimal/slime/S = new(get_turf(user))
 		S.random_colour()
 	..()
 
@@ -256,7 +256,7 @@ Charged extracts:
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "potsilver"
 
-/obj/item/slimepotion/slime_reviver/attack(mob/living/simple_animal/slime/M, mob/user)
+/obj/item/slimepotion/slime_reviver/attack(mob/living/danimal/slime/M, mob/user)
 	if(!isslime(M))
 		to_chat(user, span_warning("The potion only works on slimes!"))
 		return ..()
@@ -279,7 +279,7 @@ Charged extracts:
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "potcyan"
 
-/obj/item/slimepotion/slime/chargedstabilizer/attack(mob/living/simple_animal/slime/M, mob/user)
+/obj/item/slimepotion/slime/chargedstabilizer/attack(mob/living/danimal/slime/M, mob/user)
 	if(!isslime(M))
 		to_chat(user, span_warning("The stabilizer only works on slimes!"))
 		return ..()

@@ -51,7 +51,7 @@
 
 /*no crossbreeding till it gets overhauled for wasteland balance
 //Core-crossing: Feeding adult slimes extracts to obtain a much more powerful, single extract.
-/obj/item/slime_extract/attack(mob/living/simple_animal/slime/M, mob/user)
+/obj/item/slime_extract/attack(mob/living/danimal/slime/M, mob/user)
 	if(!isslime(M))
 		return ..()
 	if(M.stat)
@@ -94,7 +94,7 @@
 		if(SLIME_ACTIVATE_MAJOR)
 			to_chat(user, span_notice("Your [name] starts pulsing..."))
 			if(do_after(user, 40, target = user))
-				var/mob/living/simple_animal/slime/S = new(get_turf(user), "grey")
+				var/mob/living/danimal/slime/S = new(get_turf(user), "grey")
 				playsound(user, 'sound/effects/splat.ogg', 50, 1)
 				to_chat(user, span_notice("You spit out [S]."))
 				return 350
@@ -112,7 +112,7 @@
 		if(SLIME_ACTIVATE_MINOR)
 			user.visible_message(span_warning("[user] starts shaking!"),span_notice("Your [name] starts pulsing gently..."))
 			if(do_after(user, 40, target = user))
-				var/mob/living/simple_animal/S = create_random_mob(user.drop_location(), FRIENDLY_SPAWN)
+				var/mob/living/danimal/S = create_random_mob(user.drop_location(), FRIENDLY_SPAWN)
 				S.faction |= "neutral"
 				playsound(user, 'sound/effects/splat.ogg', 50, 1)
 				user.visible_message(span_warning("[user] spits out [S]!"), span_notice("You spit out [S]!"))
@@ -121,7 +121,7 @@
 		if(SLIME_ACTIVATE_MAJOR)
 			user.visible_message(span_warning("[user] starts shaking violently!"),span_warning("Your [name] starts pulsing violently..."))
 			if(do_after(user, 50, target = user))
-				var/mob/living/simple_animal/S = create_random_mob(user.drop_location(), HOSTILE_SPAWN)
+				var/mob/living/danimal/S = create_random_mob(user.drop_location(), HOSTILE_SPAWN)
 				if(user.a_intent != INTENT_HARM)
 					S.faction |= "neutral"
 				else
@@ -279,7 +279,7 @@
 
 		if(SLIME_ACTIVATE_MAJOR)
 			user.visible_message(span_warning("[user]'s skin flashes red for a moment..."), span_warning("Your skin flashes red as you emit rage-inducing pheromones..."))
-			for(var/mob/living/simple_animal/slime/slime in viewers(get_turf(user), null))
+			for(var/mob/living/danimal/slime/slime in viewers(get_turf(user), null))
 				slime.rabid = TRUE
 				slime.visible_message(span_danger("The [slime] is driven into a frenzy!"))
 			return 600
@@ -623,7 +623,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "potsilver"
 
-/obj/item/slimepotion/slime/docility/attack(mob/living/simple_animal/slime/M, mob/user)
+/obj/item/slimepotion/slime/docility/attack(mob/living/danimal/slime/M, mob/user)
 	if(!isslime(M))
 		to_chat(user, span_warning("The potion only works on slimes!"))
 		return ..()
@@ -667,7 +667,7 @@
 	if(M.stat)
 		to_chat(user, span_warning("[M] is dead!"))
 		return
-	var/mob/living/simple_animal/SM = M
+	var/mob/living/danimal/SM = M
 	if(SM.sentience_type != sentience_type)
 		to_chat(user, span_warning("[src] won't work on [SM]."))
 		return
@@ -694,14 +694,14 @@
 		being_used = FALSE
 		..()
 
-/obj/item/slimepotion/slime/sentience/proc/after_success(mob/living/user, mob/living/simple_animal/SM)
+/obj/item/slimepotion/slime/sentience/proc/after_success(mob/living/user, mob/living/danimal/SM)
 	return
 
 /obj/item/slimepotion/slime/sentience/nuclear
 	name = "syndicate intelligence potion"
 	desc = "A miraculous chemical mix that grants human like intelligence to living beings. It has been modified with Syndicate technology to also grant an internal radio implant to the target and authenticate with identification systems."
 
-/obj/item/slimepotion/slime/sentience/nuclear/after_success(mob/living/user, mob/living/simple_animal/SM)
+/obj/item/slimepotion/slime/sentience/nuclear/after_success(mob/living/user, mob/living/danimal/SM)
 	if(SM.can_be_implanted())
 		var/obj/item/implant/radio/syndicate/imp = new
 		imp.implant(SM, user)
@@ -726,7 +726,7 @@
 	if(M.stat)
 		to_chat(user, span_warning("[M] is dead!"))
 		return ..()
-	var/mob/living/simple_animal/SM = M
+	var/mob/living/danimal/SM = M
 	if(SM.sentience_type != animal_type)
 		to_chat(user, span_warning("You cannot transfer your consciousness to [SM].") )
 		return ..()
@@ -761,7 +761,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "potred"
 
-/obj/item/slimepotion/slime/steroid/attack(mob/living/simple_animal/slime/M, mob/user)
+/obj/item/slimepotion/slime/steroid/attack(mob/living/danimal/slime/M, mob/user)
 	if(!isslime(M))//If target is not a slime.
 		to_chat(user, span_warning("The steroid only works on baby slimes!"))
 		return ..()
@@ -791,7 +791,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "potcyan"
 
-/obj/item/slimepotion/slime/stabilizer/attack(mob/living/simple_animal/slime/M, mob/user)
+/obj/item/slimepotion/slime/stabilizer/attack(mob/living/danimal/slime/M, mob/user)
 	if(!isslime(M))
 		to_chat(user, span_warning("The stabilizer only works on slimes!"))
 		return ..()
@@ -812,7 +812,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "potgreen"
 
-/obj/item/slimepotion/slime/mutator/attack(mob/living/simple_animal/slime/M, mob/user)
+/obj/item/slimepotion/slime/mutator/attack(mob/living/danimal/slime/M, mob/user)
 	if(!isslime(M))
 		to_chat(user, span_warning("The mutator only works on slimes!"))
 		return ..()

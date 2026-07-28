@@ -6,7 +6,7 @@
 
 //Fragile but highly aggressive wanderers that pose a large threat in numbers.
 //They'll attempt to leap at their targette from afar using their hatchets.
-/mob/living/simple_animal/hostile/jungle/mook
+/mob/living/danimal/hostile/jungle/mook
 	name = "wanderer"
 	desc = "This unhealthy looking primitive is wielding a rudimentary hatchet, swinging it with wild abandon. One isn't much of a threat, but in numbers they can quickly overwhelm a superior opponent."
 	icon = 'icons/mob/jungle/mook.dmi'
@@ -21,10 +21,10 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 36
 	pixel_y = -8
-	ranged = TRUE
-	ranged_cooldown_time = 10
+	can_ranged_attack = TRUE
+	ranged_cooldown_duration = 10
 	pass_flags = LETPASSTHROW
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	attack_sound = 'sound/weapons/rapierhit.ogg'
 	death_sound = 'sound/voice/mook_death.ogg'
 	aggroed_vision_range = 8 //A little more aggressive once in combat to balance out their really low HP
@@ -33,22 +33,22 @@
 
 	footstep_type = FOOTSTEP_MOB_BAREFOOT
 
-/mob/living/simple_animal/hostile/jungle/mook/CanAllowThrough(atom/movable/O)
-	if(istype(O, /mob/living/simple_animal/hostile/jungle/mook))
-		var/mob/living/simple_animal/hostile/jungle/mook/M = O
+/mob/living/danimal/hostile/jungle/mook/CanAllowThrough(atom/movable/O)
+	if(istype(O, /mob/living/danimal/hostile/jungle/mook))
+		var/mob/living/danimal/hostile/jungle/mook/M = O
 		if(M.attack_state == MOOK_ATTACK_ACTIVE && M.throwing)
 			return TRUE
 	return ..()
 
-/mob/living/simple_animal/hostile/jungle/mook/death()
+/mob/living/danimal/hostile/jungle/mook/death()
 	desc = "A deceased primitive. Upon closer inspection, it was suffering from severe cellular degeneration and its garments are machine made..."//Can you guess the twist
 	return ..()
 
-/mob/living/simple_animal/hostile/jungle/mook/AttackingTarget()
+/mob/living/danimal/hostile/jungle/mook/AttackingTarget()
 	var/atom/my_target = get_target()
 	if(!isliving(my_target))
 		return ..()
-	if(ranged_cooldown <= world.time && attack_state == MOOK_ATTACK_NEUTRAL)
+	if(ranged_attack_delay <= world.time && attack_state == MOOK_ATTACK_NEUTRAL)
 		var/mob/living/L = my_target
 		if(L.incapacitated())
 			WarmupAttack(forced_slash_combo = TRUE)
@@ -56,17 +56,17 @@
 		WarmupAttack()
 	return ..()
 
-/mob/living/simple_animal/hostile/jungle/mook/Goto()
+/mob/living/danimal/hostile/jungle/mook/perform_move_action()
 	if(attack_state != MOOK_ATTACK_NEUTRAL)
 		return
 	return ..()
 
-/mob/living/simple_animal/hostile/jungle/mook/Move()
+/mob/living/danimal/hostile/jungle/mook/Move()
 	if(attack_state == MOOK_ATTACK_WARMUP || attack_state == MOOK_ATTACK_RECOVERY)
 		return
 	return ..()
 
-/mob/living/simple_animal/hostile/jungle/mook/proc/WarmupAttack(forced_slash_combo = FALSE)
+/mob/living/danimal/hostile/jungle/mook/proc/WarmupAttack(forced_slash_combo = FALSE)
 	var/atom/my_target = get_target()
 	if(attack_state == MOOK_ATTACK_NEUTRAL && my_target)
 		attack_state = MOOK_ATTACK_WARMUP
@@ -80,7 +80,7 @@
 	attack_state = MOOK_ATTACK_RECOVERY
 	ResetNeutral()
 
-/mob/living/simple_animal/hostile/jungle/mook/proc/SlashCombo()
+/mob/living/danimal/hostile/jungle/mook/proc/SlashCombo()
 	if(attack_state == MOOK_ATTACK_WARMUP && !stat)
 		attack_state = MOOK_ATTACK_ACTIVE
 		update_icons()
@@ -89,7 +89,7 @@
 		addtimer(CALLBACK(src,PROC_REF(SlashAttack)), 6)
 		addtimer(CALLBACK(src,PROC_REF(AttackRecovery)), 9)
 
-/mob/living/simple_animal/hostile/jungle/mook/proc/SlashAttack()
+/mob/living/danimal/hostile/jungle/mook/proc/SlashAttack()
 	var/atom/my_target = get_target()
 	if(!my_target || stat || attack_state != MOOK_ATTACK_ACTIVE)
 		return
@@ -107,7 +107,7 @@
 	new /obj/effect/temp_visual/kinetic_blast(swing_turf)
 	playsound(src, 'sound/weapons/slashmiss.ogg', 50, 1)
 
-/mob/living/simple_animal/hostile/jungle/mook/proc/LeapAttack()
+/mob/living/danimal/hostile/jungle/mook/proc/LeapAttack()
 	var/atom/my_target = get_target()
 	if(my_target && !stat && attack_state == MOOK_ATTACK_WARMUP)
 		attack_state = MOOK_ATTACK_ACTIVE
@@ -124,7 +124,7 @@
 	attack_state = MOOK_ATTACK_RECOVERY
 	ResetNeutral()
 
-/mob/living/simple_animal/hostile/jungle/mook/proc/AttackRecovery()
+/mob/living/danimal/hostile/jungle/mook/proc/AttackRecovery()
 	var/atom/my_target = get_target()
 	if(attack_state != MOOK_ATTACK_ACTIVE || stat || !my_target)
 		return
@@ -146,22 +146,22 @@
 		return
 	addtimer(CALLBACK(src,PROC_REF(ResetNeutral)), ATTACK_INTERMISSION_TIME)
 
-/mob/living/simple_animal/hostile/jungle/mook/proc/ResetNeutral()
+/mob/living/danimal/hostile/jungle/mook/proc/ResetNeutral()
 	if(attack_state != MOOK_ATTACK_RECOVERY)
 		return
 	attack_state = MOOK_ATTACK_NEUTRAL
-	ranged_cooldown = world.time + ranged_cooldown_time
+	ranged_attack_delay = world.time + ranged_cooldown_duration
 	update_icons()
 	var/atom/my_target = get_target()
 	if(my_target && !stat)
 		update_icons()
-		Goto(my_target, move_to_delay, minimum_distance)
+		perform_move_action(my_target, move_to_delay, minimum_distance)
 
-/mob/living/simple_animal/hostile/jungle/mook/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
+/mob/living/danimal/hostile/jungle/mook/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	. = ..()
 	if(isliving(hit_atom) && attack_state == MOOK_ATTACK_ACTIVE)
 		var/mob/living/L = hit_atom
-		if(CanAttack(L))
+		if(EvalTarget(L))
 			L.attack_animal(src)
 			struck_target_leap = TRUE
 			density = TRUE
@@ -174,27 +174,27 @@
 			continue
 		if(isliving(A))
 			var/mob/living/ML = A
-			if(!struck_target_leap && CanAttack(ML))//Check if some joker is attempting to use rest to evade us
+			if(!struck_target_leap && EvalTarget(ML))//Check if some joker is attempting to use rest to evade us
 				struck_target_leap = TRUE
 				ML.attack_animal(src)
 				density = TRUE
 				struck_target_leap = TRUE
 				update_icons()
 				continue
-			if(istype(ML, /mob/living/simple_animal/hostile/jungle/mook) && !mook_under_us)//If we land on the same tile as another mook, spread out so we don't stack our sprite on the same tile
-				var/mob/living/simple_animal/hostile/jungle/mook/M = ML
+			if(istype(ML, /mob/living/danimal/hostile/jungle/mook) && !mook_under_us)//If we land on the same tile as another mook, spread out so we don't stack our sprite on the same tile
+				var/mob/living/danimal/hostile/jungle/mook/M = ML
 				if(!M.stat)
 					mook_under_us = TRUE
 					var/anydir = pick(GLOB.cardinals)
 					Move(get_step(src, anydir), anydir)
 					continue
 
-/mob/living/simple_animal/hostile/jungle/mook/handle_automated_action()
+/mob/living/danimal/hostile/jungle/mook/handle_automated_action()
 	if(attack_state)
 		return
 	return ..()
 
-/mob/living/simple_animal/hostile/jungle/mook/OpenFire()
+/mob/living/danimal/hostile/jungle/mook/OpenFire()
 	var/atom/my_target = get_target()
 	if(isliving(my_target))
 		var/mob/living/L = my_target
@@ -202,7 +202,7 @@
 			return
 	WarmupAttack()
 
-/mob/living/simple_animal/hostile/jungle/mook/update_icons()
+/mob/living/danimal/hostile/jungle/mook/update_icons()
 	. = ..()
 	if(!stat)
 		switch(attack_state)

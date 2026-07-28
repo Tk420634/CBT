@@ -1,5 +1,5 @@
 //basic gecko tribal. unarmed, and runs away if possible
-/mob/living/simple_animal/hostile/gecko/tribal
+/mob/living/danimal/hostile/gecko/tribal
 	name = "gecko tribal"
 	desc = "A large mutated reptile that has learned the basics of tool usage."
 	icon = 'icons/fallout/mobs/animals/gecktribe.dmi'
@@ -22,7 +22,6 @@
 	speed = 0
 	maxHealth = 70
 	health = 70
-	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 4
 	melee_damage_upper = 12
@@ -108,7 +107,7 @@
 	)
 
 //juvenile gecko tribal, to make you feel even worse about attacking the village
-/mob/living/simple_animal/hostile/gecko/tribal/juvenile
+/mob/living/danimal/hostile/gecko/tribal/juvenile
 	name = "gecko tribal juvenile"
 	name = "gecko tribal juvenile"
 	desc = "A small mutated reptile with sharp teeth."
@@ -131,7 +130,6 @@
 	speed = 0
 	maxHealth = 20
 	health = 20
-	harm_intent_damage = 2
 	obj_damage = 5
 	melee_damage_lower = 1
 	melee_damage_upper = 3
@@ -171,14 +169,14 @@
 		MOB_MINIMUM_DISTANCE_CHANGE_PER_TURN_CHANCE(50),
 	)
 
-/mob/living/simple_animal/hostile/gecko/tribal/juvenile/Initialize()
+/mob/living/danimal/hostile/gecko/tribal/juvenile/Initialize()
 	.=..()
 	resize = 0.5
 	update_transform()
 
 
 //gecko with a spear. will bravely defend its home
-/mob/living/simple_animal/hostile/gecko/tribal/warrior
+/mob/living/danimal/hostile/gecko/tribal/warrior
 	bounty = 10
 	name = "gecko warrior"
 	desc = "A large mutated reptile that has learned the basics of tool usage. This one has a bone spear."
@@ -203,7 +201,6 @@
 	speed = 0
 	maxHealth = 80
 	health = 80
-	harm_intent_damage = 20
 	obj_damage = 20
 	melee_damage_lower = 16
 	melee_damage_upper = 24
@@ -288,7 +285,7 @@
 	)
 
 //gecko with a bow. will bravely defend its home
-/mob/living/simple_animal/hostile/gecko/tribal/hunter // oh I love that game!
+/mob/living/danimal/hostile/gecko/tribal/hunter // oh I love that game!
 	bounty = 10
 	name = "gecko hunter"
 	desc = "A large mutated reptile that has learned the basics of tool usage. This one has a bone spear."
@@ -314,7 +311,6 @@
 	speed = 0
 	maxHealth = 70
 	health = 70
-	harm_intent_damage = 20
 	obj_damage = 20
 	melee_damage_lower = 16
 	melee_damage_upper = 24
@@ -369,7 +365,7 @@
 	a_intent = INTENT_HARM
 	gold_core_spawnable = HOSTILE_SPAWN
 	footstep_type = FOOTSTEP_MOB_CLAW
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	check_friendly_fire = TRUE
 	projectiletype = /obj/item/projectile/geckoarrow
 	projectilesound = 'sound/weapons/bowfire.wav'
@@ -421,7 +417,7 @@
 	zone_accuracy_type = ZONE_WEIGHT_SHOTGUN
 
 //gecko priest. only fights in self defense, but drops meds when killed, and heals nearby geckos
-/mob/living/simple_animal/hostile/gecko/tribal/shaman
+/mob/living/danimal/hostile/gecko/tribal/shaman
 	bounty = 20
 	name = "gecko shaman"
 	desc = "A large mutated reptile that has learned the basics of tool usage. This one has pouches of herbs"
@@ -447,7 +443,6 @@
 	speed = 0
 	maxHealth = 90
 	health = 90
-	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 4
 	melee_damage_upper = 12
@@ -502,7 +497,7 @@
 	a_intent = INTENT_HARM
 	gold_core_spawnable = HOSTILE_SPAWN
 	footstep_type = FOOTSTEP_MOB_CLAW
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	check_friendly_fire = TRUE
 	projectiletype = /obj/item/projectile/geckofire
 	projectilesound = 'sound/magic/fireball.ogg'
@@ -535,16 +530,16 @@
 		MOB_MINIMUM_DISTANCE_CHANGE_PER_TURN_CHANCE(100),
 	)
 
-/mob/living/simple_animal/hostile/gecko/tribal/shaman/Initialize(mapload)
+/mob/living/danimal/hostile/gecko/tribal/shaman/Initialize(mapload)
 	. = ..()
 	// we only heal BRUTELOSS because each type directly heals a simplemob's health
 	// therefore setting it to BRUTELOSS | FIRELOSS | TOXLOSS | OXYLOSS would mean healing 4x as much
 	// aka 40% of max life every tick, which is basically unkillable
 	// TODO: refactor this if simple_animals ever get damage types
-	AddComponent(/datum/component/glow_heal, chosen_targets = /mob/living/simple_animal/hostile/gecko, allow_revival = FALSE, restrict_faction = null, type_healing = BRUTELOSS)
+	AddComponent(/datum/component/glow_heal, chosen_targets = /mob/living/danimal/hostile/gecko, allow_revival = FALSE, restrict_faction = null, type_healing = BRUTELOSS)
 
 //gecko boss fight. is peaceful till provoked, then summons and ressurects geckos to fight you
-/mob/living/simple_animal/hostile/gecko/tribal/head_shaman
+/mob/living/danimal/hostile/gecko/tribal/head_shaman
 	bounty = 200
 	name = "gecko head shaman"
 	desc = "A large mutated reptile that has learned the basics of tool usage. This one is dressed regally and wields a staff."
@@ -574,7 +569,6 @@
 	maxHealth = 150
 	health = 150
 	armor_list = ARMOR_VALUE_DEATHCLAW_COMMON
-	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 4
 	melee_damage_upper = 12
@@ -586,7 +580,7 @@
 	waddle_amount = 3
 	waddle_up_time = 1
 	waddle_side_time = 2
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	bossmob = TRUE
 	speak_emote = list(
 		"squeaks",
@@ -630,7 +624,7 @@
 	a_intent = INTENT_HARM
 	gold_core_spawnable = FALSE
 	footstep_type = FOOTSTEP_MOB_HEAVY
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	check_friendly_fire = TRUE
 	move_resist = MOVE_FORCE_OVERPOWERING
 	projectiletype = /obj/item/projectile/geckosummon
@@ -665,11 +659,11 @@
 		MOB_MINIMUM_DISTANCE_CHANGE_PER_TURN_CHANCE(100),
 	)
 
-/mob/living/simple_animal/hostile/gecko/tribal/head_shaman/Initialize(mapload)
+/mob/living/danimal/hostile/gecko/tribal/head_shaman/Initialize(mapload)
 	. = ..()
 	resize = 1.5
 	update_transform()
-	AddComponent(/datum/component/glow_heal, chosen_targets = /mob/living/simple_animal/hostile/gecko, allow_revival = TRUE, restrict_faction = null, type_healing = BRUTELOSS)
+	AddComponent(/datum/component/glow_heal, chosen_targets = /mob/living/danimal/hostile/gecko, allow_revival = TRUE, restrict_faction = null, type_healing = BRUTELOSS)
 
 /obj/item/projectile/geckosummon
 	name = "gecko summoning"
@@ -695,13 +689,13 @@
 /obj/item/projectile/geckosummon/on_hit(atom/target, blocked = FALSE)
 	..()
 	//var/num_nearby = 0
-	//for(var/mob/living/simple_animal/hostile/gecko/summon/G in range(7, src))
+	//for(var/mob/living/danimal/hostile/gecko/summon/G in range(7, src))
 	//	if(num_nearby++ <= 10) //should this be <= dan?
-	spawn_and_random_walk(/mob/living/simple_animal/hostile/gecko/summon, target, 5, walk_chance = 100, max_walk = 10, admin_spawn = FALSE)
+	spawn_and_random_walk(/mob/living/danimal/hostile/gecko/summon, target, 5, walk_chance = 100, max_walk = 10, admin_spawn = FALSE)
 	//		break
 	return BULLET_ACT_HIT
 
-/mob/living/simple_animal/hostile/gecko/tribal/chieftain
+/mob/living/danimal/hostile/gecko/tribal/chieftain
 	bounty = 300
 	name = "gecko chieftan"
 	desc = "A large mutated reptile that has learned the basics of tool usage. This one is dressed regally and looks fierce."
@@ -732,7 +726,6 @@
 	maxHealth = 150
 	health = 150
 	armor_list = ARMOR_VALUE_DEATHCLAW_COMMON
-	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 30
 	melee_damage_upper = 50
@@ -746,7 +739,7 @@
 	waddle_amount = 3
 	waddle_up_time = 1
 	waddle_side_time = 2
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	bossmob = TRUE
 	speak_emote = list(
 		"squeaks",
@@ -790,7 +783,7 @@
 	a_intent = INTENT_HARM
 	gold_core_spawnable = FALSE
 	footstep_type = FOOTSTEP_MOB_HEAVY
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	check_friendly_fire = TRUE
 	move_resist = MOVE_FORCE_OVERPOWERING
 	projectiletype = /obj/item/projectile/bola/fragile
@@ -824,7 +817,7 @@
 		MOB_MINIMUM_DISTANCE_CHANGE_PER_TURN_CHANCE(30),
 	)
 
-/mob/living/simple_animal/hostile/gecko/tribal/chieftain/Initialize()
+/mob/living/danimal/hostile/gecko/tribal/chieftain/Initialize()
 	. = ..()
 	resize = 1.5
 	update_transform()
@@ -866,7 +859,7 @@
 	return BULLET_ACT_HIT
 
 
-/mob/living/simple_animal/hostile/gecko/tribal/head_shaman/small_shaman
+/mob/living/danimal/hostile/gecko/tribal/head_shaman/small_shaman
 	bounty = 50
 	name = "gecko tribe small shaman"
 	desc = "A large mutated reptile that has learned the basics of tool usage. This one is dressed regally and wields a staff."
@@ -896,7 +889,6 @@
 	maxHealth = 100
 	health = 100
 	armor_list = ARMOR_VALUE_LIGHT
-	harm_intent_damage = 8
 	obj_damage = 20
 	melee_damage_lower = 4
 	melee_damage_upper = 12
@@ -908,7 +900,7 @@
 	waddle_amount = 3
 	waddle_up_time = 1
 	waddle_side_time = 2
-	robust_searching = TRUE
+	// robust_searching = TRUE
 	bossmob = TRUE
 	speak_emote = list(
 		"squeaks",
@@ -952,7 +944,7 @@
 	a_intent = INTENT_HARM
 	gold_core_spawnable = FALSE
 	footstep_type = FOOTSTEP_MOB_HEAVY
-	ranged = TRUE
+	can_ranged_attack = TRUE
 	check_friendly_fire = TRUE
 	move_resist = MOVE_FORCE_OVERPOWERING
 	idlesound = list(
@@ -985,10 +977,10 @@
 		MOB_MINIMUM_DISTANCE_CHANGE_PER_TURN_CHANCE(100),
 	)
 
-/mob/living/simple_animal/hostile/gecko/tribal/head_shaman/small_shaman/Initialize(mapload)
+/mob/living/danimal/hostile/gecko/tribal/head_shaman/small_shaman/Initialize(mapload)
 	. = ..()
 	// we only heal BRUTELOSS because each type directly heals a simplemob's health
 	// therefore setting it to BRUTELOSS | FIRELOSS | TOXLOSS | OXYLOSS would mean healing 4x as much
 	// aka 40% of max life every tick, which is basically unkillable
 	// TODO: refactor this if simple_animals ever get damage types
-	AddComponent(/datum/component/glow_heal, chosen_targets = /mob/living/simple_animal/hostile/gecko, allow_revival = FALSE, restrict_faction = null, type_healing = BRUTELOSS)
+	AddComponent(/datum/component/glow_heal, chosen_targets = /mob/living/danimal/hostile/gecko, allow_revival = FALSE, restrict_faction = null, type_healing = BRUTELOSS)

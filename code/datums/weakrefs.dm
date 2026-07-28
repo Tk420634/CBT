@@ -105,7 +105,7 @@
 /proc/RESOLVEREF(ref) 
 	return locate(ref)
 
-/proc/RESOLVEWEAKREF(datum/weakref/wr)
+/proc/RESOLVEWEAKREF(datum/weakref/wr) // dan you dumb bitch, the SECOND proc in this file is this, but better. You dumb stupid asshole bitch
 	if(!isweakref(wr))
 		return
 	return wr.resolve()

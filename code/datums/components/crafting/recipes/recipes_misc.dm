@@ -138,7 +138,7 @@
 
 /datum/crafting_recipe/hivebotmelee
 	name = "Cheap Melee Hivebot"
-	result = /mob/living/simple_animal/hostile/eyebot/playable/hivebot/melee
+	result = /mob/living/danimal/hostile/eyebot/playable/hivebot/melee
 	reqs = list(/obj/item/stack/crafting/electronicparts = 6,
 				/obj/item/stack/rods = 8,
 				/obj/item/stack/sheet/metal = 6,
@@ -151,7 +151,7 @@
 
 /datum/crafting_recipe/hivebotmelee2
 	name = "Regular Melee Hivebot"
-	result = /mob/living/simple_animal/hostile/eyebot/playable/hivebot/melee/tier2
+	result = /mob/living/danimal/hostile/eyebot/playable/hivebot/melee/tier2
 	reqs = list(/obj/item/stack/crafting/electronicparts = 8,
 				/obj/item/stack/crafting/metalparts = 4,
 				/obj/item/stack/crafting/goodparts = 3,
@@ -165,7 +165,7 @@
 
 /datum/crafting_recipe/hivebotmelee3
 	name = "Advanced Melee Hivebot"
-	result = /mob/living/simple_animal/hostile/eyebot/playable/hivebot/melee/tier2
+	result = /mob/living/danimal/hostile/eyebot/playable/hivebot/melee/tier2
 	reqs = list(/obj/item/stack/crafting/electronicparts = 12,
 				/obj/item/stack/crafting/metalparts = 16,
 				/obj/item/stack/crafting/goodparts = 12,
@@ -180,7 +180,7 @@
 
 /datum/crafting_recipe/rangedhivebot
 	name = "Cheap Ranged Hivebot"
-	result = /mob/living/simple_animal/hostile/eyebot/playable/hivebot
+	result = /mob/living/danimal/hostile/eyebot/playable/hivebot
 	reqs = list(/obj/item/stack/crafting/electronicparts = 8,
 				/obj/item/stack/crafting/metalparts = 3,
 				/obj/item/stack/crafting/goodparts = 1,
@@ -195,7 +195,7 @@
 
 /datum/crafting_recipe/rangedhivebot2
 	name = "Regular Ranged Hivebot"
-	result = /mob/living/simple_animal/hostile/eyebot/playable/hivebot/tier2
+	result = /mob/living/danimal/hostile/eyebot/playable/hivebot/tier2
 	reqs = list(/obj/item/stack/crafting/electronicparts = 12,
 				/obj/item/stack/crafting/metalparts = 6,
 				/obj/item/stack/crafting/goodparts = 4,
@@ -211,7 +211,7 @@
 
 /datum/crafting_recipe/rangedhivebot3
 	name = "Advanced Ranged Hivebot"
-	result = /mob/living/simple_animal/hostile/eyebot/playable/hivebot/tier3
+	result = /mob/living/danimal/hostile/eyebot/playable/hivebot/tier3
 	reqs = list(/obj/item/stack/crafting/electronicparts = 15,
 				/obj/item/stack/crafting/metalparts = 15,
 				/obj/item/stack/crafting/goodparts = 10,
@@ -229,7 +229,7 @@
 
 /datum/crafting_recipe/factoryhivebot
 	name = "Sentient Hivebot"
-	result = /mob/living/simple_animal/advanced/hivebot/factory
+	result = /mob/living/danimal/advanced/hivebot/factory
 	reqs = list(/obj/item/stack/crafting/electronicparts = 12,
 				/obj/item/stack/crafting/metalparts = 8,
 				/obj/item/stack/crafting/goodparts = 6,
@@ -242,7 +242,7 @@
 
 /* /datum/crafting_recipe/crystalhivebot
 	name = "Magical Hivebot"
-	result = /mob/living/simple_animal/advanced/hivebot/crystal
+	result = /mob/living/danimal/advanced/hivebot/crystal
 	reqs = list(/obj/item/stack/crafting/electronicparts = 12,
 				/obj/item/stack/crafting/metalparts = 8,
 				/obj/item/stack/crafting/goodparts = 6,

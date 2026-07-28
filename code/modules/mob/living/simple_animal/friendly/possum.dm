@@ -1,4 +1,4 @@
-/mob/living/simple_animal/opossum
+/mob/living/danimal/opossum
 	name = "opossum"
 	desc = "It's an opossum, a small scavenging marsupial."
 	icon_state = "possum"
@@ -28,7 +28,7 @@
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	gold_core_spawnable = FRIENDLY_SPAWN
 
-/mob/living/simple_animal/opossum/poppy
+/mob/living/danimal/opossum/poppy
 	name = "Poppy the Safety Possum"
 	desc = "Safety first!"
 	icon_state = "poppypossum"

@@ -129,7 +129,7 @@
 	stat_allowed = UNCONSCIOUS
 
 /datum/emote/living/deathgasp/run_emote(mob/user, params)
-	var/mob/living/simple_animal/S = user
+	var/mob/living/danimal/S = user
 	if(istype(S) && S.deathmessage)
 		message_simple = S.deathmessage
 	. = ..()

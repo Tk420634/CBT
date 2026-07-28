@@ -23,8 +23,8 @@
 
 /obj/item/crusher_trophy/golden_skull/on_mark_detonation(mob/living/target, mob/living/user)
 	if(target.stat == DEAD)
-		if(istype(target, /mob/living/simple_animal/hostile/asteroid) && user.a_intent == INTENT_GRAB)
-			var/mob/living/simple_animal/hostile/asteroid/L = target
+		if(istype(target, /mob/living/danimal/hostile/asteroid) && user.a_intent == INTENT_GRAB)
+			var/mob/living/danimal/hostile/asteroid/L = target
 			L.revive(full_heal = 1, admin_revive = 1)
 			L.attack_same = 0
 			L.loot = null
@@ -45,7 +45,7 @@
 		var/confirm = input("Are you sure you want to turn [target] into a friendly legion?", "Legionification") in list("Yes", "No")
 		if(confirm == "Yes")
 			var/mob/living/carbon/human/H = target
-			var/mob/living/simple_animal/hostile/asteroid/hivelord/legion/L = new /mob/living/simple_animal/hostile/asteroid/hivelord/legion(H.loc)
+			var/mob/living/danimal/hostile/asteroid/hivelord/legion/L = new /mob/living/danimal/hostile/asteroid/hivelord/legion(H.loc)
 			L.stored_mob = H
 			H.forceMove(L)
 			L.faction = user.faction.Copy()
@@ -86,7 +86,7 @@
 		new /obj/effect/temp_visual/small_smoke/halfsecond(T)
 		for(var/mob/living/L in T.contents)
 			if(L != user && !(L in hit_things) && !ishuman(L))
-				if(!faction_check(user.faction, L.faction))
+				if(!factions_are_friendly(user.faction, L.faction))
 					if(prob(25))
 						L.Stun(10)
 					L.apply_damage_type(20, BRUTE)

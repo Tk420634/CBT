@@ -79,7 +79,7 @@
 
 	//Chance to emag a Bot
 	if(botEmagChance)
-		for(var/mob/living/simple_animal/bot/bot in GLOB.alive_mob_list)
+		for(var/mob/living/danimal/bot/bot in GLOB.alive_mob_list)
 			if(prob(botEmagChance))
 				bot.emag_act()
 

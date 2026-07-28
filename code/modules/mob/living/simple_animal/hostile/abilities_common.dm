@@ -1,47 +1,47 @@
 #define RTS_GHOUL_ALLOWED list(\
-		/mob/living/simple_animal/hostile/ghoul,\
-		/mob/living/simple_animal/hostile/ghoul/reaver)
-		// /mob/living/simple_animal/hostile/ghoul/zombie/glowing)
+		/mob/living/danimal/hostile/ghoul,\
+		/mob/living/danimal/hostile/ghoul/reaver)
+		// /mob/living/danimal/hostile/ghoul/zombie/glowing)
 #define RTS_SMALLCRITTER_ALLOWED list(\
-		/mob/living/simple_animal/hostile/gecko,\
-		/mob/living/simple_animal/hostile/gecko/legacy,\
-		/mob/living/simple_animal/hostile/gecko/fire,\
-		/mob/living/simple_animal/hostile/gecko/legacy/alpha,\
-		/mob/living/simple_animal/hostile/gecko/big,\
-		/mob/living/simple_animal/hostile/molerat,\
-		/mob/living/simple_animal/hostile/bloatfly,\
-		/mob/living/simple_animal/hostile/pillbug)
+		/mob/living/danimal/hostile/gecko,\
+		/mob/living/danimal/hostile/gecko/legacy,\
+		/mob/living/danimal/hostile/gecko/fire,\
+		/mob/living/danimal/hostile/gecko/legacy/alpha,\
+		/mob/living/danimal/hostile/gecko/big,\
+		/mob/living/danimal/hostile/molerat,\
+		/mob/living/danimal/hostile/bloatfly,\
+		/mob/living/danimal/hostile/pillbug)
 #define RTS_RATS_ALLOWED list(\
-		/mob/living/simple_animal/hostile/rat,\
-		/mob/living/simple_animal/hostile/rat/skitter,\
-		/mob/living/simple_animal/hostile/rat/frien)
+		/mob/living/danimal/hostile/rat,\
+		/mob/living/danimal/hostile/rat/skitter,\
+		/mob/living/danimal/hostile/rat/frien)
 #define RTS_ROBOT_ALLOWED list(\
-		/mob/living/simple_animal/hostile/handy,\
-		/mob/living/simple_animal/hostile/handy/protectron,\
-		/mob/living/simple_animal/hostile/eyebot)
+		/mob/living/danimal/hostile/handy,\
+		/mob/living/danimal/hostile/handy/protectron,\
+		/mob/living/danimal/hostile/eyebot)
 
 // Separate defines for taming and control, else use above.
 #define TAME_RATS_ALLOWED list(\
-		/mob/living/simple_animal/hostile/rat,\
-		/mob/living/simple_animal/hostile/rat/skitter,\
-		/mob/living/simple_animal/hostile/molerat)
+		/mob/living/danimal/hostile/rat,\
+		/mob/living/danimal/hostile/rat/skitter,\
+		/mob/living/danimal/hostile/molerat)
 
 #define TAME_SMALLCRITTER_ALLOWED list(\
-		/mob/living/simple_animal/hostile/stalker,\
-		/mob/living/simple_animal/hostile/stalkeryoung,\
-		/mob/living/simple_animal/hostile/gecko,\
-		/mob/living/simple_animal/hostile/gecko/legacy,\
-		/mob/living/simple_animal/hostile/gecko/fire,\
-		/mob/living/simple_animal/hostile/molerat,\
-		/mob/living/simple_animal/hostile/pillbug)
+		/mob/living/danimal/hostile/stalker,\
+		/mob/living/danimal/hostile/stalkeryoung,\
+		/mob/living/danimal/hostile/gecko,\
+		/mob/living/danimal/hostile/gecko/legacy,\
+		/mob/living/danimal/hostile/gecko/fire,\
+		/mob/living/danimal/hostile/molerat,\
+		/mob/living/danimal/hostile/pillbug)
 
 #define CONTROL_SMALLCRITTER_ALLOWED list(\
-		/mob/living/simple_animal/hostile/gecko,\
-		/mob/living/simple_animal/hostile/gecko,\
-		/mob/living/simple_animal/hostile/gecko/legacy,\
-		/mob/living/simple_animal/hostile/gecko/fire,\
-		/mob/living/simple_animal/hostile/molerat,\
-		/mob/living/simple_animal/hostile/pillbug)
+		/mob/living/danimal/hostile/gecko,\
+		/mob/living/danimal/hostile/gecko,\
+		/mob/living/danimal/hostile/gecko/legacy,\
+		/mob/living/danimal/hostile/gecko/fire,\
+		/mob/living/danimal/hostile/molerat,\
+		/mob/living/danimal/hostile/pillbug)
 
 
 /datum/action/innate/ghostify
@@ -174,11 +174,11 @@
 		who_to_check = list(owner.type)
 	else
 		who_to_check = allowed_mobs
-	for(var/mob/living/simple_animal/hostile/M in orange(6, get_turf(owner)))
+	for(var/mob/living/danimal/hostile/M in orange(6, get_turf(owner)))
 		if(allmobs || (M.type in who_to_check))
 			if(M.AIStatus == AI_OFF || M.stat == DEAD || M.ckey)
 				continue
-			//M.Goto(user,M.move_to_delay,1)
+			//M.perform_move_action(user,M.move_to_delay,1)
 			walk_to(M, user, 1, M.move_to_delay)
 			M.do_alert_animation(M)
 	return TRUE
@@ -266,11 +266,11 @@
 		who_to_check = list(user.type)
 	else
 		who_to_check = allowed_mobs
-	for(var/mob/living/simple_animal/hostile/M in orange(6, get_turf(user)))
+	for(var/mob/living/danimal/hostile/M in orange(6, get_turf(user)))
 		if(allmobs || (M.type in who_to_check))
 			if(M.AIStatus == AI_OFF || M.stat == DEAD || M.ckey)
 				continue
-			//M.Goto(target,M.move_to_delay,1)
+			//M.perform_move_action(target,M.move_to_delay,1)
 			walk_to(M, target, 1, M.move_to_delay)
 			M.do_alert_animation(M)
 	remove_ranged_ability()
@@ -339,7 +339,7 @@
 	if(user.incapacitated())
 		return
 
-	var/mob/living/simple_animal/owner = user
+	var/mob/living/danimal/owner = user
 	if(!owner.ckey)
 		return
 
@@ -410,7 +410,7 @@
 	if(user.incapacitated())
 		return
 
-	var/mob/living/simple_animal/owner = user
+	var/mob/living/danimal/owner = user
 	if(!owner.ckey)
 		return
 
@@ -483,7 +483,7 @@
 		allmobs = TRUE
 	else
 		who_to_check = allowed_mobs
-	for(var/mob/living/simple_animal/hostile/M in range(1, get_turf(user))) // Requires you to be close and personal for taming
+	for(var/mob/living/danimal/hostile/M in range(1, get_turf(user))) // Requires you to be close and personal for taming
 		if(allmobs || (M.type in who_to_check))
 			if(M.stat == DEAD) // hevy is ded
 				continue

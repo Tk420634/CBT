@@ -1,4 +1,4 @@
-/mob/living/simple_animal/hostile/raider/pirate
+/mob/living/danimal/hostile/raider/pirate
 	name = "Pirate"
 	desc = "Does what he wants cause a pirate is free."
 	icon = 'icons/mob/simple_human.dmi'
@@ -15,7 +15,6 @@
 	maxHealth = 115
 	health = 115
 	spacewalk = TRUE
-	harm_intent_damage = 5
 	melee_damage_lower = 10
 	melee_damage_upper = 10
 	attack_verb_continuous = "punches"
@@ -38,7 +37,7 @@
 	loot_drop_amount = 2
 	loot_amount_random = TRUE
 
-/mob/living/simple_animal/hostile/raider/pirate/melee
+/mob/living/danimal/hostile/raider/pirate/melee
 	name = "Pirate Swashbuckler"
 	icon_state = "piratemelee"
 	icon_living = "piratemelee"
@@ -52,33 +51,33 @@
 
 	footstep_type = FOOTSTEP_MOB_SHOE
 
-/mob/living/simple_animal/hostile/raider/pirate/melee/space
+/mob/living/danimal/hostile/raider/pirate/melee/space
 	name = "Space Pirate Swashbuckler"
 	icon_state = "piratespace"
 	icon_living = "piratespace"
 	icon_dead = "piratespace_dead"
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 0
 	speed = 1
 	spacewalk = TRUE
 
-/mob/living/simple_animal/hostile/raider/pirate/melee/Initialize()
+/mob/living/danimal/hostile/raider/pirate/melee/Initialize()
 	. = ..()
 	sord = new(src)
 
-/mob/living/simple_animal/hostile/raider/pirate/melee/Destroy()
+/mob/living/danimal/hostile/raider/pirate/melee/Destroy()
 	QDEL_NULL(sord)
 	return ..()
 
-/mob/living/simple_animal/hostile/raider/pirate/ranged
+/mob/living/danimal/hostile/raider/pirate/ranged
 	name = "Pirate Gunner"
 	icon_state = "pirateranged"
 	icon_living = "pirateranged"
 	icon_dead = "pirateranged_dead"
 	projectilesound = 'sound/weapons/laser.ogg'
-	ranged = 1
-	rapid = 2
-	rapid_fire_delay = 6
+	can_ranged_attack = TRUE
+	ranged_attack_burst_count =  2
+	ranged_attack_burst_delay_per_shot = 6
 	retreat_distance = 5
 	minimum_distance = 5
 	projectiletype = /obj/item/projectile/beam/laser
@@ -97,12 +96,12 @@
 	)
 
 
-/mob/living/simple_animal/hostile/raider/pirate/ranged/space
+/mob/living/danimal/hostile/raider/pirate/ranged/space
 	name = "Space Pirate Gunner"
 	icon_state = "piratespaceranged"
 	icon_living = "piratespaceranged"
 	icon_dead = "piratespaceranged_dead"
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	// atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	//minbodytemp = 0
 	speed = 1
 	spacewalk = TRUE

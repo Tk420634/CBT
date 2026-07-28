@@ -120,7 +120,7 @@
 	if(attack_generic(user, 60, BRUTE, "melee", 0))
 		playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
 
-/obj/attack_animal(mob/living/simple_animal/M)
+/obj/attack_animal(mob/living/danimal/M)
 	if(!M.CheckActionCooldown(CLICK_CD_MELEE))
 		return
 	if(!M.melee_damage_upper && !M.obj_damage)
@@ -150,7 +150,7 @@
 
 #define BLACKLISTED_OBJECTS list(/obj/machinery/power/apc, /obj/machinery/airalarm, /obj/machinery/power/smes, /obj/structure/cable)
 
-/obj/attack_slime(mob/living/simple_animal/slime/user)
+/obj/attack_slime(mob/living/danimal/slime/user)
 	if(!user.is_adult)
 		return
 	if(src.type in BLACKLISTED_OBJECTS)

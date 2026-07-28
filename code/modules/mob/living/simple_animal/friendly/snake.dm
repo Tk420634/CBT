@@ -1,8 +1,8 @@
-/mob/living/simple_animal/hostile/retaliate/poison
+/mob/living/danimal/hostile/retaliate/poison
 	var/poison_per_bite = 0
 	var/poison_type = /datum/reagent/toxin
 
-/mob/living/simple_animal/hostile/retaliate/poison/AttackingTarget()
+/mob/living/danimal/hostile/retaliate/poison/AttackingTarget()
 	. = ..()
 	var/atom/my_target = get_target()
 	if(!. || !isliving(my_target))
@@ -11,7 +11,7 @@
 	if(L.reagents && !poison_per_bite == 0)
 		L.reagents.add_reagent(poison_type, poison_per_bite)
 
-/mob/living/simple_animal/hostile/retaliate/poison/snake
+/mob/living/danimal/hostile/retaliate/poison/snake
 	name = "snake"
 	desc = "A slithery snake. These legless reptiles are the bane of mice and adventurers alike."
 	icon_state = "snake"
@@ -41,13 +41,13 @@
 	environment_smash = ENVIRONMENT_SMASH_NONE
 
 
-/mob/living/simple_animal/hostile/retaliate/poison/snake/ListTargets(atom/the_target)
+/mob/living/danimal/hostile/retaliate/poison/snake/ListTargets(atom/the_target)
 	. = oview(vision_range, get_origin()) //get list of things in vision range
 	var/list/living_mobs = list()
 	var/list/mice = list()
 	for (var/HM in .)
 		//Yum a tasty mouse
-		if(istype(HM, /mob/living/simple_animal/mouse))
+		if(istype(HM, /mob/living/danimal/mouse))
 			mice += HM
 		if(isliving(HM))
 			living_mobs += HM
@@ -67,9 +67,9 @@
 	//Filter living mobs (in range mobs) by those we consider enemies (retaliate behaviour)
 	return  living_mobs & actual_enemies
 
-/mob/living/simple_animal/hostile/retaliate/poison/snake/AttackingTarget()
+/mob/living/danimal/hostile/retaliate/poison/snake/AttackingTarget()
 	var/atom/my_target = get_target()
-	if(!istype(my_target, /mob/living/simple_animal/mouse))
+	if(!istype(my_target, /mob/living/danimal/mouse))
 		return ..()
 	visible_message(span_notice("[name] consumes [my_target] in a single gulp!"), span_notice("You consume [my_target] in a single gulp!"))
 	qdel(my_target)

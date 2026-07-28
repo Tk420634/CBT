@@ -35,7 +35,7 @@
 	else
 		nomination(user)
 
-/obj/structure/destructible/clockwork/eminence_spire/attack_drone(mob/living/simple_animal/drone/user)
+/obj/structure/destructible/clockwork/eminence_spire/attack_drone(mob/living/danimal/drone/user)
 	if(!is_servant_of_ratvar(user))
 		..()
 	else

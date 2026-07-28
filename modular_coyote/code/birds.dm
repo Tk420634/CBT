@@ -1,6 +1,6 @@
 //These birds came from Goon.
 
-/mob/living/simple_animal/bird //the base
+/mob/living/danimal/bird //the base
 	name = "bird"
 	desc = "chirp chirp"
 	icon = 'modular_coyote/icons/mob/bird.dmi'
@@ -17,7 +17,6 @@
 	speak_emote = list("chrips")
 	maxHealth = 20
 	health = 20
-	harm_intent_damage = 5
 	friendly_verb_continuous = "nudges"
 	friendly_verb_simple = "nudge"
 	density = FALSE
@@ -44,26 +43,26 @@
 
 
 
-/mob/living/simple_animal/bird/Initialize()
+/mob/living/danimal/bird/Initialize()
 	.=..()
 	resize = 0.5
 	update_transform()
 
-/mob/living/simple_animal/bird/redparrot
+/mob/living/danimal/bird/redparrot
 	name = "red parrot"
 	desc = "A red parrot!"
 	icon_state = "parrot"
 	icon_living = "parrot"
 	icon_dead = "parrot-dead"
 
-/mob/living/simple_animal/bird/kea
+/mob/living/danimal/bird/kea
 	name = "kea"
 	desc = "Not to be confused with the car brand, it's a kea!"
 	icon_state = "kea"
 	icon_living = "kea"
 	icon_dead = "kea-dead"
 
-/mob/living/simple_animal/bird/eclectus
+/mob/living/danimal/bird/eclectus
 	name = "eclectus"
 	gender = "male"
 	desc = "A eclectus bird!"
@@ -71,7 +70,7 @@
 	icon_living = "eclectus"
 	icon_dead = "eclectus-dead"
 
-/mob/living/simple_animal/bird/eclectusf
+/mob/living/danimal/bird/eclectusf
 	name = "female eclectus"
 	gender = "female"
 	desc = "A eclectus bird! This one is a female judging by the blue and red."
@@ -79,245 +78,245 @@
 	icon_living = "eclectusf"
 	icon_dead = "eclectusf-dead"
 
-/mob/living/simple_animal/bird/agrey
+/mob/living/danimal/bird/agrey
 	name = "grey parrot"
 	desc = "A grey parrot!"
 	icon_state = "agrey"
 	icon_living = "agrey"
 	icon_dead = "agrey-dead"
 
-/mob/living/simple_animal/bird/bcaique
+/mob/living/danimal/bird/bcaique
 	name = "caique"
 	desc = "A caique"
 	icon_state = "bcaique"
 	icon_living = "bcaique"
 	icon_dead = "bcaique-dead"
 
-/mob/living/simple_animal/bird/wcaique
+/mob/living/danimal/bird/wcaique
 	name = "caique"
 	desc = "A caique"
 	icon_state = "wcaique"
 	icon_living = "wcaique"
 	icon_dead = "wcaique-dead"
 
-/mob/living/simple_animal/bird/gbudge
+/mob/living/danimal/bird/gbudge
 	name = "green budgie"
 	desc = "A green budgie!"
 	icon_state = "gbudge"
 	icon_living = "gbudge"
 	icon_dead = "gbudge-dead"
 
-/mob/living/simple_animal/bird/bbudge
+/mob/living/danimal/bird/bbudge
 	name = "blue budgie"
 	desc = "A blue budgie!"
 	icon_state = "bbudge"
 	icon_living = "bbudge"
 	icon_dead = "bbudge-dead"
 
-/mob/living/simple_animal/bird/bgbudge
+/mob/living/danimal/bird/bgbudge
 	name = "blue green budgie"
 	desc = "A blue and green budgie!"
 	icon_state = "bgbudge"
 	icon_living = "bgbudge"
 	icon_dead = "bgbudge-dead"
 
-/mob/living/simple_animal/bird/commonblackbird
+/mob/living/danimal/bird/commonblackbird
 	name = "common black bird"
 	desc = "Black bird singing in the dead of night."
 	icon_state = "commonblackbird"
 	icon_living = "commonblackbird"
 	icon_dead = "commonblackbird-dead"
 
-/mob/living/simple_animal/bird/azuretit
+/mob/living/danimal/bird/azuretit
 	name = "azure tit"
 	desc = "What an absurd tit!"
 	icon_state = "azuretit"
 	icon_living = "azuretit"
 	icon_dead = "azuretit-dead"
 
-/mob/living/simple_animal/bird/europeanrobin
+/mob/living/danimal/bird/europeanrobin
 	name = "european robin"
 	desc = "This robin probably drinks tea and calls fries chips. Weird."
 	icon_state = "europeanrobin"
 	icon_living = "europeanrobin"
 	icon_dead = "europeanrobin-dead"
 
-/mob/living/simple_animal/bird/goldcrest
+/mob/living/danimal/bird/goldcrest
 	name = "goldcrest"
 	desc = "A gold crusted bird? Oh no, it's just a goldcrest."
 	icon_state = "goldcrest"
 	icon_living = "goldcrest"
 	icon_dead = "goldcrest-dead"
 
-/mob/living/simple_animal/bird/ringneckdove
+/mob/living/danimal/bird/ringneckdove
 	name = "ringneck dove"
 	desc = "Coo coo, it's a dove!"
 	icon_state = "ringneckdove"
 	icon_living = "ringneckdove"
 	icon_dead = "ringneckdove-dead"
 
-/mob/living/simple_animal/bird/tiel
+/mob/living/danimal/bird/tiel
 	name = "Cockatiel"
 	desc = "It's a cock-a-teal!"
 	icon_state = "tiel"
 	icon_living = "tiel"
 	icon_dead = "tiel-dead"
 
-/mob/living/simple_animal/bird/wtiel
+/mob/living/danimal/bird/wtiel
 	name = "Cockatiel"
 	desc = "It's a white cock-a-teal!"
 	icon_state = "wtiel"
 	icon_living = "wtiel"
 	icon_dead = "wtiel-dead"
 
-/mob/living/simple_animal/bird/luttiel
+/mob/living/danimal/bird/luttiel
 	name = "yellow headed cockatiel"
 	desc = "It's a yellow and white cock-a-teal!"
 	icon_state = "luttiel"
 	icon_living = "luttiel"
 	icon_dead = "luttiel-dead"
 
-/mob/living/simple_animal/bird/blutiel
+/mob/living/danimal/bird/blutiel
 	name = "blue cockatiel"
 	desc = "It's a blue cock-a-teal!"
 	icon_state = "blutiel"
 	icon_living = "blutiel"
 	icon_dead = "blutiel-dead"
 
-/mob/living/simple_animal/bird/too
+/mob/living/danimal/bird/too
 	name = "Cockatoo"
 	desc = "It's cock-a-too!"
 	icon_state = "too"
 	icon_living = "too"
 	icon_dead = "too-dead"
 
-/mob/living/simple_animal/bird/utoo
+/mob/living/danimal/bird/utoo
 	name = "Umbrella Cockatoo"
 	desc = "It's a umbrella cock-a-too, ready for rain!"
 	icon_state = "utoo"
 	icon_living = "utoo"
 	icon_dead = "utoo-dead"
 
-/mob/living/simple_animal/bird/mtoo
+/mob/living/danimal/bird/mtoo
 	name = "pink Cockatoo"
 	desc = "It's a pink cock-a-too"
 	icon_state = "mtoo"
 	icon_living = "mtoo"
 	icon_dead = "mtoo-dead"
 
-/mob/living/simple_animal/bird/toucan
+/mob/living/danimal/bird/toucan
 	name = "toucan"
 	desc = "You can? toucan!"
 	icon_state = "toucan"
 	icon_living = "toucan"
 	icon_dead = "toucan-dead"
 
-/mob/living/simple_animal/bird/kbtoucan
+/mob/living/danimal/bird/kbtoucan
 	name = "toucan"
 	desc = "You can? toucan!"
 	icon_state = "kbtoucan"
 	icon_living = "kbtoucan"
 	icon_dead = "kbtoucan-dead"
 
-/mob/living/simple_animal/bird/ikea
+/mob/living/danimal/bird/ikea
 	name = "ikea"
 	desc = "It's a bird!"
 	icon_state = "ikea"
 	icon_living = "ikea"
 	icon_dead = "ikea-dead"
 
-/mob/living/simple_animal/bird/goose
+/mob/living/danimal/bird/goose
 	name = "goose"
 	desc = "It's a bird!"
 	icon_state = "goose"
 	icon_living = "goose"
 	icon_dead = "goose-dead"
 
-/mob/living/simple_animal/bird/gull
+/mob/living/danimal/bird/gull
 	name = "gull"
 	desc = "It's a bird!"
 	icon_state = "gull"
 	icon_living = "gull"
 	icon_dead = "gull-dead"
 
-/mob/living/simple_animal/bird/smallowl
+/mob/living/danimal/bird/smallowl
 	name = "small owl"
 	desc = "It's a bird!"
 	icon_state = "smallowl"
 	icon_living = "smallowl"
 	icon_dead = "smallowl-dead"
 
-/mob/living/simple_animal/bird/owl
+/mob/living/danimal/bird/owl
 	name = "owl"
 	desc = "It's a bird!"
 	icon_state = "owl"
 	icon_living = "owl"
 	icon_dead = "owl-dead"
 
-/mob/living/simple_animal/bird/hooty
+/mob/living/danimal/bird/hooty
 	name = "owl"
 	desc = "It's a bird!"
 	icon_state = "hooty"
 	icon_living = "hooty"
 	icon_dead = "hooty-dead"
 
-/mob/living/simple_animal/bird/then
+/mob/living/danimal/bird/then
 	name = "turkey hen"
 	desc = "It's a bird!"
 	icon_state = "then"
 	icon_living = "then"
 	icon_dead = "then-dead"
 
-/mob/living/simple_animal/bird/ttom
+/mob/living/danimal/bird/ttom
 	name = "turkey tom"
 	desc = "It's a bird!"
 	icon_state = "ttom"
 	icon_living = "ttom"
 	icon_dead = "ttom-dead"
 
-/mob/living/simple_animal/bird/gannet
+/mob/living/danimal/bird/gannet
 	name = "gannet"
 	desc = "It's a bird!"
 	icon_state = "gannet"
 	icon_living = "gannet"
 	icon_dead = "gannet-dead"
 
-/mob/living/simple_animal/bird/love
+/mob/living/danimal/bird/love
 	name = "love bird"
 	desc = "It's a bird!"
 	icon_state = "love"
 	icon_living = "love"
 	icon_dead = "love-dead"
 
-/mob/living/simple_animal/bird/loveyellow
+/mob/living/danimal/bird/loveyellow
 	name = "love bird"
 	desc = "It's a bird!"
 	icon_state = "lovey"
 	icon_living = "lovey"
 	icon_dead = "lovey-dead"
 
-/mob/living/simple_animal/bird/lovemale
+/mob/living/danimal/bird/lovemale
 	name = "love bird"
 	desc = "It's a bird!"
 	icon_state = "lovem"
 	icon_living = "lovem"
 	icon_dead = "lovem-dead"
 
-/mob/living/simple_animal/bird/loveblue
+/mob/living/danimal/bird/loveblue
 	name = "love bird"
 	desc = "It's a bird!"
 	icon_state = "loveb"
 	icon_living = "loveb"
 	icon_dead = "loveb-dead"
 
-/mob/living/simple_animal/bird/lovefemale
+/mob/living/danimal/bird/lovefemale
 	name = "love bird"
 	desc = "It's a bird!"
 	icon_state = "lovef"
 	icon_living = "lovef"
 	icon_dead = "lovef-dead"
 
-/mob/living/simple_animal/bird/crow
+/mob/living/danimal/bird/crow
 	name = "crow"
 	desc = "It's a bird!"
 	icon_state = "crow"
@@ -328,21 +327,21 @@
 		'sound/f13ambience/crow_2.ogg',
 	)
 
-/mob/living/simple_animal/bird/doodle
+/mob/living/danimal/bird/doodle
 	name = "doodle"
 	desc = "It's a bird!"
 	icon_state = "doodle"
 	icon_living = "doodle"
 	icon_dead = "doodle-dead"
 
-/mob/living/simple_animal/bird/swan
+/mob/living/danimal/bird/swan
 	name = "swan"
 	desc = "It's a bird!"
 	icon_state = "swan"
 	icon_living = "swan"
 	icon_dead = "swan-dead"
 
-/mob/living/simple_animal/bird/cassowary
+/mob/living/danimal/bird/cassowary
 	name = "cassowary"
 	desc = "It's a bird!"
 	icon_state = "cassowary"

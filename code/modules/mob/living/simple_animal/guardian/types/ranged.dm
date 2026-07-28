@@ -5,7 +5,7 @@
 	damage = 5
 	damage_type = BRUTE
 
-/mob/living/simple_animal/hostile/guardian/ranged
+/mob/living/danimal/hostile/guardian/ranged
 	a_intent = INTENT_HELP
 	friendly_verb_continuous = "quietly assesses"
 	friendly_verb_simple = "quietly assess"
@@ -13,9 +13,9 @@
 	melee_damage_upper = 10
 	damage_coeff = list(BRUTE = 0.9, BURN = 0.9, TOX = 0.9, CLONE = 0.9, STAMINA = 0, OXY = 0.9)
 	projectiletype = /obj/item/projectile/guardian
-	ranged_cooldown_time = 1 //fast!
+	ranged_cooldown_duration = 1 //fast!
 	projectilesound = 'sound/effects/hit_on_shattered_glass.ogg'
-	ranged = 1
+	can_ranged_attack = TRUE
 	playstyle_string = "<span class='holoparasite'>As a <b>ranged</b> type, you have 10% damage reduction, but are capable of spraying shards of crystal at incredibly high speed. You can also deploy surveillance snares to monitor enemy movement. Finally, you can switch to scout mode, in which you can't attack, but can move without limit.</span>"
 	magic_fluff_string = span_holoparasite("..And draw the Sentinel, an alien master of ranged combat.")
 	tech_fluff_string = span_holoparasite("Boot sequence complete. Ranged combat modules active. Holoparasite swarm online.")
@@ -26,7 +26,7 @@
 	var/list/snares = list()
 	var/toggle = FALSE
 
-/mob/living/simple_animal/hostile/guardian/ranged/ToggleMode()
+/mob/living/danimal/hostile/guardian/ranged/ToggleMode()
 	if(src.loc == summoner)
 		if(toggle)
 			ranged = initial(ranged)
@@ -39,7 +39,7 @@
 			to_chat(src, "<span class='danger'><B>You switch to combat mode.</span></B>")
 			toggle = FALSE
 		else
-			ranged = 0
+			can_ranged_attack = FALSE
 			melee_damage_lower = 0
 			melee_damage_upper = 0
 			obj_damage = 0
@@ -51,14 +51,14 @@
 	else
 		to_chat(src, "<span class='danger'><B>You have to be recalled to toggle modes!</span></B>")
 
-/mob/living/simple_animal/hostile/guardian/ranged/Shoot(atom/targeted_atom)
+/mob/living/danimal/hostile/guardian/ranged/Shoot(atom/targeted_atom)
 	. = ..()
 	if(istype(., /obj/item/projectile))
 		var/obj/item/projectile/P = .
 		if(guardiancolor)
 			P.color = guardiancolor
 
-/mob/living/simple_animal/hostile/guardian/ranged/ToggleLight()
+/mob/living/danimal/hostile/guardian/ranged/ToggleLight()
 	var/msg
 	switch(lighting_alpha)
 		if (LIGHTING_PLANE_ALPHA_VISIBLE)
@@ -77,7 +77,7 @@
 	to_chat(src, span_notice("[msg]"))
 
 
-/mob/living/simple_animal/hostile/guardian/ranged/verb/Snare()
+/mob/living/danimal/hostile/guardian/ranged/verb/Snare()
 	set name = "Set Surveillance Snare"
 	set category = "Guardian"
 	set desc = "Set an invisible snare that will alert you when living creatures walk over it. Max of 5"
@@ -91,7 +91,7 @@
 	else
 		to_chat(src, "<span class='danger'><B>You have too many snares deployed. Remove some first.</span></B>")
 
-/mob/living/simple_animal/hostile/guardian/ranged/verb/DisarmSnare()
+/mob/living/danimal/hostile/guardian/ranged/verb/DisarmSnare()
 	set name = "Remove Surveillance Snare"
 	set category = "Guardian"
 	set desc = "Disarm unwanted surveillance snares."
@@ -104,7 +104,7 @@
 /obj/effect/snare
 	name = "snare"
 	desc = "You shouldn't be seeing this!"
-	var/mob/living/simple_animal/hostile/guardian/spawner
+	var/mob/living/danimal/hostile/guardian/spawner
 	invisibility = INVISIBILITY_ABSTRACT
 
 /obj/effect/snare/Initialize()
@@ -129,12 +129,12 @@
 /obj/effect/snare/singularity_pull()
 	return
 
-/mob/living/simple_animal/hostile/guardian/ranged/Manifest(forced)
+/mob/living/danimal/hostile/guardian/ranged/Manifest(forced)
 	if (toggle)
 		incorporeal_move = INCORPOREAL_MOVE_BASIC
 	. = ..()
 
-/mob/living/simple_animal/hostile/guardian/ranged/Recall(forced)
+/mob/living/danimal/hostile/guardian/ranged/Recall(forced)
 	// To stop scout mode from moving when recalled
 	incorporeal_move = FALSE
 	. = ..()
