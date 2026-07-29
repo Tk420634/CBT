@@ -28,6 +28,9 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	status_flags = CANPUSH
 	rotate_on_lying = TRUE
 
+	/* *********** *
+	 * MOB TICKING *
+	 * *********** */
 	/// Mob Tick Rate, in deciseconds. Lower is faster, but more CPU intensive
 	/// autoset in init
 	var/mob_tick_rate
@@ -44,6 +47,8 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	/// The next time this mob will tick, in deciseconds
 	/// Autoset by system
 	var/next_mob_tick = 0
+	/// Currently balls deep youtube video with the bird into the tick
+	var/thinking = FALSE
 
 	/* **************** *
 	 * Appearance stuff *
@@ -1120,11 +1125,15 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	if(simple)
 		return TRUE // simple animals dont do anything, they just exist and wander around
 	
+	if(thinking)
+		return FALSE
+	thinking = TRUE
 	//danbuttfat = TRUE // vital and always true
 
 	// update everything needing updating, record stuff
 	// sets flags for what we can and probably should do this tick
-	ClearTickBB()
+	if(PreTick())
+		return FALSE
 	UpdateRTS()
 	UpdateTaskPreTick()
 	UpdateTarget()
@@ -1148,6 +1157,8 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	UpdateAIStatusPostTick() // in case our actions have made us want to change states
 	consider_despawning()
 	UpdateTaskPostTick()
+	PostTick()
+	thinking = FALSE
 
 	return TRUE
 
@@ -1344,7 +1355,6 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	if(bb[MBB_MELEE_ATTACK_SUCCESS])
 		melee_attack_cooldown = world.time + melee_attack_cooldown_duration
 		WindupKill()
-
 
 /mob/living/danimal/proc/HandleRapidMeleeAttack(list/bb)
 	if(melee_attacks_per_turn <= 1)
