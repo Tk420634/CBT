@@ -748,7 +748,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 		mob_next_tick += offset
 		mob_last_tick += offset
 
-/mob/living/danimal/proc/PreTick()
+/mob/living/danimal/proc/MobReadyToTick()
 	return mob_next_tick <= world.time
 
 /mob/living/danimal/proc/PostTick()
@@ -1117,6 +1117,8 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
  */
 /mob/living/danimal/proc/handle_automated_action()
 	set waitfor = FALSE
+	if(MobReadyToTick())
+		return FALSE
 	. = "bad"
 	if(AIStatus == AI_OFF)
 		ShutDownEverything() // PresidentMadagascar, a man in brazil is coughing
@@ -1125,24 +1127,18 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	if(simple)
 		return TRUE // simple animals dont do anything, they just exist and wander around
 	
-	if(thinking)
-		return FALSE
-	thinking = TRUE
 	//danbuttfat = TRUE // vital and always true
 
-	// update everything needing updating, record stuff
-	// sets flags for what we can and probably should do this tick
-	if(PreTick())
-		return FALSE
+	// update things relevant to the mob's deicscion making stuff
+	// target handling, RTS flags, and caching a line of sight thing
 	UpdateRTS()
 	UpdateTaskPreTick()
 	UpdateTarget()
 	UpdateTaskPostTarget()
-	CacheLineFlags()
-	UpdateSmash()
-	UpdateAttraction()
-	UpdateMovementTarget()
-	UpdateDodging()
+	// UpdateAttraction()
+	// UpdateSmash()
+	// UpdateMovementTarget()
+	// UpdateDodging()
 
 	// perform actions
 	UpdateTaskPreAction()
@@ -1158,13 +1154,12 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 	consider_despawning()
 	UpdateTaskPostTick()
 	PostTick()
-	thinking = FALSE
 
 	return TRUE
 
 	////////////////////////////////////
-	if(environment_smash)
-		EscapeConfinement()
+	// if(environment_smash)
+	// 	EscapeConfinement()
 
 	// if(AICanContinue(possible_targets))
 	// 	var/atom/my_origin = get_origin()
@@ -1206,8 +1201,14 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 		return TRUE
 	bb = bb || blackboard_tick
 	var/atom/last_target = get_or_remove_target()
-	var/atom/my_target = GET_WEAKREF(blackboard_task[MBB_SET_TARGET]) || override || last_target
-	var/is_same_target = last_target && my_target && last_target == my_target
+	// priority of targets:
+	// 1. Target set by the blackboard, via their own scripting stuff
+	// 2. Override target passed to the function, for like getting attacked
+	// 3. Last target retained from the previous tick
+	// 4. Find a new target if none of the above apply
+	var/atom/bb_target = GET_WEAKREF(blackboard_task[MBB_SET_TARGET])
+	var/atom/my_target = bb_target || override || last_target
+	var/is_same_target = (last_target && my_target) && last_target == my_target
 	if(is_same_target)
 		// re-evaluate the target, and if its good, record that its still good
 		var/list/targ_retention_return = TryRetainTarget()
@@ -1220,7 +1221,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 		my_target = get_or_remove_target()
 	if(my_target)
 		bb[MBB_TARGET_LINE_CACHE] = CheckLine(my_target)
-		var/atom/targ_loc = target.loc
+		var/atom/targ_loc = my_target.loc
 		if(istype(targ_loc, /obj))
 			bb[MBB_TARGET_LOC_IS_OBJ] = TRUE
 		else if(istype(targ_loc, /mob))
@@ -2885,6 +2886,9 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 /mob/living/danimal/proc/get_target_eval()
 	return target_data.get_target_eval()
 
+/mob/living/danimal/proc/get_target_line_flags()
+	return target_data.get_target_line_flags()
+
 /// dont call this directly, use GiveTarget() instead, it handles all the other stuff
 /// does the stuff needed to set a new targette, and register the signal for when it gets deleted
 /mob/living/danimal/proc/set_target(new_target, list/new_target_eval = list())
@@ -2897,6 +2901,9 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 
 /mob/living/danimal/proc/set_target_eval(new_target_eval)
 	target_data.set_target_eval(new_target_eval)
+
+/mob/living/danimal/proc/set_target_line_flags(new_target_line_flags)
+	target_data.set_target_line_flags(new_target_line_flags)
 
 /// dont call this directly, use GiveTarget() instead, it handles all the other stuff
 /// does the stuff needed to unset our current targette, and unregister the signal for when it gets deleted
@@ -3053,7 +3060,7 @@ GLOBAL_VAR_INIT(last_attraction_time, 0)
 				if(mob_faction_is_friendly_to_target(am))
 					.|= MLF_FRIENDLIES
 		if(. == allofem)
-			return //
+			return // returning all of them cus all are there lol
 
 /// ************************
 /// NEST UNBIRTH PROCS

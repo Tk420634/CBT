@@ -84,7 +84,8 @@ SUBSYSTEM_DEF(mobs)
 /datum/mob_target_data
 	var/datum/weakref/target_ref
 	var/list/target_eval = list()
-	var/time_targetted = 0
+	var/last_line_flags = NONE
+	var/time_targetted = 0 // the time when the target was targetted
 
 /datum/mob_target_data/Destroy()
 	clear_target()
@@ -98,10 +99,15 @@ SUBSYSTEM_DEF(mobs)
 
 /datum/mob_target_data/proc/clear_target()
 	target_ref = null
+	last_line_flags = NONE
+	target_eval = list()
 	time_targetted = 0
 
 /datum/mob_target_data/proc/set_target_eval(list/eval = list())
 	target_eval = eval.Copy()
+
+/datum/mob_target_data/proc/set_target_line_flags(new_target_line_flags)
+	last_line_flags = new_target_line_flags
 
 /datum/mob_target_data/proc/get_target()
 	return GET_WEAKREF(target_ref)
@@ -111,6 +117,9 @@ SUBSYSTEM_DEF(mobs)
 
 /datum/mob_target_data/proc/get_target_eval()
 	return target_eval
+
+/datum/mob_target_data/proc/get_target_line_flags()
+	return last_line_flags
 
 
 

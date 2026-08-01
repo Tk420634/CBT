@@ -11,7 +11,7 @@ SUBSYSTEM_DEF(npcpool)
 	flags = SS_POST_FIRE_TIMING|SS_NO_INIT|SS_BACKGROUND
 	priority = FIRE_PRIORITY_NPC
 	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
-	wait = (0.1 SECONDS) // ZOOOOOOOM *cpu dies x.x
+	wait = (0.2 SECONDS) // ZOOOOOOOM *cpu dies x.x
 
 	var/list/currentrun = list()
 
@@ -39,7 +39,7 @@ SUBSYSTEM_DEF(npcpool)
 			GLOB.simple_animals[AI_ON] -= SA
 			stack_trace("Found a null in simple_animals active list [SA.type]!")
 			continue
-		if(SA.PreTick())
+		if(SA.MobReadyToTick())
 			if(!SA.ckey && !SA.mob_transforming)
 				var/abort = FALSE
 				if(SA.stat != DEAD)
