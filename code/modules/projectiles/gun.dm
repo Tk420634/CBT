@@ -1370,6 +1370,8 @@ ATTACHMENTS
 /obj/item/gun/ui_data(mob/user)
 	var/list/data = list()
 	data["gun_name"] = name || "Unknown"
+	data["gun_archetype"] = gun_archetype || "normal"
+	data["gun_hit_chance"] = get_archetype_hit_chance(user)
 	data["gun_damage_multiplier"] = damage_multiplier || 1
 	data["gun_penetration_multiplier"] = penetration_multiplier || 1
 	data["gun_melee"] = force_unwielded || force || 0
@@ -1466,6 +1468,24 @@ ATTACHMENTS
 		attindex += 1
 	return data
 
+/obj/item/gun/proc/get_archetype_hit_chance(mob/living/user)
+	var/stat_value = 0
+	var/stat_weight = 1
+
+	if(istype(user))
+		switch(gun_archetype)
+			if("swift")
+				stat_value = isnull(user.stat_agility) ? 0 : max(0, user.stat_agility)
+			if("precise")
+				stat_value = isnull(user.stat_perception) ? 0 : max(0, user.stat_perception)
+				stat_weight = 2
+			if("heavy")
+				stat_value = isnull(user.stat_strength) ? 0 : max(0, user.stat_strength)
+			else
+				stat_value = isnull(user.stat_perception) ? 0 : max(0, user.stat_perception)
+
+	return clamp(base_accuracy + (stat_value * 5 * stat_weight), 10, 95)
+
 /obj/item/gun/ui_act(action, params)
 	. = ..()
 	if(.)
@@ -1485,6 +1505,14 @@ ATTACHMENTS
 			return
 		var/mob/user = usr
 		user.true_examinate(attachmentmaybe, TRUE)
+		. = TRUE
+	if(action == "ExplainArchetype")
+		if(!ismob(usr))
+			return
+		var/mob/living/user = usr
+		var/current_hit_chance = get_archetype_hit_chance(user)
+		to_chat(user, span_notice("Gun archetypes: <b>Swift</b> scales hit chance with Agility, <b>Precise</b> scales harder with Perception, <b>Heavy</b> scales with Strength, and <b>Normal</b> uses Perception."))
+		to_chat(user, span_notice("[src] is <b>[capitalize(gun_archetype)]</b>. Your current hit chance with it is <b>[current_hit_chance]%</b> (clamped to 10% - 95%)."))
 		. = TRUE
 	update_icon()
 

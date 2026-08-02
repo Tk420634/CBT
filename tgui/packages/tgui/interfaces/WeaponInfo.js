@@ -57,6 +57,8 @@ export const RangedInfo = (props, context) => {
     flintlock_load_time = 0,
     flintlock_prefire_time = 0,
     flintlock_prefire_1SD = 0,
+    gun_archetype = "normal",
+    gun_hit_chance = 0,
   } = data;
   let true_firemode = firemode_current || {};
   if (!firemode_current || !true_firemode["fire_rate"]) {
@@ -84,6 +86,7 @@ export const RangedInfo = (props, context) => {
   const firemode_rpm = true_firemode.fire_rate || "N/A";
   const firemode_name = true_firemode.action_kind || "Shoot";
   const firemode_desc = true_firemode.desc || "Makes weapon shoot!";
+  const readableArchetype = `${gun_archetype}`.charAt(0).toUpperCase() + `${gun_archetype}`.slice(1);
   let damage_value;
   if (gun_is_chambered && !!gun_chambered.projectile_damage) {
     const plts = gun_chambered.pellets;
@@ -171,6 +174,12 @@ export const RangedInfo = (props, context) => {
         height="fit-content"
         textAlign="center">
         <Tooltipify name={firemode_name} tip={firemode_desc} bigger={1} />
+        <Button
+          mt="0.3rem"
+          color="average"
+          content={`Archetype: ${readableArchetype} (${gun_hit_chance}% hit chance)`}
+          tooltip="Click to explain gun archetypes and what they do."
+          onClick={() => act('ExplainArchetype')} />
       </Box>
     </Section>
   );
