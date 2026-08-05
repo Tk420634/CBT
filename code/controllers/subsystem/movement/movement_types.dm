@@ -706,6 +706,7 @@
  * Arguments:
  * moving - The atom we want to move
  * directions - A list of acceptable directions to try and move in. Defaults to GLOB.alldirs
+ * areas - Whitelist of areas allowed by reference, if null, will not use a bounding system
  * delay - How many deci-seconds to wait between fires. Defaults to the lowest value, 0.1
  * timeout - Time in deci-seconds until the moveloop self expires. Defaults to infinity
  * subsystem - The movement subsystem to use. Defaults to SSmovement. Only one loop can exist for any one subsystem
@@ -713,10 +714,10 @@
  * flags - Set of bitflags that effect move loop behavior in some way. Check _DEFINES/movement.dm
  *
 **/
-/datum/controller/subsystem/move_manager/proc/move_rand(moving, directions, delay, timeout, subsystem, priority, flags, datum/extra_info)
+/datum/controller/subsystem/move_manager/proc/move_rand(moving, directions, areas, delay, timeout, subsystem, priority, flags, datum/extra_info)
 	if(!directions)
 		directions = GLOB.alldirs
-	return add_to_loop(moving, subsystem, /datum/move_loop/move_rand, priority, flags, extra_info, delay, timeout, directions)
+	return add_to_loop(moving, subsystem, /datum/move_loop/move_rand, priority, flags, extra_info, delay, timeout, directions, areas)
 
 /**
  * This isn't actually the same as walk_rand
@@ -727,12 +728,14 @@
 **/
 /datum/move_loop/move_rand
 	var/list/potential_directions
+	var/list/areaBounds // grem added a boundary system
 
-/datum/move_loop/move_rand/setup(delay, timeout, list/directions)
+/datum/move_loop/move_rand/setup(delay, timeout, list/directions, list/areas)
 	. = ..()
 	if(!.)
 		return
 	potential_directions = directions
+	areaBounds = areas
 
 /datum/move_loop/move_rand/compare_loops(datum/move_loop/loop_type, priority, flags, extra_info, delay, timeout, list/directions)
 	if(..() && (length(potential_directions | directions) == length(potential_directions))) //i guess this could be useful if actually it really has yet to move
@@ -744,6 +747,12 @@
 	while(potential_dirs.len)
 		var/testdir = pick(potential_dirs)
 		var/turf/moving_towards = get_step(moving, testdir)
+
+		if(LAZYLEN(areaBounds)) // test within bounds
+			if(!(get_area(moving_towards) in areaBounds))
+				potential_dirs -= testdir
+				continue
+
 		var/atom/old_loc = moving.loc
 		moving.Move(moving_towards, testdir)
 		if(old_loc != moving?.loc)  //If it worked, we're done
