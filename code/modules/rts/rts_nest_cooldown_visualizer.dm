@@ -10,7 +10,7 @@
  */
 
 /datum/rts_nest_cooldown_visualizer
-	var/datum/rts_commander/parent
+	var/datum/click_interceptor/rts_commander/parent
 	var/list/nests = list()
 
 

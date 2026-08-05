@@ -2,7 +2,7 @@
 ////////////////////////////////////////////////////
 ////////////////////////////////////////////////////
 /// RTS PROCESSOR
-/datum/rts_commander
+/datum/click_interceptor/rts_commander
 	/// so players can find us
 	var/cmdr_id
 	/// so we can find our player c:
@@ -38,7 +38,7 @@
 	// SECTION UI
 	var/list/buttons = list()
 
-/datum/rts_commander/New(mob/user)
+/datum/click_interceptor/rts_commander/New(mob/user)
 	UpdateCmdrID(user)
 	mybox = new(src)
 	myattackbox = new(src)
@@ -56,12 +56,12 @@
 	buttons[2] = new /atom/movable/screen/rts_button/help()
 	buttons[3] = new /atom/movable/screen/rts_button/counter()
 
-/datum/rts_commander/proc/UpdateCmdrID(mob/user)
+/datum/click_interceptor/rts_commander/proc/UpdateCmdrID(mob/user)
 	if(user)
 		cmdr_id = SSeconomy.extract_quid(user)
 		cmdr_ckey = extract_ckey(user)
 
-/datum/rts_commander/proc/UpdateButtons()
+/datum/click_interceptor/rts_commander/proc/UpdateButtons()
 	var/mob/user = GetCommanderMob()
 	if(!isobserver(user))
 		for(var/atom/movable/screen/rts_button/rb in buttons)
@@ -78,12 +78,12 @@
 		for(var/atom/movable/screen/rts_button/rb in buttons)
 			rb.Deactivate()
 
-/datum/rts_commander/proc/SetMobCounterButton(numbor)
+/datum/click_interceptor/rts_commander/proc/SetMobCounterButton(numbor)
 	var/atom/movable/screen/rts_button/counter/C = buttons[3]
 	C.name = "You have [numbor] creatures selected!"
 	C.UpdateMaptext(numbor)
 
-/datum/rts_commander/proc/ActivateInputInterceptor(mob/commander)
+/datum/click_interceptor/rts_commander/proc/ActivateInputInterceptor(mob/commander)
 	UpdateCmdrID(commander)
 	var/client/C = GetCommanderClient() // we do things by the BOOK
 	if(!C)
@@ -102,7 +102,7 @@
 		to_chat(C, span_green("Welcome, commander!"))
 	return TRUE
 
-/datum/rts_commander/proc/DeactivateInputInterceptor()
+/datum/click_interceptor/rts_commander/proc/DeactivateInputInterceptor()
 	var/client/C = GetCommanderClient()
 	if(!C)
 		return // not really anything to do
@@ -115,19 +115,19 @@
 	ClearImages()
 	to_chat(C, span_red("Goodbye, commander!"))
 
-/datum/rts_commander/proc/GetCommanderClient()
+/datum/click_interceptor/rts_commander/proc/GetCommanderClient()
 	return extract_client(cmdr_ckey)
 
-/datum/rts_commander/proc/GetCommanderMob()
+/datum/click_interceptor/rts_commander/proc/GetCommanderMob()
 	var/client/C = GetCommanderClient()
 	return C.mob
 
-/datum/rts_commander/proc/InterceptClickOn(mob/user, params, atom/object)
+/datum/click_interceptor/rts_commander/InterceptClickOn(mob/user, params, atom/object)
 
 	return TRUE // no doing underlying actions
 
 /// First part of an input, records stuff that was clicked on and with which button
-/datum/rts_commander/proc/InterceptMouseDown(mob/user, params, atom/object)
+/datum/click_interceptor/rts_commander/InterceptMouseDown(mob/user, params, atom/object)
 	origin_atom = object
 	origin_turf = get_turf(object)
 	UpdateHeldKeys(params)
@@ -141,7 +141,7 @@
 
 /// Last pert of an input, takes in what we know from the mouse's position,
 /// and our origin thing, and the keys we used to click, and does something with it
-/datum/rts_commander/proc/InterceptMouseUp(mob/user, params, atom/object)
+/datum/click_interceptor/rts_commander/InterceptMouseUp(mob/user, params, atom/object)
 	// var/list/parm = params2list(params)
 	/// if we're left clicking, we're selecting
 	myord.ProcessMouseUp(origin_atom, object, params)
@@ -151,7 +151,7 @@
 	return TRUE // no doing underlying actions
 
 /// Mainly used to update the selection box
-/datum/rts_commander/proc/InterceptMouseDrag(mob/user, src_object, params, over_object, src_location, over_location, src_control, over_control)
+/datum/click_interceptor/rts_commander/InterceptMouseDrag(mob/user, src_object, params, over_object, src_location, over_location, src_control, over_control)
 	UpdateHeldKeys(params)
 	/// update modifier keys
 	if(left_is_down)
@@ -160,7 +160,7 @@
 		mypvis.SelectRegion(origin_turf, mouseover_turf, LAZYACCESS(criteria, active_criteria), params)
 	return TRUE // no doing underlying actions
 
-/datum/rts_commander/proc/UpdateHeldKeys(params)
+/datum/click_interceptor/rts_commander/proc/UpdateHeldKeys(params)
 	var/list/parm = params2list(params)
 	if(parm["right"])
 		right_is_down = TRUE
@@ -184,7 +184,7 @@
 		alt_is_down = FALSE
 	return TRUE
 
-/datum/rts_commander/proc/CleanupHeldKeys(mob/user, params, atom/object)
+/datum/click_interceptor/rts_commander/proc/CleanupHeldKeys(mob/user, params, atom/object)
 	right_is_down = FALSE
 	left_is_down = FALSE
 	ctrl_is_down = FALSE
@@ -194,7 +194,7 @@
 	mysel.UpdateVisuals() // refreshes the selection plumbob
 	mypvis.UpdateVisuals() // flushes the preview
 
-/datum/rts_commander/proc/ClearImages()
+/datum/click_interceptor/rts_commander/proc/ClearImages()
 	mybox.clear_images()
 	mysel.clear_images()
 	mypvis.clear_images()

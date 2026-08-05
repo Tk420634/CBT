@@ -28,7 +28,7 @@
 /datum/rts_selector_box
 	var/list/imgs = list()
 	var/list/img_cache = list()
-	var/datum/rts_commander/parent
+	var/datum/click_interceptor/rts_commander/parent
 	var/ckey
 	/// our two turfs, stored in coords form, so we can easily check if we should update the box
 	/// not necessarily the top left or right or whatever, just two points that define the box
@@ -39,7 +39,7 @@
 /datum/rts_selector_box/attack
 	shadecolor = "#FF0000"
 
-/datum/rts_selector_box/New(datum/rts_commander/parent)
+/datum/rts_selector_box/New(datum/click_interceptor/rts_commander/parent)
 	src.parent = parent
 
 /datum/rts_selector_box/Destroy()

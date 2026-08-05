@@ -1,4 +1,4 @@
-/datum/buildmode_mode/boom
+/datum/click_interceptor/buildmode_mode/boom
 	key = "boom"
 
 	var/devastation = -1
@@ -7,13 +7,13 @@
 	var/flash = -1
 	var/flames = -1
 
-/datum/buildmode_mode/boom/show_help(client/c)
+/datum/click_interceptor/buildmode_mode/boom/show_help(client/c)
 	to_chat(c, span_notice("***********************************************************"))
 	to_chat(c, span_notice("Mouse Button on obj  = Kaboom"))
 	to_chat(c, span_notice("NOTE: Using the \"Config/Launch Supplypod\" verb allows you to do this in an IC way (ie making a cruise missile come down from the sky and explode wherever you click!)"))
 	to_chat(c, span_notice("***********************************************************"))
 
-/datum/buildmode_mode/boom/change_settings(client/c)
+/datum/click_interceptor/buildmode_mode/boom/change_settings(client/c)
 	devastation = input(c, "Range of total devastation. -1 to none", text("Input")) as num|null
 	if(devastation == null)
 		devastation = -1
@@ -30,7 +30,7 @@
 	if(flames == null)
 		flames = -1
 
-/datum/buildmode_mode/boom/handle_click(client/c, params, obj/object)
+/datum/click_interceptor/buildmode_mode/boom/handle_click(client/c, params, obj/object)
 	var/list/pa = params2list(params)
 	var/left_click = pa.Find("left")
 

@@ -1,33 +1,33 @@
-/datum/buildmode_mode/area_edit
+/datum/click_interceptor/buildmode_mode/area_edit
 	key = "areaedit"
 	var/area/storedarea
 	var/image/areaimage
 
-/datum/buildmode_mode/area_edit/New()
+/datum/click_interceptor/buildmode_mode/area_edit/New()
 	areaimage = image('icons/turf/areas.dmi', null, "yellow")
 	..()
 
-/datum/buildmode_mode/area_edit/enter_mode(datum/buildmode/BM)
+/datum/click_interceptor/buildmode_mode/area_edit/enter_mode(datum/click_interceptor/buildmode/BM)
 	BM.holder.images += areaimage
 
-/datum/buildmode_mode/area_edit/exit_mode(datum/buildmode/BM)
+/datum/click_interceptor/buildmode_mode/area_edit/exit_mode(datum/click_interceptor/buildmode/BM)
 	areaimage.loc = null // de-color the area
 	BM.holder.images -= areaimage
 	return ..()
 
-/datum/buildmode_mode/area_edit/Destroy()
+/datum/click_interceptor/buildmode_mode/area_edit/Destroy()
 	QDEL_NULL(areaimage)
 	storedarea = null
 	return ..()
 
-/datum/buildmode_mode/area_edit/show_help(client/c)
+/datum/click_interceptor/buildmode_mode/area_edit/show_help(client/c)
 	to_chat(c, span_notice("***********************************************************"))
 	to_chat(c, span_notice("Left Mouse Button on obj/turf/mob  = Paint area"))
 	to_chat(c, span_notice("Right Mouse Button on obj/turf/mob = Select area to paint"))
 	to_chat(c, span_notice("Right Mouse Button on buildmode button = Create new area"))
 	to_chat(c, span_notice("***********************************************************"))
 
-/datum/buildmode_mode/area_edit/change_settings(client/c)
+/datum/click_interceptor/buildmode_mode/area_edit/change_settings(client/c)
 	var/target_path = input(c, "Enter typepath:", "Typepath", "/area")
 	var/areatype = text2path(target_path)
 	if(ispath(areatype,/area))
@@ -42,7 +42,7 @@
 		storedarea.name = areaname
 		areaimage.loc = storedarea // color our area
 
-/datum/buildmode_mode/area_edit/handle_click(client/c, params, object)
+/datum/click_interceptor/buildmode_mode/area_edit/handle_click(client/c, params, object)
 	var/list/pa = params2list(params)
 	var/left_click = pa.Find("left")
 	var/right_click = pa.Find("right")

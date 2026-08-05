@@ -1,27 +1,27 @@
-/datum/buildmode_mode/varedit
+/datum/click_interceptor/buildmode_mode/varedit
 	key = "edit"
 	// Varedit mode
 	var/varholder = null
 	var/valueholder = null
 
-/datum/buildmode_mode/varedit/Destroy()
+/datum/click_interceptor/buildmode_mode/varedit/Destroy()
 	varholder = null
 	valueholder = null
 	return ..()
 
-/datum/buildmode_mode/varedit/show_help(client/c)
+/datum/click_interceptor/buildmode_mode/varedit/show_help(client/c)
 	to_chat(c, span_notice("***********************************************************"))
 	to_chat(c, span_notice("Right Mouse Button on buildmode button = Select var(type) & value"))
 	to_chat(c, span_notice("Left Mouse Button on turf/obj/mob      = Set var(type) & value"))
 	to_chat(c, span_notice("Right Mouse Button on turf/obj/mob     = Reset var's value"))
 	to_chat(c, span_notice("***********************************************************"))
 
-/datum/buildmode_mode/varedit/Reset()
+/datum/click_interceptor/buildmode_mode/varedit/Reset()
 	. = ..()
 	varholder = null
 	valueholder = null
 
-/datum/buildmode_mode/varedit/change_settings(client/c)
+/datum/click_interceptor/buildmode_mode/varedit/change_settings(client/c)
 	varholder = input(c, "Enter variable name:" ,"Name", "name")
 	
 	if(!vv_varname_lockcheck(varholder))
@@ -34,7 +34,7 @@
 		return
 	valueholder = temp_value["value"]
 
-/datum/buildmode_mode/varedit/handle_click(client/c, params, obj/object)
+/datum/click_interceptor/buildmode_mode/varedit/handle_click(client/c, params, obj/object)
 	var/list/pa = params2list(params)
 	var/left_click = pa.Find("left")
 	var/right_click = pa.Find("right")

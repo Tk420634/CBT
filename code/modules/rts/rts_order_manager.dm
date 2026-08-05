@@ -24,11 +24,11 @@
  *  */
 
 /datum/rts_order_processor
-	var/datum/rts_commander/parent
+	var/datum/click_interceptor/rts_commander/parent
 	var/working = FALSE
 	var/next_smash = 0 // oh man I hope krystal is in this one
 
-/datum/rts_order_processor/New(datum/rts_commander/parent)
+/datum/rts_order_processor/New(datum/click_interceptor/rts_commander/parent)
 	src.parent = parent
 
 /datum/rts_order_processor/Destroy()

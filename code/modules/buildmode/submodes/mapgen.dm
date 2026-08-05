@@ -1,16 +1,16 @@
-/datum/buildmode_mode/mapgen
+/datum/click_interceptor/buildmode_mode/mapgen
 	key = "mapgen"
 
 	use_corner_selection = TRUE
 	var/generator_path
 
-/datum/buildmode_mode/mapgen/show_help(client/c)
+/datum/click_interceptor/buildmode_mode/mapgen/show_help(client/c)
 	to_chat(c, span_notice("***********************************************************"))
 	to_chat(c, span_notice("Left Mouse Button on turf/obj/mob      = Select corner"))
 	to_chat(c, span_notice("Right Mouse Button on buildmode button = Select generator"))
 	to_chat(c, span_notice("***********************************************************"))
 
-/datum/buildmode_mode/mapgen/change_settings(client/c)
+/datum/click_interceptor/buildmode_mode/mapgen/change_settings(client/c)
 	var/list/gen_paths = subtypesof(/datum/mapGenerator)
 	var/list/options = list()
 	for(var/path in gen_paths)
@@ -23,14 +23,14 @@
 	generator_path = options[type]
 	deselect_region()
 
-/datum/buildmode_mode/mapgen/handle_click(client/c, params, obj/object)
+/datum/click_interceptor/buildmode_mode/mapgen/handle_click(client/c, params, obj/object)
 	if(isnull(generator_path))
 		to_chat(c, span_warning("Select generator type first."))
 		deselect_region()
 		return
 	..()
 
-/datum/buildmode_mode/mapgen/handle_selected_area(client/c, params)
+/datum/click_interceptor/buildmode_mode/mapgen/handle_selected_area(client/c, params)
 	var/list/pa = params2list(params)
 	var/left_click = pa.Find("left")
 	if(left_click)

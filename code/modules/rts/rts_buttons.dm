@@ -10,9 +10,9 @@
 /atom/movable/screen/rts_button/proc/Show(mob/user)
 	icon_state = initial(icon_state)
 
-/atom/movable/screen/rts_button/proc/Activate(datum/rts_commander/c)
+/atom/movable/screen/rts_button/proc/Activate(datum/click_interceptor/rts_commander/c)
 
-/atom/movable/screen/rts_button/proc/Deactivate(datum/rts_commander/c)
+/atom/movable/screen/rts_button/proc/Deactivate(datum/click_interceptor/rts_commander/c)
 
 /atom/movable/screen/rts_button/mode
 	name = "Toggle Mode"

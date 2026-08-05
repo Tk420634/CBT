@@ -18,7 +18,7 @@
 
 /datum/rts_criteria
 	var/kind = "default"
-	var/datum/rts_commander/parent
+	var/datum/click_interceptor/rts_commander/parent
 	var/ckey
 	var/critflags = NONE
 	var/is_default = FALSE
